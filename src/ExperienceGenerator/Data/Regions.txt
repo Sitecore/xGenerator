@@ -1,0 +1,244 @@
+Afghanistan	APAC
+Aland Islands	EMEA
+Albania	EMEA
+Algeria	EMEA
+American Samoa	APAC
+Andorra	EMEA
+Angola	EMEA
+Anguilla	AMER
+Antarctica	AMER
+Antigua and Barbuda	AMER
+Argentina	AMER
+Armenia	APAC
+Aruba	AMER
+Australia	APAC
+Austria	EMEA
+Azerbaijan	APAC
+Bahamas	AMER
+Bahrain	EMEA
+Bangladesh	APAC
+Barbados	AMER
+Belarus	EMEA
+Belgium	EMEA
+Belize	AMER
+Benin	EMEA
+Bermuda	AMER
+Bhutan	APAC
+Bolivia	AMER
+Bosnia and Herzegovina	EMEA
+Botswana	EMEA
+Bouvet Island	EMEA
+Brazil	AMER
+British Virgin Islands	AMER
+Brunei	APAC
+Bulgaria	EMEA
+Burkina Faso	EMEA
+Burundi	EMEA
+Cambodia	APAC
+Cameroon	EMEA
+Canada	AMER
+Cape Verde	EMEA
+Cayman Islands	AMER
+Central African Republic	EMEA
+Chad	EMEA
+Chile	AMER
+China	APAC
+Christmas Island	APAC
+Cocos Islands	APAC
+Colombia	AMER
+Comoros	EMEA
+Democratic Republic of the Congo	EMEA
+Republic of the Congo	EMEA
+Cook Islands	APAC
+Costa Rica	AMER
+Ivory Coast	EMEA
+Croatia	EMEA
+Cuba	AMER
+Cyprus	EMEA
+Czech Republic	EMEA
+Denmark	EMEA
+Djibouti	EMEA
+Dominica	AMER
+Dominican Republic	AMER
+Ecuador	AMER
+Egypt	EMEA
+El Salvador	AMER
+Equatorial Guinea	EMEA
+Eritrea	EMEA
+Estonia	EMEA
+Ethiopia	EMEA
+Falkland Islands	AMER
+Faroe Islands	EMEA
+Fiji	APAC
+Finland	EMEA
+France	EMEA
+French Guiana	AMER
+French Polynesia	APAC
+French Southern Territories	EMEA
+Gabon	EMEA
+Gambia	EMEA
+Georgia	EMEA
+Germany	EMEA
+Ghana	EMEA
+Gibraltar	EMEA
+Greece	EMEA
+Greenland	AMER
+Grenada	AMER
+Saint Vincent and the Grenadines	AMER
+Guadeloupe	AMER
+Guam	APAC
+Guatemala	AMER
+Guernsey	EMEA
+Guinea	EMEA
+Guinea-Bissau	EMEA
+Guyana	AMER
+Haiti	AMER
+Heard Island and McDonald Islands	EMEA
+Honduras	AMER
+Hong Kong	APAC
+Hungary	EMEA
+Iceland	EMEA
+India	APAC
+Indonesia	APAC
+Iran	EMEA
+Iraq	EMEA
+Ireland	EMEA
+Isle of Man	EMEA
+Israel	EMEA
+Italy	EMEA
+Jamaica	AMER
+Japan	APAC
+Jersey	EMEA
+Jordan	EMEA
+Kazakhstan	APAC
+Kenya	EMEA
+Kyrgyzstan	APAC
+Kiribati	APAC
+North Korea	APAC
+South Korea	APAC
+Kuwait	EMEA
+Laos	APAC
+Latvia	EMEA
+Lebanon	EMEA
+Lesotho	EMEA
+Liberia	EMEA
+Libya	EMEA
+Liechtenstein	EMEA
+Lithuania	EMEA
+Luxembourg	EMEA
+Macao	APAC
+Macedonia	EMEA
+Madagascar	EMEA
+Malawi	EMEA
+Malaysia	APAC
+Maldives	APAC
+Mali	EMEA
+Malta	EMEA
+Marshall Islands	APAC
+Martinique	AMER
+Mauritania	EMEA
+Mauritius	EMEA
+Mayotte	EMEA
+Mexico	AMER
+Micronesia	APAC
+Moldova	EMEA
+Monaco	EMEA
+Mongolia	APAC
+Montenegro	EMEA
+Montserrat	AMER
+Morocco	EMEA
+Mozambique	EMEA
+Myanmar	APAC
+Nauru	APAC
+Nepal	APAC
+Netherlands Antilles	AMER
+Netherlands	EMEA
+New Caledonia	AMER
+New Zealand	APAC
+Nicaragua	AMER
+Niger	EMEA
+Nigeria	EMEA
+Niue	APAC
+Norfolk Island	APAC
+Northern Mariana Islands	APAC
+Norway	EMEA
+Oman	EMEA
+Pakistan	APAC
+Palau	APAC
+Palestinian Territory	EMEA
+Panama	AMER
+Papua New Guinea	APAC
+Paraguay	AMER
+Peru	AMER
+Philippines	APAC
+Pitcairn	APAC
+Poland	EMEA
+Portugal	EMEA
+Puerto Rico	AMER
+Qatar	EMEA
+Reunion	EMEA
+Romania	EMEA
+Russia	APAC
+Rwanda	EMEA
+Samoa	APAC
+San Marino	EMEA
+Sao Tome and Principe	EMEA
+Saudi Arabia	EMEA
+Senegal	EMEA
+Serbia	EMEA
+Seychelles	APAC
+Sierra Leone	EMEA
+Singapore	APAC
+Slovakia	EMEA
+Slovenia	EMEA
+Solomon Islands	APAC
+Somalia	EMEA
+South Africa	EMEA
+South Georgia and the South Sandwich Islands	EMEA
+Namibia	EMEA
+Spain	EMEA
+Sri Lanka	APAC
+Saint Helena	AMER
+Saint Kitts and Nevis	AMER
+Saint Lucia	AMER
+Saint Pierre and Miquelon	AMER
+Saint Vincent and the Grenadines	AMER
+Sudan	EMEA
+Suriname	AMER
+Svalbard and Jan Mayen	EMEA
+Swaziland	EMEA
+Sweden	EMEA
+Switzerland	EMEA
+Syria	EMEA
+Tajikistan	APAC
+Taiwan	APAC
+Tanzania	EMEA
+Thailand	APAC
+East Timor	APAC
+Togo	EMEA
+Tokelau	APAC
+Tonga	APAC
+Trinidad and Tobago	AMER
+Tunisia	EMEA
+Turkey	EMEA
+Turkmenistan	APAC
+Turks and Caicos Islands	AMER
+Tuvalu	APAC
+Uganda	EMEA
+Ukraine	EMEA
+United Arab Emirates	EMEA
+United Kingdom	EMEA
+United States	AMER
+Uruguay	AMER
+United States Minor Outlying Islands	EMEA
+Uzbekistan	APAC
+Vanuatu	APAC
+Vatican	EMEA
+Venezuela	AMER
+Vietnam	APAC
+U.S. Virgin Islands	APAC
+Wallis and Futuna	APAC
+Western Sahara	EMEA
+Yemen	EMEA
+Zambia	EMEA
+Zimbabwe	EMEA

@@ -1,0 +1,140 @@
+var steve = {
+  "Overview": {
+    "Visits": {
+      "NumberOfUniqueVisitors": "100",
+      "PercentageIdentifiedVisitors": "50",
+      "NumberOfVisitsGenerated": "500",
+      "PageviewsPerVisitAvg": "8",
+      "TimeSpentPerVisitAvg": "4:30"
+    },
+    "TrafficDistribution": {
+      "shell": "50",
+      "login": "50",
+      "admin": "50",
+      "service": "50",
+      "modules_shell": "50",
+      "modules_website": "50",
+      "micro": "50",
+      "website": "50",
+      "scheduler": "50",
+      "system": "50",
+      "publisher": "50"
+    },
+    "Location": {
+      "emea": "50",
+      "apac": "50",
+      "amer": "50"
+    },
+    "DailyDistribution": {
+      "Monday": "50",
+      "Tuesday": "50",
+      "Wednesday": "50",
+      "Thursday": "50",
+      "Friday": "50",
+      "Saturday": "50",
+      "Sunday": "50"
+    },
+    "MonthlyDistribution": {
+      "January": "50",
+      "February": "50",
+      "March": "50",
+      "April": "50",
+      "May": "50",
+      "June": "50",
+      "July": "50",
+      "August": "50",
+      "September": "50",
+      "October": "50",
+      "November": "50",
+      "December": "50"
+    },
+    "Dates": {
+      "AnnualIncreaseInTraffic": "50",
+      "StartDate": "06/05/2014",
+      "EndDate": "06/05/2015"
+    }
+  },
+  "Channels": {
+    "{ADA3552B-264F-4B5F-BDEF-73463AF33290}": "50",
+    "{DF9900DE-61DD-47BF-9628-058E78EF05C6}": "50",
+    "{A709D712-D835-4168-ACDF-D427BC138DA7}": "50",
+    "{15C3060B-CADC-47CA-B1FB-6931A43D48A2}": "50",
+    "{3F01FFD3-FAD0-4E35-BC99-C2994D281649}": "50",
+    "{03119E3C-5FC0-4216-ABCB-271BCEA239FD}": "50",
+    "{1914DA0E-9C3A-4EC3-A2C2-A12EED2A4577}": "50",
+    "{59BD107F-D725-4BA1-91C6-61BEE3CB768C}": "50",
+    "{3881E0E9-B930-4850-9954-3EA17C7A7905}": "50",
+    "{4404CE1F-830B-4B76-BB26-635DD024986B}": "50",
+    "{18A68A88-F1B0-4FA1-9C93-6182B366616B}": "50",
+    "{61288021-478A-4802-8DF7-617C6B8D8D21}": "50",
+    "{4F4E0E1F-B3EE-4175-950D-B353F5764FDE}": "50",
+    "{35E92942-82FF-4057-AB2B-4FE41FF4366C}": "50",
+    "{B418E4F2-1013-4B42-A053-B6D4DCA988BF}": "50",
+    "{030BDC09-7720-4EC2-B778-EB0BC7FD13BC}": "50",
+    "{5783355A-F9E4-476E-BA9D-9620E3E452EB}": "50",
+    "{829FAEB1-1393-44DA-B04A-B5C01986610A}": "50",
+    "{A43E7EB6-8610-4DF7-BD6B-FEE899743D30}": "50",
+    "{4A0B6C13-EFC8-4A00-8A6A-B709A89B1E11}": "50",
+    "{DDAFB85B-1511-48B8-9374-2A8A1F371645}": "50",
+    "{52B75873-4CE0-4E98-B63A-B535739E6180}": "50",
+    "{A03FFC6F-6851-42BA-A5EC-F1A73CFF0B3A}": "50",
+    "{C8D1E13E-F697-417C-A53D-E3C3130A05FD}": "50",
+    "{304FDFFC-DE5D-4D45-96DF-07ED0E423F43}": "50",
+    "{BA1D62CB-4224-47D0-AF59-78A8972FD538}": "50",
+    "{FB8FA660-0A07-4EE9-A9F4-930FC5D10AEC}": "50",
+    "{B979A670-5AAF-4E63-94AC-C3C3E5BFBE84}": "50",
+    "{5854B151-1555-49FD-8F35-D40E446BEB3C}": "50",
+    "{B2747066-06F8-4E0B-9EA7-64D8859A119A}": "50",
+    "{B55EC2C2-CD7A-4E03-B155-EEFDAE872B7D}": "50",
+    "{EC74A09A-7FA7-4A5A-874A-6B5CA9E05773}": "50",
+    "{67150678-B200-44BB-BBAE-1D7B901D0860}": "50",
+    "{145304B1-C2E0-4B88-A200-D5AA18206CF7}": "50",
+    "{B5234879-DFFC-47AF-8267-59D4D3DF6226}": "50",
+    "{0D600460-DA2E-41A6-955A-9253D2A063C2}": "50",
+    "{92B2E36D-3334-4D20-BE8E-8C77B6D57F6F}": "50",
+    "{A1831F25-40FB-43EE-A740-518D4F9D92DB}": "50",
+    "{44DD9FF5-44B2-4C59-8DF8-849E400F4B6B}": "50",
+    "{AF3A1889-7022-4809-82EB-7D3CF17B83D8}": "50",
+    "{E102E1A1-5EB2-4D5A-8BA9-8E04129B4362}": "50",
+    "{AAF21F18-C413-44B1-A01B-CA79F83E1438}": "50",
+    "{1437A2B7-AF9E-460E-895B-F24A80C8BA8C}": "50",
+    "{26CE4AD6-4ACC-49AB-9B27-CB7EB2CF6E35}": "50",
+    "{2C3D8CF9-930F-4634-8536-D37EA43EC0AB}": "50",
+    "{DC8E7268-BDBA-4545-A703-CCD0775A86BD}": "50",
+    "{0FC3C8ED-0F72-45BF-BFC6-36F6F9193F60}": "50",
+    "{A9F2D058-95A5-4461-B1E5-8502D2303AF1}": "50",
+    "{DC70F72E-0A36-404D-8B10-86FE765A3BCC}": "50",
+    "{6FD56D27-FD68-405A-BC26-566C7BEF7031}": "50",
+    "{1DA15267-B0DB-4BE1-B44F-E57C2EEB8A6B}": "50",
+    "{6D3D2374-AF56-44FE-B99A-20843B440B58}": "50",
+    "{86761432-FDBB-4C4B-AFAE-557130AE4D61}": "50",
+    "{7EAA9ED7-188F-40CA-80B9-4439C28386C9}": "50",
+    "{53CD340A-0F81-4750-8AC1-8EF3203249D3}": "50",
+    "{62D19735-E898-4FF5-B53A-13B02D3B8D6F}": "50",
+    "{CC784594-B048-49FF-A8F6-D10383A5DE02}": "50",
+    "{C97092FD-225A-4A5A-BF9E-DE006FD6D37F}": "50",
+    "{32752968-325C-4872-958A-DC9DA7F13831}": "50",
+    "{5A73DC04-132A-484E-BC41-00AE56A93A2B}": "50"
+  },
+  "LandingPages": {},
+  "RefURLs": {},
+  "Search": {
+    "InternalSearchTerms": {},
+    "ExternalSearchTerms": {},
+    "PercentageTrafficFromSearch": {
+      "Percentage": "50"
+    },
+    "Organic": {
+      "google": "50",
+      "yahoo": "50",
+      "bing": "50",
+      "lycos": "50",
+      "baidu": "50"
+    },
+    "PPC": {
+      "googleppc": "50",
+      "yahooppc": "50",
+      "bingppc": "50"
+    }
+  }
+}

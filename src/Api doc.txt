@@ -1,0 +1,43 @@
+Selection options for the frontend (Websites, locations, campaigns etc)
+GET:
+/api/xgen/options
+
+To start a job:
+POST:
+/api/xgen/jobs
+
+If that worked, the server will redirect to:
+GET:
+/api/xgen/jobs/(job id)
+
+Poll (i.e. keep requesting) this URL to get updated status information
+
+For the user, the interesting parts of this response are:
+Started (Start date time)
+JobStatus (Options: Pending, Running, Cancelling, Cancelled, Failed, Complete)
+Progress (number between 0.0 and 1.0)
+CompletedVisitors (Number of completed visitors/contacts)
+CompletedVisits (Number of completed visits)
+TargetVisitors (The requested number of visitors to simulate)
+
+
+To cancel a job send
+DELETE:
+/api/xgen/jobs/(job id)
+
+
+To pause a job
+GET:
+/api/xgen/jobs/(job id)?pause=true
+
+resume
+GET:
+/api/xgen/jobs/(job id)?pause=false
+
+Stop all jbos
+POST:
+/api/xgen/clearall
+
+Empty analytics database and RDB. ONLY DO THIS IF YOU KNOW WHAT YOU ARE DOING!
+POST:
+/api/xgen/flush

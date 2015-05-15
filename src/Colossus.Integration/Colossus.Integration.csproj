@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C5315F53-3F6E-4DCF-A1FC-E4397ECF67C1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Colossus.Integration</RootNamespace>
+    <AssemblyName>Colossus.Integration</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FiftyOne.Foundation">
+      <HintPath>..\packages\51Degrees.mobi.3.1.11.1\lib\NET40\FiftyOne.Foundation.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.4.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Components\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Components\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Analytics">
+      <HintPath>..\Components\Sitecore.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Analytics.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Components\Sitecore.Analytics.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Analytics.DataAccess, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Components\Sitecore.Analytics.DataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Analytics.Model">
+      <HintPath>..\Components\Sitecore.Analytics.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Analytics.Outcome">
+      <HintPath>..\Components\Sitecore.Analytics.Outcome.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Cintel">
+      <HintPath>..\Components\Sitecore.Cintel.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Cintel.Client">
+      <HintPath>..\Components\Sitecore.Cintel.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.ExperienceAnalytics">
+      <HintPath>..\Components\Sitecore.ExperienceAnalytics.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.ItemWebApi">
+      <HintPath>..\Components\Sitecore.ItemWebApi.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Kernel">
+      <HintPath>..\Components\Sitecore.Kernel.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="GetContextInfo.cs" />
+    <Compile Include="ItemInfo.cs" />
+    <Compile Include="Processing\ChannelPatcher.cs" />
+    <Compile Include="Processing\ContactDataProcessor.cs" />
+    <Compile Include="Processing\TriggerEventsAction.cs" />
+    <Compile Include="Processing\GetSetHelpers.cs" />
+    <Compile Include="Processing\GeoPatcher.cs" />
+    <Compile Include="Processing\TriggerOutcomeData.cs" />
+    <Compile Include="Processing\TriggerOutcomesAction.cs" />
+    <Compile Include="Processing\RequestAction.cs" />
+    <Compile Include="Processing\RequestInfoHelpers.cs" />
+    <Compile Include="Processing\ISessionPatcher.cs" />
+    <Compile Include="Processing\TimePatcher.cs" />
+    <Compile Include="Processing\TriggerEventData.cs" />
+    <Compile Include="RandomWalk.cs" />
+    <Compile Include="RenderingInfo.cs" />
+    <Compile Include="SitecoreBehavior.cs" />
+    <Compile Include="SitecoreResponseInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PatchTracker.cs" />
+    <Compile Include="SitecoreRequestContext.cs" />
+    <Compile Include="SitecoreVisitContext.cs" />
+    <Compile Include="sitecore\admin\ColossusHandler.cs" />
+    <Compile Include="TestInfo.cs" />
+    <Compile Include="VisitDataConverter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Colossus\Colossus.csproj">
+      <Project>{69dea59c-074a-4825-9a7c-1d83e38d38db}</Project>
+      <Name>Colossus</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="App_Config\Include\Colossus\Colossus.config" />
+    <None Include="sitecore\admin\Colossus.ashx" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

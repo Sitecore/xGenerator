@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{78D36A52-D0E2-4357-80A2-ED237618AD83}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ExperienceGenerator</RootNamespace>
+    <AssemblyName>ExperienceGenerator</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Faker.NET4">
+      <HintPath>..\packages\Faker.Net.1.0.3\lib\net40\Faker.NET4.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="ExperienceGenerator, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\ExperienceGenerator.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Data\City.cs" />
+    <Compile Include="Data\Country.cs" />
+    <Compile Include="Data\FileHelpers.cs" />
+    <Compile Include="Data\GeoArea.cs" />
+    <Compile Include="Data\GeoBuilder.cs" />
+    <Compile Include="Data\GeoData.cs" />
+    <Compile Include="Data\GeoVariables.cs" />
+    <Compile Include="Data\ItemInfoClient.cs" />
+    <Compile Include="JobInfo.cs" />
+    <Compile Include="JobSpecification.cs" />
+    <Compile Include="Models\SiteInfo.cs" />
+    <Compile Include="Parsing\Factories\ContactDataVariable.cs" />
+    <Compile Include="Parsing\Factories\ExternalSearchVariable.cs" />
+    <Compile Include="Parsing\Factories\LambdaFactory.cs" />
+    <Compile Include="Parsing\Factories\VariableFactory.cs" />
+    <Compile Include="Data\SearchEngine.cs" />
+    <Compile Include="Parsing\Factories\LandingPageFactory.cs" />
+    <Compile Include="Parsing\Factories\OutcomeVariable.cs" />
+    <Compile Include="Parsing\JsonHelpers.cs" />
+    <Compile Include="Parsing\Factories\MonthFactory.cs" />
+    <Compile Include="Parsing\ParseConfig.cs" />
+    <Compile Include="Parsing\XGenParser.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XGenJobManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Colossus.Integration\Colossus.Integration.csproj">
+      <Project>{c5315f53-3f6e-4dcf-a1fc-e4397ecf67c1}</Project>
+      <Name>Colossus.Integration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Colossus\Colossus.csproj">
+      <Project>{69dea59c-074a-4825-9a7c-1d83e38d38db}</Project>
+      <Name>Colossus</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\cities15000.txt.gz" />
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\timezones.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\cities15000.txt" />
+    <EmbeddedResource Include="Data\countryInfo.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\Regions.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\useragents.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\Colossus.dll" />
+    <Content Include="bin\Debug\Colossus.Integration.dll" />
+    <Content Include="bin\Debug\Colossus.Integration.pdb" />
+    <Content Include="bin\Debug\Colossus.pdb" />
+    <Content Include="bin\Debug\ComponentArt.Web.UI.dll" />
+    <Content Include="bin\Debug\ExperienceGenerator.dll" />
+    <Content Include="bin\Debug\ExperienceGenerator.pdb" />
+    <Content Include="bin\Debug\FiftyOne.Foundation.dll" />
+    <Content Include="bin\Debug\HtmlAgilityPack.dll" />
+    <Content Include="bin\Debug\HtmlAgilityPack.pdb" />
+    <Content Include="bin\Debug\HtmlAgilityPack.xml" />
+    <Content Include="bin\Debug\ITHit.WebDAV.Server.dll" />
+    <Content Include="bin\Debug\Lucene.Net.dll" />
+    <Content Include="bin\Debug\Lucene.Net.pdb" />
+    <Content Include="bin\Debug\Lucene.Net.xml" />
+    <Content Include="bin\Debug\MathNet.Numerics.dll" />
+    <Content Include="bin\Debug\MathNet.Numerics.xml" />
+    <Content Include="bin\Debug\MongoDB.Bson.dll" />
+    <Content Include="bin\Debug\MongoDB.Bson.xml" />
+    <Content Include="bin\Debug\MongoDB.Driver.dll" />
+    <Content Include="bin\Debug\MongoDB.Driver.xml" />
+    <Content Include="bin\Debug\Mvp.Xml.dll" />
+    <Content Include="bin\Debug\Newtonsoft.Json.dll" />
+    <Content Include="bin\Debug\Newtonsoft.Json.xml" />
+    <Content Include="bin\Debug\RadEditor.Net2.dll" />
+    <Content Include="bin\Debug\Sitecore.Abstractions.dll" />
+    <Content Include="bin\Debug\Sitecore.Analytics.Aggregation.dll" />
+    <Content Include="bin\Debug\Sitecore.Analytics.Core.dll" />
+    <Content Include="bin\Debug\Sitecore.Analytics.DataAccess.dll" />
+    <Content Include="bin\Debug\Sitecore.Analytics.dll" />
+    <Content Include="bin\Debug\Sitecore.Analytics.Model.dll" />
+    <Content Include="bin\Debug\Sitecore.Analytics.MongoDB.dll" />
+    <Content Include="bin\Debug\Sitecore.Analytics.Outcome.dll" />
+    <Content Include="bin\Debug\Sitecore.Analytics.Processing.dll" />
+    <Content Include="bin\Debug\Sitecore.ItemWebApi.dll" />
+    <Content Include="bin\Debug\Sitecore.Kernel.dll" />
+    <Content Include="bin\Debug\Sitecore.Kernel.xml" />
+    <Content Include="bin\Debug\Sitecore.Logging.dll" />
+    <Content Include="bin\Debug\Sitecore.Marketing.dll" />
+    <Content Include="bin\Debug\Sitecore.Marketing.Taxonomy.dll" />
+    <Content Include="bin\Debug\Sitecore.NVelocity.dll" />
+    <Content Include="bin\Debug\Sitecore.Zip.dll" />
+    <Content Include="bin\Debug\Stimulsoft.Base.dll" />
+    <Content Include="bin\Debug\Stimulsoft.Report.dll" />
+    <Content Include="bin\Debug\Telerik.Web.UI.dll" />
+    <Content Include="bin\Debug\Telerik.Web.UI.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
