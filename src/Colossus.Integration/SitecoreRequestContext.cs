@@ -52,12 +52,12 @@ namespace Colossus.Integration
             if (visit != null)
             {
                 var visitHost = visit.GetVariable<string>("Host");
-                if (visitHost != null)
+                if (!string.IsNullOrEmpty(visitHost))
                 {
                     host = new Uri(visitHost);
                 }
             }
-            return new Uri(SitecoreRootUri, uri).ToString();
+            return new Uri(host, uri).ToString();
         }
 
 
