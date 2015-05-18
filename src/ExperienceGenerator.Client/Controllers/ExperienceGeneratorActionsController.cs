@@ -2,10 +2,12 @@
 using System.Configuration;
 using System.Linq;
 using System.Web.Http;
+using System.Xml;
 using Colossus.Integration;
 using Sitecore;
 using Sitecore.Analytics.Aggregation;
 using Sitecore.Analytics.Data.DataAccess.MongoDb;
+using Sitecore.Configuration;
 using Sitecore.Data;
 using Sitecore.Sites;
 using Sitecore.Web;
@@ -19,27 +21,44 @@ namespace ExperienceGenerator.Client.Controllers
 {
     public class ExperienceGeneratorActionsController : ApiController
     {
-        private static SiteInfo[] _sites;
 
-        static ExperienceGeneratorActionsController()
+
+        static SiteInfo[] GetSites(bool all)
         {
-            _sites = SiteManager.GetSites().Select(s => new SiteContext(new Sitecore.Web.SiteInfo(s.Properties))).Select(site => new SiteInfo
+
+            var excludedSites = new HashSet<string>();
+
+            var exportNode = Factory.GetConfigNode("experienceGenerator/excludeSites") as XmlElement;
+            if (exportNode != null)
+            {
+                var sites = exportNode.SelectNodes("site");
+                if (sites != null)
+                {
+                    foreach (var site in sites.OfType<XmlElement>())
+                    {
+                        excludedSites.Add(site.GetAttribute("name"));
+                    }
+                }
+            }
+
+
+            return SiteManager.GetSites().Select(s => new SiteContext(new Sitecore.Web.SiteInfo(s.Properties))).Select(site => new SiteInfo
             {
                 Id = site.Name,
                 Host = site.HostName.Split('|')[0],
                 StartPath = site.RootPath + site.StartItem,
                 Label = site.Name,
                 Database = site.Database != null ? site.Database.Name : ""
-            }).Where(site => site.Database == "web" && !string.IsNullOrEmpty(site.StartPath) &&
-                            site.Id != "modules_website")
+            }).Where(site => 
+                all || !excludedSites.Contains(site.Id))
             .ToArray();
         }
 
 
         [HttpGet]
-        public IEnumerable<SiteInfo> Websites()
+        public IEnumerable<SiteInfo> Websites(bool all = false)
         {
-            return _sites;
+            return GetSites(all);
         }
 
         [HttpGet]
@@ -49,7 +68,7 @@ namespace ExperienceGenerator.Client.Controllers
 
             foreach (var item in db.SelectItems(query))
             {
-                yield return ItemInfo.FromItem(item, _sites.Select(w => w.Id), maxDepth);
+                yield return ItemInfo.FromItem(item, GetSites(false).Select(w => w.Id), maxDepth);
             }
         }
 
@@ -59,7 +78,7 @@ namespace ExperienceGenerator.Client.Controllers
         {
             var options = new ConfigurationOptions();
 
-            options.Websites = _sites.Select(s => new SelectionOption
+            options.Websites = GetSites(false).Select(s => new SelectionOption
             {
                 Id = s.Id, Label = s.Label,
                 DefaultWeight = s.Id == "website" ? 100 : 50

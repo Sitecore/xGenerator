@@ -86,7 +86,7 @@
     </ProjectReference>
     <ProjectReference Include="..\ExperienceGenerator\ExperienceGenerator.csproj">
       <Project>{78d36a52-d0e2-4357-80a2-ed237618ad83}</Project>
-      <Name>Xerox</Name>
+      <Name>ExperienceGenerator</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
