@@ -23,6 +23,7 @@ namespace Colossus.Integration.Processing
             var outcomes = requestInfo.Variables.GetOrDefault("TriggerOutcomes") as IEnumerable<TriggerOutcomeData>;
             if (outcomes != null)
             {
+                var ix = 0;
                 foreach (var o in outcomes)
                 {
                     var defintion = Database.GetDatabase("master").GetItem(o.DefinitionId.ToID());
@@ -30,8 +31,7 @@ namespace Colossus.Integration.Processing
                     {
                         throw new Exception("Outcome not found");
                     }
-                    var oc = new ContactOutcome(Guid.NewGuid().ToID(), defintion.ID, tracker.Contact.ContactId.ToID());
-                    oc.DateTime = DateTime.Now;
+                    var oc = new ContactOutcome(Guid.NewGuid().ToID(), defintion.ID, tracker.Contact.ContactId.ToID());                    
                     if (defintion["Monetary Value Applicable"] == "1")
                     {
                         oc.MonetaryValue = o.MonetaryValue;    
@@ -44,7 +44,14 @@ namespace Colossus.Integration.Processing
                             oc.CustomValues[kv.Key] = kv.Value;
                         }
                     }
+                    
                     tracker.RegisterContactOutcome(oc);
+                    var added = tracker.GetContactOutcomes().First(outcome => outcome.Id == oc.Id);
+
+                    //Patch date time, and add 1 ms each time to avoid collisions in xProfile
+                    added.DateTime = (o.DateTime ?? tracker.CurrentPage.DateTime).AddMilliseconds(ix + 1);
+
+                    ++ix;
                 }
             }            
         }

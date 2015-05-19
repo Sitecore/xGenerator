@@ -67,6 +67,28 @@
     <Reference Include="Sitecore.Analytics.Sql">
       <HintPath>..\Components\Sitecore.Analytics.Sql.dll</HintPath>
     </Reference>
+    <Reference Include="Sitecore.Cintel, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Components\Sitecore.Cintel.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Cintel.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Components\Sitecore.Cintel.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.ContentSearch, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Components\Sitecore.ContentSearch.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.ContentSearch.Analytics, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Components\Sitecore.ContentSearch.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.ContentSearch.Analytics.Client">
+      <HintPath>..\Components\Sitecore.ContentSearch.Analytics.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.ContentSearch.Client">
+      <HintPath>..\Components\Sitecore.ContentSearch.Client.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.Kernel">
       <HintPath>..\Components\Sitecore.Kernel.dll</HintPath>
     </Reference>

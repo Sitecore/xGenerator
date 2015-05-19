@@ -118,7 +118,7 @@ namespace ExperienceGenerator.Parsing
             }));
 
             Factories.Add("Outcomes", VariableFactory.Lambda((segment, token, parser) =>
-            {
+            {             
                 var value = new NormalGenerator(10, 5).Truncate(min: 1);
                 segment.VisitVariables.AddOrReplace(new OutcomeVariable(parser.ParseSet<string>(token), value.Next));
             }));
@@ -232,6 +232,7 @@ namespace ExperienceGenerator.Parsing
                 .AddPeak(0.8, 0.1, shape: 2, weight: 0.2, pct: true));
 
             segment.VisitorVariables.Add(Variables.Random("VisitCount", new PoissonGenerator(3).Truncate(1, 10)));
+            segment.VisitorVariables.Add(Variables.Random("PageViews", new PoissonGenerator(3).Truncate(1, 10)));
             segment.VisitVariables.Add(Variables.Random("Pause", new NormalGenerator(7, 7).Truncate(0.25)));
 
             var userAgent = FileHelpers.ReadLinesFromResource<GeoData>("ExperienceGenerator.Data.useragents.txt")
@@ -262,7 +263,7 @@ namespace ExperienceGenerator.Parsing
                 var sample = new HashSet<TValue>();
                 foreach (var prob in probs)
                 {
-                    if (prob.Value < Randomness.Random.Next())
+                    if (Randomness.Random.NextDouble() < prob.Value)
                     {
                         sample.Add(prob.Key);
                     }

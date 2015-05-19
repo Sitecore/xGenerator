@@ -42,7 +42,7 @@ namespace Colossus
 
         public IEnumerable<Visit> Commit()
         {
-            var behavior = Segment.Behavior();
+            var behavior = Segment.Behavior();            
             return behavior == null ? Enumerable.Empty<Visit>() : behavior.Commit(this);
         }
     }

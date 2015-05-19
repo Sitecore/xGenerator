@@ -191,11 +191,10 @@ namespace Colossus
                                 if (stream != null)
                                 {
                                     var path = "LastException.html";
-                                    try
+                                    if (HostingEnvironment.VirtualPathProvider != null)
                                     {
                                         path = HostingEnvironment.MapPath("~/temp/LastException.htm");
                                     }
-                                    catch{}
                                     File.WriteAllText(path, new StreamReader(stream).ReadToEnd());
                                 }
                             }

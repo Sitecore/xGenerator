@@ -7,7 +7,9 @@ using Colossus.Integration;
 using Sitecore;
 using Sitecore.Analytics.Aggregation;
 using Sitecore.Analytics.Data.DataAccess.MongoDb;
+using Sitecore.Cintel.Configuration;
 using Sitecore.Configuration;
+using Sitecore.ContentSearch;
 using Sitecore.Data;
 using Sitecore.Sites;
 using Sitecore.Web;
@@ -160,6 +162,15 @@ namespace ExperienceGenerator.Client.Controllers
             var sql = new SqlReportingStorageProvider("reporting");
             sql.ExcludedTableFromDataDeletion("dbo", "Segments");
             sql.DeleteAllReportingData();
+
+
+            var index = ContentSearchManager.GetIndex(CustomerIntelligenceConfig.ContactSearch.SearchIndexName);            
+            index.Reset();            
+            index.Refresh();
+            using (var ctx = index.CreateUpdateContext())
+            {
+                ctx.Optimize();
+            }
 
             return Ok();
         }

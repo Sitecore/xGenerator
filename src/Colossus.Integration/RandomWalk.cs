@@ -16,7 +16,7 @@ namespace Colossus.Integration
         }
 
         protected override IEnumerable<Visit> Commit(SitecoreRequestContext ctx)
-        {
+        {            
             var visits = ctx.Visitor.GetVariable<double>("VisitCount", 1);
 
 
@@ -66,7 +66,11 @@ namespace Colossus.Integration
                         //Add outcomes to last visit
                         var variables = new Dictionary<string, object>();
                         if (j == pageViews - 1 && outcomes != null)
-                        {                        
+                        {
+                            foreach (var oc in outcomes)
+                            {
+                                oc.DateTime = visitContext.Visit.End;
+                            }
                             variables.Add("TriggerOutcomes", outcomes);
                         }
 
@@ -79,7 +83,7 @@ namespace Colossus.Integration
                                 events.Add(new TriggerEventData
                                 {
                                     Name = "Local search",
-                                    Id = AnalyticsIds.SearchEvent.ToGuid(),
+                                    Id = AnalyticsIds.SearchEvent.ToGuid(),                                   
                                     Text = internalKeywords
                                 });
                             }

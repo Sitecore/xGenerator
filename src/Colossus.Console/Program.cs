@@ -23,6 +23,7 @@ using Newtonsoft.Json.Linq;
 using Sitecore.Analytics.Model;
 using Sitecore.Common;
 using Sitecore.Jobs;
+using Sitecore.Pipelines.LoadHtml;
 using Sitecore.Shell.Framework.Commands.Masters;
 using Sitecore.Text;
 using Sitecore.Web.UI;
@@ -33,184 +34,72 @@ namespace Colossus.Console
     internal class Program
     {
 
-        
-
-        static void Skynet()
-        {
-            var serverUrl = "http://xdbrpc.local/";
-
-            var testUrl = "/testPage";
-
-            var goalPage1 = "/trigger-goal1";
-            //var goalPage2 = "/trigger-goal2";
-
-
-            Randomness.Seed(1337);
-
-            var random = Randomness.Random;
-
-            var segment = new VisitorSegment("Test visitors");
-
-            var sim = new VisitSimulator(segment);
-            foreach (var visitorContext in sim.NextVisitors(1000)
-                .Select(v=>new SitecoreRequestContext(serverUrl, v)))
-            {
-                using (var visitContext = visitorContext.NewVisit())
-                {
-                    visitContext.Request(goalPage1);
-
-                    var response = visitContext.Request(testUrl);
-                    if (response.Test == null)
-                    {
-                        throw new Exception("A test was expected");
-                    }
-                    
-                    var pageVersionIndex = response.Test.Variables.FindIndex(v => v.Label == "Page version");
-                    if (pageVersionIndex == -1)
-                    {
-                        throw new Exception("Component not found");
-                    }
-
-                    var conversionRate = response.Test.Combination[pageVersionIndex] == 0 ? 0.5 : 0.1;
-                    if (random.NextDouble() < conversionRate)
-                    {
-                        visitContext.Request(goalPage1);
-                    }
-                }
-            }
-        }
-       
-
-        static void Parser2()
+        public static void Outcomes()
         {
 
-            
-            var emea = GeoArea.Areas.First(area => area.Id == "amer");
-
-            var geodata = GeoData.FromResource();
-
-            var country = emea.Selector(geodata);
-
-
-            var freqs = Enumerable.Range(0, 10000).Select(i => country()).GroupBy(c => c.Country.Name)
-                .ToDictionary(g => g.Key, g => g.Count());
-
-            File.WriteAllLines(@"C:\Temp\Countries.txt", new []{"Country\tCount"}.Concat(freqs.OrderByDescending(kv=>kv.Value).Select(kv=>kv.Key + "\t" + kv.Value)));
-
-            return;
-
-
-
-            Randomness.Seed(1337);
-
-           
-            var json = File.ReadAllText(@"C:\Temp\Xerox2.js");            
-
-            var def = JObject.Parse(json);
-            var parser = new XGenParser("http://sc80rev150427/api/xgen/");
                         
 
-            
-            //var vars = new[]{""}
+            var segments = new JObject();            
+            var seg = segments["Default"] = new JObject();
+            var outcomes = seg["Outcomes"] = new JObject();
 
 
-            var sw = Stopwatch.StartNew();            
+            seg["StartDate"] = "2010-01-01";
+            seg["EndDate"] = "2010-01-02";
+            outcomes["{75D53206-47B3-4391-BD48-75C42E5FC2CE}"] = .5;
+            outcomes["{F4830B80-1BB1-4746-89C7-96EFE40DA572}"] = .5;
+
+
+            var parser = new XGenParser("http://sc80rev150427");
+
+
+            var sim = new VisitSimulator(parser.ParseSegments(segments));
+
+
+            var counts = new Dictionary<Guid, int>();
 
             var visits = 0;
-            var id = 0;
-            var contactId = 0;
-            using (var f = File.CreateText(@"C:\Temp\XeroxOut2.txt"))
+            foreach (var visitor in sim.NextVisitors(1))
             {
-                f.Write("Contact\tId\tVisitIndex\tStart\tEnd\tHour\tDuration\tPageViews\tCampaign\tCountry\tTimeZone\tContinent\tReferrer\tLandingPage\tSite");
-                f.WriteLine();
-
-                var threads = Enumerable.Range(0, 25).Select(i =>
+                foreach (var visit in visitor.Commit())
                 {
-                    var t = new Thread(() =>
+                    ++visits;
+                    foreach (var req in visit.Requests)
                     {
-                        Randomness.Seed(1337 + i);
-                        var segments = parser.ParseSegments(def["Segments"]);
-                        var sim = new VisitSimulator(segments);
-
-                        foreach (var v in sim.NextVisitors(80))
+                        var oc = req.GetVariable<IEnumerable<TriggerOutcomeData>>("TriggerOutcomes");
+                        if (oc != null)
                         {
-                            var myId = Interlocked.Increment(ref contactId);
-                            System.Console.Out.WriteLine("Visitor at {0}", v.Start);
-                            try
+                            foreach (var o in oc)
                             {
-                                var visitIndex = 0;
-                                foreach (var visit in v.Segment.Behavior().Commit(v))
-                                {
-                                    Interlocked.Increment(ref visits);
-                                    System.Console.Out.WriteLine(" - Visit at {0}", visit.Start);
-                                    //foreach (var req in visit.Requests)
-                                    //{
-                                    //    System.Console.Out.WriteLine("   " + req.Url);
-                                    //}
-
-                                    //var visit = v.AddVisit();
-                                    //visit.AddRequest("");
-                                    lock (f)
-                                    {
-                                        f.Write("Contact" + myId);
-                                        f.Write("\t");
-                                        f.Write("Visit" + Interlocked.Increment(ref id));
-                                        f.Write("\t");
-                                        f.Write(++visitIndex);
-                                        f.Write("\t");
-                                        f.Write(v.Start.Date.ToString("yyyy-MM-dd"));
-                                        f.Write("\t");
-                                        f.Write(v.End.Date.ToString("yyyy-MM-dd"));
-                                        f.Write("\t");
-                                        f.Write(v.Start.Hour);
-                                        f.Write("\t");
-                                        f.Write((v.End - v.Start).TotalSeconds);
-                                        f.Write("\t");
-                                        f.Write(visit.GetVariable<double>("PageViews"));
-                                        f.Write("\t");
-                                        f.Write(visit.GetVariable("Campaign", ""));
-                                        f.Write("\t");
-                                        f.Write(visit.GetVariable("Country", ""));
-                                        f.Write("\t");
-                                        f.Write(visit.GetVariable("TimeZone", ""));
-                                        f.Write("\t");
-                                        f.Write(visit.GetVariable("Continent", ""));
-                                        f.Write("\t");
-                                        f.Write(visit.GetVariable("Referrer", ""));
-                                        f.Write("\t");
-                                        f.Write(visit.GetVariable("LandingPage", ""));
-                                        f.Write("\t");
-                                        f.Write(visit.GetVariable("Site", ""));
-
-                                        f.WriteLine();
-                                    }
-                                }
+                                //System.Console.Out.WriteLine(o.DefinitionId);
+                                counts[o.DefinitionId] = counts.GetOrDefault(o.DefinitionId) + 1;
                             }
-                            catch(Exception ex)
-                            {
-                                System.Console.Out.WriteLine("Error: " + ex);
-                            }
-                            System.Console.Out.WriteLine("{0:N0} visits ({1:N2} visits per second)", visits, visits/sw.Elapsed.TotalSeconds);
                         }
-                    });
-                    t.Start();
-                    return t;
-                }).ToArray();
-
-                foreach (var t in threads)
-                {
-                    t.Join();
+                    }
                 }
-
-                System.Console.Out.WriteLine("{0:N0} visits in {1:N2} seconds", visits, sw.Elapsed.TotalSeconds);
             }
+
+            System.Console.Out.WriteLine("{0} visits", visits);
+            foreach (var c in counts)
+            {
+                System.Console.Out.WriteLine("{0}: {1}", c.Key, c.Value);
+            }
+
+
         }
+
 
         public static void Main(string[] args)
         {
 
-            Parser2();
+
+            Outcomes();
             return;
+
+
+
+            //Parser2();
+            //return;
 
             //XeroxParser.Configure();
 
@@ -315,6 +204,177 @@ namespace Colossus.Console
                 }
             }
 
+        }
+
+        static void Skynet()
+        {
+            var serverUrl = "http://xdbrpc.local/";
+
+            var testUrl = "/testPage";
+
+            var goalPage1 = "/trigger-goal1";
+            //var goalPage2 = "/trigger-goal2";
+
+
+            Randomness.Seed(1337);
+
+            var random = Randomness.Random;
+
+            var segment = new VisitorSegment("Test visitors");
+
+            var sim = new VisitSimulator(segment);
+            foreach (var visitorContext in sim.NextVisitors(1000)
+                .Select(v => new SitecoreRequestContext(serverUrl, v)))
+            {
+                using (var visitContext = visitorContext.NewVisit())
+                {
+                    visitContext.Request(goalPage1);
+
+                    var response = visitContext.Request(testUrl);
+                    if (response.Test == null)
+                    {
+                        throw new Exception("A test was expected");
+                    }
+
+                    var pageVersionIndex = response.Test.Variables.FindIndex(v => v.Label == "Page version");
+                    if (pageVersionIndex == -1)
+                    {
+                        throw new Exception("Component not found");
+                    }
+
+                    var conversionRate = response.Test.Combination[pageVersionIndex] == 0 ? 0.5 : 0.1;
+                    if (random.NextDouble() < conversionRate)
+                    {
+                        visitContext.Request(goalPage1);
+                    }
+                }
+            }
+        }
+
+
+        static void Parser2()
+        {
+
+
+            var emea = GeoArea.Areas.First(area => area.Id == "amer");
+
+            var geodata = GeoData.FromResource();
+
+            var country = emea.Selector(geodata);
+
+
+            var freqs = Enumerable.Range(0, 10000).Select(i => country()).GroupBy(c => c.Country.Name)
+                .ToDictionary(g => g.Key, g => g.Count());
+
+            File.WriteAllLines(@"C:\Temp\Countries.txt", new[] { "Country\tCount" }.Concat(freqs.OrderByDescending(kv => kv.Value).Select(kv => kv.Key + "\t" + kv.Value)));
+
+            return;
+
+
+
+            Randomness.Seed(1337);
+
+
+            var json = File.ReadAllText(@"C:\Temp\Xerox2.js");
+
+            var def = JObject.Parse(json);
+            var parser = new XGenParser("http://sc80rev150427/api/xgen/");
+
+
+
+            //var vars = new[]{""}
+
+
+            var sw = Stopwatch.StartNew();
+
+            var visits = 0;
+            var id = 0;
+            var contactId = 0;
+            using (var f = File.CreateText(@"C:\Temp\XeroxOut2.txt"))
+            {
+                f.Write("Contact\tId\tVisitIndex\tStart\tEnd\tHour\tDuration\tPageViews\tCampaign\tCountry\tTimeZone\tContinent\tReferrer\tLandingPage\tSite");
+                f.WriteLine();
+
+                var threads = Enumerable.Range(0, 25).Select(i =>
+                {
+                    var t = new Thread(() =>
+                    {
+                        Randomness.Seed(1337 + i);
+                        var segments = parser.ParseSegments(def["Segments"]);
+                        var sim = new VisitSimulator(segments);
+
+                        foreach (var v in sim.NextVisitors(80))
+                        {
+                            var myId = Interlocked.Increment(ref contactId);
+                            System.Console.Out.WriteLine("Visitor at {0}", v.Start);
+                            try
+                            {
+                                var visitIndex = 0;
+                                foreach (var visit in v.Segment.Behavior().Commit(v))
+                                {
+                                    Interlocked.Increment(ref visits);
+                                    System.Console.Out.WriteLine(" - Visit at {0}", visit.Start);
+                                    //foreach (var req in visit.Requests)
+                                    //{
+                                    //    System.Console.Out.WriteLine("   " + req.Url);
+                                    //}
+
+                                    //var visit = v.AddVisit();
+                                    //visit.AddRequest("");
+                                    lock (f)
+                                    {
+                                        f.Write("Contact" + myId);
+                                        f.Write("\t");
+                                        f.Write("Visit" + Interlocked.Increment(ref id));
+                                        f.Write("\t");
+                                        f.Write(++visitIndex);
+                                        f.Write("\t");
+                                        f.Write(v.Start.Date.ToString("yyyy-MM-dd"));
+                                        f.Write("\t");
+                                        f.Write(v.End.Date.ToString("yyyy-MM-dd"));
+                                        f.Write("\t");
+                                        f.Write(v.Start.Hour);
+                                        f.Write("\t");
+                                        f.Write((v.End - v.Start).TotalSeconds);
+                                        f.Write("\t");
+                                        f.Write(visit.GetVariable<double>("PageViews"));
+                                        f.Write("\t");
+                                        f.Write(visit.GetVariable("Campaign", ""));
+                                        f.Write("\t");
+                                        f.Write(visit.GetVariable("Country", ""));
+                                        f.Write("\t");
+                                        f.Write(visit.GetVariable("TimeZone", ""));
+                                        f.Write("\t");
+                                        f.Write(visit.GetVariable("Continent", ""));
+                                        f.Write("\t");
+                                        f.Write(visit.GetVariable("Referrer", ""));
+                                        f.Write("\t");
+                                        f.Write(visit.GetVariable("LandingPage", ""));
+                                        f.Write("\t");
+                                        f.Write(visit.GetVariable("Site", ""));
+
+                                        f.WriteLine();
+                                    }
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                System.Console.Out.WriteLine("Error: " + ex);
+                            }
+                            System.Console.Out.WriteLine("{0:N0} visits ({1:N2} visits per second)", visits, visits / sw.Elapsed.TotalSeconds);
+                        }
+                    });
+                    t.Start();
+                    return t;
+                }).ToArray();
+
+                foreach (var t in threads)
+                {
+                    t.Join();
+                }
+
+                System.Console.Out.WriteLine("{0:N0} visits in {1:N2} seconds", visits, sw.Elapsed.TotalSeconds);
+            }
         }
     }
 }

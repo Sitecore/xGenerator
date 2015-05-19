@@ -12,6 +12,8 @@ namespace Colossus.Integration.Processing
 
         public decimal MonetaryValue { get; set; }
 
+        public DateTime? DateTime { get; set; }
+
         public Dictionary<string, string> CustomValues { get; set; }
     }
 }
