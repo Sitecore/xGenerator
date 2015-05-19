@@ -1,5 +1,6 @@
 ﻿using System.Web.Http;
 using ExperienceGenerator.Client.Infrastructure;
+using Sitecore.Analytics.Aggregation.Data.Model;
 
 namespace ExperienceGenerator.Client
 {
@@ -11,6 +12,9 @@ namespace ExperienceGenerator.Client
 
             // Web API routes
             //config.MapHttpAttributeRoutes();
+
+            //Disable dimension cache to enable flush of reporting database
+            Dimension.EnableCaching = false;
 
             XGenJobManager.Instance = new XGenSitecoreJobManager();
 
