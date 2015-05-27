@@ -92,10 +92,6 @@
   <ItemGroup>
     <Compile Include="GetContextInfo.cs" />
     <Compile Include="ItemInfo.cs" />
-    <Compile Include="Mobile\Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Processing\ChannelPatcher.cs" />
     <Compile Include="Processing\ContactDataProcessor.cs" />
     <Compile Include="Processing\TriggerEventsAction.cs" />
@@ -125,9 +121,6 @@
       <Project>{69dea59c-074a-4825-9a7c-1d83e38d38db}</Project>
       <Name>Colossus</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Mobile\Default.aspx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App_Config\Include\Colossus\Colossus.config" />
