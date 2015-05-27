@@ -100,6 +100,7 @@
         <x-item>/sitecore/shell/client/Applications/ExperienceGenerator/DataSheet.js</x-item>
         <x-item>/sitecore/shell/client/Applications/ExperienceGenerator/ExperienceGenerator.css</x-item>
         <x-item>/sitecore/shell/Themes/Standard/ExperienceGenerator.zip</x-item>
+        <x-item>/bin/FiftyOne.Foundation.dll</x-item>
       </Entries>
       <Converter>
         <FileToEntryConverter>
