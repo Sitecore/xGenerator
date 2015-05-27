@@ -1,16 +1,16 @@
 Copy the assemblies from Sitecore XP 8.0 to the "Components" folder in the solution root
-NuGet package is restored for other dependencies
+NuGet package restore is used for other dependencies
 
 Deployment to Sitecore install:
-Install the package from ExperienceGenerator.Client\ExperienceGenerator.zip to create the items
+Install the package from ExperienceGenerator.Client\ExperienceGenerator.zip to create the required items
 
 Copy ExperienceGenerator.Client\App_Config\* to the root of the installation
 Copy Colossus.Integration\App_Config\* to the root of the installation
 Copy all non-Sitecore assemblies from ExperienceGenerator.Client\bin to the bin folder of the installation (i.e. those not already there)
 
 
-To verify deployment, try opening /api/xgen/options. 
-If these gives an 404 or is blank try:
+To verify deployment, open /api/xgen/options. 
+If this gives an 404 or is blank try:
 1. Stop IIS
 2. Delete all folders in C:\Windows\Microsoft.NET\Framework64\v4.0.30319\Temporary ASP.NET Files\root
 3. Start IIS
