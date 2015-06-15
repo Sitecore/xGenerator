@@ -1,12 +1,22 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Web.Hosting;
 using Colossus.Web;
+using Newtonsoft.Json;
 using Sitecore.ApplicationCenter.Applications;
 
 namespace Colossus
 {
+    public class RequestLogRecord
+    {
+        public RequestInfo Info { get; set; }
+        public string Url { get; set; }
+        public string UserAgent { get; set; }
+        public string Referer { get; set; }
+    }
+
     public abstract class WebRequestContext<TResponseInfo> : IRequestContext<TResponseInfo>
         where TResponseInfo : ResponseInfo, new()
     {
@@ -71,6 +81,38 @@ namespace Colossus
             return uri;
         }
 
+        private static string VisitUrl(WebClient client, string url)
+        {
+            //var stopWatch = new Stopwatch();
+            //stopWatch.Start();
+            var result = client.DownloadString(url);
+            //stopWatch.Stop();
+            //using (StreamWriter sw = File.AppendText(@"G:\sitecore-xerox\src\ExperienceGenerator\urlsTime.log"))
+            //{
+            //    sw.WriteLine(url + " Time:" + stopWatch.ElapsedMilliseconds);
+            //}
+            return result;
+        }
+
+        private static void SaveRequestToStorage(RequestInfo info, string url, string userAgent, string referer)
+        {
+            var logRecord = new RequestLogRecord();
+            logRecord.Info = info;
+            logRecord.Url = url;
+            logRecord.UserAgent = userAgent;
+            logRecord.Referer = referer;
+
+            var json = JsonConvert.SerializeObject(logRecord, new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.All,
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
+
+            using (StreamWriter sw = File.AppendText(@"G:\sitecore-xerox\src\ExperienceGenerator\urlsTime.log"))
+            {
+                sw.WriteLine(json);
+            }
+        }
 
         internal TResponseInfo Execute(Request request, Func<string, WebClient, string> requestAction = null)
         {
@@ -79,7 +121,7 @@ namespace Colossus
             LastResponse = null;
             CurrentRequest = request;
 
-            requestAction = requestAction ?? ((url, wc) => wc.DownloadString(url));
+            requestAction = requestAction ?? ((url, wc) => VisitUrl(wc,url));
 
             var response = requestAction(request.Url, WebClient);
             if (LastResponse != null)
@@ -98,10 +140,12 @@ namespace Colossus
             var info = RequestInfo.FromVisit(CurrentRequest);            
             var httpRequest = request as HttpWebRequest;
             if (httpRequest != null)
-            {                
+            {
+                httpRequest.Timeout = 500000;
                 httpRequest.UserAgent = CurrentRequest.GetVariable("UserAgent", "Colossus");
                 httpRequest.Referer = CurrentRequest.GetVariable("Referrer", CurrentRequest.GetVariable("Referer", ""));
             }
+            SaveRequestToStorage(info, httpRequest.RequestUri.ToString(), httpRequest.UserAgent, httpRequest.Referer);
             request.Headers.AddChunked(DataEncoding.RequestDataKey, DataEncoding.EncodeHeaderValue(info));
         }
 
@@ -160,6 +204,7 @@ namespace Colossus
                 var webRequest = request as HttpWebRequest;
                 if (webRequest != null)
                 {
+                    webRequest.Timeout = 500000;
                     webRequest.CookieContainer = _container;
                     webRequest.MaximumResponseHeadersLength = -1;
                 }

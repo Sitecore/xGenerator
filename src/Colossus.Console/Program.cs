@@ -12,6 +12,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Colossus.Integration;
 using Colossus.Integration.Processing;
+using Colossus.RecordsLog;
 using Colossus.Statistics;
 using Colossus.Web;
 using ExperienceGenerator;
@@ -93,7 +94,9 @@ namespace Colossus.Console
         {
 
 
-            Outcomes();
+            //Outcomes();
+            //Demoo();
+            VisitRecordedPages();
             return;
 
 
@@ -375,6 +378,25 @@ namespace Colossus.Console
 
                 System.Console.Out.WriteLine("{0:N0} visits in {1:N2} seconds", visits, sw.Elapsed.TotalSeconds);
             }
+        }
+
+        static void Demoo()
+        {
+            var json = File.ReadAllText(@"G:\Scripts\jetstream\s.json");
+            var root = JsonConvert.DeserializeObject<JObject>(json);
+            var spec = new JobSpecification { VisitorCount = 10, Specification = root };
+            spec.RootUrl = "http://j537/";
+
+            XGenConsoleJobManager jobManager = new XGenConsoleJobManager();
+            var status = jobManager.StartNew(spec);
+            jobManager.WaitAll();
+        }
+
+        static void VisitRecordedPages()
+        {
+            var recordsStorage = new RecordsLogFileStorage(@"G:\sitecore-xerox\src\ExperienceGenerator\urlsTime.log.recorded");
+            var context = new RecordedContext(recordsStorage);
+            context.Process();
         }
     }
 }

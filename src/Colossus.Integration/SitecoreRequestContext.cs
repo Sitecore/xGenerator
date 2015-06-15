@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -24,13 +26,26 @@ namespace Colossus.Integration
             SitecoreRootUri = new Uri(sitecoreRootUri);
         }
 
+        private static string VisitUrl(WebClient client, string url)
+        {
+            //var stopWatch = new Stopwatch();
+            //stopWatch.Start();
+            var result = client.DownloadString(url);
+            //stopWatch.Stop();
+            //using (StreamWriter sw = File.AppendText(@"G:\sitecore-xerox\src\ExperienceGenerator\urlsTime.log"))
+            //{
+            //    sw.WriteLine(url + " Time:" + stopWatch.ElapsedMilliseconds);
+            //}
+            return result;
+        }
+
         public bool IsColossusClientAvailable
         {
             get
             {
                 try
                 {
-                    new WebClient().DownloadString(ColossusHandlerUrl);
+                    VisitUrl(new WebClient(), ColossusHandlerUrl);
                     return true;
                 }
                 catch

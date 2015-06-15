@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using Colossus;
@@ -43,10 +46,23 @@ namespace ExperienceGenerator.Data
             }
         }
 
+        private static string VisitUrl(WebClient client, string url)
+        {
+            //var stopWatch = new Stopwatch();
+            //stopWatch.Start();
+            var result = client.DownloadString(url);
+            //stopWatch.Stop();
+            //using (StreamWriter sw = File.AppendText(@"G:\sitecore-xerox\src\ExperienceGenerator\urlsTime.log"))
+            //{
+            //    sw.WriteLine(url + " Time:" + stopWatch.ElapsedMilliseconds);
+            //}	
+            return result;
+        }
 
         private TResponse Request<TResponse>(string url)
         {
-            return JsonConvert.DeserializeObject<TResponse>(new WebClient().DownloadString(ItemServiceRoot + url.ToString()));
+            var result = VisitUrl(new WebClient(), ItemServiceRoot + url.ToString());
+            return JsonConvert.DeserializeObject<TResponse>(result);
         }
 
         public IEnumerable<ItemInfo> Query(string query, string language = null, int? maxDepth = 0)

@@ -17,7 +17,8 @@ namespace ExperienceGenerator
 
         public XGenJobManager()
         {
-            Threads = Environment.ProcessorCount * 2;
+            //Threads = Environment.ProcessorCount * 2;
+            Threads = 1;
         }
 
         private ConcurrentDictionary<Guid, JobInfo> _jobs = new ConcurrentDictionary<Guid, JobInfo>();

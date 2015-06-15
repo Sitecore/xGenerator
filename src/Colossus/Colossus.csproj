@@ -61,6 +61,8 @@
     <Compile Include="CompositeVariable.cs" />
     <Compile Include="IRequestContext.cs" />
     <Compile Include="IVisitRequestContext.cs" />
+    <Compile Include="RecordsLog\RecordsLogFileStorage.cs" />
+    <Compile Include="RecordsLog\RecordsLogStorage.cs" />
     <Compile Include="Request.cs" />
     <Compile Include="SimulationObject.cs" />
     <Compile Include="Statistics\BetaGenerator.cs" />
@@ -73,6 +75,10 @@
     <Compile Include="Statistics\WignerGenerator.cs" />
     <Compile Include="IVisitorBehavior.cs" />
     <Compile Include="Web\DataEncoding.cs" />
+    <Compile Include="Web\RecordedContext.cs" />
+    <Compile Include="Web\RecordedWebClient.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Web\RequestEventArgs.cs" />
     <Compile Include="Web\ResponseInfo.cs" />
     <Compile Include="Web\SimulationObjectInfo.cs" />

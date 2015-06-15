@@ -141,7 +141,7 @@ namespace ExperienceGenerator.Client.Controllers
         }
 
 
-        [HttpPost]
+        [HttpGet]
         public IHttpActionResult StopAll()
         {
             foreach (

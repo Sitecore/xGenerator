@@ -91,6 +91,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Data\cities15000.txt.gz" />
     <None Include="app.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
