@@ -5,6 +5,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Colossus.RecordsLog;
+using Sitecore.Text;
 
 namespace Colossus.Web
 {
@@ -14,10 +15,12 @@ namespace Colossus.Web
     public class RecordedContext
     {
         private readonly RecordsLogStorage recordsStorage;
+        private readonly string hostName;
 
-        public RecordedContext(RecordsLogStorage storage)
+        public RecordedContext(RecordsLogStorage storage, string host)
         {
             recordsStorage = storage;
+            hostName = host;
         }
         
         public void Process()
@@ -30,7 +33,9 @@ namespace Colossus.Web
                     wc = new RecordedWebClient();
                 }
                 wc.Context = requestLogRecord;
-                wc.DownloadString(requestLogRecord.Url);
+                var url = new Uri(requestLogRecord.Url);
+                var requestUrl = requestLogRecord.Url.Replace(url.Host, hostName);
+                wc.DownloadString(requestUrl);
             }
             
         }

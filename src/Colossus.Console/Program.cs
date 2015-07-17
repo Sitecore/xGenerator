@@ -19,6 +19,7 @@ using ExperienceGenerator;
 using ExperienceGenerator.Data;
 using ExperienceGenerator.Parsing;
 using MathNet.Numerics.Distributions;
+using NDesk.Options;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Sitecore.Analytics.Model;
@@ -89,14 +90,51 @@ namespace Colossus.Console
 
         }
 
+        static string playFName = string.Empty;
+        static string generateFName = string.Empty;
+        static string hostName = string.Empty;
+        static string outputFName = string.Empty;
 
         public static void Main(string[] args)
         {
+                        OptionSet os = new OptionSet()
+            {
+                {"p|play=", v => playFName = v},
+                {"g|generate=", v=> generateFName = v},
+                {"h|host=", v => hostName = v},
+                {"o|output=", v => outputFName = v}
+            };
+            var pl = os.Parse(args);
 
+            if (string.IsNullOrEmpty(hostName))
+            {
+                System.Console.WriteLine("Host parameter is not set. Example host=jetstream");
+                return;
+            }
 
+            if (!string.IsNullOrEmpty(playFName))
+            {
+                VisitRecordedPages(playFName, hostName);
+            }
+
+            if (!string.IsNullOrEmpty(outputFName))
+            {
+                GlobalParameters.Instance.OutputRecordLog = outputFName;
+            }
+
+            if (!string.IsNullOrEmpty(generateFName))
+            {
+                if (string.IsNullOrEmpty(outputFName))
+                {
+                    System.Console.WriteLine("output parameter is not set. It is required in generate mode");
+                    return;
+                }
+                GenerateRecordedLog(generateFName, hostName);
+            }
+
+            
             //Outcomes();
             //Demoo();
-            VisitRecordedPages();
             return;
 
 
@@ -380,22 +418,22 @@ namespace Colossus.Console
             }
         }
 
-        static void Demoo()
+        static void GenerateRecordedLog(string fname, string host)
         {
-            var json = File.ReadAllText(@"G:\Scripts\jetstream\s.json");
+            var json = File.ReadAllText(fname);
             var root = JsonConvert.DeserializeObject<JObject>(json);
             var spec = new JobSpecification { VisitorCount = 10, Specification = root };
-            spec.RootUrl = "http://j537/";
+            spec.RootUrl = string.Format("http://{0}/", host);
 
             XGenConsoleJobManager jobManager = new XGenConsoleJobManager();
             var status = jobManager.StartNew(spec);
             jobManager.WaitAll();
         }
 
-        static void VisitRecordedPages()
+        static void VisitRecordedPages(string playFile, string host)
         {
-            var recordsStorage = new RecordsLogFileStorage(@"G:\sitecore-xerox\src\ExperienceGenerator\urlsTime.log.recorded");
-            var context = new RecordedContext(recordsStorage);
+            var recordsStorage = new RecordsLogFileStorage(playFile);
+            var context = new RecordedContext(recordsStorage, host);
             context.Process();
         }
     }

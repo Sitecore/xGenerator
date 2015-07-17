@@ -83,35 +83,8 @@ namespace Colossus
 
         private static string VisitUrl(WebClient client, string url)
         {
-            //var stopWatch = new Stopwatch();
-            //stopWatch.Start();
             var result = client.DownloadString(url);
-            //stopWatch.Stop();
-            //using (StreamWriter sw = File.AppendText(@"G:\sitecore-xerox\src\ExperienceGenerator\urlsTime.log"))
-            //{
-            //    sw.WriteLine(url + " Time:" + stopWatch.ElapsedMilliseconds);
-            //}
             return result;
-        }
-
-        private static void SaveRequestToStorage(RequestInfo info, string url, string userAgent, string referer)
-        {
-            var logRecord = new RequestLogRecord();
-            logRecord.Info = info;
-            logRecord.Url = url;
-            logRecord.UserAgent = userAgent;
-            logRecord.Referer = referer;
-
-            var json = JsonConvert.SerializeObject(logRecord, new JsonSerializerSettings
-            {
-                TypeNameHandling = TypeNameHandling.All,
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-            });
-
-            using (StreamWriter sw = File.AppendText(@"G:\sitecore-xerox\src\ExperienceGenerator\urlsTime.log"))
-            {
-                sw.WriteLine(json);
-            }
         }
 
         internal TResponseInfo Execute(Request request, Func<string, WebClient, string> requestAction = null)
@@ -145,7 +118,6 @@ namespace Colossus
                 httpRequest.UserAgent = CurrentRequest.GetVariable("UserAgent", "Colossus");
                 httpRequest.Referer = CurrentRequest.GetVariable("Referrer", CurrentRequest.GetVariable("Referer", ""));
             }
-            SaveRequestToStorage(info, httpRequest.RequestUri.ToString(), httpRequest.UserAgent, httpRequest.Referer);
             request.Headers.AddChunked(DataEncoding.RequestDataKey, DataEncoding.EncodeHeaderValue(info));
         }
 
