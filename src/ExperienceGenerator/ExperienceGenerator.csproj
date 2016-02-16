@@ -47,10 +47,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="ExperienceGenerator, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\ExperienceGenerator.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\City.cs" />
@@ -105,54 +101,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Data\useragents.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="bin\Debug\Colossus.dll" />
-    <Content Include="bin\Debug\Colossus.Integration.dll" />
-    <Content Include="bin\Debug\Colossus.Integration.pdb" />
-    <Content Include="bin\Debug\Colossus.pdb" />
-    <Content Include="bin\Debug\ComponentArt.Web.UI.dll" />
-    <Content Include="bin\Debug\ExperienceGenerator.dll" />
-    <Content Include="bin\Debug\ExperienceGenerator.pdb" />
-    <Content Include="bin\Debug\FiftyOne.Foundation.dll" />
-    <Content Include="bin\Debug\HtmlAgilityPack.dll" />
-    <Content Include="bin\Debug\HtmlAgilityPack.pdb" />
-    <Content Include="bin\Debug\HtmlAgilityPack.xml" />
-    <Content Include="bin\Debug\ITHit.WebDAV.Server.dll" />
-    <Content Include="bin\Debug\Lucene.Net.dll" />
-    <Content Include="bin\Debug\Lucene.Net.pdb" />
-    <Content Include="bin\Debug\Lucene.Net.xml" />
-    <Content Include="bin\Debug\MathNet.Numerics.dll" />
-    <Content Include="bin\Debug\MathNet.Numerics.xml" />
-    <Content Include="bin\Debug\MongoDB.Bson.dll" />
-    <Content Include="bin\Debug\MongoDB.Bson.xml" />
-    <Content Include="bin\Debug\MongoDB.Driver.dll" />
-    <Content Include="bin\Debug\MongoDB.Driver.xml" />
-    <Content Include="bin\Debug\Mvp.Xml.dll" />
-    <Content Include="bin\Debug\Newtonsoft.Json.dll" />
-    <Content Include="bin\Debug\Newtonsoft.Json.xml" />
-    <Content Include="bin\Debug\RadEditor.Net2.dll" />
-    <Content Include="bin\Debug\Sitecore.Abstractions.dll" />
-    <Content Include="bin\Debug\Sitecore.Analytics.Aggregation.dll" />
-    <Content Include="bin\Debug\Sitecore.Analytics.Core.dll" />
-    <Content Include="bin\Debug\Sitecore.Analytics.DataAccess.dll" />
-    <Content Include="bin\Debug\Sitecore.Analytics.dll" />
-    <Content Include="bin\Debug\Sitecore.Analytics.Model.dll" />
-    <Content Include="bin\Debug\Sitecore.Analytics.MongoDB.dll" />
-    <Content Include="bin\Debug\Sitecore.Analytics.Outcome.dll" />
-    <Content Include="bin\Debug\Sitecore.Analytics.Processing.dll" />
-    <Content Include="bin\Debug\Sitecore.ItemWebApi.dll" />
-    <Content Include="bin\Debug\Sitecore.Kernel.dll" />
-    <Content Include="bin\Debug\Sitecore.Kernel.xml" />
-    <Content Include="bin\Debug\Sitecore.Logging.dll" />
-    <Content Include="bin\Debug\Sitecore.Marketing.dll" />
-    <Content Include="bin\Debug\Sitecore.Marketing.Taxonomy.dll" />
-    <Content Include="bin\Debug\Sitecore.NVelocity.dll" />
-    <Content Include="bin\Debug\Sitecore.Zip.dll" />
-    <Content Include="bin\Debug\Stimulsoft.Base.dll" />
-    <Content Include="bin\Debug\Stimulsoft.Report.dll" />
-    <Content Include="bin\Debug\Telerik.Web.UI.dll" />
-    <Content Include="bin\Debug\Telerik.Web.UI.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
