@@ -6,6 +6,7 @@ using System.Threading;
 using Colossus;
 using Colossus.Integration;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Messaging;
 
 namespace ExperienceGenerator
 {
@@ -18,12 +19,14 @@ namespace ExperienceGenerator
         public XGenJobManager()
         {
             Threads = Environment.ProcessorCount * 2;
+            WarmUpInterval = TimeSpan.FromSeconds(1);
         }
 
         private ConcurrentDictionary<Guid, JobInfo> _jobs = new ConcurrentDictionary<Guid, JobInfo>();
 
 
         public int Threads { get; set; }
+        public virtual TimeSpan WarmUpInterval { get; set; }
 
         public IEnumerable<JobInfo> Jobs
         {
@@ -54,6 +57,12 @@ namespace ExperienceGenerator
                     info.Segments.Add(segment);
 
                     StartJob(info, segment);
+
+                    if (i == 0)
+                    {
+                        // Fix for concurrent creating of Contacts.
+                        Thread.Sleep(this.WarmUpInterval);
+                    }
                 }
             }
 
@@ -71,7 +80,7 @@ namespace ExperienceGenerator
 
 
         protected void Process(JobSegment job)
-        {            
+        {
             try
             {
                 if (job.JobStatus <= JobStatus.Paused)
@@ -109,7 +118,7 @@ namespace ExperienceGenerator
                             job.LastException = ex.ToString();
                         }
 
-                        ++job.CompletedVisitors;                                                
+                        ++job.CompletedVisitors;
                     }
                 }
 
