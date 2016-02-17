@@ -1,4 +1,4 @@
-<project site="sc80rev150427" format="Zip Package">
+<project site="habitat.local" format="Zip Package" targetfilefolder="wwwroot">
   <Metadata>
     <metadata>
       <PackageName>Experience Generator</PackageName>
@@ -86,12 +86,9 @@
         <x-item>/App_Config/Include/ExperienceGenerator/ExperienceGenerator.config</x-item>
         <x-item>/App_Config/Include/Colossus/Colossus.config</x-item>
         <x-item>/bin/ExperienceGenerator.Client.dll</x-item>
-        <x-item>/bin/ExperienceGenerator.Client.pdb</x-item>
         <x-item>/bin/ExperienceGenerator.dll</x-item>
-        <x-item>/bin/ExperienceGenerator.pdb</x-item>
         <x-item>/bin/Colossus.dll</x-item>
         <x-item>/bin/Colossus.Integration.dll</x-item>
-        <x-item>/bin/Colossus.Integration.pdb</x-item>
         <x-item>/bin/Colossus.pdb</x-item>
         <x-item>/bin/MathNet.Numerics.dll</x-item>
         <x-item>/bin/MathNet.Numerics.xml</x-item>
