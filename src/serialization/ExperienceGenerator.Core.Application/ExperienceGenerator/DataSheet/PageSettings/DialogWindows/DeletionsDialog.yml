@@ -1,0 +1,95 @@
+﻿---
+ID: 8552bfb8-60fd-43e5-9844-fe568f409a92
+Parent: a2c3f81e-d3c2-45c0-aba2-66cd7e69a50f
+Template: f62b4cd7-754c-4461-810f-2b6bd2c92a0d
+Path: /sitecore/client/Applications/ExperienceGenerator/DataSheet/PageSettings/DialogWindows/DeletionsDialog
+DB: core
+SharedFields:
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: 0
+- ID: deab3795-056f-4421-adf0-758844461b72
+  Hint: Placeholder Name
+  Value: DeleteData
+- ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
+  Hint: __Renderings
+  Type: layout
+  Value: |
+    <r>
+      <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=DeletionsBorder&amp;UsePadding=1" uid="{8CFD7F16-08D6-4394-BB7E-ED58B3D3CF7B}" />
+        <r id="{C4393722-39FA-4869-9582-3A8EB8983A0D}" par="Id=RowPanel1" ph="DeletionsBorder.Content" uid="{816E0EAD-AE45-4000-B0FE-EB059A7B764C}" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="Id=ColumnPanel1&amp;GridColumns=12" ph="RowPanel1.Content" uid="{A407F50F-0825-41E5-B58F-61F32FB0BE31}" />
+        <r id="{98316BB6-F3F5-4E6F-81F0-79F173D151D8}" par="Id=Text1&amp;Text=By+clicking+the+%22Delete+all%22+button%2c+you+will+delete+ALL+VISITOR+DATA+in+the+solution." ph="ColumnPanel1.Content" uid="{35AC2581-934F-4ACE-898D-B092403A5C60}" />
+        <r id="{C4393722-39FA-4869-9582-3A8EB8983A0D}" par="UsePadding=1&amp;Id=InnerRowPanel1&amp;PaddingType=Top" ph="DeletionsBorder.Content" uid="{51400152-BF2C-4F4A-B20D-D422F94744DE}" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="Id=ColumnPanel2&amp;GridColumns=12" ph="InnerRowPanel1.Content" uid="{A407F50F-0825-41E5-B58F-61F32FB0BE31}" />
+        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=Text2&amp;Text=+This+includes%3a" ph="ColumnPanel2.Content" uid="{E35C468D-8C1C-43FB-9EEC-C2B8F5068388}" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="Id=ColumnPanel3&amp;GridColumns=12" ph="RowPanel1.Content" uid="{A407F50F-0825-41E5-B58F-61F32FB0BE31}" />
+        <r id="{C4393722-39FA-4869-9582-3A8EB8983A0D}" par="UsePadding=1&amp;Id=InnerRowPanel&amp;PaddingType=All" ph="DeletionsBorder.Content" uid="{51400152-BF2C-4F4A-B20D-D422F94744DE}" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="Id=ColumnPanel4&amp;GridColumns=12" ph="InnerRowPanel.Content" uid="{A407F50F-0825-41E5-B58F-61F32FB0BE31}" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="Id=ColumnPanel5&amp;GridColumns=12" ph="InnerRowPanel.Content" uid="{A407F50F-0825-41E5-B58F-61F32FB0BE31}" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="Id=ColumnPanel6&amp;GridColumns=12" ph="InnerRowPanel.Content" uid="{A407F50F-0825-41E5-B58F-61F32FB0BE31}" />
+        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=Text4&amp;Text=%e2%80%a2+Contact+and+all+visits" ph="ColumnPanel4.Content" uid="{899D742D-825D-4CB9-BF8F-C2D213955BE3}" />
+        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=Text5&amp;Text=%e2%80%a2+Content+testing+data" ph="ColumnPanel5.Content" uid="{899D742D-825D-4CB9-BF8F-C2D213955BE3}" />
+        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=Text3&amp;Text=%e2%80%a2+Personalisation+data" ph="ColumnPanel6.Content" uid="{899D742D-825D-4CB9-BF8F-C2D213955BE3}" />
+        <r id="{C4393722-39FA-4869-9582-3A8EB8983A0D}" par="Id=RowPanel2" ph="DeletionsBorder.Content" uid="{0E66F8A8-5F99-4A43-B243-D2B994D66F26}" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="Id=ColumnPanel7&amp;GridColumns=12" ph="RowPanel2.Content" uid="{610C4046-6056-4B0E-8CC9-8BE2F46642DB}" />
+        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=Text6&amp;Text=You+cannot+undo+this+action+-+once+deleted+it%27s+not+possible+to+retrieve+data." ph="ColumnPanel7.Content" uid="{6EC0CB4E-EACC-4958-8C6A-20B63603DCD9}" />
+        <r id="{C4393722-39FA-4869-9582-3A8EB8983A0D}" par="UsePadding=1&amp;Id=RowPanel3&amp;PaddingType=All" ph="DeletionsBorder.Content" uid="{0E66F8A8-5F99-4A43-B243-D2B994D66F26}" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="Id=ColumnPanel8&amp;GridColumns=12&amp;ContentAlign=Center" ph="RowPanel3.Content" uid="{30FDDB06-34D9-4149-8713-5C31FFEB97A4}" />
+        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3aapp.deleteData()%3b&amp;Id=DelAllButton&amp;ButtonType=Inverse&amp;Text=Delete+all+visitor+data" ph="ColumnPanel8.Content" uid="{48D8AA51-4611-406A-958A-02F7B88BD98F}" />
+      </d>
+    </r>
+Languages:
+- Language: da
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Naviger
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20150314T040903:635619029439984180Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+- Language: de-DE
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Navigieren
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20150314T041146:635619031069485623Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20140701T115826
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+- Language: ja-JP
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: 移動
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20150314T041021:635619030212472090Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin

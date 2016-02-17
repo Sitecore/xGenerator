@@ -1,0 +1,143 @@
+﻿---
+ID: 037a6789-1bde-438e-8364-9fbb05d3fb27
+Parent: 340e8e4c-74fc-4ca8-8aad-795300882384
+Template: c63c943a-cb4d-45d6-880c-208bd29dae1a
+Path: /sitecore/client/Applications/ExperienceGenerator/DataSheet
+DB: core
+SharedFields:
+- ID: 3a67ad0f-9530-4b1b-9b70-9230c36ae8d6
+  Hint: UseFullWidth
+  Value: 1
+- ID: 5e642935-a6fc-48e9-b039-fe1136ced488
+  Hint: Theme
+  Value: Oxford
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: 0
+- ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
+  Hint: __Renderings
+  Type: layout
+  Value: |
+    <r>
+      <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}" l="{4F72A793-BDBC-4262-9523-6AADD8FEA487}">
+        <r id="{DAFAFFB8-74AF-4141-A96A-70B16834CEC6}" par="PageCodeScriptFileName=%2fsitecore%2fshell%2fclient%2fApplications%2fExperienceGenerator%2fDataSheet.js" ph="Page.Code" uid="{237256AA-9D30-463E-9ED1-90CFF092FCF6}" />
+        <r id="{56A04392-9E0E-4609-AE9A-ACD28C7F749B}" ph="Page.Body" uid="{03104DA0-8FE8-47D5-88B3-1658E867E82B}" />
+        <r ds="{977D9715-6A07-4E90-9DDA-DE5048C07D6B}" id="{A82840D0-633E-4D1A-B7FE-8C0062AA22F1}" par="Id=Texts" ph="Page.Body" uid="{FB32A379-F28C-4EA4-8B37-68AC3949C112}" />
+        <r id="{5AE97C0C-EE88-4564-A363-4FA11C01C90A}" ph="GlobalHeader" uid="{532C7DCD-29E7-4C34-9910-FC283D61A026}" />
+        <r id="{2EE499CD-439A-4F10-B81F-36A54CAC01DB}" par="Id=AccountInformation" ph="GlobalHeader.LoginInfo" uid="{D8CDFA97-CF37-43EB-99A2-A266C882A146}" />
+        <r id="{7A69C522-7E99-4630-A25A-5D571505862A}" par="Id=GlobalLogo" ph="GlobalHeader.StartButton" uid="{A340B9F2-9FD0-4767-9B0B-62D7C8B0E5C7}" />
+        <r id="{EC86834B-890C-405C-BB36-CA25044909E1}" ph="GlobalFooter" uid="{C01DD5BD-DFC2-425B-A301-43AE8363B443}" />
+        <r id="{93CEEFCD-2DE1-40AF-AE9A-EBBFBCCC522F}" ph="ApplicationHeader" uid="{1E240370-226C-40E4-9C54-7FE8630DF74A}" />
+        <r ds="{EE3F9843-6BFE-4D4F-B18F-2AE2EBF99FE2}" id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=HeaderTitle" ph="ApplicationHeader.Title" uid="{1DC97590-77EC-4F75-A687-D86F7D22CAAA}" />
+        <r id="{26541BC4-C62D-4F2F-BE3F-A4E2195FEE0F}" ph="ApplicationContent" uid="{B84F6AF6-5A63-4D51-AEC7-1A92BEAFB025}" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=Main&amp;UsePadding=1" ph="ApplicationContent.Main" uid="{8EC02FDB-51E9-4983-9AD3-FAD2210E5BAC}" />
+        <r id="{AF79ED5D-4396-4EEC-8E22-9D7C523266FA}" par="Id=Breadcrumb" ph="ApplicationHeader.BreadCrumb" uid="{7020F0A4-9331-4D9B-9A95-AC95B318CF69}" />
+        <r id="{C80807A7-AD13-4693-9822-DD840CB266C5}" par="Click=javascript%3aalert(%22This+doesn%27t+do+anything+yet!%22)&amp;Id=BackButton&amp;Text=Back" ph="ApplicationHeader.Back" uid="{D51FE619-4950-4C2F-9CBF-65E5AAC34B4E}" />
+        <r id="{910155C7-3881-4A56-90FB-D126490EDE55}" par="Id=PageMessageBar" ph="Main.Content" uid="{6188645E-C019-4AA5-B83B-08C609D60275}" />
+        <r ds="{40463B45-8869-4A7E-B86E-2FDC8CE1AE57}" id="{7426CD5B-A534-4462-ABEE-D700D78ECF6A}" par="Id=Tabs" ph="Main.Content" uid="{B06C0472-B649-4BFA-9B46-229BBB0421B5}" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=SummaryBorder&amp;UsePadding=1" ph="ApplicationContent.Info" uid="{1BE15563-AB5E-4F87-9661-92AAB5902DCD}" />
+        <r ds="{FE8D64B4-8A74-41D5-AAF3-660F68DB4C98}" id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=SummaryTitle" ph="SummaryBorder.Content" uid="{49290073-AD1A-41E9-BCEE-6F1154921629}" />
+        <r id="{C4393722-39FA-4869-9582-3A8EB8983A0D}" par="UsePadding=1&amp;Id=SummaryRow&amp;PaddingType=All" ph="SummaryBorder.Content" uid="{8A6C81B4-D22B-453F-A629-87A2D38FD5A4}" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="Id=ColumnPanel1&amp;GridColumns=9" ph="SummaryRow.Content" uid="{B51DCCB6-013C-489E-B12B-919A8F47A85C}" />
+        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=NumberVisitsText&amp;Text=Number+of+visits+generated" ph="ColumnPanel1.Content" uid="{A4D76542-C71B-4254-BB46-82439E80B420}" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="Id=ColumnPanel2&amp;GridColumns=3" ph="SummaryRow.Content" uid="{B51DCCB6-013C-489E-B12B-919A8F47A85C}" />
+        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=NumberVisitsValue&amp;Text=0" ph="ColumnPanel2.Content" uid="{3D1A3AFE-3B6E-491A-B9D9-E441CB91A9C4}" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="Id=ColumnPanel3&amp;GridColumns=9" ph="SummaryRow.Content" uid="{83E89CA1-F76B-4651-A888-78DB58E27559}" />
+        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=NumberContactsText&amp;Text=Number+of+contacts+generated" ph="ColumnPanel3.Content" uid="{5650796B-9358-461B-8B42-594212BE9E2C}" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="Id=ColumnPanel4&amp;GridColumns=3" ph="SummaryRow.Content" uid="{94AFE5AC-4FA5-4481-9D7D-18E7B0AF00EB}" />
+        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=NumberContactsValue&amp;Text=0" ph="ColumnPanel4.Content" uid="{316B77B2-3CDD-4077-A934-85EC835505E7}" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="Id=ColumnPanel5&amp;GridColumns=12" ph="SummaryRow.Content" uid="{8D415446-77E8-47D2-B063-00210849851E}" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=ProgressBorder&amp;PaddingType=Top&amp;UsePadding=1" ph="ColumnPanel5.Content" uid="{2B8B8A0F-1AA5-4011-AB66-CAD0E01429D9}" />
+        <r id="{AF6438A4-8295-4925-90B3-2BF97D3515AF}" par="UpdateInterval=1000&amp;Value=0&amp;Id=ProgressBar&amp;MaxValue=100" ph="ProgressBorder.Content" uid="{4C1364AF-98CE-4CC5-88CB-0AF1151DB6FB}" />
+        <r id="{B60FB581-44D1-4372-86A2-D6E494F020E1}" par="Id=SelectPageWindow&amp;IsVisible=1" ph="Page.Body" uid="{4D77DE32-3A4F-4C35-8222-8AA9AEE23661}" />
+        <r ds="{0BE0755E-E76B-4F42-9146-4A8C493C7E9F}" id="{8B4238F3-D5CD-464D-8DE6-4A69E05CD55B}" par="UsePlaceholders=1" ph="_SelectPageWindow.Content" uid="{33CF8A84-C35F-4698-A48E-84825411D6F1}" />
+        <r id="{FE9723FC-56E4-4CA8-9C64-CB34F29462A5}" par="Id=AppProgressIndicator" ph="Main.Content" uid="{7179CB5A-D67F-4781-9005-BF540F984791}" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=StartButtonBorder&amp;UsePadding=1&amp;ShowBorder=0" ph="SummaryBorder.Content" uid="{28A7916E-03FC-4C6E-94BB-087EE212081C}" />
+        <r ds="{EE043B7A-1636-4831-B4B5-C42AB5962660}" id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3aapp.start()%3b&amp;Id=StartButton" ph="StartButtonBorder.Content" uid="{DB97179F-A319-476D-A96D-8E4E7150AEBA}" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=SecondaryButtonBorder&amp;UsePadding=1&amp;ShowBorder=0" ph="SummaryBorder.Content" uid="{28A7916E-03FC-4C6E-94BB-087EE212081C}" />
+        <r ds="{F5A70CEF-C7B7-46D5-A9F7-63A6B8196119}" id="{26B2B002-BCA0-4968-99E4-01573338B6A9}" par="Click=javascript%3aapp.pause()%3b&amp;Id=PauseButton" ph="SecondaryButtonBorder.Content" uid="{DB97179F-A319-476D-A96D-8E4E7150AEBA}" />
+        <r ds="{5ABFBC97-EF9E-4660-964A-9BE6D12F3B6E}" id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3aapp.stop()%3b&amp;Id=StopButton" ph="SecondaryButtonBorder.Content" uid="{DB97179F-A319-476D-A96D-8E4E7150AEBA}" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=DeleteBorder&amp;PaddingType=All&amp;UsePadding=1" ph="SummaryBorder.Content" uid="{99C65E68-29D1-4775-A99D-3D41DAFD3E0A}" />
+        <r ds="{77571502-EE04-48C5-AA06-1706EB06C4FC}" id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3aapp.DelWindow.show()%3b&amp;Id=DeleteButton" ph="DeleteBorder.Content" uid="{DB97179F-A319-476D-A96D-8E4E7150AEBA}" />
+        <r id="{B60FB581-44D1-4372-86A2-D6E494F020E1}" par="HeaderText=Add+Landing+Page&amp;Id=AddLandingPagesWindow&amp;IsVisible=1" ph="Page.Body" uid="{2F809BC5-AAE6-4A0B-B84D-AB6F60573199}" />
+        <r ds="{27273FEB-C1A7-45F1-949A-BB54B61C9C62}" id="{8B4238F3-D5CD-464D-8DE6-4A69E05CD55B}" par="UsePlaceholders=1" ph="AddLandingPagesWindow.Content" uid="{89907371-511B-4240-86B2-16EE36105D03}" />
+        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3aapp.dialogOKButton(%22LandingPageTreeView%22%2c+%22AddLandingPagesWindow%22%2c+%22LandingPagesListInnerPanel%22+%2c+%22landingPages%22)&amp;Id=OkButton1&amp;ButtonType=Primary&amp;Text=OK" ph="AddLandingPagesWindow.Buttons" uid="{B6C733A0-F4D4-4925-80D4-3B300FD1FA35}" />
+        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3aapp.dialogCancelButton(+%22AddLandingPagesWindow%22)&amp;Id=CancelButton1&amp;Text=Cancel" ph="AddLandingPagesWindow.Buttons" uid="{880ED2BA-72FF-4CAF-B380-FEEAD2120C7C}" />
+        <r id="{B60FB581-44D1-4372-86A2-D6E494F020E1}" par="HeaderText=Add+Campaign&amp;Id=AddCampaignsWindow&amp;IsVisible=1" ph="Page.Body" uid="{E1B15E6E-E0C0-4761-9843-B05DB66313F2}" />
+        <r ds="{20985827-B9FA-4FB1-A45D-EA1DB9EBBE0C}" id="{8B4238F3-D5CD-464D-8DE6-4A69E05CD55B}" par="UsePlaceholders=1" ph="AddCampaignsWindow.Content" uid="{59F5E519-9CF2-4349-A4A5-11A283FEA257}" />
+        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3aapp.dialogOKButton(%22CampaignsTreeView%22%2c+%22AddCampaignsWindow%22%2c+%22CampaignsListInnerPanelBottomBorder%22+%2c+%22campaigns%22)&amp;Id=OkButton2&amp;ButtonType=Primary&amp;Text=OK" ph="AddCampaignsWindow.Buttons" uid="{43788A43-047F-4F9F-90D2-AA96E7DFDD53}" />
+        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3aapp.dialogCancelButton(+%22AddCampaignsWindow%22)&amp;Id=CancelButton2&amp;Text=Cancel" ph="AddCampaignsWindow.Buttons" uid="{4BF1E05C-3580-49E3-B666-1A52F1F0AE42}" />
+        <r id="{B60FB581-44D1-4372-86A2-D6E494F020E1}" par="HeaderText=Campaign&amp;Id=SingleCampaignWindow&amp;IsVisible=1" ph="Page.Body" uid="{E1B15E6E-E0C0-4761-9843-B05DB66313F2}" />
+        <r ds="{73953D32-AF3F-4E22-BD04-BDC17A1A3FA3}" id="{8B4238F3-D5CD-464D-8DE6-4A69E05CD55B}" par="UsePlaceholders=1" ph="SingleCampaignWindow.Content" uid="{59F5E519-9CF2-4349-A4A5-11A283FEA257}" />
+        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3aapp.dialogOKButton(%22CampaignsTreeView%22%2c+%22AddCampaignsWindow%22%2c+%22CampaignsListInnerPanelBottomBorder%22+%2c+%22campaigns%22)&amp;Id=OkButton3&amp;ButtonType=Primary&amp;Text=OK" ph="SingleCampaignWindow.Buttons" uid="{43788A43-047F-4F9F-90D2-AA96E7DFDD53}" />
+        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3aapp.dialogCancelButton(+%22AddCampaignsWindow%22)&amp;Id=CancelButton3&amp;Text=Cancel" ph="SingleCampaignWindow.Buttons" uid="{4BF1E05C-3580-49E3-B666-1A52F1F0AE42}" />
+        <r id="{B60FB581-44D1-4372-86A2-D6E494F020E1}" par="HeaderText=Delete+all+visitor+data+in+the+solution%3f&amp;Id=DelWindow&amp;Size=%7bDFE6D45B-ED26-4D2C-8C5C-5A1EA07B1DEF%7d" ph="Page.Body" uid="{6A349FDA-2A4F-4084-8F82-557C91596693}" />
+        <r ds="{8552BFB8-60FD-43E5-9844-FE568F409A92}" id="{8B4238F3-D5CD-464D-8DE6-4A69E05CD55B}" par="UsePlaceholders=1" ph="DelWindow.Content" uid="{2AE9DAF7-A1D5-40F3-B6A8-59FFDB4A0A76}" />
+        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3aapp.dialogCancelButton(+%22DelWindow%22)&amp;Id=CancelButton&amp;Text=Cancel" ph="DelWindow.Buttons" uid="{498FCD75-158D-4937-9E6E-C97D792D0F9B}" />
+      </d>
+    </r>
+Languages:
+- Language: da
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: PageTest
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20150314T040856:635619029363892899Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: 7205a57f-93b4-413a-aa9a-6b16bbc59565
+      Hint: BrowserTitle
+      Value: Sidetest
+- Language: de-DE
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Seitentest
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20150314T041136:635619030963240162Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: 7205a57f-93b4-413a-aa9a-6b16bbc59565
+      Hint: BrowserTitle
+      Value: Seitentest
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20130118T151052
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: 7205a57f-93b4-413a-aa9a-6b16bbc59565
+      Hint: BrowserTitle
+      Value: Experience Generator
+- Language: ja-JP
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: ページ テスト
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20150314T041011:635619030116065840Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: 7205a57f-93b4-413a-aa9a-6b16bbc59565
+      Hint: BrowserTitle
+      Value: ページ テスト

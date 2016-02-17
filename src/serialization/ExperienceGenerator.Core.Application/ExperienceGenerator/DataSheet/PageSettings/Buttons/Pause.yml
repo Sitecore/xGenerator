@@ -1,0 +1,75 @@
+﻿---
+ID: f5a70cef-c7b7-46d5-a9f7-63a6b8196119
+Parent: 1f2e2f4d-139c-4dde-8efa-21d9f499ce6a
+Template: 8a9f4991-322d-4fa3-b40b-41b1c715c34b
+Path: /sitecore/client/Applications/ExperienceGenerator/DataSheet/PageSettings/Buttons/Pause
+DB: core
+SharedFields:
+- ID: 9f2e12c5-f236-441d-ae2f-1df11a343d81
+  Hint: Click
+  Value: javascript:app.saveTest()
+Languages:
+- Language: da
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Gem
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20150314T040905:635619029456077312Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: 99a761cf-5262-4d10-b53e-4cd9e79c232d
+      Hint: Text
+      Value: Gem
+- Language: de-DE
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Speichern
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20150314T041149:635619031091516027Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: 99a761cf-5262-4d10-b53e-4cd9e79c232d
+      Hint: Text
+      Value: Speichern
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20140611T144802
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: 99a761cf-5262-4d10-b53e-4cd9e79c232d
+      Hint: Text
+      Value: Pause
+- Language: ja-JP
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: 保存
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20150314T041023:635619030232003340Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: 99a761cf-5262-4d10-b53e-4cd9e79c232d
+      Hint: Text
+      Value: 保存
