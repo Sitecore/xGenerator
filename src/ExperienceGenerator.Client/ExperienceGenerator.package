@@ -90,7 +90,6 @@
         <x-item>/bin/Colossus.dll</x-item>
         <x-item>/bin/Colossus.Integration.dll</x-item>
         <x-item>/bin/MathNet.Numerics.dll</x-item>
-        <x-item>/bin/MathNet.Numerics.xml</x-item>
         <x-item>/sitecore/admin/Colossus.ashx</x-item>
         <x-item>/bin/Faker.NET4.dll</x-item>
         <x-item>/sitecore/shell/client/Applications/ExperienceGenerator/DataSheet.js</x-item>
