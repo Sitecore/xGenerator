@@ -1,4 +1,4 @@
-<project site="habitat.local" format="Zip Package" targetfilefolder="wwwroot">
+<project site="habitat.local" format="Zip Package">
   <Metadata>
     <metadata>
       <PackageName>Experience Generator</PackageName>
