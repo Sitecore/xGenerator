@@ -99,7 +99,7 @@
       </Entries>
       <Converter>
         <FileToEntryConverter>
-          <Root />
+          <Root>/</Root>
           <Transforms>
             <InstallerConfigurationTransform>
               <Options>
