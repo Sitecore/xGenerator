@@ -1,0 +1,17 @@
+﻿---
+ID: c7089ebd-7af0-4f14-beea-680a465231b1
+Parent: 30bac1eb-8d67-4837-8393-12b29b2ff2cd
+Template: ab86861a-6030-46c5-b394-e8f99e8b87db
+Path: /sitecore/client/Applications/ExperienceGenerator/Common/Templates/Settings Preset
+DB: core
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160218T162041Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin

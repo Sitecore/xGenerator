@@ -17,7 +17,6 @@ namespace ExperienceGenerator.Client
       public struct Fields
       {
         public static readonly ID Specification = new ID("{A0EE2080-2CC8-4DE0-8EFD-8E29CD39194F}");
-        public static readonly ID VisitorCount = new ID("{3FA95D81-7AA6-4BAD-BB3A-9BAF1C72F1D7}");
       }
     }
   }
