@@ -22,6 +22,9 @@ using SiteInfo = ExperienceGenerator.Models.SiteInfo;
 namespace ExperienceGenerator.Client.Controllers
 {
   using System;
+  using System.Net;
+  using System.Net.Http;
+  using System.Web.Http.Results;
   using ExperienceGenerator.Client.Repositories;
   using Newtonsoft.Json.Linq;
   using Sitecore.Data.Engines;
@@ -151,6 +154,11 @@ namespace ExperienceGenerator.Client.Controllers
     public IHttpActionResult SaveSettings([FromBody] Preset preset)
     {
       var repo = new SettingsRepository();
+      if (repo.GetPresets().Any(x => x.Key.Equals(preset.Name.ToLower())))
+      {
+        return this.InternalServerError(new Exception("Preset with the same name already exists."));
+      }
+
       repo.Save(preset.Name, preset.Spec);
       return this.Ok();
     }
@@ -166,7 +174,7 @@ namespace ExperienceGenerator.Client.Controllers
     public List<string> Presets()
     {
       var repo = new SettingsRepository();
-      return repo.GetPresets();
+      return repo.GetPresetsIds();
     }
 
     [HttpPost]

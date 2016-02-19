@@ -39,9 +39,11 @@ SharedFields:
         <r id="{442BD093-FBAD-4E36-BC08-489E16C82D08}" par="Id=Presets&amp;Header=Presets&amp;IsCollapsible=1" ph="ApplicationContent.Info" uid="{95A9B9FE-DB93-4312-8BE9-2F7B6B75148A}" />
         <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=PresetsBorder&amp;UsePadding=1" ph="Presets.Body" uid="{2D42213F-D19E-4D97-801E-2F0B69DA14E7}" />
         <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=SaveSettingsBorder&amp;ShowBorder=0" ph="PresetsBorder.Content" uid="{ED31D3BC-8B3C-424C-B53F-C8033B429E09}" />
+        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=PresetNameTitle&amp;Text=Preset+name" ph="SaveSettingsBorder.Content" uid="{1B8CE17F-BA03-41CF-914D-EBACFECAE215}" />
         <r id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" par="IsEnabled=1&amp;Id=PresetName&amp;IsVisible=1" ph="SaveSettingsBorder.Content" uid="{FD26BDD7-8BEA-4A94-BA05-6FBE69C23BBC}" />
         <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3aapp.save()%3b&amp;Id=SaveSettings&amp;Text=Save+Settings" ph="SaveSettingsBorder.Content" uid="{5591039A-5478-4534-AFF4-AFDFF170E213}" />
-        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=LoadSettingsBorder" ph="PresetsBorder.Content" uid="{74F06A9F-4449-4FC6-9A02-5AA170F2382A}" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=LoadSettingsBorder&amp;PaddingType=Top&amp;UsePadding=1" ph="PresetsBorder.Content" uid="{74F06A9F-4449-4FC6-9A02-5AA170F2382A}" />
+        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=LoadPresetTitle&amp;Text=Select+preset+to+load+settings" ph="LoadSettingsBorder.Content" uid="{517CC50C-708A-431C-947A-223409B62CE9}" />
         <r id="{25D357D3-3648-4336-9B53-55EED7CFA078}" par="Id=PresetList&amp;Items=%7bBinding+DataSource.Items%7d" ph="LoadSettingsBorder.Content" uid="{30738443-CE8F-41CF-88C6-F58B36B1B459}" />
         <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3aapp.loadPreset()%3b&amp;Id=LoadPreset&amp;Text=Load+Preset" ph="LoadSettingsBorder.Content" uid="{77E2393D-6C2E-4332-BA3B-E66012FEAD68}" />
         <r id="{33A02142-2DBD-4034-AEA2-BDF215EB2451}" par="Id=DataSource&amp;Query=%2fsitecore%2fclient%2fApplications%2fExperienceGenerator%2fCommon%2fPresets%2f%2f*&amp;Database=core" ph="Page.Body" uid="{90DC94F5-5777-4D59-B2B3-E50E848697ED}" />

@@ -45,14 +45,19 @@ namespace ExperienceGenerator.Client.Repositories
       return this.Create(preset);
     }
 
-    public List<string> GetPresets()
+    public List<Item> GetPresets()
     {
-      return this.PresetsRoot.Children.Select(child => child.ID.ToString()).ToList();
+      return this.PresetsRoot.Children.ToList();
     }
 
     protected JObject Create(Item preset)
     {
       return JObject.Parse(preset[Templates.Preset.Fields.Specification]);
-    } 
+    }
+
+    public List<string> GetPresetsIds()
+    {
+      return this.GetPresets().Select(child => child.ID.ToString()).ToList();
+    }
   }
 }
