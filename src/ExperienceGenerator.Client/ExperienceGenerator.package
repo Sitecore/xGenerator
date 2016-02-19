@@ -1,4 +1,4 @@
-<project site="habitat.local" format="Zip Package">
+<project>
   <Metadata>
     <metadata>
       <PackageName>Experience Generator</PackageName>
@@ -116,6 +116,25 @@
       <Exclude />
       <Name>Files</Name>
     </xfiles>
+    <xitems>
+      <Entries>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Common/{94EEE1CE-F99F-42A9-8CC3-43E7043286E5}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Common/Presets/{B4EF340E-BE30-4959-A586-11DDF7C6F66C}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Common/Templates/{30BAC1EB-8D67-4837-8393-12B29B2FF2CD}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Common/Templates/Settings Preset/{C7089EBD-7AF0-4F14-BEEA-680A465231B1}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Common/Templates/Settings Preset/Data/{F8BC9A3C-FC0B-41C1-9C61-8BBD21CE3931}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Common/Templates/Settings Preset/Data/Specification/{A0EE2080-2CC8-4DE0-8EFD-8E29CD39194F}/invariant/0</x-item>
+      </Entries>
+      <SkipVersions>False</SkipVersions>
+      <Converter>
+        <ItemToEntryConverter>
+          <Transforms />
+        </ItemToEntryConverter>
+      </Converter>
+      <Include />
+      <Exclude />
+      <Name>Common</Name>
+    </xitems>
   </Sources>
   <Converter>
     <TrivialConverter>
