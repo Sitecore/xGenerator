@@ -371,7 +371,6 @@ define(["sitecore"], function (_sc) {
                 type: "POST",
                 data: this.data,
                 contentType: "application/json; charset=utf-8",
-                dataType: "json",
                 success: function () { }
             }).done(function (data) {
                 self.PresetName.set("text", "");
