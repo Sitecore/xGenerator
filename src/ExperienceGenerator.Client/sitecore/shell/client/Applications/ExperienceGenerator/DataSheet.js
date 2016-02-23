@@ -358,25 +358,31 @@ define(["sitecore"], function (_sc) {
         save: function (name) {
             var self = this;
             var name = this.PresetName.attributes.text;
-            this.collectSettings();
-            console.log(this.data);
-            //this.data = this.adapt(this.data); //Adapter Hell alert
-            console.log(this.data);
-            this.data = { spec: this.data, name: name };
-            //console.log(JSON.stringify(this.data, null, 2));
-            this.data = JSON.stringify(this.data);
-            var that = this;
-            $.ajax({
-                url: "/api/xgen/savesettings",
-                type: "POST",
-                data: this.data,
-                contentType: "application/json; charset=utf-8",
-                success: function () { }
-            }).done(function (data) {
-                self.PresetName.set("text", "");
-            }).fail(function (data) {
-                alert(data.responseJSON.ExceptionMessage);
-            });
+            if (name == "") {
+                alert("Please enter preset name.");
+            } else {
+                this.collectSettings();
+                console.log(this.data);
+                //this.data = this.adapt(this.data); //Adapter Hell alert
+                console.log(this.data);
+                this.data = { spec: this.data, name: name };
+                //console.log(JSON.stringify(this.data, null, 2));
+                this.data = JSON.stringify(this.data);
+                var that = this;
+                $.ajax({
+                    url: "/api/xgen/savesettings",
+                    type: "POST",
+                    data: this.data,
+                    dataType:"json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function () { }
+                }).done(function (data) {
+                    self.PresetName.set("text", "");
+                    self.DataSource.refresh();
+                }).fail(function (data) {
+                    alert(data.responseJSON.ExceptionMessage);
+                });
+            }
         },
 
         collectSettings: function () {

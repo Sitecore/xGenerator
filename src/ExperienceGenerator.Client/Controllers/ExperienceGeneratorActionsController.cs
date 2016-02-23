@@ -160,7 +160,7 @@ namespace ExperienceGenerator.Client.Controllers
       }
 
       repo.Save(preset.Name, preset.Spec);
-      return this.Ok();
+      return this.Json(new {message="ok"});
     }
 
     [HttpGet]
