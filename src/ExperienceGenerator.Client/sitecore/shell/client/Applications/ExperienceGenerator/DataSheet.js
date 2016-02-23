@@ -12,6 +12,21 @@ define(["sitecore"], function (_sc) {
             this.StartDate.viewModel.setDate(new Date(now.getFullYear() - 1, now.getMonth(), now.getDate()));
             this.EndDate.viewModel.setDate(now);
             this.loadOptions();
+            this.initPresetDataSource();
+        },
+
+        initPresetDataSource: function () {
+            var url = "/api/xgen/presetquery";
+            var self = this;
+            $.ajax({
+                url: url,
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+            }).done(function (data) {
+                self.DataSource.set("query", data.query);
+                self.DataSource.refresh();
+            });
         },
 
         loadOptions: function () {

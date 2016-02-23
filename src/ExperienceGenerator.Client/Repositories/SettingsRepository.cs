@@ -5,6 +5,7 @@ using System.Web;
 
 namespace ExperienceGenerator.Client.Repositories
 {
+  using System.Web.Http;
   using Newtonsoft.Json.Linq;
   using Sitecore.Data;
   using Sitecore.Data.Items;
@@ -20,12 +21,8 @@ namespace ExperienceGenerator.Client.Repositories
     {
       
       var templateId = Templates.Preset.ID;
-      var presetRoot = this.Database.GetItem(presetsRootPath);
 
-      if (presetRoot == null)
-      {
-        return;
-      }
+      var presetRoot = this.SitePresetRoot;
 
       var presetItem = presetRoot.Add(name, new TemplateID(templateId));
 
@@ -34,9 +31,32 @@ namespace ExperienceGenerator.Client.Repositories
       presetItem.Editing.EndEdit();
     }
 
+    protected Item CreateSiteFolder(Item root)
+    {
+      var siteName = Sitecore.Context.Site.Name;
+      var presetRoot = root.Add(siteName, new TemplateID(Sitecore.TemplateIDs.Folder));
+      return presetRoot;
+    }
+
+    protected Item SitePresetRoot
+    {
+      get
+      {
+        var siteName = Sitecore.Context.Site.Name;
+        var presetPath = $"{this.PresetsRoot.Paths.FullPath}/{siteName}";
+        var presetRoot = this.Database.GetItem(presetPath);
+        if (presetRoot == null)
+        {
+          return this.CreateSiteFolder(this.PresetsRoot);
+        }
+
+        return presetRoot;
+      }
+    }
+
     public JObject GetSettingPreset(ID id)
     {
-      var preset = this.PresetsRoot.Children[id];
+      var preset = this.SitePresetRoot.Children[id];
       if (preset == null)
       {
         return null;
@@ -47,7 +67,7 @@ namespace ExperienceGenerator.Client.Repositories
 
     public List<Item> GetPresets()
     {
-      return this.PresetsRoot.Children.ToList();
+      return this.SitePresetRoot.Children.ToList();
     }
 
     protected JObject Create(Item preset)
@@ -58,6 +78,11 @@ namespace ExperienceGenerator.Client.Repositories
     public List<string> GetPresetsIds()
     {
       return this.GetPresets().Select(child => child.ID.ToString()).ToList();
+    }
+
+    public string  GetPresetsQuery()
+    {
+      return $"{this.SitePresetRoot.Paths.FullPath}//*";
     }
   }
 }

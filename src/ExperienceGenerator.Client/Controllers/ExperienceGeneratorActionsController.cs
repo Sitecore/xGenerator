@@ -164,6 +164,13 @@ namespace ExperienceGenerator.Client.Controllers
     }
 
     [HttpGet]
+    public IHttpActionResult PresetQuery()
+    {
+      var repo = new SettingsRepository();
+      return this.Json(new {query = repo.GetPresetsQuery()});
+    }
+
+    [HttpGet]
     public JObject SettingsPreset(string id)
     {
       var repo = new SettingsRepository();

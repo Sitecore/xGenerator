@@ -46,7 +46,7 @@ SharedFields:
         <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=LoadPresetTitle&amp;Text=Select+preset+to+load+settings" ph="LoadSettingsBorder.Content" uid="{517CC50C-708A-431C-947A-223409B62CE9}" />
         <r id="{25D357D3-3648-4336-9B53-55EED7CFA078}" par="Id=PresetList&amp;Items=%7bBinding+DataSource.Items%7d" ph="LoadSettingsBorder.Content" uid="{30738443-CE8F-41CF-88C6-F58B36B1B459}" />
         <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3aapp.loadPreset()%3b&amp;Id=LoadPreset&amp;Text=Load+Preset" ph="LoadSettingsBorder.Content" uid="{77E2393D-6C2E-4332-BA3B-E66012FEAD68}" />
-        <r id="{33A02142-2DBD-4034-AEA2-BDF215EB2451}" par="Id=DataSource&amp;Query=%2fsitecore%2fclient%2fApplications%2fExperienceGenerator%2fCommon%2fPresets%2f%2f*&amp;Database=core" ph="Page.Body" uid="{90DC94F5-5777-4D59-B2B3-E50E848697ED}" />
+        <r id="{33A02142-2DBD-4034-AEA2-BDF215EB2451}" par="Id=DataSource&amp;Database=core" ph="Page.Body" uid="{90DC94F5-5777-4D59-B2B3-E50E848697ED}" />
         <r ds="{FE8D64B4-8A74-41D5-AAF3-660F68DB4C98}" id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=SummaryTitle" ph="SummaryBorder.Content" uid="{49290073-AD1A-41E9-BCEE-6F1154921629}" />
         <r id="{C4393722-39FA-4869-9582-3A8EB8983A0D}" par="UsePadding=1&amp;Id=SummaryRow&amp;PaddingType=All" ph="SummaryBorder.Content" uid="{8A6C81B4-D22B-453F-A629-87A2D38FD5A4}" />
         <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="Id=ColumnPanel1&amp;GridColumns=9" ph="SummaryRow.Content" uid="{B51DCCB6-013C-489E-B12B-919A8F47A85C}" />
