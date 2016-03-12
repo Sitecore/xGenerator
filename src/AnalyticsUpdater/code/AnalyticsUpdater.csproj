@@ -49,22 +49,22 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="MongoDB.Driver">
-      <HintPath>..\..\Components\Sitecore\MongoDB.Driver.dll</HintPath>
+      <HintPath>..\..\Sitecore\MongoDB.Driver.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Analytics.Model">
-      <HintPath>..\..\Components\Sitecore\Sitecore.Analytics.Model.dll</HintPath>
+      <HintPath>..\..\Sitecore\Sitecore.Analytics.Model.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Analytics.MongoDB">
-      <HintPath>..\..\Components\Sitecore\Sitecore.Analytics.MongoDB.dll</HintPath>
+      <HintPath>..\..\Sitecore\Sitecore.Analytics.MongoDB.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Analytics.Processing">
-      <HintPath>..\..\Components\Sitecore\Sitecore.Analytics.Processing.dll</HintPath>
+      <HintPath>..\..\Sitecore\Sitecore.Analytics.Processing.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.ContentSearch">
-      <HintPath>..\..\Components\Sitecore\Sitecore.ContentSearch.dll</HintPath>
+      <HintPath>..\..\Sitecore\Sitecore.ContentSearch.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Kernel">
-      <HintPath>..\..\Components\Sitecore\Sitecore.Kernel.dll</HintPath>
+      <HintPath>..\..\Sitecore\Sitecore.Kernel.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
