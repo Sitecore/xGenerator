@@ -9,8 +9,8 @@
       <Comment />
       <Attributes />
       <Readme />
-      <Publisher>Sitecore</Publisher>
-      <PostStep />
+      <Publisher>AnalyticsUpdater.Installer.PostStep, AnalyticsUpdater</Publisher>
+      <PostStep></PostStep>
       <PackageID />
     </metadata>
   </Metadata>
