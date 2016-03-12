@@ -1,13 +1,10 @@
 ﻿---
-ID: 0d827949-a185-4bdb-8086-07ecf23dd416
-Parent: fc841551-6185-45f9-b869-d59bcba401a4
-Template: 455a3e98-a627-4b40-8035-e683a0331ac7
-Path: /sitecore/templates/AnalyticsUpdater/Demo Tools Settings/Analytics/Last Refresh Date
+ID: fc841551-6185-45f9-b869-d59bcba401a4
+Parent: 511b6c4f-3a50-4825-b377-f334f3dfc06c
+Template: e269fbb5-3750-427a-9149-7aa950b49301
+Path: /sitecore/templates/AnalyticsUpdater/Analytics Updater Settings/Analytics
 DB: core
 SharedFields:
-- ID: ab162cc0-dc80-4abf-8871-998ee5d7ba32
-  Hint: Type
-  Value: Date
 - ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
   Hint: __Sortorder
   Value: 100

@@ -2,7 +2,7 @@
 ID: 511b6c4f-3a50-4825-b377-f334f3dfc06c
 Parent: f0932727-f92b-40af-a89a-796bcbba8a91
 Template: ab86861a-6030-46c5-b394-e8f99e8b87db
-Path: /sitecore/templates/AnalyticsUpdater/Demo Tools Settings
+Path: /sitecore/templates/AnalyticsUpdater/Analytics Updater Settings
 DB: core
 Languages:
 - Language: en
