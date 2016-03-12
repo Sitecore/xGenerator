@@ -9,8 +9,8 @@
       <Comment />
       <Attributes />
       <Readme />
-      <Publisher>AnalyticsUpdater.Installer.PostStep, AnalyticsUpdater</Publisher>
-      <PostStep></PostStep>
+      <Publisher/>
+      <PostStep>AnalyticsUpdater.Installer.PostStep, AnalyticsUpdater</PostStep>
       <PackageID />
     </metadata>
   </Metadata>
@@ -135,6 +135,47 @@
       <Exclude />
       <Name>Common</Name>
     </xitems>
+    <xitems>
+      <Entries>
+        <x-item>/core/sitecore/content/Applications/Control Panel/AnalyticsUpdater/{3B4DCA1B-34DB-465A-9D3E-4B2CF833FF0F}/invariant/0</x-item>
+        <x-item>/core/sitecore/content/Applications/Control Panel/AnalyticsUpdater/Refresh analytics reporting dates/{9186AD55-4F98-40D6-BD31-A46FEDF38C74}/invariant/0</x-item>
+        <x-item>/core/sitecore/system/Settings/AnalyticsUpdater/{4F8AF373-7561-4D9B-B38E-6F196338EE63}/invariant/0</x-item>
+        <x-item>/core/sitecore/system/Settings/AnalyticsUpdater/Analytics Updater Settings/{CFAF8BF6-7AB2-4A3D-8A87-35F64D0D8FD8}/invariant/0</x-item>
+        <x-item>/core/sitecore/templates/AnalyticsUpdater/{F0932727-F92B-40AF-A89A-796BCBBA8A91}/invariant/0</x-item>
+        <x-item>/core/sitecore/templates/AnalyticsUpdater/Analytics Updater Settings/{511B6C4F-3A50-4825-B377-F334F3DFC06C}/invariant/0</x-item>
+        <x-item>/core/sitecore/templates/AnalyticsUpdater/Analytics Updater Settings/Analytics/{FC841551-6185-45F9-B869-D59BCBA401A4}/invariant/0</x-item>
+        <x-item>/core/sitecore/templates/AnalyticsUpdater/Analytics Updater Settings/Analytics/Last Refresh Date/{0D827949-A185-4BDB-8086-07ECF23DD416}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Settings/AnalyticsUpdater/{DB25DB51-DF03-401C-96F6-AEB3274A8474}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Settings/AnalyticsUpdater/Refresh Analytics/{AD488697-75A8-4245-B391-BD1809D5BF58}/invariant/0</x-item>
+      </Entries>
+      <SkipVersions>False</SkipVersions>
+      <Converter>
+        <ItemToEntryConverter>
+          <Transforms />
+        </ItemToEntryConverter>
+      </Converter>
+      <Include />
+      <Exclude />
+      <Name>AnalyticsUpdaterItems</Name>
+    </xitems>
+    <xfiles>
+      <Entries>
+        <x-item>/App_Config/Include/Feature/AnalyticsUpdater.config</x-item>
+        <x-item>/App_Config/Include/Feature/AnalyticsUpdater.Serialization.config</x-item>
+        <x-item>/bin/AnalyticsUpdater.dll</x-item>
+        <x-item>/RefreshAnalytics.sql</x-item>
+        <x-item>/sitecore/shell/Applications/Dialogs/UpdateAnalytics.xml</x-item>
+      </Entries>
+      <Converter>
+        <FileToEntryConverter>
+          <Root>/</Root>
+          <Transforms />
+        </FileToEntryConverter>
+      </Converter>
+      <Include />
+      <Exclude />
+      <Name>AnalyticsUpdaterFiles</Name>
+    </xfiles>
   </Sources>
   <Converter>
     <TrivialConverter>
