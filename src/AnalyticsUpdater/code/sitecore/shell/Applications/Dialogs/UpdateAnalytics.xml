@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <control xmlns:def="Definition" xmlns="http://schemas.sitecore.net/Visual-Studio-Intellisense">
   <UpdateAnalytics>
-    <WizardForm CodeBeside="AnalyticsUpdater.sitecore.shell.Applications.Dialogs.UpdateAnalytics, Sitecore.Feature.DemoTools">
+    <WizardForm CodeBeside="AnalyticsUpdater.sitecore.shell.Applications.Dialogs.UpdateAnalytics, AnalyticsUpdater">
 
       <WizardFormPage ID="Settings" Header="Settings" Text="Select the script settings. Click Next to run script." Icon="Applications/32x32/replace2.png">
         <WizardFormPadding>
