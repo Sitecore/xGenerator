@@ -27,6 +27,7 @@ namespace ExperienceGenerator.Client.Controllers
   using System.Web.Http.Results;
   using ExperienceGenerator.Client.Repositories;
   using Newtonsoft.Json.Linq;
+  using Sitecore.Analytics.Data.Items;
   using Sitecore.Data.Engines;
 
   public class ExperienceGeneratorActionsController : ApiController
@@ -97,17 +98,16 @@ namespace ExperienceGenerator.Client.Controllers
       options.Location = GeoArea.Areas.Select(area => new SelectionOption { Id = area.Id, Label = area.Label }).ToList();
 
       var db = Database.GetDatabase("master");
-      var online = db.GetItem("{D07286FA-67CE-4D66-8783-0140B8B91EF1}");
-
+      var online = db.GetItem(KnownItems.OnlineChannelRoot);
 
       options.Version = "0.1";
 
       options.ChannelGroups =
-          online.Children.Where(c => c.TemplateName == "Channel Group").Select(cg => new ChannelGroup
+          online.Children.Where(c => c.TemplateID == ChannelgroupItem.TemplateID).Select(cg => new ChannelGroup
           {
             Label = cg.Name,
             Channels =
-                  cg.Children.Where(c => c.TemplateName == "Channel")
+                  cg.Children.Where(c => c.TemplateID == ChannelItem.TemplateID)
                       .Select(c => new SelectionOption
                       {
                         Id = c.ID.ToString(),
@@ -117,21 +117,20 @@ namespace ExperienceGenerator.Client.Controllers
                       .OrderBy(item => item.Label)
                       .ToList()
           }).ToList();
-
-      var outcomes = db.GetItem("{062A1E69-0BF6-4D6D-AC4F-C11D0F7DC1E1}");
+      var outcomes = db.GetItem(KnownItems.OutcomesRoot);
       options.OutcomeGroups =
-          outcomes.Children.Where(c => c.TemplateName == "Outcome Type").Select(cg => new OutcomeGroup()
+          outcomes.Children.Where(c => c.TemplateID == OutcomeTypeItem.TemplateID).Select(cg => new OutcomeGroup()
           {
             Label = cg.Name,
             Channels =
-                  cg.Children.Where(c => c.TemplateName == "Outcome Definition")
+                  cg.Children.Where(c => c.TemplateID == OutcomeDefinitionItem.TemplateID)
                       .Select(c => new SelectionOption { Id = c.ID.ToString(), Label = c.Name, DefaultWeight = 5 })
                       .OrderBy(item => item.Label)
                       .ToList()
           }).ToList();
 
-      var campaigns = db.GetItem("{EC095310-746F-4C1B-A73F-941863564DC2}");
-      options.Campaigns = campaigns.Axes.GetDescendants().Where(item => item.TemplateName == "Campaign")
+      var campaigns = db.GetItem(KnownItems.CampaignsRoot);
+      options.Campaigns = campaigns.Axes.GetDescendants().Where(item => item.TemplateID == CampaignItem.TemplateID)
           .Select(item => new SelectionOption { Id = item.ID.ToString(), Label = item.Paths.FullPath.Substring(campaigns.Paths.FullPath.Length + 1), DefaultWeight = 10 })
           .OrderBy(e => e.Label)
           .ToList();
