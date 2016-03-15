@@ -9,6 +9,7 @@ namespace AnalyticsUpdater.sitecore.shell.Applications.Dialogs
   using System;
   using System.Globalization;
   using Sitecore;
+  using Sitecore.Data;
   using Sitecore.Diagnostics;
   using Sitecore.Globalization;
   using Sitecore.Jobs;
@@ -47,6 +48,18 @@ namespace AnalyticsUpdater.sitecore.shell.Applications.Dialogs
       }
     }
 
+    protected void SetLastRefreshDate()
+    {
+      var coreDatabase = Sitecore.Configuration.Factory.GetDatabase("core");
+      var settingsItem = coreDatabase.GetItem(new ID("{CFAF8BF6-7AB2-4A3D-8A87-35F64D0D8FD8}"));
+      if (settingsItem != null)
+      {
+        settingsItem.Editing.BeginEdit();
+        settingsItem["Last Refresh Date"] = this.BaseDate.Value;
+        settingsItem.Editing.EndEdit();
+      }
+    }
+
     protected override void ActivePageChanged(string page, string oldPage)
     {
       base.ActivePageChanged(page, oldPage);
@@ -55,6 +68,7 @@ namespace AnalyticsUpdater.sitecore.shell.Applications.Dialogs
         base.NextButton.Disabled = true;
         base.BackButton.Disabled = true;
         base.CancelButton.Disabled = true;
+        this.SetLastRefreshDate();
         SheerResponse.Timer("StartJob", 10);
       }
       if (page == "Settings")

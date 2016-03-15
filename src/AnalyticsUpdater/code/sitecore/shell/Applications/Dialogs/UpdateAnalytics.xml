@@ -6,6 +6,9 @@
       <WizardFormPage ID="Settings" Header="Settings" Text="Select the script settings. Click Next to run script." Icon="Applications/32x32/replace2.png">
         <WizardFormPadding>
           <Scrollbox ID="SettingsPane" Border="none" Background="transparent">
+            <Groupbox Header="Source Date">
+              <DatePicker ID="BaseDate"/>
+            </Groupbox>
             <Groupbox Header="New Base Date">
               All Analytics data will be shifted to the current date.
             </Groupbox>
