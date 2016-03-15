@@ -66,6 +66,10 @@
       <HintPath>..\packages\Rainbow.Storage.Yaml.1.1.0\lib\net45\Rainbow.Storage.Yaml.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Sitecore.Analytics, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\inetpub\wwwroot\habitat.local\Website\bin\Sitecore.Analytics.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.Analytics.Aggregation, Version=8.0.5138.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Components\Sitecore.Analytics.Aggregation.dll</HintPath>
@@ -181,6 +185,7 @@
     </Compile>
     <Compile Include="Infrastructure\SitecoreRouteInitializer.cs" />
     <Compile Include="Infrastructure\XGenSitecoreJobManager.cs" />
+    <Compile Include="KnownItems.cs" />
     <Compile Include="Models\ConfigurationOptions.cs" />
     <Compile Include="Models\Preset.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
