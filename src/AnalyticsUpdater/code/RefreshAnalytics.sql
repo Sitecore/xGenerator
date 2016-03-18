@@ -37,7 +37,7 @@ BEGIN
 		
 		if(@exist = 1)
 		BEGIN
-			SELECT @sql = 'UPDATE ' + @table_name + ' SET Date = DATEADD(day,'+@daysToAdd+', Date) WHERE Date <='''+CONVERT(varchar(10), @lastUpdate, 20)+'''''
+			SELECT @sql = 'UPDATE ' + @table_name + ' SET Date = DATEADD(day,'+@daysToAdd+', Date) WHERE Date <='''+CONVERT(varchar(10), @lastUpdate, 20)+''''
 			EXEC sp_executesql @sql
 		END
 	END	
