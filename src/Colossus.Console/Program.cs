@@ -300,7 +300,7 @@ namespace Colossus.Console
                     var t = new Thread(() =>
                     {
                         Randomness.Seed(1337 + i);
-                        var segments = parser.ParseSegments(def["Segments"]);
+                        var segments = parser.ParseSegments(def["Segments"], JobType.Visits);
                         var sim = new SegmentBasedSimulator(segments);
 
                         foreach (var v in sim.NextVisitors(80))
