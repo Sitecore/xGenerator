@@ -1,0 +1,90 @@
+﻿---
+ID: 49bb3e24-dd92-420d-b93f-b080a27214b9
+Parent: 11c0a46e-4ea0-4f51-b74f-c54aa9ffc79a
+Template: d3cefe6e-e51b-4a84-b92e-aaf8aa8e8dc8
+Path: /sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Lists/InteractionListSettings/Channel
+DB: core
+SharedFields:
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: 0
+- ID: e67f1b1f-3488-4cf4-80ae-be285c918c2e
+  Hint: DataField
+  Value: channelName
+Languages:
+- Language: da
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Kanal
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20151207T115242Z
+    - ID: 2e9fd749-0f47-4397-8ba2-c56c65366bf0
+      Hint: HeaderText
+      Value: Kanal
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: 75388012-d191-4561-8074-5340e149c0a5
+      Hint: SortField
+      Value: ChannelDisplayName
+- Language: de-DE
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: KampagneTraffictyp
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20140611T165135:635381022957621904
+    - ID: 2e9fd749-0f47-4397-8ba2-c56c65366bf0
+      Hint: HeaderText
+      Value: KampagneTraffictyp
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: 75388012-d191-4561-8074-5340e149c0a5
+      Hint: SortField
+      Value: KAnalAnzeigename
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20131127T180638
+    - ID: 2e9fd749-0f47-4397-8ba2-c56c65366bf0
+      Hint: HeaderText
+      Value: Channel
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: 75388012-d191-4561-8074-5340e149c0a5
+      Hint: SortField
+      Value: channelName
+- Language: ja-JP
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: チャネル
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20151207T115533Z
+    - ID: 2e9fd749-0f47-4397-8ba2-c56c65366bf0
+      Hint: HeaderText
+      Value: チャネル
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: 75388012-d191-4561-8074-5340e149c0a5
+      Hint: SortField
+      Value: チャンルの表示名

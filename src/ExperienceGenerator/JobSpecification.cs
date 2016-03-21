@@ -6,21 +6,36 @@ using ExperienceGenerator.Parsing;
 
 namespace ExperienceGenerator
 {
-    public class JobSpecification
+  using System.Linq;
+
+  public class JobSpecification
+  {
+    public JobType Type { get; set; }
+    public string RootUrl { get; set; }
+
+    public int VisitorCount { get; set; }
+
+    public JObject Specification { get; set; }
+
+
+    public IVisitSimulator CreateSimulator()
     {
-        public string RootUrl { get; set; }
+      var parser = new XGenParser(RootUrl);
+      if (Specification["Segments"].Any())
+      {
+        var segments = parser.ParseSegments(Specification["Segments"], Type);
+        return new SegmentBasedSimulator(segments);
+      }
+     return new  ContactBasedSimulator(parser.ParseContacts(Specification["Contacts"],Type));
 
-        public int VisitorCount { get; set; }
-
-        public JObject Specification { get; set; }
-                        
-
-        public VisitSimulator CreateSimulator()
-        {
-            var parser = new XGenParser(RootUrl);
-            var segments = parser.ParseSegments(Specification["Segments"]);
-
-            return new VisitSimulator(segments);
-        }        
     }
+  }
+
+  
+
+  public enum JobType
+  {
+    Visits = 0,
+    Contacts = 1
+  }
 }

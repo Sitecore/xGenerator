@@ -1,0 +1,93 @@
+﻿---
+ID: 6f1727ef-1761-4839-a82f-057a102aa3af
+Parent: 5f8f6ed0-8c03-4935-8cd2-c52b960e81f2
+Template: d3cefe6e-e51b-4a84-b92e-aaf8aa8e8dc8
+Path: /sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/DialogWindows/VisitDetailsDialog/PagesInVisitList/Url
+DB: core
+SharedFields:
+- ID: 35e827ff-bb6c-4ed6-b79f-c41750ea5d46
+  Hint: HTMLTemplate
+  Value: "<a href=\"{{path}}\" target=\"_blank\" class=\"url\">{{path}}</a>"
+- ID: b2a46ae4-38f9-4538-a2b3-8021083e0e40
+  Hint: Sortable
+  Value: 1
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: 0
+Languages:
+- Language: da
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: URL
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20151207T115228Z
+    - ID: 2e9fd749-0f47-4397-8ba2-c56c65366bf0
+      Hint: HeaderText
+      Value: URL
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: 75388012-d191-4561-8074-5340e149c0a5
+      Hint: SortField
+      Value: URL
+- Language: de-DE
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: URL
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20140611T164841:635381021213937871
+    - ID: 2e9fd749-0f47-4397-8ba2-c56c65366bf0
+      Hint: HeaderText
+      Value: URL
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: 75388012-d191-4561-8074-5340e149c0a5
+      Hint: SortField
+      Value: URL
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20131204T094054
+    - ID: 2e9fd749-0f47-4397-8ba2-c56c65366bf0
+      Hint: HeaderText
+      Value: URL
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: 75388012-d191-4561-8074-5340e149c0a5
+      Hint: SortField
+      Value: Url
+- Language: ja-JP
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: URL
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20151207T115517Z
+    - ID: 2e9fd749-0f47-4397-8ba2-c56c65366bf0
+      Hint: HeaderText
+      Value: URL
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: 75388012-d191-4561-8074-5340e149c0a5
+      Hint: SortField
+      Value: URL

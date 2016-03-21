@@ -53,7 +53,7 @@ namespace Colossus.Console
             var parser = new XGenParser("http://sc80rev150427");
 
 
-            var sim = new VisitSimulator(parser.ParseSegments(segments));
+            var sim = new SegmentBasedSimulator(parser.ParseSegments(segments, JobType.Visits));
 
 
             var counts = new Dictionary<Guid, int>();
@@ -167,7 +167,7 @@ namespace Colossus.Console
                     .PartOfYear(trend => trend.AddPeak(0.5, 0.1, pct: true)));
 
 
-            var simulator = new VisitSimulator(segment);
+            var simulator = new SegmentBasedSimulator(segment);
 
             //Create a 1000 visitors. These are ordered by start date
             foreach (var visitor in simulator.NextVisitors(1000))
@@ -222,7 +222,7 @@ namespace Colossus.Console
 
             var segment = new VisitorSegment("Test visitors");
 
-            var sim = new VisitSimulator(segment);
+            var sim = new SegmentBasedSimulator(segment);
             foreach (var visitorContext in sim.NextVisitors(1000)
                 .Select(v => new SitecoreRequestContext(serverUrl, v)))
             {
@@ -301,7 +301,7 @@ namespace Colossus.Console
                     {
                         Randomness.Seed(1337 + i);
                         var segments = parser.ParseSegments(def["Segments"]);
-                        var sim = new VisitSimulator(segments);
+                        var sim = new SegmentBasedSimulator(segments);
 
                         foreach (var v in sim.NextVisitors(80))
                         {

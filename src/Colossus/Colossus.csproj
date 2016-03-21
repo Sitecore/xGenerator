@@ -61,6 +61,7 @@
     <Compile Include="CompositeVariable.cs" />
     <Compile Include="IRequestContext.cs" />
     <Compile Include="IVisitRequestContext.cs" />
+    <Compile Include="IVisitSimulator.cs" />
     <Compile Include="Request.cs" />
     <Compile Include="SimulationObject.cs" />
     <Compile Include="Statistics\BetaGenerator.cs" />
@@ -98,7 +99,7 @@
     <Compile Include="VisitorSegment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VisitorVariable.cs" />
-    <Compile Include="VisitSimulator.cs" />
+    <Compile Include="SegmentBasedSimulator.cs" />
     <Compile Include="Web\VisitEventArgs.cs" />
     <Compile Include="Web\WebRequestContext.cs" />
     <Compile Include="Web\RequestInfo.cs" />

@@ -21,5 +21,4 @@ namespace ExperienceGenerator.Client.Infrastructure
             Process(job);
         }
     }
-
 }

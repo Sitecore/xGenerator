@@ -118,12 +118,16 @@ namespace ExperienceGenerator.Client.Controllers
                       .ToList()
           }).ToList();
       var outcomes = db.GetItem(KnownItems.OutcomesRoot);
+      var taxonomyRoot = db.GetItem(KnownItems.TaxonomyRoot);
+
+      var outcomeGroups = outcomes.Axes.GetDescendants().Where(c => c.TemplateID == OutcomeDefinitionItem.TemplateID).GroupBy(x => new ID(x["Group"]),x=>x);
+
       options.OutcomeGroups =
-          outcomes.Children.Where(c => c.TemplateID == OutcomeTypeItem.TemplateID).Select(cg => new OutcomeGroup()
+          taxonomyRoot.Axes.GetDescendants().Where(c => c.TemplateID == OutcomegroupItem.TemplateID).Select(cg => new OutcomeGroup()
           {
             Label = cg.Name,
             Channels =
-                  cg.Children.Where(c => c.TemplateID == OutcomeDefinitionItem.TemplateID)
+                  outcomeGroups.Where(c =>c.Key== cg.ID).SelectMany(x=>x)
                       .Select(c => new SelectionOption { Id = c.ID.ToString(), Label = c.Name, DefaultWeight = 5 })
                       .OrderBy(item => item.Label)
                       .ToList()
@@ -177,11 +181,42 @@ namespace ExperienceGenerator.Client.Controllers
     }
 
     [HttpGet]
+    public JArray ContactSettingsPreset(string id)
+    {
+      var repo = new ContactSettingsRepository();
+      return repo.GetContactSettingPreset(new ID(id));
+    }
+    [HttpPost]
+    public IHttpActionResult SaveContactsSettings([FromBody] ContactPreset preset)
+    {
+      var repo = new ContactSettingsRepository();
+      if (repo.GetPresets().Any(x => x.Key.Equals(preset.Name.ToLower())))
+      {
+        return this.InternalServerError(new Exception("Preset with the same name already exists."));
+      }
+
+      repo.Save(preset.Name, preset.Spec);
+      return this.Json(new { message = "ok" });
+    }
+    [HttpGet]
     public List<string> Presets()
     {
       var repo = new SettingsRepository();
       return repo.GetPresetsIds();
     }
+
+    [HttpGet]
+    public List<Country> Countries()
+    {
+      return new GeoDataRepository().GetCountries();
+    }
+
+    [HttpGet]
+    public List<City> Cities(int id)
+    {
+      return new GeoDataRepository().GetCities(id);
+    }
+
 
     [HttpPost]
     public IHttpActionResult StopAll()
@@ -215,6 +250,33 @@ namespace ExperienceGenerator.Client.Controllers
       }
 
       return Ok();
+    }
+  }
+
+  public class GeoDataRepository
+  {
+    private static GeoData _cache;
+    private static readonly object _lock = new object();
+
+    private static GeoData Cache
+    {
+      get
+      {
+        lock (_lock)
+        {
+          return _cache ?? (_cache = GeoData.FromResource());
+        }
+      }
+    }
+
+    public List<Country> GetCountries()
+    {
+      return Cache.Countries.Values.ToList();
+    }
+
+    public List<City> GetCities(int isoNumeric)
+    {
+      return Cache.CitiesByCountry[isoNumeric].ToList();
     }
   }
 }

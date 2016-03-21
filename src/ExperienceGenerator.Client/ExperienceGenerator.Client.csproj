@@ -168,6 +168,7 @@
     <Content Include="App_Config\Include\Unicorn\Unicorn.AutoPublish.config" />
     <Content Include="App_Config\Include\ExperienceGenerator\ExperienceGenerator.Serialization.config" />
     <Content Include="App_Config\Include\ExperienceGenerator\zExperienceGenerator.DevSettings.config" />
+    <Content Include="sitecore\shell\client\Applications\ExperienceGenerator\Contacts.js" />
     <Content Include="sitecore\shell\client\Applications\ExperienceGenerator\DataSheet.js" />
     <Content Include="sitecore\shell\client\Applications\ExperienceGenerator\ExperienceGenerator.css" />
     <None Include="Global.asax" />
@@ -177,6 +178,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ExperienceGeneratorActionsController.cs" />
+    <Compile Include="Controllers\ExperienceGeneratorContactsJobsController.cs" />
     <Compile Include="Controllers\ExperienceGeneratorJobsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

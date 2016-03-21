@@ -1,0 +1,14 @@
+﻿---
+ID: ad71adab-4f1d-4354-9bae-b89d97749200
+Parent: 2f9f25ef-9993-43c2-b28f-a056a31da6cc
+Template: 88b6af7b-7253-471d-a644-12b81ef8f578
+Path: /sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Lists/ContactListSettings
+DB: core
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160311T093340Z

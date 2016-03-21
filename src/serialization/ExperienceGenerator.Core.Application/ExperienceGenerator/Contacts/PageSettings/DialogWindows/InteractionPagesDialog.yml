@@ -1,0 +1,73 @@
+﻿---
+ID: de8692df-c65f-4bd5-bc18-021f9c48ee88
+Parent: 98631609-7c98-49d8-8751-b779a8fd3a84
+Template: f62b4cd7-754c-4461-810f-2b6bd2c92a0d
+Path: /sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/DialogWindows/InteractionPagesDialog
+DB: core
+SharedFields:
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: 0
+- ID: deab3795-056f-4421-adf0-758844461b72
+  Hint: Placeholder Name
+  Value: Navigate
+- ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
+  Hint: __Renderings
+  Type: layout
+  Value: |
+    <r>
+      <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=Border&amp;UsePadding=1" />
+        <r id="{08B6767B-8E8A-41C8-8880-EFEBB4EAE0E3}" par="ClickFolderMode=1&amp;Database=master&amp;Id=AddPageTreeView&amp;IsCheckboxEnabled=1&amp;RootItem=%7B0DE95AE4-41AB-4D01-9EB0-67441B7C2450%7D&amp;SelectMode=2&amp;ShowSitecoreIcons=1" ph="Border.Content" />
+      </d>
+    </r>
+Languages:
+- Language: da
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Naviger
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20150314T040903:635619029439984180Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+- Language: de-DE
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Navigieren
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20150314T041146:635619031069485623Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20140701T115826
+- Language: ja-JP
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: 移動
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20150314T041021:635619030212472090Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin

@@ -41,4 +41,34 @@ namespace ExperienceGenerator.Parsing.Factories
             get { return new[] { "ContactId", "ContactFirstName", "ContactLastName", "ContactEmail" }; }
         }
     }
+
+  public class IdentifiedContactDataVariable : ContactDataVariable
+
+  {
+    public IdentifiedContactDataVariable(string email, string fName, string lName) : base(0)
+    {
+      this.Email = email;
+      this.FirstName = fName;
+      this.LastName = lName;
+    }
+
+    public override void SetValues(SimulationObject target)
+    {
+        target.Variables["ContactId"] = Email;
+
+
+
+        target.Variables["ContactFirstName"] = FirstName;
+        target.Variables["ContactLastName"] = LastName;
+        target.Variables["ContactEmail"] = Email;
+
+      }
+
+    public string Email { get; set; }
+
+    public string LastName { get; set; }
+
+    public string FirstName { get; set; }
+    
+  }
 }

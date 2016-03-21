@@ -1,0 +1,27 @@
+﻿---
+ID: e45c19e0-f3fa-45d6-90d5-c295803a7ce3
+Parent: e8ed70ba-1401-4bcf-b3f9-5a60fe67c8f5
+Template: d4c7f5f9-8977-4e0c-b6ce-28ae8e0753e2
+Path: /sitecore/client/Applications/Launchpad/PageSettings/Buttons/Tools/Contact Experience Generator
+DB: core
+SharedFields:
+- ID: 044e3fdb-22ae-4e6c-b50e-2abdfbabd338
+  Hint: Link
+  Value: /sitecore/client/Applications/ExperienceGenerator/Contacts
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: 200
+- ID: d25b56d4-23b6-4462-be25-b6a6d7f38e13
+  Hint: Icon
+  Value: ExperienceGenerator/48x48/Experience Generator.png
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20150515T094449Z
+    - ID: aa4a4643-5bfc-45a7-b9d9-5183a5211d99
+      Hint: Text
+      Value: Experience Generator

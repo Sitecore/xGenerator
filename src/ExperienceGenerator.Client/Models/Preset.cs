@@ -13,4 +13,10 @@ namespace ExperienceGenerator.Client.Models
 
     public JObject Spec { get; set; }
   }
+  public class ContactPreset
+  {
+    public string Name { get; set; }
+
+    public JArray Spec { get; set; }
+  }
 }

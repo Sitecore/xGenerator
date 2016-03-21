@@ -1,0 +1,103 @@
+﻿---
+ID: 67609f12-fecf-42d8-8572-87be11c81810
+Parent: 98631609-7c98-49d8-8751-b779a8fd3a84
+Template: f62b4cd7-754c-4461-810f-2b6bd2c92a0d
+Path: /sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/DialogWindows/VisitDetailsDialog
+DB: core
+SharedFields:
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: 0
+- ID: deab3795-056f-4421-adf0-758844461b72
+  Hint: Placeholder Name
+  Value: Campaigns
+- ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
+  Hint: __Renderings
+  Type: layout
+  Value: |
+    <r>
+      <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=MainBorder" uid="{3F9C7CFD-36B8-41A8-8A05-D5736CAF04E0}" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=PaddingMainBorder" ph="MainBorder.Content" uid="{B9F6AA90-4D22-4815-8967-1B22B5EEBE1C}" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=VisitDialogBorder&amp;UsePadding=1" ph="MainBorder.Content" uid="{A2FDD9F2-83E4-4F1A-9FDF-70B158542028}" />
+        <r ds="{5F8F6ED0-8C03-4935-8CD2-C52B960E81F2}" id="{442BD093-FBAD-4E36-BC08-489E16C82D08}" par="Id=PagesInVisitAccordion&amp;Header=Add+page&amp;IsCollapsible=0" ph="VisitDialogBorder.Content" uid="{DF813216-D8C5-4792-9F56-F61ECF76FD1B}" />
+        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3aapp.delPagesFromVisit()&amp;Id=DeleteSelectedPagesButton&amp;Text=Delete+selected" ph="PagesInVisitAccordion.ActionBar" uid="{E6BFA038-031D-47E4-ADFB-14B9AE5F34FA}" />
+        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3aapp.addPageToVisit()&amp;Id=AddPageToVisitButton&amp;Text=Add" ph="PagesInVisitAccordion.ActionBar" uid="{77EEB0DD-7750-4560-9B60-960D4F67048E}" />
+        <r id="{327FD09D-41D6-4F15-8B18-611799364853}" par="Id=MultiSelectList&amp;PageScriptFileName=%2fsitecore%2fshell%2fclient%2fSpeak%2fAssets%2flib%2fui%2f1.1%2fbehaviors%2fMultiSelectList.js&amp;Name=MultiSelectList" ph="PagesInVisitAccordion.Body" uid="{2A87C612-606C-464D-828C-366D1261F075}" />
+        <r ds="{5F8F6ED0-8C03-4935-8CD2-C52B960E81F2}" id="{ACE0AFD6-3DE0-42CF-8E62-4E68CD810A8D}" par="Id=PagesInVisitList&amp;Items=%7bBinding+PagesInVisitDataProvider.cidata%7d&amp;ViewMode=DetailList&amp;AllowMultipleColumnSorting=0&amp;Behaviors=MultiSelectList" ph="PagesInVisitAccordion.Body" uid="{483F03FA-B788-4B13-A25E-BB1AC7023B39}" />
+        <r ds="{88134D50-FA78-406D-8C52-8286EB12BB25}" id="{FE9723FC-56E4-4CA8-9C64-CB34F29462A5}" par="Id=ProgressIndicatorPagesInVisit&amp;IsBusy=%7bBinding+PagesInVisitDataProvider.IsBusy%7d&amp;TargetControl=PagesInVisitList" ph="PagesInVisitAccordion.Body" uid="{25D07625-EC3A-4949-BF28-5A34BF73060C}" />
+        <r ds="{6CD06869-4264-420C-A161-3220DD3AB7BA}" id="{A91523CD-6E56-4F08-8B21-C39018E0134A}" par="Id=PagesInVisitDataProvider" ph="PagesInVisitAccordion.Body" uid="{688E92D3-2DFE-4A3B-9A77-181C74DDC189}" />
+        <r id="{327FD09D-41D6-4F15-8B18-611799364853}" par="ContentAlignment=Center&amp;IsVisible=%25252525252525257BBinding%252525252525252520PagesInVisitDataProvider.HasMoreData%25252525252525257D&amp;UsePadding=1&amp;Id=MorePagesInVisitBorder" ph="PagesInVisitAccordion.Body" uid="{05199F6E-C378-4472-8F21-63FCE88437E9}" />
+        <r id="{442BD093-FBAD-4E36-BC08-489E16C82D08}" par="Id=TrafficChannelAccordion&amp;Header=Select+traffic+channel&amp;IsCollapsible=0" ph="VisitDialogBorder.Content" uid="{72296FD4-4918-43D1-A648-095E9EF6B43F}" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=SearchParams" ph="TrafficChannelAccordion.Body" uid="{5314BC53-7E32-4879-A6D9-6C68D14659ED}" />
+        <r id="{C4393722-39FA-4869-9582-3A8EB8983A0D}" par="Id=SearchEngineRow" ph="SearchParams.Content" uid="{470247E3-CF20-40ED-B2E3-E97F7CE9AF6E}" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="Id=SearchEngineLeft&amp;GridColumns=6" ph="SearchEngineRow.Content" uid="{4C2528C3-A188-43D9-AF0E-611A55623111}" />
+        <r id="{33A02142-2DBD-4034-AEA2-BDF215EB2451}" par="Id=SearchEngineDatasource&amp;Query=%2f%2f*%5b%40%40id%3d%27%7b6F01950A-C49A-416E-8ED3-EE4CACC121B8%7d%27%5d%2f*&amp;Database=core" ph="SearchEngineLeft.Content" uid="{D7E718E4-D5E6-47C7-960E-628CF05A77A4}" />
+        <r id="{25D357D3-3648-4336-9B53-55EED7CFA078}" par="Id=SearchEngine&amp;DisplayFieldName=%24displayName&amp;Items=%7bBinding+SearchEngineDatasource.Items%7d&amp;ValueFieldName=itemName" ph="SearchEngineLeft.Content" uid="{D0D6E0A5-7954-4C98-A26A-8FE713A2A8B5}" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="Id=SearchEngineRight&amp;GridColumns=6" ph="SearchEngineRow.Content" uid="{E9501957-152F-4E95-B3CD-8D75A9C7C141}" />
+        <r id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" par="Id=SearchKeyword" ph="SearchEngineRight.Content" uid="{ACC3A860-924D-471D-8BA9-2C8EC02E43E7}" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=TrafficChannelBorder" ph="TrafficChannelAccordion.ActionBar" uid="{C1A38AFD-DF98-4346-A75B-F338F7920944}" />
+        <r id="{33A02142-2DBD-4034-AEA2-BDF215EB2451}" par="Id=ChannelsDatasource&amp;Query=%2fsitecore%2fsystem%2fMarketing+Control+Panel%2fTaxonomies%2fChannel%2fOnline%2f%2f*%5b%40%40templateid%3d%27%7b3B4FDE65-16A8-491D-BF15-99CE83CF3506%7d%27%5d" ph="TrafficChannelBorder.Content" uid="{25E1407B-9551-4967-B51C-7EC6BCB4EEA5}" />
+        <r id="{25D357D3-3648-4336-9B53-55EED7CFA078}" par="Id=TrafficChannelComboBox&amp;SelectedValue=%7bB418E4F2-1013-4B42-A053-B6D4DCA988BF%7d&amp;Items=%7bBinding+ChannelsDatasource.Items%7d" ph="TrafficChannelBorder.Content" uid="{39DDB7F2-AD3D-4DF5-95A7-B79C7C64E27D}" />
+        <r id="{442BD093-FBAD-4E36-BC08-489E16C82D08}" par="Id=LocationAccordion&amp;Header=Select+location&amp;IsCollapsible=0" ph="VisitDialogBorder.Content" uid="{6173D0BA-D3E6-44DF-9F5F-909C6D085432}" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=LocationParams" ph="LocationAccordion.Body" uid="{F39CBE41-2861-4E34-9846-FD1B006AB808}" />
+        <r id="{C4393722-39FA-4869-9582-3A8EB8983A0D}" par="Id=LocationRow" ph="LocationParams.Content" uid="{2DED5BF1-040E-48B3-B300-CFDC681627E2}" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="Id=LocationLeft&amp;GridColumns=6" ph="LocationRow.Content" uid="{3C152186-20CC-41A9-A037-11ABF19CC4E4}" />
+        <r id="{25D357D3-3648-4336-9B53-55EED7CFA078}" par="Id=Country&amp;DisplayFieldName=Name&amp;ValueFieldName=IsoNumeric" ph="LocationLeft.Content" uid="{2F2A8D48-C981-4751-A94B-358CC6B09FD3}" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="Id=LocationRight&amp;GridColumns=6" ph="LocationRow.Content" uid="{710546D3-7E23-470F-86A3-F86290B8A4EB}" />
+        <r id="{25D357D3-3648-4336-9B53-55EED7CFA078}" par="Id=City&amp;DisplayFieldName=Name&amp;ValueFieldName=GeoNameId" ph="LocationRight.Content" uid="{05843F7F-5642-47E8-B492-B61051B46362}" />
+        <r id="{442BD093-FBAD-4E36-BC08-489E16C82D08}" par="Id=RecencyAccordion&amp;Header=Select+recency&amp;IsCollapsible=0" ph="VisitDialogBorder.Content" uid="{84466541-8CF0-484D-B30F-B52B3064E784}" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=RecencyParams" ph="RecencyAccordion.ActionBar" uid="{DB774E0C-1861-47C6-A516-BD911DE8ECD9}" />
+        <r id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" par="Type=number&amp;Text=0&amp;Id=RecencyValue" ph="RecencyParams.Content" uid="{3FC38B8C-BBD6-406E-8B96-8C879F23F556}" />
+      </d>
+    </r>
+Languages:
+- Language: da
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Naviger
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20150314T040903:635619029439984180Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+- Language: de-DE
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Navigieren
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20150314T041146:635619031069485623Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20140701T115826
+- Language: ja-JP
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: 移動
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20150314T041021:635619030212472090Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin

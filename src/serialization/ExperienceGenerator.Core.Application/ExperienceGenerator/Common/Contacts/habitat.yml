@@ -1,0 +1,14 @@
+﻿---
+ID: 43adc083-38f1-4332-b0b8-1f1251a57760
+Parent: ed72a22e-57b8-4da2-9b00-af77d25840e3
+Template: a87a00b1-e6db-45ab-8b54-636fec3b5523
+Path: /sitecore/client/Applications/ExperienceGenerator/Common/Contacts/habitat
+DB: core
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20160229T101813Z

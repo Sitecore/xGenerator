@@ -1,0 +1,72 @@
+﻿---
+ID: bd7b246f-77cc-4c93-b0a0-c2024e053805
+Parent: 5fdba48b-53b2-4e3d-80e6-7d36fa98fdd5
+Template: 6437cfd5-76ca-48aa-bfbd-8b8d73eb5581
+Path: /sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Texts/Test summary
+DB: core
+SharedFields:
+- ID: 844fe7aa-2cb9-49a2-ac81-917c04b0713e
+  Hint: TextType
+  Value: LargeTitle
+Languages:
+- Language: da
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: SummaryTitle
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20150314T040844:635619029247490200Z
+    - ID: 3564b3d0-3804-4d86-9880-b5e7473ef56c
+      Hint: Text
+      Value: TESTOVERSIGT
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+- Language: de-DE
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: TESTZUSAMMENFASSUNG
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20150314T041119:635619030796214383Z
+    - ID: 3564b3d0-3804-4d86-9880-b5e7473ef56c
+      Hint: Text
+      Value: TESTZUSAMMENFASSUNG
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20140702T120619
+    - ID: 3564b3d0-3804-4d86-9880-b5e7473ef56c
+      Hint: Text
+      Value: Process
+- Language: ja-JP
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: 要約タイトル
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20150314T040956:635619029969194220Z
+    - ID: 3564b3d0-3804-4d86-9880-b5e7473ef56c
+      Hint: Text
+      Value: テストの要約
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin

@@ -8,7 +8,7 @@ using Sitecore.Analytics;
 
 namespace Colossus.Integration
 {
-    public class RandomWalk : SitecoreBehavior
+  public class RandomWalk : SitecoreBehavior
     {
         public RandomWalk(string sitecoreUrl)
             : base(sitecoreUrl)

@@ -11,31 +11,33 @@ using Sitecore.Analytics.Tracking;
 
 namespace Colossus.Integration.Processing
 {
-    public class ContactDataProcessor : ISessionPatcher
+  public class ContactDataProcessor : ISessionPatcher
+  {
+    public void UpdateSession(Session session, RequestInfo requestInfo)
     {
-        public void UpdateSession(Session session, RequestInfo requestInfo)
-        {
 
-            requestInfo.SetIfVariablePresent("ContactId", session.Identify);
-                        
-            requestInfo.SetIfVariablePresent("ContactFirstName", name =>
-            {
-                var personalInfo = session.Contact.GetFacet<IContactPersonalInfo>("Personal");
-                personalInfo.FirstName = name;
-            });
+      requestInfo.SetIfVariablePresent("ContactId", session.Identify);
 
-            requestInfo.SetIfVariablePresent("ContactLastName", name =>
-            {
-                var personalInfo = session.Contact.GetFacet<IContactPersonalInfo>("Personal");
-                personalInfo.Surname = name;
-                
-            });
+      requestInfo.SetIfVariablePresent("ContactFirstName", name =>
+      {
+        var personalInfo = session.Contact.GetFacet<IContactPersonalInfo>("Personal");
+        personalInfo.FirstName = name;
+      });
 
-            requestInfo.SetIfVariablePresent("ContactEmail", email =>
-            {
-                var emails = session.Contact.GetFacet<IContactEmailAddresses>("Emails");                                
-                emails.Preferred = email;
-            });
-        }
+      requestInfo.SetIfVariablePresent("ContactLastName", name =>
+      {
+        var personalInfo = session.Contact.GetFacet<IContactPersonalInfo>("Personal");
+        personalInfo.Surname = name;
+
+      });
+
+      requestInfo.SetIfVariablePresent("ContactEmail", email =>
+      {
+        var emails = session.Contact.GetFacet<IContactEmailAddresses>("Emails");
+        emails.Preferred = "Primary";
+        var entry = emails.Entries.Create("Primary");
+        entry.SmtpAddress = email;
+      });
     }
+  }
 }

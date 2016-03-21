@@ -1,0 +1,68 @@
+﻿---
+ID: 40dc4037-1acf-4250-8ffe-edadc737c1d8
+Parent: 2f594966-4699-437c-bdf1-a3a545b595f1
+Template: 76c2629e-3b7d-4eee-82d0-f5df443b56a5
+Path: /sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Messages/No items found
+DB: core
+Languages:
+- Language: da
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Der blev ikke fundet nogen elementer
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20131230T162546:635240175460337401
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: d281bd0c-d3ef-4012-b560-5daaf3fa37a8
+      Hint: Text
+      Value: Der blev ikke fundet nogen elementer.
+- Language: de-DE
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Keine Items gefunden
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20131230T164746:635240188668609041
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: d281bd0c-d3ef-4012-b560-5daaf3fa37a8
+      Hint: Text
+      Value: Es wurden keine Items gefunden.
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20130130T070650
+    - ID: d281bd0c-d3ef-4012-b560-5daaf3fa37a8
+      Hint: Text
+      Value: No items found.
+- Language: ja-JP
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: アイテムがみつかりません
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20150314T040945:635619029856070208Z
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: d281bd0c-d3ef-4012-b560-5daaf3fa37a8
+      Hint: Text
+      Value: アイテムがみつかりません

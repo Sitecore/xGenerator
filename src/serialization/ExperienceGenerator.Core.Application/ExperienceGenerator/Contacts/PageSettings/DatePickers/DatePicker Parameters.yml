@@ -1,0 +1,18 @@
+﻿---
+ID: f8329eed-e027-431e-be36-1e408a26cc41
+Parent: feff9e48-022b-4d74-8a30-335facd63d98
+Template: a006af51-8c91-4229-a590-c7a853684249
+Path: /sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/DatePickers/DatePicker Parameters
+DB: core
+SharedFields:
+- ID: c37f3302-2d96-40f0-801a-21ed80a645d3
+  Hint: ViewMode
+  Value: Textbox
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20150505T114002Z

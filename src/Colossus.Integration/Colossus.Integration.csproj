@@ -120,6 +120,7 @@
     <Compile Include="SitecoreRequestContext.cs" />
     <Compile Include="SitecoreVisitContext.cs" />
     <Compile Include="sitecore\admin\ColossusHandler.cs" />
+    <Compile Include="StrictWalk.cs" />
     <Compile Include="TestInfo.cs" />
     <Compile Include="VisitDataConverter.cs" />
   </ItemGroup>
