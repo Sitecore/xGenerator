@@ -169,14 +169,20 @@
           {
 
             var segment = new VisitorSegment(contact.Value<string>("email"));
+
+
+            //set city
             var city = interaction["geoData"].ToObject<City>();
-            city.TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById(interaction["geoData"]["TimeZoneInfo"]["Id"].ToString());
+            city = GeoData.Cities.Find(x=>x.GeoNameId == city.GeoNameId);
+            segment.VisitorVariables.Add(new GeoVariables(() => city));
+            //set contact
             segment.VisitVariables.Add(new IdentifiedContactDataVariable(contact.Value<string>("email"), contact.Value<string>("firstName"), contact.Value<string>("lastName")));
+
+            //set channel (can be overriden below)
             var channelId = interaction.Value<string>("channelId");
             segment.VisitVariables.Add(new SingleVisitorVariable<string>("Channel",(visit)=>channelId));
 
-
-            segment.VisitorVariables.Add(new GeoVariables(() => city));
+            //set search options
             var engine = interaction.Value<string>("searchEngine");
             if (engine != null)
             {
@@ -190,7 +196,11 @@
               }
             }
 
-            segment.StartDateTime(DateTime.Now.Subtract(new TimeSpan(2, 0, 30, 0)), DateTime.Now.Subtract(new TimeSpan(2, 0, 0, 0)));
+
+            //set datetime
+            segment.DateGenerator.Start = DateTime.Now.Add(TimeSpan.Parse(interaction.Value<string>("recency")));
+
+
             segments.Add(segment);
             var visitorBehavior = new StrictWalk(this._sitecoreRoot, interaction["pages"].Select(x => x.Value<string>("path")));
             segment.Behavior = () => visitorBehavior;

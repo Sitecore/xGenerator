@@ -454,7 +454,7 @@ define(["sitecore", "knockout"], function (_sc, ko) {
         Specification: {
           Contacts: doc,
           Segments: {
-            Default: defaultSegment
+
           }
         }
       }

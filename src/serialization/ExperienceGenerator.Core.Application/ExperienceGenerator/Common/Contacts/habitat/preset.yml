@@ -417,28 +417,24 @@ Languages:
                     "path": "/sitecore/content/Legal/Home"
                   },
                   {
-                    "itemId": "{D3374636-A7C4-4F29-9B32-B4437E95B9F5}",
-                    "path": "/sitecore/content/Legal/Home/News/2016/02/03/14/17"
+                    "itemId": "{ACFE0443-14B2-4173-A2C0-F5D917DE0B1A}",
+                    "path": "/sitecore/content/Legal/Home/News/2016/01/07/14/23/Cybersecurity Requires a Heightened Level of Collaboration"
                   },
                   {
-                    "itemId": "{0E118C1F-BC2D-48D3-9486-8BA03F36C796}",
-                    "path": "/sitecore/content/Legal/Home/News/2016/03/01/10/35"
+                    "itemId": "{D6585F7B-8823-49D9-949D-FA8C8E7AE3F3}",
+                    "path": "/sitecore/content/Legal/Home/News/2016/01/07/14/56/Content Marketing Strategies for Law Firms"
                   },
                   {
                     "itemId": "{53C59369-B0C7-40B2-B76F-DED99916D309}",
                     "path": "/sitecore/content/Legal/Home/About Us"
                   },
                   {
-                    "itemId": "{3D1C0597-EB53-4216-BA7C-215624C3A641}",
-                    "path": "/sitecore/content/Legal/Home/Our Team/Dale Kent"
+                    "itemId": "{C9BFB6A6-5B20-42EF-82FD-E79CEC01CC80}",
+                    "path": "/sitecore/content/Legal/Home/Our Team/Eduardo Perez Jr"
                   },
                   {
                     "itemId": "{17F0B1C7-0D17-4039-962D-6B5894DEF4DF}",
                     "path": "/sitecore/content/Legal/Home/Our Team/Mark Chase"
-                  },
-                  {
-                    "itemId": "{F84917ED-9ACA-4A6F-B65F-00E6B209D371}",
-                    "path": "/sitecore/content/Legal/Home/Our Team/Shane Nevins"
                   }
                 ],
                 "geoData": {
@@ -566,6 +562,6 @@ Languages:
                 "searchKeyword": "takeover"
               }
             ],
-            "itemId": "ec5bdee8-b233-4168-b96c-cc581d06e23f"
+            "itemId": "8e95e6c6-793c-4c74-a88d-b95164b22dcb"
           }
         ]

@@ -25,7 +25,8 @@
 
         foreach (var page in pages)
         {
-          visitContext.Request(page);
+          
+          visitContext.Request(page, TimeSpan.FromSeconds(Randomness.Random.Next(10, 200)));
         }
 
         yield return visitContext.Visit;

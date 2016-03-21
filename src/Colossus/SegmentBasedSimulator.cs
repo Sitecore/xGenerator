@@ -7,26 +7,6 @@ using Newtonsoft.Json.Linq;
 
 namespace Colossus
 {
-  public class ContactBasedSimulator : IVisitSimulator
-  {
-    private IEnumerable<VisitorSegment> VisitorSegment;
-
-    public ContactBasedSimulator(IEnumerable<VisitorSegment> segments)
-    {
-      VisitorSegment = segments;
-    }
-
-    public Visitor NextVisitor()
-    {
-      return null;
-    }
-
-    public IEnumerable<Visitor> NextVisitors(int count, bool sort = true)
-    {
-      return VisitorSegment.Select(x => new Visitor(x));
-    }
-    
-  }
   public class SegmentBasedSimulator : IVisitSimulator
   {
     private readonly Func<VisitorSegment> _segments;

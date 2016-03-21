@@ -1,5 +1,6 @@
 ﻿namespace ExperienceGenerator.Tests
 {
+  using System;
   using System.Linq;
   using Colossus.Integration;
   using ExperienceGenerator.Parsing;
@@ -31,6 +32,7 @@
           {
             new
             {
+              recency="-1",
               pages = new object[0],
               geoData = new GeoDataTmpClass
               {
@@ -49,6 +51,7 @@
       segments.Count().Should().Be(1);
       segments.All(x => x.Behavior().GetType() == typeof(StrictWalk)).Should().BeTrue();
       segments.First().VisitVariables.OfType<IdentifiedContactDataVariable>().Single().Email.Should().Be("dmd@sc.net");
+      DateTime.Now.Subtract(segments.First().DateGenerator.Start.Value).TotalDays.Should().BeGreaterOrEqualTo(0.98);
     }
   }
 }
