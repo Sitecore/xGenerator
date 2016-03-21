@@ -37,8 +37,12 @@ BEGIN
 		
 		if(@exist = 1)
 		BEGIN
-			SELECT @sql = 'UPDATE ' + @table_name + ' SET Date = DATEADD(minute, 1, Date) WHERE Date <='''+CONVERT(varchar(10), @lastUpdate, 20)+''''
-			EXEC sp_executesql @sql
+			if(@table_name <> 'SegmentRecords')
+			BEGIN
+				SELECT @sql = 'UPDATE ' + @table_name + ' SET Date = DATEADD(minute, 1, Date) WHERE Date <='''+CONVERT(varchar(10), @lastUpdate, 20)+''''
+				EXEC sp_executesql @sql	
+			END
+
 			SELECT @sql = 'UPDATE ' + @table_name + ' SET Date = DATEADD(day,'+@daysToAdd+', Date) WHERE Date <='''+CONVERT(varchar(10), @lastUpdate, 20)+''''
 			EXEC sp_executesql @sql
 		END
