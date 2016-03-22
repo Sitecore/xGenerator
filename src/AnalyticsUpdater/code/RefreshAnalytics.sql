@@ -17,6 +17,40 @@ BEGIN
 	DECLARE @daysToAdd nvarchar(10);
 	SELECT @daysToAdd = CONVERT(nvarchar(10), @dayspan)  
 
+	DECLARE @d datetime
+	DECLARE @siteNameId int
+	DECLARE @itemId uniqueidentifier
+	DECLARE @languageId int
+	DECLARE @devicenameid int
+	DECLARE @duplicate int
+	DECLARE @views int
+	DECLARE @visits int
+	DECLARE @duration int
+	DECLARE @value int
+	
+	DECLARE fact_pvbylanguage CURSOR FOR
+	SELECT date, SiteNameId, ItemId, LanguageId, DeviceNameId,Views, Visits, Duration, Value from dbo.Fact_PageViewsByLanguage where date <= @lastUpdate
+
+
+	OPEN fact_pvbylanguage
+	FETCH NEXT FROM fact_pvbylanguage
+	INTO @d, @siteNameId, @itemId, @languageId, @devicenameid, @views, @visits, @duration, @value
+
+	WHILE @@FETCH_STATUS =0
+	BEGIN
+
+		UPDATE Fact_PageViewsByLanguage set Views = Views + @views, Visits = Visits + @visits, Duration = Duration +@duration, Value = Value + @value
+		WHERE Date = DATEADD(day, @dayspan, @d) AND SiteNameId = @siteNameId AND ItemId = @itemId AND LanguageId = @languageId AND DeviceNameId = @devicenameid AND Date > @lastUpdate
+
+		DELETE dbo.Fact_PageViewsByLanguage WHERE CURRENT OF fact_pvbylanguage 
+
+		FETCH NEXT FROM fact_pvbylanguage
+		INTO @d, @siteNameId, @itemId, @languageId, @devicenameid, @views, @visits, @duration, @value
+	END
+
+	CLOSE fact_pvbylanguage
+	DEALLOCATE fact_pvbylanguage
+
 	--Select tables list that should be updated
 	DECLARE tables_cursor CURSOR
 		FOR SELECT name
@@ -37,12 +71,6 @@ BEGIN
 		
 		if(@exist = 1)
 		BEGIN
-			if(@table_name <> 'SegmentRecords')
-			BEGIN
-				SELECT @sql = 'UPDATE ' + @table_name + ' SET Date = DATEADD(minute, 1, Date) WHERE Date <='''+CONVERT(varchar(10), @lastUpdate, 20)+''''
-				EXEC sp_executesql @sql	
-			END
-
 			SELECT @sql = 'UPDATE ' + @table_name + ' SET Date = DATEADD(day,'+@daysToAdd+', Date) WHERE Date <='''+CONVERT(varchar(10), @lastUpdate, 20)+''''
 			EXEC sp_executesql @sql
 		END
