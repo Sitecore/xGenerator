@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Colossus.Integration.Processing;
-using Colossus.Web;
-using Sitecore;
-using Sitecore.Analytics;
-using Sitecore.Analytics.DataAccess;
-using Sitecore.Analytics.Model;
-using Sitecore.Analytics.Testing;
-using Sitecore.Layouts;
-
-namespace Colossus.Integration
+﻿namespace Colossus.Integration.Models
 {
-    public class SitecoreResponseInfo : ResponseInfo
+  using System;
+  using System.Collections.Generic;
+  using System.Linq;
+  using Colossus.Integration.Processing;
+  using Colossus.Web;
+  using Sitecore;
+  using Sitecore.Analytics;
+  using Sitecore.Analytics.DataAccess;
+  using Sitecore.Analytics.Model;
+  using Sitecore.Analytics.Testing;
+  using Sitecore.Layouts;
+
+  public class SitecoreResponseInfo : ResponseInfo
     {
         public Guid? ContactId { get; set; }
 
@@ -29,7 +29,7 @@ namespace Colossus.Integration
 
         public SitecoreResponseInfo()
         {
-            Renderings = new List<RenderingInfo>();
+            this.Renderings = new List<RenderingInfo>();
         }
 
         public static SitecoreResponseInfo FromContext()

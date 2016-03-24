@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Sitecore.Data.Items;
-
-namespace Colossus.Integration
+﻿namespace Colossus.Integration.Models
 {
-
-    public class RenderingInfo
+  public class RenderingInfo
     {
 
         public ItemInfo Item { get; set; }

@@ -1,27 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using Colossus.Integration.Processing;
-using Colossus.Web;
-using Sitecore.Analytics.Model;
-
-namespace Colossus.Integration
+﻿namespace Colossus.Integration.Models
 {
-    public class SitecoreRequestContext : WebRequestContext<SitecoreResponseInfo>
+  using System;
+  using System.Net;
+
+  public class SitecoreRequestContext : WebRequestContext<SitecoreResponseInfo>
     {
         public Uri SitecoreRootUri { get; set; }        
 
         public string ColossusHandlerUrl
         {
-            get { return TransformUrl("/sitecore/admin/colossus.ashx"); }
+            get { return this.TransformUrl("/sitecore/admin/colossus.ashx"); }
         }
 
         public SitecoreRequestContext(string sitecoreRootUri, Visitor visitor) : base(visitor)
         {
-            SitecoreRootUri = new Uri(sitecoreRootUri);
+            this.SitecoreRootUri = new Uri(sitecoreRootUri);
         }
 
         public bool IsColossusClientAvailable
@@ -30,7 +23,7 @@ namespace Colossus.Integration
             {
                 try
                 {
-                    new WebClient().DownloadString(ColossusHandlerUrl);
+                    new WebClient().DownloadString(this.ColossusHandlerUrl);
                     return true;
                 }
                 catch
@@ -48,7 +41,7 @@ namespace Colossus.Integration
 
         public override string TransformUrl(string uri, Visit visit = null)
         {
-            var host = SitecoreRootUri;
+            var host = this.SitecoreRootUri;
             if (visit != null)
             {
                 var visitHost = visit.GetVariable<string>("Host");

@@ -31,7 +31,9 @@ using Sitecore.Workflows.Simple;
 
 namespace Colossus.Console
 {
-    internal class Program
+  using Colossus.Integration.Models;
+
+  internal class Program
     {
 
         public static void Outcomes()

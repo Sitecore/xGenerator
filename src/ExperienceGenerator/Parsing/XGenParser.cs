@@ -6,8 +6,12 @@
   using System.Linq;
   using Colossus;
   using Colossus.Integration;
+  using Colossus.Integration.Behaviors;
+  using Colossus.Integration.Models;
+  using Colossus.Integration.Processing;
   using Colossus.Statistics;
   using ExperienceGenerator.Data;
+  using ExperienceGenerator.Models;
   using ExperienceGenerator.Parsing.Factories;
   using Newtonsoft.Json;
   using Newtonsoft.Json.Linq;
@@ -159,58 +163,116 @@
     public virtual IEnumerable<VisitorSegment> ParseContacts(JToken definition, JobType type)
     {
       var segments = new List<VisitorSegment>();
-      if (JobType.Contacts == type)
+      if (JobType.Contacts != type)
       {
-        foreach (var contact in (JArray)definition)
+        return segments;
+      }
+
+      foreach (var contact in (JArray)definition)
+      {
+        if (contact["interactions"] == null)
+          continue;
+        foreach (var interaction in contact["interactions"])
         {
-          if (contact["interactions"] == null)
-            continue;
-          foreach (var interaction in contact["interactions"])
+
+          var segment = new VisitorSegment(contact.Value<string>("email"));
+
+
+          //set city
+          var city = interaction["geoData"].ToObject<City>();
+          city = GeoData.Cities.Find(x => x.GeoNameId == city.GeoNameId);
+          segment.VisitorVariables.Add(new GeoVariables(() => city));
+
+          //set contact
+          segment.VisitVariables.Add(ExtractContact(contact));
+
+          //set channel (can be overriden below)
+          var channelId = interaction.Value<string>("channelId");
+          segment.VisitVariables.Add(new SingleVisitorVariable<string>("Channel", (visit) => channelId));
+
+
+
+          //set search options
+          var engine = interaction.Value<string>("searchEngine");
+          if (engine != null)
           {
-
-            var segment = new VisitorSegment(contact.Value<string>("email"));
-
-
-            //set city
-            var city = interaction["geoData"].ToObject<City>();
-            city = GeoData.Cities.Find(x=>x.GeoNameId == city.GeoNameId);
-            segment.VisitorVariables.Add(new GeoVariables(() => city));
-            //set contact
-            segment.VisitVariables.Add(new IdentifiedContactDataVariable(contact.Value<string>("email"), contact.Value<string>("firstName"), contact.Value<string>("lastName")));
-
-            //set channel (can be overriden below)
-            var channelId = interaction.Value<string>("channelId");
-            segment.VisitVariables.Add(new SingleVisitorVariable<string>("Channel",(visit)=>channelId));
-
-            //set search options
-            var engine = interaction.Value<string>("searchEngine");
-            if (engine != null)
+            var searchEngine = SearchEngine.SearchEngines.First(s => s.Id.Equals(engine, StringComparison.InvariantCultureIgnoreCase));
+            var keyword = interaction.Value<string>("searchKeyword");
+            if (keyword != null)
             {
-              var searchEngine = SearchEngine.SearchEngines.First(s => s.Id.Equals(engine, StringComparison.InvariantCultureIgnoreCase));
-              var keyword = interaction.Value<string>("searchKeyword");
-              if (keyword != null)
-              {
-                var searchKeywords = keyword.Split(new char[] { ' ' });
-                segment.VisitVariables.AddOrReplace(new ExternalSearchVariable(() => searchEngine, () => searchKeywords));
+              var searchKeywords = keyword.Split(new char[] { ' ' });
+              segment.VisitVariables.AddOrReplace(new ExternalSearchVariable(() => searchEngine, () => searchKeywords));
 
-              }
             }
+          }
+          //set userAgent
+
+          SetUserAgent(segment);
+
+          //set datetime
+          segment.DateGenerator.Start = DateTime.Today
+            .AddHours(12)
+            .AddMinutes(Randomness.Random.Next(-240, 240))
+            .AddSeconds(Randomness.Random.Next(-240, 240))
+            .Add(TimeSpan.Parse(interaction.Value<string>("recency")));
 
 
-            //set datetime
-            segment.DateGenerator.Start = DateTime.Now.Add(TimeSpan.Parse(interaction.Value<string>("recency")));
+          //set outcomes
+          var outcomes = new HashSet<string>(interaction.Values<JsonItemInfo>("outcomes")?.Select(x => x.Id.ToString()) ?? Enumerable.Empty<string>());
+          var value = new NormalGenerator(10, 5).Truncate(1);
+          segment.VisitVariables.AddOrReplace(new OutcomeVariable(() => outcomes, value.Next));
 
 
-            segments.Add(segment);
-            var visitorBehavior = new StrictWalk(this._sitecoreRoot, interaction["pages"].Select(x => x.Value<string>("path")));
-            segment.Behavior = () => visitorBehavior;
+          var pageItemInfos = interaction.Values<PageItemInfo>("pages").ToArray();
+          var pages = new List<PageDefinition>();
+          //set campaign (can be overriden below)
+          var campaign = interaction.Value<string>("campaignId");
+          if (!string.IsNullOrEmpty(campaign))
+            pageItemInfos[0].Path = pageItemInfos[0].Path + "?sc_camp=" + campaign;
+
+          foreach (var page in pageItemInfos)
+          {
+            var pageDefinition = new PageDefinition() { Path = page.Path };
+
+            //set goals
+            pageDefinition.RequestVariables.Add("TriggerEvents", page.Goals.Select(x => new TriggerEventData() { Id = x.Id }));
+            pages.Add(pageDefinition);
           }
 
+          var visitorBehavior = new StrictWalk(this._sitecoreRoot, pages);
+          segment.Behavior = () => visitorBehavior;
+          segments.Add(segment);
+
         }
+
       }
       return segments;
 
     }
+
+    private static void SetUserAgent(VisitorSegment segment)
+    {
+      var userAgent = FileHelpers.ReadLinesFromResource<GeoData>("ExperienceGenerator.Data.useragents.txt")
+        .Exponential(.8, 8);
+      segment.RequestVariables.Add(Variables.Random("UserAgent", userAgent));
+    }
+
+    private static IdentifiedContactDataVariable ExtractContact(JToken contact)
+    {
+      return new IdentifiedContactDataVariable()
+      {
+        Address = contact.Value<string>("address"),
+        BirthDate = contact.Value<string>("birthday"),
+        Email = contact.Value<string>("email"),
+        FirstName = contact.Value<string>("firstName"),
+        MiddleName = contact.Value<string>("middleName"),
+        LastName = contact.Value<string>("lastName"),
+        Gender = contact.Value<string>("gender"),
+        JobTitle = contact.Value<string>("jobTitle"),
+        Phone = contact.Value<string>("phone")
+      };
+    }
+
     public virtual Func<VisitorSegment> ParseSegments(JToken definition, JobType type)
     {
       if (definition == null || !definition.Any())
@@ -218,18 +280,27 @@
         throw new Exception("At least one segment is required");
       }
 
-
-
       var segments = new Dictionary<string, KeyValuePair<VisitorSegment, double>>();
-
-
-
 
       foreach (var kv in (JObject)definition)
       {
         var segment = new VisitorSegment(kv.Key);
         var def = (JObject)kv.Value;
-        this.InitializeSegment(segment, def, type);
+
+        segment.DateGenerator.Hour(t => t.AddPeak(0.4, 0.25, 0, pct: true)
+        .AddPeak(0.8, 0.1, 2, 0.2, pct: true));
+        SetUserAgent(segment);
+
+
+        if (type != JobType.Contacts)
+        {
+          segment.VisitorVariables.Add(Variables.Random("VisitCount", new PoissonGenerator(3).Truncate(1, 10)));
+          segment.VisitorVariables.Add(Variables.Random("PageViews", new PoissonGenerator(3).Truncate(1, 10)));
+          segment.VisitVariables.Add(Variables.Random("Pause", new NormalGenerator(7, 7).Truncate(0.25)));
+        }
+
+        var visitorBehavior = new RandomWalk(this._sitecoreRoot);
+        segment.Behavior = () => visitorBehavior;
 
         segments.Add(kv.Key, new KeyValuePair<VisitorSegment, double>(segment, def.Value<double?>("Weight") ?? 1d));
 
@@ -273,29 +344,6 @@
 
       return segments.Values.Weighted();
     }
-
-
-    protected virtual void InitializeSegment(VisitorSegment segment, JObject definition, JobType type)
-    {
-      segment.DateGenerator.Hour(t => t.AddPeak(0.4, 0.25, 0, pct: true)
-          .AddPeak(0.8, 0.1, 2, 0.2, pct: true));
-      var userAgent = FileHelpers.ReadLinesFromResource<GeoData>("ExperienceGenerator.Data.useragents.txt")
-         .Exponential(.8, 8);
-      segment.RequestVariables.Add(Variables.Random("UserAgent", userAgent));
-
-
-      if (type != JobType.Contacts)
-      {
-        segment.VisitorVariables.Add(Variables.Random("VisitCount", new PoissonGenerator(3).Truncate(1, 10)));
-        segment.VisitorVariables.Add(Variables.Random("PageViews", new PoissonGenerator(3).Truncate(1, 10)));
-        segment.VisitVariables.Add(Variables.Random("Pause", new NormalGenerator(7, 7).Truncate(0.25)));
-      }
-
-      var visitorBehavior = new RandomWalk(this._sitecoreRoot);
-      segment.Behavior = () => visitorBehavior;
-    }
-
-
 
     public Func<ISet<TValue>> ParseSet<TValue>(JToken token)
     {

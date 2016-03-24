@@ -18,30 +18,4 @@ namespace ExperienceGenerator.Client.Models
 
         public List<OutcomeGroup> OutcomeGroups { get; set; }        
     }
-
-    public class SelectionOption
-    {
-        public string Id { get; set; }
-        public string Label { get; set; }
-        public double DefaultWeight { get; set; }
-
-        public SelectionOption()
-        {
-            DefaultWeight = 50;
-        }
-    }
-
-    public class ChannelGroup
-    {
-        public string Label { get; set; }
-
-        public List<SelectionOption> Channels { get; set; }
-    }
-
-    public class OutcomeGroup
-    {
-        public string Label { get; set; }
-
-        public List<SelectionOption> Channels { get; set; }
-    }
 }

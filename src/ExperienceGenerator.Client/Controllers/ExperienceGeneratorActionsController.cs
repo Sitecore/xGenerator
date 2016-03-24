@@ -25,6 +25,7 @@ namespace ExperienceGenerator.Client.Controllers
   using System.Net;
   using System.Net.Http;
   using System.Web.Http.Results;
+  using Colossus.Integration.Models;
   using ExperienceGenerator.Client.Repositories;
   using Newtonsoft.Json.Linq;
   using Sitecore.Analytics.Data.Items;

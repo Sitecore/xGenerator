@@ -3,6 +3,7 @@
   using System;
   using System.Linq;
   using Colossus.Integration;
+  using Colossus.Integration.Behaviors;
   using ExperienceGenerator.Parsing;
   using ExperienceGenerator.Parsing.Factories;
   using FluentAssertions;
@@ -34,6 +35,13 @@
             {
               recency="-1",
               pages = new object[0],
+              outcomes = new object[]
+              {
+                new
+                {
+                  itemId = Guid.NewGuid().ToString()
+                }
+              },
               geoData = new GeoDataTmpClass
               {
                 TimeZoneInfo = new
@@ -51,7 +59,41 @@
       segments.Count().Should().Be(1);
       segments.All(x => x.Behavior().GetType() == typeof(StrictWalk)).Should().BeTrue();
       segments.First().VisitVariables.OfType<IdentifiedContactDataVariable>().Single().Email.Should().Be("dmd@sc.net");
-      DateTime.Now.Subtract(segments.First().DateGenerator.Start.Value).TotalDays.Should().BeGreaterOrEqualTo(0.98);
+      DateTime.Now.Subtract(segments.First().DateGenerator.Start.Value).TotalDays.Should().BeGreaterOrEqualTo(0.91);
+    }
+
+    [Fact]
+    public void ParseContacts_NoOutcomes()
+    {
+      var json = new[]
+      {
+        new
+        {
+          email = "dmd@sc.net",
+          interactions = new object[]
+          {
+            new
+            {
+              recency="-1",
+              pages = new object[0],
+              geoData = new GeoDataTmpClass
+              {
+                TimeZoneInfo = new
+                {
+                  Id = "Eastern Standard Time"
+                }
+              }
+            }
+          }
+        }
+      };
+
+      var parser = new XGenParser("http://google.com");
+      var segments = parser.ParseContacts(JToken.FromObject(json), JobType.Contacts);
+      segments.Count().Should().Be(1);
+      segments.All(x => x.Behavior().GetType() == typeof(StrictWalk)).Should().BeTrue();
+      segments.First().VisitVariables.OfType<IdentifiedContactDataVariable>().Single().Email.Should().Be("dmd@sc.net");
+      DateTime.Now.Subtract(segments.First().DateGenerator.Start.Value).TotalDays.Should().BeGreaterOrEqualTo(0.94);
     }
   }
 }

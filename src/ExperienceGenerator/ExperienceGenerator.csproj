@@ -59,9 +59,11 @@
     <Compile Include="Data\ItemInfoClient.cs" />
     <Compile Include="JobInfo.cs" />
     <Compile Include="JobSpecification.cs" />
+    <Compile Include="JobType.cs" />
     <Compile Include="Models\SiteInfo.cs" />
     <Compile Include="Parsing\Factories\ContactDataVariable.cs" />
     <Compile Include="Parsing\Factories\ExternalSearchVariable.cs" />
+    <Compile Include="Parsing\Factories\IdentifiedContactDataVariable.cs" />
     <Compile Include="Parsing\Factories\LambdaFactory.cs" />
     <Compile Include="Parsing\Factories\VariableFactory.cs" />
     <Compile Include="Data\SearchEngine.cs" />

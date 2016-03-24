@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Colossus.Integration.Processing;
-using FiftyOne.Foundation.Mobile.Detection;
-using Sitecore.Analytics;
-using Sitecore.Analytics.Model;
-
-namespace Colossus.Integration
+﻿namespace Colossus.Integration.Models
 {
-    public static class VisitDataConverter
+  using System;
+  using System.Collections.Generic;
+  using Colossus.Integration.Processing;
+  using FiftyOne.Foundation.Mobile.Detection;
+  using Sitecore.Analytics.Model;
+
+  public static class VisitDataConverter
     {
 
         public static IEnumerable<VisitData> ToVisitData(this Visitor visitor)

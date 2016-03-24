@@ -86,6 +86,7 @@
     <Reference Include="Sitecore.Kernel">
       <HintPath>..\Components\Sitecore.Kernel.dll</HintPath>
     </Reference>
+    <Reference Include="Sitecore.Mvc, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.ServiceModel" />
@@ -97,8 +98,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GetContextInfo.cs" />
-    <Compile Include="ItemInfo.cs" />
+    <Compile Include="Models\PageDefinition.cs" />
+    <Compile Include="Models\GetContextInfo.cs" />
+    <Compile Include="Models\ItemInfo.cs" />
     <Compile Include="Processing\ChannelPatcher.cs" />
     <Compile Include="Processing\ContactDataProcessor.cs" />
     <Compile Include="Processing\TriggerEventsAction.cs" />
@@ -111,18 +113,18 @@
     <Compile Include="Processing\ISessionPatcher.cs" />
     <Compile Include="Processing\TimePatcher.cs" />
     <Compile Include="Processing\TriggerEventData.cs" />
-    <Compile Include="RandomWalk.cs" />
-    <Compile Include="RenderingInfo.cs" />
-    <Compile Include="SitecoreBehavior.cs" />
-    <Compile Include="SitecoreResponseInfo.cs" />
+    <Compile Include="Behaviors\RandomWalk.cs" />
+    <Compile Include="Models\RenderingInfo.cs" />
+    <Compile Include="Behaviors\SitecoreBehavior.cs" />
+    <Compile Include="Models\SitecoreResponseInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PatchTracker.cs" />
-    <Compile Include="SitecoreRequestContext.cs" />
-    <Compile Include="SitecoreVisitContext.cs" />
+    <Compile Include="Models\SitecoreRequestContext.cs" />
+    <Compile Include="Models\SitecoreVisitContext.cs" />
     <Compile Include="sitecore\admin\ColossusHandler.cs" />
-    <Compile Include="StrictWalk.cs" />
-    <Compile Include="TestInfo.cs" />
-    <Compile Include="VisitDataConverter.cs" />
+    <Compile Include="Behaviors\StrictWalk.cs" />
+    <Compile Include="Models\TestInfo.cs" />
+    <Compile Include="Models\VisitDataConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Colossus\Colossus.csproj">

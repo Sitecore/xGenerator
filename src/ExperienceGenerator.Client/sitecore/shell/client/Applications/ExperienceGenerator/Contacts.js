@@ -1,35 +1,41 @@
 /*/ THIS CODE IS FOR PROTOTYPE ONLY!!!! /*/
-define(["sitecore", "knockout"], function (_sc, ko) {
+define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
   var DataSheet = _sc.Definitions.App.extend({
-    addContact: function (DialogWindow) {
+    addContact: function () {
       var contacts = this.ContactList.get("items");
-      contacts.push({
-        'email': "",
-        'firstName': "",
-        'lastName': "",
-        "itemId": this.guid()
-      });
+      contacts.push({ "itemId": this.guid() });
       //how to avoid?
-      this.ContactList.set("items", []);
+
+      this.ContactList.unset("items", { silent: true });
       this.ContactList.set("items", contacts);
       this.selectLastElement(this.ContactList);
 
     },
+
+    addItemToList: function (sourceControl, targetControl) {
+      var selected = this[sourceControl].get('selectedItem');
+
+      if (!selected) return;
+
+
+      var existingOutcomes = this[targetControl].get('items') || [];
+      existingOutcomes.push(selected);
+      this[targetControl].unset("items");
+      this[targetControl].set("items", existingOutcomes);
+
+
+    },
+
     addInteraction: function () {
       var contact = this.ContactList.get("selectedItem");
       if (!contact) return;
       var interactions = contact.get("interactions");
       interactions.push({
-        channelName: "",
-        recency: "-2 days",
-        pages: [
-        ],
         geoData: { Country: {} },
         "itemId": this.guid()
-      })
-      // contact.set("interactions", []);
-      //  contact.set("interactions", interactions);
-      this.InteractionList.set('items', []);
+      });
+
+      this.InteractionList.unset("items", { silent: true });
       this.InteractionList.set('items', contact.get('interactions'));
       //how to avoid?
 
@@ -37,14 +43,13 @@ define(["sitecore", "knockout"], function (_sc, ko) {
 
     },
     deleteSelected: function (controlName) {
-      var that = this;
       var filteredItem = this[controlName].get("items");
 
       var checkedItems = this[controlName].get('checkedItems');
       _.each(checkedItems, function (checkedItem) {
         filteredItem = _.without(filteredItem, checkedItem);
       });
-      this[controlName].set('items', []);
+      this[controlName].unset("items", { silent: true });
       this[controlName].set('items', filteredItem);
       if (controlName === "InteractionList")
         this.ContactList.get("selectedItem").set("interactions", filteredItem);
@@ -56,10 +61,6 @@ define(["sitecore", "knockout"], function (_sc, ko) {
     },
 
     initialized: function () {
-
-
-
-
       this.landingPages = "";
       this.campaigns = "";
       this.data = {};
@@ -77,17 +78,31 @@ define(["sitecore", "knockout"], function (_sc, ko) {
         PrimeAddressValue: "address"
       };
 
-      //this.RecencyValue.viewModel.$el.attr('type', 'number');
-      //this.RecencyValue.viewModel.$el.attr('type', 'number');
+
 
       this.loadCountries();
       //this.initPresetDataSource();
 
+      this.CampaignComboBox.once("change:items",
+        function (m, sel) {
+          this.emptyCampaign = this.guid();
+          sel.push({
+            $displayName: "None",
+            itemId: this.emptyCampaign
+          });
+          m.setItems(sel);
+        }, this);
+
       this.ContactList.on("change:selectedItem", this.setEditContactBindings, this);
       this.InteractionList.on("change:selectedItem", this.openEditInteractionModal, this);
       this.TrafficChannelComboBox.on("change:selectedItem", this.setTrafficChannel, this);
+      this.CampaignComboBox.on("change:selectedItem", this.setCampaign, this);
       this.RecencyValue.on("change:text", this.setRecency, this);
       this.Country.on("change:selectedItem", this.loadCities, this);
+      this.BirthdayValue.on("change:date", function (model, value) {
+        model.unset("text");
+        model.set("text", value);
+      }, this)
       this.City.on("change:selectedItem", function (m, sel) {
 
         var itr = this.InteractionList.get('selectedItem');
@@ -106,12 +121,14 @@ define(["sitecore", "knockout"], function (_sc, ko) {
         itr.set('searchKeyword', sel);
       }, this);
 
-      // this.PagesInVisitList.on('change:items', function(ctx, changed) {
 
-      // });
+      this.PagesInVisitList.on("change:selectedItem", this.pageSelected, this);
+
+      this.OutcomeList.on("change:items", this.setOutcomes, this);
+      this.GoalList.on("change:items", this.setGoals, this);
 
 
-      this.initReverseBindings();
+      this.applyTwoWayBindings();
 
 
 
@@ -143,27 +160,14 @@ define(["sitecore", "knockout"], function (_sc, ko) {
         self.Country.set("items", data, true);
       });
     },
-    initReverseBindings: function () {
+    applyTwoWayBindings: function () {
       for (var key in this.bindingMap) {
         if (this.bindingMap.hasOwnProperty(key)) {
           this[key].on("change:text", this.updateSelectedContact, this);
         }
       }
     },
-    delPagesFromVisit: function () {
-      var that = this;
-      var selectedItem = this.InteractionList.get('selectedItem');
-      var pages = selectedItem.get('pages');
 
-      var checkedItems = this.PagesInVisitList.get('checkedItems');
-      _.each(checkedItems, function (checkedItem) {
-        pages = _.without(pages, checkedItem);
-      });
-      selectedItem.set('pages', pages);
-      this.PagesInVisitList.set('items', []);
-      this.PagesInVisitList.set('items', selectedItem.get('pages'));
-
-    },
     setTrafficChannel: function (model, selected) {
       var target = this.InteractionList.get('selectedItem');
 
@@ -179,13 +183,66 @@ define(["sitecore", "knockout"], function (_sc, ko) {
 
     },
 
+    setCampaign: function (model, selected) {
+      var target = this.InteractionList.get('selectedItem');
+
+      if (!target || !selected) return;
+
+      if (selected.itemId == this.emptyCampaign) {
+        target.unset("campaignName");
+        target.unset("campaignId");
+      } else {
+        target.set("campaignName", selected.$displayName);
+        target.set("campaignId", selected.itemId);
+      }
+
+
+
+    },
+
+    pageSelected: function (model, selectedItem) {
+
+      if (!selectedItem) return;
+      this.GoalList.unset('items');
+      this.GoalList.set('items', selectedItem.get('goals'));
+
+    },
+
+
+    setGoals: function (model, changed) {
+      var target = this.PagesInVisitList.get('selectedItem');
+
+      var interaction = this.InteractionList.get('selectedItem');
+      if (!target || !changed || !interaction) return;
+      interaction.get('pages')[target.collection.indexOf(target)]['goals'] = _.map(changed, function (x) {
+        return {
+          itemId: x.itemId,
+          $displayName: x.$displayName
+        }
+      });
+     
+      this.PagesInVisitList.unset('items');
+      this.PagesInVisitList.set('items', interaction.get('pages'));
+
+    },
+
+    setOutcomes: function (model, changed) {
+      var target = this.InteractionList.get('selectedItem');
+
+      if (!target || !changed) return;
+
+      target.unset("outcomes");
+      target.set("outcomes", _.map(changed, function (x) {
+        return {
+          itemId: x.itemId, $displayName: x.$displayName
+        }
+      }));
+    },
+
     setRecency: function (model, changed) {
       var target = this.InteractionList.get('selectedItem');
       if (!target || !changed) return;
       target.set("recency", changed);
-    },
-
-    addPagesCancelButton: function () {
     },
     addPagesOKButton: function () {
       var selectedItem = this.InteractionList.get('selectedItem');
@@ -204,7 +261,7 @@ define(["sitecore", "knockout"], function (_sc, ko) {
         selectedItem.get('pages').push(items[idx]);
       }
 
-      this.PagesInVisitList.set('items', []);
+      this.PagesInVisitList.unset('items');
       this.PagesInVisitList.set('items', selectedItem.get('pages'));
 
       this.AddInteractionPagesWindow.hide();
@@ -225,7 +282,7 @@ define(["sitecore", "knockout"], function (_sc, ko) {
           }
         }
       }
-      this.InteractionList.set('selectedItemId', "");
+      this.InteractionList.unset('selectedItemId');
       var contacts = this.ContactList.get('items');
 
       for (var idx in contacts) {
@@ -235,6 +292,11 @@ define(["sitecore", "knockout"], function (_sc, ko) {
 
         }
       }
+
+      var items = this.InteractionList.get('items');
+      this.InteractionList.unset('items');
+      this.InteractionList.set('items', items);
+
 
     },
 
@@ -247,6 +309,8 @@ define(["sitecore", "knockout"], function (_sc, ko) {
     openEditInteractionModal: function (control, selectedItem) {
       if (!selectedItem) return;
       this.PagesInVisitList.set('items', selectedItem.get('pages'));
+      this.OutcomeList.set('items', selectedItem.get('outcomes'));
+      this.GoalList.unset('items');
 
       var that = this;
       var geoId = selectedItem.get('geoData').GeoNameId;
@@ -254,6 +318,7 @@ define(["sitecore", "knockout"], function (_sc, ko) {
         that.City.set('selectedValue', geoId);
       });
       this.TrafficChannelComboBox.set('selectedValue', selectedItem.get('channelId'));
+      this.CampaignComboBox.set('selectedValue', selectedItem.get('campaignId') || this.emptyCampaign);
       this.Country.set('selectedValue', selectedItem.get('geoData').Country.IsoNumeric);
       this.SearchEngine.set('selectedValue', selectedItem.get('searchEngine'));
       this.SearchKeyword.set('text', selectedItem.get('searchKeyword'));
@@ -281,7 +346,7 @@ define(["sitecore", "knockout"], function (_sc, ko) {
           this[key].set("text", selectedItem.get(this.bindingMap[key]));
         }
       }
-
+      this["BirthdayValue"].set("date", selectedItem.get(this.bindingMap["BirthdayValue"]));
       this.InteractionList.set('items', selectedItem.get('interactions'));
     },
 
@@ -341,7 +406,7 @@ define(["sitecore", "knockout"], function (_sc, ko) {
       } else {
         _sc.on("intervalCompleted:ProgressBar", this.updateProgress, this);
         $.ajax({
-          url: "/api/xgen/contacts/" + this.jobId + "?pause=false",
+          url: "/api/xgen/jobs/" + this.jobId + "?pause=false",
           type: "GET"
         });
       }
@@ -353,7 +418,7 @@ define(["sitecore", "knockout"], function (_sc, ko) {
       }
       _sc.off("intervalCompleted:ProgressBar");
       $.ajax({
-        url: "/api/xgen/contacts/" + this.jobId,
+        url: "/api/xgen/jobs/" + this.jobId,
         type: "DELETE",
       }).done(function (data) {
         //Do something here when job is aborted
@@ -361,7 +426,7 @@ define(["sitecore", "knockout"], function (_sc, ko) {
     },
 
     start: function () {
-      this.data = this.adapt(ko.toJS(this.ContactList.get('items'))); //Adapter Hell alert
+      this.data = this.adapt(ko.toJS(this.ContactList.get('items'))); 
       console.log(this.data);
       //console.log(JSON.stringify(this.data, null, 2));
       this.data = JSON.stringify(this.data);
@@ -387,7 +452,7 @@ define(["sitecore", "knockout"], function (_sc, ko) {
       var jobId = this.jobId;
       var that = this;
       $.ajax({
-        url: "/api/xgen/contacts/" + that.jobId,
+        url: "/api/xgen/jobs/" + that.jobId,
         type: "GET",
       }).done(function (data) {
         that.ProgressBar.set("value", data.Progress * 100);
@@ -444,12 +509,10 @@ define(["sitecore", "knockout"], function (_sc, ko) {
     },
 
 
-
-
-    ///////////////////////////////////////////////////////////////Niels' adaptor start ///////////////////
     adapt: function (doc) {
 
       return {
+        Type: "Contact",
         VisitorCount: doc.length,
         Specification: {
           Contacts: doc,
@@ -459,29 +522,8 @@ define(["sitecore", "knockout"], function (_sc, ko) {
         }
       }
 
-    },
-
-
-
-    toWeights: function (o, keyTranslator) {
-      var weights = {};
-      var i = 0;
-      keyTranslator = keyTranslator || function (value, i) { return value; };
-      for (var key in o) {
-        weights[keyTranslator(key, i++)] = (1 * o[key] || 0) / 100;
-      }
-      return weights;
-    },
-
-    durationToSeconds: function (s) {
-      var parts = s.split(":");
-      var i = 0;
-      var duration = 0;
-      if (parts.length > 2) duration += parts[i++] * 3600;
-      if (parts.length > 1) duration += parts[i++] * 60;
-      return duration + 1 * parts[i];
     }
-    ///////////////////////////////////////////////////////Niel's adaptor end ///////////////////
+
 
 
   });

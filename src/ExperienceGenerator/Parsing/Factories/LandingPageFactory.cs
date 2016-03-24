@@ -12,7 +12,9 @@ using ExperienceGenerator.Models;
 
 namespace ExperienceGenerator.Parsing.Factories
 {
-    public class LandingPageFactory : VariableFactory
+  using Colossus.Integration.Models;
+
+  public class LandingPageFactory : VariableFactory
     {
         public override void UpdateSegment(VisitorSegment segment, JToken definition, XGenParser parser)
         {

@@ -17,38 +17,81 @@ SharedFields:
   Value: |
     <r>
       <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
-        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=MainBorder" uid="{3F9C7CFD-36B8-41A8-8A05-D5736CAF04E0}" />
-        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=PaddingMainBorder" ph="MainBorder.Content" uid="{B9F6AA90-4D22-4815-8967-1B22B5EEBE1C}" />
-        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=VisitDialogBorder&amp;UsePadding=1" ph="MainBorder.Content" uid="{A2FDD9F2-83E4-4F1A-9FDF-70B158542028}" />
-        <r ds="{5F8F6ED0-8C03-4935-8CD2-C52B960E81F2}" id="{442BD093-FBAD-4E36-BC08-489E16C82D08}" par="Id=PagesInVisitAccordion&amp;Header=Add+page&amp;IsCollapsible=0" ph="VisitDialogBorder.Content" uid="{DF813216-D8C5-4792-9F56-F61ECF76FD1B}" />
-        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3aapp.delPagesFromVisit()&amp;Id=DeleteSelectedPagesButton&amp;Text=Delete+selected" ph="PagesInVisitAccordion.ActionBar" uid="{E6BFA038-031D-47E4-ADFB-14B9AE5F34FA}" />
-        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3aapp.addPageToVisit()&amp;Id=AddPageToVisitButton&amp;Text=Add" ph="PagesInVisitAccordion.ActionBar" uid="{77EEB0DD-7750-4560-9B60-960D4F67048E}" />
-        <r id="{327FD09D-41D6-4F15-8B18-611799364853}" par="Id=MultiSelectList&amp;PageScriptFileName=%2fsitecore%2fshell%2fclient%2fSpeak%2fAssets%2flib%2fui%2f1.1%2fbehaviors%2fMultiSelectList.js&amp;Name=MultiSelectList" ph="PagesInVisitAccordion.Body" uid="{2A87C612-606C-464D-828C-366D1261F075}" />
-        <r ds="{5F8F6ED0-8C03-4935-8CD2-C52B960E81F2}" id="{ACE0AFD6-3DE0-42CF-8E62-4E68CD810A8D}" par="Id=PagesInVisitList&amp;Items=%7bBinding+PagesInVisitDataProvider.cidata%7d&amp;ViewMode=DetailList&amp;AllowMultipleColumnSorting=0&amp;Behaviors=MultiSelectList" ph="PagesInVisitAccordion.Body" uid="{483F03FA-B788-4B13-A25E-BB1AC7023B39}" />
-        <r ds="{88134D50-FA78-406D-8C52-8286EB12BB25}" id="{FE9723FC-56E4-4CA8-9C64-CB34F29462A5}" par="Id=ProgressIndicatorPagesInVisit&amp;IsBusy=%7bBinding+PagesInVisitDataProvider.IsBusy%7d&amp;TargetControl=PagesInVisitList" ph="PagesInVisitAccordion.Body" uid="{25D07625-EC3A-4949-BF28-5A34BF73060C}" />
-        <r ds="{6CD06869-4264-420C-A161-3220DD3AB7BA}" id="{A91523CD-6E56-4F08-8B21-C39018E0134A}" par="Id=PagesInVisitDataProvider" ph="PagesInVisitAccordion.Body" uid="{688E92D3-2DFE-4A3B-9A77-181C74DDC189}" />
-        <r id="{327FD09D-41D6-4F15-8B18-611799364853}" par="ContentAlignment=Center&amp;IsVisible=%25252525252525257BBinding%252525252525252520PagesInVisitDataProvider.HasMoreData%25252525252525257D&amp;UsePadding=1&amp;Id=MorePagesInVisitBorder" ph="PagesInVisitAccordion.Body" uid="{05199F6E-C378-4472-8F21-63FCE88437E9}" />
-        <r id="{442BD093-FBAD-4E36-BC08-489E16C82D08}" par="Id=TrafficChannelAccordion&amp;Header=Select+traffic+channel&amp;IsCollapsible=0" ph="VisitDialogBorder.Content" uid="{72296FD4-4918-43D1-A648-095E9EF6B43F}" />
-        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=SearchParams" ph="TrafficChannelAccordion.Body" uid="{5314BC53-7E32-4879-A6D9-6C68D14659ED}" />
-        <r id="{C4393722-39FA-4869-9582-3A8EB8983A0D}" par="Id=SearchEngineRow" ph="SearchParams.Content" uid="{470247E3-CF20-40ED-B2E3-E97F7CE9AF6E}" />
-        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="Id=SearchEngineLeft&amp;GridColumns=6" ph="SearchEngineRow.Content" uid="{4C2528C3-A188-43D9-AF0E-611A55623111}" />
-        <r id="{33A02142-2DBD-4034-AEA2-BDF215EB2451}" par="Id=SearchEngineDatasource&amp;Query=%2f%2f*%5b%40%40id%3d%27%7b6F01950A-C49A-416E-8ED3-EE4CACC121B8%7d%27%5d%2f*&amp;Database=core" ph="SearchEngineLeft.Content" uid="{D7E718E4-D5E6-47C7-960E-628CF05A77A4}" />
-        <r id="{25D357D3-3648-4336-9B53-55EED7CFA078}" par="Id=SearchEngine&amp;DisplayFieldName=%24displayName&amp;Items=%7bBinding+SearchEngineDatasource.Items%7d&amp;ValueFieldName=itemName" ph="SearchEngineLeft.Content" uid="{D0D6E0A5-7954-4C98-A26A-8FE713A2A8B5}" />
-        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="Id=SearchEngineRight&amp;GridColumns=6" ph="SearchEngineRow.Content" uid="{E9501957-152F-4E95-B3CD-8D75A9C7C141}" />
-        <r id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" par="Id=SearchKeyword" ph="SearchEngineRight.Content" uid="{ACC3A860-924D-471D-8BA9-2C8EC02E43E7}" />
-        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=TrafficChannelBorder" ph="TrafficChannelAccordion.ActionBar" uid="{C1A38AFD-DF98-4346-A75B-F338F7920944}" />
-        <r id="{33A02142-2DBD-4034-AEA2-BDF215EB2451}" par="Id=ChannelsDatasource&amp;Query=%2fsitecore%2fsystem%2fMarketing+Control+Panel%2fTaxonomies%2fChannel%2fOnline%2f%2f*%5b%40%40templateid%3d%27%7b3B4FDE65-16A8-491D-BF15-99CE83CF3506%7d%27%5d" ph="TrafficChannelBorder.Content" uid="{25E1407B-9551-4967-B51C-7EC6BCB4EEA5}" />
-        <r id="{25D357D3-3648-4336-9B53-55EED7CFA078}" par="Id=TrafficChannelComboBox&amp;SelectedValue=%7bB418E4F2-1013-4B42-A053-B6D4DCA988BF%7d&amp;Items=%7bBinding+ChannelsDatasource.Items%7d" ph="TrafficChannelBorder.Content" uid="{39DDB7F2-AD3D-4DF5-95A7-B79C7C64E27D}" />
-        <r id="{442BD093-FBAD-4E36-BC08-489E16C82D08}" par="Id=LocationAccordion&amp;Header=Select+location&amp;IsCollapsible=0" ph="VisitDialogBorder.Content" uid="{6173D0BA-D3E6-44DF-9F5F-909C6D085432}" />
-        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=LocationParams" ph="LocationAccordion.Body" uid="{F39CBE41-2861-4E34-9846-FD1B006AB808}" />
-        <r id="{C4393722-39FA-4869-9582-3A8EB8983A0D}" par="Id=LocationRow" ph="LocationParams.Content" uid="{2DED5BF1-040E-48B3-B300-CFDC681627E2}" />
-        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="Id=LocationLeft&amp;GridColumns=6" ph="LocationRow.Content" uid="{3C152186-20CC-41A9-A037-11ABF19CC4E4}" />
-        <r id="{25D357D3-3648-4336-9B53-55EED7CFA078}" par="Id=Country&amp;DisplayFieldName=Name&amp;ValueFieldName=IsoNumeric" ph="LocationLeft.Content" uid="{2F2A8D48-C981-4751-A94B-358CC6B09FD3}" />
-        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="Id=LocationRight&amp;GridColumns=6" ph="LocationRow.Content" uid="{710546D3-7E23-470F-86A3-F86290B8A4EB}" />
-        <r id="{25D357D3-3648-4336-9B53-55EED7CFA078}" par="Id=City&amp;DisplayFieldName=Name&amp;ValueFieldName=GeoNameId" ph="LocationRight.Content" uid="{05843F7F-5642-47E8-B492-B61051B46362}" />
-        <r id="{442BD093-FBAD-4E36-BC08-489E16C82D08}" par="Id=RecencyAccordion&amp;Header=Select+recency&amp;IsCollapsible=0" ph="VisitDialogBorder.Content" uid="{84466541-8CF0-484D-B30F-B52B3064E784}" />
-        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=RecencyParams" ph="RecencyAccordion.ActionBar" uid="{DB774E0C-1861-47C6-A516-BD911DE8ECD9}" />
-        <r id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" par="Type=number&amp;Text=0&amp;Id=RecencyValue" ph="RecencyParams.Content" uid="{3FC38B8C-BBD6-406E-8B96-8C879F23F556}" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=MainBorder" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=PaddingMainBorder" ph="MainBorder.Content" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=VisitDialogBorder&amp;UsePadding=1" ph="MainBorder.Content" />
+        <r id="{442BD093-FBAD-4E36-BC08-489E16C82D08}" ds="{5F8F6ED0-8C03-4935-8CD2-C52B960E81F2}" par="Header=Add%20page&amp;Id=PagesInVisitAccordion&amp;IsCollapsible=0" ph="VisitDialogBorder.Content" />
+        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3Aapp.deleteSelected(%27PagesInVisitList%27)&amp;Id=DeleteSelectedPagesButton&amp;Text=Delete%20selected" ph="PagesInVisitAccordion.ActionBar" />
+        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3Aapp.addPageToVisit()&amp;Id=AddPageToVisitButton&amp;Text=Add" ph="PagesInVisitAccordion.ActionBar" />
+        <r id="{C4393722-39FA-4869-9582-3A8EB8983A0D}" par="Id=PagesRowPanel" ph="PagesInVisitAccordion.Body" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="GridColumns=12&amp;Id=PageListLeft" ph="PagesRowPanel.Content" />
+        <r id="{327FD09D-41D6-4F15-8B18-611799364853}" par="Id=MultiSelectList&amp;Name=MultiSelectList&amp;PageScriptFileName=%2Fsitecore%2Fshell%2Fclient%2FSpeak%2FAssets%2Flib%2Fui%2F1.1%2Fbehaviors%2FMultiSelectList.js" ph="PageListLeft.Content" />
+        <r id="{ACE0AFD6-3DE0-42CF-8E62-4E68CD810A8D}" ds="{5F8F6ED0-8C03-4935-8CD2-C52B960E81F2}" par="AllowMultipleColumnSorting=0&amp;Behaviors=MultiSelectList&amp;Id=PagesInVisitList&amp;ViewMode=DetailList" ph="PageListLeft.Content" />
+        <r id="{C4393722-39FA-4869-9582-3A8EB8983A0D}" par="Id=GoalsRowPanel" ph="PagesInVisitAccordion.Body" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="GridColumns=12&amp;Id=PageListRight" ph="GoalsRowPanel.Content" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=PageParams&amp;IsVisible=%7BBinding%20PagesInVisitList.HasSelectedItem%7D&amp;PaddingType=All&amp;UsePadding=1" ph="PageListRight.Content" />
+        <r id="{C4393722-39FA-4869-9582-3A8EB8983A0D}" par="Id=PageInfo" ph="PageParams.Content" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="GridColumns=12&amp;Id=PageInfoTop" ph="PageInfo.Content" />
+        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=PageInfoLabel&amp;Text=Add%20custom%20page%20events&amp;TextType=Value" ph="PageInfoTop.Content" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="GridColumns=9&amp;Id=PageInfoLeft" ph="PageInfo.Content" />
+        <r id="{33A02142-2DBD-4034-AEA2-BDF215EB2451}" par="Id=GoalsDatasource&amp;Query=%2Fsitecore%2Fsystem%2FMarketing%20Control%20Panel%2FGoals%2F%2F*%5B%40%40templateid%3D%27%7B475E9026-333F-432D-A4DC-52E03B75CB6B%7D%27%5D" ph="PageInfoLeft.Content" />
+        <r id="{25D357D3-3648-4336-9B53-55EED7CFA078}" par="Id=GoalsComboBox&amp;Items=%7BBinding%20GoalsDatasource.Items%7D" ph="PageInfoLeft.Content" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="GridColumns=3&amp;Id=PageInfoRight" ph="PageInfo.Content" />
+        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3Aapp.deleteSelected(%27GoalList%27)&amp;Id=DelGoal&amp;Text=Delete%20selected" ph="PageInfoRight.Content" />
+        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3Aapp.addItemToList(%27GoalsComboBox%27%2C%27GoalList%27)&amp;Id=AddGoal&amp;Text=Add" ph="PageInfoRight.Content" />
+        <r id="{C4393722-39FA-4869-9582-3A8EB8983A0D}" par="Id=PageInfoBottom" ph="PageParams.Content" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="GridColumns=12&amp;Id=PageInfoBottomRight" ph="PageInfoBottom.Content" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=GoalBorder&amp;PaddingType=Top&amp;UsePadding=1" ph="PageInfoBottomRight.Content" />
+        <r id="{ACE0AFD6-3DE0-42CF-8E62-4E68CD810A8D}" ds="{B7DEF03C-DBE4-408B-BCD0-0404D3121AF1}" par="Behaviors=MultiSelectList&amp;Id=GoalList&amp;TileHtmlFileName=%2Fsitecore%2Fshell%2Fclient%2FBusiness%20Component%20Library%2FLayouts%2FRenderings%2FListsAndGrids%2FListControls%2FDefaultTile.cshtml" ph="GoalBorder.Content" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="GridColumns=12&amp;Id=GoalColBottom" ph="GoalsRowPanel.Content" />
+        <r id="{442BD093-FBAD-4E36-BC08-489E16C82D08}" par="Header=Select%20traffic%20channel&amp;Id=TrafficChannelAccordion&amp;IsCollapsible=0" ph="VisitDialogBorder.Content" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=SearchParams&amp;PaddingType=All&amp;UsePadding=1" ph="TrafficChannelAccordion.Body" />
+        <r id="{C4393722-39FA-4869-9582-3A8EB8983A0D}" par="Id=SearchEngineRow" ph="SearchParams.Content" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="GridColumns=4&amp;Id=SearchEngineLeft" ph="SearchEngineRow.Content" />
+        <r id="{33A02142-2DBD-4034-AEA2-BDF215EB2451}" par="Database=core&amp;Id=SearchEngineDatasource&amp;Query=%2F%2F*%5B%40%40id%3D%27%7B6F01950A-C49A-416E-8ED3-EE4CACC121B8%7D%27%5D%2F*" ph="SearchEngineLeft.Content" />
+        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=Text1&amp;Text=Select%20search%20engine" ph="SearchEngineLeft.Content" />
+        <r id="{25D357D3-3648-4336-9B53-55EED7CFA078}" par="DisplayFieldName=%24displayName&amp;Id=SearchEngine&amp;Items=%7BBinding%20SearchEngineDatasource.Items%7D&amp;ValueFieldName=itemName" ph="SearchEngineLeft.Content" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="GridColumns=8&amp;Id=SearchEngineRight" ph="SearchEngineRow.Content" />
+        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=Text2&amp;Text=Enter%20Search%20Keyword" ph="SearchEngineRight.Content" />
+        <r id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" par="Id=SearchKeyword" ph="SearchEngineRight.Content" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=TrafficChannelBorder&amp;PaddingType=All&amp;UsePadding=0" ph="TrafficChannelAccordion.ActionBar" />
+        <r id="{33A02142-2DBD-4034-AEA2-BDF215EB2451}" par="Id=ChannelsDatasource&amp;Query=%2Fsitecore%2Fsystem%2FMarketing%20Control%20Panel%2FTaxonomies%2FChannel%2FOnline%2F%2F*%5B%40%40templateid%3D%27%7B3B4FDE65-16A8-491D-BF15-99CE83CF3506%7D%27%5D" ph="TrafficChannelBorder.Content" />
+        <r id="{25D357D3-3648-4336-9B53-55EED7CFA078}" par="Id=TrafficChannelComboBox&amp;Items=%7BBinding%20ChannelsDatasource.Items%7D&amp;SelectedValue=%7BB418E4F2-1013-4B42-A053-B6D4DCA988BF%7D" ph="TrafficChannelBorder.Content" />
+        <r id="{442BD093-FBAD-4E36-BC08-489E16C82D08}" par="Header=Select%20visit%20outcomes&amp;Id=OutcomeAccordion&amp;IsCollapsible=0" ph="VisitDialogBorder.Content" />
+        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3Aapp.deleteSelected(%27OutcomeList%27)&amp;Id=DeleteSelectedPagesButton&amp;Text=Delete%20selected" ph="OutcomeAccordion.ActionBar" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=OutcomeAccordionBorder&amp;PaddingType=All&amp;UsePadding=1" ph="OutcomeAccordion.Body" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=OutcomeParamsInnerTop&amp;PaddingType=Bottom&amp;UsePadding=1" ph="OutcomeAccordionBorder.Content" />
+        <r id="{C4393722-39FA-4869-9582-3A8EB8983A0D}" par="Id=OutcomeChooseRowPanel" ph="OutcomeParamsInnerTop.Content" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="GridColumns=10&amp;Id=OutcomeColLeft" ph="OutcomeChooseRowPanel.Content" />
+        <r id="{33A02142-2DBD-4034-AEA2-BDF215EB2451}" par="Id=OutcomeDatasource&amp;Query=%2Fsitecore%2Fsystem%2FMarketing%20Control%20Panel%2FOutcomes%2F%2F*%5B%40%40templateid%3D%27%7BEE43C2F0-6277-4144-B144-8CA2CEFCCF12%7D%27%5D" ph="OutcomeColLeft.Content" />
+        <r id="{25D357D3-3648-4336-9B53-55EED7CFA078}" par="Id=OutcomeComboBox&amp;Items=%7BBinding%20OutcomeDatasource.Items%7D" ph="OutcomeColLeft.Content" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="GridColumns=1&amp;Id=OutcomeColRight" ph="OutcomeChooseRowPanel.Content" />
+        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3Aapp.addItemToList(%27OutcomeComboBox%27%2C%27OutcomeList%27)()&amp;Id=AddOutcome&amp;Text=Add" ph="OutcomeColRight.Content" />
+        <r id="{C4393722-39FA-4869-9582-3A8EB8983A0D}" par="Id=OutcomeRowPanel" ph="OutcomeAccordionBorder.Content" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="GridColumns=12&amp;Id=OutcomeColBottom" ph="OutcomeRowPanel.Content" />
+        <r id="{ACE0AFD6-3DE0-42CF-8E62-4E68CD810A8D}" ds="{153C2C22-1D9A-4527-8A7F-E5012F3C253C}" par="Behaviors=MultiSelectList&amp;Id=OutcomeList&amp;TileHtmlFileName=%2Fsitecore%2Fshell%2Fclient%2FBusiness%20Component%20Library%2FLayouts%2FRenderings%2FListsAndGrids%2FListControls%2FDefaultTile.cshtml" ph="OutcomeColBottom.Content" />
+        <r id="{442BD093-FBAD-4E36-BC08-489E16C82D08}" par="Header=Visit%20parameters&amp;Id=LocationAccordion&amp;IsCollapsible=0" ph="VisitDialogBorder.Content" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=LocationParams&amp;PaddingType=All&amp;UsePadding=1" ph="LocationAccordion.Body" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=LocationParamsInnerTop&amp;PaddingType=Bottom&amp;UsePadding=1" ph="LocationParams.Content" />
+        <r id="{C4393722-39FA-4869-9582-3A8EB8983A0D}" par="Id=LocationRow&amp;PaddingType=Bottom" ph="LocationParamsInnerTop.Content" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="GridColumns=12&amp;Id=LocationTop" ph="LocationRow.Content" />
+        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=LocationCommonLabel&amp;Text=Location%20options&amp;TextType=Value" ph="LocationTop.Content" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="GridColumns=3&amp;Id=LocationLeft" ph="LocationRow.Content" />
+        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=CountryLabel&amp;Text=Select%20country" ph="LocationLeft.Content" />
+        <r id="{25D357D3-3648-4336-9B53-55EED7CFA078}" par="DisplayFieldName=Name&amp;Id=Country&amp;ValueFieldName=IsoNumeric" ph="LocationLeft.Content" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="GridColumns=3&amp;Id=LocationRight" ph="LocationRow.Content" />
+        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=CityLabel&amp;Text=Select%20city" ph="LocationRight.Content" />
+        <r id="{25D357D3-3648-4336-9B53-55EED7CFA078}" par="DisplayFieldName=Name&amp;Id=City&amp;ValueFieldName=GeoNameId" ph="LocationRight.Content" />
+        <r id="{C4393722-39FA-4869-9582-3A8EB8983A0D}" par="Id=RecencyRow&amp;PaddingType=Top" ph="LocationParams.Content" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="GridColumns=12&amp;Id=RecencyTop" ph="RecencyRow.Content" />
+        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=OtherOptionsCommonLabel&amp;Text=Other%20options&amp;TextType=Value" ph="RecencyTop.Content" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="GridColumns=3&amp;Id=RecencyRight" ph="RecencyRow.Content" />
+        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=RecencyLabel&amp;Text=Enter%20recency(days)" ph="RecencyRight.Content" />
+        <r id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" par="Id=RecencyValue&amp;Text=0&amp;Type=number" ph="RecencyRight.Content" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="GridColumns=3&amp;Id=CampaignRight" ph="RecencyRow.Content" />
+        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=CampaignLabel&amp;Text=Select%20campaign" ph="CampaignRight.Content" />
+        <r id="{33A02142-2DBD-4034-AEA2-BDF215EB2451}" par="Id=CampaignDatasource&amp;Query=%2Fsitecore%2Fsystem%2FMarketing%20Control%20Panel%2FCampaigns%2F%2F*%5B%40%40templateid%3D%27%7B94FD1606-139E-46EE-86FF-BC5BF3C79804%7D%27%5D" ph="CampaignRight.Content" />
+        <r id="{25D357D3-3648-4336-9B53-55EED7CFA078}" par="Id=CampaignComboBox&amp;Items=%7BBinding%20CampaignDatasource.Items%7D" ph="CampaignRight.Content" />
       </d>
     </r>
 Languages:

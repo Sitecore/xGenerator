@@ -4,37 +4,31 @@ using Sitecore.Analytics.Aggregation.Data.Model;
 
 namespace ExperienceGenerator.Client
 {
-    public static class WebApiConfig
+  public static class WebApiConfig
+  {
+    public static void Register(HttpConfiguration config)
     {
-        public static void Register(HttpConfiguration config)
-        {
-            // Web API configuration and services
+      // Web API configuration and services
 
-            // Web API routes
-            //config.MapHttpAttributeRoutes();
+      // Web API routes
+      //config.MapHttpAttributeRoutes();
 
-            //Disable dimension cache to enable flush of reporting database
-            Dimension.EnableCaching = false;
+      //Disable dimension cache to enable flush of reporting database
+      Dimension.EnableCaching = false;
 
-            XGenJobManager.Instance = new XGenSitecoreJobManager();
-
-            config.Routes.MapHttpRoute(
-                name: "ExperienceGeneratorJobsApi",
-                routeTemplate: "api/xgen/jobs/{id}",
-                defaults: new { controller = "ExperienceGeneratorJobs", id = RouteParameter.Optional }
-            );
+      XGenJobManager.Instance = new XGenSitecoreJobManager();
 
       config.Routes.MapHttpRoute(
-             name: "ExperienceGeneratorContactsJobsApi",
-             routeTemplate: "api/xgen/contacts/{id}",
-             defaults: new { controller = "ExperienceGeneratorContactsJobs", id = RouteParameter.Optional }
-         );
+          name: "ExperienceGeneratorJobsApi",
+          routeTemplate: "api/xgen/jobs/{id}",
+          defaults: new { controller = "ExperienceGeneratorJobs", id = RouteParameter.Optional }
+      );
 
       config.Routes.MapHttpRoute(
                 name: "ExperienceGeneratorActionsApi",
                 routeTemplate: "api/xgen/{action}/{id}",
                 defaults: new { controller = "ExperienceGeneratorActions", id = RouteParameter.Optional }
             );
-        }
     }
+  }
 }

@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Sitecore.Analytics.Model.Definitions;
-using Sitecore.Analytics.Testing;
-
-namespace Colossus.Integration
+﻿namespace Colossus.Integration.Models
 {
-    public class TestInfo
+  using System;
+  using System.Collections.Generic;
+  using System.Linq;
+  using Sitecore.Analytics.Testing;
+
+  public class TestInfo
     {
         public Guid Id { get; set; }
 

@@ -15,14 +15,16 @@ namespace Colossus.Integration.Processing
         {
             requestInfo.SetIfVariablePresent("Channel", (value) =>
             {
-                if (!string.IsNullOrEmpty(value) )
-                {
-                    Guid id;
-                    if (Guid.TryParse(value, out id))
-                    {
-                        session.Interaction.ChannelId = id;
-                    }
-                }
+              if (string.IsNullOrEmpty(value))
+              {
+                return;
+              }
+
+              Guid id;
+              if (Guid.TryParse(value, out id))
+              {
+                session.Interaction.ChannelId = id;
+              }
             });            
         }
     }

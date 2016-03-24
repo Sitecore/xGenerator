@@ -17,8 +17,8 @@ SharedFields:
   Value: |
     <r>
       <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
-        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=Border&amp;UsePadding=1" />
-        <r id="{08B6767B-8E8A-41C8-8880-EFEBB4EAE0E3}" par="ClickFolderMode=1&amp;Database=master&amp;Id=AddPageTreeView&amp;IsCheckboxEnabled=1&amp;RootItem=%7B0DE95AE4-41AB-4D01-9EB0-67441B7C2450%7D&amp;SelectMode=2&amp;ShowSitecoreIcons=1" ph="Border.Content" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=Border&amp;UsePadding=1" uid="{50E7827D-A063-4C27-92B3-F3E7F3CAEBCD}" />
+        <r id="{08B6767B-8E8A-41C8-8880-EFEBB4EAE0E3}" par="Id=AddPageTreeView&amp;PreLoadPath=%7b0DE95AE4-41AB-4D01-9EB0-67441B7C2450%7d%2f%7b3D6658D8-A0BF-4E75-B3E2-D050FABCF4E1%7d&amp;SelectMode=2&amp;Database=master&amp;ClickFolderMode=1&amp;IsCheckboxEnabled=1&amp;ShowSitecoreIcons=1" ph="Border.Content" uid="{9E3ED1EF-B6D1-4790-AD7F-5E6CB88B5398}" />
       </d>
     </r>
 Languages:

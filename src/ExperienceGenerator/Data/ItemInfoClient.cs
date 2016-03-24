@@ -15,7 +15,9 @@ using ExperienceGenerator.Models;
 
 namespace ExperienceGenerator.Data
 {
-    public class ItemInfoClient
+  using Colossus.Integration.Models;
+
+  public class ItemInfoClient
     {
         public string ItemServiceRoot { get; set; }
 

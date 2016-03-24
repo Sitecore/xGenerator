@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
-using Sitecore;
-using Sitecore.Data;
-using Sitecore.Data.Fields;
-using Sitecore.Data.Items;
-using Sitecore.Links;
-
-namespace Colossus.Integration
+﻿namespace Colossus.Integration.Models
 {
-    public class ItemInfo
+  using System;
+  using System.Collections.Generic;
+  using System.Linq;
+  using Sitecore;
+  using Sitecore.Data.Fields;
+  using Sitecore.Data.Items;
+  using Sitecore.Links;
+
+  public class ItemInfo
     {
         public Guid Id { get; set; }
 
@@ -39,9 +35,9 @@ namespace Colossus.Integration
 
         public ItemInfo()
         {
-            Fields = new Dictionary<string, string>();            
-            Children = new List<ItemInfo>();
-            SiteUrls = new Dictionary<string, ItemUrl>();
+            this.Fields = new Dictionary<string, string>();            
+            this.Children = new List<ItemInfo>();
+            this.SiteUrls = new Dictionary<string, ItemUrl>();
         }
 
         public static ItemInfo FromItem(Item item, IEnumerable<string> websites = null, int? maxDepth = null)
