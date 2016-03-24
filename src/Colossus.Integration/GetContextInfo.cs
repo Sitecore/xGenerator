@@ -1,7 +1,8 @@
-﻿namespace Colossus.Integration.Models
+﻿namespace Colossus.Integration
 {
   using System.Collections.Generic;
   using System.Web;
+  using Colossus.Integration.Models;
   using Colossus.Integration.Processing;
   using Colossus.Web;
   using Sitecore.Analytics;

@@ -99,7 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\PageDefinition.cs" />
-    <Compile Include="Models\GetContextInfo.cs" />
+    <Compile Include="GetContextInfo.cs" />
     <Compile Include="Models\ItemInfo.cs" />
     <Compile Include="Processing\ChannelPatcher.cs" />
     <Compile Include="Processing\ContactDataProcessor.cs" />
