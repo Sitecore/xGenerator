@@ -455,9 +455,14 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
         url: "/api/xgen/jobs/" + that.jobId,
         type: "GET",
       }).done(function (data) {
-        that.ProgressBar.set("value", data.Progress * 100);
+        var total = 0;
+        var contacts = data.Specification.Specification.Contacts;
+        for (var i = 0; i < contacts.length; i++) {
+          total += contacts[i].interactions.length;
+        }
+        
+        that.ProgressBar.set("value", data.Progress / total * 100);
         that.NumberVisitsValue.set("text", data.CompletedVisits);
-        that.NumberContactsValue.set("text", data.CompletedVisitors);
         if (data.JobStatus != "Running" && data.JobStatus != "Pending" && data.JobStatus != "Paused") {
           _sc.off("intervalCompleted:ProgressBar");
         }
