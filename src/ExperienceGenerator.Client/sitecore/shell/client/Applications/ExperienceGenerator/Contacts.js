@@ -432,7 +432,7 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
       this.data = JSON.stringify(this.data);
       var that = this;
       $.ajax({
-        url: "/api/xgen/contacts",
+        url: "/api/xgen/jobs",
         type: "POST",
         data: this.data,
         contentType: "application/json; charset=utf-8",
@@ -512,7 +512,7 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
     adapt: function (doc) {
 
       return {
-        Type: "Contact",
+        Type: 1,
         VisitorCount: doc.length,
         Specification: {
           Contacts: doc,

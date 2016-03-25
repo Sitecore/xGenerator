@@ -1,6 +1,7 @@
 ﻿namespace ExperienceGenerator.Parsing
 {
   using System;
+  using System.Collections;
   using System.Collections.Generic;
   using System.ComponentModel;
   using System.Linq;
@@ -13,7 +14,6 @@
   using ExperienceGenerator.Data;
   using ExperienceGenerator.Models;
   using ExperienceGenerator.Parsing.Factories;
-  using Newtonsoft.Json;
   using Newtonsoft.Json.Linq;
 
   public class XGenParser
@@ -172,35 +172,37 @@
       {
         if (contact["interactions"] == null)
           continue;
-        foreach (var interaction in contact["interactions"])
+        foreach (var interactionJObject in contact["interactions"])
         {
 
           var segment = new VisitorSegment(contact.Value<string>("email"));
-
+          var interaction = interactionJObject.ToObject<Interaction>();
 
           //set city
-          var city = interaction["geoData"].ToObject<City>();
-          city = GeoData.Cities.Find(x => x.GeoNameId == city.GeoNameId);
-          segment.VisitorVariables.Add(new GeoVariables(() => city));
+          if (interaction.GeoData != null)
+          {
+            var city = GeoData.Cities.FirstOrDefault(x => x.GeoNameId == interaction.GeoData.GeoNameId);
+            segment.VisitorVariables.Add(new GeoVariables(() => city));
+          }
 
           //set contact
           segment.VisitVariables.Add(ExtractContact(contact));
 
           //set channel (can be overriden below)
-          var channelId = interaction.Value<string>("channelId");
-          segment.VisitVariables.Add(new SingleVisitorVariable<string>("Channel", (visit) => channelId));
+          segment.VisitVariables.Add(new SingleVisitorVariable<string>("Channel", (visit) => interaction.ChannelId));
 
 
 
           //set search options
-          var engine = interaction.Value<string>("searchEngine");
-          if (engine != null)
+          if (!string.IsNullOrEmpty(interaction.SearchEngine))
           {
-            var searchEngine = SearchEngine.SearchEngines.First(s => s.Id.Equals(engine, StringComparison.InvariantCultureIgnoreCase));
-            var keyword = interaction.Value<string>("searchKeyword");
-            if (keyword != null)
+            var searchEngine = SearchEngine.SearchEngines.First(s => s.Id.Equals(interaction.SearchEngine, StringComparison.InvariantCultureIgnoreCase));
+            if (!string.IsNullOrEmpty(interaction.SearchKeyword))
             {
-              var searchKeywords = keyword.Split(new char[] { ' ' });
+              var searchKeywords = interaction.SearchKeyword.Split(new char[]
+              {
+                ' '
+              });
               segment.VisitVariables.AddOrReplace(new ExternalSearchVariable(() => searchEngine, () => searchKeywords));
 
             }
@@ -214,28 +216,42 @@
             .AddHours(12)
             .AddMinutes(Randomness.Random.Next(-240, 240))
             .AddSeconds(Randomness.Random.Next(-240, 240))
-            .Add(TimeSpan.Parse(interaction.Value<string>("recency")));
+            .Add(TimeSpan.Parse(interaction.Recency));
 
 
           //set outcomes
-          var outcomes = new HashSet<string>(interaction.Values<JsonItemInfo>("outcomes")?.Select(x => x.Id.ToString()) ?? Enumerable.Empty<string>());
-          var value = new NormalGenerator(10, 5).Truncate(1);
-          segment.VisitVariables.AddOrReplace(new OutcomeVariable(() => outcomes, value.Next));
+          if (interaction.Outcomes!=null)
+          {
+            var outcomes = interaction.Outcomes.Select(x => x.Id.ToString());
+            var value = new NormalGenerator(10, 5).Truncate(1);
+            segment.VisitVariables.AddOrReplace(new OutcomeVariable(() => new HashSet<string>(outcomes), value.Next));
+          }
 
-
-          var pageItemInfos = interaction.Values<PageItemInfo>("pages").ToArray();
+          var pageItemInfos = interaction.Pages?.ToArray()??Enumerable.Empty<PageItemInfo>();
           var pages = new List<PageDefinition>();
+
+
           //set campaign (can be overriden below)
-          var campaign = interaction.Value<string>("campaignId");
-          if (!string.IsNullOrEmpty(campaign))
-            pageItemInfos[0].Path = pageItemInfos[0].Path + "?sc_camp=" + campaign;
+          if (!string.IsNullOrEmpty(interaction.CampaignId) && pageItemInfos.Any())
+          {
+            var pageItemInfo = pageItemInfos.First();
+            pageItemInfo.Path = pageItemInfo.Path + "?sc_camp=" + interaction.CampaignId;
+          }
 
           foreach (var page in pageItemInfos)
           {
             var pageDefinition = new PageDefinition() { Path = page.Path };
 
             //set goals
-            pageDefinition.RequestVariables.Add("TriggerEvents", page.Goals.Select(x => new TriggerEventData() { Id = x.Id }));
+            if (page.Goals != null)
+            {
+              pageDefinition.RequestVariables.Add("TriggerEvents", page.Goals.Select(x => new TriggerEventData()
+              {
+                Id = x.Id,
+                Name = x.DisplayName,
+                IsGoal = true
+              }).ToList());
+            }
             pages.Add(pageDefinition);
           }
 

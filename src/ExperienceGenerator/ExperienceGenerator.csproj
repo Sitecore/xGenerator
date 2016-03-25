@@ -60,6 +60,8 @@
     <Compile Include="JobInfo.cs" />
     <Compile Include="JobSpecification.cs" />
     <Compile Include="JobType.cs" />
+    <Compile Include="Models\JsonItemInfo.cs" />
+    <Compile Include="Models\PageItemInfo.cs" />
     <Compile Include="Models\SiteInfo.cs" />
     <Compile Include="Parsing\Factories\ContactDataVariable.cs" />
     <Compile Include="Parsing\Factories\ExternalSearchVariable.cs" />
@@ -69,6 +71,7 @@
     <Compile Include="Data\SearchEngine.cs" />
     <Compile Include="Parsing\Factories\LandingPageFactory.cs" />
     <Compile Include="Parsing\Factories\OutcomeVariable.cs" />
+    <Compile Include="Models\Interaction.cs" />
     <Compile Include="Parsing\JsonHelpers.cs" />
     <Compile Include="Parsing\Factories\MonthFactory.cs" />
     <Compile Include="Parsing\ParseConfig.cs" />
