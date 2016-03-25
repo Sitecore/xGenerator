@@ -168,8 +168,12 @@
     <Content Include="App_Config\Include\Unicorn\Unicorn.AutoPublish.config" />
     <Content Include="App_Config\Include\ExperienceGenerator\ExperienceGenerator.Serialization.config" />
     <Content Include="App_Config\Include\ExperienceGenerator\zExperienceGenerator.DevSettings.config" />
-    <Content Include="sitecore\shell\client\Applications\ExperienceGenerator\Contacts.js" />
-    <Content Include="sitecore\shell\client\Applications\ExperienceGenerator\DataSheet.js" />
+    <Content Include="sitecore\shell\client\Applications\ExperienceGenerator\Contacts.js">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sitecore\shell\client\Applications\ExperienceGenerator\DataSheet.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="sitecore\shell\client\Applications\ExperienceGenerator\ExperienceGenerator.css" />
     <None Include="Global.asax" />
     <Content Include="sitecore\shell\Themes\Standard\ExperienceGenerator.zip" />

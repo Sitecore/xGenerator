@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<control xmlns:def="Definition" xmlns="http://schemas.sitecore.net/Visual-Studio-Intellisense">
+  <UpdateAnalytics>
+    <WizardForm CodeBeside="AnalyticsUpdater.sitecore.shell.Applications.Dialogs.UpdateAnalytics, AnalyticsUpdater">
+
+      <WizardFormPage ID="Settings" Header="Settings" Text="Select the script settings. Click Next to run script." Icon="Applications/32x32/replace2.png">
+        <WizardFormPadding>
+          <Scrollbox ID="SettingsPane" Border="none" Background="transparent">
+            <Groupbox Header="Source Date">
+              <DatePicker ID="BaseDate"/>
+            </Groupbox>
+            <Groupbox Header="New Base Date">
+              All Analytics data will be shifted to the current date.
+            </Groupbox>
+          </Scrollbox>
+
+        </WizardFormPadding>
+      </WizardFormPage>
+
+      <WizardFormPage ID="Processing" Header="Processing" Text="Please wait while the script runs..." Icon="Applications/32x32/replace2.png">
+        <GridPanel Width="100%">
+          <Space Height="64"/>
+
+          <ThemedImage Src="Applications/32x32/replace2.png" Width="48" Height="48" GridPanel.Align="center"/>
+          <Space Height="16"/>
+          <Border Align="center">
+            <ThemedImage Src="Images/progress.gif" Width="94" Height="17"/>
+          </Border>
+          <Space Height="16"/>
+          <Border ID="PublishingText" Align="center" GridPanel.Align="center" GridPanel.Style="font-weight:bold">
+            <Literal Text="Processing..."/>
+          </Border>
+          <Space Height="16"/>
+          <Border ID="PublishingTarget" Align="center" GridPanel.Align="center">
+            &#160;
+          </Border>
+        </GridPanel>
+      </WizardFormPage>
+
+      <WizardFormLastPage ID="LastPage" Icon="Custom/32x32/Publish.png">
+        <GridPanel Cellpadding="2" Width="100%" Height="100%" Fixed="true">
+
+          <Border GridPanel.Style="padding:0px 0px 16px 0px; font-weight:bold">
+            <Literal Text="The wizard has completed. Click Finish to close the wizard."/>
+          </Border>
+
+          <Border GridPanel.Style="padding:0px 0px 2px 0px">
+            <Literal ID="Status"/>
+          </Border>
+          <Border ID="ResultLabel" GridPanel.Style="padding:8px 0px 2px 0px" >
+            <Literal Text="Result:"/>
+          </Border>
+
+          <Memo ID="ResultText" ReadOnly="true" Width="100%" Height="100%" GridPanel.Height="100%" />
+
+        </GridPanel>
+      </WizardFormLastPage>
+
+    </WizardForm>
+  </UpdateAnalytics>
+</control>
