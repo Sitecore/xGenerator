@@ -2,9 +2,19 @@
 define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
   var DataSheet = _sc.Definitions.App.extend({
     addContact: function () {
+      this.ContactList.unset("selectedItemId");
       var contacts = this.ContactList.get("items");
-      contacts.push({ "itemId": this.guid(), "interactions":[] });
-      //how to avoid?
+      var newContact = {
+        "itemId": this.guid(),
+        "interactions": []
+      };
+
+      for (var key in this.bindingMap) {
+        if (this.bindingMap.hasOwnProperty(key)) {
+          newContact[this.bindingMap[key]] = "";
+        }
+      }
+      contacts.push(newContact);
 
       this.ContactList.unset("items", { silent: true });
       this.ContactList.set("items", contacts);
@@ -333,7 +343,7 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
           contact[this.bindingMap[key]] = this[key].get("text");
         }
       }
-      this.ContactList.attributes.selectedItem.set(this.bindingMap[key], this[key].get("text"));
+      this.ContactList.get("selectedItem").set(this.bindingMap[key], this[key].get("text"));
     },
 
     setEditContactBindings: function (control, selectedItem) {
