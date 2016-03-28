@@ -121,7 +121,7 @@ namespace ExperienceGenerator.Client.Controllers
       var outcomes = db.GetItem(KnownItems.OutcomesRoot);
       var taxonomyRoot = db.GetItem(KnownItems.TaxonomyRoot);
 
-      var outcomeGroups = outcomes.Axes.GetDescendants().Where(c => c.TemplateID == OutcomeDefinitionItem.TemplateID).GroupBy(x => new ID(x["Group"]),x=>x);
+      var outcomeGroups = outcomes.Axes.GetDescendants().Where(c => c.TemplateID == OutcomeDefinitionItem.TemplateID).GroupBy(x => string.IsNullOrEmpty(x["Group"])?ID.Null:new ID(x["Group"]),x=>x);
 
       options.OutcomeGroups =
           taxonomyRoot.Axes.GetDescendants().Where(c => c.TemplateID == OutcomegroupItem.TemplateID).Select(cg => new OutcomeGroup()
@@ -133,6 +133,19 @@ namespace ExperienceGenerator.Client.Controllers
                       .OrderBy(item => item.Label)
                       .ToList()
           }).ToList();
+
+      var outcomesWithoutGroup = outcomeGroups.Where(c => c.Key == ID.Null).SelectMany(x => x)
+        .Select(c => new SelectionOption { Id = c.ID.ToString(), Label = c.Name, DefaultWeight = 5 })
+        .OrderBy(item => item.Label)
+        .ToList();
+      if (outcomesWithoutGroup.Any())
+      {
+        options.OutcomeGroups.Add(new OutcomeGroup()
+        {
+          Label = "None",
+          Channels = outcomesWithoutGroup
+        });
+      }
 
       var campaigns = db.GetItem(KnownItems.CampaignsRoot);
       options.Campaigns = campaigns.Axes.GetDescendants().Where(item => item.TemplateID == CampaignItem.TemplateID)
