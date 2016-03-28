@@ -176,6 +176,81 @@
       <Exclude />
       <Name>AnalyticsUpdaterFiles</Name>
     </xfiles>
+    <xitems>
+      <Entries>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Common/Contacts/{ED72A22E-57B8-4DA2-9B00-AF77D25840E3}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Common/Contacts/habitat/{43ADC083-38F1-4332-B0B8-1F1251A57760}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Common/Contacts/habitat/CompleteSample/{E86E6EC3-18B2-4589-9C86-A7EA83466392}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/{2C9E7C3D-8979-4677-9030-76E8CA0ED9D2}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/{9D7FAB6C-778A-460E-B6EE-508222174804}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Buttons/{4C3B5656-91E5-456F-8975-C8C3D597621D}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Buttons/Delete/{94DB2B93-687F-4889-AA83-0D68682FD444}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Buttons/Pause/{6E59BF5E-6843-4E07-8244-914E44C2D510}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Buttons/Start/{03BEE34C-AAAC-4866-A5FA-6349B79DA0B7}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Buttons/Stop/{123E51EA-0ED3-4769-8CE9-EE0FA4FB7155}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/DataSheetStyle/{2C02099B-1239-400F-BEC5-8426999DBB91}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/DatePickers/{FEFF9E48-022B-4D74-8A30-335FACD63D98}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/DatePickers/DatePicker Parameters/{F8329EED-E027-431E-BE36-1E408A26CC41}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/DialogWindows/{98631609-7C98-49D8-8751-B779A8FD3A84}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/DialogWindows/InteractionPagesDialog/{DE8692DF-C65F-4BD5-BC18-021F9C48EE88}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/DialogWindows/VisitDetailsDialog/{67609F12-FECF-42D8-8572-87BE11C81810}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/DialogWindows/VisitDetailsDialog/PagesInVisitList/{5F8F6ED0-8C03-4935-8CD2-C52B960E81F2}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/DialogWindows/VisitDetailsDialog/PagesInVisitList/Url/{6F1727EF-1761-4839-A82F-057A102AA3AF}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Lists/{2F9F25EF-9993-43C2-B28F-A056A31DA6CC}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Lists/ContactListSettings/{AD71ADAB-4F1D-4354-9BAE-B89D97749200}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Lists/ContactListSettings/Email/{B802BC3E-FC92-4A8D-84C5-BFAFF7A91E1D}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Lists/ContactListSettings/FirstName/{9F0CCAFE-F80E-40ED-966B-CDA510BAC2F2}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Lists/ContactListSettings/LastName/{AC755110-5351-4E8B-82ED-CB6EE837D847}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Lists/GoalListSettings/{B7DEF03C-DBE4-408B-BCD0-0404D3121AF1}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Lists/InteractionListSettings/{11C0A46E-4EA0-4F51-B74F-C54AA9FFC79A}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Lists/InteractionListSettings/Campaign/{66340004-9F79-4CF4-9042-F8EA65CA4445}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Lists/InteractionListSettings/Channel/{49BB3E24-DD92-420D-B93F-B080A27214B9}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Lists/InteractionListSettings/Location/{0172E5A1-C047-473F-BED1-13DDB84CBF80}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Lists/InteractionListSettings/Recency/{743E1808-E4A7-4DCB-B54F-C7302709A47E}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Lists/OutcomeListSettings/{153C2C22-1D9A-4527-8A7F-E5012F3C253C}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Lists/OutcomeListSettings/Outcome/{7A17F59B-74B5-4D6D-A274-06C4F3520FAE}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Messages/{2F594966-4699-437C-BDF1-A3A545B595F1}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Messages/No items found/{40DC4037-1ACF-4250-8FFE-EDADC737C1D8}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/PageTitle/{E54936CD-9A39-4CB7-8406-D9181B8714C3}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/SearchEngines/{6F01950A-C49A-416E-8ED3-EE4CACC121B8}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/SearchEngines/Bing/{E57ED5D3-4307-4023-B882-35A5BEC0B4FD}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/SearchEngines/Google/{B7CB7CC7-CB0C-4DFC-B3D7-AE06067CBFAC}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Sliders/{907285A5-619E-46B9-B7AF-9A6F7BAE76E1}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Sliders/Slider Parameters/{5395551F-BCD6-4B63-8A6D-D7D665CB302E}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/StringDictionary Parameters/{AD8066C3-F3C3-47CC-A69C-50C7241166BE}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Texts/{5FDBA48B-53B2-4E3D-80E6-7D36FA98FDD5}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Texts/Overview/{029018A9-F831-40A8-909F-720839AFC078}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Texts/Overview/Annual increase in traffic/{B03BDA5E-0DAD-4ACA-81C0-08232A1A14BC}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Texts/Overview/End date/{F0BA74D7-B168-4F11-A554-313D6D22EEB3}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Texts/Overview/Number of unique visitors/{0C360C11-D9B0-4B6F-ABFC-4ABF85AC6146}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Texts/Overview/Number of visits generated/{6A40326C-10BC-491D-BF5F-37DEA4A5C9F5}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Texts/Overview/Pageviews per visit avg/{C447D8D4-FA43-4577-897F-F5B0E626B6E7}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Texts/Overview/Percentage identified visitors/{252F366A-270C-4C47-9877-C097F06BE47C}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Texts/Overview/Start date/{18EAF30E-65DC-41DD-B1A5-9042280D77C8}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Texts/Overview/Time spent per visit avg/{B47BA1DC-9B68-4C0C-92CB-AD0DA3FB2663}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Texts/Test summary/{BD7B246F-77CC-4C93-B0A0-C2024E053805}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/TextsParameters/{05F09618-FC9F-4263-8946-6ED5D525F741}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/Launchpad/PageSettings/Buttons/Tools/Contact Experience Generator/{E45C19E0-F3FA-45D6-90D5-C295803A7CE3}/invariant/0</x-item>
+      </Entries>
+      <SkipVersions>False</SkipVersions>
+      <Converter>
+        <ItemToEntryConverter>
+          <Transforms>
+            <InstallerConfigurationTransform>
+              <Options>
+                <BehaviourOptions>
+                  <ItemMode>Undefined</ItemMode>
+                  <ItemMergeMode>Undefined</ItemMergeMode>
+                </BehaviourOptions>
+              </Options>
+            </InstallerConfigurationTransform>
+          </Transforms>
+        </ItemToEntryConverter>
+      </Converter>
+      <Include />
+      <Exclude />
+      <Name>ProfileGeneratorItems</Name>
+    </xitems>
   </Sources>
   <Converter>
     <TrivialConverter>
