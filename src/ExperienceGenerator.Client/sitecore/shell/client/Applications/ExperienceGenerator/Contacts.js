@@ -29,7 +29,7 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
     addInteraction: function () {
       var contact = this.ContactList.get("selectedItem");
       if (!contact) return;
-      var interactions = contact.get("interactions");
+      var interactions = contact.get("interactions")|| [];
       interactions.push({
         geoData: { Country: {} },
         "itemId": this.guid()
