@@ -116,6 +116,29 @@
       <Exclude />
       <Name>Files</Name>
     </xfiles>
+     <xfiles>
+      <Entries>
+        <x-item>/sitecore/shell/client/Applications/ExperienceGenerator/Contacts.js</x-item>
+      </Entries>
+      <Converter>
+        <FileToEntryConverter>
+          <Root>/</Root>
+          <Transforms>
+            <InstallerConfigurationTransform>
+              <Options>
+                <BehaviourOptions>
+                  <ItemMode>Undefined</ItemMode>
+                  <ItemMergeMode>Undefined</ItemMergeMode>
+                </BehaviourOptions>
+              </Options>
+            </InstallerConfigurationTransform>
+          </Transforms>
+        </FileToEntryConverter>
+      </Converter>
+      <Include />
+      <Exclude />
+      <Name>Profile generator files</Name>
+    </xfiles>
     <xitems>
       <Entries>
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Common/{94EEE1CE-F99F-42A9-8CC3-43E7043286E5}/invariant/0</x-item>
