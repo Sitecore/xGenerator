@@ -29,7 +29,7 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
 
 
       var existingOutcomes = this[targetControl].get('items') || [];
-      existingOutcomes.push(selected);
+      existingOutcomes.push(_.clone(selected));
       this[targetControl].unset("items");
       this[targetControl].set("items", existingOutcomes);
 
@@ -58,9 +58,9 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
       var filteredItem = this[controlName].get("items");
 
       var checkedItems = this[controlName].get('checkedItems');
-      _.each(checkedItems, function (checkedItem) {
-        filteredItem = _.without(filteredItem, checkedItem);
-      });
+
+      filteredItem = _.difference(filteredItem, checkedItems);
+     
       this[controlName].unset("items", { silent: true });
       this[controlName].set('items', filteredItem);
       if (controlName === "InteractionList")
