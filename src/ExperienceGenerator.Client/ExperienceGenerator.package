@@ -225,6 +225,7 @@
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Lists/ContactListSettings/FirstName/{9F0CCAFE-F80E-40ED-966B-CDA510BAC2F2}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Lists/ContactListSettings/LastName/{AC755110-5351-4E8B-82ED-CB6EE837D847}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Lists/GoalListSettings/{B7DEF03C-DBE4-408B-BCD0-0404D3121AF1}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Lists/GoalListSettings/Goal/{CA35A7AA-6884-43F6-92E3-963FBE288670}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Lists/InteractionListSettings/{11C0A46E-4EA0-4F51-B74F-C54AA9FFC79A}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Lists/InteractionListSettings/Campaign/{66340004-9F79-4CF4-9042-F8EA65CA4445}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Lists/InteractionListSettings/Channel/{49BB3E24-DD92-420D-B93F-B080A27214B9}/invariant/0</x-item>
