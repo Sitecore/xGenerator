@@ -41,6 +41,8 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
       if (!contact) return;
       var interactions = contact.get("interactions");
       interactions.push({
+        pages: [],
+        recency: 0,
         geoData: { Country: {} },
         "itemId": this.guid()
       });
@@ -230,7 +232,7 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
           $displayName: x.$displayName
         }
       });
-     
+
       this.PagesInVisitList.unset('items');
       this.PagesInVisitList.set('items', interaction.get('pages'));
 
@@ -436,7 +438,7 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
     },
 
     start: function () {
-      this.data = this.adapt(ko.toJS(this.ContactList.get('items'))); 
+      this.data = this.adapt(ko.toJS(this.ContactList.get('items')));
       console.log(this.data);
       //console.log(JSON.stringify(this.data, null, 2));
       this.data = JSON.stringify(this.data);
@@ -470,7 +472,7 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
         for (var i = 0; i < contacts.length; i++) {
           total += contacts[i].interactions.length;
         }
-        
+
         that.ProgressBar.set("value", data.Progress / total * 100);
         that.NumberVisitsValue.set("text", data.CompletedVisits);
         if (data.JobStatus != "Running" && data.JobStatus != "Pending" && data.JobStatus != "Paused") {
