@@ -29,7 +29,7 @@ SharedFields:
         <r id="{93CEEFCD-2DE1-40AF-AE9A-EBBFBCCC522F}" par="" ph="ApplicationHeader" />
         <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" ds="{EE3F9843-6BFE-4D4F-B18F-2AE2EBF99FE2}" par="Id=HeaderTitle" ph="ApplicationHeader.Title" />
         <r id="{AF79ED5D-4396-4EEC-8E22-9D7C523266FA}" par="Id=Breadcrumb" ph="ApplicationHeader.BreadCrumb" />
-        <r id="{C80807A7-AD13-4693-9822-DD840CB266C5}" par="Click=javascript%3Aalert(%22This%20doesn%27t%20do%20anything%20yet!%22)&amp;Id=BackButton&amp;Text=Back" ph="ApplicationHeader.Back" />
+        <r id="{C80807A7-AD13-4693-9822-DD840CB266C5}" par="Click=javascript%3A%20window.history.back()&amp;Id=BackButton&amp;Text=Back" ph="ApplicationHeader.Back" />
         <r id="{26541BC4-C62D-4F2F-BE3F-A4E2195FEE0F}" par="" ph="ApplicationContent" />
         <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=Main&amp;UsePadding=1" ph="ApplicationContent.Main" />
         <r id="{910155C7-3881-4A56-90FB-D126490EDE55}" par="Id=PageMessageBar" ph="Main.Content" />

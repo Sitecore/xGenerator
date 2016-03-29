@@ -225,7 +225,7 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
       var target = this.PagesInVisitList.get('selectedItem');
 
       var interaction = this.InteractionList.get('selectedItem');
-      if (!target || !changed || !interaction) return;
+      if (!target || !changed || !interaction || !target.collection) return;
       interaction.get('pages')[target.collection.indexOf(target)]['goals'] = _.map(changed, function (x) {
         return {
           itemId: x.itemId,
