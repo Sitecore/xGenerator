@@ -108,6 +108,14 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
       this.ContactList.on("change:selectedItem", this.setEditContactBindings, this);
       this.InteractionList.on("change:selectedItem", this.openEditInteractionModal, this);
       this.TrafficChannelComboBox.on("change:selectedItem", this.setTrafficChannel, this);
+      this.PrimeEmailValue.on("change:text", function (model, text) {
+        var $parent = model.viewModel.$el.parent();
+
+        if (!text&& !$parent.hasClass("has-error") || (text && $parent.hasClass("has-error"))) {
+          $parent.toggleClass("has-error");
+        }
+       
+      }, this);
       this.CampaignComboBox.on("change:selectedItem", this.setCampaign, this);
       this.RecencyValue.on("change:text", this.setRecency, this);
       this.Country.on("change:selectedItem", this.loadCities, this);
