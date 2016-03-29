@@ -12,7 +12,7 @@
     protected virtual Item PresetsRoot => this.Database.GetItem(presetsRootPath);
     protected Database Database => Sitecore.Configuration.Factory.GetDatabase("core");
 
-    protected Item SitePresetRoot
+    protected virtual Item SitePresetRoot
     {
       get
       {

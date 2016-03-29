@@ -202,8 +202,7 @@
     <xitems>
       <Entries>
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Common/Contacts/{ED72A22E-57B8-4DA2-9B00-AF77D25840E3}/invariant/0</x-item>
-        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Common/Contacts/habitat/{43ADC083-38F1-4332-B0B8-1F1251A57760}/invariant/0</x-item>
-        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Common/Contacts/habitat/CompleteSample/{E86E6EC3-18B2-4589-9C86-A7EA83466392}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Common/Contacts/CompleteSample/{E86E6EC3-18B2-4589-9C86-A7EA83466392}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/{2C9E7C3D-8979-4677-9030-76E8CA0ED9D2}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/{9D7FAB6C-778A-460E-B6EE-508222174804}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Buttons/{4C3B5656-91E5-456F-8975-C8C3D597621D}/invariant/0</x-item>

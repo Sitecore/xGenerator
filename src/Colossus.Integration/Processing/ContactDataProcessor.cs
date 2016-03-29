@@ -38,24 +38,26 @@ namespace Colossus.Integration.Processing
 
       });
 
-      requestInfo.SetIfVariablePresent("ContactBirthDate", name =>
+      requestInfo.SetIfVariablePresent("ContactBirthDate", date =>
       {
+        if (string.IsNullOrEmpty(date)) return;
+
         var personalInfo = session.Contact.GetFacet<IContactPersonalInfo>("Personal");
-        personalInfo.BirthDate = DateTime.ParseExact(name.Substring(0, 8), "yyyyMMdd", null);
+        personalInfo.BirthDate = DateTime.ParseExact(date.Substring(0, 8), "yyyyMMdd", null);
 
       });
 
-      requestInfo.SetIfVariablePresent("ContactGender", name =>
+      requestInfo.SetIfVariablePresent("ContactGender", gender =>
       {
         var personalInfo = session.Contact.GetFacet<IContactPersonalInfo>("Personal");
-        personalInfo.Gender = name;
+        personalInfo.Gender = gender;
 
       });
 
-      requestInfo.SetIfVariablePresent("ContactJobTitle", name =>
+      requestInfo.SetIfVariablePresent("ContactJobTitle", title =>
       {
         var personalInfo = session.Contact.GetFacet<IContactPersonalInfo>("Personal");
-        personalInfo.JobTitle = name;
+        personalInfo.JobTitle = title;
 
       });
 

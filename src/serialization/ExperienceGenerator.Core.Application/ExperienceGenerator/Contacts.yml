@@ -20,101 +20,101 @@ SharedFields:
   Value: |
     <r>
       <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}" l="{4F72A793-BDBC-4262-9523-6AADD8FEA487}">
-        <r id="{DAFAFFB8-74AF-4141-A96A-70B16834CEC6}" par="PageCodeScriptFileName=%2Fsitecore%2Fshell%2Fclient%2FApplications%2FExperienceGenerator%2FContacts.js" ph="Page.Code" />
-        <r id="{56A04392-9E0E-4609-AE9A-ACD28C7F749B}" par="" ph="Page.Body" />
-        <r id="{5AE97C0C-EE88-4564-A363-4FA11C01C90A}" par="" ph="GlobalHeader" />
-        <r id="{2EE499CD-439A-4F10-B81F-36A54CAC01DB}" par="Id=AccountInformation" ph="GlobalHeader.LoginInfo" />
-        <r id="{7A69C522-7E99-4630-A25A-5D571505862A}" par="Id=GlobalLogo" ph="GlobalHeader.StartButton" />
-        <r id="{EC86834B-890C-405C-BB36-CA25044909E1}" par="" ph="GlobalFooter" />
-        <r id="{93CEEFCD-2DE1-40AF-AE9A-EBBFBCCC522F}" par="" ph="ApplicationHeader" />
-        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" ds="{EE3F9843-6BFE-4D4F-B18F-2AE2EBF99FE2}" par="Id=HeaderTitle" ph="ApplicationHeader.Title" />
-        <r id="{AF79ED5D-4396-4EEC-8E22-9D7C523266FA}" par="Id=Breadcrumb" ph="ApplicationHeader.BreadCrumb" />
-        <r id="{C80807A7-AD13-4693-9822-DD840CB266C5}" par="Click=javascript%3A%20window.history.back()&amp;Id=BackButton&amp;Text=Back" ph="ApplicationHeader.Back" />
-        <r id="{26541BC4-C62D-4F2F-BE3F-A4E2195FEE0F}" par="" ph="ApplicationContent" />
-        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=Main&amp;UsePadding=1" ph="ApplicationContent.Main" />
-        <r id="{910155C7-3881-4A56-90FB-D126490EDE55}" par="Id=PageMessageBar" ph="Main.Content" />
-        <r id="{FE9723FC-56E4-4CA8-9C64-CB34F29462A5}" par="Id=AppProgressIndicator" ph="Main.Content" />
-        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=Contacts&amp;PaddingType=Top&amp;UsePadding=1" ph="Main.Content" />
-        <r id="{442BD093-FBAD-4E36-BC08-489E16C82D08}" par="Header=Add%20contact&amp;Id=AddContactsExpander&amp;IsCollapsible=0" ph="Contacts.Content" />
-        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="ButtonType=Inverse&amp;Click=javascript%3Aapp.deleteSelected(%27ContactList%27)&amp;Id=DeleteContactsButton&amp;Text=Delete%20selected" ph="AddContactsExpander.ActionBar" />
-        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="ButtonType=Inverse&amp;Click=javascript%3Aapp.addContact()&amp;Id=AddContactsButton&amp;Text=Add%20contact" ph="AddContactsExpander.ActionBar" />
-        <r id="{ACE0AFD6-3DE0-42CF-8E62-4E68CD810A8D}" ds="{AD71ADAB-4F1D-4354-9BAE-B89D97749200}" par="Behaviors=MultiSelectList&amp;Id=ContactList&amp;TileHtmlFileName=%2Fsitecore%2Fshell%2Fclient%2FBusiness%20Component%20Library%2FLayouts%2FRenderings%2FListsAndGrids%2FListControls%2FDefaultTile.cshtml&amp;ViewMode=DetailList" ph="Contacts.Content" />
-        <r id="{442BD093-FBAD-4E36-BC08-489E16C82D08}" ds="{46C9A8FB-6322-45E7-A01D-415F8502A3D2}" par="EnableAdditional=0&amp;Id=ContactDetailsAccordion&amp;IsCollapsible=0&amp;IsVisible=%7BBinding%20ContactList.HasSelectedItem%7D&amp;ShowAdditional=1" ph="Contacts.Content" />
-        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=ContactDetailsBorder&amp;PaddingType=All&amp;UsePadding=1" ph="ContactDetailsAccordion.Body" />
-        <r id="{C4393722-39FA-4869-9582-3A8EB8983A0D}" par="Id=ContactRow" ph="ContactDetailsBorder.Content" />
-        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="GridColumns=4&amp;Id=LeftContactColumn" ph="ContactRow.Content" />
-        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=FirstNameBorder" ph="LeftContactColumn.Content" />
-        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" ds="{30D912C0-F4EA-4FB0-9837-0CD399D7438A}" par="Id=FirstNameLabel" ph="FirstNameBorder.Content" />
-        <r id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" par="Id=FirstNameValue" ph="FirstNameBorder.Content" />
-        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=MiddleNameBorder" ph="LeftContactColumn.Content" />
-        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" ds="{6680F96C-4D14-4284-9703-A088815BAC96}" par="Id=MiddleNameLabel" ph="MiddleNameBorder.Content" />
-        <r id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" par="Id=MiddleNameValue" ph="MiddleNameBorder.Content" />
-        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=LastNameBorder" ph="LeftContactColumn.Content" />
-        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" ds="{069DD69E-84F7-418C-8D79-5043D3D53790}" par="Id=LastNameLabel" ph="LastNameBorder.Content" />
-        <r id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" par="Id=LastNameValue" ph="LastNameBorder.Content" />
-        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="GridColumns=4&amp;Id=RightContactColumn" ph="ContactRow.Content" />
-        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=TitleBorder" ph="RightContactColumn.Content" />
-        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" ds="{96220CB1-EB6D-4296-840D-6AD4178E484F}" par="Id=TitleLabel" ph="TitleBorder.Content" />
-        <r id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" par="Id=TitleValue" ph="TitleBorder.Content" />
-        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=GenderInfoBorder" ph="RightContactColumn.Content" />
-        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" ds="{BD0CF5C7-0EA7-4E77-BAC0-F812A63AD7DE}" par="Id=GenderLabel" ph="GenderInfoBorder.Content" />
-        <r id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" par="Id=GenderValue" ph="GenderInfoBorder.Content" />
-        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=BirthBorder" ph="RightContactColumn.Content" />
-        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" ds="{C6E325A5-F61F-43CD-9FE8-497E4A82BB3D}" par="Id=BirthdayLabel" ph="BirthBorder.Content" />
-        <r id="{3CAC8515-EA11-4B97-A1E5-546DC6FC5E59}" par="Id=BirthdayValue" ph="BirthBorder.Content" />
-        <r id="{C4393722-39FA-4869-9582-3A8EB8983A0D}" par="Id=DetailsRow" ph="ContactDetailsBorder.Content" />
-        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="GridColumns=4&amp;Id=LeftDetailsColumn" ph="DetailsRow.Content" />
-        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=EmailTitle&amp;Text=Email&amp;TextType=Value" ph="LeftDetailsColumn.Content" />
-        <r id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" ds="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" par="Id=PrimeEmailValue" ph="LeftDetailsColumn.Content" />
-        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="GridColumns=4&amp;Id=CenterDetailsColumn" ph="DetailsRow.Content" />
-        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=PhoneTitle&amp;Text=Phone&amp;TextType=Value" ph="CenterDetailsColumn.Content" />
-        <r id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" ds="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" par="Id=PrimePhoneValue" ph="CenterDetailsColumn.Content" />
-        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="GridColumns=4&amp;Id=RightDetailsColumn" ph="DetailsRow.Content" />
-        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=AddressTitle&amp;Text=Address&amp;TextType=Value" ph="RightDetailsColumn.Content" />
-        <r id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" ds="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" par="Id=PrimeAddressValue" ph="RightDetailsColumn.Content" />
-        <r id="{ACE0AFD6-3DE0-42CF-8E62-4E68CD810A8D}" ds="{11C0A46E-4EA0-4F51-B74F-C54AA9FFC79A}" par="Behaviors=MultiSelectList&amp;Id=InteractionList&amp;TileHtmlFileName=%2Fsitecore%2Fshell%2Fclient%2FBusiness%20Component%20Library%2FLayouts%2FRenderings%2FListsAndGrids%2FListControls%2FDefaultTile.cshtml&amp;ViewMode=DetailList" ph="ContactDetailsAccordion.Body" />
-        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="ButtonType=Inverse&amp;Click=javascript%3Aapp.deleteSelected(%27InteractionList%27)&amp;Id=DeleteInteractionsButton&amp;Text=Delete%20selected" ph="ContactDetailsAccordion.ActionBar" />
-        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="ButtonType=Inverse&amp;Click=javascript%3Aapp.addInteraction()&amp;Id=AddInteractionButton&amp;Text=Add%20Interaction" ph="ContactDetailsAccordion.ActionBar" />
-        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=SummaryBorder&amp;UsePadding=1" ph="ApplicationContent.Info" />
-        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" ds="{FE8D64B4-8A74-41D5-AAF3-660F68DB4C98}" par="Id=SummaryTitle" ph="SummaryBorder.Content" />
-        <r id="{C4393722-39FA-4869-9582-3A8EB8983A0D}" par="Id=SummaryRow&amp;PaddingType=All&amp;UsePadding=1" ph="SummaryBorder.Content" />
-        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="GridColumns=9&amp;Id=ColumnPanel1" ph="SummaryRow.Content" />
-        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=NumberVisitsText&amp;Text=Number%20of%20visits%20generated" ph="ColumnPanel1.Content" />
-        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="GridColumns=3&amp;Id=ColumnPanel2" ph="SummaryRow.Content" />
-        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=NumberVisitsValue&amp;Text=0" ph="ColumnPanel2.Content" />
-        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="GridColumns=12&amp;Id=ColumnPanel5" ph="SummaryRow.Content" />
-        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=ProgressBorder&amp;PaddingType=Top&amp;UsePadding=1" ph="ColumnPanel5.Content" />
-        <r id="{AF6438A4-8295-4925-90B3-2BF97D3515AF}" par="Id=ProgressBar&amp;MaxValue=100&amp;UpdateInterval=1000&amp;Value=0" ph="ProgressBorder.Content" />
-        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=StartButtonBorder&amp;ShowBorder=0&amp;UsePadding=1" ph="SummaryBorder.Content" />
-        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" ds="{EE043B7A-1636-4831-B4B5-C42AB5962660}" par="Click=javascript%3Aapp.start()%3B&amp;Id=StartButton" ph="StartButtonBorder.Content" />
-        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=SecondaryButtonBorder&amp;ShowBorder=0&amp;UsePadding=1" ph="SummaryBorder.Content" />
-        <r id="{26B2B002-BCA0-4968-99E4-01573338B6A9}" ds="{F5A70CEF-C7B7-46D5-A9F7-63A6B8196119}" par="Click=javascript%3Aapp.pause()%3B&amp;Id=PauseButton" ph="SecondaryButtonBorder.Content" />
-        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" ds="{5ABFBC97-EF9E-4660-964A-9BE6D12F3B6E}" par="Click=javascript%3Aapp.stop()%3B&amp;Id=StopButton" ph="SecondaryButtonBorder.Content" />
-        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=DeleteBorder&amp;PaddingType=All&amp;UsePadding=1" ph="SummaryBorder.Content" />
-        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" ds="{77571502-EE04-48C5-AA06-1706EB06C4FC}" par="Click=javascript%3Aapp.DelWindow.show()%3B&amp;Id=DeleteButton" ph="DeleteBorder.Content" />
-        <r id="{442BD093-FBAD-4E36-BC08-489E16C82D08}" par="Header=Presets&amp;Id=Presets&amp;IsCollapsible=1" ph="ApplicationContent.Info" />
-        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=PresetsBorder&amp;UsePadding=1" ph="Presets.Body" />
-        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=SaveSettingsBorder&amp;ShowBorder=0" ph="PresetsBorder.Content" />
-        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=PresetNameTitle&amp;Text=Preset%20name" ph="SaveSettingsBorder.Content" />
-        <r id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" par="Id=PresetName" ph="SaveSettingsBorder.Content" />
-        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3Aapp.save()%3B&amp;Id=SaveSettings&amp;Text=Save%20Settings" ph="SaveSettingsBorder.Content" />
-        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=LoadSettingsBorder&amp;PaddingType=Top&amp;UsePadding=1" ph="PresetsBorder.Content" />
-        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=LoadPresetTitle&amp;Text=Select%20preset%20to%20load%20settings" ph="LoadSettingsBorder.Content" />
-        <r id="{25D357D3-3648-4336-9B53-55EED7CFA078}" par="Id=PresetList&amp;Items=%7BBinding%20DataSource.Items%7D" ph="LoadSettingsBorder.Content" />
-        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3Aapp.loadPreset()%3B&amp;Id=LoadPreset&amp;Text=Load%20Preset" ph="LoadSettingsBorder.Content" />
-        <r id="{327FD09D-41D6-4F15-8B18-611799364853}" par="Id=ContactSelectList&amp;Name=MultiSelectList&amp;PageScriptFileName=%2Fsitecore%2Fshell%2Fclient%2FSpeak%2FAssets%2Flib%2Fui%2F1.1%2Fbehaviors%2FMultiSelectList.js" ph="Page.Code" />
-        <r id="{A82840D0-633E-4D1A-B7FE-8C0062AA22F1}" ds="{977D9715-6A07-4E90-9DDA-DE5048C07D6B}" par="Id=Texts" ph="Page.Body" />
-        <r id="{33A02142-2DBD-4034-AEA2-BDF215EB2451}" par="Database=core&amp;Id=DataSource&amp;Query=%2Fsitecore%2Fclient%2FApplications%2FExperienceGenerator%2FCommon%2FContacts%2F%2F*%5B%40%40tid%3D%27%7BC7089EBD-7AF0-4F14-BEEA-680A465231B1%7D%27%5D" ph="Page.Body" />
-        <r id="{B60FB581-44D1-4372-86A2-D6E494F020E1}" par="HeaderLess=1&amp;Id=InteractionDetailsDialogWindow&amp;Size=%7B1255F2C7-60B0-4FF6-8C00-D6E6E50147A7%7D" ph="Page.Body" />
-        <r id="{8B4238F3-D5CD-464D-8DE6-4A69E05CD55B}" ds="{67609F12-FECF-42D8-8572-87BE11C81810}" par="UsePlaceholders=1" ph="InteractionDetailsDialogWindow.Content" />
-        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="ButtonType=Primary&amp;Click=javascript%3Aapp.interactionsOKButton()&amp;Id=OkButton&amp;Text=OK" ph="InteractionDetailsDialogWindow.Buttons" />
-        <r id="{B60FB581-44D1-4372-86A2-D6E494F020E1}" par="HeaderText=Add%20Interaction%20Page&amp;Id=AddInteractionPagesWindow" ph="Page.Body" />
-        <r id="{8B4238F3-D5CD-464D-8DE6-4A69E05CD55B}" ds="{DE8692DF-C65F-4BD5-BC18-021F9C48EE88}" par="UsePlaceholders=1" ph="AddInteractionPagesWindow.Content" />
-        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="ButtonType=Primary&amp;Click=javascript%3Aapp.addPagesOKButton()&amp;Id=OkButton4&amp;Text=OK" ph="AddInteractionPagesWindow.Buttons" />
-        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3Aapp.addPagesCancelButton(%20%22AddInteractionPagesWindow%22)&amp;Id=CancelButton4&amp;Text=Cancel" ph="AddInteractionPagesWindow.Buttons" />
-        <r id="{B60FB581-44D1-4372-86A2-D6E494F020E1}" par="HeaderText=Delete%20all%20visitor%20data%20in%20the%20solution%3F&amp;Id=DelWindow&amp;IsAnimated=1&amp;Size=%7BDFE6D45B-ED26-4D2C-8C5C-5A1EA07B1DEF%7D" ph="Page.Body" />
-        <r id="{8B4238F3-D5CD-464D-8DE6-4A69E05CD55B}" ds="{8552BFB8-60FD-43E5-9844-FE568F409A92}" par="UsePlaceholders=1" ph="DelWindow.Content" />
-        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3Aapp.dialogCancelButton(%20%22DelWindow%22)&amp;Id=CancelButton&amp;Text=Cancel" ph="DelWindow.Buttons" />
+        <r id="{DAFAFFB8-74AF-4141-A96A-70B16834CEC6}" par="PageCodeScriptFileName=%2fsitecore%2fshell%2fclient%2fApplications%2fExperienceGenerator%2fContacts.js" ph="Page.Code" uid="{A5D6DB86-2B7F-47A4-8B44-ECC55D5B7897}" />
+        <r id="{56A04392-9E0E-4609-AE9A-ACD28C7F749B}" ph="Page.Body" uid="{01DBFA11-8E42-4119-8E0F-5575593BA44E}" />
+        <r id="{5AE97C0C-EE88-4564-A363-4FA11C01C90A}" ph="GlobalHeader" uid="{D49FE9CB-1B47-4E72-9DB0-71987E0E076B}" />
+        <r id="{2EE499CD-439A-4F10-B81F-36A54CAC01DB}" par="Id=AccountInformation" ph="GlobalHeader.LoginInfo" uid="{B794928F-A13D-4D56-82DD-487A2070C12D}" />
+        <r id="{7A69C522-7E99-4630-A25A-5D571505862A}" par="Id=GlobalLogo" ph="GlobalHeader.StartButton" uid="{4884FF65-CE87-4880-9B5F-0BCE8E268CE9}" />
+        <r id="{EC86834B-890C-405C-BB36-CA25044909E1}" ph="GlobalFooter" uid="{F0833B57-819C-403E-B7D1-6DB7D67F262C}" />
+        <r id="{93CEEFCD-2DE1-40AF-AE9A-EBBFBCCC522F}" ph="ApplicationHeader" uid="{0F3720E8-2DA3-49DF-A720-848DE4264A28}" />
+        <r ds="{EE3F9843-6BFE-4D4F-B18F-2AE2EBF99FE2}" id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=HeaderTitle" ph="ApplicationHeader.Title" uid="{41DC1D55-7A61-447A-8E03-0744A8A61827}" />
+        <r id="{AF79ED5D-4396-4EEC-8E22-9D7C523266FA}" par="Id=Breadcrumb" ph="ApplicationHeader.BreadCrumb" uid="{7EA4EECC-3168-4F1F-AC0B-881587C0867A}" />
+        <r id="{C80807A7-AD13-4693-9822-DD840CB266C5}" par="Click=javascript%3a+window.history.back()&amp;Id=BackButton&amp;Text=Back" ph="ApplicationHeader.Back" uid="{135BB3CE-1835-4AA1-A76E-40BD548F5017}" />
+        <r id="{26541BC4-C62D-4F2F-BE3F-A4E2195FEE0F}" ph="ApplicationContent" uid="{11924D02-5E97-44BB-B8C1-83431D402ADE}" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=Main&amp;UsePadding=1" ph="ApplicationContent.Main" uid="{18E641B7-C3E1-41F8-A44C-38DC6A9EFEA1}" />
+        <r id="{910155C7-3881-4A56-90FB-D126490EDE55}" par="Id=PageMessageBar" ph="Main.Content" uid="{2D89DBDC-7A73-41BA-B4AF-7BD5C4EF28B2}" />
+        <r id="{FE9723FC-56E4-4CA8-9C64-CB34F29462A5}" par="Id=AppProgressIndicator" ph="Main.Content" uid="{873BD415-974F-422D-978B-4FAAD37AF426}" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=Contacts&amp;PaddingType=Top&amp;UsePadding=1" ph="Main.Content" uid="{6D4A72AE-1E5F-4804-9141-C7A711F02593}" />
+        <r id="{442BD093-FBAD-4E36-BC08-489E16C82D08}" par="Id=AddContactsExpander&amp;Header=Add+contact&amp;IsCollapsible=0" ph="Contacts.Content" uid="{2A9DF520-CEF1-42B8-A7B2-33C0973482A8}" />
+        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3aapp.deleteSelected(%27ContactList%27)&amp;Id=DeleteContactsButton&amp;ButtonType=Inverse&amp;Text=Delete+selected" ph="AddContactsExpander.ActionBar" uid="{96F92CBA-E587-4ED4-B828-A63589C215D4}" />
+        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3aapp.addContact()&amp;Id=AddContactsButton&amp;ButtonType=Inverse&amp;Text=Add+contact" ph="AddContactsExpander.ActionBar" uid="{75379132-5357-4AF9-B298-24D5414C2AF8}" />
+        <r ds="{AD71ADAB-4F1D-4354-9BAE-B89D97749200}" id="{ACE0AFD6-3DE0-42CF-8E62-4E68CD810A8D}" par="Id=ContactList&amp;ViewMode=DetailList&amp;Behaviors=MultiSelectList&amp;TileHtmlFileName=%2fsitecore%2fshell%2fclient%2fBusiness+Component+Library%2fLayouts%2fRenderings%2fListsAndGrids%2fListControls%2fDefaultTile.cshtml" ph="Contacts.Content" uid="{6E9623F5-F305-4842-80B4-F99225EA9E73}" />
+        <r ds="{46C9A8FB-6322-45E7-A01D-415F8502A3D2}" id="{442BD093-FBAD-4E36-BC08-489E16C82D08}" par="Id=ContactDetailsAccordion&amp;IsVisible=%7bBinding+ContactList.HasSelectedItem%7d&amp;EnableAdditional=0&amp;IsCollapsible=0&amp;ShowAdditional=1" ph="Contacts.Content" uid="{28A87504-E948-47A5-8034-66DE2C4FA85C}" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=ContactDetailsBorder&amp;PaddingType=All&amp;UsePadding=1" ph="ContactDetailsAccordion.Body" uid="{3FA5BF2D-B47B-4483-9AD7-841ECFFC4287}" />
+        <r id="{C4393722-39FA-4869-9582-3A8EB8983A0D}" par="Id=ContactRow" ph="ContactDetailsBorder.Content" uid="{F6750A92-92C7-4EF1-AE19-86981E7E8CB0}" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="Id=LeftContactColumn&amp;GridColumns=4" ph="ContactRow.Content" uid="{00D24F79-48A0-4811-98DC-9A0FC7AF1662}" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=FirstNameBorder" ph="LeftContactColumn.Content" uid="{2F107CBE-55E0-4EE9-9DD9-A8B4BC1AE105}" />
+        <r ds="{30D912C0-F4EA-4FB0-9837-0CD399D7438A}" id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=FirstNameLabel" ph="FirstNameBorder.Content" uid="{B0659D6B-8DD8-474E-9E70-F6260AE32680}" />
+        <r id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" par="Id=FirstNameValue" ph="FirstNameBorder.Content" uid="{103FC72C-06C2-4F2B-AA2E-9E40684D5C1B}" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=MiddleNameBorder" ph="LeftContactColumn.Content" uid="{6B8FBDF8-6431-4AC0-BF40-5A6CEE738127}" />
+        <r ds="{6680F96C-4D14-4284-9703-A088815BAC96}" id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=MiddleNameLabel" ph="MiddleNameBorder.Content" uid="{D3F08FD8-50CC-4338-9D9D-C92BD41C064E}" />
+        <r id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" par="Id=MiddleNameValue" ph="MiddleNameBorder.Content" uid="{07289AD2-5C5E-48C2-8721-FB82E60C12F5}" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=LastNameBorder" ph="LeftContactColumn.Content" uid="{F31754E7-2103-4DF7-9013-DB86587E35E1}" />
+        <r ds="{069DD69E-84F7-418C-8D79-5043D3D53790}" id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=LastNameLabel" ph="LastNameBorder.Content" uid="{9E740C90-6C37-4D2A-A430-42FFFFAEBAD2}" />
+        <r id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" par="Id=LastNameValue" ph="LastNameBorder.Content" uid="{277692BA-E1EA-4CC0-A115-494A5FC08DF0}" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="Id=RightContactColumn&amp;GridColumns=4" ph="ContactRow.Content" uid="{45750479-C85B-4E34-95A6-7D98D21A6DA7}" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=TitleBorder" ph="RightContactColumn.Content" uid="{0B7EB22A-1210-459A-B055-8D853AE0158D}" />
+        <r ds="{96220CB1-EB6D-4296-840D-6AD4178E484F}" id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=TitleLabel" ph="TitleBorder.Content" uid="{D0FED39C-DDC9-40BD-9A0E-E55CA5A722D5}" />
+        <r id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" par="Id=TitleValue" ph="TitleBorder.Content" uid="{706E3C5D-B14D-46B8-BAEC-3E7A846964A9}" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=GenderInfoBorder" ph="RightContactColumn.Content" uid="{6F8C1F3F-ACC8-43FF-83B6-F07DE8C37658}" />
+        <r ds="{BD0CF5C7-0EA7-4E77-BAC0-F812A63AD7DE}" id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=GenderLabel" ph="GenderInfoBorder.Content" uid="{C32D34B0-59B4-45BB-B465-0C7476E14978}" />
+        <r id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" par="Id=GenderValue" ph="GenderInfoBorder.Content" uid="{EB48DAA5-863B-4DF2-A768-0FB5DB43D48A}" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=BirthBorder" ph="RightContactColumn.Content" uid="{B5283BBA-0818-4F5D-8129-F2C5DAFB031F}" />
+        <r ds="{C6E325A5-F61F-43CD-9FE8-497E4A82BB3D}" id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=BirthdayLabel" ph="BirthBorder.Content" uid="{8B4775E8-D856-463A-8C79-85FBBAE898E6}" />
+        <r id="{3CAC8515-EA11-4B97-A1E5-546DC6FC5E59}" par="Id=BirthdayValue" ph="BirthBorder.Content" uid="{BF28E3F7-B0CE-421C-842F-F3A3FB043A1D}" />
+        <r id="{C4393722-39FA-4869-9582-3A8EB8983A0D}" par="Id=DetailsRow" ph="ContactDetailsBorder.Content" uid="{19331433-1EA3-4A12-A4CB-3504402FDFB7}" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="Id=LeftDetailsColumn&amp;GridColumns=4" ph="DetailsRow.Content" uid="{E8978D98-B585-478D-8A18-36EFA2F7F40F}" />
+        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=EmailTitle&amp;TextType=Value&amp;Text=Email" ph="LeftDetailsColumn.Content" uid="{050A378C-0D69-4DC0-8253-68FFF91D403F}" />
+        <r ds="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" par="IsRequired=1&amp;Id=PrimeEmailValue" ph="LeftDetailsColumn.Content" uid="{23ED39B1-7F87-42D0-8527-9AEA9B88BA6A}" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="Id=CenterDetailsColumn&amp;GridColumns=4" ph="DetailsRow.Content" uid="{BA9068AE-FE94-4C66-9ED5-D575DA264FB5}" />
+        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=PhoneTitle&amp;TextType=Value&amp;Text=Phone" ph="CenterDetailsColumn.Content" uid="{86A10F9E-1777-403C-A131-E03BDFF91A19}" />
+        <r ds="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" par="Id=PrimePhoneValue" ph="CenterDetailsColumn.Content" uid="{CB0BB7A4-0DEE-4702-AE7B-25EF30434E65}" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="Id=RightDetailsColumn&amp;GridColumns=4" ph="DetailsRow.Content" uid="{FEB63819-954F-420E-A186-5E53334EF5EA}" />
+        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=AddressTitle&amp;TextType=Value&amp;Text=Address" ph="RightDetailsColumn.Content" uid="{EE426688-AFEC-4DAE-861D-2CC362524149}" />
+        <r ds="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" par="Id=PrimeAddressValue" ph="RightDetailsColumn.Content" uid="{B522893C-FBFA-4060-8454-78BBE93626D9}" />
+        <r ds="{11C0A46E-4EA0-4F51-B74F-C54AA9FFC79A}" id="{ACE0AFD6-3DE0-42CF-8E62-4E68CD810A8D}" par="Id=InteractionList&amp;ViewMode=DetailList&amp;Behaviors=MultiSelectList&amp;TileHtmlFileName=%2fsitecore%2fshell%2fclient%2fBusiness+Component+Library%2fLayouts%2fRenderings%2fListsAndGrids%2fListControls%2fDefaultTile.cshtml" ph="ContactDetailsAccordion.Body" uid="{544B7F88-38C0-4F30-9318-C925AA464839}" />
+        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3aapp.deleteSelected(%27InteractionList%27)&amp;Id=DeleteInteractionsButton&amp;ButtonType=Inverse&amp;Text=Delete+selected" ph="ContactDetailsAccordion.ActionBar" uid="{3FFCB6F8-BD9D-4678-8361-8814BF2E4F65}" />
+        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3aapp.addInteraction()&amp;Id=AddInteractionButton&amp;ButtonType=Inverse&amp;Text=Add+Interaction" ph="ContactDetailsAccordion.ActionBar" uid="{96B55C31-2F56-4E53-B6B1-C5A9312C85CA}" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=SummaryBorder&amp;UsePadding=1" ph="ApplicationContent.Info" uid="{D3CB3E14-518F-4EC7-80D6-BA9A1E5FDAB2}" />
+        <r ds="{FE8D64B4-8A74-41D5-AAF3-660F68DB4C98}" id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=SummaryTitle" ph="SummaryBorder.Content" uid="{7DEBFD75-1912-407D-BCF9-5AE480C5BB27}" />
+        <r id="{C4393722-39FA-4869-9582-3A8EB8983A0D}" par="UsePadding=1&amp;Id=SummaryRow&amp;PaddingType=All" ph="SummaryBorder.Content" uid="{FB725217-EFEC-4650-A3E0-2C371A35F407}" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="Id=ColumnPanel1&amp;GridColumns=9" ph="SummaryRow.Content" uid="{5F0ADED1-5B06-45A9-9537-59C3B999A36B}" />
+        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=NumberVisitsText&amp;Text=Number+of+visits+generated" ph="ColumnPanel1.Content" uid="{BFE3FA63-BCDA-4EA0-A9E5-96724E2D1A96}" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="Id=ColumnPanel2&amp;GridColumns=3" ph="SummaryRow.Content" uid="{59A173D7-CC0A-420C-AA91-2960C72616F8}" />
+        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=NumberVisitsValue&amp;Text=0" ph="ColumnPanel2.Content" uid="{C6FC071B-660C-40C7-AE07-E841B6912231}" />
+        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="Id=ColumnPanel5&amp;GridColumns=12" ph="SummaryRow.Content" uid="{F9EE3978-36BA-4515-8397-576A566928BB}" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=ProgressBorder&amp;PaddingType=Top&amp;UsePadding=1" ph="ColumnPanel5.Content" uid="{57808C5F-5CAE-49E7-941E-FCCC1C14FEC8}" />
+        <r id="{AF6438A4-8295-4925-90B3-2BF97D3515AF}" par="UpdateInterval=1000&amp;Value=0&amp;Id=ProgressBar&amp;MaxValue=100" ph="ProgressBorder.Content" uid="{8A232049-3736-46FA-B056-3222A4498506}" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=StartButtonBorder&amp;UsePadding=1&amp;ShowBorder=0" ph="SummaryBorder.Content" uid="{A983EFAA-732A-4719-B108-BC04B1C04738}" />
+        <r ds="{EE043B7A-1636-4831-B4B5-C42AB5962660}" id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3aapp.start()%3b&amp;Id=StartButton" ph="StartButtonBorder.Content" uid="{8D40F00A-FC99-4D22-A9A3-C7F6B2F351A4}" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=SecondaryButtonBorder&amp;UsePadding=1&amp;ShowBorder=0" ph="SummaryBorder.Content" uid="{B41E801F-9796-47F8-BA59-38C09AE19624}" />
+        <r ds="{F5A70CEF-C7B7-46D5-A9F7-63A6B8196119}" id="{26B2B002-BCA0-4968-99E4-01573338B6A9}" par="Click=javascript%3aapp.pause()%3b&amp;Id=PauseButton" ph="SecondaryButtonBorder.Content" uid="{C26F0D29-B25A-4DD2-87EE-3C2238077381}" />
+        <r ds="{5ABFBC97-EF9E-4660-964A-9BE6D12F3B6E}" id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3aapp.stop()%3b&amp;Id=StopButton" ph="SecondaryButtonBorder.Content" uid="{FE5742AC-7D3D-4023-96E0-62CFCA59AE43}" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=DeleteBorder&amp;PaddingType=All&amp;UsePadding=1" ph="SummaryBorder.Content" uid="{6D01B8C7-31FE-46EE-B2B6-588A42651A39}" />
+        <r ds="{77571502-EE04-48C5-AA06-1706EB06C4FC}" id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3aapp.DelWindow.show()%3b&amp;Id=DeleteButton" ph="DeleteBorder.Content" uid="{77CA880E-87FA-4288-8EA3-9CF81D6748C5}" />
+        <r id="{442BD093-FBAD-4E36-BC08-489E16C82D08}" par="Id=Presets&amp;Header=Presets&amp;IsCollapsible=1" ph="ApplicationContent.Info" uid="{B19B5AD6-B82C-4927-AE95-756479D9200C}" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=PresetsBorder&amp;UsePadding=1" ph="Presets.Body" uid="{77B23F2E-4AB2-4C90-8516-2E0C4C30BE7E}" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=SaveSettingsBorder&amp;ShowBorder=0" ph="PresetsBorder.Content" uid="{4B17BBD7-9182-4F5C-979D-0F62EE99CD1B}" />
+        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=PresetNameTitle&amp;Text=Preset+name" ph="SaveSettingsBorder.Content" uid="{1D574EE9-9241-4877-AFD6-5599EF410EA1}" />
+        <r id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" par="Id=PresetName" ph="SaveSettingsBorder.Content" uid="{6E2D3FD8-D3E5-45AE-BEBD-C14E85520F6D}" />
+        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3aapp.save()%3b&amp;Id=SaveSettings&amp;Text=Save+Settings" ph="SaveSettingsBorder.Content" uid="{6B615AE5-9F4E-4317-8FF7-05A85FBED337}" />
+        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=LoadSettingsBorder&amp;PaddingType=Top&amp;UsePadding=1" ph="PresetsBorder.Content" uid="{B47CE3A0-55A1-4D8D-9E3A-5985F36698D3}" />
+        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=LoadPresetTitle&amp;Text=Select+preset+to+load+settings" ph="LoadSettingsBorder.Content" uid="{B8ACC30F-8B23-4ED2-AD42-67A3BA9D343A}" />
+        <r id="{25D357D3-3648-4336-9B53-55EED7CFA078}" par="Id=PresetList&amp;Items=%7bBinding+DataSource.Items%7d" ph="LoadSettingsBorder.Content" uid="{ED05483E-42E9-4773-A43A-7D0FE2A126D3}" />
+        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3aapp.loadPreset()%3b&amp;Id=LoadPreset&amp;Text=Load+Preset" ph="LoadSettingsBorder.Content" uid="{FAF6D515-0452-48F7-9FA8-DFBE744EAAFD}" />
+        <r id="{327FD09D-41D6-4F15-8B18-611799364853}" par="Id=ContactSelectList&amp;PageScriptFileName=%2fsitecore%2fshell%2fclient%2fSpeak%2fAssets%2flib%2fui%2f1.1%2fbehaviors%2fMultiSelectList.js&amp;Name=MultiSelectList" ph="Page.Code" uid="{30555004-F6E5-4756-8DF7-2065B347FFE4}" />
+        <r ds="{977D9715-6A07-4E90-9DDA-DE5048C07D6B}" id="{A82840D0-633E-4D1A-B7FE-8C0062AA22F1}" par="Id=Texts" ph="Page.Body" uid="{803EC061-37E3-49F5-A992-CE0917D5041C}" />
+        <r id="{33A02142-2DBD-4034-AEA2-BDF215EB2451}" par="Id=DataSource&amp;Query=%2fsitecore%2fclient%2fApplications%2fExperienceGenerator%2fCommon%2fContacts%2f%2f*%5b%40%40tid%3d%27%7bC7089EBD-7AF0-4F14-BEEA-680A465231B1%7d%27%5d&amp;Database=core" ph="Page.Body" uid="{337334ED-7AB0-46A0-96F7-96FF1E807D1D}" />
+        <r id="{B60FB581-44D1-4372-86A2-D6E494F020E1}" par="Id=InteractionDetailsDialogWindow&amp;HeaderLess=1&amp;Size=%7b1255F2C7-60B0-4FF6-8C00-D6E6E50147A7%7d" ph="Page.Body" uid="{0FA5EEDD-999F-42BF-8251-8C9FF75E19DC}" />
+        <r ds="{67609F12-FECF-42D8-8572-87BE11C81810}" id="{8B4238F3-D5CD-464D-8DE6-4A69E05CD55B}" par="UsePlaceholders=1" ph="InteractionDetailsDialogWindow.Content" uid="{F7B777DF-A62E-4EE5-A6E1-3AE576B056C6}" />
+        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3aapp.interactionsOKButton()&amp;Id=OkButton&amp;ButtonType=Primary&amp;Text=OK" ph="InteractionDetailsDialogWindow.Buttons" uid="{BD08AA2F-D39A-40D2-8FE0-792DD70FEE04}" />
+        <r id="{B60FB581-44D1-4372-86A2-D6E494F020E1}" par="HeaderText=Add+Interaction+Page&amp;Id=AddInteractionPagesWindow" ph="Page.Body" uid="{C699501E-7A0C-446F-8B9B-7752C5490F13}" />
+        <r ds="{DE8692DF-C65F-4BD5-BC18-021F9C48EE88}" id="{8B4238F3-D5CD-464D-8DE6-4A69E05CD55B}" par="UsePlaceholders=1" ph="AddInteractionPagesWindow.Content" uid="{9E24F34C-9FF7-4F19-A8BB-2E447CC086DE}" />
+        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3aapp.addPagesOKButton()&amp;Id=OkButton4&amp;ButtonType=Primary&amp;Text=OK" ph="AddInteractionPagesWindow.Buttons" uid="{9BD8DA9E-EFB1-4568-8531-1BC083FFD95C}" />
+        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3aapp.addPagesCancelButton(+%22AddInteractionPagesWindow%22)&amp;Id=CancelButton4&amp;Text=Cancel" ph="AddInteractionPagesWindow.Buttons" uid="{5610BC95-40B1-40F8-902F-4EE1744867DA}" />
+        <r id="{B60FB581-44D1-4372-86A2-D6E494F020E1}" par="HeaderText=Delete+all+visitor+data+in+the+solution%3f&amp;Id=DelWindow&amp;Size=%7bDFE6D45B-ED26-4D2C-8C5C-5A1EA07B1DEF%7d&amp;IsAnimated=1" ph="Page.Body" uid="{8221647C-0050-4A3A-ABD8-C96F8AB01D0C}" />
+        <r ds="{8552BFB8-60FD-43E5-9844-FE568F409A92}" id="{8B4238F3-D5CD-464D-8DE6-4A69E05CD55B}" par="UsePlaceholders=1" ph="DelWindow.Content" uid="{BDEA1A4F-0329-4BA8-9204-2CDCC0DC7134}" />
+        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3aapp.dialogCancelButton(+%22DelWindow%22)&amp;Id=CancelButton&amp;Text=Cancel" ph="DelWindow.Buttons" uid="{05F43C08-338F-47A3-B73F-697C47BF1743}" />
       </d>
     </r>
 Languages:

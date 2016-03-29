@@ -8,6 +8,8 @@
   {
     private const string presetsRootPath = "/sitecore/client/Applications/ExperienceGenerator/Common/Contacts";
     protected override Item PresetsRoot => this.Database.GetItem(presetsRootPath);
+    protected override Item SitePresetRoot => this.PresetsRoot;
+
     public JArray GetContactSettingPreset(ID id)
     {
       var preset = this.SitePresetRoot.Children[id];

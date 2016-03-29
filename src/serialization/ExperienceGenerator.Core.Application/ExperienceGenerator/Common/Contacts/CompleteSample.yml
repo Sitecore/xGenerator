@@ -1,9 +1,13 @@
 ﻿---
 ID: e86e6ec3-18b2-4589-9c86-a7ea83466392
-Parent: 43adc083-38f1-4332-b0b8-1f1251a57760
+Parent: ed72a22e-57b8-4da2-9b00-af77d25840e3
 Template: c7089ebd-7af0-4f14-beea-680a465231b1
-Path: /sitecore/client/Applications/ExperienceGenerator/Common/Contacts/habitat/CompleteSample
+Path: /sitecore/client/Applications/ExperienceGenerator/Common/Contacts/CompleteSample
 DB: core
+SharedFields:
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: 100
 Languages:
 - Language: en
   Versions:
