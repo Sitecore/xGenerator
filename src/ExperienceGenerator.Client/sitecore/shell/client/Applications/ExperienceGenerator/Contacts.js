@@ -1,5 +1,12 @@
 /*/ THIS CODE IS FOR PROTOTYPE ONLY!!!! /*/
 define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
+  var itemToListElement = function (item) {
+    return {
+      itemId: item.itemId,
+      $displayName: item.$displayName
+    }
+  };
+
   var DataSheet = _sc.Definitions.App.extend({
     addContact: function () {
       this.ContactList.unset("selectedItemId");
@@ -30,7 +37,7 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
 
       var existingOutcomes = this[targetControl].get('items') || [];
       existingOutcomes.push(_.clone(selected));
-      this[targetControl].unset("items");
+      this[targetControl].unset("items", { silent: true });
       this[targetControl].set("items", existingOutcomes);
 
 
@@ -60,7 +67,7 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
       var checkedItems = this[controlName].get('checkedItems');
 
       filteredItem = _.difference(filteredItem, checkedItems);
-     
+
       this[controlName].unset("items", { silent: true });
       this[controlName].set('items', filteredItem);
       if (controlName === "InteractionList")
@@ -111,10 +118,10 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
       this.PrimeEmailValue.on("change:text", function (model, text) {
         var $parent = model.viewModel.$el.parent();
 
-        if (!text&& !$parent.hasClass("has-error") || (text && $parent.hasClass("has-error"))) {
+        if (!text && !$parent.hasClass("has-error") || (text && $parent.hasClass("has-error"))) {
           $parent.toggleClass("has-error");
         }
-       
+
       }, this);
       this.CampaignComboBox.on("change:selectedItem", this.setCampaign, this);
       this.RecencyValue.on("change:text", this.setRecency, this);
@@ -149,8 +156,7 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
 
 
       this.applyTwoWayBindings();
-
-
+      this.RecencyValue.viewModel.$el.attr("max", "0");
 
 
     },
@@ -166,6 +172,9 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
         dataType: "json",
       }).done(function (data) {
         self.City.set("items", _.sortBy(data, 'Name'), true);
+        var interaction = self.InteractionList.get("selectedItem");
+        if (interaction)
+          self.City.set('selectedValue', interaction.get('geoData').GeoNameId);
       });
     },
     loadCountries: function () {
@@ -223,8 +232,8 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
     pageSelected: function (model, selectedItem) {
 
       if (!selectedItem) return;
-      this.GoalList.unset('items');
-      this.GoalList.set('items', selectedItem.get('goals'));
+      this.GoalList.unset('items', { silent: true });
+      this.GoalList.set('items', selectedItem.get('goals')||[]);
 
     },
 
@@ -233,15 +242,11 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
       var target = this.PagesInVisitList.get('selectedItem');
 
       var interaction = this.InteractionList.get('selectedItem');
-      if (!target || !changed || !interaction || !target.collection) return;
-      interaction.get('pages')[target.collection.indexOf(target)]['goals'] = _.map(changed, function (x) {
-        return {
-          itemId: x.itemId,
-          $displayName: x.$displayName
-        }
-      });
+      if (!target || !changed || !interaction) return;
+      var pageIdx = target.collection ? target.collection.indexOf(target) : 0;
+      interaction.get('pages')[pageIdx]['goals'] = _.map(changed, itemToListElement);
 
-      this.PagesInVisitList.unset('items');
+      this.PagesInVisitList.unset('items', { silent: true });
       this.PagesInVisitList.set('items', interaction.get('pages'));
 
     },
@@ -251,12 +256,8 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
 
       if (!target || !changed) return;
 
-      target.unset("outcomes");
-      target.set("outcomes", _.map(changed, function (x) {
-        return {
-          itemId: x.itemId, $displayName: x.$displayName
-        }
-      }));
+      target.unset("outcomes", { silent: true });
+      target.set("outcomes", _.map(changed, itemToListElement));
     },
 
     setRecency: function (model, changed) {
@@ -314,7 +315,7 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
       }
 
       var items = this.InteractionList.get('items');
-      this.InteractionList.unset('items');
+      this.InteractionList.unset('items', { silent: true });
       this.InteractionList.set('items', items);
 
 
@@ -339,6 +340,7 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
       });
       this.TrafficChannelComboBox.set('selectedValue', selectedItem.get('channelId'));
       this.CampaignComboBox.set('selectedValue', selectedItem.get('campaignId') || this.emptyCampaign);
+      this.Country.unset('selectedValue');
       this.Country.set('selectedValue', selectedItem.get('geoData').Country.IsoNumeric);
       this.SearchEngine.set('selectedValue', selectedItem.get('searchEngine'));
       this.SearchKeyword.set('text', selectedItem.get('searchKeyword'));
