@@ -104,6 +104,7 @@
   <ItemGroup>
     <Compile Include="AutoDbDataAttribute.cs" />
     <Compile Include="ExperienceGeneratorActionsControllerTests.cs" />
+    <Compile Include="SettingsRepositoryTests.cs" />
     <Compile Include="XGenParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -6,19 +6,22 @@
 
   public class ContactSettingsRepository : BaseSettingsRepository
   {
-    private const string presetsRootPath = "/sitecore/client/Applications/ExperienceGenerator/Common/Contacts";
-    protected override Item PresetsRoot => this.Database.GetItem(presetsRootPath);
+    public ContactSettingsRepository() : base()
+    {
+
+    }
+    public ContactSettingsRepository(Database database) : base(database)
+    {
+
+    }
+    private const string contactPresetsRootPath = "/sitecore/client/Applications/ExperienceGenerator/Common/Contacts";
+    protected override Item PresetsRoot => this.Database.GetItem(contactPresetsRootPath);
     protected override Item SitePresetRoot => this.PresetsRoot;
 
     public JArray GetContactSettingPreset(ID id)
     {
       var preset = this.SitePresetRoot.Children[id];
-      if (preset == null)
-      {
-        return null;
-      }
-
-      return this.CreateArray(preset);
+      return preset == null ? null : this.CreateArray(preset);
     }
   }
 }

@@ -7,6 +7,5 @@ namespace ExperienceGenerator.Client.Repositories
 
   public class SettingsRepository : BaseSettingsRepository
   {
-
   }
 }

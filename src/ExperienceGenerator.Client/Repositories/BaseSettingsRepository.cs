@@ -8,9 +8,20 @@
 
   public class BaseSettingsRepository
   {
+
+    public BaseSettingsRepository(Database database)
+    {
+      this.Database = database;
+    }
+
+    public BaseSettingsRepository() : this(Sitecore.Configuration.Factory.GetDatabase("core"))
+    {
+
+    }
+
     private const string presetsRootPath = "/sitecore/client/Applications/ExperienceGenerator/Common/Presets";
     protected virtual Item PresetsRoot => this.Database.GetItem(presetsRootPath);
-    protected Database Database => Sitecore.Configuration.Factory.GetDatabase("core");
+    protected Database Database { get; set; }
 
     protected virtual Item SitePresetRoot
     {

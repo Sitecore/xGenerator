@@ -18,9 +18,15 @@
       {
         new DbField("Group")
       });
+
+      db.Add(new DbTemplate("Spec", Templates.Preset.ID)
+      {
+        new DbField("Spec",Templates.Preset.Fields.Specification)
+      });
       db.Add(new DbItem("Online", KnownItems.OnlineChannelRoot));
       db.Add(new DbItem("TR", KnownItems.TaxonomyRoot));
       db.Add(new DbItem("CR", KnownItems.CampaignsRoot));
+
     }
   }
 }
