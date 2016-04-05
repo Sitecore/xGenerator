@@ -184,7 +184,6 @@
     <xfiles>
       <Entries>
         <x-item>/App_Config/Include/Feature/AnalyticsUpdater.config</x-item>
-        <x-item>/App_Config/Include/Feature/AnalyticsUpdater.Serialization.config</x-item>
         <x-item>/bin/AnalyticsUpdater.dll</x-item>
         <x-item>/RefreshAnalytics.sql</x-item>
         <x-item>/sitecore/shell/Applications/Dialogs/UpdateAnalytics.xml</x-item>
