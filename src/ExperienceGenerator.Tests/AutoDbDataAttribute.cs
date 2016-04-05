@@ -1,11 +1,15 @@
 ﻿namespace ExperienceGenerator.Tests
 {
+  using System;
   using ExperienceGenerator.Client;
+  using ExperienceGenerator.Parsing;
   using Ploeh.AutoFixture;
+  using Ploeh.AutoFixture.Kernel;
   using Ploeh.AutoFixture.Xunit2;
   using Sitecore.Analytics.Data.Items;
   using Sitecore.FakeDb;
   using Sitecore.FakeDb.AutoFixture;
+  using Xunit.Abstractions;
 
   internal class AutoDbDataAttribute : AutoDataAttribute
   {
@@ -27,6 +31,21 @@
       db.Add(new DbItem("TR", KnownItems.TaxonomyRoot));
       db.Add(new DbItem("CR", KnownItems.CampaignsRoot));
 
+      Fixture.Customizations.Add(new XGenBuilder());
+
+    }
+  }
+  public class XGenBuilder : ISpecimenBuilder
+  {
+    public object Create(object request, ISpecimenContext context)
+    {
+      var type = request as Type;
+      if (type != null && type == typeof(XGenParser))
+      {
+        return new XGenParser("http://type.info");
+      }
+
+      return new NoSpecimen();
     }
   }
 }

@@ -123,9 +123,18 @@
       var devices = new DeviceRepository().GetAll().ToDictionary(ga => ga.Id, ga => ga);
       Factories.Add("Devices", VariableFactory.Lambda((segment, token, parser) =>
       {
-        var regionId = parser.ParseWeightedSet<string>(token);
-        Func<string> func = () => devices[regionId()].UserAgent;
-        segment.VisitorVariables.AddOrReplace(Variables.Random("UserAgent", func ));
+        Func<string> userAgent;
+        if (!token.HasValues)
+        {
+          userAgent = FileHelpers.ReadLinesFromResource<GeoData>("ExperienceGenerator.Data.useragents.txt")
+            .Exponential(.8, 8);
+        }
+        else
+        {
+          var id = parser.ParseWeightedSet<string>(token);
+          userAgent = () => devices[id()].UserAgent;
+        }
+        segment.VisitorVariables.AddOrReplace(Variables.Random("UserAgent", userAgent ));
       }));
 
       Factories.Add("Outcomes", VariableFactory.Lambda((segment, token, parser) =>
