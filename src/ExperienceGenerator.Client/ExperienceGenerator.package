@@ -61,6 +61,8 @@
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/DataSheet/PageSettings/Texts/Overview/Start date/{2EE01475-D0FF-4230-8A3A-8218E1C6A8CF}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/DataSheet/PageSettings/Texts/Overview/Time spent per visit avg/{0D6001C4-4CA7-4615-B146-128763549F0F}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/DataSheet/PageSettings/Messages/No items found/{78A6B05D-7421-4BB0-8FE6-B7EEBA88CD85}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/DataSheet/PageSettings/DialogWindows/DevicesDialog/{B0353F86-B4E3-4683-B3A8-338D79BEDACC}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/DataSheet/PageSettings/Tabs/Devices/{CCC32E1C-61CA-4A18-BDA1-23F088342C06}/invariant/0</x-item>
       </Entries>
       <SkipVersions>False</SkipVersions>
       <Converter>
