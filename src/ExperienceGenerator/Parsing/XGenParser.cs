@@ -111,10 +111,21 @@
           parser.ParseWeightedSet<string>(token), true))));
 
       var areas = GeoArea.Areas.ToDictionary(ga => ga.Id, ga => ga.Selector(GeoData));
+      
+
       Factories.Add("Geo", VariableFactory.Lambda((segment, token, parser) =>
       {
         var regionId = parser.ParseWeightedSet<string>(token["Region"]);
         segment.VisitorVariables.AddOrReplace(new GeoVariables(() => areas[regionId()](), true));
+      }));
+
+
+      var devices = new DeviceRepository().GetAll().ToDictionary(ga => ga.Id, ga => ga);
+      Factories.Add("Devices", VariableFactory.Lambda((segment, token, parser) =>
+      {
+        var regionId = parser.ParseWeightedSet<string>(token);
+        Func<string> func = () => devices[regionId()].UserAgent;
+        segment.VisitorVariables.AddOrReplace(Variables.Random("UserAgent", func ));
       }));
 
       Factories.Add("Outcomes", VariableFactory.Lambda((segment, token, parser) =>
@@ -305,7 +316,7 @@
 
         segment.DateGenerator.Hour(t => t.AddPeak(0.4, 0.25, 0, pct: true)
         .AddPeak(0.8, 0.1, 2, 0.2, pct: true));
-        SetUserAgent(segment);
+        //SetUserAgent(segment);
 
 
         if (type != JobType.Contacts)

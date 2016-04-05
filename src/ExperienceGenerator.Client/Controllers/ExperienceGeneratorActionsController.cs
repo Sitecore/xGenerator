@@ -73,6 +73,13 @@ namespace ExperienceGenerator.Client.Controllers
       return GetSites(all);
     }
 
+
+    [HttpGet]
+    public IEnumerable<Device> Devices()
+    {
+      return new DeviceRepository().GetAll();
+    }
+
     [HttpGet]
     public IEnumerable<ItemInfo> Items(string query, int? maxDepth = null)
     {

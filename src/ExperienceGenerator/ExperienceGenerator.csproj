@@ -51,6 +51,8 @@
   <ItemGroup>
     <Compile Include="Data\City.cs" />
     <Compile Include="Data\Country.cs" />
+    <Compile Include="Data\Device.cs" />
+    <Compile Include="Data\DeviceRepository.cs" />
     <Compile Include="Data\FileHelpers.cs" />
     <Compile Include="Data\GeoArea.cs" />
     <Compile Include="Data\GeoBuilder.cs" />
@@ -106,6 +108,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Data\useragents.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\devices.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
