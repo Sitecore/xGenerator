@@ -44,7 +44,9 @@ define(["sitecore", "underscore"], function (_sc, _) {
 
         var root = _.groupBy(data, "Type");
         var arr = [];
-        var mapped = Object.keys(root).map(key => arr.push({ title: key, isFolder: true, children: root[key], itemUri : { itemId: "" } }));
+        var mapped = Object.keys(root).map(function(key) {
+          arr.push({ title: key, isFolder: true, children: root[key], itemUri: { itemId: "" } });
+        });
         _.each(arr, function (group) {
           _.each(group.children, function (device) {
             device.title = device.Name;
