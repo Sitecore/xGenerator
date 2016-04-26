@@ -19,6 +19,7 @@ For build instructions please refer to .\sitecore-xerox\src\Build instructions.t
 #Solution structure:
 **ExperienceGenerator.Client** – SPEAK v1 applications to manipulate with configuration of created data. 
 Includes Experience generator and Experience Profile generator tools
+
 **ExperienceGenerator** – core of SPEAK applications.
 Consists of:
 *	configuration parsers (for Experience generator and Experience Profile generator tools)
