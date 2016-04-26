@@ -13,6 +13,20 @@ Generate "realistically looking" traffic for Sitecore sites with configurable pa
  - Outcomes
  - Campaigns
 
+#Experience Profile Generator
+
+Generate visits for Sitecore Contact with configurable settings:
+ - Contact information
+ - Visit pages
+ - Recency
+ - Outcomes
+ - Geo location
+ - Goals
+ - Channel
+
+
+
+
 For build instructions please refer to .\sitecore-xerox\src\Build instructions.txt
 
 
