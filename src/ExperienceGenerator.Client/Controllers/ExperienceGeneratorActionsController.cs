@@ -211,10 +211,6 @@ namespace ExperienceGenerator.Client.Controllers
     public IHttpActionResult SaveContactsSettings([FromBody] ContactPreset preset)
     {
       var repo = new ContactSettingsRepository();
-      if (repo.GetPresets().Any(x => x.Key.Equals(preset.Name.ToLower())))
-      {
-        return this.InternalServerError(new Exception("Preset with the same name already exists."));
-      }
 
       repo.Save(preset.Name, preset.Spec);
       return this.Json(new { message = "ok" });

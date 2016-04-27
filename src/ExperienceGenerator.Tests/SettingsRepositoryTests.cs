@@ -7,6 +7,7 @@
   using ExperienceGenerator.Client.Repositories;
   using FluentAssertions;
   using Newtonsoft.Json.Linq;
+  using Ploeh.AutoFixture.Xunit2;
   using Sitecore.Analytics.Data.Items;
   using Sitecore.Data;
   using Sitecore.Data.Items;
@@ -19,12 +20,9 @@
 
     [Theory]
     [AutoDbData]
-    public void Save_OnePresent_ShouldReturnSingleSetting(Db db)
+    public void Save_OnePresent_ShouldReturnSingleSetting(Db db, [Greedy]ContactSettingsRepository repo)
     {
       CreateItem(db, "/sitecore/client/Applications/ExperienceGenerator/Common/Contacts");
-
-      var repo = new ContactSettingsRepository(db.Database);
-
       repo.Save("name", EmptySpecification);
       repo.GetPresets().Count.Should().Be(1);
     }
@@ -33,25 +31,39 @@
 
     [Theory]
     [AutoDbData]
-    public void Save_SpecPassed_ShouldBeSavedCorrectly(Db db)
+    public void Save_SpecPassed_ShouldBeSavedCorrectly(Db db, [Greedy]ContactSettingsRepository repo)
     {
       CreateItem(db, "/sitecore/client/Applications/ExperienceGenerator/Common/Contacts");
-
-      var repo = new ContactSettingsRepository(db.Database);
-
       repo.Save("name", EmptySpecification);
       var savedSpec = db.GetItem("/sitecore/client/Applications/ExperienceGenerator/Common/Contacts/name")[Templates.Preset.Fields.Specification];
       JArray.Parse(savedSpec).ToString().Should().Be(EmptySpecification.ToString());
     }
 
 
+
     [Theory]
     [AutoDbData]
-    public void ContactSettingsRepository_NoPresets_ShouldReturnEmptyCollection(Db db)
+    public void Save_WithExistingItemName_ShouldOverrideItem(Db db, [Greedy]ContactSettingsRepository repo)
+    {
+      CreateItem(db, "/sitecore/client/Applications/ExperienceGenerator/Common/Contacts");
+      repo.Save("name", EmptySpecification);
+      var savedSpec = db.GetItem("/sitecore/client/Applications/ExperienceGenerator/Common/Contacts/name")[Templates.Preset.Fields.Specification];
+      JArray.Parse(savedSpec).ToString().Should().Be(EmptySpecification.ToString());
+      var jToken = (JArray)EmptySpecification.DeepClone();
+      jToken[0]["someKey"]="someVal";
+      repo.Save("name", jToken);
+      savedSpec = db.GetItem("/sitecore/client/Applications/ExperienceGenerator/Common/Contacts/name")[Templates.Preset.Fields.Specification];
+      JArray.Parse(savedSpec).ToString().Should().Be(jToken.ToString());
+
+    }
+
+
+    [Theory]
+    [AutoDbData]
+    public void ContactSettingsRepository_NoPresets_ShouldReturnEmptyCollection(Db db, [Greedy]ContactSettingsRepository repo)
     {
       CreateItem(db, "/sitecore/client/Applications/ExperienceGenerator/Common/Contacts");
 
-      var repo = new ContactSettingsRepository(db.Database);
       repo.GetPresets().Count.Should().Be(0);
     }
 

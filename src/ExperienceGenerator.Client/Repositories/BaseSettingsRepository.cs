@@ -58,8 +58,9 @@
       var templateId = Templates.Preset.ID;
 
       var presetRoot = this.SitePresetRoot;
+     
 
-      var presetItem = presetRoot.Add(name, new TemplateID(templateId));
+      var presetItem = presetRoot.Children.FirstOrDefault(x => x.Name == name)??presetRoot.Add(name, new TemplateID(templateId));
 
       presetItem.Editing.BeginEdit();
       presetItem[Templates.Preset.Fields.Specification] = spec;

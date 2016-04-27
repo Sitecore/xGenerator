@@ -233,7 +233,7 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
 
       if (!selectedItem) return;
       this.GoalList.unset('items', { silent: true });
-      this.GoalList.set('items', selectedItem.get('goals')||[]);
+      this.GoalList.set('items', selectedItem.get('goals') || []);
 
     },
 
@@ -515,7 +515,12 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
       if (name == "") {
         alert("Please enter preset name.");
       } else {
-        this.data = { spec: ko.toJS(this.ContactList.get('items')), name: name };
+        if (_.any(this.DataSource.get("items"), item => item.itemName === name)) {
+          var overwrite = confirm("Are you sure you want to overwrite settings?");
+          if (!overwrite) return;
+        }
+
+        this.data = { spec: ko.toJS(this.ContactList.get('items')), name: name, force:true };
         console.log(this.data);
 
         this.data = JSON.stringify(this.data);
