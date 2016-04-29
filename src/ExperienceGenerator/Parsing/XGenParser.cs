@@ -305,6 +305,7 @@
         LastName = contact.Value<string>("lastName"),
         Gender = contact.Value<string>("gender"),
         JobTitle = contact.Value<string>("jobTitle"),
+        Picture = contact.Value<string>("image"),
         Phone = contact.Value<string>("phone")
       };
     }

@@ -16,6 +16,7 @@
       target.Variables["ContactBirthDate"] = this.BirthDate;
       target.Variables["ContactJobTitle"] = this.JobTitle;
       target.Variables["ContactPhone"] = this.Phone;
+      target.Variables["ContactPicture"] = this.Picture;
       target.Variables["ContactAddress"] = this.Address;
     }
 
@@ -27,6 +28,7 @@
     public string Gender { get; set; }
     public string JobTitle { get; set; }
     public string Phone { get; set; }
+    public string Picture { get; set; }
     public string Address { get; set; }
 
 
@@ -41,6 +43,7 @@
       "ContactBirthDate",
       "ContactJobTitle",
       "ContactPhone",
+      "ContactPicture",
       "ContactAddress"
     };
   }

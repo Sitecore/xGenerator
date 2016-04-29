@@ -4,6 +4,7 @@
   using ExperienceGenerator.Client;
   using ExperienceGenerator.Parsing;
   using Ploeh.AutoFixture;
+  using Ploeh.AutoFixture.AutoNSubstitute;
   using Ploeh.AutoFixture.Kernel;
   using Ploeh.AutoFixture.Xunit2;
   using Sitecore.Analytics.Data.Items;
@@ -16,6 +17,7 @@
     public AutoDbDataAttribute()
       : base(new Fixture().Customize(new AutoDbCustomization()))
     {
+      Fixture.Customize(new AutoConfiguredNSubstituteCustomization());
       var db = Fixture.Create<Db>();
       db.Add(new DbItem("Outcome", KnownItems.OutcomesRoot));
       db.Add(new DbTemplate("OutcomeDef", OutcomeDefinitionItem.TemplateID)

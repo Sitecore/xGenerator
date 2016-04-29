@@ -253,6 +253,9 @@ namespace ExperienceGenerator.Client.Controllers
       var driver = new MongoDbDriver(ConfigurationManager.ConnectionStrings["analytics"].ConnectionString);
       driver.ResetDatabase();
 
+      var item = Context.ContentDatabase.GetItem("/sitecore/media library/Images/xgen");
+      item?.Delete();
+
       var sql = new SqlReportingStorageProvider("reporting");
       sql.ExcludedTableFromDataDeletion("dbo", "Segments");
       sql.DeleteAllReportingData();

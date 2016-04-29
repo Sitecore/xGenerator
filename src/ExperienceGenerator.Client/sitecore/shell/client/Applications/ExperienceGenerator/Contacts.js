@@ -13,6 +13,7 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
       var contacts = this.ContactList.get("items");
       var newContact = {
         "itemId": this.guid(),
+        "image": "",
         "interactions": []
       };
 
@@ -98,6 +99,19 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
       };
 
 
+      var $file = $("<input id='contactImageFile' type='file'/>");
+      var that = this;
+      $("[data-sc-id=ImageContactPanel]").prepend($file);
+      $file.on("change", function () {
+        var fileReader = new FileReader();
+        fileReader.onload = function (e) {
+          that.ContactImage.set('imageUrl', e.target.result);
+        };
+        if (this.files.length > 0)
+          fileReader.readAsDataURL(this.files[0]);
+      });
+
+
 
       this.loadCountries();
       //this.initPresetDataSource();
@@ -126,6 +140,16 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
       this.CampaignComboBox.on("change:selectedItem", this.setCampaign, this);
       this.RecencyValue.on("change:text", this.setRecency, this);
       this.Country.on("change:selectedItem", this.loadCities, this);
+      this.ContactImage.on("change:src", function (model, value) {
+        this.ContactList.get("selectedItem").set('image', value);
+        for (var idx in this.ContactList.attributes.items) {
+          var contact = this.ContactList.attributes.items[idx];
+          if (contact.itemId == this.ContactList.attributes.selectedItemId) {
+            contact['image'] = value;
+          }
+        }
+
+      }, this);
       this.BirthdayValue.on("change:date", function (model, value) {
         model.unset("text");
         model.set("text", value);
@@ -370,6 +394,10 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
       }
       this["BirthdayValue"].set("date", selectedItem.get(this.bindingMap["BirthdayValue"]));
       this.InteractionList.set('items', selectedItem.get('interactions'));
+      this.ContactImage.set('imageUrl', selectedItem.get('image'));
+
+
+
     },
 
     initPresetDataSource: function () {
@@ -503,7 +531,10 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
         dataType: "json",
         success: function () { }
       }).done(function (data) {
-        _.each(data, function (item) { item['itemId'] = self.guid(); });
+        _.each(data, function (item) {
+          item['itemId'] = self.guid();
+          item['image'] = item['image'] || '';
+        });
         self.ContactList.set('selectedItem', null);
         self.ContactList.set('items', data);
       });
@@ -515,12 +546,12 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
       if (name == "") {
         alert("Please enter preset name.");
       } else {
-        if (_.any(this.DataSource.get("items"), item => item.itemName === name)) {
+        if (_.any(this.DataSource.get("items"), function (item){return item.itemName === name})) {
           var overwrite = confirm("Are you sure you want to overwrite settings?");
           if (!overwrite) return;
         }
 
-        this.data = { spec: ko.toJS(this.ContactList.get('items')), name: name, force:true };
+        this.data = { spec: ko.toJS(this.ContactList.get('items')), name: name, force: true };
         console.log(this.data);
 
         this.data = JSON.stringify(this.data);

@@ -2,7 +2,9 @@
 {
   using System;
   using System.Collections.Generic;
+  using System.IO;
   using System.Linq;
+  using System.Text.RegularExpressions;
   using Colossus.Integration.Models;
   using Colossus.Integration.Processing;
 
@@ -21,6 +23,9 @@
       {
         var outcomes = visitContext.Visit.GetVariable<IEnumerable<TriggerOutcomeData>>("TriggerOutcomes");
         visitContext.Visit.Variables.Remove("TriggerOutcomes");
+
+        UploadContactPicture(visitContext.Visit.Variables);
+
         for (var i = 0; i < this.pages.Count; i++)
         {
           var page = this.pages[i];
@@ -39,6 +44,29 @@
 
         yield return visitContext.Visit;
       }
+    }
+
+    private void UploadContactPicture(Dictionary<string, object> variables)
+    {
+      if (!variables.ContainsKey("ContactPicture")) return;
+      var base64 = (string)variables["ContactPicture"];
+      var database = Sitecore.Context.ContentDatabase;
+      Sitecore.Resources.Media.MediaCreatorOptions options = new Sitecore.Resources.Media.MediaCreatorOptions
+      {
+        Database = database,
+        FileBased =false,
+        Destination = "/sitecore/media library/Images/xgen/"+Math.Abs(base64.GetHashCode()),
+       };
+
+      var match = Regex.Match(base64, @"data:(?<type>.+?),(?<data>.+)", RegexOptions.Compiled);
+      using (Stream stream = new MemoryStream(Convert.FromBase64String(match.Groups["data"].Value)))
+      {
+        var item = Sitecore.Resources.Media.MediaManager.Creator.CreateFromStream(stream, "/contacts/", options);
+        variables["ContactPicture"] = item.ID;
+      }
+
+      // Sitecore.Data.Items.MediaItem mediaItem = new Sitecore.Data.Items.MediaItem(item);
+
     }
   }
 }
