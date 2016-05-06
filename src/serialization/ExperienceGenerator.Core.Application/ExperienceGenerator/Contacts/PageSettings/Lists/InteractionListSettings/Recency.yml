@@ -16,7 +16,7 @@ SharedFields:
   Value: {07A8B1E1-D779-4CF2-81FC-0768ABF97CDC}
 - ID: b2a46ae4-38f9-4538-a2b3-8021083e0e40
   Hint: Sortable
-  Value: 1
+  Value: 0
 - ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
   Hint: __Sortorder
   Value: 600
@@ -67,7 +67,7 @@ Languages:
     Fields:
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
-      Value: 20131127T180638
+      Value: 20131127T160638Z
     - ID: 2e9fd749-0f47-4397-8ba2-c56c65366bf0
       Hint: HeaderText
       Value: Recency
@@ -76,7 +76,7 @@ Languages:
       Value: sitecore\admin
     - ID: 75388012-d191-4561-8074-5340e149c0a5
       Hint: SortField
-      Value: recency
+      Value: 
     - ID: 7ad5458f-19c3-4173-ad67-3bfaf7cd3c7f
       Hint: HeaderAlignment
       Value: {D6AD4470-B309-4558-BE16-2B4B4C9BC8D8}

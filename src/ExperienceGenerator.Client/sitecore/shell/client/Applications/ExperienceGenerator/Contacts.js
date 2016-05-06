@@ -55,8 +55,8 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
         "itemId": this.guid()
       });
 
-      this.InteractionList.unset("items", { silent: true });
-      this.InteractionList.set('items', contact.get('interactions'));
+
+      this.setInteractions(contact.get('interactions'));
       //how to avoid?
 
       this.selectLastElement(this.InteractionList);
@@ -105,7 +105,30 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
       $file.on("change", function () {
         var fileReader = new FileReader();
         fileReader.onload = function (e) {
-          that.ContactImage.set('imageUrl', e.target.result);
+
+          var canvas = $("<canvas style='display:none'/>")[0];
+          var ctx = canvas.getContext("2d");
+
+          // limit the image to 300x300 maximum size
+          var maxW = 300;
+          var maxH = 300;
+
+
+          var img = new Image;
+          img.onload = function () {
+            var iw = img.width;
+            var ih = img.height;
+            var scale = Math.min((maxW / iw), (maxH / ih));
+            var iwScaled = iw * scale;
+            var ihScaled = ih * scale;
+            canvas.width = iwScaled;
+            canvas.height = ihScaled;
+            ctx.drawImage(img, 0, 0, iwScaled, ihScaled);
+            that.ContactImage.set('imageUrl', canvas.toDataURL());
+          }
+          img.src = e.target.result;
+
+
         };
         if (this.files.length > 0)
           fileReader.readAsDataURL(this.files[0]);
@@ -126,7 +149,7 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
           m.setItems(sel);
         }, this);
 
-      this.ContactList.on("change:selectedItem", this.setEditContactBindings, this);
+      this.ContactList.on("change:selectedItem", this.loadSelectedContact, this);
       this.InteractionList.on("change:selectedItem", this.openEditInteractionModal, this);
       this.TrafficChannelComboBox.on("change:selectedItem", this.setTrafficChannel, this);
       this.PrimeEmailValue.on("change:text", function (model, text) {
@@ -196,9 +219,6 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
         dataType: "json",
       }).done(function (data) {
         self.City.set("items", _.sortBy(data, 'Name'), true);
-        var interaction = self.InteractionList.get("selectedItem");
-        if (interaction)
-          self.City.set('selectedValue', interaction.get('geoData').GeoNameId);
       });
     },
     loadCountries: function () {
@@ -210,7 +230,7 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
       }).done(function (data) {
-        self.Country.set("items", data, true);
+        self.Country.set("items", _.sortBy(data, 'Name'), true);
       });
     },
     applyTwoWayBindings: function () {
@@ -288,6 +308,7 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
       var target = this.InteractionList.get('selectedItem');
       if (!target || !changed) return;
       target.set("recency", changed);
+      this.setInteractions();
     },
     addPagesOKButton: function () {
       var selectedItem = this.InteractionList.get('selectedItem');
@@ -338,9 +359,7 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
         }
       }
 
-      var items = this.InteractionList.get('items');
-      this.InteractionList.unset('items', { silent: true });
-      this.InteractionList.set('items', items);
+      this.setInteractions();
 
 
     },
@@ -359,13 +378,16 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
 
       var that = this;
       var geoId = selectedItem.get('geoData').GeoNameId;
+      var countryId = selectedItem.get('geoData').Country.IsoNumeric;
+
       this.City.once('change:items', function () {
         that.City.set('selectedValue', geoId);
       });
+
       this.TrafficChannelComboBox.set('selectedValue', selectedItem.get('channelId'));
       this.CampaignComboBox.set('selectedValue', selectedItem.get('campaignId') || this.emptyCampaign);
-      this.Country.unset('selectedValue');
-      this.Country.set('selectedValue', selectedItem.get('geoData').Country.IsoNumeric);
+      this.Country.unset('selectedValue', { silent: true });
+      this.Country.set('selectedValue', countryId);
       this.SearchEngine.set('selectedValue', selectedItem.get('searchEngine'));
       this.SearchKeyword.set('text', selectedItem.get('searchKeyword'));
       this.RecencyValue.set('text', selectedItem.get('recency'));
@@ -382,7 +404,7 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
       this.ContactList.get("selectedItem").set(this.bindingMap[key], this[key].get("text"));
     },
 
-    setEditContactBindings: function (control, selectedItem) {
+    loadSelectedContact: function (control, selectedItem) {
       if (!selectedItem) {
         return;
       }
@@ -393,13 +415,22 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
         }
       }
       this["BirthdayValue"].set("date", selectedItem.get(this.bindingMap["BirthdayValue"]));
-      this.InteractionList.set('items', selectedItem.get('interactions'));
+      this.setInteractions(selectedItem.get('interactions'));
       this.ContactImage.set('imageUrl', selectedItem.get('image'));
 
 
 
     },
+    setInteractions: function (interactions) {
+      interactions = interactions || this.InteractionList.get('items');
 
+      var sorted = _.sortBy(interactions, function (x) { return +x["recency"]; });
+      sorted.reverse();
+
+      this.InteractionList.unset('items', { silent: true });
+      this.InteractionList.set('items', sorted);
+    }
+    ,
     initPresetDataSource: function () {
       var url = "/api/xgen/presetquery";
       var self = this;
@@ -546,7 +577,7 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
       if (name == "") {
         alert("Please enter preset name.");
       } else {
-        if (_.any(this.DataSource.get("items"), function (item){return item.itemName === name})) {
+        if (_.any(this.DataSource.get("items"), function (item) { return item.itemName === name })) {
           var overwrite = confirm("Are you sure you want to overwrite settings?");
           if (!overwrite) return;
         }
