@@ -123,7 +123,7 @@
 
         using (var ms = new MemoryStream())
         {
-          mItem.GetMediaStream().CopyTo(ms);
+          mItem.GetMediaStream()?.CopyTo(ms);
           picture.Picture = ms.ToArray();
         }
 

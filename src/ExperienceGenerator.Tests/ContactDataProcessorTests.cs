@@ -19,9 +19,10 @@
 
   public class ContactDataProcessorTests
   {
+
     [Theory]
     [AutoDbData]
-    public void UpdateSession_ContactPicture_SetWithValidItemId_ShouldSetContactPictureStream(Db db, byte[] streamContent, [Content] Item item, ContactDataProcessor processor, [Substitute] MediaProvider mediaProvider, [Substitute] Session session, RequestInfo request)
+    public void UpdateSession_ContactPictureWithValidItemId_ShouldSetContactPictureStream(Db db, byte[] streamContent, [Content] Item item, ContactDataProcessor processor, [Substitute] MediaProvider mediaProvider, [Substitute] Session session, RequestInfo request)
     {
       request.Variables.Add("ContactPicture", item.ID.ToString());
       var ms = new MediaStream(new MemoryStream(streamContent), "someExt", new MediaItem(item));
@@ -36,7 +37,7 @@
 
     [Theory]
     [AutoDbData]
-    public void UpdateSession_ContactPicture_SetWithInalidItemId_ShouldNotOverwriteContactPicture(Db db, byte[] streamContent, [Content] Item item, ContactDataProcessor processor, [Substitute] MediaProvider mediaProvider, [Substitute] Session session, RequestInfo request)
+    public void UpdateSession_ContactPictureWithInvalidItemId_ShouldNotOverwriteContactPicture(Db db, byte[] streamContent, [Content] Item item, ContactDataProcessor processor, [Substitute] MediaProvider mediaProvider, [Substitute] Session session, RequestInfo request)
     {
       request.Variables.Add("ContactPicture", Guid.NewGuid().ToString());
       session.Contact.GetFacet<IContactPicture>("Picture").Picture = streamContent;
@@ -49,7 +50,7 @@
 
     [Theory]
     [AutoDbData]
-    public void UpdateSession_ContactPicture_EmptyID_ShouldNotOverwriteContactPicture(Db db, byte[] streamContent, [Content] Item item, ContactDataProcessor processor, [Substitute] MediaProvider mediaProvider, [Substitute] Session session, RequestInfo request)
+    public void UpdateSession_ContactPictureWithEmptyID_ShouldNotOverwriteContactPicture(Db db, byte[] streamContent, [Content] Item item, ContactDataProcessor processor, [Substitute] MediaProvider mediaProvider, [Substitute] Session session, RequestInfo request)
     {
       request.Variables.Add("ContactPicture", string.Empty);
       session.Contact.GetFacet<IContactPicture>("Picture").Picture = streamContent;

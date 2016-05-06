@@ -50,6 +50,7 @@
     {
       if (!variables.ContainsKey("ContactPicture")) return;
       var base64 = (string)variables["ContactPicture"];
+      if (string.IsNullOrEmpty(base64)) return;
       var database = Sitecore.Context.ContentDatabase;
       Sitecore.Resources.Media.MediaCreatorOptions options = new Sitecore.Resources.Media.MediaCreatorOptions
       {

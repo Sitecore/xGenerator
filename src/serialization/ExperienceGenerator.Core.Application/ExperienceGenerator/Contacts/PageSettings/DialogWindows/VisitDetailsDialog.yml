@@ -66,7 +66,7 @@ SharedFields:
         <r id="{33A02142-2DBD-4034-AEA2-BDF215EB2451}" par="Id=OutcomeDatasource&amp;Query=%2Fsitecore%2Fsystem%2FMarketing%20Control%20Panel%2FOutcomes%2F%2F*%5B%40%40templateid%3D%27%7BEE43C2F0-6277-4144-B144-8CA2CEFCCF12%7D%27%5D" ph="OutcomeColLeft.Content" />
         <r id="{25D357D3-3648-4336-9B53-55EED7CFA078}" par="Id=OutcomeComboBox&amp;Items=%7BBinding%20OutcomeDatasource.Items%7D" ph="OutcomeColLeft.Content" />
         <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="GridColumns=1&amp;Id=OutcomeColRight" ph="OutcomeChooseRowPanel.Content" />
-        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3Aapp.addItemToList(%27OutcomeComboBox%27%2C%27OutcomeList%27)()&amp;Id=AddOutcome&amp;Text=Add" ph="OutcomeColRight.Content" />
+        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3Aapp.addItemToList(%27OutcomeComboBox%27%2C%27OutcomeList%27)&amp;Id=AddOutcome&amp;Text=Add" ph="OutcomeColRight.Content" />
         <r id="{C4393722-39FA-4869-9582-3A8EB8983A0D}" par="Id=OutcomeRowPanel" ph="OutcomeAccordionBorder.Content" />
         <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="GridColumns=12&amp;Id=OutcomeColBottom" ph="OutcomeRowPanel.Content" />
         <r id="{ACE0AFD6-3DE0-42CF-8E62-4E68CD810A8D}" ds="{153C2C22-1D9A-4527-8A7F-E5012F3C253C}" par="Behaviors=MultiSelectList&amp;Id=OutcomeList&amp;TileHtmlFileName=%2Fsitecore%2Fshell%2Fclient%2FBusiness%20Component%20Library%2FLayouts%2FRenderings%2FListsAndGrids%2FListControls%2FDefaultTile.cshtml" ph="OutcomeColBottom.Content" />
