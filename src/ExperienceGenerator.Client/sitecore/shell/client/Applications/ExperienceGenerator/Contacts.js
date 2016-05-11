@@ -218,7 +218,8 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
       }).done(function (data) {
-        self.City.set("items", _.sortBy(data, 'Name'), true);
+        self.City.unset("items", { silent: true });
+        self.City.set("items", _.sortBy(data, 'Name'));
       });
     },
     loadCountries: function () {
@@ -230,7 +231,7 @@ define(["sitecore", "knockout", "underscore"], function (_sc, ko, _) {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
       }).done(function (data) {
-        self.Country.set("items", _.sortBy(data, 'Name'), true);
+        self.Country.set("items", _.sortBy(data, 'Name'));
       });
     },
     applyTwoWayBindings: function () {
