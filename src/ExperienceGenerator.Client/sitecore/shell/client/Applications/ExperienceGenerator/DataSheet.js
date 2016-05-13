@@ -186,7 +186,7 @@ define(["sitecore", "underscore"], function (_sc, _) {
       var p = this.uiSetup[tab + "Groups"];
       for (var key in p) {
         if (p.hasOwnProperty(key)) {
-          var c = p[key].Channels;
+          var c = p[key].Options;
           for (var key2 in c) {
             if (c.hasOwnProperty(key2)) {
               var innerLabel = c[key2].Label;
@@ -218,8 +218,8 @@ define(["sitecore", "underscore"], function (_sc, _) {
 
       this.createSliders("TrafficDistributionBorder", this.uiSetup.Websites);
       this.createSliders("DailyDistributionBorder", days);
-      this.createSliders("LocationBorder", this.uiSetup.Location);
       this.createSliders("MonthlyDistributionBorder", months);
+      this.fillListTab("Location");
       this.fillListTab("Channel");
       this.fillListTab("Outcome");
       this.createSliders("OrganicBorder", this.uiSetup.OrganicSearch);
@@ -429,7 +429,7 @@ define(["sitecore", "underscore"], function (_sc, _) {
       this.data = {};
       this.readDomValues("Overview", "Visits");
       this.readDomValues("Overview", "TrafficDistribution");
-      this.readDomValues("Overview", "Location");
+      this.readDomValues("Locations");
       this.readDomValues("Overview", "DailyDistribution");
       this.readDomValues("Overview", "MonthlyDistribution");
       this.readDomValues("Overview", "Dates");
@@ -482,7 +482,7 @@ define(["sitecore", "underscore"], function (_sc, _) {
         Devices:  this.toWeights(doc.Devices)
         ,
         Geo: {
-          Region: this.toWeights(doc.Overview.Location)
+          Region: this.toWeights(doc.Locations)
         },
         Outcomes: this.toWeights(doc.Outcomes),
 

@@ -103,7 +103,10 @@ namespace ExperienceGenerator.Client.Controllers
         Label = s.Label,
         DefaultWeight = s.Id == "website" ? 100 : 50
       }).ToList();
-      options.Location = GeoArea.Areas.Select(area => new SelectionOption { Id = area.Id, Label = area.Label }).ToList();
+      options.LocationGroups = GeoRegion.Regions.Select(region => 
+      new SelectionOptionGroup() {
+        Label = region.Label,
+        Options = region.SubRegions.Select(x=> new SelectionOption() { Id = x.Id, Label = x.Label, DefaultWeight = 0})}).ToList();
 
       var db = Database.GetDatabase("master");
       var online = db.GetItem(KnownItems.OnlineChannelRoot);
@@ -111,10 +114,10 @@ namespace ExperienceGenerator.Client.Controllers
       options.Version = "0.1";
 
       options.ChannelGroups =
-          online.Children.Where(c => c.TemplateID == ChannelgroupItem.TemplateID).Select(cg => new ChannelGroup
+          online.Children.Where(c => c.TemplateID == ChannelgroupItem.TemplateID).Select(cg => new SelectionOptionGroup
           {
             Label = cg.Name,
-            Channels =
+            Options = 
                   cg.Children.Where(c => c.TemplateID == ChannelItem.TemplateID)
                       .Select(c => new SelectionOption
                       {
@@ -131,10 +134,10 @@ namespace ExperienceGenerator.Client.Controllers
       var outcomeGroups = outcomes.Axes.GetDescendants().Where(c => c.TemplateID == OutcomeDefinitionItem.TemplateID).GroupBy(x => string.IsNullOrEmpty(x["Group"])?ID.Null:new ID(x["Group"]),x=>x);
 
       options.OutcomeGroups =
-          taxonomyRoot.Axes.GetDescendants().Where(c => c.TemplateID == OutcomegroupItem.TemplateID).Select(cg => new OutcomeGroup()
+          taxonomyRoot.Axes.GetDescendants().Where(c => c.TemplateID == OutcomegroupItem.TemplateID).Select(cg => new SelectionOptionGroup()
           {
             Label = cg.Name,
-            Channels =
+            Options = 
                   outcomeGroups.Where(c =>c.Key== cg.ID).SelectMany(x=>x)
                       .Select(c => new SelectionOption { Id = c.ID.ToString(), Label = c.Name, DefaultWeight = 5 })
                       .OrderBy(item => item.Label)
@@ -147,10 +150,10 @@ namespace ExperienceGenerator.Client.Controllers
         .ToList();
       if (outcomesWithoutGroup.Any())
       {
-        options.OutcomeGroups.Add(new OutcomeGroup()
+        options.OutcomeGroups.Add(new SelectionOptionGroup()
         {
           Label = "None",
-          Channels = outcomesWithoutGroup
+          Options = outcomesWithoutGroup
         });
       }
 
@@ -253,7 +256,7 @@ namespace ExperienceGenerator.Client.Controllers
       var driver = new MongoDbDriver(ConfigurationManager.ConnectionStrings["analytics"].ConnectionString);
       driver.ResetDatabase();
 
-      var item = Context.ContentDatabase.GetItem("/sitecore/media library/Images/xgen");
+      var item = (Context.ContentDatabase ?? Context.Database).GetItem("/sitecore/media library/Images/xgen");
       item?.Delete();
 
       var sql = new SqlReportingStorageProvider("reporting");

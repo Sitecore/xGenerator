@@ -26,7 +26,8 @@ namespace ExperienceGenerator.Data
         public string[] Neighbours { get; set; }
         public string EquivalentFipsCode { get; set; }
 
-        public string Region { get; set; }
+        public string RegionId { get; set; }
+        public string SubRegionId { get; set; }
 
         private static CultureInfo enUs = CultureInfo.GetCultureInfo("en-US");
         public static Country FromCsv(string[] row)

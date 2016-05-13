@@ -110,7 +110,8 @@
         segment.VisitVariables.AddOrReplace(Variables.Random("Referrer",
           parser.ParseWeightedSet<string>(token), true))));
 
-      var areas = GeoArea.Areas.ToDictionary(ga => ga.Id, ga => ga.Selector(GeoData));
+      var subregions = GeoRegion.Regions.SelectMany(x=>x.SubRegions);
+      var areas = subregions.ToDictionary(ga => ga.Id, ga => ga.Selector(GeoData));
       
 
       Factories.Add("Geo", VariableFactory.Lambda((segment, token, parser) =>

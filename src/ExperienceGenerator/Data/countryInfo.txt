@@ -1,4 +1,4 @@
-#NOTE: Russia moved to Asia
+﻿#NOTE: Russia moved to Asia
 # GeoNames.org Country Information																		
 # ================================																		
 #																		
@@ -139,7 +139,7 @@ GN	GIN	324	GV	Guinea	Conakry	245857	10324025	AF	.gn	GNF	Franc	224			fr-GN	242047
 GP	GLP	312	GP	Guadeloupe	Basse-Terre	1780	443000	NA	.gp	EUR	Euro	590	#####	^((97|98)\d{3})$	fr-GP	3579143		
 GQ	GNQ	226	EK	Equatorial Guinea	Malabo	28051	1014999	AF	.gq	XAF	Franc	240			es-GQ,fr	2309096	GA,CM	
 GR	GRC	300	GR	Greece	Athens	131940	11000000	EU	.gr	EUR	Euro	30	### ##	^(\d{5})$	el-GR,en,fr	390903	AL,MK,TR,BG	
-GS	SGS	239	SX	South Georgia and the South Sandwich Islands	Grytviken	3903	30	AN	.gs	GBP	Pound				en	3474415		
+#GS	SGS	239	SX	South Georgia and the South Sandwich Islands	Grytviken	3903	30	AN	.gs	GBP	Pound				en	3474415		
 GT	GTM	320	GT	Guatemala	Guatemala City	108890	13550440	NA	.gt	GTQ	Quetzal	502	#####	^(\d{5})$	es-GT	3595528	MX,HN,BZ,SV	
 GU	GUM	316	GQ	Guam	Hagatna	549	159358	OC	.gu	USD	Dollar	+1-671	969##	^(969\d{2})$	en-GU,ch-GU	4043988		
 GW	GNB	624	PU	Guinea-Bissau	Bissau	36120	1565126	AF	.gw	XOF	Franc	245	####	^(\d{4})$	pt-GW,pov	2372248	SN,GN	
@@ -266,7 +266,7 @@ SY	SYR	760	SY	Syria	Damascus	185180	22198110	AS	.sy	SYP	Pound	963			ar-SY,ku,hy,
 SZ	SWZ	748	WZ	Swaziland	Mbabane	17363	1354051	AF	.sz	SZL	Lilangeni	268	@###	^([A-Z]\d{3})$	en-SZ,ss-SZ	934841	ZA,MZ	
 TC	TCA	796	TK	Turks and Caicos Islands	Cockburn Town	430	20556	NA	.tc	USD	Dollar	+1-649	TKCA 1ZZ	^(TKCA 1ZZ)$	en-TC	3576916		
 TD	TCD	148	CD	Chad	N'Djamena	1284000	10543464	AF	.td	XAF	Franc	235			fr-TD,ar-TD,sre	2434508	NE,LY,CF,SD,CM,NG	
-TF	ATF	260	FS	French Southern Territories	Port-aux-Francais	7829	140	AN	.tf	EUR	Euro  				fr	1546748		
+TF	ATF	260	FS	French Southern Territories	ж	7829	140	AN	.tf	EUR	Euro  				fr	1546748		
 TG	TGO	768	TO	Togo	Lome	56785	6587239	AF	.tg	XOF	Franc	228			fr-TG,ee,hna,kbp,dag,ha	2363686	BJ,GH,BF	
 TH	THA	764	TH	Thailand	Bangkok	514000	67089500	AS	.th	THB	Baht	66	#####	^(\d{5})$	th,en	1605651	LA,MM,KH,MY	
 TJ	TJK	762	TI	Tajikistan	Dushanbe	143100	7487489	AS	.tj	TJS	Somoni	992	######	^(\d{6})$	tg,ru	1220409	CN,AF,KG,UZ	

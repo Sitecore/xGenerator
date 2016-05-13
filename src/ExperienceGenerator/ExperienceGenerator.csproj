@@ -54,7 +54,7 @@
     <Compile Include="Data\Device.cs" />
     <Compile Include="Data\DeviceRepository.cs" />
     <Compile Include="Data\FileHelpers.cs" />
-    <Compile Include="Data\GeoArea.cs" />
+    <Compile Include="Data\GeoRegion.cs" />
     <Compile Include="Data\GeoBuilder.cs" />
     <Compile Include="Data\GeoData.cs" />
     <Compile Include="Data\GeoVariables.cs" />
@@ -92,7 +92,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Data\cities15000.txt.gz" />
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -100,7 +99,7 @@
     <EmbeddedResource Include="Data\timezones.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Data\cities15000.txt" />
+    <EmbeddedResource Include="Data\cities15000.txt" />
     <EmbeddedResource Include="Data\countryInfo.txt" />
   </ItemGroup>
   <ItemGroup>
