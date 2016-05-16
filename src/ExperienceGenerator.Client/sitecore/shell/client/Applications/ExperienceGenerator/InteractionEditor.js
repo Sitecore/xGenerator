@@ -41,7 +41,7 @@ define(["underscore"], function (_) {
       currItr.campaignId = host.CampaignComboBox.get("selectedItem").itemId;
     }
 
-    currItr.recency = host.RecencyValue.get("text");
+    currItr.recency = parseInt(host.RecencyValue.get("text")) || 0;
     currItr.geoData = host.City.get("selectedItem");
     currItr.location = host.City.get("selectedItem").Name + host.City.get("selectedItem").CountryCode;
     currItr.outcomes = _.map(host.OutcomeList.get("items"), itemToListElement);
@@ -69,6 +69,8 @@ define(["underscore"], function (_) {
   };
   self.setGoals = function (model, changed) {
     var selectedPage = host.PagesInVisitList.get("selectedItem");
+    if (!selectedPage) return;
+
     var page = _.find(host.PagesInVisitList.get("items"), function (p) {
       return p.itemId == selectedPage.get("itemId");
     });
