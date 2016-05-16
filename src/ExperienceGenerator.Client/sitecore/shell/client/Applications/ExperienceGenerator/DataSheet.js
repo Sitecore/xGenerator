@@ -73,6 +73,9 @@ define(["sitecore", "underscore"], function (_sc, _) {
       var nodes = this[TreeView].viewModel.getRoot().tree;
       var that = this;
       var $target = $("div[data-sc-id='" + panel + "']");
+      var weights = [];
+      $target.find("input.sc-ds-slider").map(function(idx, el) { weights[el.getAttribute('data-sc-id')] = el.value });
+     
       $target.empty();
       nodes.visit(function (childNode) {
         var id = childNode.data.key;
@@ -80,7 +83,7 @@ define(["sitecore", "underscore"], function (_sc, _) {
           var output = "";
           output += "<div class='landingpage'>";
           output += "<div class='channel-innerlabel truncate'>" + childNode.data.title + "</div>";
-          output += "<div class='landingpage-channel-slider'><input class='form-control sc-textbox sc-ds-slider' data-sc-id='" + id + "' type='range'/></div>";
+          output += "<div class='landingpage-channel-slider'><input class='form-control sc-textbox sc-ds-slider' data-sc-id='" + id + "' value='"+weights[id]+"' type='range'/></div>";
           output += "<div class='end-button-area'><button class='btn btn-default end-button'><span class='sc-button-text'>Delete</span></button></div>";
           output += "</div>";
           var $output = $(output);
@@ -349,7 +352,7 @@ define(["sitecore", "underscore"], function (_sc, _) {
             var $comp = $where.find(".sc-textbox");
             for (var ii in section) {
               id = ii;
-              var row = $comp.filter("[data-sc-id=" + id + "]");
+              var row = $comp.filter("[data-sc-id='" + id + "']");
               if (row == undefined || row.length == 0) {
                 this.appendRow($where, id, section[id]);
               } else {
@@ -377,7 +380,17 @@ define(["sitecore", "underscore"], function (_sc, _) {
       } else {
         container = $tab.find("div.row").first().children().first()[0];
       }
-      this.appendRowToDOM($(container).attr("data-sc-id"), id, this.guid(), id, "none", value);
+
+
+      var isId = _sc.Helpers.id.isId(id);
+      if(isId) {
+        var db = new _sc.Definitions.Data.Database(new _sc.Definitions.Data.DatabaseUri("master"));
+        db.getItem(id, function (item) {
+          $("[data-sc-id='" + id + "']").parents(".landingpage").find(".channel-innerlabel").text(item.$displayName);
+        });
+      }
+
+      this.appendRowToDOM($(container).attr("data-sc-id"), decodeURIComponent(id), this.guid(), id, "none", value);
     },
 
     loadPreset: function () {
