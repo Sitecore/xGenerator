@@ -505,12 +505,17 @@ SharedFields:
           uid="{738B34AB-169B-4E20-A884-D5937812040D}" />
         <r
           id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}"
-          par="Click=javascript%3aapp.addPagesOKButton()&amp;Id=OkButton4&amp;ButtonType=Primary&amp;Text=OK"
+          par="Click=javascript%3aapp.dialogCancelButton(%22InteractionDetailsDialogWindow%22)&amp;Id=CancelChangesButton&amp;ButtonType=Default&amp;Text=Cancel"
+          ph="InteractionDetailsDialogWindow.Buttons"
+          uid="{F8C5EFCA-A00E-4735-AEF1-4E5DADA2FEEC}" />
+        <r
+          id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}"
+          par="Click=javascript%3aapp.interactionEditor.addPagesOKButton()&amp;Id=OkButton4&amp;ButtonType=Primary&amp;Text=OK"
           ph="AddInteractionPagesWindow.Buttons"
           uid="{FBE2EBA5-A172-4BA0-983C-206253B9231C}" />
         <r
           id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}"
-          par="Click=javascript%3aapp.addPagesCancelButton(+%22AddInteractionPagesWindow%22)&amp;Id=CancelButton4&amp;Text=Cancel"
+          par="Click=javascript%3aapp.interactionEditor.addPagesCancelButton(+)&amp;Id=CancelButton4&amp;Text=Cancel"
           ph="AddInteractionPagesWindow.Buttons"
           uid="{A1B2C9B3-F967-4FE1-A380-F0F74F9AB56C}" />
         <r
@@ -526,7 +531,7 @@ SharedFields:
           uid="{B8113009-ECBE-499F-AAE7-34C439CD57A0}" />
         <r
           id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}"
-          par="Click=javascript%3aapp.dialogCancelButton(+%22DelWindow%22)&amp;Id=CancelButton&amp;Text=Cancel"
+          par="Click=javascript%3aapp.dialogCancelButton(+%22DelWindow%22)&amp;Id=CancelButton&amp;Text=CancelChangesButton"
           ph="DelWindow.Buttons"
           uid="{C300E08C-BDE0-4287-9A7D-C4AC2A4377B1}" />
       </d>
