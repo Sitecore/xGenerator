@@ -114,6 +114,7 @@
     <Compile Include="AutoDbDataAttribute.cs" />
     <Compile Include="ExperienceGeneratorActionsControllerTests.cs" />
     <Compile Include="Facets\Facets.cs" />
+    <Compile Include="GeoRegionTests.cs" />
     <Compile Include="SettingsRepositoryTests.cs" />
     <Compile Include="ContactDataProcessorTests.cs" />
     <Compile Include="XGenParserTests.cs" />

@@ -22,7 +22,7 @@ namespace ExperienceGenerator.Data
             target.Variables["Country"] = city.CountryCode;
             target.Variables["Continent"] = city.Country.Continent;
             target.Variables["Region"] = city.Admin1;
-            target.Variables["City"] = city.Name;
+            target.Variables["City"] = city.AsciiName;
             target.Variables["Tld"] = city.Country.TopLevelDomain;
             target.Variables["DomainPostfix"] = city.Country.DomainPostFix;
             target.Variables["Latitude"] = city.Latitude;

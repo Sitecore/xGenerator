@@ -258,7 +258,7 @@ namespace Colossus.Console
         {
 
 
-            var emea = GeoArea.Areas.First(area => area.Id == "amer");
+            var emea = GeoRegion.Regions.First(area => area.Id == "amer");
 
             var geodata = GeoData.FromResource();
 

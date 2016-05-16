@@ -12,6 +12,17 @@
   using Sitecore.FakeDb.AutoFixture;
   using Xunit.Abstractions;
 
+  internal class InlineAutoDbDataAttribute : InlineAutoDataAttribute
+  {
+    public InlineAutoDbDataAttribute(params object[] values)
+      : base(new AutoDbDataAttribute(),values)
+    {
+      
+    }
+  }
+
+
+
   internal class AutoDbDataAttribute : AutoDataAttribute
   {
     public AutoDbDataAttribute()

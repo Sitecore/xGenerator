@@ -15,7 +15,6 @@ namespace ExperienceGenerator.Data
 
     public Dictionary<string, string> TimeZoneNames { get; set; }
 
-    public Dictionary<string, City[]> CitiesByContinent { get; set; }
     public Dictionary<int, City[]> CitiesByCountry { get; set; }
 
 
@@ -35,6 +34,7 @@ namespace ExperienceGenerator.Data
       return tz;
     }
 
+
     public static GeoData FromResource()
     {
       var data = new GeoData();
@@ -44,8 +44,9 @@ namespace ExperienceGenerator.Data
           .Select(l => Country.FromCsv(l.Split('\t')))
           .ToDictionary(c => c.Iso);
 
-      data.Cities = FileHelpers.ReadLinesFromResource<GeoData>("ExperienceGenerator.Data.cities15000.txt.gz", true)
+      data.Cities = FileHelpers.ReadLinesFromResource<GeoData>("ExperienceGenerator.Data.cities15000.txt")
           .Skip(1)
+          .Where(l => !l.StartsWith("#"))
           .Select(l => City.FromCsv(l.Split('\t')))
           .OrderBy(c => c.Population)
           .ToList();
@@ -93,19 +94,21 @@ namespace ExperienceGenerator.Data
         }
       }
 
-      var countriesByName = data.Countries.Values.ToDictionary(c => c.Name);
+      var countriesByName = data.Countries.Values.ToDictionary(c => c.IsoNumeric);
+
       foreach (
           var row in
-              FileHelpers.ReadLinesFromResource<GeoArea>("ExperienceGenerator.Data.Regions.txt").Select(l => l.Split('\t')))
+              FileHelpers.ReadLinesFromResource<GeoRegion>("ExperienceGenerator.Data.Regions.txt").Where(l=>l[0]!='#').Select(l => l.Split('\t')))
       {
-        countriesByName[row[0]].Region = row[1];
+        if (string.IsNullOrEmpty(row[3]) || string.IsNullOrEmpty(row[7]) || string.IsNullOrEmpty(row[8])) continue;
+        countriesByName[int.Parse(row[3])].RegionId = row[7];
+        countriesByName[int.Parse(row[3])].SubRegionId = row[8];
       }
-
-      data.CitiesByContinent = data.Cities.GroupBy(c => c.Country.Continent)
-          .ToDictionary(c => c.Key, c => c.ToArray());
 
       data.CitiesByCountry = data.Cities.GroupBy(c => c.Country.IsoNumeric)
                .ToDictionary(c => c.Key, c => c.ToArray());
+
+      data.Countries = data.Countries.Values.Where(x => data.CitiesByCountry.ContainsKey(x.IsoNumeric)).ToDictionary(x => x.Iso);
 
       return data;
     }
