@@ -384,7 +384,7 @@ define(["sitecore", "underscore"], function (_sc, _) {
 
       var isId = _sc.Helpers.id.isId(id);
       if(isId) {
-        var db = new _sc.Definitions.Data.Database(new _sc.Definitions.Data.DatabaseUri("master"));
+        var db = new _sc.Definitions.Data.Database(new _sc.Definitions.Data.DatabaseUri(this.LandingPageTreeView.get('database')||"master"));
         db.getItem(id, function (item) {
           $("[data-sc-id='" + id + "']").parents(".landingpage").find(".channel-innerlabel").text(item.$displayName);
         });
