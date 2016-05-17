@@ -176,6 +176,7 @@
     <Content Include="App_Config\Include\Unicorn\Unicorn.config" />
     <Content Include="App_Config\Include\Unicorn\Unicorn.AutoPublish.config" />
     <None Include="Global.asax" />
+    <Content Include="sitecore\shell\client\Applications\ExperienceGenerator\InteractionEditor.js" />
     <Content Include="sitecore\shell\Themes\Standard\ExperienceGenerator.zip" />
     <None Include="Web.config" />
   </ItemGroup>
@@ -202,7 +203,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <Content Include="App_Config\Include\ExperienceGenerator\ExperienceGenerator.config" />
+    <Content Include="App_Config\Include\ExperienceGenerator\ExperienceGenerator.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="ExperienceGenerator.package" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Web.Debug.config">
