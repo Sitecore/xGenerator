@@ -49,6 +49,7 @@
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/DataSheet/PageSettings/Tabs/Ref URLs/{C3A8AEAB-CE07-401A-ADE6-A432A5E9865E}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/DataSheet/PageSettings/Tabs/Search/{F1FBE1CD-E30F-48DB-B9F1-6B5D318D27E6}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/DataSheet/PageSettings/Tabs/Outcomes/{4E08B3BE-41D3-4EDF-A9C7-F58EE35C5D41}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExperienceGenerator/DataSheet/PageSettings/Tabs/Locations/{06AFBA86-6575-404C-BE9A-C612A8EAFB1D}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/DataSheet/PageSettings/Tabs/Campaigns/{8CF749F2-B229-4181-B26F-063A1E466A5B}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/DataSheet/PageSettings/Texts/Overview/{B389F826-532D-426E-97F5-416A43D12B22}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/DataSheet/PageSettings/Texts/Test summary/{FE8D64B4-8A74-41D5-AAF3-660F68DB4C98}/invariant/0</x-item>
