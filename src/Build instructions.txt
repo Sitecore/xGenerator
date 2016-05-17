@@ -1,4 +1,4 @@
-Copy the assemblies from Sitecore XP 8.0 to the "Components" folder in the solution root
+Copy the assemblies from Sitecore XP 8 to the "Components" folder in the solution root
 NuGet package restore is used for other dependencies
 
 Deployment to Sitecore install:
