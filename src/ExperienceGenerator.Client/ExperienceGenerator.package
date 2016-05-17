@@ -122,6 +122,7 @@
      <xfiles>
       <Entries>
         <x-item>/sitecore/shell/client/Applications/ExperienceGenerator/Contacts.js</x-item>
+        <x-item>/sitecore/shell/client/Applications/ExperienceGenerator/InteractionEditor.js</x-item>
       </Entries>
       <Converter>
         <FileToEntryConverter>
