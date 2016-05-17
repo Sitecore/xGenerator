@@ -323,7 +323,7 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
           total += contacts[i].interactions.length;
         }
 
-        that.ProgressBar.set("value", data.Progress / total * 100);
+        that.ProgressBar.set("value", data.CompletedVisitors / total * 100);
         that.NumberVisitsValue.set("text", data.CompletedVisits);
         if (data.JobStatus != "Running" && data.JobStatus != "Pending" && data.JobStatus != "Paused") {
           _sc.off("intervalCompleted:ProgressBar");
