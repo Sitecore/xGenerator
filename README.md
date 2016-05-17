@@ -13,4 +13,4 @@ Generate "realistically looking" traffic for Sitecore sites with configurable pa
  - Outcomes
  - Campaigns
 
-For build instructions please refer to .\sitecore-xerox\src\Build instructions.txt
+For build instructions please refer to [Build Instructions.txt](src/Build instructions.txt)
