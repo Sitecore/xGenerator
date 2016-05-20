@@ -1,8 +1,8 @@
 /*/ THIS CODE IS FOR PROTOTYPE ONLY!!!! /*/
-define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/InteractionEditor.js"], function (_sc, ko, _, interactionEditor) {
+define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/InteractionEditor.js"], function(_sc, ko, _, interactionEditor) {
   var DataSheet = _sc.Definitions.App.extend({
-    interactionEditor:interactionEditor,
-    addContact: function () {
+    interactionEditor: interactionEditor,
+    addContact: function() {
       this.ContactList.unset("selectedItemId");
       var contacts = this.ContactList.get("items");
       var newContact = {
@@ -23,20 +23,20 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
       this.selectLastElement(this.ContactList);
     },
 
-    addItemToList: function (sourceControl, targetControl) {
-      var selected = this[sourceControl].get('selectedItem');
+    addItemToList: function(sourceControl, targetControl) {
+      var selected = this[sourceControl].get("selectedItem");
       if (!selected) return;
 
-      var existingOutcomes = this[targetControl].get('items') || [];
+      var existingOutcomes = this[targetControl].get("items") || [];
       existingOutcomes.push(_.clone(selected));
       this[targetControl].unset("items", { silent: true });
       this[targetControl].set("items", existingOutcomes);
     },
 
-    addInteraction: function () {
+    addInteraction: function() {
       var contact = this.ContactList.get("selectedItem");
       if (!contact) return;
-      
+
       var newInteraction = {
         pages: [],
         recency: 0,
@@ -45,25 +45,47 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
 
       interactionEditor.editInteraction(newInteraction);
     },
-    deleteSelected: function (controlName) {
-      var filteredItem = this[controlName].get("items");
+    deleteSelected: function(controlName) {
+      var control = this[controlName];
+      var filteredItem = control.get("items");
 
-      var checkedItems = this[controlName].get('checkedItems');
+      var checkedItems = control.get("checkedItems");
 
       filteredItem = _.difference(filteredItem, checkedItems);
 
-      this[controlName].unset("items", { silent: true });
-      this[controlName].set('items', filteredItem);
-      if (controlName === "InteractionList")
+      control.unset("items", { silent: true });
+      control.set("items", filteredItem);
+      if (controlName === "InteractionList") {
         this.ContactList.get("selectedItem").set("interactions", filteredItem);
 
-    },
+      }
 
-    selectLastElement: function (control) {
+    },
+    duplicateSelected: function(controlName) {
+      var control = this[controlName];
+      var filteredItem = control.get("items");
+
+      var checkedItems = control.get("checkedItems");
+
+      _.each(checkedItems, function(item) {
+        var newItem = _.clone(item);
+        newItem["itemId"] = this.guid();
+        filteredItem.push(newItem);
+      });
+
+      control.unset("items", { silent: true });
+      control.set("items", filteredItem);
+      if (controlName === "InteractionList") {
+        this.ContactList.get("selectedItem").set("interactions", filteredItem);
+        this.setInteractions(filteredItem);
+      }
+      control.viewModel.uncheckItems(control.get("checkedItems"));
+    },
+    selectLastElement: function(control) {
       control.viewModel.$el.find("tr").eq(-2).find("td:last").click();
     },
 
-    initialized: function () {
+    initialized: function() {
       interactionEditor.initialize(this);
 
       this.landingPages = "";
@@ -87,9 +109,9 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
       var $file = $("<input id='contactImageFile' type='file'/>");
       var that = this;
       $("[data-sc-id=ImageContactPanel]").prepend($file);
-      $file.on("change", function () {
+      $file.on("change", function() {
         var fileReader = new FileReader();
-        fileReader.onload = function (e) {
+        fileReader.onload = function(e) {
 
           var canvas = $("<canvas style='display:none'/>")[0];
           var ctx = canvas.getContext("2d");
@@ -100,7 +122,7 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
 
 
           var img = new Image;
-          img.onload = function () {
+          img.onload = function() {
             var iw = img.width;
             var ih = img.height;
             var scale = Math.min((maxW / iw), (maxH / ih));
@@ -109,8 +131,8 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
             canvas.width = iwScaled;
             canvas.height = ihScaled;
             ctx.drawImage(img, 0, 0, iwScaled, ihScaled);
-            that.ContactImage.set('imageUrl', canvas.toDataURL());
-          }
+            that.ContactImage.set("imageUrl", canvas.toDataURL());
+          };
           img.src = e.target.result;
 
 
@@ -123,7 +145,7 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
 
       this.ContactList.on("change:selectedItem", this.loadSelectedContact, this);
       this.InteractionList.on("change:selectedItem", this.openEditInteractionModal, this);
-      this.PrimeEmailValue.on("change:text", function (model, text) {
+      this.PrimeEmailValue.on("change:text", function(model, text) {
         var $parent = model.viewModel.$el.parent();
 
         if (!text && !$parent.hasClass("has-error") || (text && $parent.hasClass("has-error"))) {
@@ -131,13 +153,13 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
         }
 
       }, this);
-      
-      this.ContactImage.on("change:src", function (model, value) {
-        this.ContactList.get("selectedItem").set('image', value);
+
+      this.ContactImage.on("change:src", function(model, value) {
+        this.ContactList.get("selectedItem").set("image", value);
         for (var idx in this.ContactList.attributes.items) {
           var contact = this.ContactList.attributes.items[idx];
           if (contact.itemId == this.ContactList.attributes.selectedItemId) {
-            contact['image'] = value;
+            contact["image"] = value;
           }
         }
 
@@ -149,14 +171,14 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
 
       this.applyTwoWayBindings();
     },
-    applyTwoWayBindings: function () {
+    applyTwoWayBindings: function() {
       for (var key in this.bindingMap) {
         if (this.bindingMap.hasOwnProperty(key)) {
           this[key].on("change:text", this.updateSelectedContact, this);
         }
       }
     },
-    interactionsOKButton: function () {
+    interactionsOKButton: function() {
       var itr = interactionEditor.retrieveInteraction();
       var interactions = this.ContactList.get("selectedItem").get("interactions");
       if (!itr.itemId) {
@@ -174,11 +196,11 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
 
       this.setInteractions(interactions);
     },
-    openEditInteractionModal: function (control, selectedItem) {
+    openEditInteractionModal: function(control, selectedItem) {
       if (!selectedItem) return;
       interactionEditor.editInteraction(selectedItem.attributes);
     },
-    updateSelectedContact: function (model) {
+    updateSelectedContact: function(model) {
       var key = model.get("name");
       for (var idx in this.ContactList.attributes.items) {
         var contact = this.ContactList.attributes.items[idx];
@@ -189,7 +211,7 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
       this.ContactList.get("selectedItem").set(this.bindingMap[key], this[key].get("text"));
     },
 
-    loadSelectedContact: function (control, selectedItem) {
+    loadSelectedContact: function(control, selectedItem) {
       if (!selectedItem) {
         return;
       }
@@ -200,20 +222,20 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
         }
       }
       this["BirthdayValue"].set("date", selectedItem.get(this.bindingMap["BirthdayValue"]));
-      this.setInteractions(selectedItem.get('interactions'));
-      this.ContactImage.set('imageUrl', selectedItem.get('image'));
+      this.setInteractions(selectedItem.get("interactions"));
+      this.ContactImage.set("imageUrl", selectedItem.get("image"));
     },
-    setInteractions: function (interactions) {
-      interactions = interactions || this.InteractionList.get('items');
+    setInteractions: function(interactions) {
+      interactions = interactions || this.InteractionList.get("items");
 
-      var sorted = _.sortBy(interactions, function (x) { return +x["recency"]; });
+      var sorted = _.sortBy(interactions, function(x) { return +x["recency"]; });
       sorted.reverse();
 
-      this.InteractionList.unset('items', { silent: true });
-      this.InteractionList.set('items', sorted);
+      this.InteractionList.unset("items", { silent: true });
+      this.InteractionList.set("items", sorted);
     },
 
-    initPresetDataSource: function () {
+    initPresetDataSource: function() {
       var url = "/api/xgen/presetquery";
       var self = this;
       $.ajax({
@@ -221,34 +243,34 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
         type: "GET",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-      }).done(function (data) {
+      }).done(function(data) {
         self.DataSource.set("query", data.query);
         self.DataSource.refresh();
       });
     },
 
-    loadOptions: function () {
+    loadOptions: function() {
       var that = this;
       $.ajax({
         url: "/api/xgen/options"
-      }).done(function (data) {
+      }).done(function(data) {
         that.populate(data);
       });
     },
 
-    guid: function () {
-      return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+    guid: function() {
+      return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
         var r = Math.random() * 16 | 0, v = c == "x" ? r : (r & 0x3 | 0x8);
         return v.toString(16);
       });
     },
 
 
-    dialogCancelButton: function (DialogWindow) {
+    dialogCancelButton: function(DialogWindow) {
       this[DialogWindow].hide();
     },
 
-    deleteData: function () {
+    deleteData: function() {
       this.DelWindow.hide();
       $.ajax({
         url: "/api/xgen/flush",
@@ -256,7 +278,7 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
       });
     },
 
-    pause: function () {
+    pause: function() {
       this.paused = !this.paused;
       //ToDo: toggle event listener for intervalCompleted:ProgressBar
       if (this.paused) {
@@ -273,7 +295,7 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
         });
       }
     },
-    stop: function () {
+    stop: function() {
       if (this.jobId == "") {
         //No job has ever been started
         return;
@@ -282,13 +304,13 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
       $.ajax({
         url: "/api/xgen/jobs/" + this.jobId,
         type: "DELETE",
-      }).done(function (data) {
+      }).done(function(data) {
         //Do something here when job is aborted
       });
     },
 
-    start: function () {
-      this.data = this.adapt(ko.toJS(this.ContactList.get('items')));
+    start: function() {
+      this.data = this.adapt(ko.toJS(this.ContactList.get("items")));
       console.log(this.data);
       //console.log(JSON.stringify(this.data, null, 2));
       this.data = JSON.stringify(this.data);
@@ -299,24 +321,24 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
         data: this.data,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        success: function () { }
-      }).done(function (data) {
+        success: function() {}
+      }).done(function(data) {
         that.running(data);
       });
     },
 
-    running: function (data) {
+    running: function(data) {
       this.jobId = data.Id;
       _sc.on("intervalCompleted:ProgressBar", this.updateProgress, this);
     },
 
-    updateProgress: function () {
+    updateProgress: function() {
       var jobId = this.jobId;
       var that = this;
       $.ajax({
         url: "/api/xgen/jobs/" + that.jobId,
         type: "GET",
-      }).done(function (data) {
+      }).done(function(data) {
         var total = 0;
         var contacts = data.Specification.Specification.Contacts;
         for (var i = 0; i < contacts.length; i++) {
@@ -330,7 +352,7 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
         }
       });
     },
-    loadPreset: function () {
+    loadPreset: function() {
       var self = this;
       var selectedItem = this.PresetList.attributes.selectedItemId;
       var url = "/api/xgen/contactsettingspreset?id=" + selectedItem;
@@ -339,29 +361,29 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
         type: "GET",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        success: function () { }
-      }).done(function (data) {
-        _.each(data, function (item) {
-          item['itemId'] = self.guid();
-          item['image'] = item['image'] || '';
+        success: function() {}
+      }).done(function(data) {
+        _.each(data, function(item) {
+          item["itemId"] = self.guid();
+          item["image"] = item["image"] || "";
         });
-        self.ContactList.set('selectedItem', null);
-        self.ContactList.set('items', data);
+        self.ContactList.set("selectedItem", null);
+        self.ContactList.set("items", data);
       });
     },
 
-    save: function (name) {
+    save: function(name) {
       var self = this;
       var name = this.PresetName.attributes.text;
       if (name == "") {
         alert("Please enter preset name.");
       } else {
-        if (_.any(this.DataSource.get("items"), function (item) { return item.itemName === name })) {
+        if (_.any(this.DataSource.get("items"), function(item) { return item.itemName === name })) {
           var overwrite = confirm("Are you sure you want to overwrite settings?");
           if (!overwrite) return;
         }
 
-        this.data = { spec: ko.toJS(this.ContactList.get('items')), name: name, force: true };
+        this.data = { spec: ko.toJS(this.ContactList.get("items")), name: name, force: true };
         console.log(this.data);
 
         this.data = JSON.stringify(this.data);
@@ -371,16 +393,16 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
           data: this.data,
           dataType: "json",
           contentType: "application/json; charset=utf-8",
-          success: function () { }
-        }).done(function (data) {
+          success: function() {}
+        }).done(function(data) {
           self.PresetName.set("text", "");
           self.DataSource.refresh();
-        }).fail(function (data) {
+        }).fail(function(data) {
           alert(data.responseJSON.ExceptionMessage);
         });
       }
     },
-    adapt: function (doc) {
+    adapt: function(doc) {
 
       return {
         Type: 1,
@@ -388,9 +410,10 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
         Specification: {
           Contacts: doc,
           Segments: {
+          
           }
         }
-      }
+      };
     }
   });
   return DataSheet;
