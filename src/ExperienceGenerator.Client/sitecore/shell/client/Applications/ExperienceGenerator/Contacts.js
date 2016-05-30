@@ -76,8 +76,14 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
       control.unset("items", { silent: true });
       control.set("items", filteredItem);
       if (controlName === "InteractionList") {
+        var interactions = this.ContactList.get("selectedItem").get("interactions");
+
+        //hack to clear array
+        while(interactions.length > 0) {interactions.pop();}
+        _.each(filteredItem, function(item) {interactions.push(item);});
+
         this.ContactList.get("selectedItem").set("interactions", filteredItem);
-        this.setInteractions(filteredItem);
+        this.setInteractions(interactions);
       }
       control.viewModel.uncheckItems(control.get("checkedItems"));
     },
