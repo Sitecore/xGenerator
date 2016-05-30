@@ -421,11 +421,11 @@ SharedFields:
           ph="AddInteractionPagesWindow.Content" />
         <r
           id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}"
-          par="ButtonType=Primary&amp;Click=javascript%3Aapp.addPagesOKButton()&amp;Id=OkButton4&amp;Text=OK"
+          par="ButtonType=Primary&amp;Click=javascript%3Aapp.interactionEditor.addPagesOKButton()&amp;Id=OkButton4&amp;Text=OK"
           ph="AddInteractionPagesWindow.Buttons" />
         <r
           id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}"
-          par="Click=javascript%3Aapp.addPagesCancelButton(%20%22AddInteractionPagesWindow%22)&amp;Id=CancelButton4&amp;Text=Cancel"
+          par="Click=javascript%3Aapp.interactionEditor.addPagesCancelButton(+)&amp;Id=CancelButton4&amp;Text=Cancel"
           ph="AddInteractionPagesWindow.Buttons" />
         <r
           id="{B60FB581-44D1-4372-86A2-D6E494F020E1}"
