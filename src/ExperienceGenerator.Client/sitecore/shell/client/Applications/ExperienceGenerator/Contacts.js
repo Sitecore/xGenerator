@@ -82,7 +82,6 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
         while(interactions.length > 0) {interactions.pop();}
         _.each(filteredItem, function(item) {interactions.push(item);});
 
-        this.ContactList.get("selectedItem").set("interactions", filteredItem);
         this.setInteractions(interactions);
       }
       control.viewModel.uncheckItems(control.get("checkedItems"));
