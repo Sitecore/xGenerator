@@ -4,6 +4,8 @@
   using System.Configuration;
   using System.Linq;
   using System.Threading;
+  using MongoDB.Bson;
+  using MongoDB.Driver;
   using Sitecore;
   using Sitecore.Analytics.Data.DataAccess.MongoDb;
   using Sitecore.Analytics.Model;
@@ -128,8 +130,8 @@
       var scriptTxt = refreshAnalyticsQuery.Fields["Query"].Value;
       var connectionStringName = refreshAnalyticsQuery.Fields["Data Source"].Value;
       var item = ConfigurationManager.ConnectionStrings[connectionStringName];
-      //var driver = new JSMongoDbDriver(item.ConnectionString);
-      //driver.Eval(scriptTxt, new object[] { days });
+      var driver = new JsMongoDbDriver(item.ConnectionString);
+      driver.Eval(scriptTxt, new object[] { days });
     }
 
     private void UpdateLastRefreshDate()
@@ -186,6 +188,18 @@
     {
       var lastUpdateField = new DateField(_controlPannelSettings.Fields["Last Refresh Date"]);
       return lastUpdateField.DateTime;
+    }
+
+    private class JsMongoDbDriver:MongoDbDriver
+    {
+      public JsMongoDbDriver(string connectionString) : base(connectionString)
+		  {
+      }
+   
+      public BsonValue Eval(BsonJavaScript code, params object[] args)
+      {
+        return base.Database.Eval(EvalFlags.None, code, args);
+      }
     }
   }
 }

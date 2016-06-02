@@ -52,6 +52,9 @@
     <Reference Include="MongoDB.Driver">
       <HintPath>..\..\Components\MongoDB.Driver.dll</HintPath>
     </Reference>
+    <Reference Include="MongoDB.Bson">
+      <HintPath>..\..\Components\MongoDB.Bson.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.Analytics.Model">
       <HintPath>..\..\Components\Sitecore.Analytics.Model.dll</HintPath>
     </Reference>
