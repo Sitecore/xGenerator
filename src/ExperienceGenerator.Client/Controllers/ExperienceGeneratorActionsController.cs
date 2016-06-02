@@ -106,7 +106,7 @@ namespace ExperienceGenerator.Client.Controllers
       options.LocationGroups = GeoRegion.Regions.Select(region => 
       new SelectionOptionGroup() {
         Label = region.Label,
-        Options = region.SubRegions.Select(x=> new SelectionOption() { Id = x.Id, Label = x.Label, DefaultWeight = 0})}).ToList();
+        Options = region.SubRegions.Select(x=> new SelectionOption() { Id = x.Id, Label = x.Label, DefaultWeight = 50})}).ToList();
 
       var db = Database.GetDatabase("master");
       var online = db.GetItem(KnownItems.OnlineChannelRoot);
