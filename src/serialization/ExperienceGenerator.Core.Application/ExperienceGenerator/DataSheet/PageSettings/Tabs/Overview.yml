@@ -1,121 +1,236 @@
 ﻿---
-ID: 6c17ff83-b4e1-4314-976f-f5df3ae99a24
-Parent: 40463b45-8869-4a7e-b86e-2fdc8ce1ae57
-Template: f62b4cd7-754c-4461-810f-2b6bd2c92a0d
+ID: "6c17ff83-b4e1-4314-976f-f5df3ae99a24"
+Parent: "40463b45-8869-4a7e-b86e-2fdc8ce1ae57"
+Template: "f62b4cd7-754c-4461-810f-2b6bd2c92a0d"
 Path: /sitecore/client/Applications/ExperienceGenerator/DataSheet/PageSettings/Tabs/Overview
 DB: core
 SharedFields:
-- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
   Hint: __Sortorder
   Value: 0
-- ID: deab3795-056f-4421-adf0-758844461b72
+- ID: "deab3795-056f-4421-adf0-758844461b72"
   Hint: Placeholder Name
   Value: Overview
-- ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
+- ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
   Hint: __Renderings
   Type: layout
   Value: |
     <r>
-      <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
-        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=Overview&amp;PaddingType=Top&amp;ShowBorder=0&amp;UsePadding=1" />
-        <r id="{442BD093-FBAD-4E36-BC08-489E16C82D08}" par="Id=OverviewExpander&amp;IsCollapsible=0" ph="Overview.Content" />
-        <r id="{C4393722-39FA-4869-9582-3A8EB8983A0D}" par="Id=RowPanel1&amp;PaddingType=All&amp;UsePadding=1" ph="OverviewExpander.Body" />
-        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="GridColumns=4&amp;Id=VisitsCol" ph="RowPanel1.Content" />
-        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=VisitsBorder&amp;UsePadding=0" ph="VisitsCol.Content" />
-        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" ds="{04281F02-818D-425E-8FAD-7795EBE64F6D}" par="Id=NumberOfUniqueVisitorsText" ph="VisitsBorder.Content" />
-        <r id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" par="Id=NumberOfUniqueVisitors&amp;Text=100" ph="VisitsBorder.Content" />
-        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" ds="{16DDA573-B59C-4B3A-8578-FB8FEFE8E23E}" par="Id=NumberOfVisitsGeneratedText" ph="VisitsBorder.Content" />
-        <r id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" par="Id=NumberOfVisitsGenerated&amp;Text=500" ph="VisitsBorder.Content" />
-        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=BounceRateText&amp;Text=Bounce%20rate" ph="VisitsBorder.Content" />
-        <r id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" ds="{7C26EDFA-A15D-410B-B78D-3C95E89FD469}" par="Id=BounceRate&amp;Text=5&amp;Type=range" ph="VisitsBorder.Content" />
-        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" ds="{2F0E40F9-E210-483D-800C-E388D428651C}" par="Id=PercentageIdentifiedVisitorsText" ph="VisitsBorder.Content" />
-        <r id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" ds="{7C26EDFA-A15D-410B-B78D-3C95E89FD469}" par="Id=PercentageIdentifiedVisitors&amp;Text=20&amp;Type=range" ph="VisitsBorder.Content" />
-        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" ds="{187F31B7-FEF3-4ACB-B601-0454FC268486}" par="Id=PageviewsPerVisitAvgText" ph="VisitsBorder.Content" />
-        <r id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" par="Id=PageviewsPerVisitAvg&amp;Text=4" ph="VisitsBorder.Content" />
-        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" ds="{0D6001C4-4CA7-4615-B146-128763549F0F}" par="Id=TimeSpentPerPageAvgText" ph="VisitsBorder.Content" />
-        <r id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" par="Id=TimeSpentPerPageAvg&amp;Text=00%3A30" ph="VisitsBorder.Content" />
-        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="GridColumns=4&amp;Id=TrafficDistributionCol" ph="RowPanel1.Content" />
-        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=TrafficDistributionBorder" ph="TrafficDistributionCol.Content" />
-        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=TrafficText&amp;Text=Traffic%20distribution" ph="TrafficDistributionBorder.Content" />
-        <r id="{C4393722-39FA-4869-9582-3A8EB8983A0D}" par="Id=RowPanel2&amp;PaddingType=All&amp;UsePadding=1" ph="OverviewExpander.Body" />
-        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="GridColumns=4&amp;Id=DatesCol" ph="RowPanel2.Content" />
-        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=DatesBorder&amp;PaddingType=Top&amp;UsePadding=1" ph="DatesCol.Content" />
-        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" ds="{2EE01475-D0FF-4230-8A3A-8218E1C6A8CF}" par="Id=StartDateText" ph="DatesBorder.Content" />
-        <r id="{3CAC8515-EA11-4B97-A1E5-546DC6FC5E59}" ds="{605849E7-5869-45A7-A1C6-2DFD8E84FA7B}" par="Date=20140506T000000&amp;Id=StartDate" ph="DatesBorder.Content" />
-        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" ds="{03DCB85B-C4E0-49E6-8E6A-83530C87D1F3}" par="Id=EndDateText" ph="DatesBorder.Content" />
-        <r id="{3CAC8515-EA11-4B97-A1E5-546DC6FC5E59}" ds="{03DCB85B-C4E0-49E6-8E6A-83530C87D1F3}" par="Date=20150506T000000&amp;Id=EndDate" ph="DatesBorder.Content" />
-        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" ds="{50E2D15C-824B-4C55-90A6-94605D4B6DEE}" par="Id=AnnualIncreaseInTrafficText" ph="DatesBorder.Content" />
-        <r id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" ds="{7C26EDFA-A15D-410B-B78D-3C95E89FD469}" par="Id=AnnualIncreaseInTraffic&amp;Type=range" ph="DatesBorder.Content" />
-        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="GridColumns=4&amp;Id=DailyCol" ph="RowPanel2.Content" />
-        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=DailyDistributionBorder&amp;PaddingType=Top&amp;UsePadding=1" ph="DailyCol.Content" />
-        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=DailyText&amp;Text=Daily%20distribution" ph="DailyDistributionBorder.Content" />
-        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="GridColumns=4&amp;Id=MonthlyCol" ph="RowPanel2.Content" />
-        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=MonthlyDistributionBorder&amp;PaddingType=Top&amp;UsePadding=1" ph="MonthlyCol.Content" />
-        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=MonthlyText&amp;Text=Monthly%20distribution" ph="MonthlyDistributionBorder.Content" />
+      <d
+        id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+        <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=Overview&amp;PaddingType=Top&amp;ShowBorder=0&amp;UsePadding=1" />
+        <r
+          id="{442BD093-FBAD-4E36-BC08-489E16C82D08}"
+          par="Id=OverviewExpander&amp;IsCollapsible=0"
+          ph="Overview.Content" />
+        <r
+          id="{C4393722-39FA-4869-9582-3A8EB8983A0D}"
+          par="Id=RowPanel1&amp;PaddingType=All&amp;UsePadding=1"
+          ph="OverviewExpander.Body" />
+        <r
+          id="{5CB208F6-1860-426B-8221-FAA85B329848}"
+          par="GridColumns=4&amp;Id=VisitsCol"
+          ph="RowPanel1.Content" />
+        <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=VisitsBorder&amp;UsePadding=0"
+          ph="VisitsCol.Content" />
+        <r
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
+          ds="{04281F02-818D-425E-8FAD-7795EBE64F6D}"
+          par="Id=NumberOfUniqueVisitorsText"
+          ph="VisitsBorder.Content" />
+        <r
+          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
+          par="Id=NumberOfUniqueVisitors&amp;Text=100"
+          ph="VisitsBorder.Content" />
+        <r
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
+          ds="{16DDA573-B59C-4B3A-8578-FB8FEFE8E23E}"
+          par="Id=NumberOfVisitsGeneratedText"
+          ph="VisitsBorder.Content" />
+        <r
+          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
+          par="Id=NumberOfVisitsGenerated&amp;Text=500"
+          ph="VisitsBorder.Content" />
+        <r
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
+          par="Id=BounceRateText&amp;Text=Bounce%20rate"
+          ph="VisitsBorder.Content" />
+        <r
+          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
+          ds="{7C26EDFA-A15D-410B-B78D-3C95E89FD469}"
+          par="Id=BounceRate&amp;Text=5&amp;Type=range"
+          ph="VisitsBorder.Content" />
+        <r
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
+          ds="{2F0E40F9-E210-483D-800C-E388D428651C}"
+          par="Id=PercentageIdentifiedVisitorsText"
+          ph="VisitsBorder.Content" />
+        <r
+          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
+          ds="{7C26EDFA-A15D-410B-B78D-3C95E89FD469}"
+          par="Id=PercentageIdentifiedVisitors&amp;Text=20&amp;Type=range"
+          ph="VisitsBorder.Content" />
+        <r
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
+          ds="{187F31B7-FEF3-4ACB-B601-0454FC268486}"
+          par="Id=PageviewsPerVisitAvgText"
+          ph="VisitsBorder.Content" />
+        <r
+          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
+          par="Id=PageviewsPerVisitAvg&amp;Text=4"
+          ph="VisitsBorder.Content" />
+        <r
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
+          ds="{0D6001C4-4CA7-4615-B146-128763549F0F}"
+          par="Id=TimeSpentPerPageAvgText"
+          ph="VisitsBorder.Content" />
+        <r
+          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
+          par="Id=TimeSpentPerPageAvg&amp;Text=00%3A30"
+          ph="VisitsBorder.Content" />
+        <r
+          id="{5CB208F6-1860-426B-8221-FAA85B329848}"
+          par="GridColumns=4&amp;Id=TrafficDistributionCol"
+          ph="RowPanel1.Content" />
+        <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=TrafficDistributionBorder"
+          ph="TrafficDistributionCol.Content" />
+        <r
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
+          par="Id=TrafficText&amp;Text=Traffic%20distribution"
+          ph="TrafficDistributionBorder.Content" />
+        <r
+          id="{C4393722-39FA-4869-9582-3A8EB8983A0D}"
+          par="Id=RowPanel2&amp;PaddingType=All&amp;UsePadding=1"
+          ph="OverviewExpander.Body" />
+        <r
+          id="{5CB208F6-1860-426B-8221-FAA85B329848}"
+          par="GridColumns=4&amp;Id=DatesCol"
+          ph="RowPanel2.Content" />
+        <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=DatesBorder&amp;PaddingType=Top&amp;UsePadding=1"
+          ph="DatesCol.Content" />
+        <r
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
+          ds="{2EE01475-D0FF-4230-8A3A-8218E1C6A8CF}"
+          par="Id=StartDateText"
+          ph="DatesBorder.Content" />
+        <r
+          id="{3CAC8515-EA11-4B97-A1E5-546DC6FC5E59}"
+          ds="{605849E7-5869-45A7-A1C6-2DFD8E84FA7B}"
+          par="Date=20140506T000000&amp;Id=StartDate"
+          ph="DatesBorder.Content" />
+        <r
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
+          ds="{03DCB85B-C4E0-49E6-8E6A-83530C87D1F3}"
+          par="Id=EndDateText"
+          ph="DatesBorder.Content" />
+        <r
+          id="{3CAC8515-EA11-4B97-A1E5-546DC6FC5E59}"
+          ds="{03DCB85B-C4E0-49E6-8E6A-83530C87D1F3}"
+          par="Date=20150506T000000&amp;Id=EndDate"
+          ph="DatesBorder.Content" />
+        <r
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
+          ds="{50E2D15C-824B-4C55-90A6-94605D4B6DEE}"
+          par="Id=AnnualIncreaseInTrafficText"
+          ph="DatesBorder.Content" />
+        <r
+          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
+          ds="{7C26EDFA-A15D-410B-B78D-3C95E89FD469}"
+          par="Id=AnnualIncreaseInTraffic&amp;Type=range"
+          ph="DatesBorder.Content" />
+        <r
+          id="{5CB208F6-1860-426B-8221-FAA85B329848}"
+          par="GridColumns=4&amp;Id=DailyCol"
+          ph="RowPanel2.Content" />
+        <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=DailyDistributionBorder&amp;PaddingType=Top&amp;UsePadding=1"
+          ph="DailyCol.Content" />
+        <r
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
+          par="Id=DailyText&amp;Text=Daily%20distribution"
+          ph="DailyDistributionBorder.Content" />
+        <r
+          id="{5CB208F6-1860-426B-8221-FAA85B329848}"
+          par="GridColumns=4&amp;Id=MonthlyCol"
+          ph="RowPanel2.Content" />
+        <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=MonthlyDistributionBorder&amp;PaddingType=Top&amp;UsePadding=1"
+          ph="MonthlyCol.Content" />
+        <r
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
+          par="Id=MonthlyText&amp;Text=Monthly%20distribution"
+          ph="MonthlyDistributionBorder.Content" />
       </d>
     </r>
 Languages:
 - Language: da
   Fields:
-  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
     Hint: __Display name
     Value: Sider
   Versions:
   - Version: 1
     Fields:
-    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20150314T040855:635619029352174524Z
-    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Value: "20150314T040855:635619029352174524Z"
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: sitecore\admin
-    - ID: aea872fb-aa91-4d1a-b877-3ca6fbbb4fd4
+    - ID: "aea872fb-aa91-4d1a-b877-3ca6fbbb4fd4"
       Hint: Header
       Value: Sider
-- Language: de-DE
+- Language: "de-DE"
   Fields:
-  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
     Hint: __Display name
     Value: Seiten
   Versions:
   - Version: 1
     Fields:
-    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20150314T041134:635619030945740946Z
-    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Value: "20150314T041134:635619030945740946Z"
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: sitecore\admin
-    - ID: aea872fb-aa91-4d1a-b877-3ca6fbbb4fd4
+    - ID: "aea872fb-aa91-4d1a-b877-3ca6fbbb4fd4"
       Hint: Header
       Value: Seiten
 - Language: en
   Versions:
   - Version: 1
     Fields:
-    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20140708T173403
-    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
-      Hint: __Created by
-      Value: sitecore\admin
-    - ID: aea872fb-aa91-4d1a-b877-3ca6fbbb4fd4
+    - ID: "aea872fb-aa91-4d1a-b877-3ca6fbbb4fd4"
       Hint: Header
       Value: Overview
-- Language: ja-JP
+- Language: "ja-JP"
   Fields:
-  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
     Hint: __Display name
     Value: ページ
   Versions:
   - Version: 1
     Fields:
-    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20150314T041010:635619030100128340Z
-    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Value: "20150314T041010:635619030100128340Z"
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: sitecore\admin
-    - ID: aea872fb-aa91-4d1a-b877-3ca6fbbb4fd4
+    - ID: "aea872fb-aa91-4d1a-b877-3ca6fbbb4fd4"
       Hint: Header
       Value: ページ

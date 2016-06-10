@@ -1,63 +1,63 @@
 ﻿---
-ID: f87e0c88-8932-4b36-bbbd-23f0fdaa2296
-Parent: eb911a25-00ff-465e-9794-c6046fb24a8f
-Template: 27c78269-cef0-483f-9e7a-af27ed04ce5d
+ID: "f87e0c88-8932-4b36-bbbd-23f0fdaa2296"
+Parent: "eb911a25-00ff-465e-9794-c6046fb24a8f"
+Template: "27c78269-cef0-483f-9e7a-af27ed04ce5d"
 Path: /sitecore/client/Applications/ExperienceGenerator/DataSheet/PageSettings/DataSheetStyle
 DB: core
 SharedFields:
-- ID: 834b2406-24a9-4376-9350-cbe6da96c51a
+- ID: "834b2406-24a9-4376-9350-cbe6da96c51a"
   Hint: Stylesheet
   Value: /sitecore/shell/client/Applications/ExperienceGenerator/ExperienceGenerator.css
 Languages:
 - Language: da
   Fields:
-  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
     Hint: __Display name
     Value: PageTestStyle
   Versions:
   - Version: 1
     Fields:
-    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20150314T040850:635619029305301024Z
-    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Value: "20150314T040850:635619029305301024Z"
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: sitecore\admin
-- Language: de-DE
+- Language: "de-DE"
   Fields:
-  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
     Hint: __Display name
     Value: SeiteTestStyle
   Versions:
   - Version: 1
     Fields:
-    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20150314T041127:635619030875900325Z
-    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Value: "20150314T041127:635619030875900325Z"
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: sitecore\admin
 - Language: en
   Versions:
   - Version: 1
     Fields:
-    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20140325T105044
-    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: sitecore\admin
-- Language: ja-JP
+- Language: "ja-JP"
   Fields:
-  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
     Hint: __Display name
     Value: ページ テスト スタイル
   Versions:
   - Version: 1
     Fields:
-    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20150314T041004:635619030040598185Z
-    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Value: "20150314T041004:635619030040598185Z"
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: sitecore\admin

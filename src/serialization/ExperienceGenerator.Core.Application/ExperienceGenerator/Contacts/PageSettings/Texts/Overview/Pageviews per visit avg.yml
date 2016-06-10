@@ -1,7 +1,7 @@
 ﻿---
-ID: c447d8d4-fa43-4577-897f-f5b0e626b6e7
-Parent: 029018a9-f831-40a8-909f-720839afc078
-Template: 76f63df7-0235-4164-86ab-84b5ec48cb2a
+ID: "c447d8d4-fa43-4577-897f-f5b0e626b6e7"
+Parent: "029018a9-f831-40a8-909f-720839afc078"
+Template: "76f63df7-0235-4164-86ab-84b5ec48cb2a"
 Path: /sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Texts/Overview/Pageviews per visit avg
 DB: core
 Languages:
@@ -9,12 +9,12 @@ Languages:
   Versions:
   - Version: 1
     Fields:
-    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20150505T110036Z
-    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: sitecore\admin
-    - ID: b3f89d3b-fc37-4699-860e-db8fb37323c1
+    - ID: "b3f89d3b-fc37-4699-860e-db8fb37323c1"
       Hint: Text
       Value: Pageviews per visit (avg)

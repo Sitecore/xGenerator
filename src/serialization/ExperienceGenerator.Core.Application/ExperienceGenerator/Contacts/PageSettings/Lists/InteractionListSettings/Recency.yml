@@ -1,102 +1,100 @@
 ﻿---
-ID: 743e1808-e4a7-4dcb-b54f-c7302709a47e
-Parent: 11c0a46e-4ea0-4f51-b74f-c54aa9ffc79a
-Template: d3cefe6e-e51b-4a84-b92e-aaf8aa8e8dc8
+ID: "743e1808-e4a7-4dcb-b54f-c7302709a47e"
+Parent: "11c0a46e-4ea0-4f51-b74f-c54aa9ffc79a"
+Template: "d3cefe6e-e51b-4a84-b92e-aaf8aa8e8dc8"
 Path: /sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Lists/InteractionListSettings/Recency
 DB: core
 SharedFields:
-- ID: 1c50efbe-47cd-4a9b-9eef-a466e75c4977
+- ID: "1c50efbe-47cd-4a9b-9eef-a466e75c4977"
   Hint: Width
   Value: 130px
-- ID: 35e827ff-bb6c-4ed6-b79f-c41750ea5d46
+- ID: "35e827ff-bb6c-4ed6-b79f-c41750ea5d46"
   Hint: HTMLTemplate
-  Value: {{recency}} days
-- ID: 876d7f97-dcff-4a17-b1cc-7d127a273489
+  Value: "{{recency}} days"
+- ID: "876d7f97-dcff-4a17-b1cc-7d127a273489"
   Hint: ContentAlignment
-  Value: {07A8B1E1-D779-4CF2-81FC-0768ABF97CDC}
-- ID: b2a46ae4-38f9-4538-a2b3-8021083e0e40
+  Value: "{07A8B1E1-D779-4CF2-81FC-0768ABF97CDC}"
+- ID: "b2a46ae4-38f9-4538-a2b3-8021083e0e40"
   Hint: Sortable
+  Type: Checkbox
   Value: 0
-- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
   Hint: __Sortorder
   Value: 600
 Languages:
 - Language: da
   Fields:
-  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
     Hint: __Display name
     Value: Nyhed
   Versions:
   - Version: 1
     Fields:
-    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20151207T115240Z
-    - ID: 2e9fd749-0f47-4397-8ba2-c56c65366bf0
+    - ID: "2e9fd749-0f47-4397-8ba2-c56c65366bf0"
       Hint: HeaderText
       Value: Nyhed
-    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: sitecore\admin
-    - ID: 75388012-d191-4561-8074-5340e149c0a5
+    - ID: "75388012-d191-4561-8074-5340e149c0a5"
       Hint: SortField
       Value: VisitStartDateTime
-- Language: de-DE
+- Language: "de-DE"
   Fields:
-  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
     Hint: __Display name
     Value: Neuheit
   Versions:
   - Version: 1
     Fields:
-    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20140611T165106:635381022667217315
-    - ID: 2e9fd749-0f47-4397-8ba2-c56c65366bf0
+      Value: "20140611T165106:635381022667217315"
+    - ID: "2e9fd749-0f47-4397-8ba2-c56c65366bf0"
       Hint: HeaderText
       Value: Neuheit
-    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: sitecore\admin
-    - ID: 75388012-d191-4561-8074-5340e149c0a5
+    - ID: "75388012-d191-4561-8074-5340e149c0a5"
       Hint: SortField
       Value: BesuchStartdatumUhrzeit
 - Language: en
   Versions:
   - Version: 1
     Fields:
-    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20131127T160638Z
-    - ID: 2e9fd749-0f47-4397-8ba2-c56c65366bf0
+    - ID: "2e9fd749-0f47-4397-8ba2-c56c65366bf0"
       Hint: HeaderText
       Value: Recency
-    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: sitecore\admin
-    - ID: 75388012-d191-4561-8074-5340e149c0a5
-      Hint: SortField
-      Value: 
-    - ID: 7ad5458f-19c3-4173-ad67-3bfaf7cd3c7f
+    - ID: "7ad5458f-19c3-4173-ad67-3bfaf7cd3c7f"
       Hint: HeaderAlignment
-      Value: {D6AD4470-B309-4558-BE16-2B4B4C9BC8D8}
-- Language: ja-JP
+      Value: "{D6AD4470-B309-4558-BE16-2B4B4C9BC8D8}"
+- Language: "ja-JP"
   Fields:
-  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
     Hint: __Display name
     Value: 最新性
   Versions:
   - Version: 1
     Fields:
-    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20151207T115531Z
-    - ID: 2e9fd749-0f47-4397-8ba2-c56c65366bf0
+    - ID: "2e9fd749-0f47-4397-8ba2-c56c65366bf0"
       Hint: HeaderText
       Value: 最新性
-    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: sitecore\admin
-    - ID: 75388012-d191-4561-8074-5340e149c0a5
+    - ID: "75388012-d191-4561-8074-5340e149c0a5"
       Hint: SortField
       Value: 訪問の開始日時

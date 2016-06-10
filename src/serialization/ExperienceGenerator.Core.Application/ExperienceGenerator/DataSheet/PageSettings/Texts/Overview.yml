@@ -1,7 +1,7 @@
 ﻿---
-ID: b389f826-532d-426e-97f5-416a43d12b22
-Parent: ae110b84-5964-4494-a84e-dd773d22307a
-Template: a87a00b1-e6db-45ab-8b54-636fec3b5523
+ID: "b389f826-532d-426e-97f5-416a43d12b22"
+Parent: "ae110b84-5964-4494-a84e-dd773d22307a"
+Template: "a87a00b1-e6db-45ab-8b54-636fec3b5523"
 Path: /sitecore/client/Applications/ExperienceGenerator/DataSheet/PageSettings/Texts/Overview
 DB: core
 Languages:
@@ -9,6 +9,6 @@ Languages:
   Versions:
   - Version: 1
     Fields:
-    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20150505T105935Z

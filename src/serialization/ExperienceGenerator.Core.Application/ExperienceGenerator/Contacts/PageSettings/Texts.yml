@@ -1,56 +1,56 @@
 ﻿---
-ID: 5fdba48b-53b2-4e3d-80e6-7d36fa98fdd5
-Parent: 9d7fab6c-778a-460e-b6ee-508222174804
-Template: a87a00b1-e6db-45ab-8b54-636fec3b5523
+ID: "5fdba48b-53b2-4e3d-80e6-7d36fa98fdd5"
+Parent: "9d7fab6c-778a-460e-b6ee-508222174804"
+Template: "a87a00b1-e6db-45ab-8b54-636fec3b5523"
 Path: /sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Texts
 DB: core
 Languages:
 - Language: da
   Fields:
-  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
     Hint: __Display name
     Value: Tekster
   Versions:
   - Version: 1
     Fields:
-    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20150314T040848:635619029289989014Z
-    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Value: "20150314T040848:635619029289989014Z"
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: sitecore\admin
-- Language: de-DE
+- Language: "de-DE"
   Fields:
-  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
     Hint: __Display name
     Value: Texte
   Versions:
   - Version: 1
     Fields:
-    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20150314T041125:635619030852932044Z
-    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Value: "20150314T041125:635619030852932044Z"
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: sitecore\admin
 - Language: en
   Versions:
   - Version: 1
     Fields:
-    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20140702T120534
-- Language: ja-JP
+- Language: "ja-JP"
   Fields:
-  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
     Hint: __Display name
     Value: テキスト
   Versions:
   - Version: 1
     Fields:
-    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20150314T041001:635619030019973845Z
-    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Value: "20150314T041001:635619030019973845Z"
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: sitecore\admin

@@ -1,71 +1,71 @@
 ﻿---
-ID: ee3f9843-6bfe-4d4f-b18f-2ae2ebf99fe2
-Parent: eb911a25-00ff-465e-9794-c6046fb24a8f
-Template: 76f63df7-0235-4164-86ab-84b5ec48cb2a
+ID: "ee3f9843-6bfe-4d4f-b18f-2ae2ebf99fe2"
+Parent: "eb911a25-00ff-465e-9794-c6046fb24a8f"
+Template: "76f63df7-0235-4164-86ab-84b5ec48cb2a"
 Path: /sitecore/client/Applications/ExperienceGenerator/DataSheet/PageSettings/PageTitle
 DB: core
 Languages:
 - Language: da
   Fields:
-  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
     Hint: __Display name
     Value: PageTitle
   Versions:
   - Version: 1
     Fields:
-    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20150314T040859:635619029399985494Z
-    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Value: "20150314T040859:635619029399985494Z"
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: sitecore\admin
-    - ID: b3f89d3b-fc37-4699-860e-db8fb37323c1
+    - ID: "b3f89d3b-fc37-4699-860e-db8fb37323c1"
       Hint: Text
       Value: Sidetest
-- Language: de-DE
+- Language: "de-DE"
   Fields:
-  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
     Hint: __Display name
     Value: Seitentitel
   Versions:
   - Version: 1
     Fields:
-    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20150314T041141:635619031014644109Z
-    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Value: "20150314T041141:635619031014644109Z"
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: sitecore\admin
-    - ID: b3f89d3b-fc37-4699-860e-db8fb37323c1
+    - ID: "b3f89d3b-fc37-4699-860e-db8fb37323c1"
       Hint: Text
       Value: Seitentest
 - Language: en
   Versions:
   - Version: 1
     Fields:
-    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20140611T145342
-    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: sitecore\admin
-    - ID: b3f89d3b-fc37-4699-860e-db8fb37323c1
+    - ID: "b3f89d3b-fc37-4699-860e-db8fb37323c1"
       Hint: Text
       Value: Experience Generator
-- Language: ja-JP
+- Language: "ja-JP"
   Fields:
-  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
     Hint: __Display name
     Value: ページ タイトル
   Versions:
   - Version: 1
     Fields:
-    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20150314T041016:635619030162003340Z
-    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Value: "20150314T041016:635619030162003340Z"
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: sitecore\admin
-    - ID: b3f89d3b-fc37-4699-860e-db8fb37323c1
+    - ID: "b3f89d3b-fc37-4699-860e-db8fb37323c1"
       Hint: Text
       Value: ページ テスト

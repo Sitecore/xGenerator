@@ -1,7 +1,7 @@
 ﻿---
-ID: 029018a9-f831-40a8-909f-720839afc078
-Parent: 5fdba48b-53b2-4e3d-80e6-7d36fa98fdd5
-Template: a87a00b1-e6db-45ab-8b54-636fec3b5523
+ID: "029018a9-f831-40a8-909f-720839afc078"
+Parent: "5fdba48b-53b2-4e3d-80e6-7d36fa98fdd5"
+Template: "a87a00b1-e6db-45ab-8b54-636fec3b5523"
 Path: /sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Texts/Overview
 DB: core
 Languages:
@@ -9,6 +9,6 @@ Languages:
   Versions:
   - Version: 1
     Fields:
-    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20150505T105935Z

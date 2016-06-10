@@ -1,33 +1,34 @@
 ﻿---
-ID: 5395551f-bcd6-4b63-8a6d-d7d665cb302e
-Parent: 907285a5-619e-46b9-b7af-9a6f7bae76e1
-Template: 5cde79be-228f-4be5-b9d3-e63e365f1063
+ID: "5395551f-bcd6-4b63-8a6d-d7d665cb302e"
+Parent: "907285a5-619e-46b9-b7af-9a6f7bae76e1"
+Template: "5cde79be-228f-4be5-b9d3-e63e365f1063"
 Path: /sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Sliders/Slider Parameters
 DB: core
 SharedFields:
-- ID: 6d845445-ce74-4649-a2da-24f912a9471a
+- ID: "6d845445-ce74-4649-a2da-24f912a9471a"
   Hint: TitleValuesStep
   Value: 100
-- ID: ce272a7d-d61d-4c13-a060-1b658c84b6c2
+- ID: "ce272a7d-d61d-4c13-a060-1b658c84b6c2"
   Hint: HideTooltip
+  Type: Checkbox
   Value: 1
 Languages:
 - Language: en
   Versions:
   - Version: 1
     Fields:
-    - ID: 0ec9416c-b808-45b4-9319-089cc747b6b8
+    - ID: "0ec9416c-b808-45b4-9319-089cc747b6b8"
       Hint: Maximum
       Value: 100
-    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20150505T111102Z
-    - ID: 814faeb1-c6a9-4bf8-9224-03ec1b29a52b
+    - ID: "814faeb1-c6a9-4bf8-9224-03ec1b29a52b"
       Hint: Type
       Value: Single
-    - ID: e6d6a619-e0b5-4361-8c0e-ec8fc3d2f402
+    - ID: "e6d6a619-e0b5-4361-8c0e-ec8fc3d2f402"
       Hint: Minimum
       Value: 0
-    - ID: ff5074fa-9220-4dba-89af-61e82babdf02
+    - ID: "ff5074fa-9220-4dba-89af-61e82babdf02"
       Hint: SelectedValue
       Value: 50

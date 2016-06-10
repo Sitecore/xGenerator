@@ -1,101 +1,158 @@
 ﻿---
-ID: 8cf749f2-b229-4181-b26f-063a1e466a5b
-Parent: 40463b45-8869-4a7e-b86e-2fdc8ce1ae57
-Template: f62b4cd7-754c-4461-810f-2b6bd2c92a0d
+ID: "8cf749f2-b229-4181-b26f-063a1e466a5b"
+Parent: "40463b45-8869-4a7e-b86e-2fdc8ce1ae57"
+Template: "f62b4cd7-754c-4461-810f-2b6bd2c92a0d"
 Path: /sitecore/client/Applications/ExperienceGenerator/DataSheet/PageSettings/Tabs/Campaigns
 DB: core
 SharedFields:
-- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
   Hint: __Sortorder
   Value: 97
-- ID: deab3795-056f-4421-adf0-758844461b72
+- ID: "deab3795-056f-4421-adf0-758844461b72"
   Hint: Placeholder Name
   Value: Campaigns
-- ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
+- ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
   Hint: __Renderings
   Type: layout
   Value: |
     <r>
-      <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
-        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=Campaigns&amp;PaddingType=Top&amp;UsePadding=1" uid="{3F9547D4-6844-41E2-A405-557C7168D95A}" />
-        <r id="{442BD093-FBAD-4E36-BC08-489E16C82D08}" par="Id=CampaignsTrafficExpander&amp;Header=Campaign+traffic&amp;IsCollapsible=0" ph="Campaigns.Content" uid="{798C7174-06CF-4FAE-A6A9-A60D38FADF84}" />
-        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=AddCampaignsBorder&amp;PaddingType=All&amp;UsePadding=1" ph="CampaignsTrafficExpander.Body" uid="{04056889-987A-4567-A009-17AE2416F8AD}" />
-        <r id="{C4393722-39FA-4869-9582-3A8EB8983A0D}" par="Id=RowPanel1" ph="AddCampaignsBorder.Content" uid="{38049D31-853C-4C3C-9172-783AD2D9A0D7}" />
-        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="Id=ColumnPanel1&amp;GridColumns=6" ph="RowPanel1.Content" uid="{1F1F1E3C-B16B-477C-8DF7-4A36C4F3A276}" />
-        <r id="{7717EB6C-9F90-4C58-826D-5E87722A0318}" par="Id=Text1&amp;Text=Percentage+of+traffic+coming+from+campaigns" ph="ColumnPanel1.Content" uid="{9E6B5759-D9CC-437D-9F9A-AA1C52E32348}" />
-        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="Id=ColumnPanel2&amp;GridColumns=6" ph="RowPanel1.Content" uid="{1F1F1E3C-B16B-477C-8DF7-4A36C4F3A276}" />
-        <r id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}" par="Type=range&amp;IsEnabled=1&amp;Id=Percentage&amp;IsVisible=1" ph="ColumnPanel2.Content" uid="{A7CC99E5-353F-4BB4-B4F6-9CD9A48E1BF1}" />
-        <r id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}" par="Click=javascript%3aapp.dialogShow(%22CampaignsTreeView%22%2c+%22AddCampaignsWindow%22%2c+%22campaigns%22)&amp;Id=AddCampaignsButton&amp;Text=Add+campaign" ph="_AddCampaignsBorder.Content" uid="{6194928E-AE5F-47FF-A915-81A4B5F3B33D}" />
-        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=CampaignsListBorder&amp;PaddingType=Top&amp;UsePadding=1&amp;ShowBorder=0" ph="Campaigns.Content" uid="{CAC52FAB-2CB3-4949-A24F-8C4ADF6765AE}" />
-        <r id="{442BD093-FBAD-4E36-BC08-489E16C82D08}" par="Id=CampaignsListExpander&amp;Header=Campaigns&amp;IsCollapsible=0" ph="CampaignsListBorder.Content" uid="{28F337C1-B36F-4C7C-B267-A360DE38BD8F}" />
-        <r id="{C4393722-39FA-4869-9582-3A8EB8983A0D}" par="UsePadding=1&amp;Id=CampaignsBorder&amp;PaddingType=All" ph="CampaignsListExpander.Body" uid="{884DADBE-7B83-43D9-9234-4BDE78ACFCD6}" />
-        <r id="{5CB208F6-1860-426B-8221-FAA85B329848}" par="Id=CampaignsListInnerPanel&amp;GridColumns=12" ph="CampaignsBorder.Content" uid="{C7FE8930-A181-4C90-96DD-3CEC7F5572BF}" />
-        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=CampaignsListInnerPanelTopBorder" ph="CampaignsListInnerPanel.Content" uid="{95D44041-4FC0-411B-99BF-B5A7B35ACC66}" />
-        <r id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}" par="Id=CampaignsListInnerPanelBottomBorder" ph="CampaignsListInnerPanel.Content" uid="{95D44041-4FC0-411B-99BF-B5A7B35ACC66}" />
+      <d
+        id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+        <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=Campaigns&amp;PaddingType=Top&amp;UsePadding=1"
+          uid="{3F9547D4-6844-41E2-A405-557C7168D95A}" />
+        <r
+          id="{442BD093-FBAD-4E36-BC08-489E16C82D08}"
+          par="Id=CampaignsTrafficExpander&amp;Header=Campaign+traffic&amp;IsCollapsible=0"
+          ph="Campaigns.Content"
+          uid="{798C7174-06CF-4FAE-A6A9-A60D38FADF84}" />
+        <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=AddCampaignsBorder&amp;PaddingType=All&amp;UsePadding=1"
+          ph="CampaignsTrafficExpander.Body"
+          uid="{04056889-987A-4567-A009-17AE2416F8AD}" />
+        <r
+          id="{C4393722-39FA-4869-9582-3A8EB8983A0D}"
+          par="Id=RowPanel1"
+          ph="AddCampaignsBorder.Content"
+          uid="{38049D31-853C-4C3C-9172-783AD2D9A0D7}" />
+        <r
+          id="{5CB208F6-1860-426B-8221-FAA85B329848}"
+          par="Id=ColumnPanel1&amp;GridColumns=6"
+          ph="RowPanel1.Content"
+          uid="{1F1F1E3C-B16B-477C-8DF7-4A36C4F3A276}" />
+        <r
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
+          par="Id=Text1&amp;Text=Percentage+of+traffic+coming+from+campaigns"
+          ph="ColumnPanel1.Content"
+          uid="{9E6B5759-D9CC-437D-9F9A-AA1C52E32348}" />
+        <r
+          id="{5CB208F6-1860-426B-8221-FAA85B329848}"
+          par="Id=ColumnPanel2&amp;GridColumns=6"
+          ph="RowPanel1.Content"
+          uid="{1F1F1E3C-B16B-477C-8DF7-4A36C4F3A276}" />
+        <r
+          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
+          par="Type=range&amp;IsEnabled=1&amp;Id=Percentage&amp;IsVisible=1"
+          ph="ColumnPanel2.Content"
+          uid="{A7CC99E5-353F-4BB4-B4F6-9CD9A48E1BF1}" />
+        <r
+          id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}"
+          par="Click=javascript%3aapp.dialogShow(%22CampaignsTreeView%22%2c+%22AddCampaignsWindow%22%2c+%22campaigns%22)&amp;Id=AddCampaignsButton&amp;Text=Add+campaign"
+          ph="_AddCampaignsBorder.Content"
+          uid="{6194928E-AE5F-47FF-A915-81A4B5F3B33D}" />
+        <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=CampaignsListBorder&amp;PaddingType=Top&amp;UsePadding=1&amp;ShowBorder=0"
+          ph="Campaigns.Content"
+          uid="{CAC52FAB-2CB3-4949-A24F-8C4ADF6765AE}" />
+        <r
+          id="{442BD093-FBAD-4E36-BC08-489E16C82D08}"
+          par="Id=CampaignsListExpander&amp;Header=Campaigns&amp;IsCollapsible=0"
+          ph="CampaignsListBorder.Content"
+          uid="{28F337C1-B36F-4C7C-B267-A360DE38BD8F}" />
+        <r
+          id="{C4393722-39FA-4869-9582-3A8EB8983A0D}"
+          par="UsePadding=1&amp;Id=CampaignsBorder&amp;PaddingType=All"
+          ph="CampaignsListExpander.Body"
+          uid="{884DADBE-7B83-43D9-9234-4BDE78ACFCD6}" />
+        <r
+          id="{5CB208F6-1860-426B-8221-FAA85B329848}"
+          par="Id=CampaignsListInnerPanel&amp;GridColumns=12"
+          ph="CampaignsBorder.Content"
+          uid="{C7FE8930-A181-4C90-96DD-3CEC7F5572BF}" />
+        <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=CampaignsListInnerPanelTopBorder"
+          ph="CampaignsListInnerPanel.Content"
+          uid="{95D44041-4FC0-411B-99BF-B5A7B35ACC66}" />
+        <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=CampaignsListInnerPanelBottomBorder"
+          ph="CampaignsListInnerPanel.Content"
+          uid="{95D44041-4FC0-411B-99BF-B5A7B35ACC66}" />
       </d>
     </r>
 Languages:
 - Language: da
   Fields:
-  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
     Hint: __Display name
     Value: Sider
   Versions:
   - Version: 1
     Fields:
-    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20150314T040855:635619029352174524Z
-    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Value: "20150314T040855:635619029352174524Z"
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: sitecore\admin
-    - ID: aea872fb-aa91-4d1a-b877-3ca6fbbb4fd4
+    - ID: "aea872fb-aa91-4d1a-b877-3ca6fbbb4fd4"
       Hint: Header
       Value: Sider
-- Language: de-DE
+- Language: "de-DE"
   Fields:
-  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
     Hint: __Display name
     Value: Seiten
   Versions:
   - Version: 1
     Fields:
-    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20150314T041134:635619030945740946Z
-    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Value: "20150314T041134:635619030945740946Z"
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: sitecore\admin
-    - ID: aea872fb-aa91-4d1a-b877-3ca6fbbb4fd4
+    - ID: "aea872fb-aa91-4d1a-b877-3ca6fbbb4fd4"
       Hint: Header
       Value: Seiten
 - Language: en
   Versions:
   - Version: 1
     Fields:
-    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20140708T173403
-    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
-      Hint: __Created by
-      Value: sitecore\admin
-    - ID: aea872fb-aa91-4d1a-b877-3ca6fbbb4fd4
+    - ID: "aea872fb-aa91-4d1a-b877-3ca6fbbb4fd4"
       Hint: Header
       Value: Campaigns
-- Language: ja-JP
+- Language: "ja-JP"
   Fields:
-  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
     Hint: __Display name
     Value: ページ
   Versions:
   - Version: 1
     Fields:
-    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20150314T041010:635619030100128340Z
-    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Value: "20150314T041010:635619030100128340Z"
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: sitecore\admin
-    - ID: aea872fb-aa91-4d1a-b877-3ca6fbbb4fd4
+    - ID: "aea872fb-aa91-4d1a-b877-3ca6fbbb4fd4"
       Hint: Header
       Value: ページ

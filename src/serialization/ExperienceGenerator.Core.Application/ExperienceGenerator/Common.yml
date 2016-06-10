@@ -1,7 +1,7 @@
 ﻿---
-ID: 94eee1ce-f99f-42a9-8cc3-43e7043286e5
-Parent: 340e8e4c-74fc-4ca8-8aad-795300882384
-Template: a87a00b1-e6db-45ab-8b54-636fec3b5523
+ID: "94eee1ce-f99f-42a9-8cc3-43e7043286e5"
+Parent: "340e8e4c-74fc-4ca8-8aad-795300882384"
+Template: "a87a00b1-e6db-45ab-8b54-636fec3b5523"
 Path: /sitecore/client/Applications/ExperienceGenerator/Common
 DB: core
 Languages:
@@ -9,6 +9,6 @@ Languages:
   Versions:
   - Version: 1
     Fields:
-    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20160218T161030Z

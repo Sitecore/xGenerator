@@ -7,6 +7,7 @@ DB: core
 SharedFields:
 - ID: "3a67ad0f-9530-4b1b-9b70-9230c36ae8d6"
   Hint: UseFullWidth
+  Type: Checkbox
   Value: 1
 - ID: "5e642935-a6fc-48e9-b039-fe1136ced488"
   Hint: Theme

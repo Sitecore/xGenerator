@@ -1,7 +1,7 @@
 ﻿---
-ID: 153c2c22-1d9a-4527-8a7f-e5012f3c253c
-Parent: 2f9f25ef-9993-43c2-b28f-a056a31da6cc
-Template: 88b6af7b-7253-471d-a644-12b81ef8f578
+ID: "153c2c22-1d9a-4527-8a7f-e5012f3c253c"
+Parent: "2f9f25ef-9993-43c2-b28f-a056a31da6cc"
+Template: "88b6af7b-7253-471d-a644-12b81ef8f578"
 Path: /sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Lists/OutcomeListSettings
 DB: core
 Languages:
@@ -9,6 +9,6 @@ Languages:
   Versions:
   - Version: 1
     Fields:
-    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20160311T093340Z
