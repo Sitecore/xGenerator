@@ -1,4 +1,7 @@
-﻿namespace ExperienceGenerator.Tests
+﻿using Sitecore.FakeDb.Sites;
+using Sitecore.Sites;
+
+namespace ExperienceGenerator.Tests
 {
   using System;
   using System.Linq;
@@ -22,9 +25,13 @@
     [AutoDbData]
     public void Save_OnePresent_ShouldReturnSingleSetting(Db db, [Greedy]ContactSettingsRepository repo)
     {
-      CreateItem(db, "/sitecore/client/Applications/ExperienceGenerator/Common/Contacts");
-      repo.Save("name", EmptySpecification);
-      repo.GetPresets().Count.Should().Be(1);
+      var siteContext = new FakeSiteContext("siteName");
+      using (new FakeSiteContextSwitcher(siteContext))
+      {
+        CreateItem(db, $"/sitecore/client/Applications/ExperienceGenerator/Common/Contacts/{siteContext.Name}");
+        repo.Save("name", EmptySpecification);
+        repo.GetPresets().Count.Should().Be(1);
+      }
     }
 
 
@@ -33,28 +40,41 @@
     [AutoDbData]
     public void Save_SpecPassed_ShouldBeSavedCorrectly(Db db, [Greedy]ContactSettingsRepository repo)
     {
-      CreateItem(db, "/sitecore/client/Applications/ExperienceGenerator/Common/Contacts");
-      repo.Save("name", EmptySpecification);
-      var savedSpec = db.GetItem("/sitecore/client/Applications/ExperienceGenerator/Common/Contacts/name")[Templates.Preset.Fields.Specification];
-      JArray.Parse(savedSpec).ToString().Should().Be(EmptySpecification.ToString());
+      var siteContext = new FakeSiteContext("siteName");
+      using (new FakeSiteContextSwitcher(siteContext))
+      {
+        CreateItem(db, $"/sitecore/client/Applications/ExperienceGenerator/Common/Contacts/{siteContext.Name}");
+        repo.Save("name", EmptySpecification);
+        var savedSpec =
+          db.GetItem($"/sitecore/client/Applications/ExperienceGenerator/Common/Contacts/{siteContext.Name}/name")[
+            Templates.Preset.Fields.Specification];
+        JArray.Parse(savedSpec).ToString().Should().Be(EmptySpecification.ToString());
+      }
     }
 
 
 
     [Theory]
     [AutoDbData]
-    public void Save_WithExistingItemName_ShouldOverrideItem(Db db, [Greedy]ContactSettingsRepository repo)
+    public void Save_WithExistingItemName_ShouldOverrideItem(Db db,[Greedy]ContactSettingsRepository repo)
     {
-      CreateItem(db, "/sitecore/client/Applications/ExperienceGenerator/Common/Contacts");
-      repo.Save("name", EmptySpecification);
-      var savedSpec = db.GetItem("/sitecore/client/Applications/ExperienceGenerator/Common/Contacts/name")[Templates.Preset.Fields.Specification];
-      JArray.Parse(savedSpec).ToString().Should().Be(EmptySpecification.ToString());
-      var jToken = (JArray)EmptySpecification.DeepClone();
-      jToken[0]["someKey"]="someVal";
-      repo.Save("name", jToken);
-      savedSpec = db.GetItem("/sitecore/client/Applications/ExperienceGenerator/Common/Contacts/name")[Templates.Preset.Fields.Specification];
-      JArray.Parse(savedSpec).ToString().Should().Be(jToken.ToString());
-
+      var siteContext = new FakeSiteContext("siteName");
+      using (new FakeSiteContextSwitcher(siteContext))
+      {
+        CreateItem(db, $"/sitecore/client/Applications/ExperienceGenerator/Common/Contacts/{siteContext.Name}");
+        repo.Save("name", EmptySpecification);
+        var savedSpec =
+          db.GetItem($"/sitecore/client/Applications/ExperienceGenerator/Common/Contacts/{siteContext.Name}/name")[
+            Templates.Preset.Fields.Specification];
+        JArray.Parse(savedSpec).ToString().Should().Be(EmptySpecification.ToString());
+        var jToken = (JArray) EmptySpecification.DeepClone();
+        jToken[0]["someKey"] = "someVal";
+        repo.Save("name", jToken);
+        savedSpec =
+          db.GetItem($"/sitecore/client/Applications/ExperienceGenerator/Common/Contacts/{siteContext.Name}/name")[
+            Templates.Preset.Fields.Specification];
+        JArray.Parse(savedSpec).ToString().Should().Be(jToken.ToString());
+      }
     }
 
 
@@ -62,9 +82,12 @@
     [AutoDbData]
     public void ContactSettingsRepository_NoPresets_ShouldReturnEmptyCollection(Db db, [Greedy]ContactSettingsRepository repo)
     {
-      CreateItem(db, "/sitecore/client/Applications/ExperienceGenerator/Common/Contacts");
-
-      repo.GetPresets().Count.Should().Be(0);
+      var siteContext = new FakeSiteContext("siteName");
+      using (new FakeSiteContextSwitcher(siteContext))
+      {
+        CreateItem(db, $"/sitecore/client/Applications/ExperienceGenerator/Common/Contacts/{siteContext.Name}");
+        repo.GetPresets().Count.Should().Be(0);
+      }
     }
 
     private void CreateItem(Db db, string fullItemPath)

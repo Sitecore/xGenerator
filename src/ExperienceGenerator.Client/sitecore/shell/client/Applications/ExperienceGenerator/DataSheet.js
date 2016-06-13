@@ -13,7 +13,7 @@ define(["sitecore", "underscore"], function (_sc, _) {
       this.StartDate.viewModel.setDate(new Date(now.getFullYear() - 1, now.getMonth(), now.getDate()));
       this.EndDate.viewModel.setDate(now);
       this.loadOptions();
-      this.initPresetDataSource();
+      //this.initPresetDataSource();
     },
 
     initPresetDataSource: function () {

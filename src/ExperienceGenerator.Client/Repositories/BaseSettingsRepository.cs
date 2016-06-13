@@ -78,7 +78,7 @@
 
     public JObject GetSettingPreset(ID id)
     {
-      var preset = this.SitePresetRoot.Children[id];
+      var preset = this.SitePresetRoot.Axes.SelectSingleItem($"//*[@@id='{id}']"); ;
       if (preset == null)
       {
         return null;
