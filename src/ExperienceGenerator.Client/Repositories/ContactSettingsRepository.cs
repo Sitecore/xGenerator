@@ -4,7 +4,7 @@
   using Sitecore.Data;
   using Sitecore.Data.Items;
 
-  public class ContactSettingsRepository : BaseSettingsRepository
+  public class ContactSettingsRepository : SettingsRepository
   {
     public ContactSettingsRepository() : base()
     {

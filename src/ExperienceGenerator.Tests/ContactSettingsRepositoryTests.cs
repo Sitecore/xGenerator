@@ -12,6 +12,7 @@
   using Sitecore.Data;
   using Sitecore.Data.Items;
   using Sitecore.FakeDb;
+  using Sitecore.FakeDb.Sites;
   using Xunit;
 
   public class ContactSettingsRepositoryTests

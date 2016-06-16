@@ -115,7 +115,8 @@
     <Compile Include="ExperienceGeneratorActionsControllerTests.cs" />
     <Compile Include="Facets\Facets.cs" />
     <Compile Include="GeoRegionTests.cs" />
-    <Compile Include="SettingsRepositoryTests.cs" />
+    <Compile Include="XGenSettingsRepositoryTests.cs" />
+    <Compile Include="ContactSettingsRepositoryTests.cs" />
     <Compile Include="ContactDataProcessorTests.cs" />
     <Compile Include="XGenParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
