@@ -414,10 +414,13 @@ define(["sitecore", "underscore"], function (_sc, _) {
       if (name == "") {
         alert("Please enter preset name.");
       } else {
+        if (_.any(this.DataSource.get("items"), function(item) { return item.itemName === name })) {
+          var overwrite = confirm("Are you sure you want to overwrite settings?");
+          if (!overwrite) return;
+        }
         this.collectSettings();
         console.log(this.data);
         //this.data = this.adapt(this.data); //Adapter Hell alert
-        console.log(this.data);
         this.data = { spec: this.data, name: name };
         //console.log(JSON.stringify(this.data, null, 2));
         this.data = JSON.stringify(this.data);

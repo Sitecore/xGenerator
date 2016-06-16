@@ -196,9 +196,8 @@
     <Compile Include="Models\Preset.cs" />
     <Compile Include="Models\SelectionOption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\BaseSettingsRepository.cs" />
-    <Compile Include="Repositories\ContactSettingsRepository.cs" />
     <Compile Include="Repositories\SettingsRepository.cs" />
+    <Compile Include="Repositories\ContactSettingsRepository.cs" />
     <Compile Include="Templates.cs" />
   </ItemGroup>
   <ItemGroup>

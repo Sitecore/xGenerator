@@ -53,7 +53,7 @@
 
         var dev = devices.First(x => x.Id == device.Key);
         var expected = device.Value.Value<double>();
-        (userAgentList.Count(x => x == dev.UserAgent) / 1000d).Should().BeApproximately(expected, 0.03);
+        (userAgentList.Count(x => x == dev.UserAgent) / 1000d).Should().BeApproximately(expected, 0.04);
 
       }
 

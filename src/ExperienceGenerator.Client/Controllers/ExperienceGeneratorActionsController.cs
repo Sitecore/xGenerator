@@ -181,11 +181,6 @@ namespace ExperienceGenerator.Client.Controllers
     public IHttpActionResult SaveSettings([FromBody] Preset preset)
     {
       var repo = new SettingsRepository();
-      if (repo.GetPresets().Any(x => x.Key.Equals(preset.Name.ToLower())))
-      {
-        return this.InternalServerError(new Exception("Preset with the same name already exists."));
-      }
-
       repo.Save(preset.Name, preset.Spec);
       return this.Json(new {message="ok"});
     }
