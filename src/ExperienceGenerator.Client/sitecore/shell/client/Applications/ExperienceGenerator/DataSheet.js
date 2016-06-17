@@ -339,6 +339,18 @@ define(["sitecore", "underscore"], function (_sc, _) {
       }
     },
 
+    emptyDomValues: function () {
+      this.emptyDomValue("LandingPages");
+      this.emptyDomValue("Search");
+      this.emptyDomValue("Devices");
+      this.emptyDomValue("RefURLsTab");
+    },
+
+    emptyDomValue:function(area) {
+      var elements = $("div[data-sc-id='" + area + "'] .landingpage");
+      elements.remove();
+    },
+
     writeDomValues: function (data) {
       for (var i in data) {
         var tab = data[i];
@@ -404,6 +416,7 @@ define(["sitecore", "underscore"], function (_sc, _) {
         dataType: "json",
         success: function () { }
       }).done(function (data) {
+        self.emptyDomValues();
         self.writeDomValues(data);
       });
     },

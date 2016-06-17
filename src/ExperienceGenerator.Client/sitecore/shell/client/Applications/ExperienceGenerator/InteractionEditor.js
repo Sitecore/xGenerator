@@ -36,10 +36,11 @@ define(["underscore"], function (_) {
     currItr.channelName = host.TrafficChannelComboBox.get("selectedItem").$displayName;
     currItr.channelId = host.TrafficChannelComboBox.get("selectedItem").itemId;
 
-    if (host.CampaignComboBox.get("selectedItem").itemId != emptyCampaign) {
-      currItr.campaignName = host.CampaignComboBox.get("selectedItem").$displayName;
-      currItr.campaignId = host.CampaignComboBox.get("selectedItem").itemId;
-    }
+    currItr.campaignName = host.CampaignComboBox.get("selectedItem").$displayName;
+
+    currItr.campaignId = host.CampaignComboBox.get("selectedItem").itemId != emptyCampaign
+      ? host.CampaignComboBox.get("selectedItem").itemId
+      : null;
 
     currItr.recency = parseInt(host.RecencyValue.get("text")) || 0;
     currItr.geoData = host.City.get("selectedItem");
@@ -129,10 +130,10 @@ define(["underscore"], function (_) {
       self.loadCountries();
       host.CampaignComboBox.once("change:items",
       function (m, sel) {
-        emptyCampaign = self.guid();
+        self.emptyCampaign = self.guid();
         sel.push({
           $displayName: "None",
-          itemId: emptyCampaign
+          itemId: self.emptyCampaign
         });
         m.setItems(sel);
       }, host);

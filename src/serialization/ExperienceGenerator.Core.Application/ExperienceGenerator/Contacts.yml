@@ -412,6 +412,10 @@ SharedFields:
           par="ButtonType=Primary&amp;Click=javascript%3Aapp.interactionsOKButton()&amp;Id=OkButton&amp;Text=OK"
           ph="InteractionDetailsDialogWindow.Buttons" />
         <r
+          id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}"
+          par="Click=javascript%3aapp.dialogCancelButton(%27InteractionDetailsDialogWindow%27)&amp;Id=CancelChangesButton&amp;ButtonType=Default&amp;Text=Cancel"
+          ph="InteractionDetailsDialogWindow.Buttons" />
+        <r
           id="{B60FB581-44D1-4372-86A2-D6E494F020E1}"
           par="HeaderText=Add%20Interaction%20Page&amp;Id=AddInteractionPagesWindow"
           ph="Page.Body" />
