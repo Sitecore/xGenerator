@@ -43,8 +43,8 @@
       <HintPath>..\packages\51Degrees.mobi.3.1.11.1\lib\NET40\FiftyOne.Foundation.dll</HintPath>
     </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.4.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Components\HtmlAgilityPack.dll</HintPath>
+      <HintPath>..\packages\HtmlAgilityPack.1.4.6\lib\Net45\HtmlAgilityPack.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -77,6 +77,15 @@
     <Reference Include="Sitecore.Cintel.Client">
       <HintPath>..\Components\Sitecore.Cintel.Client.dll</HintPath>
     </Reference>
+    <Reference Include="Sitecore.EmailCampaign">
+      <HintPath>..\Components\Sitecore.EmailCampaign.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.EmailCampaign.Cd">
+      <HintPath>..\Components\Sitecore.EmailCampaign.Cd.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.EmailCampaign.Cm">
+      <HintPath>..\Components\Sitecore.EmailCampaign.Cm.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.ExperienceAnalytics">
       <HintPath>..\Components\Sitecore.ExperienceAnalytics.dll</HintPath>
     </Reference>
@@ -89,19 +98,17 @@
     <Reference Include="Sitecore.Mvc, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\ExmEvent.cs" />
     <Compile Include="Models\PageDefinition.cs" />
     <Compile Include="GetContextInfo.cs" />
     <Compile Include="Models\ItemInfo.cs" />
     <Compile Include="Processing\ChannelPatcher.cs" />
+    <Compile Include="Processing\PatchExmDateTimes.cs" />
     <Compile Include="Processing\ContactDataProcessor.cs" />
     <Compile Include="Processing\TriggerEventsAction.cs" />
     <Compile Include="Processing\GetSetHelpers.cs" />

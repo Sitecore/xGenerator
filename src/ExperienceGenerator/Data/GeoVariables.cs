@@ -33,6 +33,9 @@ namespace ExperienceGenerator.Data
 
             if (AdjustToTimeZone)
             {
+                target.Start = DateTime.SpecifyKind(target.Start, DateTimeKind.Utc);
+                target.End = DateTime.SpecifyKind(target.End, DateTimeKind.Utc);
+
                 target.Start = TimeZoneInfo.ConvertTimeFromUtc(target.Start, city.TimeZoneInfo);
                 target.End = TimeZoneInfo.ConvertTimeFromUtc(target.End, city.TimeZoneInfo);
             }
@@ -48,6 +51,6 @@ namespace ExperienceGenerator.Data
                     "Currency", "TimeZone"
                 };
             }
-        }        
+        }
     }
 }

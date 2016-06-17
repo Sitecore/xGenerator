@@ -4,31 +4,38 @@ using Sitecore.Analytics.Aggregation.Data.Model;
 
 namespace ExperienceGenerator.Client
 {
-  public static class WebApiConfig
-  {
-    public static void Register(HttpConfiguration config)
+    public static class WebApiConfig
     {
-      // Web API configuration and services
+        public static void Register(HttpConfiguration config)
+        {
+            // Web API configuration and services
 
-      // Web API routes
-      //config.MapHttpAttributeRoutes();
+            // Web API routes
+            //config.MapHttpAttributeRoutes();
 
-      //Disable dimension cache to enable flush of reporting database
-      Dimension.EnableCaching = false;
+            //Disable dimension cache to enable flush of reporting database
+            Dimension.EnableCaching = false;
 
-      XGenJobManager.Instance = new XGenSitecoreJobManager();
+            XGenJobManager.Instance = new XGenSitecoreJobManager();
+            ExmJobManager.Instance = new ExmJobManager();
 
-      config.Routes.MapHttpRoute(
-          name: "ExperienceGeneratorJobsApi",
-          routeTemplate: "api/xgen/jobs/{id}",
-          defaults: new { controller = "ExperienceGeneratorJobs", id = RouteParameter.Optional }
-      );
+            config.Routes.MapHttpRoute(
+                name: "ExperienceGeneratorExmJobsApi",
+                routeTemplate: "api/xgen/exmjobs/{action}/{id}",
+                defaults: new {controller = "ExperienceGeneratorExmJobs", action = "Index", id = RouteParameter.Optional}
+                );
 
-      config.Routes.MapHttpRoute(
+            config.Routes.MapHttpRoute(
+                name: "ExperienceGeneratorJobsApi",
+                routeTemplate: "api/xgen/jobs/{id}",
+                defaults: new {controller = "ExperienceGeneratorJobs", id = RouteParameter.Optional}
+                );
+
+            config.Routes.MapHttpRoute(
                 name: "ExperienceGeneratorActionsApi",
                 routeTemplate: "api/xgen/{action}/{id}",
-                defaults: new { controller = "ExperienceGeneratorActions", id = RouteParameter.Optional }
-            );
+                defaults: new {controller = "ExperienceGeneratorActions", id = RouteParameter.Optional}
+                );
+        }
     }
-  }
 }
