@@ -1,4 +1,5 @@
 using System;
+using ExperienceGenerator.Services;
 
 namespace ExperienceGenerator.Models.Exm
 {
@@ -30,5 +31,15 @@ namespace ExperienceGenerator.Models.Exm
         public string LastException { get; set; }
 
         public string StatusUrl { get; set; }
+
+        public int Threads
+        {
+            get { return ExmEventsGenerator.Threads; }
+        }
+
+        public int Errors
+        {
+            get { return ExmEventsGenerator.Errors; }
+        }
     }
 }

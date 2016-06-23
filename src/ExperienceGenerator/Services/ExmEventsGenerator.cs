@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Net.Http;
+using System.Threading;
 using Sitecore.Data;
 using Sitecore.Modules.EmailCampaign;
 using Sitecore.Modules.EmailCampaign.Core.Crypto;
@@ -16,44 +17,75 @@ namespace ExperienceGenerator.Services
 {
     public static class ExmEventsGenerator
     {
+        public static int Threads { get; set; }
+
+        public static int Errors { get; set; }
+
         public static IEnumerable<TSource> DistinctBy<TSource, TKey>
             (this IEnumerable<TSource> source, Func<TSource, TKey> keySelector)
+        {
+            HashSet<TKey> knownKeys = new HashSet<TKey>();
+            foreach (TSource element in source)
             {
-                HashSet<TKey> knownKeys = new HashSet<TKey>();
-                foreach (TSource element in source)
+                if (knownKeys.Add(keySelector(element)))
                 {
-                    if (knownKeys.Add(keySelector(element)))
-                    {
-                        yield return element;
-                    }
+                    yield return element;
+                }
+            }
+        }
+
+        public static async void RequestUrl(string url, string userAgent = null, string ip = null, string dateTime = null)
+        {
+            while (Threads > 50)
+            {
+                Thread.Sleep(100);
+            }
+
+            Threads++;
+
+            using (var client = new HttpClient())
+            {
+                if (userAgent != null)
+                {
+                    client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", userAgent);
+                }
+
+                if (ip != null)
+                {
+                    client.DefaultRequestHeaders.TryAddWithoutValidation("X-Forwarded-For", ip);
+                }
+
+                if (dateTime != null)
+                {
+                    client.DefaultRequestHeaders.TryAddWithoutValidation("X-Exm-RequestTime", dateTime);
+                }
+
+                var res = await client.PostAsync(url, new StringContent(string.Empty));
+                if (!res.IsSuccessStatusCode)
+                {
+                    Errors++;
                 }
             }
 
+            Threads--;
+        }
+
         public static void GenerateSent(string hostName, ID contactId, ID messageId, DateTime dateTime)
         {
-            using (var client = new HttpClient())
-            {
-                var url = string.Format("{0}/api/xgen/exmjobs/GenerateSent?contactId={1}&messageId={2}&date={3}", hostName, contactId, messageId, dateTime.ToString("u"));
-                var res = client.PostAsync(url, new StringContent(string.Empty)).Result;
-            }
+            var url = string.Format("{0}/api/xgen/exmjobs/GenerateSent?contactId={1}&messageId={2}&date={3}", hostName, contactId, messageId, dateTime.ToString("u"));
+            RequestUrl(url);
         }
 
         public static void GenerateBounce(string hostName, ID contactId, ID messageId, DateTime dateTime)
         {
-            using (var client = new HttpClient())
-            {
-                var url = string.Format("{0}/api/xgen/exmjobs/GenerateBounce?contactId={1}&messageId={2}&date={3}", hostName, contactId, messageId, dateTime.ToString("u"));
-                var res = client.PostAsync(url, new StringContent(string.Empty)).Result;
-            }
+            var url = string.Format("{0}/api/xgen/exmjobs/GenerateBounce?contactId={1}&messageId={2}&date={3}", hostName, contactId, messageId, dateTime.ToString("u"));
+            RequestUrl(url);
         }
 
         public static void GenerateSpamComplaint(string hostName, ID contactId, ID messageId, string email, DateTime dateTime)
         {
-            using (var client = new HttpClient())
-            {
-                var url = string.Format("{0}/api/xgen/exmjobs/GenerateSpam?contactId={1}&messageId={2}&email={3}&&date={4}", hostName, contactId, messageId, email, dateTime.ToString("u"));
-                var res = client.PostAsync(url, new StringContent(string.Empty)).Result;
-            }
+            var url = string.Format("{0}/api/xgen/exmjobs/GenerateSpam?contactId={1}&messageId={2}&email={3}&&date={4}", hostName, contactId, messageId, email, dateTime.ToString("u"));
+            RequestUrl(url);
         }
 
         public static void GenerateHandlerEvent(string hostName, Guid userId, MessageItem messageItem, ExmEvents exmEvent, DateTime dateTime, string userAgent = null, string ip = null, string link = null)
@@ -86,21 +118,8 @@ namespace ExperienceGenerator.Services
 
             var parameters = encryptedQueryString.ToQueryString(true);
 
-            using (var client = new HttpClient())
-            {
-                var url = string.Format("{0}/sitecore/{1}{2}", hostName, eventHandler, parameters);
-
-                //Add the user agent header. the device is resolved based on this user agent. use devices you want from http://www.useragentstring.com/. Also make sure Device Detection Service is subscribed to.
-                client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", userAgent);
-
-                //set what ever ip you want to set, the location is calculated based on the ip address. Remember to setup the configuration according to Sitecore IP Geolocation Service
-                client.DefaultRequestHeaders.TryAddWithoutValidation("X-Forwarded-For", ip);
-
-                client.DefaultRequestHeaders.TryAddWithoutValidation("X-Exm-RequestTime", dateTime.ToString("u"));
-
-                //Fire request to handler
-                var res = client.GetAsync(url).Result;
-            }
+            var url = string.Format("{0}/sitecore/{1}{2}", hostName, eventHandler, parameters);
+            RequestUrl(url, userAgent, ip, dateTime.ToString("u"));
         }
 
         private static NameValueCollection GetQueryParameters(Guid userId, ID messageId, string link = null)

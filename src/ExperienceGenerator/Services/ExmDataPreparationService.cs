@@ -192,7 +192,7 @@ namespace ExperienceGenerator.Services
 
             var sampleTemplate = _db.GetTemplate("{76036F5E-CBCE-46D1-AF0A-4143F9B557AA}");
 
-            var pageItemPath = Context.Site.StartPath + "/" + goal.Name;
+            var pageItemPath = Context.Site.StartPath + "/" + goal.Item;
             var pageItem = _db.GetItem(pageItemPath);
             if (pageItem == null)
             {
@@ -243,9 +243,16 @@ namespace ExperienceGenerator.Services
                 return;
             }
 
+            var contactIndex = 1;
             var contactsThisEmail = _contactsPerEmail[email.ID];
+            var numContactsForThisEmail = contactsThisEmail.Count;
             foreach (var contactId in contactsThisEmail)
             {
+                _specification.Job.Status = string.Format(
+                    "Generating events for contact {0} of {1}",
+                    contactIndex++,
+                    numContactsForThisEmail);
+
                 var contact = _contacts.FirstOrDefault(x => x.ContactId == contactId);
                 if (contact == null)
                 {
@@ -283,7 +290,7 @@ namespace ExperienceGenerator.Services
                             var link = "/";
                             if (_goalsSet != null)
                             {
-                                link += _goalsSet().Name;
+                                link += _goalsSet().Item;
                             }
 
                             ExmEventsGenerator.GenerateHandlerEvent(_managerRoot.Settings.BaseURL, contact.ContactId, email, ExmEvents.Click, eventDate, userAgent, ip, link);
@@ -411,8 +418,16 @@ namespace ExperienceGenerator.Services
 
             _contactsPerEmail[messageItem.ID] = new List<Guid>();
 
+
+            var numContactsForThisEmail = contactsForThisEmail.Count;
+
+            var contactIndex = 1;
             foreach (var contact in contactsForThisEmail)
             {
+                _specification.Job.Status = string.Format(
+                    "Sending email to contact {0} of {1}",
+                    contactIndex++,
+                    numContactsForThisEmail);
                 _contactsPerEmail[messageItem.ID].Add(contact.ContactId);
                 SendEmailToContact(contact, messageItem);
             }
@@ -583,16 +598,23 @@ namespace ExperienceGenerator.Services
             {
                 hasUnlocked = false;
 
+                var lockedLists = new List<string>();
                 foreach (var list in _lists)
                 {
                     if (_listManager.IsLocked(list))
                     {
                         hasUnlocked = true;
-                        break;
+                        lockedLists.Add(list.Name);
                     }
                 }
 
-                Thread.Sleep(1000);
+                if (hasUnlocked)
+                {
+                    _specification.Job.Status = string.Format(
+                        "Waiting for lists to unlock ({0})...", 
+                        string.Join(", ", lockedLists));
+                    Thread.Sleep(1000);
+                }
             } while (hasUnlocked);
         }
 
