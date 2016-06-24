@@ -1,5 +1,6 @@
 ﻿using System.Web.Http;
 using ExperienceGenerator.Client.Infrastructure;
+using ExperienceGenerator.Services.Exm;
 using Sitecore.Analytics.Aggregation.Data.Model;
 
 namespace ExperienceGenerator.Client

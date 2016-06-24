@@ -6,6 +6,8 @@ namespace ExperienceGenerator.Models.Exm
     {
         public int NumContacts { get; set; }
 
+        public decimal ContactGrowth { get; set; }
+
         public List<ExmSpecificList> SpecificLists { get; set; }
 
         public List<ExmSpecificCampaign> SpecificCampaigns { get; set; }

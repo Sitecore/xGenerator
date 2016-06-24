@@ -13,6 +13,16 @@ namespace ExperienceGenerator.Models.Exm
 
         public int DaysAgo { get; set; }
 
+        public DateTime DateEffective
+        {
+            get
+            {
+                return Date.HasValue
+                    ? Date.Value.ToUniversalTime()
+                    : DateTime.UtcNow.AddDays(-1*DaysAgo);
+            }
+        }
+
         public ExmEventPercentages Events { get; set; }
     }
 }

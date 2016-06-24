@@ -2,10 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ExperienceGenerator.Models.Exm;
-using ExperienceGenerator.Services;
 using Sitecore.Jobs;
 
-namespace ExperienceGenerator
+namespace ExperienceGenerator.Services.Exm
 {
     public class ExmJobManager
     {

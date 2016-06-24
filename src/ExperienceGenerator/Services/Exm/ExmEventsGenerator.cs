@@ -13,7 +13,7 @@ using Sitecore.Modules.EmailCampaign.Core.Extensions;
 using Sitecore.Modules.EmailCampaign.Core.Links;
 using Sitecore.Modules.EmailCampaign.Messages;
 
-namespace ExperienceGenerator.Services
+namespace ExperienceGenerator.Services.Exm
 {
     public static class ExmEventsGenerator
     {

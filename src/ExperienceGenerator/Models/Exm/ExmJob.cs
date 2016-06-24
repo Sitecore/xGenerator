@@ -1,5 +1,6 @@
 using System;
 using ExperienceGenerator.Services;
+using ExperienceGenerator.Services.Exm;
 
 namespace ExperienceGenerator.Models.Exm
 {

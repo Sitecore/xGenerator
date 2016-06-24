@@ -2,29 +2,18 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Globalization;
 using System.Linq;
-using System.Threading;
 using Colossus.Statistics;
 using ExperienceGenerator.Data;
 using ExperienceGenerator.Models.Exm;
 using Sitecore;
-using Sitecore.Analytics.Data;
 using Sitecore.Analytics.Data.Items;
-using Sitecore.Analytics.DataAccess;
-using Sitecore.Analytics.Model;
-using Sitecore.Analytics.Model.Entities;
 using Sitecore.Caching;
 using Sitecore.Common;
 using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 using Sitecore.EmailCampaign.Analytics.Model;
-using Sitecore.ListManagement;
-using Sitecore.ListManagement.ContentSearch.Model;
-using Sitecore.ListManagement.Services;
-using Sitecore.Marketing.Definitions;
-using Sitecore.Marketing.Definitions.Goals;
 using Sitecore.Modules.EmailCampaign;
 using Sitecore.Modules.EmailCampaign.Core;
 using Sitecore.Modules.EmailCampaign.Core.Dispatch;
@@ -34,29 +23,23 @@ using Sitecore.Modules.EmailCampaign.Factories;
 using Sitecore.Modules.EmailCampaign.Messages;
 using Sitecore.Publishing;
 using Sitecore.SecurityModel;
-using AuthenticationLevel = Sitecore.Analytics.Model.AuthenticationLevel;
-using Contact = Sitecore.Analytics.Tracking.Contact;
 using ContactData = Sitecore.ListManagement.ContentSearch.Model.ContactData;
 using Factory = Sitecore.Configuration.Factory;
 
-namespace ExperienceGenerator.Services
+namespace ExperienceGenerator.Services.Exm
 {
     public class ExmDataPreparationService
     {
         private readonly ExmDataPreparationModel _specification;
-        private readonly string[] _languages = { "en", "uk" };
-        private readonly ListManager<ContactList, ContactData> _listManager;
-        private readonly List<Contact> _contacts = new List<Contact>();
-        private readonly List<ContactList> _lists = new List<ContactList>();
-        private readonly List<ExmGoal> _goals = new List<ExmGoal>();
-        private Func<ExmGoal> _goalsSet;
         private readonly Random _random = new Random();
         private readonly Database _db = Factory.GetDatabase("master");
         private readonly Dictionary<string, List<Guid>> _contactsPerEmail = new Dictionary<string, List<Guid>>();
         private readonly List<Guid> _unsubscribeFromAllContacts = new List<Guid>();
-        private readonly ItemUtilExt _itemUtil = new ItemUtilExt();
         private readonly Func<string> _userAgent = FileHelpers.ReadLinesFromResource<GeoData>("ExperienceGenerator.Data.useragents.txt").ToArray().Uniform();
         private readonly Func<int> _eventDay;
+        private readonly ExmContactService _contactService;
+        private readonly ExmGoalService _goalService;
+        private readonly ExmListService _listService;
         private readonly Func<string> _ip = new[]
         {
             //Denmark
@@ -76,7 +59,10 @@ namespace ExperienceGenerator.Services
         public ExmDataPreparationService(ExmDataPreparationModel specification)
         {
             _specification = specification;
-            _listManager = (ListManager<ContactList, ContactData>)Factory.CreateObject("contactListManager", false);
+            _contactService = new ExmContactService(specification);
+            _goalService = new ExmGoalService(specification);
+            _listService = new ExmListService(specification, _contactService);
+
             _eventDay = specification.EventDayDistribution.Keys.Weighted(specification.EventDayDistribution.Values.ToArray());
         }
 
@@ -95,21 +81,21 @@ namespace ExperienceGenerator.Services
                     Cleanup();
 
                     _specification.Job.Status = "Creating goals...";
-                    CreateGoals();
+                    _goalService.CreateGoals();
 
                     _specification.Job.Status = "Smart Publish...";
                     PublishSmart();
 
                     _specification.Job.Status = "Creating contacts";
-                    CreateContacts();
+                    _contactService.CreateContacts(_specification.NumContacts);
 
                     _specification.Job.Status = "Creating lists...";
-                    CreateLists();
+                    _listService.CreateLists();
 
                     _specification.Job.Status = "Identify manager root...";
                     GetManagerRoot();
 
-                    //_specification.Job.Status = "Back-dating segments...";
+                    _specification.Job.Status = "Back-dating segments...";
                     BackDateSegments();
 
                     _specification.Job.Status = "Creating emails...";
@@ -141,7 +127,7 @@ namespace ExperienceGenerator.Services
                 }
             }
 
-            //ExperienceAnalytics.Segments
+            //TODO: Just clear ExperienceAnalytics.Segments
             CacheManager.ClearAllCaches();
         }
 
@@ -150,59 +136,6 @@ namespace ExperienceGenerator.Services
             var targetDatabases = new[] { Factory.GetDatabase("web") };
             var languages = _db.Languages;
             PublishManager.PublishSmart(_db, targetDatabases, languages);
-        }
-
-        private void CreateGoals()
-        {
-            if (_specification.Goals == null || !_specification.Goals.Any())
-            {
-                return;
-            }
-
-            foreach (var goal in _specification.Goals)
-            {
-                CreateGoal(goal);
-                _specification.Job.CompletedGoals++;
-            }
-
-            _goalsSet = _goals.ToArray().Uniform();
-        }
-
-        private void CreateGoal(ExmGoal goal)
-        {
-            _goals.Add(goal);
-
-            var goalItemPath = "/sitecore/system/Marketing Control Panel/Goals/" + goal.Name;
-            var goalItem = _db.GetItem(goalItemPath);
-            if (goalItem == null)
-            {
-                var goalTemplate = _db.GetTemplate("{475E9026-333F-432D-A4DC-52E03B75CB6B}");
-
-                goalItem = _db.CreateItemPath(goalItemPath, goalTemplate);
-                using (new EditContext(goalItem))
-                {
-                    goalItem["Points"] = goal.Points.ToString();
-                }
-
-                _itemUtil.ExecuteWorkflowCommandForItem(goalItem, ItemIds.DeployAnalyticsCommand);
-                var manager = DefinitionManagerFactory.Default.GetDefinitionManager<IGoalDefinition>("item");
-                var definition = manager.Get(goalItem.ID, CultureInfo.GetCultureInfo("en"));
-                manager.SaveAsync(definition, true);
-            }
-
-            var sampleTemplate = _db.GetTemplate("{76036F5E-CBCE-46D1-AF0A-4143F9B557AA}");
-
-            var pageItemPath = Context.Site.StartPath + "/" + goal.Item;
-            var pageItem = _db.GetItem(pageItemPath);
-            if (pageItem == null)
-            {
-                pageItem = _db.CreateItemPath(pageItemPath, sampleTemplate);
-
-                using (new EditContext(pageItem))
-                {
-                    pageItem["__Tracking"] = string.Format("<tracking><event id=\"{0}\" name=\"{1}\" /></tracking>", goalItem.ID, goalItem.DisplayName);
-                }
-            }
         }
 
         private void Cleanup()
@@ -253,7 +186,7 @@ namespace ExperienceGenerator.Services
                     contactIndex++,
                     numContactsForThisEmail);
 
-                var contact = _contacts.FirstOrDefault(x => x.ContactId == contactId);
+                var contact = _contactService.GetContact(contactId);
                 if (contact == null)
                 {
                     continue;
@@ -288,9 +221,9 @@ namespace ExperienceGenerator.Services
                             spamPercentage = 0.01;
 
                             var link = "/";
-                            if (_goalsSet != null)
+                            if (_goalService.GoalsSet != null)
                             {
-                                link += _goalsSet().Item;
+                                link += _goalService.GoalsSet().Item;
                             }
 
                             ExmEventsGenerator.GenerateHandlerEvent(_managerRoot.Settings.BaseURL, contact.ContactId, email, ExmEvents.Click, eventDate, userAgent, ip, link);
@@ -366,6 +299,19 @@ namespace ExperienceGenerator.Services
         {
             var totalDays = (int)(DateTime.UtcNow - _specification.RandomCampaigns.DateRangeStart).TotalDays;
 
+            var dates = new List<DateTime>();
+            for (var i = 0; i < _specification.RandomCampaigns.NumCampaigns; i++)
+            {
+                var daysAgo = _random.Next(0, totalDays);
+                var dateMessageSent = DateTime.UtcNow.Date.AddDays(-1 * daysAgo);
+                var secondsAgo = _random.Next(0, 86400);
+                dateMessageSent = dateMessageSent.AddSeconds(-1 * secondsAgo);
+                dates.Add(dateMessageSent);
+            }
+
+            // Sort dates so that growth over time makes sense
+            dates.Sort();
+
             var randomListNames = new List<string>();
             for (var i = 0; i < _specification.RandomLists.NumLists; i++)
             {
@@ -375,9 +321,7 @@ namespace ExperienceGenerator.Services
             for (var i = 0; i < _specification.RandomCampaigns.NumCampaigns; i++)
             {
                 var emailName = "Auto campaign " + i;
-
-                var daysAgo = _random.Next(0, totalDays);
-                var dateMessageSent = DateTime.UtcNow.AddDays(-1 * daysAgo);
+                var dateMessageSent = dates[i];
 
                 var numListsToTake = _random.Next(_specification.RandomCampaigns.ListsPerCampaignMin, _specification.RandomCampaigns.ListsPerCampaignMax);
                 var includeLists = randomListNames.OrderBy(x => Guid.NewGuid()).Take(numListsToTake).ToList();
@@ -388,19 +332,10 @@ namespace ExperienceGenerator.Services
 
         private void CreateAndSendSpecificCampaigns()
         {
-            foreach (var emailSpecification in _specification.SpecificCampaigns)
+            foreach (var emailSpecification in _specification.SpecificCampaigns.OrderBy(x => x.DateEffective))
             {
-                CreateAndSendSpecificCampaign(emailSpecification);
+                CreateAndSendEmail(emailSpecification.Name, emailSpecification.IncludeLists, emailSpecification.DateEffective, emailSpecification.Events);
             }
-        }
-
-        private void CreateAndSendSpecificCampaign(ExmSpecificCampaign emailSpecification)
-        {
-            var dateMessageSent = emailSpecification.Date.HasValue
-                ? emailSpecification.Date.Value.ToUniversalTime()
-                : DateTime.UtcNow.AddDays(-1 * emailSpecification.DaysAgo);
-
-            CreateAndSendEmail(emailSpecification.Name, emailSpecification.IncludeLists, dateMessageSent, emailSpecification.Events);
         }
 
         private void CreateAndSendEmail(string name, List<string> lists, DateTime dateMessageSent, ExmEventPercentages percentages)
@@ -418,7 +353,6 @@ namespace ExperienceGenerator.Services
 
             _contactsPerEmail[messageItem.ID] = new List<Guid>();
 
-
             var numContactsForThisEmail = contactsForThisEmail.Count;
 
             var contactIndex = 1;
@@ -435,6 +369,7 @@ namespace ExperienceGenerator.Services
             messageItem.Source.State = MessageState.Sent;
 
             GenerateEvents(messageItem, percentages);
+            _listService.GrowLists();
             _specification.Job.CompletedEmails++;
         }
 
@@ -507,12 +442,12 @@ namespace ExperienceGenerator.Services
 
             foreach (var listName in lists)
             {
-                var list = _lists.FirstOrDefault(x => x.Name.Equals(listName, StringComparison.InvariantCultureIgnoreCase));
+                var list = _listService.GetList(listName);
                 if (list != null)
                 {
                     messageItem.RecipientManager.AddIncludedRecipientListId(ID.Parse(list.Id));
 
-                    var contacts = _listManager.GetContacts(list);
+                    var contacts = _listService. ListManager.GetContacts(list);
                     contactsForThisEmail.AddRange(contacts);
                 }
             }
@@ -537,180 +472,6 @@ namespace ExperienceGenerator.Services
             messageItem.Source.UsePreferredLanguage = false;
 
             return messageItem;
-        }
-
-        private void CreateLists()
-        {
-            if (_specification.SpecificLists != null && _specification.SpecificLists.Any())
-            {
-                CreateSpecificLists();
-            }
-            else if (_specification.RandomLists != null)
-            {
-                CreateRandomLists();
-            }
-
-            WaitUntilListsUnlocked();
-        }
-
-        private void CreateRandomLists()
-        {
-            for (var i = 0; i < _specification.RandomLists.NumLists; i++)
-            {
-                var name = "Auto List " + i;
-                var xaList = CreateList(name);
-                _listManager.AssociateContacts(xaList, SelectRandomContacts(_specification.RandomLists.ContactsMin, _specification.RandomLists.ContactsMax));
-                _lists.Add(xaList);
-            }
-        }
-
-        private void CreateSpecificLists()
-        {
-            foreach (var listSpecification in _specification.SpecificLists)
-            {
-                var xaList = CreateList(listSpecification.Name);
-                _listManager.AssociateContacts(xaList, SelectRandomContacts(listSpecification.NumContacts));
-                _lists.Add(xaList);
-            }
-        }
-
-        private ContactList CreateList(string name)
-        {
-            var contactList = new ContactList
-            {
-                Name = name,
-                Owner = "xGenerator",
-                Type = ListRowType.ContactList
-            };
-
-            _listManager.Create(contactList);
-            _specification.Job.CompletedLists++;
-            return contactList;
-        }
-
-        private void WaitUntilListsUnlocked()
-        {
-            bool hasUnlocked;
-
-            _specification.Job.Status = "Waiting for lists to unlock...";
-
-            do
-            {
-                hasUnlocked = false;
-
-                var lockedLists = new List<string>();
-                foreach (var list in _lists)
-                {
-                    if (_listManager.IsLocked(list))
-                    {
-                        hasUnlocked = true;
-                        lockedLists.Add(list.Name);
-                    }
-                }
-
-                if (hasUnlocked)
-                {
-                    _specification.Job.Status = string.Format(
-                        "Waiting for lists to unlock ({0})...", 
-                        string.Join(", ", lockedLists));
-                    Thread.Sleep(1000);
-                }
-            } while (hasUnlocked);
-        }
-
-        private IEnumerable<ContactData> SelectRandomContacts(int min, int max)
-        {
-            var numberToTake = _random.Next(min, max);
-            return SelectRandomContacts(numberToTake);
-        }
-
-        private IEnumerable<ContactData> SelectRandomContacts(int numberToTake)
-        {
-            return _contacts.OrderBy(x => Guid.NewGuid()).Select(ContactToContactData).Take(numberToTake);
-        }
-
-        // TODO: Isn't this in Sitecore's API somewhere?
-        private ContactData ContactToContactData(Contact contact)
-        {
-            var result = new ContactData
-            {
-                ContactId = contact.ContactId,
-                Identifier = contact.Identifiers.Identifier
-            };
-
-            var contactPersonalInfo = contact.GetFacet<IContactPersonalInfo>("Personal");
-            result.FirstName = contactPersonalInfo.FirstName;
-            result.MiddleName = contactPersonalInfo.MiddleName;
-            result.Surname = contactPersonalInfo.Surname;
-            result.Nickname = contactPersonalInfo.Nickname;
-
-            if (contactPersonalInfo.BirthDate != null)
-            {
-                result.BirthDate = contactPersonalInfo.BirthDate.Value;
-            }
-
-            result.Gender = contactPersonalInfo.Gender;
-            result.JobTitle = contactPersonalInfo.JobTitle;
-            result.Suffix = contactPersonalInfo.Suffix;
-            result.Title = contactPersonalInfo.Title;
-
-            var contactEmailAddresses = contact.GetFacet<IContactEmailAddresses>("Emails");
-            result.PreferredEmail = contactEmailAddresses.Entries[contactEmailAddresses.Preferred].SmtpAddress;
-
-            result.IdentificationLevel = contact.Identifiers.IdentificationLevel.ToString();
-            result.Classification = contact.System.Classification;
-            result.VisitCount = contact.System.VisitCount;
-            result.Value = contact.System.Value;
-            result.IntegrationLabel = contact.System.IntegrationLabel;
-
-            return result;
-        }
-
-        private void CreateContacts()
-        {
-            for (var i = 0; i < _specification.NumContacts; i++)
-            {
-                var contact = CreateContact(i);
-                _contacts.Add(contact);
-                _specification.Job.CompletedContacts++;
-            }
-        }
-
-        private Contact CreateContact(int index)
-        {
-            var identifier = "XGen" + index;
-
-            var contactRepository = new ContactRepository();
-
-            var contact = contactRepository.LoadContactReadOnly(identifier);
-            if (contact != null)
-            {
-                return contact;
-            }
-
-            contact = contactRepository.CreateContact(ID.NewID);
-            contact.Identifiers.AuthenticationLevel = AuthenticationLevel.None;
-            contact.System.Classification = 0;
-            contact.ContactSaveMode = ContactSaveMode.AlwaysSave;
-            contact.Identifiers.Identifier = "XGen" + index;
-            contact.System.OverrideClassification = 0;
-            contact.System.Value = 0;
-            contact.System.VisitCount = 0;
-
-            var contactPreferences = contact.GetFacet<IContactPreferences>("Preferences");
-            contactPreferences.Language = _languages[index % _languages.Length];
-
-            var contactPersonalInfo = contact.GetFacet<IContactPersonalInfo>("Personal");
-            contactPersonalInfo.FirstName = Faker.Name.First();
-            contactPersonalInfo.Surname = Faker.Name.Last();
-
-            var contactEmailAddresses = contact.GetFacet<IContactEmailAddresses>("Emails");
-            contactEmailAddresses.Entries.Create("Work").SmtpAddress =
-                Faker.Internet.Email(string.Format("{0} {1}", contactPersonalInfo.FirstName, contactPersonalInfo.Surname));
-            contactEmailAddresses.Preferred = "Work";
-
-            contactRepository.SaveContact(contact, new ContactSaveOptions(true, null));
-            return contact;
         }
     }
 }

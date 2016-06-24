@@ -112,7 +112,7 @@
     <Compile Include="Data\GeoData.cs" />
     <Compile Include="Data\GeoVariables.cs" />
     <Compile Include="Data\ItemInfoClient.cs" />
-    <Compile Include="ExmJobManager.cs" />
+    <Compile Include="Services\Exm\ExmJobManager.cs" />
     <Compile Include="JobInfo.cs" />
     <Compile Include="JobSpecification.cs" />
     <Compile Include="JobType.cs" />
@@ -142,8 +142,11 @@
     <Compile Include="Parsing\ParseConfig.cs" />
     <Compile Include="Parsing\XGenParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\ExmDataPreparationService.cs" />
-    <Compile Include="Services\ExmEventsGenerator.cs" />
+    <Compile Include="Services\Exm\ExmContactService.cs" />
+    <Compile Include="Services\Exm\ExmDataPreparationService.cs" />
+    <Compile Include="Services\Exm\ExmEventsGenerator.cs" />
+    <Compile Include="Services\Exm\ExmGoalService.cs" />
+    <Compile Include="Services\Exm\ExmListService.cs" />
     <Compile Include="XGenJobManager.cs" />
   </ItemGroup>
   <ItemGroup>

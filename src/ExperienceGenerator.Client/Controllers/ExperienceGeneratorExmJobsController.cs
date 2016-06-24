@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Http;
 using ExperienceGenerator.Models.Exm;
+using ExperienceGenerator.Services.Exm;
 using Sitecore.Common;
 using Sitecore.EmailCampaign.Cm.Pipelines.HandleSentMessage;
 using Sitecore.EmailCampaign.Cm.Pipelines.HandleUndeliveredMessage;
