@@ -60,6 +60,22 @@ namespace AnalyticsUpdater.sitecore.shell.Applications.Dialogs
       }
     }
 
+    protected override bool ActivePageChanging(string page, ref string newpage)
+    {
+      if (page == "Settings")
+      {
+        var selectedDate = DateUtil.IsoDateToDateTime(this.BaseDate.Value);
+
+        if (selectedDate.Date >= DateTime.Now.Date)
+        {
+          SheerResponse.Alert("Source date should be less than the current date");
+          return false;
+        }
+      }
+
+      return true;
+    }
+
     protected override void ActivePageChanged(string page, string oldPage)
     {
       base.ActivePageChanged(page, oldPage);
