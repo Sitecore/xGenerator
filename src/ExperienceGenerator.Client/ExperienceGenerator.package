@@ -191,6 +191,7 @@
         <x-item>/bin/AnalyticsUpdater.dll</x-item>
         <x-item>/RefreshAnalytics.sql</x-item>
         <x-item>/sitecore/shell/Applications/Dialogs/UpdateAnalytics.xml</x-item>
+        <x-item>/sitecore/admin/RebuildAnalyticsIndex.aspx</x-item>
       </Entries>
       <Converter>
         <FileToEntryConverter>
