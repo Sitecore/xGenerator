@@ -1,4 +1,6 @@
-﻿namespace Colossus.Integration.Models
+﻿using Sitecore.Globalization;
+
+namespace Colossus.Integration.Models
 {
   using System;
   using System.Collections.Generic;
@@ -40,7 +42,7 @@
             this.SiteUrls = new Dictionary<string, ItemUrl>();
         }
 
-        public static ItemInfo FromItem(Item item, IEnumerable<string> websites = null, int? maxDepth = null)
+        public static ItemInfo FromItem(Item item, IEnumerable<string> websites = null, int? maxDepth = null, Language language = null)
         {
             var info = new ItemInfo();
             info.Id = item.ID.Guid;
@@ -75,6 +77,10 @@
                     Context.SetActiveSite(website);
                     var options = LinkManager.GetDefaultUrlOptions();                    
                     options.AlwaysIncludeServerUrl = true;
+                    if (language != null)
+                    {
+                      options.Language = language;
+                    }
 
                     info.SiteUrls[website] = new ItemUrl
                     {

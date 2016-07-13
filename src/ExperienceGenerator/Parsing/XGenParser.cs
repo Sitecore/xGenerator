@@ -172,6 +172,12 @@
       }));
 
 
+      Factories.Add("Language", VariableFactory.Lambda((segment, token, parser) =>
+      {
+        var languages = parser.ParseWeightedSet<string>(token);
+        segment.VisitVariables.AddOrReplace(Variables.Random("Language", languages));
+      }));
+
       Factories.Add("LandingPage", new LandingPageFactory());
     }
 

@@ -62,7 +62,7 @@ namespace ExperienceGenerator.Data
             }
             if (!string.IsNullOrEmpty(language))
             {
-                url.Append("&sc_language=").Append(language);
+                url.Append("&language=").Append(language);
             }
 
             return Request<ItemInfo[]>(url.ToString());
