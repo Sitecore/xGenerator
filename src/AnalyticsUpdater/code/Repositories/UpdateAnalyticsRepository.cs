@@ -100,7 +100,7 @@
         }
     }
 
-    private static void RebuildAnalyticsIndex()
+    public static void RebuildAnalyticsIndex()
     {
         using (new Sitecore.SecurityModel.SecurityDisabler())
         {

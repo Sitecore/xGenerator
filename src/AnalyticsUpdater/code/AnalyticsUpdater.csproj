@@ -21,7 +21,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
-	<RestorePackages>true</RestorePackages>
+    <RestorePackages>true</RestorePackages>
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -105,6 +105,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="RefreshAnalytics.sql" />
+    <Content Include="sitecore\admin\RebuildAnalyticsIndex.aspx" />
     <Content Include="sitecore\shell\Applications\Dialogs\UpdateAnalytics.xml" />
     <None Include="Web.config" />
   </ItemGroup>
@@ -113,6 +114,10 @@
     <Compile Include="Installer\PostSteps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\UpdateAnalyticsRepository.cs" />
+    <Compile Include="sitecore\admin\RebuildAnalyticsIndex.aspx.cs">
+      <DependentUpon>RebuildAnalyticsIndex.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="sitecore\shell\Applications\Dialogs\UpdateAnalytics.cs" />
     <Compile Include="sitecore\shell\Applications\Dialogs\WizardStatusForm.cs" />
   </ItemGroup>
@@ -127,7 +132,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>63564</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
