@@ -58,7 +58,7 @@ namespace ExperienceGenerator.Client.Controllers
       return SiteManager.GetSites().Select(s => new SiteContext(new Sitecore.Web.SiteInfo(s.Properties))).Select(site => new SiteInfo
       {
         Id = site.Name,
-        Host = site.HostName.Split('|')[0],
+        Host = StringUtil.GetString(site.TargetHostName.Split('|')[0], site.HostName.Split('|')[0]),
         StartPath = site.RootPath + site.StartItem,
         Label = site.Name,
         Database = site.Database != null ? site.Database.Name : ""
