@@ -12,7 +12,9 @@ using Sitecore.Analytics.Tracking;
 using Sitecore.Common;
 using Sitecore.Configuration;
 using Sitecore.Data;
+using Sitecore.Data.Managers;
 using Sitecore.Data.Serialization;
+using Sitecore.Globalization;
 
 namespace Colossus.Integration.Processing
 {
@@ -26,7 +28,7 @@ namespace Colossus.Integration.Processing
                 var ix = 0;
                 foreach (var o in outcomes)
                 {
-                    var defintion = Database.GetDatabase("master").GetItem(o.DefinitionId.ToID());
+                    var defintion = Database.GetDatabase("master").GetItem(o.DefinitionId.ToID(), LanguageManager.DefaultLanguage);
                     if (defintion == null || defintion.Versions.Count == 0)
                     {
                         throw new Exception("Outcome not found");

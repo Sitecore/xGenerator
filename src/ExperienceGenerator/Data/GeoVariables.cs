@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Colossus;
+using Colossus.Integration.Behaviors;
 
 namespace ExperienceGenerator.Data
 {
@@ -33,8 +34,11 @@ namespace ExperienceGenerator.Data
 
             if (AdjustToTimeZone)
             {
+              if (target.Start.Kind != DateTimeKind.Local && target.End.Kind != DateTimeKind.Local)
+              {
                 target.Start = TimeZoneInfo.ConvertTimeFromUtc(target.Start, city.TimeZoneInfo);
                 target.End = TimeZoneInfo.ConvertTimeFromUtc(target.End, city.TimeZoneInfo);
+              }
             }
         }
 
