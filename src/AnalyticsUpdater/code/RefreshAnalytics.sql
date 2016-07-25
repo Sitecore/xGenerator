@@ -1,4 +1,10 @@
-﻿CREATE PROCEDURE [dbo].[sp_sc_Refresh_Analytics]
+﻿IF OBJECT_ID('sp_sc_Refresh_Analytics', 'P') is not null
+BEGIN
+	DROP PROCEDURE [dbo].[sp_sc_Refresh_Analytics]
+END
+GO
+
+CREATE PROCEDURE [dbo].[sp_sc_Refresh_Analytics]
 	@lastUpdate DATETIME
 AS
 BEGIN
@@ -55,7 +61,7 @@ BEGIN
 	DECLARE tables_cursor CURSOR
 		FOR SELECT name
 		FROM sys.Tables
-		WHERE name LIKE 'Fact_%' OR name LIKE 'Segment%'
+		WHERE (name LIKE 'Fact_%' OR name LIKE 'Segment%') AND name<>'Fact_PageViewsByLanguage'
 	OPEN tables_cursor
 	FETCH NEXT FROM tables_cursor INTO @table_name
 
@@ -71,6 +77,10 @@ BEGIN
 		
 		if(@exist = 1)
 		BEGIN
+			select @sql = 'Delete FROM ' + @table_name + ' WHERE Date > '''+CONVERT(varchar(10), @lastUpdate, 20)+''' AND Date <= ''' + CONVERT(varchar(10), @today, 20) + ''' 
+			AND (Select count(1) from '+ @table_name + ' WHERE DATEADD(day,-'+@daysToAdd+', Date) <='''+CONVERT(varchar(10), @lastUpdate, 20)+''')>0'
+			EXEC sp_executesql @sql
+
 			SELECT @sql = 'UPDATE ' + @table_name + ' SET Date = DATEADD(day,'+@daysToAdd+', Date) WHERE Date <='''+CONVERT(varchar(10), @lastUpdate, 20)+''''
 			EXEC sp_executesql @sql
 		END

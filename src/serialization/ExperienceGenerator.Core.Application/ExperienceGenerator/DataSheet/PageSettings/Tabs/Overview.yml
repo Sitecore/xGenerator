@@ -20,156 +20,201 @@ SharedFields:
         id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
         <r
           id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
-          par="Id=Overview&amp;PaddingType=Top&amp;ShowBorder=0&amp;UsePadding=1" />
+          par="Id=Overview&amp;PaddingType=Top&amp;UsePadding=1&amp;ShowBorder=0"
+          uid="{FEE7F098-321B-4650-BA5B-F01FAE39581F}" />
         <r
           id="{442BD093-FBAD-4E36-BC08-489E16C82D08}"
           par="Id=OverviewExpander&amp;IsCollapsible=0"
-          ph="Overview.Content" />
+          ph="Overview.Content"
+          uid="{8B43E013-82AD-4C8A-B280-26ACAFBDDCFC}" />
         <r
           id="{C4393722-39FA-4869-9582-3A8EB8983A0D}"
-          par="Id=RowPanel1&amp;PaddingType=All&amp;UsePadding=1"
-          ph="OverviewExpander.Body" />
+          par="UsePadding=1&amp;Id=RowPanel1&amp;PaddingType=All"
+          ph="OverviewExpander.Body"
+          uid="{C9FF079B-E876-4BE3-82E7-8E148BE4217B}" />
         <r
           id="{5CB208F6-1860-426B-8221-FAA85B329848}"
-          par="GridColumns=4&amp;Id=VisitsCol"
-          ph="RowPanel1.Content" />
+          par="Id=VisitsCol&amp;GridColumns=4"
+          ph="RowPanel1.Content"
+          uid="{24815201-D92D-4C32-B92C-CD96ED4A21E0}" />
         <r
           id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
           par="Id=VisitsBorder&amp;UsePadding=0"
-          ph="VisitsCol.Content" />
+          ph="VisitsCol.Content"
+          uid="{712486F3-1301-4EB1-BF5D-68F8F25F646F}" />
         <r
-          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
           ds="{04281F02-818D-425E-8FAD-7795EBE64F6D}"
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
           par="Id=NumberOfUniqueVisitorsText"
-          ph="VisitsBorder.Content" />
+          ph="VisitsBorder.Content"
+          uid="{49F07B05-AF66-48F7-B641-ECB802AEF884}" />
         <r
           id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
-          par="Id=NumberOfUniqueVisitors&amp;Text=100"
-          ph="VisitsBorder.Content" />
+          par="Text=100&amp;Id=NumberOfUniqueVisitors"
+          ph="VisitsBorder.Content"
+          uid="{AFD5EDCD-A92C-445D-87AC-1E6D35EC1558}" />
         <r
-          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
           ds="{16DDA573-B59C-4B3A-8578-FB8FEFE8E23E}"
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
           par="Id=NumberOfVisitsGeneratedText"
-          ph="VisitsBorder.Content" />
+          ph="VisitsBorder.Content"
+          uid="{A34C078D-3BBF-4A4C-93D2-979860B4C8BE}" />
         <r
           id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
-          par="Id=NumberOfVisitsGenerated&amp;Text=500"
-          ph="VisitsBorder.Content" />
+          par="Text=500&amp;Id=NumberOfVisitsGenerated"
+          ph="VisitsBorder.Content"
+          uid="{A1F2F570-404B-49C9-B3F1-151DC74ACB49}" />
         <r
           id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
-          par="Id=BounceRateText&amp;Text=Bounce%20rate"
-          ph="VisitsBorder.Content" />
+          par="Id=BounceRateText&amp;Text=Bounce+rate"
+          ph="VisitsBorder.Content"
+          uid="{1E9F042B-CC72-44BB-A04E-9CE9A1423AA7}" />
         <r
-          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
           ds="{7C26EDFA-A15D-410B-B78D-3C95E89FD469}"
-          par="Id=BounceRate&amp;Text=5&amp;Type=range"
-          ph="VisitsBorder.Content" />
+          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
+          par="Type=range&amp;Text=5&amp;Id=BounceRate"
+          ph="VisitsBorder.Content"
+          uid="{C5DC4795-1BCF-4604-8EC7-6916C0C43E65}" />
         <r
-          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
           ds="{2F0E40F9-E210-483D-800C-E388D428651C}"
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
           par="Id=PercentageIdentifiedVisitorsText"
-          ph="VisitsBorder.Content" />
+          ph="VisitsBorder.Content"
+          uid="{15713E4F-1B53-44E4-87F9-F86F3BCF5EDE}" />
         <r
-          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
           ds="{7C26EDFA-A15D-410B-B78D-3C95E89FD469}"
-          par="Id=PercentageIdentifiedVisitors&amp;Text=20&amp;Type=range"
-          ph="VisitsBorder.Content" />
+          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
+          par="Type=range&amp;Text=20&amp;Id=PercentageIdentifiedVisitors"
+          ph="VisitsBorder.Content"
+          uid="{B538BED2-4453-43E4-919F-1B42FB0D4E44}" />
         <r
-          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
           ds="{187F31B7-FEF3-4ACB-B601-0454FC268486}"
-          par="Id=PageviewsPerVisitAvgText"
-          ph="VisitsBorder.Content" />
-        <r
-          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
-          par="Id=PageviewsPerVisitAvg&amp;Text=4"
-          ph="VisitsBorder.Content" />
-        <r
           id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
-          ds="{0D6001C4-4CA7-4615-B146-128763549F0F}"
-          par="Id=TimeSpentPerPageAvgText"
-          ph="VisitsBorder.Content" />
+          par="Id=PageviewsPerVisitAvgText"
+          ph="VisitsBorder.Content"
+          uid="{E59BC56F-47D5-49C5-AEB2-E1548139F10F}" />
         <r
           id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
-          par="Id=TimeSpentPerPageAvg&amp;Text=00%3A30"
-          ph="VisitsBorder.Content" />
+          par="Text=4&amp;Id=PageviewsPerVisitAvg"
+          ph="VisitsBorder.Content"
+          uid="{6D5FE81A-0200-4535-A3D8-C645140B34F3}" />
+        <r
+          ds="{0D6001C4-4CA7-4615-B146-128763549F0F}"
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
+          par="Id=TimeSpentPerPageAvgText"
+          ph="VisitsBorder.Content"
+          uid="{3FD228C7-710A-4970-8198-B237BB0FBDEF}" />
+        <r
+          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
+          par="Text=00%3a30&amp;Id=TimeSpentPerPageAvg"
+          ph="VisitsBorder.Content"
+          uid="{4F485DB3-A13D-4BB8-9BF5-A38CB6ECDD99}" />
         <r
           id="{5CB208F6-1860-426B-8221-FAA85B329848}"
-          par="GridColumns=4&amp;Id=TrafficDistributionCol"
-          ph="RowPanel1.Content" />
+          par="Id=TrafficDistributionCol&amp;GridColumns=4"
+          ph="RowPanel1.Content"
+          uid="{1AC43D3D-8641-4F2D-9263-D0F7ED9930AF}" />
         <r
           id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
           par="Id=TrafficDistributionBorder"
-          ph="TrafficDistributionCol.Content" />
+          ph="TrafficDistributionCol.Content"
+          uid="{3AD4F8B6-4BA9-4B5C-8D68-3F994118605B}" />
         <r
           id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
-          par="Id=TrafficText&amp;Text=Traffic%20distribution"
-          ph="TrafficDistributionBorder.Content" />
+          par="Id=TrafficText&amp;Text=Traffic+distribution"
+          ph="TrafficDistributionBorder.Content"
+          uid="{81A741E1-7185-400C-A0E1-FB75E5EF7E25}" />
+        <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=LanguageDistributionBorder&amp;PaddingType=All"
+          ph="TrafficDistributionCol.Content"
+          uid="{1E62A26C-B039-4DF1-B7A1-CF400043D463}" />
+        <r
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
+          par="Id=LanguageDistributionHeader&amp;Text=Languages"
+          ph="LanguageDistributionBorder.Content"
+          uid="{AB86DBC8-D4F4-4EF8-8795-FB49AAD8A00B}" />
         <r
           id="{C4393722-39FA-4869-9582-3A8EB8983A0D}"
-          par="Id=RowPanel2&amp;PaddingType=All&amp;UsePadding=1"
-          ph="OverviewExpander.Body" />
+          par="UsePadding=1&amp;Id=RowPanel2&amp;PaddingType=All"
+          ph="OverviewExpander.Body"
+          uid="{203B4D92-6A72-4468-B289-CEC612870BD7}" />
         <r
           id="{5CB208F6-1860-426B-8221-FAA85B329848}"
-          par="GridColumns=4&amp;Id=DatesCol"
-          ph="RowPanel2.Content" />
+          par="Id=DatesCol&amp;GridColumns=4"
+          ph="RowPanel2.Content"
+          uid="{2D79DCDF-7CD5-4C35-AA23-696A6CC71ED4}" />
         <r
           id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
           par="Id=DatesBorder&amp;PaddingType=Top&amp;UsePadding=1"
-          ph="DatesCol.Content" />
+          ph="DatesCol.Content"
+          uid="{B3711D07-8592-45D4-A493-AFB3D75DC398}" />
         <r
-          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
           ds="{2EE01475-D0FF-4230-8A3A-8218E1C6A8CF}"
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
           par="Id=StartDateText"
-          ph="DatesBorder.Content" />
+          ph="DatesBorder.Content"
+          uid="{C7BD3728-83EF-450D-BDDB-B34F25C027AD}" />
         <r
-          id="{3CAC8515-EA11-4B97-A1E5-546DC6FC5E59}"
           ds="{605849E7-5869-45A7-A1C6-2DFD8E84FA7B}"
-          par="Date=20140506T000000&amp;Id=StartDate"
-          ph="DatesBorder.Content" />
-        <r
-          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
-          ds="{03DCB85B-C4E0-49E6-8E6A-83530C87D1F3}"
-          par="Id=EndDateText"
-          ph="DatesBorder.Content" />
-        <r
           id="{3CAC8515-EA11-4B97-A1E5-546DC6FC5E59}"
+          par="Id=StartDate&amp;Date=20140506T000000"
+          ph="DatesBorder.Content"
+          uid="{BD634F3A-DFE5-4E82-92AD-03DDE92F2899}" />
+        <r
           ds="{03DCB85B-C4E0-49E6-8E6A-83530C87D1F3}"
-          par="Date=20150506T000000&amp;Id=EndDate"
-          ph="DatesBorder.Content" />
-        <r
           id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
-          ds="{50E2D15C-824B-4C55-90A6-94605D4B6DEE}"
-          par="Id=AnnualIncreaseInTrafficText"
-          ph="DatesBorder.Content" />
+          par="Id=EndDateText"
+          ph="DatesBorder.Content"
+          uid="{A69E03ED-C8F7-4E76-8B72-FDF24FB3F478}" />
         <r
-          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
+          ds="{03DCB85B-C4E0-49E6-8E6A-83530C87D1F3}"
+          id="{3CAC8515-EA11-4B97-A1E5-546DC6FC5E59}"
+          par="Id=EndDate&amp;Date=20150506T000000"
+          ph="DatesBorder.Content"
+          uid="{092D388D-BFED-4EBF-9AFF-771AC74058FF}" />
+        <r
+          ds="{50E2D15C-824B-4C55-90A6-94605D4B6DEE}"
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
+          par="Id=AnnualIncreaseInTrafficText"
+          ph="DatesBorder.Content"
+          uid="{D7D898D9-553D-4414-9C54-53B3B6AD209B}" />
+        <r
           ds="{7C26EDFA-A15D-410B-B78D-3C95E89FD469}"
-          par="Id=AnnualIncreaseInTraffic&amp;Type=range"
-          ph="DatesBorder.Content" />
+          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
+          par="Type=range&amp;Id=AnnualIncreaseInTraffic"
+          ph="DatesBorder.Content"
+          uid="{026C4EBE-948E-437D-8CC9-3F257FD1264B}" />
         <r
           id="{5CB208F6-1860-426B-8221-FAA85B329848}"
-          par="GridColumns=4&amp;Id=DailyCol"
-          ph="RowPanel2.Content" />
+          par="Id=DailyCol&amp;GridColumns=4"
+          ph="RowPanel2.Content"
+          uid="{8EF5C466-FEBB-4165-AFFA-4A419C23D48B}" />
         <r
           id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
           par="Id=DailyDistributionBorder&amp;PaddingType=Top&amp;UsePadding=1"
-          ph="DailyCol.Content" />
+          ph="DailyCol.Content"
+          uid="{6503BE34-A17A-416A-9E22-4B48F94157AD}" />
         <r
           id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
-          par="Id=DailyText&amp;Text=Daily%20distribution"
-          ph="DailyDistributionBorder.Content" />
+          par="Id=DailyText&amp;Text=Daily+distribution"
+          ph="DailyDistributionBorder.Content"
+          uid="{D476F17E-4CBD-4553-BE85-EEE69D257CC7}" />
         <r
           id="{5CB208F6-1860-426B-8221-FAA85B329848}"
-          par="GridColumns=4&amp;Id=MonthlyCol"
-          ph="RowPanel2.Content" />
+          par="Id=MonthlyCol&amp;GridColumns=4"
+          ph="RowPanel2.Content"
+          uid="{2911C0AC-E77B-4F0F-B3A3-6DC164BD9A02}" />
         <r
           id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
           par="Id=MonthlyDistributionBorder&amp;PaddingType=Top&amp;UsePadding=1"
-          ph="MonthlyCol.Content" />
+          ph="MonthlyCol.Content"
+          uid="{1D5D147C-5CE0-44DD-B048-7365DA4A4DE0}" />
         <r
           id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
-          par="Id=MonthlyText&amp;Text=Monthly%20distribution"
-          ph="MonthlyDistributionBorder.Content" />
+          par="Id=MonthlyText&amp;Text=Monthly+distribution"
+          ph="MonthlyDistributionBorder.Content"
+          uid="{224B9F87-8469-429E-863D-7A1FC4A97F8D}" />
       </d>
     </r>
 Languages:

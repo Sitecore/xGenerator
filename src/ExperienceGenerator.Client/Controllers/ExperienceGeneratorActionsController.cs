@@ -17,6 +17,7 @@ using ExperienceGenerator.Client.Models;
 using ExperienceGenerator.Data;
 using ExperienceGenerator.Models;
 using ExperienceGenerator.Parsing;
+using Sitecore.Globalization;
 using SiteInfo = ExperienceGenerator.Models.SiteInfo;
 
 namespace ExperienceGenerator.Client.Controllers
@@ -58,7 +59,7 @@ namespace ExperienceGenerator.Client.Controllers
       return SiteManager.GetSites().Select(s => new SiteContext(new Sitecore.Web.SiteInfo(s.Properties))).Select(site => new SiteInfo
       {
         Id = site.Name,
-        Host = site.HostName.Split('|')[0],
+        Host = StringUtil.GetString(site.TargetHostName.Split('|')[0], site.HostName.Split('|')[0]),
         StartPath = site.RootPath + site.StartItem,
         Label = site.Name,
         Database = site.Database != null ? site.Database.Name : ""
@@ -82,13 +83,19 @@ namespace ExperienceGenerator.Client.Controllers
     }
 
     [HttpGet]
-    public IEnumerable<ItemInfo> Items(string query, int? maxDepth = null)
+    public IEnumerable<ItemInfo> Items(string query, int? maxDepth = null, string language = null)
     {
       var db = Database.GetDatabase("web");
 
       foreach (var item in db.SelectItems(query))
       {
-        yield return ItemInfo.FromItem(item, GetSites(false).Select(w => w.Id), maxDepth);
+        Language itemLanguage = null;
+        if (!string.IsNullOrEmpty(language))
+        {
+          Language.TryParse(language, out itemLanguage);
+        }
+
+        yield return ItemInfo.FromItem(item, GetSites(false).Select(w => w.Id), maxDepth, itemLanguage);
       }
     }
 
@@ -164,6 +171,11 @@ namespace ExperienceGenerator.Client.Controllers
               .Select(e => new SelectionOption { Id = e.Id, Label = e.Label })
               .ToList();
 
+      options.Languages = Sitecore.Context.Database.GetLanguages().Select(x=>new SelectionOption() { DefaultWeight = 50, Label = x.CultureInfo.DisplayName, Id = x.Name}).ToList();
+      if (options.Languages.Count == 1)
+      {
+        options.Languages[0].DefaultWeight = 100;
+      }
 
       return options;
     }

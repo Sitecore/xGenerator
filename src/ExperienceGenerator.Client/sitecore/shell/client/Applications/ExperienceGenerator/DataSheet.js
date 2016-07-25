@@ -238,6 +238,7 @@ define(["sitecore", "underscore"], function (_sc, _) {
       var months = [{ Id: "January", Label: "January" }, { Id: "February", Label: "February" }, { Id: "March", Label: "March" }, { Id: "April", Label: "April" }, { Id: "May", Label: "May" }, { Id: "June", Label: "June" }, { Id: "July", Label: "July" }, { Id: "August", Label: "August" }, { Id: "September", Label: "September" }, { Id: "October", Label: "October" }, { Id: "November", Label: "November" }, { Id: "December", Label: "December" }];
 
       this.createSliders("TrafficDistributionBorder", this.uiSetup.Websites);
+      this.createSliders("LanguageDistributionBorder", this.uiSetup.Languages);
       this.createSliders("DailyDistributionBorder", days);
       this.createSliders("MonthlyDistributionBorder", months);
       this.fillListTab("Location");
@@ -476,6 +477,7 @@ define(["sitecore", "underscore"], function (_sc, _) {
       this.data = {};
       this.readDomValues("Overview", "Visits");
       this.readDomValues("Overview", "TrafficDistribution");
+      this.readDomValues("Overview", "LanguageDistribution");
       this.readDomValues("Locations");
       this.readDomValues("Overview", "DailyDistribution");
       this.readDomValues("Overview", "MonthlyDistribution");
@@ -541,7 +543,9 @@ define(["sitecore", "underscore"], function (_sc, _) {
         Campaign: {
           Percentage: 1 * doc.Campaigns.Percentage / 100,
           Weights: this.toWeights(doc.Campaigns)
-        }
+        },
+
+        Language: this.toWeights(doc.Overview.LanguageDistribution)
       }
 
       delete (defaultSegment.Channel.Weights.Percentage);

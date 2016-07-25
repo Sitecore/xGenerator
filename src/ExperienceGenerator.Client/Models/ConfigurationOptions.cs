@@ -6,6 +6,7 @@
   {
     public string Version { get; set; }
     public List<SelectionOption> Websites { get; set; }
+    public List<SelectionOption> Languages { get; set; }
     public List<SelectionOptionGroup> LocationGroups { get; set; }
     public List<SelectionOption> Campaigns { get; set; }
     public List<OptionTypes> ChannelTypes { get; set; }
