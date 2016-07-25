@@ -1,10 +1,4 @@
-﻿IF OBJECT_ID('sp_sc_Refresh_Analytics', 'P') is not null
-BEGIN
-	DROP PROCEDURE [dbo].[sp_sc_Refresh_Analytics]
-END
-GO
-
-CREATE PROCEDURE [dbo].[sp_sc_Refresh_Analytics]
+﻿CREATE PROCEDURE [dbo].[sp_sc_Refresh_Analytics]
 	@lastUpdate DATETIME
 AS
 BEGIN
