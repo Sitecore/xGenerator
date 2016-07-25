@@ -21,62 +21,77 @@ SharedFields:
         <r
           id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
           par="Id=Channels&amp;PaddingType=Top&amp;UsePadding=1&amp;ShowBorder=0"
-          uid="{A8743F31-F1ED-45E5-8F82-04529D82B079}" />
+          uid="{696D14A5-27CD-4745-8F01-EF159E9B379F}" />
         <r
           id="{442BD093-FBAD-4E36-BC08-489E16C82D08}"
           par="Id=ChannelsTrafficExpander&amp;Header=Channel+traffic&amp;IsCollapsible=0"
           ph="Channels.Content"
-          uid="{798C7174-06CF-4FAE-A6A9-A60D38FADF84}" />
+          uid="{0E658DF6-82DC-454F-A5B3-84F488BE5573}" />
         <r
           id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
           par="Id=AddCampaignsBorder&amp;PaddingType=All&amp;UsePadding=1"
           ph="ChannelsTrafficExpander.Body"
-          uid="{04056889-987A-4567-A009-17AE2416F8AD}" />
+          uid="{D6C2FE7C-E97F-4CBC-A859-EC581861D303}" />
         <r
           id="{C4393722-39FA-4869-9582-3A8EB8983A0D}"
           par="Id=RowPanel2"
           ph="AddCampaignsBorder.Content"
-          uid="{38049D31-853C-4C3C-9172-783AD2D9A0D7}" />
+          uid="{2EF11533-E526-464C-82BF-FF31E8318468}" />
         <r
           id="{5CB208F6-1860-426B-8221-FAA85B329848}"
           par="Id=ColumnPanel1&amp;GridColumns=6"
           ph="RowPanel2.Content"
-          uid="{1F1F1E3C-B16B-477C-8DF7-4A36C4F3A276}" />
+          uid="{E8A66A4B-CDFC-43EB-8C9F-ECF4B008DEC7}" />
         <r
           id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
           par="Id=Text1&amp;Text=Percentage+of+traffic+with+explicitly+set+channel"
           ph="ColumnPanel1.Content"
-          uid="{9E6B5759-D9CC-437D-9F9A-AA1C52E32348}" />
+          uid="{D1EF4C33-640E-43C1-91AC-547296F29B43}" />
         <r
           id="{5CB208F6-1860-426B-8221-FAA85B329848}"
           par="Id=ColumnPanel2&amp;GridColumns=6"
           ph="RowPanel2.Content"
-          uid="{1F1F1E3C-B16B-477C-8DF7-4A36C4F3A276}" />
+          uid="{D9989A7F-1AB6-4F1B-82ED-550963F1B09E}" />
         <r
           id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
-          par="Type=range&amp;IsEnabled=1&amp;Text=0&amp;Id=Percentage&amp;IsVisible=1"
+          par="Type=range&amp;Text=0&amp;Id=Percentage"
           ph="ColumnPanel2.Content"
-          uid="{A7CC99E5-353F-4BB4-B4F6-9CD9A48E1BF1}" />
+          uid="{C4193238-C9F2-4782-ABBC-20E881D5A2A3}" />
         <r
           id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
           par="Id=ChannelsListBorder&amp;PaddingType=Top&amp;UsePadding=1&amp;ShowBorder=0"
           ph="Channels.Content"
-          uid="{CAC52FAB-2CB3-4949-A24F-8C4ADF6765AE}" />
+          uid="{81449479-B48A-4A87-BC9B-89ED2CE3A16C}" />
         <r
           id="{442BD093-FBAD-4E36-BC08-489E16C82D08}"
-          par="Id=ChannelsExpander&amp;IsCollapsible=0"
+          par="Id=ChannelsExpander&amp;Header=Online+Channels&amp;IsCollapsible=0"
           ph="Channels.Content"
-          uid="{798C7174-06CF-4FAE-A6A9-A60D38FADF84}" />
+          uid="{C81E61C2-9D78-4F35-AF42-68E7BB27D0E1}" />
         <r
           id="{C4393722-39FA-4869-9582-3A8EB8983A0D}"
-          par="UsePadding=1&amp;Id=RowPanel1&amp;PaddingType=All"
+          par="UsePadding=1&amp;Id=OnlineRowPanel&amp;PaddingType=All"
           ph="ChannelsExpander.Body"
-          uid="{91D04020-4D57-44C5-A310-FD3F0FDF4F5A}" />
+          uid="{C70A415F-3F03-44B4-AD9C-7F6A50FC08E1}" />
         <r
           id="{5CB208F6-1860-426B-8221-FAA85B329848}"
-          par="Id=ChannelPanel&amp;GridColumns=12"
-          ph="RowPanel1.Content"
-          uid="{15F81A71-CA79-43EF-8C9A-3F6E8131B748}" />
+          par="Id=OnlineChannelPanel&amp;GridColumns=12"
+          ph="OnlineRowPanel.Content"
+          uid="{19C6CE40-5566-4004-A181-5F0D1D7FB3CF}" />
+        <r
+          id="{442BD093-FBAD-4E36-BC08-489E16C82D08}"
+          par="Id=OfflineChannelsExpander&amp;Header=Offline+Channels&amp;IsCollapsible=0"
+          ph="Channels.Content"
+          uid="{557F3344-38AB-4BDB-9FC8-336C122930CF}" />
+        <r
+          id="{C4393722-39FA-4869-9582-3A8EB8983A0D}"
+          par="UsePadding=1&amp;Id=OfflineRowPanel&amp;PaddingType=All"
+          ph="OfflineChannelsExpander.Body"
+          uid="{FDA3AAD7-D66F-489A-98E4-07232F223397}" />
+        <r
+          id="{5CB208F6-1860-426B-8221-FAA85B329848}"
+          par="Id=OfflineChannelPanel&amp;GridColumns=12"
+          ph="OfflineRowPanel.Content"
+          uid="{AAA5DD1B-A3FD-42E4-8C14-70C49D22CC98}" />
       </d>
     </r>
 Languages:

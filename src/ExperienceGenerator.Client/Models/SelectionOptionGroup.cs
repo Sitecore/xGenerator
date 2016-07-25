@@ -8,5 +8,4 @@
 
     public IEnumerable<SelectionOption> Options { get; set; }
   }
-
 }

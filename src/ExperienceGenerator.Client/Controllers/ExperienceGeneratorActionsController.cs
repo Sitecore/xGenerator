@@ -30,6 +30,7 @@ namespace ExperienceGenerator.Client.Controllers
   using Newtonsoft.Json.Linq;
   using Sitecore.Analytics.Data.Items;
   using Sitecore.Data.Engines;
+  using Sitecore.Data.Items;
 
   public class ExperienceGeneratorActionsController : ApiController
   {
@@ -109,25 +110,15 @@ namespace ExperienceGenerator.Client.Controllers
         Options = region.SubRegions.Select(x=> new SelectionOption() { Id = x.Id, Label = x.Label, DefaultWeight = 50})}).ToList();
 
       var db = Database.GetDatabase("master");
-      var online = db.GetItem(KnownItems.OnlineChannelRoot);
+      var channels = db.GetItem(KnownItems.ChannelsRoot);
 
       options.Version = "0.1";
 
-      options.ChannelGroups =
-          online.Children.Where(c => c.TemplateID == ChannelgroupItem.TemplateID).Select(cg => new SelectionOptionGroup
-          {
-            Label = cg.Name,
-            Options = 
-                  cg.Children.Where(c => c.TemplateID == ChannelItem.TemplateID)
-                      .Select(c => new SelectionOption
-                      {
-                        Id = c.ID.ToString(),
-                        Label = c.Name,
-                        DefaultWeight = c.Name == "Direct" ? 50 : 0
-                      })
-                      .OrderBy(item => item.Label)
-                      .ToList()
-          }).ToList();
+      options.ChannelTypes = channels.Children.Where(x=>x.TemplateID == ChanneltypeItem.TemplateID).Select(x=>new OptionTypes()
+      {
+        Type = x.DisplayName,
+        OptionGroups = SelectChannelGroups(x)
+      }).ToList();
       var outcomes = db.GetItem(KnownItems.OutcomesRoot);
       var taxonomyRoot = db.GetItem(KnownItems.TaxonomyRoot);
 
@@ -175,6 +166,24 @@ namespace ExperienceGenerator.Client.Controllers
 
 
       return options;
+    }
+
+    private static IEnumerable<SelectionOptionGroup> SelectChannelGroups(Item channelsRoot)
+    {
+      return channelsRoot.Children.Where(c => c.TemplateID == ChannelgroupItem.TemplateID).Select(cg => new SelectionOptionGroup
+      {
+        Label = cg.Name,
+        Options =
+          cg.Children.Where(c => c.TemplateID == ChannelItem.TemplateID)
+            .Select(c => new SelectionOption
+            {
+              Id = c.ID.ToString(),
+              Label = c.Name,
+              DefaultWeight = c.Name == "Direct" ? 50 : 0
+            })
+            .OrderBy(item => item.Label)
+            .ToList()
+      }).ToList();
     }
 
     [HttpPost]

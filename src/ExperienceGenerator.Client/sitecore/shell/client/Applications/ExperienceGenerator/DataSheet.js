@@ -132,7 +132,7 @@ define(["sitecore", "underscore"], function (_sc, _) {
       var output = "";
       var that = this;
       var $target = $("div[data-sc-id='" + targetBorderId + "']");
-      output += "<div class='landingpage'>";
+      output += "<div class='landing page'>";
       output += "<div class='channel-innerlabel truncate'>" + text + "</div><div class='landingpage-channel-slider'>";
       //if (action == "Delete") {
       output += "<input class='form-control sc-textbox sc-ds-slider' data-sc-id='" + datascid + "' type='range' value='" + weight + "'/>";
@@ -183,10 +183,28 @@ define(["sitecore", "underscore"], function (_sc, _) {
       target.append(output);
     },
 
-    fillListTab: function (tab) {
-      var prevSectionLabel, selectionLabel;
+    fillListTab: function(tab) {
+      
       output = "";
+
+      var types = this.uiSetup[tab + "Types"];
+      if (types != null) {
+        for (var typeIdx in types) {
+          var type = types[typeIdx];
+          output = this.extractGroups(type["OptionGroups"]);
+          $("div[data-sc-id='" + type['Type'] + tab + "Panel']").append(output);
+        }
+        return;
+      }
+      
       var p = this.uiSetup[tab + "Groups"];
+      output = this.extractGroups(p);
+      $("div[data-sc-id='" + tab + "Panel']").append(output);
+    },
+
+    extractGroups: function (p) {
+      var prevSectionLabel, sectionLabel;
+      var output = "";
       for (var key in p) {
         if (p.hasOwnProperty(key)) {
           var c = p[key].Options;
@@ -207,7 +225,7 @@ define(["sitecore", "underscore"], function (_sc, _) {
           }
         }
       }
-      $("div[data-sc-id='" + tab + "Panel']").append(output);
+      return output;
     },
 
     populate: function (data) {

@@ -190,6 +190,7 @@
     <Compile Include="Infrastructure\SitecoreRouteInitializer.cs" />
     <Compile Include="Infrastructure\XGenSitecoreJobManager.cs" />
     <Compile Include="KnownItems.cs" />
+    <Compile Include="Models\OptionTypes.cs" />
     <Compile Include="Models\SelectionOptionGroup.cs" />
     <Compile Include="Models\ConfigurationOptions.cs" />
     <Compile Include="Models\ContactPreset.cs" />
