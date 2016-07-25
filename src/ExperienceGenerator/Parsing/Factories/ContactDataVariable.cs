@@ -1,42 +1,40 @@
 ﻿namespace ExperienceGenerator.Parsing.Factories
 {
-  using System;
-  using System.Collections.Generic;
-  using Colossus;
-  using Faker;
+    using System.Collections.Generic;
+    using Colossus;
+    using Faker;
 
-  public class ContactDataVariable : VisitorVariablesBase
-
-  {
-    public double IdentifiedPercentage { get; set; }
-
-    public ContactDataVariable(double identifiedPercentage)
+    public class ContactDataVariable : VisitorVariablesBase
     {
-      this.IdentifiedPercentage = identifiedPercentage;
-    }
+        public static int VisitorIndex;
 
-    public override void SetValues(SimulationObject target)
-    {
-      if (Randomness.Random.NextDouble() < this.IdentifiedPercentage)
-      {
-        target.Variables["ContactId"] = "XGen" + Guid.NewGuid().ToString("N");
+        public double IdentifiedPercentage { get; set; }
 
+        public ContactDataVariable(double identifiedPercentage)
+        {
+            this.IdentifiedPercentage = identifiedPercentage;
+        }
 
-        var firstname = Name.First();
-        var lastname = Name.Last();
-        var email = Internet.Email(firstname + " " + lastname);
+        public override void SetValues(SimulationObject target)
+        {
+            if (Randomness.Random.NextDouble() < this.IdentifiedPercentage)
+            {
+                target.Variables["ContactId"] = "XGen" + VisitorIndex;
+                VisitorIndex++;
 
-        target.Variables["ContactFirstName"] = firstname;
-        target.Variables["ContactLastName"] = lastname;
-        target.Variables["ContactEmail"] = email;
+                var firstname = Name.First();
+                var lastname = Name.Last();
+                var email = Internet.Email(firstname + " " + lastname);
 
-        //target.Variables["Cont"] = "Colossus" + Guid.NewGuid();
-      }
-    }
+                target.Variables["ContactFirstName"] = firstname;
+                target.Variables["ContactLastName"] = lastname;
+                target.Variables["ContactEmail"] = email;
+            }
+        }
 
-    public override IEnumerable<string> ProvidedVariables => new[]
-    {
+        public override IEnumerable<string> ProvidedVariables => new[]
+        {
       "ContactId", "ContactFirstName", "ContactLastName", "ContactEmail"
-    };
-  }
+        };
+    }
 }

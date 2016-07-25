@@ -59,7 +59,7 @@
     </Reference>
     <Reference Include="Sitecore.Analytics, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\inetpub\wwwroot\habitat.local\Website\bin\Sitecore.Analytics.dll</HintPath>
+      <HintPath>..\Components\Sitecore.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Analytics.Model, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Sitecore.FakeDb, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
@@ -75,7 +75,7 @@
     </Reference>
     <Reference Include="Sitecore.Logging, Version=1.2.0.30715, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\inetpub\wwwroot\habitat.local\Website\bin\Sitecore.Logging.dll</HintPath>
+      <HintPath>..\Components\Sitecore.Logging.dll</HintPath>
     </Reference>
     <Reference Include="sitecore.nexus">
       <HintPath>..\Components\sitecore.nexus.dll</HintPath>

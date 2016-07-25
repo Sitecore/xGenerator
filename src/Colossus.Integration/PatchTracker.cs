@@ -1,17 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 using Colossus.Integration.Processing;
-using Colossus.Web;
-using Sitecore;
 using Sitecore.Analytics;
 using Sitecore.Analytics.Pipelines.InitializeTracker;
-using Sitecore.Analytics.Tracking;
 using Sitecore.Diagnostics;
-using Sitecore.ItemWebApi;
 
 namespace Colossus.Integration
 {
@@ -24,11 +17,10 @@ namespace Colossus.Integration
             Patchers = new List<ISessionPatcher>();
 
             //TODO: Add to config
-            Patchers.Add(new ChannelPatcher());            
+            Patchers.Add(new ChannelPatcher());
             Patchers.Add(new GeoPatcher());
             Patchers.Add(new TimePatcher());
-            Patchers.Add(new ContactDataProcessor());         
-                        
+            Patchers.Add(new ContactDataProcessor());
         }
 
         public void AddPatcher(ISessionPatcher patcher)
@@ -38,17 +30,45 @@ namespace Colossus.Integration
 
         public override void Process(InitializeTrackerArgs args)
         {
-            var requestInfo = HttpContext.Current.ColossusInfo();
-            if (requestInfo != null)
-            {                
-                if (Tracker.Current != null && Tracker.IsActive)
-                {
-                    foreach (var patcher in Patchers)
-                    {                           
-                        patcher.UpdateSession(args.Session, requestInfo);
-                    }
-                }
+            if (Tracker.Current == null || !Tracker.IsActive)
+            {
+                return;
             }
+
+            var requestInfo = HttpContext.Current.ColossusInfo();
+            if (requestInfo == null)
+            {
+                if (PatchExmRequestTime(args)) return;
+            }
+
+            if (requestInfo == null)
+            {
+                return;
+            }
+
+            foreach (var patcher in Patchers)
+            {
+                patcher.UpdateSession(args.Session, requestInfo);
+            }
+        }
+
+        private bool PatchExmRequestTime(InitializeTrackerArgs args)
+        {
+            var exmRequestTime = args.HttpContext.Request.Headers["X-Exm-RequestTime"];
+            if (string.IsNullOrEmpty(exmRequestTime))
+            {
+                return false;
+            }
+
+            DateTime requestTime;
+            if (!DateTime.TryParse(exmRequestTime, out requestTime))
+            {
+                return false;
+            }
+
+            args.Session.Interaction.StartDateTime = requestTime;
+            args.Session.Interaction.EndDateTime = requestTime.AddSeconds(5);
+            return true;
         }
     }
 }
