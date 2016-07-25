@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Threading;
 using Colossus.Statistics;
 using ExperienceGenerator.Data;
 using ExperienceGenerator.Models.Exm;
@@ -79,6 +80,12 @@ namespace ExperienceGenerator.Services.Exm
                 {
                     _specification.Job.Status = "Cleanup...";
                     Cleanup();
+
+                    if (_specification.RebuildMasterIndex)
+                    {
+                        _specification.Job.Status = "Rebuilding master index...";
+                        Sitecore.ContentSearch.ContentSearchManager.GetIndex("sitecore_master_index").Rebuild();
+                    }
 
                     _specification.Job.Status = "Creating goals...";
                     _goalService.CreateGoals();
@@ -347,8 +354,8 @@ namespace ExperienceGenerator.Services.Exm
 
             var dateMessageFinished = dateMessageSent.AddMinutes(5);
 
-            AdjustEmailStats(messageItem, sendingProcessData, dateMessageSent, dateMessageFinished);
-
+            AdjustEmailStatsWithRetry(messageItem, sendingProcessData, dateMessageSent, dateMessageFinished, 30);
+            
             PublishEmail(messageItem, sendingProcessData);
 
             _contactsPerEmail[messageItem.ID] = new List<Guid>();
@@ -362,8 +369,16 @@ namespace ExperienceGenerator.Services.Exm
                     "Sending email to contact {0} of {1}",
                     contactIndex++,
                     numContactsForThisEmail);
-                _contactsPerEmail[messageItem.ID].Add(contact.ContactId);
-                SendEmailToContact(contact, messageItem);
+
+                try
+                {
+                    SendEmailToContact(contact, messageItem);
+                    _contactsPerEmail[messageItem.ID].Add(contact.ContactId);
+                }
+                catch (Exception ex)
+                {
+                    _specification.Job.LastException = ex.ToString();
+                }
             }
 
             messageItem.Source.State = MessageState.Sent;
@@ -403,6 +418,26 @@ namespace ExperienceGenerator.Services.Exm
             };
 
             new PublishDispatchItems().Process(dispatchArgs);
+        }
+
+        private void AdjustEmailStatsWithRetry(MessageItem messageItem, SendingProcessData sendingProcessData,
+            DateTime dateMessageSent, DateTime dateMessageFinished, int retryCount)
+        {
+            int sleepTime = 1000;
+
+            for (var i = 0; i < retryCount; i++)
+            {
+                try
+                {
+                    AdjustEmailStats(messageItem, sendingProcessData, dateMessageSent, dateMessageFinished);
+                    return;
+                }
+                catch (Exception)
+                {
+                    Thread.Sleep(sleepTime);
+                    sleepTime += 1000;
+                }
+            }
         }
 
         private void AdjustEmailStats(MessageItem messageItem, SendingProcessData sendingProcessData, DateTime dateMessageSent, DateTime dateMessageFinished)

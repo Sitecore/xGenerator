@@ -36,35 +36,34 @@ namespace ExperienceGenerator.Services.Exm
 
         public static async void RequestUrl(string url, string userAgent = null, string ip = null, string dateTime = null)
         {
-            while (Threads > 50)
+            while (Threads > 10)
             {
-                Thread.Sleep(100);
+                Thread.Sleep(1000);
             }
 
             Threads++;
 
-            using (var client = new HttpClient())
+            // Don't use IDisposable HttpClient, seems to cause problems with threads
+            var client = new HttpClient();
+            if (userAgent != null)
             {
-                if (userAgent != null)
-                {
-                    client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", userAgent);
-                }
+                client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", userAgent);
+            }
 
-                if (ip != null)
-                {
-                    client.DefaultRequestHeaders.TryAddWithoutValidation("X-Forwarded-For", ip);
-                }
+            if (ip != null)
+            {
+                client.DefaultRequestHeaders.TryAddWithoutValidation("X-Forwarded-For", ip);
+            }
 
-                if (dateTime != null)
-                {
-                    client.DefaultRequestHeaders.TryAddWithoutValidation("X-Exm-RequestTime", dateTime);
-                }
+            if (dateTime != null)
+            {
+                client.DefaultRequestHeaders.TryAddWithoutValidation("X-Exm-RequestTime", dateTime);
+            }
 
-                var res = await client.PostAsync(url, new StringContent(string.Empty));
-                if (!res.IsSuccessStatusCode)
-                {
-                    Errors++;
-                }
+            var res = await client.PostAsync(url, new StringContent(string.Empty));
+            if (!res.IsSuccessStatusCode)
+            {
+                Errors++;
             }
 
             Threads--;

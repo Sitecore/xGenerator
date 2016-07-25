@@ -4,6 +4,8 @@ namespace ExperienceGenerator.Models.Exm
 {
     public class ExmDataPreparationModel
     {
+        public bool RebuildMasterIndex { get; set; }
+
         public int NumContacts { get; set; }
 
         public decimal ContactGrowth { get; set; }

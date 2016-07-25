@@ -48,6 +48,7 @@ namespace ExperienceGenerator.Services.Exm
             var contact = contactRepository.LoadContactReadOnly(identifier);
             if (contact != null)
             {
+                DoContactCreated(contact);
                 return contact;
             }
 
@@ -72,11 +73,11 @@ namespace ExperienceGenerator.Services.Exm
                 Faker.Internet.Email(string.Format("{0} {1}", contactPersonalInfo.FirstName, contactPersonalInfo.Surname));
             contactEmailAddresses.Preferred = "Work";
 
-            contactRepository.SaveContact(contact, new ContactSaveOptions(true, null));
+            var leaseOwner = new LeaseOwner("CONTACT_CREATE", LeaseOwnerType.OutOfRequestWorker);
+            var options = new ContactSaveOptions(true, leaseOwner, null);
+            contactRepository.SaveContact(contact, options);
 
-            _contacts.Add(contact);
-            _specification.Job.CompletedContacts++;
-            ContactCount++;
+            DoContactCreated(contact);
             return contact;
         }
 
@@ -130,6 +131,13 @@ namespace ExperienceGenerator.Services.Exm
             result.IntegrationLabel = contact.System.IntegrationLabel;
 
             return result;
+        }
+
+        private void DoContactCreated(Contact contact)
+        {
+            _contacts.Add(contact);
+            _specification.Job.CompletedContacts++;
+            ContactCount++;
         }
     }
 }
