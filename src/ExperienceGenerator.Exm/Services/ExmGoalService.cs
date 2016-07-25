@@ -1,20 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using Colossus.Statistics;
-using ExperienceGenerator.Models.Exm;
-using Sitecore;
-using Sitecore.Configuration;
-using Sitecore.Data;
-using Sitecore.Data.Items;
-using Sitecore.Marketing.Definitions;
-using Sitecore.Marketing.Definitions.Goals;
-using Sitecore.Modules.EmailCampaign.Core;
-
-namespace ExperienceGenerator.Services.Exm
+﻿namespace ExperienceGenerator.Exm.Services
 {
-    public class ExmGoalService
+  using System;
+  using System.Collections.Generic;
+  using System.Globalization;
+  using System.Linq;
+  using Colossus.Statistics;
+  using ExperienceGenerator.Exm.Models;
+  using Sitecore;
+  using Sitecore.Configuration;
+  using Sitecore.Data;
+  using Sitecore.Data.Items;
+  using Sitecore.Marketing.Definitions;
+  using Sitecore.Marketing.Definitions.Goals;
+  using Sitecore.Modules.EmailCampaign.Core;
+
+  public class ExmGoalService
     {
         private readonly ExmDataPreparationModel _specification;
         private readonly List<ExmGoal> _goals = new List<ExmGoal>();
@@ -25,54 +25,54 @@ namespace ExperienceGenerator.Services.Exm
 
         public ExmGoalService(ExmDataPreparationModel specification)
         {
-            _specification = specification;
+            this._specification = specification;
         }
 
         public void CreateGoals()
         {
-            if (_specification.Goals == null || !_specification.Goals.Any())
+            if (this._specification.Goals == null || !this._specification.Goals.Any())
             {
                 return;
             }
 
-            foreach (var goal in _specification.Goals)
+            foreach (var goal in this._specification.Goals)
             {
-                CreateGoal(goal);
-                _specification.Job.CompletedGoals++;
+                this.CreateGoal(goal);
+                this._specification.Job.CompletedGoals++;
             }
 
-            GoalsSet = _goals.ToArray().Uniform();
+            this.GoalsSet = this._goals.ToArray().Uniform();
         }
 
         public void CreateGoal(ExmGoal goal)
         {
-            _goals.Add(goal);
+            this._goals.Add(goal);
 
             var goalItemPath = "/sitecore/system/Marketing Control Panel/Goals/" + goal.Name;
-            var goalItem = _db.GetItem(goalItemPath);
+            var goalItem = this._db.GetItem(goalItemPath);
             if (goalItem == null)
             {
-                var goalTemplate = _db.GetTemplate("{475E9026-333F-432D-A4DC-52E03B75CB6B}");
+                var goalTemplate = this._db.GetTemplate("{475E9026-333F-432D-A4DC-52E03B75CB6B}");
 
-                goalItem = _db.CreateItemPath(goalItemPath, goalTemplate);
+                goalItem = this._db.CreateItemPath(goalItemPath, goalTemplate);
                 using (new EditContext(goalItem))
                 {
                     goalItem["Points"] = goal.Points.ToString();
                 }
 
-                _itemUtil.ExecuteWorkflowCommandForItem(goalItem, ItemIds.DeployAnalyticsCommand);
+                this._itemUtil.ExecuteWorkflowCommandForItem(goalItem, ItemIds.DeployAnalyticsCommand);
                 var manager = DefinitionManagerFactory.Default.GetDefinitionManager<IGoalDefinition>("item");
                 var definition = manager.Get(goalItem.ID, CultureInfo.GetCultureInfo("en"));
                 manager.SaveAsync(definition, true);
             }
 
-            var sampleTemplate = _db.GetTemplate("{76036F5E-CBCE-46D1-AF0A-4143F9B557AA}");
+            var sampleTemplate = this._db.GetTemplate("{76036F5E-CBCE-46D1-AF0A-4143F9B557AA}");
 
             var pageItemPath = Context.Site.StartPath + "/" + goal.Item;
-            var pageItem = _db.GetItem(pageItemPath);
+            var pageItem = this._db.GetItem(pageItemPath);
             if (pageItem == null)
             {
-                pageItem = _db.CreateItemPath(pageItemPath, sampleTemplate);
+                pageItem = this._db.CreateItemPath(pageItemPath, sampleTemplate);
 
                 using (new EditContext(pageItem))
                 {

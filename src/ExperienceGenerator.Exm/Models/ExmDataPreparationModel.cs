@@ -1,8 +1,8 @@
-using System.Collections.Generic;
-
-namespace ExperienceGenerator.Models.Exm
+namespace ExperienceGenerator.Exm.Models
 {
-    public class ExmDataPreparationModel
+  using System.Collections.Generic;
+
+  public class ExmDataPreparationModel
     {
         public bool RebuildMasterIndex { get; set; }
 

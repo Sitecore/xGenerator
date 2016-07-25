@@ -1,8 +1,8 @@
-using System;
-
-namespace ExperienceGenerator.Models.Exm
+namespace ExperienceGenerator.Exm.Models
 {
-    public class ExmRandomCampaignsDefinition
+  using System;
+
+  public class ExmRandomCampaignsDefinition
     {
         public int NumCampaigns { get; set; }
 

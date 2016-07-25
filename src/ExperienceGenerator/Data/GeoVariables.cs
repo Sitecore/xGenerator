@@ -41,7 +41,6 @@ namespace ExperienceGenerator.Data
                 target.End = TimeZoneInfo.ConvertTimeFromUtc(target.End, city.TimeZoneInfo);
               }
             }
-        }
 
         public override IEnumerable<string> ProvidedVariables
         {

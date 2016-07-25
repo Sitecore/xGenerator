@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using ExperienceGenerator.Models.Exm;
-using Sitecore.Analytics.Data;
-using Sitecore.Analytics.DataAccess;
-using Sitecore.Analytics.Model;
-using Sitecore.Analytics.Model.Entities;
-using Sitecore.Analytics.Tracking;
-using Sitecore.Data;
-using ContactData = Sitecore.ListManagement.ContentSearch.Model.ContactData;
-
-namespace ExperienceGenerator.Services.Exm
+﻿namespace ExperienceGenerator.Exm.Services
 {
-    public class ExmContactService
+  using System;
+  using System.Collections.Generic;
+  using System.Linq;
+  using ExperienceGenerator.Exm.Models;
+  using Sitecore.Analytics.Data;
+  using Sitecore.Analytics.DataAccess;
+  using Sitecore.Analytics.Model;
+  using Sitecore.Analytics.Model.Entities;
+  using Sitecore.Analytics.Tracking;
+  using Sitecore.Data;
+
+  public class ExmContactService
     {
         private readonly ExmDataPreparationModel _specification;
         private readonly string[] _languages = { "en", "uk" };
@@ -23,20 +22,20 @@ namespace ExperienceGenerator.Services.Exm
 
         public ExmContactService(ExmDataPreparationModel specification)
         {
-            _specification = specification;
+            this._specification = specification;
         }
 
         public void CreateContacts(int numContacts)
         {
             for (var i = 0; i < numContacts; i++)
             {
-                CreateContact(i);
+                this.CreateContact(i);
             }
         }
 
         public Contact GetContact(Guid id)
         {
-            return _contacts.FirstOrDefault(x => x.ContactId == id);
+            return this._contacts.FirstOrDefault(x => x.ContactId == id);
         }
 
         public Contact CreateContact(int index)
@@ -48,7 +47,7 @@ namespace ExperienceGenerator.Services.Exm
             var contact = contactRepository.LoadContactReadOnly(identifier);
             if (contact != null)
             {
-                DoContactCreated(contact);
+                this.DoContactCreated(contact);
                 return contact;
             }
 
@@ -62,7 +61,7 @@ namespace ExperienceGenerator.Services.Exm
             contact.System.VisitCount = 0;
 
             var contactPreferences = contact.GetFacet<IContactPreferences>("Preferences");
-            contactPreferences.Language = _languages[index % _languages.Length];
+            contactPreferences.Language = this._languages[index % this._languages.Length];
 
             var contactPersonalInfo = contact.GetFacet<IContactPersonalInfo>("Personal");
             contactPersonalInfo.FirstName = Faker.Name.First();
@@ -77,29 +76,29 @@ namespace ExperienceGenerator.Services.Exm
             var options = new ContactSaveOptions(true, leaseOwner, null);
             contactRepository.SaveContact(contact, options);
 
-            DoContactCreated(contact);
+            this.DoContactCreated(contact);
             return contact;
         }
 
-        public List<ContactData> SelectRandomContacts(int min, int max)
+        public List<Sitecore.ListManagement.ContentSearch.Model.ContactData> SelectRandomContacts(int min, int max)
         {
-            var numberToTake = _random.Next(min, max);
-            return SelectRandomContacts(numberToTake);
+            var numberToTake = this._random.Next(min, max);
+            return this.SelectRandomContacts(numberToTake);
         }
 
-        public List<ContactData> SelectRandomContacts(int numberToTake)
+        public List<Sitecore.ListManagement.ContentSearch.Model.ContactData> SelectRandomContacts(int numberToTake)
         {
-            return _contacts
+            return this._contacts
                 .OrderBy(x => Guid.NewGuid())
-                .Select(ContactToContactData)
+                .Select(this.ContactToContactData)
                 .Take(numberToTake)
                 .ToList();
         }
 
         // TODO: Isn't this in Sitecore's API somewhere?
-        public ContactData ContactToContactData(Contact contact)
+        public Sitecore.ListManagement.ContentSearch.Model.ContactData ContactToContactData(Contact contact)
         {
-            var result = new ContactData
+            var result = new Sitecore.ListManagement.ContentSearch.Model.ContactData
             {
                 ContactId = contact.ContactId,
                 Identifier = contact.Identifiers.Identifier
@@ -135,9 +134,9 @@ namespace ExperienceGenerator.Services.Exm
 
         private void DoContactCreated(Contact contact)
         {
-            _contacts.Add(contact);
-            _specification.Job.CompletedContacts++;
-            ContactCount++;
+            this._contacts.Add(contact);
+            this._specification.Job.CompletedContacts++;
+            this.ContactCount++;
         }
     }
 }

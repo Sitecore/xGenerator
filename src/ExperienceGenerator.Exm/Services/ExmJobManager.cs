@@ -1,12 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using ExperienceGenerator.Models.Exm;
-using Sitecore.Jobs;
-
-namespace ExperienceGenerator.Services.Exm
+namespace ExperienceGenerator.Exm.Services
 {
-    public class ExmJobManager
+  using System;
+  using System.Collections.Generic;
+  using System.Linq;
+  using ExperienceGenerator.Exm.Models;
+  using Sitecore.Jobs;
+
+  public class ExmJobManager
     {
         public static ExmJobManager Instance;
 
@@ -15,7 +15,7 @@ namespace ExperienceGenerator.Services.Exm
         public ExmJob StartJob(ExmDataPreparationModel specification)
         {
             specification.Job = new ExmJob();
-            _jobs.Add(specification);
+            this._jobs.Add(specification);
             var options = new JobOptions("ExperienceGeneratorExm-" + specification.Job.Id, "ExperienceGenerator", Sitecore.Context.Site.Name, this, "Run", new object[] { specification });
             JobManager.Start(options);
             return specification.Job;
@@ -29,7 +29,7 @@ namespace ExperienceGenerator.Services.Exm
 
         public ExmJob Poll(Guid id)
         {
-            var spec = _jobs.FirstOrDefault(x => x.Job.Id == id);
+            var spec = this._jobs.FirstOrDefault(x => x.Job.Id == id);
             return spec == null ? null : spec.Job;
         }
     }

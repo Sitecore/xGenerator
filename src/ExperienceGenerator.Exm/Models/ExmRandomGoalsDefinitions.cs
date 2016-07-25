@@ -1,4 +1,4 @@
-namespace ExperienceGenerator.Models.Exm
+namespace ExperienceGenerator.Exm.Models
 {
     public class ExmRandomGoalsDefinitions
     {

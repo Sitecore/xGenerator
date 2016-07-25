@@ -1,16 +1,15 @@
-using System;
-using ExperienceGenerator.Services;
-using ExperienceGenerator.Services.Exm;
-
-namespace ExperienceGenerator.Models.Exm
+namespace ExperienceGenerator.Exm.Models
 {
-    public class ExmJob
+  using System;
+  using ExperienceGenerator.Exm.Services;
+
+  public class ExmJob
     {
         public Guid Id { get; set; }
 
         public ExmJob()
         {
-            Id = Guid.NewGuid();
+            this.Id = Guid.NewGuid();
         }
 
         public DateTime? Started { get; set; }

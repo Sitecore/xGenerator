@@ -1,39 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Threading;
-using Colossus.Statistics;
-using ExperienceGenerator.Data;
-using ExperienceGenerator.Models.Exm;
-using Sitecore;
-using Sitecore.Analytics.Data.Items;
-using Sitecore.Caching;
-using Sitecore.Common;
-using Sitecore.Data;
-using Sitecore.Data.Items;
-using Sitecore.Diagnostics;
-using Sitecore.EmailCampaign.Analytics.Model;
-using Sitecore.Modules.EmailCampaign;
-using Sitecore.Modules.EmailCampaign.Core;
-using Sitecore.Modules.EmailCampaign.Core.Dispatch;
-using Sitecore.Modules.EmailCampaign.Core.Gateways;
-using Sitecore.Modules.EmailCampaign.Core.Pipelines.DispatchNewsletter;
-using Sitecore.Modules.EmailCampaign.Factories;
-using Sitecore.Modules.EmailCampaign.Messages;
-using Sitecore.Publishing;
-using Sitecore.SecurityModel;
-using ContactData = Sitecore.ListManagement.ContentSearch.Model.ContactData;
-using Factory = Sitecore.Configuration.Factory;
+﻿using ContactData = Sitecore.ListManagement.ContentSearch.Model.ContactData;
 
-namespace ExperienceGenerator.Services.Exm
+namespace ExperienceGenerator.Exm.Services
 {
-    public class ExmDataPreparationService
+  using System;
+  using System.Collections.Generic;
+  using System.Configuration;
+  using System.Data.SqlClient;
+  using System.Linq;
+  using System.Threading;
+  using Colossus.Statistics;
+  using ExperienceGenerator.Data;
+  using ExperienceGenerator.Exm.Models;
+  using Sitecore;
+  using Sitecore.Analytics.Data.Items;
+  using Sitecore.Caching;
+  using Sitecore.Common;
+  using Sitecore.Data;
+  using Sitecore.Data.Items;
+  using Sitecore.Diagnostics;
+  using Sitecore.EmailCampaign.Analytics.Model;
+  using Sitecore.Modules.EmailCampaign;
+  using Sitecore.Modules.EmailCampaign.Core;
+  using Sitecore.Modules.EmailCampaign.Core.Dispatch;
+  using Sitecore.Modules.EmailCampaign.Core.Gateways;
+  using Sitecore.Modules.EmailCampaign.Core.Pipelines.DispatchNewsletter;
+  using Sitecore.Modules.EmailCampaign.Factories;
+  using Sitecore.Modules.EmailCampaign.Messages;
+  using Sitecore.Publishing;
+  using Sitecore.SecurityModel;
+
+  public class ExmDataPreparationService
     {
         private readonly ExmDataPreparationModel _specification;
         private readonly Random _random = new Random();
-        private readonly Database _db = Factory.GetDatabase("master");
+        private readonly Database _db = Sitecore.Configuration.Factory.GetDatabase("master");
         private readonly Dictionary<string, List<Guid>> _contactsPerEmail = new Dictionary<string, List<Guid>>();
         private readonly List<Guid> _unsubscribeFromAllContacts = new List<Guid>();
         private readonly Func<string> _userAgent = FileHelpers.ReadLinesFromResource<GeoData>("ExperienceGenerator.Data.useragents.txt").ToArray().Uniform();
@@ -59,18 +59,18 @@ namespace ExperienceGenerator.Services.Exm
 
         public ExmDataPreparationService(ExmDataPreparationModel specification)
         {
-            _specification = specification;
-            _contactService = new ExmContactService(specification);
-            _goalService = new ExmGoalService(specification);
-            _listService = new ExmListService(specification, _contactService);
+            this._specification = specification;
+            this._contactService = new ExmContactService(specification);
+            this._goalService = new ExmGoalService(specification);
+            this._listService = new ExmListService(specification, this._contactService);
 
-            _eventDay = specification.EventDayDistribution.Keys.Weighted(specification.EventDayDistribution.Values.ToArray());
+            this._eventDay = specification.EventDayDistribution.Keys.Weighted(specification.EventDayDistribution.Values.ToArray());
         }
 
         public void CreateData()
         {
-            _specification.Job.JobStatus = JobStatus.Running;
-            _specification.Job.Started = DateTime.Now;
+            this._specification.Job.JobStatus = JobStatus.Running;
+            this._specification.Job.Started = DateTime.Now;
 
             Context.SetActiveSite("website");
 
@@ -78,48 +78,48 @@ namespace ExperienceGenerator.Services.Exm
             {
                 using (new SecurityDisabler())
                 {
-                    _specification.Job.Status = "Cleanup...";
-                    Cleanup();
+                    this._specification.Job.Status = "Cleanup...";
+                    this.Cleanup();
 
-                    if (_specification.RebuildMasterIndex)
+                    if (this._specification.RebuildMasterIndex)
                     {
-                        _specification.Job.Status = "Rebuilding master index...";
+                        this._specification.Job.Status = "Rebuilding master index...";
                         Sitecore.ContentSearch.ContentSearchManager.GetIndex("sitecore_master_index").Rebuild();
                     }
 
-                    _specification.Job.Status = "Creating goals...";
-                    _goalService.CreateGoals();
+                    this._specification.Job.Status = "Creating goals...";
+                    this._goalService.CreateGoals();
 
-                    _specification.Job.Status = "Smart Publish...";
-                    PublishSmart();
+                    this._specification.Job.Status = "Smart Publish...";
+                    this.PublishSmart();
 
-                    _specification.Job.Status = "Creating contacts";
-                    _contactService.CreateContacts(_specification.NumContacts);
+                    this._specification.Job.Status = "Creating contacts";
+                    this._contactService.CreateContacts(this._specification.NumContacts);
 
-                    _specification.Job.Status = "Creating lists...";
-                    _listService.CreateLists();
+                    this._specification.Job.Status = "Creating lists...";
+                    this._listService.CreateLists();
 
-                    _specification.Job.Status = "Identify manager root...";
-                    GetManagerRoot();
+                    this._specification.Job.Status = "Identify manager root...";
+                    this.GetManagerRoot();
 
-                    _specification.Job.Status = "Back-dating segments...";
-                    BackDateSegments();
+                    this._specification.Job.Status = "Back-dating segments...";
+                    this.BackDateSegments();
 
-                    _specification.Job.Status = "Creating emails...";
-                    CreateAndSendCampaigns();
+                    this._specification.Job.Status = "Creating emails...";
+                    this.CreateAndSendCampaigns();
                 }
 
-                _specification.Job.Status = "DONE!";
-                _specification.Job.JobStatus = JobStatus.Complete;
+                this._specification.Job.Status = "DONE!";
+                this._specification.Job.JobStatus = JobStatus.Complete;
             }
             catch (Exception ex)
             {
-                _specification.Job.JobStatus = JobStatus.Failed;
-                _specification.Job.LastException = ex.ToString();
+                this._specification.Job.JobStatus = JobStatus.Failed;
+                this._specification.Job.LastException = ex.ToString();
                 Log.Error("Failed", ex, this);
             }
 
-            _specification.Job.Ended = DateTime.Now;
+            this._specification.Job.Ended = DateTime.Now;
         }
 
         private void BackDateSegments()
@@ -140,17 +140,17 @@ namespace ExperienceGenerator.Services.Exm
 
         private void PublishSmart()
         {
-            var targetDatabases = new[] { Factory.GetDatabase("web") };
-            var languages = _db.Languages;
-            PublishManager.PublishSmart(_db, targetDatabases, languages);
+            var targetDatabases = new[] { Sitecore.Configuration.Factory.GetDatabase("web") };
+            var languages = this._db.Languages;
+            PublishManager.PublishSmart(this._db, targetDatabases, languages);
         }
 
         private void Cleanup()
         {
             var emailsPath = "/sitecore/content/Email Campaign/Messages/" + DateTime.Now.Year;
-            _db.GetItem(emailsPath)?.Delete();
+            this._db.GetItem(emailsPath)?.Delete();
 
-            var serviceMessages = _db.SelectItems("/sitecore/content/Email Campaign/Messages/Service Messages//*[@@templatename='HTML Message']");
+            var serviceMessages = this._db.SelectItems("/sitecore/content/Email Campaign/Messages/Service Messages//*[@@templatename='HTML Message']");
             foreach (var serviceMessage in serviceMessages)
             {
                 if (serviceMessage.Fields["Campaign"].Value != string.Empty)
@@ -164,12 +164,12 @@ namespace ExperienceGenerator.Services.Exm
             }
 
             var engagementPlansPath = "/sitecore/system/Marketing Control Panel/Engagement Plans/Email Campaign/Emails/" + DateTime.Now.Year;
-            _db.GetItem(engagementPlansPath)?.Delete();
+            this._db.GetItem(engagementPlansPath)?.Delete();
 
             var campaignsPath = "/sitecore/system/Marketing Control Panel/Campaigns/Emails/" + DateTime.Now.Year;
-            _db.GetItem(campaignsPath)?.Delete();
+            this._db.GetItem(campaignsPath)?.Delete();
 
-            var lists = _db.SelectItems("/sitecore/system/List Manager/All Lists/*[@@templatename='Contact List']");
+            var lists = this._db.SelectItems("/sitecore/system/List Manager/All Lists/*[@@templatename='Contact List']");
             foreach (var list in lists)
             {
                 list.Delete();
@@ -184,83 +184,83 @@ namespace ExperienceGenerator.Services.Exm
             }
 
             var contactIndex = 1;
-            var contactsThisEmail = _contactsPerEmail[email.ID];
+            var contactsThisEmail = this._contactsPerEmail[email.ID];
             var numContactsForThisEmail = contactsThisEmail.Count;
             foreach (var contactId in contactsThisEmail)
             {
-                _specification.Job.Status = string.Format(
+                this._specification.Job.Status = string.Format(
                     "Generating events for contact {0} of {1}",
                     contactIndex++,
                     numContactsForThisEmail);
 
-                var contact = _contactService.GetContact(contactId);
+                var contact = this._contactService.GetContact(contactId);
                 if (contact == null)
                 {
                     continue;
                 }
 
-                var bouncePercentage = GetRandomPercentage(percentages.BounceMin, percentages.BounceMax);
-                if (_random.NextDouble() < bouncePercentage)
+                var bouncePercentage = this.GetRandomPercentage(percentages.BounceMin, percentages.BounceMax);
+                if (this._random.NextDouble() < bouncePercentage)
                 {
-                    ExmEventsGenerator.GenerateBounce(_managerRoot.Settings.BaseURL, contact.ContactId.ToID(), email.MessageId.ToID(), email.StartTime.AddMinutes(1));
+                    ExmEventsGenerator.GenerateBounce(this._managerRoot.Settings.BaseURL, contact.ContactId.ToID(), email.MessageId.ToID(), email.StartTime.AddMinutes(1));
                 }
                 else
                 {
-                    var userAgent = _userAgent();
-                    var ip = _ip();
-                    var eventDay = _eventDay();
-                    var seconds = _random.Next(60, 86400);
+                    var userAgent = this._userAgent();
+                    var ip = this._ip();
+                    var eventDay = this._eventDay();
+                    var seconds = this._random.Next(60, 86400);
                     var eventDate = email.StartTime.AddDays(eventDay).AddSeconds(seconds);
 
-                    var openPercentage = GetRandomPercentage(percentages.OpenMin, percentages.OpenMax);
-                    var spamPercentage = GetRandomPercentage(percentages.SpamMin, percentages.SpamMax);
+                    var openPercentage = this.GetRandomPercentage(percentages.OpenMin, percentages.OpenMax);
+                    var spamPercentage = this.GetRandomPercentage(percentages.SpamMin, percentages.SpamMax);
 
-                    if (_random.NextDouble() < openPercentage)
+                    if (this._random.NextDouble() < openPercentage)
                     {
-                        ExmEventsGenerator.GenerateHandlerEvent(_managerRoot.Settings.BaseURL, contact.ContactId, email, ExmEvents.Open, eventDate, userAgent, ip);
+                        ExmEventsGenerator.GenerateHandlerEvent(this._managerRoot.Settings.BaseURL, contact.ContactId, email, ExmEvents.Open, eventDate, userAgent, ip);
 
-                        eventDate = eventDate.AddSeconds(_random.Next(10, 300));
+                        eventDate = eventDate.AddSeconds(this._random.Next(10, 300));
 
-                        var clickPercentage = GetRandomPercentage(percentages.ClickMin, percentages.ClickMax);
-                        if (_random.NextDouble() < clickPercentage)
+                        var clickPercentage = this.GetRandomPercentage(percentages.ClickMin, percentages.ClickMax);
+                        if (this._random.NextDouble() < clickPercentage)
                         {
                             // Much less likely to complain if they were interested enough to click the link.
                             spamPercentage = 0.01;
 
                             var link = "/";
-                            if (_goalService.GoalsSet != null)
+                            if (this._goalService.GoalsSet != null)
                             {
-                                link += _goalService.GoalsSet().Item;
+                                link += this._goalService.GoalsSet().Item;
                             }
 
-                            ExmEventsGenerator.GenerateHandlerEvent(_managerRoot.Settings.BaseURL, contact.ContactId, email, ExmEvents.Click, eventDate, userAgent, ip, link);
-                            eventDate = eventDate.AddSeconds(_random.Next(10, 300));
+                            ExmEventsGenerator.GenerateHandlerEvent(this._managerRoot.Settings.BaseURL, contact.ContactId, email, ExmEvents.Click, eventDate, userAgent, ip, link);
+                            eventDate = eventDate.AddSeconds(this._random.Next(10, 300));
                         }
                     }
 
-                    if (_random.NextDouble() < spamPercentage)
+                    if (this._random.NextDouble() < spamPercentage)
                     {
-                        ExmEventsGenerator.GenerateSpamComplaint(_managerRoot.Settings.BaseURL, contact.ContactId.ToID(), email.MessageId.ToID(), "email", eventDate);
-                        eventDate = eventDate.AddSeconds(_random.Next(10, 300));
+                        ExmEventsGenerator.GenerateSpamComplaint(this._managerRoot.Settings.BaseURL, contact.ContactId.ToID(), email.MessageId.ToID(), "email", eventDate);
+                        eventDate = eventDate.AddSeconds(this._random.Next(10, 300));
                     }
 
-                    var unsubscribePercentage = GetRandomPercentage(percentages.UnsubscribeMin, percentages.UnsubscribeMax);
-                    if (_random.NextDouble() < unsubscribePercentage)
+                    var unsubscribePercentage = this.GetRandomPercentage(percentages.UnsubscribeMin, percentages.UnsubscribeMax);
+                    if (this._random.NextDouble() < unsubscribePercentage)
                     {
-                        var unsubscribeFromAllPercentage = GetRandomPercentage(percentages.UnsubscribeFromAllMin, percentages.UnsubscribeFromAllMax);
+                        var unsubscribeFromAllPercentage = this.GetRandomPercentage(percentages.UnsubscribeFromAllMin, percentages.UnsubscribeFromAllMax);
                         ExmEvents unsubscribeEvent;
 
-                        if (_random.NextDouble() < unsubscribeFromAllPercentage)
+                        if (this._random.NextDouble() < unsubscribeFromAllPercentage)
                         {
                             unsubscribeEvent = ExmEvents.UnsubscribeFromAll;
-                            _unsubscribeFromAllContacts.Add(contact.ContactId);
+                            this._unsubscribeFromAllContacts.Add(contact.ContactId);
                         }
                         else
                         {
                             unsubscribeEvent = ExmEvents.Unsubscribe;
                         }
 
-                        ExmEventsGenerator.GenerateHandlerEvent(_managerRoot.Settings.BaseURL, contact.ContactId, email,
+                        ExmEventsGenerator.GenerateHandlerEvent(this._managerRoot.Settings.BaseURL, contact.ContactId, email,
                             unsubscribeEvent, eventDate, userAgent, ip);
                     }
                 }
@@ -274,7 +274,7 @@ namespace ExperienceGenerator.Services.Exm
                 return minimum / 100;
             }
 
-            return (_random.NextDouble() * (maximum - minimum) + minimum) / 100;
+            return (this._random.NextDouble() * (maximum - minimum) + minimum) / 100;
         }
 
         private void GetManagerRoot()
@@ -287,31 +287,31 @@ namespace ExperienceGenerator.Services.Exm
                 throw new Exception("ManagerRoot not found");
             }
 
-            _managerRoot = ManagerRoot.FromItem(rootItem);
+            this._managerRoot = ManagerRoot.FromItem(rootItem);
         }
 
         private void CreateAndSendCampaigns()
         {
-            if (_specification.SpecificCampaigns != null && _specification.SpecificCampaigns.Any())
+            if (this._specification.SpecificCampaigns != null && this._specification.SpecificCampaigns.Any())
             {
-                CreateAndSendSpecificCampaigns();
+                this.CreateAndSendSpecificCampaigns();
             }
-            else if (_specification.RandomCampaigns != null)
+            else if (this._specification.RandomCampaigns != null)
             {
-                CreateAndSendRandomCampaigns();
+                this.CreateAndSendRandomCampaigns();
             }
         }
 
         private void CreateAndSendRandomCampaigns()
         {
-            var totalDays = (int)(DateTime.UtcNow - _specification.RandomCampaigns.DateRangeStart).TotalDays;
+            var totalDays = (int)(DateTime.UtcNow - this._specification.RandomCampaigns.DateRangeStart).TotalDays;
 
             var dates = new List<DateTime>();
-            for (var i = 0; i < _specification.RandomCampaigns.NumCampaigns; i++)
+            for (var i = 0; i < this._specification.RandomCampaigns.NumCampaigns; i++)
             {
-                var daysAgo = _random.Next(0, totalDays);
+                var daysAgo = this._random.Next(0, totalDays);
                 var dateMessageSent = DateTime.UtcNow.Date.AddDays(-1 * daysAgo);
-                var secondsAgo = _random.Next(0, 86400);
+                var secondsAgo = this._random.Next(0, 86400);
                 dateMessageSent = dateMessageSent.AddSeconds(-1 * secondsAgo);
                 dates.Add(dateMessageSent);
             }
@@ -320,72 +320,72 @@ namespace ExperienceGenerator.Services.Exm
             dates.Sort();
 
             var randomListNames = new List<string>();
-            for (var i = 0; i < _specification.RandomLists.NumLists; i++)
+            for (var i = 0; i < this._specification.RandomLists.NumLists; i++)
             {
                 randomListNames.Add("Auto List " + i);
             }
 
-            for (var i = 0; i < _specification.RandomCampaigns.NumCampaigns; i++)
+            for (var i = 0; i < this._specification.RandomCampaigns.NumCampaigns; i++)
             {
                 var emailName = "Auto campaign " + i;
                 var dateMessageSent = dates[i];
 
-                var numListsToTake = _random.Next(_specification.RandomCampaigns.ListsPerCampaignMin, _specification.RandomCampaigns.ListsPerCampaignMax);
+                var numListsToTake = this._random.Next(this._specification.RandomCampaigns.ListsPerCampaignMin, this._specification.RandomCampaigns.ListsPerCampaignMax);
                 var includeLists = randomListNames.OrderBy(x => Guid.NewGuid()).Take(numListsToTake).ToList();
 
-                CreateAndSendEmail(emailName, includeLists, dateMessageSent, _specification.RandomCampaigns.Events);
+                this.CreateAndSendEmail(emailName, includeLists, dateMessageSent, this._specification.RandomCampaigns.Events);
             }
         }
 
         private void CreateAndSendSpecificCampaigns()
         {
-            foreach (var emailSpecification in _specification.SpecificCampaigns.OrderBy(x => x.DateEffective))
+            foreach (var emailSpecification in this._specification.SpecificCampaigns.OrderBy(x => x.DateEffective))
             {
-                CreateAndSendEmail(emailSpecification.Name, emailSpecification.IncludeLists, emailSpecification.DateEffective, emailSpecification.Events);
+                this.CreateAndSendEmail(emailSpecification.Name, emailSpecification.IncludeLists, emailSpecification.DateEffective, emailSpecification.Events);
             }
         }
 
         private void CreateAndSendEmail(string name, List<string> lists, DateTime dateMessageSent, ExmEventPercentages percentages)
         {
-            var messageItem = CreateEmailMessage(name, name);
+            var messageItem = this.CreateEmailMessage(name, name);
 
-            var contactsForThisEmail = GetContactsForEmail(lists, messageItem);
+            var contactsForThisEmail = this.GetContactsForEmail(lists, messageItem);
             var sendingProcessData = new SendingProcessData(new ID(messageItem.MessageId));
 
             var dateMessageFinished = dateMessageSent.AddMinutes(5);
 
-            AdjustEmailStatsWithRetry(messageItem, sendingProcessData, dateMessageSent, dateMessageFinished, 30);
+            this.AdjustEmailStatsWithRetry(messageItem, sendingProcessData, dateMessageSent, dateMessageFinished, 30);
             
-            PublishEmail(messageItem, sendingProcessData);
+            this.PublishEmail(messageItem, sendingProcessData);
 
-            _contactsPerEmail[messageItem.ID] = new List<Guid>();
+            this._contactsPerEmail[messageItem.ID] = new List<Guid>();
 
             var numContactsForThisEmail = contactsForThisEmail.Count;
 
             var contactIndex = 1;
             foreach (var contact in contactsForThisEmail)
             {
-                _specification.Job.Status = string.Format(
+                this._specification.Job.Status = string.Format(
                     "Sending email to contact {0} of {1}",
                     contactIndex++,
                     numContactsForThisEmail);
 
                 try
                 {
-                    SendEmailToContact(contact, messageItem);
-                    _contactsPerEmail[messageItem.ID].Add(contact.ContactId);
+                    this.SendEmailToContact(contact, messageItem);
+                    this._contactsPerEmail[messageItem.ID].Add(contact.ContactId);
                 }
                 catch (Exception ex)
                 {
-                    _specification.Job.LastException = ex.ToString();
+                    this._specification.Job.LastException = ex.ToString();
                 }
             }
 
             messageItem.Source.State = MessageState.Sent;
 
-            GenerateEvents(messageItem, percentages);
-            _listService.GrowLists();
-            _specification.Job.CompletedEmails++;
+            this.GenerateEvents(messageItem, percentages);
+            this._listService.GrowLists();
+            this._specification.Job.CompletedEmails++;
         }
 
         private void SendEmailToContact(ContactData contact, MessageItem messageItem)
@@ -404,7 +404,7 @@ namespace ExperienceGenerator.Services.Exm
                     messageItem.PlanId.ToGuid(), Sitecore.Modules.EmailCampaign.Core.Constants.SendCompletedStateName,
                     customValues);
 
-            ExmEventsGenerator.GenerateSent(_managerRoot.Settings.BaseURL, new ID(contact.ContactId), messageItem.InnerItem.ID, messageItem.StartTime);
+            ExmEventsGenerator.GenerateSent(this._managerRoot.Settings.BaseURL, new ID(contact.ContactId), messageItem.InnerItem.ID, messageItem.StartTime);
         }
 
         private void PublishEmail(MessageItem messageItem, SendingProcessData sendingProcessData)
@@ -429,7 +429,7 @@ namespace ExperienceGenerator.Services.Exm
             {
                 try
                 {
-                    AdjustEmailStats(messageItem, sendingProcessData, dateMessageSent, dateMessageFinished);
+                    this.AdjustEmailStats(messageItem, sendingProcessData, dateMessageSent, dateMessageFinished);
                     return;
                 }
                 catch (Exception)
@@ -477,19 +477,19 @@ namespace ExperienceGenerator.Services.Exm
 
             foreach (var listName in lists)
             {
-                var list = _listService.GetList(listName);
+                var list = this._listService.GetList(listName);
                 if (list != null)
                 {
                     messageItem.RecipientManager.AddIncludedRecipientListId(ID.Parse(list.Id));
 
-                    var contacts = _listService. ListManager.GetContacts(list);
+                    var contacts = this._listService. ListManager.GetContacts(list);
                     contactsForThisEmail.AddRange(contacts);
                 }
             }
 
             contactsForThisEmail = contactsForThisEmail
                 .DistinctBy(x => x.ContactId)
-                .Where(x => !_unsubscribeFromAllContacts.Contains(x.ContactId))
+                .Where(x => !this._unsubscribeFromAllContacts.Contains(x.ContactId))
                 .ToList();
 
             return contactsForThisEmail;
@@ -499,7 +499,7 @@ namespace ExperienceGenerator.Services.Exm
         {
             var oneColumnMessageBranchId = "{6FE51EB4-1D30-4E6B-8BA0-0EBB1405D283}";
             var query = string.Format("./descendant::*[@@tid='{0}']", TemplateIds.OneTimeMessageType);
-            var typeId = _managerRoot.InnerItem.Axes.SelectSingleItem(query).ID.ToString();
+            var typeId = this._managerRoot.InnerItem.Axes.SelectSingleItem(query).ID.ToString();
 
             var messageItem = MessageItemSource.Create(messageName, oneColumnMessageBranchId, typeId);
             messageItem.Source.DisplayName = messageName;

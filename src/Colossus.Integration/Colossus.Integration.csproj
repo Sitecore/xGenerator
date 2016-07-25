@@ -77,15 +77,6 @@
     <Reference Include="Sitecore.Cintel.Client">
       <HintPath>..\Components\Sitecore.Cintel.Client.dll</HintPath>
     </Reference>
-    <Reference Include="Sitecore.EmailCampaign">
-      <HintPath>..\Components\Sitecore.EmailCampaign.dll</HintPath>
-    </Reference>
-    <Reference Include="Sitecore.EmailCampaign.Cd">
-      <HintPath>..\Components\Sitecore.EmailCampaign.Cd.dll</HintPath>
-    </Reference>
-    <Reference Include="Sitecore.EmailCampaign.Cm">
-      <HintPath>..\Components\Sitecore.EmailCampaign.Cm.dll</HintPath>
-    </Reference>
     <Reference Include="Sitecore.ExperienceAnalytics">
       <HintPath>..\Components\Sitecore.ExperienceAnalytics.dll</HintPath>
     </Reference>

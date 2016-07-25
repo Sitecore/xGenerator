@@ -1,6 +1,5 @@
 ﻿using System.Web.Http;
 using ExperienceGenerator.Client.Infrastructure;
-using ExperienceGenerator.Services.Exm;
 using Sitecore.Analytics.Aggregation.Data.Model;
 
 namespace ExperienceGenerator.Client
@@ -18,13 +17,6 @@ namespace ExperienceGenerator.Client
             Dimension.EnableCaching = false;
 
             XGenJobManager.Instance = new XGenSitecoreJobManager();
-            ExmJobManager.Instance = new ExmJobManager();
-
-            config.Routes.MapHttpRoute(
-                name: "ExperienceGeneratorExmJobsApi",
-                routeTemplate: "api/xgen/exmjobs/{action}/{id}",
-                defaults: new {controller = "ExperienceGeneratorExmJobs", action = "Index", id = RouteParameter.Optional}
-                );
 
             config.Routes.MapHttpRoute(
                 name: "ExperienceGeneratorJobsApi",
