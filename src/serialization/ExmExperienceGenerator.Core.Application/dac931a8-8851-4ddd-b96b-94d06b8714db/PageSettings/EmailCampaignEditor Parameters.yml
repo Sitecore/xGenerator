@@ -1,0 +1,83 @@
+﻿---
+ID: "5222d4f9-7ee4-4d2c-b9d3-d6c6c184c222"
+Parent: "d6cc328d-c7b2-4c87-a33d-ef0083fe3b32"
+Template: "4d96d06c-54ee-47f3-97e5-1b4fa4b902b0"
+Path: /sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/EmailCampaignEditor/PageSettings/EmailCampaignEditor Parameters
+DB: core
+SharedFields:
+- ID: "6a80f83a-4295-47e0-bfb5-2f88729ab09b"
+  Hint: Size
+  Value: "{1255F2C7-60B0-4FF6-8C00-D6E6E50147A7}"
+- ID: "6d0c0ab0-bc40-4bd0-8acb-16612a180f14"
+  Hint: IsVisible
+  Type: Checkbox
+  Value: 1
+- ID: "af3e0d23-9d4c-4e4e-af9a-f3179d6098d3"
+  Hint: IsAnimated
+  Type: Checkbox
+  Value: 1
+Languages:
+- Language: da
+  Fields:
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
+    Hint: __Display name
+    Value: "SelectFolderDialog-parametre"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20160519T084601Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: "7065ac6a-3607-4f0b-97cf-9d0b46b961ff"
+      Hint: HeaderText
+      Value: Vælg folder
+- Language: "de-DE"
+  Fields:
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
+    Hint: __Display name
+    Value: AuswählenOrdnerDialog Parameter
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20160519T084733Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: "7065ac6a-3607-4f0b-97cf-9d0b46b961ff"
+      Hint: HeaderText
+      Value: Ordner auswählen
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20140409T125427
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: "7065ac6a-3607-4f0b-97cf-9d0b46b961ff"
+      Hint: HeaderText
+      Value: Edit campaign
+- Language: "ja-JP"
+  Fields:
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
+    Hint: __Display name
+    Value: フォルダー選択ダイアログ パラメーター
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20160519T084427Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: "7065ac6a-3607-4f0b-97cf-9d0b46b961ff"
+      Hint: HeaderText
+      Value: フォルダーを選択する

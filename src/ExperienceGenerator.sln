@@ -24,6 +24,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build instructions", "Build
 	ProjectSection(SolutionItems) = preProject
 		Build instructions.txt = Build instructions.txt
 		publishsettings.targets = publishsettings.targets
+		ExperienceGenerator.Client\App_Config\Include\ExperienceGenerator\zExperienceGenerator.DevSettings.config = ExperienceGenerator.Client\App_Config\Include\ExperienceGenerator\zExperienceGenerator.DevSettings.config
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalyticsUpdater", "AnalyticsUpdater\code\AnalyticsUpdater.csproj", "{EE25C5D1-A3E8-4399-A124-5119EEB84EEF}"

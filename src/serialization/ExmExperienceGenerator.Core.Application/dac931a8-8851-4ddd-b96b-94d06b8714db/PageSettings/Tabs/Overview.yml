@@ -1,0 +1,201 @@
+﻿---
+ID: "0582868c-343a-4c89-838d-254855f43114"
+Parent: "646e81f2-9c84-4d06-a409-7aa314d702ba"
+Template: "f62b4cd7-754c-4461-810f-2b6bd2c92a0d"
+Path: /sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/EmailCampaignEditor/PageSettings/Tabs/Overview
+DB: core
+SharedFields:
+- ID: "deab3795-056f-4421-adf0-758844461b72"
+  Hint: Placeholder Name
+  Value: Tab
+- ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
+  Hint: __Renderings
+  Type: layout
+  Value: |
+    <r>
+      <d
+        id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+        <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=Overview&amp;PaddingType=Top&amp;ShowBorder=0&amp;UsePadding=1" />
+        <r
+          id="{442BD093-FBAD-4E36-BC08-489E16C82D08}"
+          par="Id=OverviewExpander&amp;IsCollapsible=0"
+          ph="Overview.Content" />
+        <r
+          id="{C4393722-39FA-4869-9582-3A8EB8983A0D}"
+          par="Id=RowPanel2&amp;PaddingType=All&amp;UsePadding=1"
+          ph="OverviewExpander.Body" />
+        <r
+          id="{5CB208F6-1860-426B-8221-FAA85B329848}"
+          par="GridColumns=4&amp;Id=DatesCol"
+          ph="RowPanel2.Content" />
+        <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=DatesBorder&amp;PaddingType=Top&amp;UsePadding=1"
+          ph="DatesCol.Content" />
+        <r
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
+          ds="{2EE01475-D0FF-4230-8A3A-8218E1C6A8CF}"
+          par="Id=StartDateText"
+          ph="DatesBorder.Content" />
+        <r
+          id="{3CAC8515-EA11-4B97-A1E5-546DC6FC5E59}"
+          ds="{605849E7-5869-45A7-A1C6-2DFD8E84FA7B}"
+          par="Date=20140506T000000&amp;Id=StartDate"
+          ph="DatesBorder.Content" />
+        <r
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
+          ds="{03DCB85B-C4E0-49E6-8E6A-83530C87D1F3}"
+          par="Id=EndDateText"
+          ph="DatesBorder.Content" />
+        <r
+          id="{3CAC8515-EA11-4B97-A1E5-546DC6FC5E59}"
+          ds="{03DCB85B-C4E0-49E6-8E6A-83530C87D1F3}"
+          par="Date=20150506T000000&amp;Id=EndDate"
+          ph="DatesBorder.Content" />
+        <r
+          id="{5CB208F6-1860-426B-8221-FAA85B329848}"
+          par="GridColumns=4&amp;Id=DailyCol"
+          ph="RowPanel2.Content" />
+        <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=DailyDistributionBorder&amp;PaddingType=Top&amp;UsePadding=1"
+          ph="DailyCol.Content" />
+        <r
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
+          par="Id=DailyText&amp;Text=Daily%20distribution"
+          ph="DailyDistributionBorder.Content" />
+        <r
+          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
+          ds="{7C26EDFA-A15D-410B-B78D-3C95E89FD469}"
+          par="Id=TraficDistribution0&amp;Type=range"
+          ph="DailyDistributionBorder.Content" />
+        <r
+          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
+          ds="{7C26EDFA-A15D-410B-B78D-3C95E89FD469}"
+          par="Id=TraficDistribution1&amp;Type=range"
+          ph="DailyDistributionBorder.Content" />
+        <r
+          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
+          ds="{7C26EDFA-A15D-410B-B78D-3C95E89FD469}"
+          par="Id=TraficDistribution2&amp;Type=range"
+          ph="DailyDistributionBorder.Content" />
+        <r
+          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
+          ds="{7C26EDFA-A15D-410B-B78D-3C95E89FD469}"
+          par="Id=TraficDistribution3&amp;Type=range"
+          ph="DailyDistributionBorder.Content" />
+        <r
+          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
+          ds="{7C26EDFA-A15D-410B-B78D-3C95E89FD469}"
+          par="Id=TraficDistribution4&amp;Type=range"
+          ph="DailyDistributionBorder.Content" />
+        <r
+          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
+          ds="{7C26EDFA-A15D-410B-B78D-3C95E89FD469}"
+          par="Id=TraficDistribution5&amp;Type=range"
+          ph="DailyDistributionBorder.Content" />
+        <r
+          id="{C4393722-39FA-4869-9582-3A8EB8983A0D}"
+          par="Id=RowPanel3&amp;PaddingType=All"
+          ph="OverviewExpander.Body" />
+        <r
+          id="{5CB208F6-1860-426B-8221-FAA85B329848}"
+          par="GridColumns=4&amp;Id=UniqueOpenRate"
+          ph="RowPanel3.Content" />
+        <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=UniqueOpenRateBorder&amp;PaddingType=Top"
+          ph="UniqueOpenRate.Content" />
+        <r
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
+          par="Id=UniqueOpenRateText&amp;Text=Unique%20Open%20Rate"
+          ph="UniqueOpenRateBorder.Content" />
+        <r
+          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
+          ds="{7C26EDFA-A15D-410B-B78D-3C95E89FD469}"
+          par="Id=UniqueOpenRateDistribution&amp;Type=range"
+          ph="UniqueOpenRateBorder.Content" />
+        <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=UniqueClickRateBorder&amp;PaddingType=Top"
+          ph="UniqueOpenRate.Content" />
+        <r
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
+          par="Id=UniqueClickRateText&amp;Text=Unique%20Click%20Rate"
+          ph="UniqueClickRateBorder.Content" />
+        <r
+          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
+          ds="{7C26EDFA-A15D-410B-B78D-3C95E89FD469}"
+          par="Id=UniqueClickRateDistribution&amp;Type=range"
+          ph="UniqueClickRateBorder.Content" />
+        <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=BouncedBorder&amp;PaddingType=Top"
+          ph="UniqueOpenRate.Content" />
+        <r
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
+          par="Id=BouncedText&amp;Text=Bounced"
+          ph="BouncedBorder.Content" />
+        <r
+          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
+          ds="{7C26EDFA-A15D-410B-B78D-3C95E89FD469}"
+          par="Id=BouncedDistribution&amp;Type=range"
+          ph="BouncedBorder.Content" />
+        <r
+          id="{5CB208F6-1860-426B-8221-FAA85B329848}"
+          par="GridColumns=4&amp;Id=OpenRate"
+          ph="RowPanel3.Content" />
+        <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=OpenRateBorder&amp;PaddingType=Top"
+          ph="OpenRate.Content" />
+        <r
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
+          par="Id=OpenRateText&amp;Text=Open%20Rate"
+          ph="OpenRateBorder.Content" />
+        <r
+          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
+          ds="{7C26EDFA-A15D-410B-B78D-3C95E89FD469}"
+          par="Id=OpenRateDistribution&amp;Type=range"
+          ph="OpenRateBorder.Content" />
+        <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=ClickRateBorder&amp;PaddingType=Top"
+          ph="OpenRate.Content" />
+        <r
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
+          par="Id=ClickRateText&amp;Text=Click%20Rate"
+          ph="ClickRateBorder.Content" />
+        <r
+          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
+          ds="{7C26EDFA-A15D-410B-B78D-3C95E89FD469}"
+          par="Id=ClickRateDistribution&amp;Type=range"
+          ph="ClickRateBorder.Content" />
+        <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=UnsubscribedBorder&amp;PaddingType=Top"
+          ph="OpenRate.Content" />
+        <r
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
+          par="Id=UnsubscribedText&amp;Text=Unsubscribed"
+          ph="UnsubscribedBorder.Content" />
+        <r
+          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
+          ds="{7C26EDFA-A15D-410B-B78D-3C95E89FD469}"
+          par="Id=UnsubscribedDistribution&amp;Type=range"
+          ph="UnsubscribedBorder.Content" />
+      </d>
+    </r>
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20160726T114340Z
+    - ID: "aea872fb-aa91-4d1a-b877-3ca6fbbb4fd4"
+      Hint: Header
+      Value: Tab

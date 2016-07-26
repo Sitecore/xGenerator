@@ -1,0 +1,21 @@
+﻿---
+ID: "9b8a2e21-a239-4103-99d5-5b990134b8cc"
+Parent: "646e81f2-9c84-4d06-a409-7aa314d702ba"
+Template: "f62b4cd7-754c-4461-810f-2b6bd2c92a0d"
+Path: /sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/EmailCampaignEditor/PageSettings/Tabs/Locations
+DB: core
+SharedFields:
+- ID: "deab3795-056f-4421-adf0-758844461b72"
+  Hint: Placeholder Name
+  Value: Locations
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20160726T114340Z
+    - ID: "aea872fb-aa91-4d1a-b877-3ca6fbbb4fd4"
+      Hint: Header
+      Value: Locations
