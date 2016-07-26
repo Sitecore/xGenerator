@@ -43,23 +43,91 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Faker.NET4, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Faker.Net.1.0.3\lib\net40\Faker.NET4.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.Analytics, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Components\Sitecore.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Analytics.DataAccess, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Components\Sitecore.Analytics.DataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Analytics.Model, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Components\Sitecore.Analytics.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.ContentSearch, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Components\Sitecore.ContentSearch.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.ContentSearch.Analytics, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Components\Sitecore.ContentSearch.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.EmailCampaign">
+      <HintPath>..\Components\Sitecore.EmailCampaign.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.EmailCampaign.Analytics.Model">
+      <HintPath>..\Components\Sitecore.EmailCampaign.Analytics.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.EmailCampaign.Cm">
+      <HintPath>..\Components\Sitecore.EmailCampaign.Cm.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.ExM.Framework">
+      <HintPath>..\Components\Sitecore.ExM.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Kernel">
+      <HintPath>..\Components\Sitecore.Kernel.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.ListManagement, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Components\Sitecore.ListManagement.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.ListManagement.ContentSearch, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Components\Sitecore.ListManagement.ContentSearch.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.ListManagement.Services, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Components\Sitecore.ListManagement.Services.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Marketing, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Components\Sitecore.Marketing.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
@@ -71,11 +139,49 @@
     <Content Include="sitecore\shell\client\Applications\ExmExperienceGenerator\ExmGenerator.js" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Config\Include\ExperienceGenerator\ExperienceGenerator.Exm.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="ExperienceGenerator.Exm.package" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
-    <None Include="Web.config" />
+    <None Include="Web.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ExperienceGeneratorExmJobsController.cs" />
+    <Compile Include="Infrastructure\SitecoreRouteInitializer.cs" />
+    <Compile Include="Models\ExmDataPreparationModel.cs" />
+    <Compile Include="Models\ExmEventPercentages.cs" />
+    <Compile Include="Models\ExmGoal.cs" />
+    <Compile Include="Models\ExmJob.cs" />
+    <Compile Include="Models\ExmRandomCampaignsDefinition.cs" />
+    <Compile Include="Models\ExmRandomGoalsDefinitions.cs" />
+    <Compile Include="Models\ExmRandomListsDefinition.cs" />
+    <Compile Include="Models\ExmSpecificCampaign.cs" />
+    <Compile Include="Models\ExmSpecificList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ExmContactService.cs" />
+    <Compile Include="Services\ExmDataPreparationService.cs" />
+    <Compile Include="Services\ExmEventsGenerator.cs" />
+    <Compile Include="Services\ExmGoalService.cs" />
+    <Compile Include="Services\ExmJobManager.cs" />
+    <Compile Include="Services\ExmListService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Colossus\Colossus.csproj">
+      <Project>{69DEA59C-074A-4825-9A7C-1D83E38D38DB}</Project>
+      <Name>Colossus</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ExperienceGenerator.Client\ExperienceGenerator.Client.csproj">
+      <Project>{c1ffdde2-c451-419c-acc1-92fccc027008}</Project>
+      <Name>ExperienceGenerator.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ExperienceGenerator\ExperienceGenerator.csproj">
+      <Project>{78D36A52-D0E2-4357-80A2-ED237618AD83}</Project>
+      <Name>ExperienceGenerator</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

@@ -9,7 +9,7 @@ using ExperienceGenerator.Parsing;
 
 namespace ExperienceGenerator.Data
 {
-    static class FileHelpers
+    public static class FileHelpers
     {
 
         public static IEnumerable<string> ReadLinesFromResource<TAssembly>(string path, bool zipped = false)

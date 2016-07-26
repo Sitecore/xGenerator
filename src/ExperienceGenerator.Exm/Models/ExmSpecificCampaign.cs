@@ -1,9 +1,9 @@
-using System;
-using System.Collections.Generic;
-
-namespace ExperienceGenerator.Models.Exm
+namespace ExperienceGenerator.Exm.Models
 {
-    public class ExmSpecificCampaign
+  using System;
+  using System.Collections.Generic;
+
+  public class ExmSpecificCampaign
     {
         public string Name { get; set; }
 
@@ -17,9 +17,9 @@ namespace ExperienceGenerator.Models.Exm
         {
             get
             {
-                return Date.HasValue
-                    ? Date.Value.ToUniversalTime()
-                    : DateTime.UtcNow.AddDays(-1*DaysAgo);
+                return this.Date.HasValue
+                    ? this.Date.Value.ToUniversalTime()
+                    : DateTime.UtcNow.AddDays(-1*this.DaysAgo);
             }
         }
 

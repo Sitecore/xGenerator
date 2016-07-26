@@ -58,35 +58,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Components\Sitecore.ContentSearch.Analytics.dll</HintPath>
     </Reference>
-    <Reference Include="Sitecore.EmailCampaign, Version=3.1.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Components\Sitecore.EmailCampaign.dll</HintPath>
-    </Reference>
-    <Reference Include="Sitecore.EmailCampaign.Analytics.Model, Version=3.1.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Components\Sitecore.EmailCampaign.Analytics.Model.dll</HintPath>
-    </Reference>
-    <Reference Include="Sitecore.EmailCampaign.Cd, Version=3.1.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Components\Sitecore.EmailCampaign.Cd.dll</HintPath>
-    </Reference>
-    <Reference Include="Sitecore.EmailCampaign.Cm, Version=3.1.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Components\Sitecore.EmailCampaign.Cm.dll</HintPath>
-    </Reference>
     <Reference Include="Sitecore.Kernel">
       <HintPath>..\Components\Sitecore.Kernel.dll</HintPath>
-    </Reference>
-    <Reference Include="Sitecore.ListManagement, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Components\Sitecore.ListManagement.dll</HintPath>
-    </Reference>
-    <Reference Include="Sitecore.ListManagement.ContentSearch, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Components\Sitecore.ListManagement.ContentSearch.dll</HintPath>
-    </Reference>
-    <Reference Include="Sitecore.ListManagement.Services">
-      <HintPath>..\Components\Sitecore.ListManagement.Services.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Marketing, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -112,19 +85,9 @@
     <Compile Include="Data\GeoData.cs" />
     <Compile Include="Data\GeoVariables.cs" />
     <Compile Include="Data\ItemInfoClient.cs" />
-    <Compile Include="Services\Exm\ExmJobManager.cs" />
     <Compile Include="JobInfo.cs" />
     <Compile Include="JobSpecification.cs" />
     <Compile Include="JobType.cs" />
-    <Compile Include="Models\Exm\ExmDataPreparationModel.cs" />
-    <Compile Include="Models\Exm\ExmEventPercentages.cs" />
-    <Compile Include="Models\Exm\ExmGoal.cs" />
-    <Compile Include="Models\Exm\ExmJob.cs" />
-    <Compile Include="Models\Exm\ExmRandomCampaignsDefinition.cs" />
-    <Compile Include="Models\Exm\ExmRandomGoalsDefinitions.cs" />
-    <Compile Include="Models\Exm\ExmRandomListsDefinition.cs" />
-    <Compile Include="Models\Exm\ExmSpecificCampaign.cs" />
-    <Compile Include="Models\Exm\ExmSpecificList.cs" />
     <Compile Include="Models\JsonItemInfo.cs" />
     <Compile Include="Models\PageItemInfo.cs" />
     <Compile Include="Models\SiteInfo.cs" />
@@ -142,11 +105,6 @@
     <Compile Include="Parsing\ParseConfig.cs" />
     <Compile Include="Parsing\XGenParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\Exm\ExmContactService.cs" />
-    <Compile Include="Services\Exm\ExmDataPreparationService.cs" />
-    <Compile Include="Services\Exm\ExmEventsGenerator.cs" />
-    <Compile Include="Services\Exm\ExmGoalService.cs" />
-    <Compile Include="Services\Exm\ExmListService.cs" />
     <Compile Include="XGenJobManager.cs" />
   </ItemGroup>
   <ItemGroup>

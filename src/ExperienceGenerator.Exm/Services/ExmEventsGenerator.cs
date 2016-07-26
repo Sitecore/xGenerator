@@ -1,21 +1,21 @@
 ﻿// © 2016 Sitecore Corporation A/S. All rights reserved.
 
-using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Net.Http;
-using System.Threading;
-using Sitecore.Data;
-using Sitecore.Modules.EmailCampaign;
-using Sitecore.Modules.EmailCampaign.Core.Crypto;
-using Sitecore.Modules.EmailCampaign.Core.Extensions;
-using Sitecore.Modules.EmailCampaign.Core.Links;
-using Sitecore.Modules.EmailCampaign.Messages;
-
-namespace ExperienceGenerator.Services.Exm
+namespace ExperienceGenerator.Exm.Services
 {
-    public static class ExmEventsGenerator
+  using System;
+  using System.Collections.Generic;
+  using System.Collections.Specialized;
+  using System.ComponentModel;
+  using System.Net.Http;
+  using System.Threading;
+  using Sitecore.Data;
+  using Sitecore.Modules.EmailCampaign;
+  using Sitecore.Modules.EmailCampaign.Core.Crypto;
+  using Sitecore.Modules.EmailCampaign.Core.Extensions;
+  using Sitecore.Modules.EmailCampaign.Core.Links;
+  using Sitecore.Modules.EmailCampaign.Messages;
+
+  public static class ExmEventsGenerator
     {
         public static int Threads { get; set; }
 
