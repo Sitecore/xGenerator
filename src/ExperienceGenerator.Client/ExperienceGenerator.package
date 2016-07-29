@@ -9,9 +9,14 @@
       <Comment />
       <Attributes />
       <Readme>
-        If You are installing this package on distributed environment, please follow next steps:
-        1) In App_config/Include/ExperienceGenerator/ExperienceGenerator.config set ExperienceGenerator.DistributedEnvironment setting to 'true'
-        2) Extract this package as zip archive. Copy all extracted files from 'files' folder to your CD instance.
+If You are installing this package on distributed environment,
+please follow next steps:
+
+1) In App_config/Include/ExperienceGenerator/ExperienceGenerator.config
+set ExperienceGenerator.DistributedEnvironment setting to 'true'
+
+2) Extract this package as zip archive. 
+Copy all extracted files from 'files' folder to your CD instance.
       </Readme>
       <Publisher/>
       <PostStep>AnalyticsUpdater.Installer.PostStep, AnalyticsUpdater</PostStep>
