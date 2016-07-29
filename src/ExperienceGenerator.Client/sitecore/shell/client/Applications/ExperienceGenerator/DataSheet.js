@@ -247,6 +247,9 @@ define(["sitecore", "underscore"], function (_sc, _) {
       this.createSliders("OrganicBorder", this.uiSetup.OrganicSearch);
       this.createSliders("PPCBorder", this.uiSetup.PpcSearch);
       this.createRows("CampaignsListInnerPanelTopBorder", this.uiSetup.Campaigns, "none");
+
+      this.CdBorder.set("isVisible", !data.TrackerIsEnabled);
+      this.ContentDeliveryValue.set("text",window.location.origin);
     },
 
     deleteData: function () {
@@ -475,6 +478,10 @@ define(["sitecore", "underscore"], function (_sc, _) {
 
     collectSettings: function () {
       this.data = {};
+
+      if (this.CdBorder.get("isVisible") && this.ContentDeliveryValue.get("text"))
+        this.data.RootUrl = this.ContentDeliveryValue.get("text");
+
       this.readDomValues("Overview", "Visits");
       this.readDomValues("Overview", "TrafficDistribution");
       this.readDomValues("Overview", "LanguageDistribution");
@@ -556,6 +563,8 @@ define(["sitecore", "underscore"], function (_sc, _) {
           Default: defaultSegment
         }
       }
+
+      request.RootUrl = doc.RootUrl;
       return request;
     },
 

@@ -8,7 +8,11 @@
       <License>SITCORE INTERNAL USE. DO NOT DISTRIBUTE.</License>
       <Comment />
       <Attributes />
-      <Readme />
+      <Readme>
+        If You are installing this package on distributed environment, please follow next steps:
+        1) In App_config/Include/ExperienceGenerator/ExperienceGenerator.config set ExperienceGenerator.DistributedEnvironment setting to 'true'
+        2) Extract this package as zip archive. Copy all extracted files from 'files' folder to your CD instance.
+      </Readme>
       <Publisher/>
       <PostStep>AnalyticsUpdater.Installer.PostStep, AnalyticsUpdater</PostStep>
       <PackageID />
@@ -93,7 +97,7 @@
         <x-item>/bin/Colossus.dll</x-item>
         <x-item>/bin/Colossus.Integration.dll</x-item>
         <x-item>/bin/MathNet.Numerics.dll</x-item>
-        <x-item>/sitecore/admin/Colossus.ashx</x-item>
+        <x-item>/Colossus.ashx</x-item>
         <x-item>/bin/Faker.NET4.dll</x-item>
         <x-item>/sitecore/shell/client/Applications/ExperienceGenerator/DataSheet.js</x-item>
         <x-item>/sitecore/shell/client/Applications/ExperienceGenerator/ExperienceGenerator.css</x-item>

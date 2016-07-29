@@ -48,7 +48,7 @@ namespace ExperienceGenerator.Data
 
         private TResponse Request<TResponse>(string url)
         {
-            return JsonConvert.DeserializeObject<TResponse>(new WebClient().DownloadString(ItemServiceRoot + url.ToString()));
+            return JsonConvert.DeserializeObject<TResponse>(new WebClient().DownloadString(ItemServiceRoot + url));
         }
 
         public IEnumerable<ItemInfo> Query(string query, string language = null, int? maxDepth = 0)

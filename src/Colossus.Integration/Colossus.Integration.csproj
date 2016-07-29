@@ -86,6 +86,10 @@
     <Reference Include="Sitecore.Kernel">
       <HintPath>..\Components\Sitecore.Kernel.dll</HintPath>
     </Reference>
+    <Reference Include="Sitecore.Marketing, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Components\Sitecore.Marketing.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.Mvc, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -121,7 +125,7 @@
     <Compile Include="PatchTracker.cs" />
     <Compile Include="Models\SitecoreRequestContext.cs" />
     <Compile Include="Models\SitecoreVisitContext.cs" />
-    <Compile Include="sitecore\admin\ColossusHandler.cs" />
+    <Compile Include="ColossusHandler.cs" />
     <Compile Include="Behaviors\StrictWalk.cs" />
     <Compile Include="Models\TestInfo.cs" />
     <Compile Include="Models\VisitDataConverter.cs" />
@@ -136,7 +140,7 @@
     <Content Include="App_Config\Include\Colossus\Colossus.config" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
-    <Content Include="sitecore\admin\Colossus.ashx" />
+    <Content Include="Colossus.ashx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

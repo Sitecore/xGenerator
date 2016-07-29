@@ -105,6 +105,8 @@ namespace ExperienceGenerator.Client.Controllers
     {
       var options = new ConfigurationOptions();
 
+      options.TrackerIsEnabled = Settings.GetBoolSetting("ExperienceGenerator.DistributedEnvironment", false);
+
       options.Websites = GetSites(false).Select(s => new SelectionOption
       {
         Id = s.Id,

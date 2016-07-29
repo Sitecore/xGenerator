@@ -18,7 +18,10 @@ using Sitecore.Globalization;
 
 namespace Colossus.Integration.Processing
 {
-    public class TriggerOutcomesAction : IRequestAction
+  using Sitecore.Marketing.Definitions;
+  using Sitecore.Marketing.Definitions.Outcomes.Model;
+
+  public class TriggerOutcomesAction : IRequestAction
     {        
         public void Execute(ITracker tracker, RequestInfo requestInfo)
         {
@@ -28,13 +31,14 @@ namespace Colossus.Integration.Processing
                 var ix = 0;
                 foreach (var o in outcomes)
                 {
-                    var defintion = Database.GetDatabase("master").GetItem(o.DefinitionId.ToID(), LanguageManager.DefaultLanguage);
-                    if (defintion == null || defintion.Versions.Count == 0)
+                    
+                    var defintion = DefinitionManagerFactory.Default.GetDefinitionManager<IOutcomeDefinition>().Get(o.DefinitionId.ToID(), LanguageManager.DefaultLanguage.CultureInfo);
+                    if (defintion == null)
                     {
                         throw new Exception("Outcome not found");
                     }
-                    var oc = new ContactOutcome(Guid.NewGuid().ToID(), defintion.ID, tracker.Contact.ContactId.ToID());                    
-                    if (defintion["Monetary Value Applicable"] == "1")
+                    var oc = new ContactOutcome(Guid.NewGuid().ToID(), defintion.Id, tracker.Contact.ContactId.ToID());                    
+                    if (defintion.IsMonetaryValueApplicable)
                     {
                         oc.MonetaryValue = o.MonetaryValue;    
                     }
