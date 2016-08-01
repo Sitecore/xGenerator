@@ -1,16 +1,16 @@
 ﻿---
-ID: "73a0edc4-c61d-4ed4-90b4-ec31ffb70a63"
-Parent: "646e81f2-9c84-4d06-a409-7aa314d702ba"
+ID: "d44e05ef-fecb-4945-bb7a-6244dc83e034"
+Parent: "5ed8b01f-2544-4d85-a22b-402db57929f6"
 Template: "f62b4cd7-754c-4461-810f-2b6bd2c92a0d"
-Path: /sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/EmailCampaignEditor/PageSettings/Tabs/Devices
+Path: /sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/LandingPagesDialog
 DB: core
 SharedFields:
 - ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
   Hint: __Sortorder
-  Value: 25
+  Value: 0
 - ID: "deab3795-056f-4421-adf0-758844461b72"
   Hint: Placeholder Name
-  Value: Channels
+  Value: Navigate
 - ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
   Hint: __Renderings
   Type: layout
@@ -20,19 +20,13 @@ SharedFields:
         id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
         <r
           id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
-          par="Id=Devices&amp;PaddingType=Top&amp;UsePadding=1" />
+          par="Id=Border&amp;UsePadding=1"
+          uid="{8CFD7F16-08D6-4394-BB7E-ED58B3D3CF7B}" />
         <r
-          id="{442BD093-FBAD-4E36-BC08-489E16C82D08}"
-          par="Header=Devices&amp;Id=DeviceListExpander&amp;IsCollapsible=0"
-          ph="Devices.Content" />
-        <r
-          id="{C4393722-39FA-4869-9582-3A8EB8983A0D}"
-          par="Id=DeviceRowPanel&amp;PaddingType=All&amp;UsePadding=1"
-          ph="DeviceListExpander.Body" />
-        <r
-          id="{5CB208F6-1860-426B-8221-FAA85B329848}"
-          par="GridColumns=12&amp;Id=DeviceListInnerPanel"
-          ph="DeviceRowPanel.Content" />
+          id="{08B6767B-8E8A-41C8-8880-EFEBB4EAE0E3}"
+          par="Id=LandingPageTreeView&amp;SelectMode=2&amp;Database=master&amp;RootItem=%7b0DE95AE4-41AB-4D01-9EB0-67441B7C2450%7d&amp;ClickFolderMode=1&amp;IsCheckboxEnabled=1&amp;ShowSitecoreIcons=1"
+          ph="Border.Content"
+          uid="{CFF5D346-4527-441C-8DB7-536086B57F7E}" />
       </d>
     </r>
 Languages:
@@ -40,60 +34,48 @@ Languages:
   Fields:
   - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
     Hint: __Display name
-    Value: Sider
+    Value: Naviger
   Versions:
   - Version: 1
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: "20150314T040855:635619029352174524Z"
+      Value: "20150314T040903:635619029439984180Z"
     - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: sitecore\admin
-    - ID: "aea872fb-aa91-4d1a-b877-3ca6fbbb4fd4"
-      Hint: Header
-      Value: Sider
 - Language: "de-DE"
   Fields:
   - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
     Hint: __Display name
-    Value: Seiten
+    Value: Navigieren
   Versions:
   - Version: 1
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: "20150314T041134:635619030945740946Z"
+      Value: "20150314T041146:635619031069485623Z"
     - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: sitecore\admin
-    - ID: "aea872fb-aa91-4d1a-b877-3ca6fbbb4fd4"
-      Hint: Header
-      Value: Seiten
 - Language: en
   Versions:
   - Version: 1
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20140708T173403
-    - ID: "aea872fb-aa91-4d1a-b877-3ca6fbbb4fd4"
-      Hint: Header
-      Value: Devices
+      Value: 20140701T115826
 - Language: "ja-JP"
   Fields:
   - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
     Hint: __Display name
-    Value: ページ
+    Value: 移動
   Versions:
   - Version: 1
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: "20150314T041010:635619030100128340Z"
+      Value: "20150314T041021:635619030212472090Z"
     - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: sitecore\admin
-    - ID: "aea872fb-aa91-4d1a-b877-3ca6fbbb4fd4"
-      Hint: Header
-      Value: ページ

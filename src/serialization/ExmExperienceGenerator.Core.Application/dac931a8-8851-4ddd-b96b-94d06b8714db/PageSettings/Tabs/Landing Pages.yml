@@ -1,16 +1,16 @@
 ﻿---
-ID: "73a0edc4-c61d-4ed4-90b4-ec31ffb70a63"
+ID: "2a0a1657-07ff-4c11-9ecf-3c38049c17bf"
 Parent: "646e81f2-9c84-4d06-a409-7aa314d702ba"
 Template: "f62b4cd7-754c-4461-810f-2b6bd2c92a0d"
-Path: /sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/EmailCampaignEditor/PageSettings/Tabs/Devices
+Path: /sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/EmailCampaignEditor/PageSettings/Tabs/Landing Pages
 DB: core
 SharedFields:
 - ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
   Hint: __Sortorder
-  Value: 25
+  Value: 75
 - ID: "deab3795-056f-4421-adf0-758844461b72"
   Hint: Placeholder Name
-  Value: Channels
+  Value: LandingPages
 - ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
   Hint: __Renderings
   Type: layout
@@ -20,19 +20,35 @@ SharedFields:
         id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
         <r
           id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
-          par="Id=Devices&amp;PaddingType=Top&amp;UsePadding=1" />
+          par="Id=LandingPages&amp;PaddingType=Top&amp;UsePadding=1" />
         <r
           id="{442BD093-FBAD-4E36-BC08-489E16C82D08}"
-          par="Header=Devices&amp;Id=DeviceListExpander&amp;IsCollapsible=0"
-          ph="Devices.Content" />
+          par="Header=Add%20landing%20page&amp;Id=AddLandingPagesExpander&amp;IsCollapsible=0"
+          ph="LandingPages.Content" />
+        <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=AddLandingPagesBorder&amp;PaddingType=All&amp;UsePadding=1"
+          ph="AddLandingPagesExpander.Body" />
+        <r
+          id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}"
+          par="Click=javascript%3Aapp.AddLandingPagesDialog.show()&amp;Id=AddLandingPageButton&amp;Text=Add%20landing%20page"
+          ph="AddLandingPagesBorder.Content" />
+        <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=LandingPagesListBorder&amp;PaddingType=Top&amp;ShowBorder=0&amp;UsePadding=1"
+          ph="LandingPages.Content" />
+        <r
+          id="{442BD093-FBAD-4E36-BC08-489E16C82D08}"
+          par="Header=Landing%20pages&amp;Id=LandingPagesListExpander&amp;IsCollapsible=0"
+          ph="LandingPagesListBorder.Content" />
         <r
           id="{C4393722-39FA-4869-9582-3A8EB8983A0D}"
-          par="Id=DeviceRowPanel&amp;PaddingType=All&amp;UsePadding=1"
-          ph="DeviceListExpander.Body" />
+          par="Id=LandingPagesRowPanel&amp;PaddingType=All&amp;UsePadding=1"
+          ph="LandingPagesListExpander.Body" />
         <r
           id="{5CB208F6-1860-426B-8221-FAA85B329848}"
-          par="GridColumns=12&amp;Id=DeviceListInnerPanel"
-          ph="DeviceRowPanel.Content" />
+          par="GridColumns=12&amp;Id=LandingPagesListInnerPanel"
+          ph="LandingPagesRowPanel.Content" />
       </d>
     </r>
 Languages:
@@ -79,7 +95,7 @@ Languages:
       Value: 20140708T173403
     - ID: "aea872fb-aa91-4d1a-b877-3ca6fbbb4fd4"
       Hint: Header
-      Value: Devices
+      Value: Landing Pages
 - Language: "ja-JP"
   Fields:
   - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"

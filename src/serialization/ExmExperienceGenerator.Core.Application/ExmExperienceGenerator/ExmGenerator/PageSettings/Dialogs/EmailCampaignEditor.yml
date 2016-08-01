@@ -18,26 +18,39 @@ SharedFields:
         l="{759BEFD1-3323-404D-A243-E0ED81163C03}">
         <r
           id="{CB83D434-31ED-4AC3-A280-CCE2B63F9743}"
-          par="PageCodeScriptFileName=%2fsitecore%2fshell%2fclient%2fApplications%2fExmExperienceGenerator%2fdialogs%2fEmailCampaignEditor.js"
-          ph="Page.Body"
-          uid="{EBE546AF-9D2C-41A0-A770-35937C8500EC}" />
+          par="PageCodeScriptFileName=%2Fsitecore%2Fshell%2Fclient%2FApplications%2FExmExperienceGenerator%2Fdialogs%2FEmailCampaignEditor.js"
+          ph="Page.Body" />
         <r
-          ds="{5222D4F9-7EE4-4D2C-B9D3-D6C6C184C222}"
           id="{B60FB581-44D1-4372-86A2-D6E494F020E1}"
+          ds="{5222D4F9-7EE4-4D2C-B9D3-D6C6C184C222}"
           par="Id=EditCampaignDialog"
-          ph="Page.Body"
-          uid="{8FD1A7E8-B680-4AF7-A4FD-73E38DD9E89B}" />
+          ph="Page.Body" />
         <r
           id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
           par="Id=EditCampaignDialogBorder&amp;UsePadding=0"
-          ph="EditCampaignDialog.Content"
-          uid="{1692FDB0-BBF5-42C7-876B-C5EA3A3EC377}" />
+          ph="EditCampaignDialog.Content" />
         <r
-          ds="{646E81F2-9C84-4D06-A409-7AA314D702BA}"
           id="{7426CD5B-A534-4462-ABEE-D700D78ECF6A}"
+          ds="{646E81F2-9C84-4D06-A409-7AA314D702BA}"
           par="Id=EditCampaignTabs"
-          ph="EditCampaignDialogBorder.Content"
-          uid="{2C7C92D4-DC8C-4711-934F-56570D979FA4}" />
+          ph="EditCampaignDialogBorder.Content" />
+        <r
+          id="{B60FB581-44D1-4372-86A2-D6E494F020E1}"
+          par="HeaderText=Add%20Landing%20Page&amp;Id=AddLandingPagesDialog"
+          ph="Page.Body" />
+        <r
+          id="{8B4238F3-D5CD-464D-8DE6-4A69E05CD55B}"
+          ds="{D44E05EF-FECB-4945-BB7A-6244DC83E034}"
+          par="UsePlaceholders=1"
+          ph="AddLandingPagesDialog.Content" />
+        <r
+          id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}"
+          par="ButtonType=Primary&amp;Click=javascript%3Aapp.addLandingPages()&amp;Id=AddLandingPagesButton&amp;Text=OK"
+          ph="AddLandingPagesDialog.Buttons" />
+        <r
+          id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}"
+          par="Click=javascript%3Aapp.AddLandingPagesDialog.hide()%3B%20app.EditCampaignDialog.show()&amp;Id=CloseLandingPagesDialogButton&amp;Text=Cancel"
+          ph="AddLandingPagesDialog.Buttons" />
       </d>
     </r>
 Languages:

@@ -5,6 +5,9 @@ Template: "f62b4cd7-754c-4461-810f-2b6bd2c92a0d"
 Path: /sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/EmailCampaignEditor/PageSettings/Tabs/Overview
 DB: core
 SharedFields:
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 0
 - ID: "deab3795-056f-4421-adf0-758844461b72"
   Hint: Placeholder Name
   Value: Tab
@@ -24,7 +27,7 @@ SharedFields:
           ph="Overview.Content" />
         <r
           id="{C4393722-39FA-4869-9582-3A8EB8983A0D}"
-          par="Id=RowPanel2&amp;PaddingType=All&amp;UsePadding=1"
+          par="Id=RowPanel2&amp;PaddingType=Left&amp;UsePadding=1"
           ph="OverviewExpander.Body" />
         <r
           id="{5CB208F6-1860-426B-8221-FAA85B329848}"
@@ -68,37 +71,37 @@ SharedFields:
           ph="DailyDistributionBorder.Content" />
         <r
           id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
-          ds="{7C26EDFA-A15D-410B-B78D-3C95E89FD469}"
+          ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
           par="Id=TraficDistribution0&amp;Type=range"
           ph="DailyDistributionBorder.Content" />
         <r
           id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
-          ds="{7C26EDFA-A15D-410B-B78D-3C95E89FD469}"
+          ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
           par="Id=TraficDistribution1&amp;Type=range"
           ph="DailyDistributionBorder.Content" />
         <r
           id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
-          ds="{7C26EDFA-A15D-410B-B78D-3C95E89FD469}"
+          ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
           par="Id=TraficDistribution2&amp;Type=range"
           ph="DailyDistributionBorder.Content" />
         <r
           id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
-          ds="{7C26EDFA-A15D-410B-B78D-3C95E89FD469}"
+          ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
           par="Id=TraficDistribution3&amp;Type=range"
           ph="DailyDistributionBorder.Content" />
         <r
           id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
-          ds="{7C26EDFA-A15D-410B-B78D-3C95E89FD469}"
+          ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
           par="Id=TraficDistribution4&amp;Type=range"
           ph="DailyDistributionBorder.Content" />
         <r
           id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
-          ds="{7C26EDFA-A15D-410B-B78D-3C95E89FD469}"
+          ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
           par="Id=TraficDistribution5&amp;Type=range"
           ph="DailyDistributionBorder.Content" />
         <r
           id="{C4393722-39FA-4869-9582-3A8EB8983A0D}"
-          par="Id=RowPanel3&amp;PaddingType=All"
+          par="Id=RowPanel3&amp;PaddingType=LeftBottom&amp;UsePadding=1"
           ph="OverviewExpander.Body" />
         <r
           id="{5CB208F6-1860-426B-8221-FAA85B329848}"
@@ -114,7 +117,7 @@ SharedFields:
           ph="UniqueOpenRateBorder.Content" />
         <r
           id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
-          ds="{7C26EDFA-A15D-410B-B78D-3C95E89FD469}"
+          ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
           par="Id=UniqueOpenRateDistribution&amp;Type=range"
           ph="UniqueOpenRateBorder.Content" />
         <r
@@ -127,7 +130,7 @@ SharedFields:
           ph="UniqueClickRateBorder.Content" />
         <r
           id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
-          ds="{7C26EDFA-A15D-410B-B78D-3C95E89FD469}"
+          ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
           par="Id=UniqueClickRateDistribution&amp;Type=range"
           ph="UniqueClickRateBorder.Content" />
         <r
@@ -140,7 +143,7 @@ SharedFields:
           ph="BouncedBorder.Content" />
         <r
           id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
-          ds="{7C26EDFA-A15D-410B-B78D-3C95E89FD469}"
+          ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
           par="Id=BouncedDistribution&amp;Type=range"
           ph="BouncedBorder.Content" />
         <r
@@ -157,7 +160,7 @@ SharedFields:
           ph="OpenRateBorder.Content" />
         <r
           id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
-          ds="{7C26EDFA-A15D-410B-B78D-3C95E89FD469}"
+          ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
           par="Id=OpenRateDistribution&amp;Type=range"
           ph="OpenRateBorder.Content" />
         <r
@@ -170,7 +173,7 @@ SharedFields:
           ph="ClickRateBorder.Content" />
         <r
           id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
-          ds="{7C26EDFA-A15D-410B-B78D-3C95E89FD469}"
+          ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
           par="Id=ClickRateDistribution&amp;Type=range"
           ph="ClickRateBorder.Content" />
         <r
@@ -183,9 +186,51 @@ SharedFields:
           ph="UnsubscribedBorder.Content" />
         <r
           id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
-          ds="{7C26EDFA-A15D-410B-B78D-3C95E89FD469}"
+          ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
           par="Id=UnsubscribedDistribution&amp;Type=range"
           ph="UnsubscribedBorder.Content" />
+        <r
+          id="{5CB208F6-1860-426B-8221-FAA85B329848}"
+          par="GridColumns=4&amp;Id=SentColumn"
+          ph="RowPanel3.Content" />
+        <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=TotalSentBorder&amp;PaddingType=Top"
+          ph="SentColumn.Content" />
+        <r
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
+          par="Id=TotalSentText&amp;Text=Open%20Rate"
+          ph="TotalSentBorder.Content" />
+        <r
+          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
+          par="Id=TotalSent&amp;Type=text"
+          ph="TotalSentBorder.Content" />
+        <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=DeliveredBorder&amp;PaddingType=Top"
+          ph="SentColumn.Content" />
+        <r
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
+          par="Id=DeliveredText&amp;Text=Click%20Rate"
+          ph="DeliveredBorder.Content" />
+        <r
+          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
+          ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
+          par="Id=DeliveredDistribution&amp;Type=range"
+          ph="DeliveredBorder.Content" />
+        <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=SpamComplaintsBorder&amp;PaddingType=Top"
+          ph="SentColumn.Content" />
+        <r
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
+          par="Id=SpamComplaintsText&amp;Text=Unsubscribed"
+          ph="SpamComplaintsBorder.Content" />
+        <r
+          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
+          ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
+          par="Id=SpamComplaintsDistribution&amp;Type=range"
+          ph="SpamComplaintsBorder.Content" />
       </d>
     </r>
 Languages:

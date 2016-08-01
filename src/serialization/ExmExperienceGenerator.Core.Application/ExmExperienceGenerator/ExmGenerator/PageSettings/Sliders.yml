@@ -1,0 +1,14 @@
+﻿---
+ID: "40dc87de-206b-460c-bab7-7f23a23bd51b"
+Parent: "86e9eb14-9f9c-4edc-9cef-d6b590f1da8c"
+Template: "a87a00b1-e6db-45ab-8b54-636fec3b5523"
+Path: /sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Sliders
+DB: core
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20160801T072844Z

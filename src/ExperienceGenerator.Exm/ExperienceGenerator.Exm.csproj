@@ -135,8 +135,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+    <Content Include="sitecore\shell\client\Applications\ExmExperienceGenerator\DataRepository.js" />
     <Content Include="sitecore\shell\client\Applications\ExmExperienceGenerator\dialogs\EmailCampaignEditor.js" />
     <Content Include="sitecore\shell\client\Applications\ExmExperienceGenerator\ExmGenerator.js" />
+    <Content Include="sitecore\shell\client\Applications\ExmExperienceGenerator\uiUtils.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Config\Include\ExperienceGenerator\ExperienceGenerator.Exm.config">

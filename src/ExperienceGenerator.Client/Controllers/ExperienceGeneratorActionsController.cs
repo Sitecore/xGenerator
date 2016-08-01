@@ -111,10 +111,7 @@ namespace ExperienceGenerator.Client.Controllers
         Label = s.Label,
         DefaultWeight = s.Id == "website" ? 100 : 50
       }).ToList();
-      options.LocationGroups = GeoRegion.Regions.Select(region => 
-      new SelectionOptionGroup() {
-        Label = region.Label,
-        Options = region.SubRegions.Select(x=> new SelectionOption() { Id = x.Id, Label = x.Label, DefaultWeight = 50})}).ToList();
+      options.LocationGroups = Locations();
 
       var db = Database.GetDatabase("master");
       var channels = db.GetItem(KnownItems.ChannelsRoot);
@@ -178,6 +175,15 @@ namespace ExperienceGenerator.Client.Controllers
       }
 
       return options;
+    }
+
+    [HttpGet]
+    public List<SelectionOptionGroup> Locations()
+    {
+      return GeoRegion.Regions.Select(region => 
+        new SelectionOptionGroup() {
+          Label = region.Label,
+          Options = region.SubRegions.Select(x=> new SelectionOption() { Id = x.Id, Label = x.Label, DefaultWeight = 50})}).ToList();
     }
 
     private static IEnumerable<SelectionOptionGroup> SelectChannelGroups(Item channelsRoot)
