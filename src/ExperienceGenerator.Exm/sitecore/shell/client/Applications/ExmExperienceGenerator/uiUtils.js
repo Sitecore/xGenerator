@@ -5,7 +5,7 @@
   <div class='channel-innerlabel truncate'><%= innerLabel %></div>\
   <div class='channel-slider'><input class='form-control sc-textbox sc-ds-slider' data-sc-id='<%= sliderId %>' type='range' value='<%= sliderWeight %>'/></div>\
   </div>",
-    deletableSliderTemplate:  "<div class='landingpage'>\
+    deletableSliderTemplate: "<div class='landingpage'>\
   <div class='channel-innerlabel truncate'><%= sectionLabel %></div>\
   <div class='landingpage-channel-slider'><input class='form-control sc-textbox sc-ds-slider' data-sc-id='<%= sliderId %>' value='<%= sliderWeight %>' type='range'/></div>\
   <div class='end-button-area'><button class='btn btn-default end-button' onclick='$(this).parents(&quot;.landingpage&quot;).remove()'><span class='sc-button-text'>Delete</span></button></div>\
@@ -42,7 +42,34 @@
         }
       }
       return output;
+    },
+
+    parseSlidersContainer: function (slidersContainer) {
+      var slidersData = [];
+      $(slidersContainer).find("input[type='range']").each(function(idx, slider) {
+        slidersData[slider.getAttribute("data-sc-id")] = slider.value;
+      });
+
+      return slidersData;
+    },
+
+    resetSliders: function(slidersContainer, host) {
+      $(slidersContainer).find("input[type='range']").each(function (idx, slider) {
+
+        var objectId = slider.getAttribute("data-sc-id");
+        if (host && host[objectId])
+          host[objectId].set("text", undefined);
+        else 
+          slider.value = undefined;
+      });
+    },
+
+    setSliderValues: function (sliderValues) {
+      for (var id in sliderValues) {
+        $("input[type='range'][data-sc-id='" + id + "']")[0].value = sliderValues[id];
+      }
     }
+
   };
 
   return uiUtils;

@@ -18,39 +18,57 @@ SharedFields:
         l="{759BEFD1-3323-404D-A243-E0ED81163C03}">
         <r
           id="{CB83D434-31ED-4AC3-A280-CCE2B63F9743}"
-          par="PageCodeScriptFileName=%2Fsitecore%2Fshell%2Fclient%2FApplications%2FExmExperienceGenerator%2Fdialogs%2FEmailCampaignEditor.js"
-          ph="Page.Body" />
+          par="PageCodeScriptFileName=%2fsitecore%2fshell%2fclient%2fApplications%2fExmExperienceGenerator%2fdialogs%2fEmailCampaignEditor.js"
+          ph="Page.Body"
+          uid="{C8058736-6E1F-426F-86BB-724F5FD6BE9C}" />
         <r
-          id="{B60FB581-44D1-4372-86A2-D6E494F020E1}"
           ds="{5222D4F9-7EE4-4D2C-B9D3-D6C6C184C222}"
+          id="{B60FB581-44D1-4372-86A2-D6E494F020E1}"
           par="Id=EditCampaignDialog"
-          ph="Page.Body" />
+          ph="Page.Body"
+          uid="{7F6117B1-53B7-465C-9DE0-0AC2481545B0}" />
+        <r
+          id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}"
+          par="Click=javascript%3aapp.submitEditCampaign()&amp;Id=OkEditCampaignButton&amp;ButtonType=Primary&amp;Text=OK"
+          ph="EditCampaignDialog.Buttons"
+          uid="{83D0FFF7-10A0-4190-A18F-874B514CD6BF}" />
+        <r
+          id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}"
+          par="Click=javascript%3aapp.cancelEditCampaign()&amp;Id=CancelEditCampaignButton&amp;Text=Cancel"
+          ph="EditCampaignDialog.Buttons"
+          uid="{62635940-4AAE-415E-978E-1CB0B67C973A}" />
         <r
           id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
           par="Id=EditCampaignDialogBorder&amp;UsePadding=0"
-          ph="EditCampaignDialog.Content" />
+          ph="EditCampaignDialog.Content"
+          uid="{A8FA292B-D81D-498D-8EC2-D89673FC45D3}" />
         <r
-          id="{7426CD5B-A534-4462-ABEE-D700D78ECF6A}"
           ds="{646E81F2-9C84-4D06-A409-7AA314D702BA}"
+          id="{7426CD5B-A534-4462-ABEE-D700D78ECF6A}"
           par="Id=EditCampaignTabs"
-          ph="EditCampaignDialogBorder.Content" />
+          ph="EditCampaignDialogBorder.Content"
+          uid="{0DB030C3-7543-4C95-834B-B0CB1D338ADA}" />
         <r
           id="{B60FB581-44D1-4372-86A2-D6E494F020E1}"
-          par="HeaderText=Add%20Landing%20Page&amp;Id=AddLandingPagesDialog"
-          ph="Page.Body" />
+          par="HeaderText=Add+Landing+Page&amp;Id=AddLandingPagesDialog"
+          ph="Page.Body"
+          uid="{12947002-CEB2-41A8-AC20-40B9AC869F75}" />
         <r
-          id="{8B4238F3-D5CD-464D-8DE6-4A69E05CD55B}"
           ds="{D44E05EF-FECB-4945-BB7A-6244DC83E034}"
+          id="{8B4238F3-D5CD-464D-8DE6-4A69E05CD55B}"
           par="UsePlaceholders=1"
-          ph="AddLandingPagesDialog.Content" />
+          ph="AddLandingPagesDialog.Content"
+          uid="{01EE3441-F49D-4AA7-9BA6-09ED7311818F}" />
         <r
           id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}"
-          par="ButtonType=Primary&amp;Click=javascript%3Aapp.addLandingPages()&amp;Id=AddLandingPagesButton&amp;Text=OK"
-          ph="AddLandingPagesDialog.Buttons" />
+          par="Click=javascript%3aapp.addLandingPages()&amp;Id=AddLandingPagesButton&amp;ButtonType=Primary&amp;Text=OK"
+          ph="AddLandingPagesDialog.Buttons"
+          uid="{A429969A-3187-41E6-9830-931D56BEB84A}" />
         <r
           id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}"
-          par="Click=javascript%3Aapp.AddLandingPagesDialog.hide()%3B%20app.EditCampaignDialog.show()&amp;Id=CloseLandingPagesDialogButton&amp;Text=Cancel"
-          ph="AddLandingPagesDialog.Buttons" />
+          par="Click=javascript%3aapp.EditCampaignDialog.show()&amp;Id=CloseLandingPagesDialogButton&amp;Text=Cancel"
+          ph="AddLandingPagesDialog.Buttons"
+          uid="{66E5DE6A-F4E6-4149-86BB-0A55F2ED5F6C}" />
       </d>
     </r>
 Languages:

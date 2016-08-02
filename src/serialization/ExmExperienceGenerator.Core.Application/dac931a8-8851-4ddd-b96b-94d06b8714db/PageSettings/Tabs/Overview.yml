@@ -72,32 +72,32 @@ SharedFields:
         <r
           id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
           ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
-          par="Id=TraficDistribution0&amp;Type=range"
+          par="Id=TrafficDistribution0&amp;Type=range"
           ph="DailyDistributionBorder.Content" />
         <r
           id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
           ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
-          par="Id=TraficDistribution1&amp;Type=range"
+          par="Id=TrafficDistribution1&amp;Type=range"
           ph="DailyDistributionBorder.Content" />
         <r
           id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
           ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
-          par="Id=TraficDistribution2&amp;Type=range"
+          par="Id=TrafficDistribution2&amp;Type=range"
           ph="DailyDistributionBorder.Content" />
         <r
           id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
           ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
-          par="Id=TraficDistribution3&amp;Type=range"
+          par="Id=TrafficDistribution3&amp;Type=range"
           ph="DailyDistributionBorder.Content" />
         <r
           id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
           ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
-          par="Id=TraficDistribution4&amp;Type=range"
+          par="Id=TrafficDistribution4&amp;Type=range"
           ph="DailyDistributionBorder.Content" />
         <r
           id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
           ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
-          par="Id=TraficDistribution5&amp;Type=range"
+          par="Id=TrafficDistribution5&amp;Type=range"
           ph="DailyDistributionBorder.Content" />
         <r
           id="{C4393722-39FA-4869-9582-3A8EB8983A0D}"
@@ -199,7 +199,7 @@ SharedFields:
           ph="SentColumn.Content" />
         <r
           id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
-          par="Id=TotalSentText&amp;Text=Open%20Rate"
+          par="Id=TotalSentText&amp;Text=Total%20Sent"
           ph="TotalSentBorder.Content" />
         <r
           id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
@@ -211,7 +211,7 @@ SharedFields:
           ph="SentColumn.Content" />
         <r
           id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
-          par="Id=DeliveredText&amp;Text=Click%20Rate"
+          par="Id=DeliveredText&amp;Text=Delivered"
           ph="DeliveredBorder.Content" />
         <r
           id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
@@ -224,7 +224,7 @@ SharedFields:
           ph="SentColumn.Content" />
         <r
           id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
-          par="Id=SpamComplaintsText&amp;Text=Unsubscribed"
+          par="Id=SpamComplaintsText&amp;Text=Spam%20Complaints"
           ph="SpamComplaintsBorder.Content" />
         <r
           id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"

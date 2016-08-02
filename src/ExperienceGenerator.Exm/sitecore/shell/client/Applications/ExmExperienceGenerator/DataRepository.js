@@ -26,6 +26,12 @@
       $.ajax({
         url: urls.locationsUrl
       }).success(callback);
+    },
+
+    getItem:function(id, database, callback) {
+      database = database || "master";
+      var db = new sc.Definitions.Data.Database(new sc.Definitions.Data.DatabaseUri(database));
+      db.getItem(id, callback);
     }
   };
 
