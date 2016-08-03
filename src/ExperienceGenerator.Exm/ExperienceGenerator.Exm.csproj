@@ -145,6 +145,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="ExperienceGenerator.Exm.package" />
+    <Content Include="App_Config\Include\ExperienceGenerator\ExmExperienceGenerator.Serialization.config" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Web.config">
       <SubType>Designer</SubType>
