@@ -10,9 +10,9 @@ namespace ExperienceGenerator.Exm.Services
     {
         public static ExmJobManager Instance;
 
-        private readonly List<ExmDataPreparationModel> _jobs = new List<ExmDataPreparationModel>();
+        private readonly List<InitialExmDataPreparationModel> _jobs = new List<InitialExmDataPreparationModel>();
 
-        public ExmJob StartJob(ExmDataPreparationModel specification)
+        public ExmJob StartJob(InitialExmDataPreparationModel specification)
         {
             specification.Job = new ExmJob();
             this._jobs.Add(specification);
@@ -21,7 +21,7 @@ namespace ExperienceGenerator.Exm.Services
             return specification.Job;
         }
 
-        public void Run(ExmDataPreparationModel specification)
+        public void Run(InitialExmDataPreparationModel specification)
         {
             var exmDataPreparationService = new ExmDataPreparationService(specification);
             exmDataPreparationService.CreateData();

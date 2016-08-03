@@ -16,14 +16,14 @@
 
   public class ExmGoalService
     {
-        private readonly ExmDataPreparationModel _specification;
+        private readonly InitialExmDataPreparationModel _specification;
         private readonly List<ExmGoal> _goals = new List<ExmGoal>();
         private readonly Database _db = Factory.GetDatabase("master");
         private readonly ItemUtilExt _itemUtil = new ItemUtilExt();
 
         public Func<ExmGoal> GoalsSet { get; private set; }
 
-        public ExmGoalService(ExmDataPreparationModel specification)
+        public ExmGoalService(InitialExmDataPreparationModel specification)
         {
             this._specification = specification;
         }

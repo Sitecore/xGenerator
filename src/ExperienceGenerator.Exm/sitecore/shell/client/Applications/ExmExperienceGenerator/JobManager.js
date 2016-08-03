@@ -15,10 +15,11 @@
     },
 
     start: function (data, callback, errorCallback) {
+      console.log(data);
       $.ajax({
         url: urls.exmJobUrl,
         type: "POST",
-        data: data,
+        data: JSON.stringify(data),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: callback,

@@ -2,7 +2,7 @@ namespace ExperienceGenerator.Exm.Models
 {
   using System.Collections.Generic;
 
-  public class ExmDataPreparationModel
+  public class InitialExmDataPreparationModel
     {
         public bool RebuildMasterIndex { get; set; }
 

@@ -12,14 +12,14 @@
 
   public class ExmListService
     {
-        private readonly ExmDataPreparationModel _specification;
+        private readonly InitialExmDataPreparationModel _specification;
         private readonly ExmContactService _contactService;
         private readonly List<ContactList> _lists = new List<ContactList>();
         private readonly Random _random = new Random();
 
         public ListManager<ContactList, ContactData> ListManager { get; }
 
-        public ExmListService(ExmDataPreparationModel specification, ExmContactService contactService)
+        public ExmListService(InitialExmDataPreparationModel specification, ExmContactService contactService)
         {
             this._specification = specification;
             this._contactService = contactService;

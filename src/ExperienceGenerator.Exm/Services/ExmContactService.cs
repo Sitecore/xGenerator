@@ -13,14 +13,14 @@
 
   public class ExmContactService
     {
-        private readonly ExmDataPreparationModel _specification;
+        private readonly InitialExmDataPreparationModel _specification;
         private readonly string[] _languages = { "en", "uk" };
         private readonly Random _random = new Random();
         private readonly List<Contact> _contacts = new List<Contact>();
 
         public int ContactCount { get; private set; }
 
-        public ExmContactService(ExmDataPreparationModel specification)
+        public ExmContactService(InitialExmDataPreparationModel specification)
         {
             this._specification = specification;
         }

@@ -138,6 +138,7 @@
     <Content Include="sitecore\shell\client\Applications\ExmExperienceGenerator\DataRepository.js" />
     <Content Include="sitecore\shell\client\Applications\ExmExperienceGenerator\dialogs\EmailCampaignEditor.js" />
     <Content Include="sitecore\shell\client\Applications\ExmExperienceGenerator\ExmGenerator.js" />
+    <Content Include="sitecore\shell\client\Applications\ExmExperienceGenerator\JobManager.js" />
     <Content Include="sitecore\shell\client\Applications\ExmExperienceGenerator\uiUtils.js" />
   </ItemGroup>
   <ItemGroup>
@@ -153,9 +154,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CampaignModel.cs" />
     <Compile Include="Controllers\ExperienceGeneratorExmJobsController.cs" />
+    <Compile Include="Controllers\Funnel.cs" />
     <Compile Include="Infrastructure\SitecoreRouteInitializer.cs" />
-    <Compile Include="Models\ExmDataPreparationModel.cs" />
+    <Compile Include="Models\InitialExmDataPreparationModel.cs" />
     <Compile Include="Models\ExmEventPercentages.cs" />
     <Compile Include="Models\ExmGoal.cs" />
     <Compile Include="Models\ExmJob.cs" />

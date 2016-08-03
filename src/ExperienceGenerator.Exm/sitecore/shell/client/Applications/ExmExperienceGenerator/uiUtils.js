@@ -45,7 +45,7 @@
     },
 
     parseSlidersContainer: function (slidersContainer) {
-      var slidersData = [];
+      var slidersData = {};
       $(slidersContainer).find("input[type='range']").each(function(idx, slider) {
         slidersData[slider.getAttribute("data-sc-id")] = slider.value;
       });
@@ -58,9 +58,9 @@
 
         var objectId = slider.getAttribute("data-sc-id");
         if (host && host[objectId])
-          host[objectId].set("text", undefined);
+          host[objectId].set("text", 50);
         else 
-          slider.value = undefined;
+          slider.value = 50;
       });
     },
 

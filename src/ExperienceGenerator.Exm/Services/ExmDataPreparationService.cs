@@ -31,7 +31,7 @@ namespace ExperienceGenerator.Exm.Services
 
   public class ExmDataPreparationService
     {
-        private readonly ExmDataPreparationModel _specification;
+        private readonly InitialExmDataPreparationModel _specification;
         private readonly Random _random = new Random();
         private readonly Database _db = Sitecore.Configuration.Factory.GetDatabase("master");
         private readonly Dictionary<string, List<Guid>> _contactsPerEmail = new Dictionary<string, List<Guid>>();
@@ -57,7 +57,7 @@ namespace ExperienceGenerator.Exm.Services
 
         private ManagerRoot _managerRoot;
 
-        public ExmDataPreparationService(ExmDataPreparationModel specification)
+        public ExmDataPreparationService(InitialExmDataPreparationModel specification)
         {
             this._specification = specification;
             this._contactService = new ExmContactService(specification);
