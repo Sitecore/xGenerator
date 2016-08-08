@@ -16,6 +16,17 @@ namespace Colossus.Statistics
             return builder.Build();
         }
 
+
+        public static Func<TValue> Weighted<TValue>(this IEnumerable<KeyValuePair<TValue, int>> values)
+        {
+          var builder = new WeightedSetBuilder<TValue>();
+          foreach (var kv in values)
+          {
+            builder.Add(kv.Key, kv.Value);
+          }
+          return builder.Build();
+        }
+
         public static Func<TValue> Weighted<TValue>(this IEnumerable<KeyValuePair<TValue, double>> values)
         {
             var builder = new WeightedSetBuilder<TValue>();

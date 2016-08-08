@@ -37,7 +37,7 @@
 
       jobManager.start(requestData, function (data) {
         self.jobId = data.Id;
-        _sc.on("intervalCompleted:ProgressBar", this.updateJobStatus, this);
+        _sc.on("intervalCompleted:ProgressBar", self.updateJobStatus, self);
       }, function (error) {
         alert(error);
       });

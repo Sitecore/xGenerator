@@ -155,24 +155,18 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CampaignModel.cs" />
+    <Compile Include="Controllers\ExmEventsController.cs" />
     <Compile Include="Controllers\ExperienceGeneratorExmJobsController.cs" />
     <Compile Include="Controllers\Funnel.cs" />
     <Compile Include="Infrastructure\SitecoreRouteInitializer.cs" />
-    <Compile Include="Models\InitialExmDataPreparationModel.cs" />
-    <Compile Include="Models\ExmEventPercentages.cs" />
-    <Compile Include="Models\ExmGoal.cs" />
     <Compile Include="Models\ExmJob.cs" />
-    <Compile Include="Models\ExmRandomCampaignsDefinition.cs" />
-    <Compile Include="Models\ExmRandomGoalsDefinitions.cs" />
-    <Compile Include="Models\ExmRandomListsDefinition.cs" />
-    <Compile Include="Models\ExmSpecificCampaign.cs" />
-    <Compile Include="Models\ExmSpecificList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ExmContactService.cs" />
-    <Compile Include="Services\ExmDataPreparationService.cs" />
+    <Compile Include="Services\ExmDataProcessingService.cs" />
     <Compile Include="Services\ExmEventsGenerator.cs" />
-    <Compile Include="Services\ExmGoalService.cs" />
+    <Compile Include="Services\ExmJobDefinition.cs" />
     <Compile Include="Services\ExmJobManager.cs" />
+    <Compile Include="Services\ExmLandingPageService.cs" />
     <Compile Include="Services\ExmListService.cs" />
   </ItemGroup>
   <ItemGroup>

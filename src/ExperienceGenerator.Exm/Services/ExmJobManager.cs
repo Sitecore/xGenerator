@@ -7,30 +7,47 @@ namespace ExperienceGenerator.Exm.Services
   using Sitecore.Jobs;
 
   public class ExmJobManager
+  {
+    public static ExmJobManager Instance;
+
+    private readonly List<ExmJobDefinition> jobDefinitions = new List<ExmJobDefinition>();
+
+    public ExmJob StartJob(ExmJobDefinition jobDefinition)
     {
-        public static ExmJobManager Instance;
-
-        private readonly List<InitialExmDataPreparationModel> _jobs = new List<InitialExmDataPreparationModel>();
-
-        public ExmJob StartJob(InitialExmDataPreparationModel specification)
-        {
-            specification.Job = new ExmJob();
-            this._jobs.Add(specification);
-            var options = new JobOptions("ExperienceGeneratorExm-" + specification.Job.Id, "ExperienceGenerator", Sitecore.Context.Site.Name, this, "Run", new object[] { specification });
-            JobManager.Start(options);
-            return specification.Job;
-        }
-
-        public void Run(InitialExmDataPreparationModel specification)
-        {
-            var exmDataPreparationService = new ExmDataPreparationService(specification);
-            exmDataPreparationService.CreateData();
-        }
-
-        public ExmJob Poll(Guid id)
-        {
-            var spec = this._jobs.FirstOrDefault(x => x.Job.Id == id);
-            return spec == null ? null : spec.Job;
-        }
+      jobDefinition.Job = new ExmJob();
+      this.jobDefinitions.Add(jobDefinition);
+      var options = new JobOptions("ExperienceGeneratorExm-" + jobDefinition.Job.Id, "ExperienceGenerator", Sitecore.Context.Site.Name, this, "Run", new object[] { jobDefinition });
+      JobManager.Start(options);
+      return jobDefinition.Job;
     }
+
+    public void Run(ExmJobDefinition jobDefinition)
+    {
+      jobDefinition.Job.JobStatus = ExperienceGenerator.JobStatus.Running;
+      foreach (var keyValuePair in jobDefinition)
+      {
+        var exmDataPreparationService = new ExmDataProcessingService(keyValuePair.Value, keyValuePair.Key);
+        exmDataPreparationService.StatusChanged += this.JobStatusChanged;
+        exmDataPreparationService.CreateData();
+      }
+
+
+      jobDefinition.Job.JobStatus = ExperienceGenerator.JobStatus.Complete;
+    }
+
+    private void JobStatusChanged(Guid campaignId, ExperienceGenerator.JobStatus status, string message)
+    {
+#warning does not work with multiple campaigns
+      var exmJob = this.jobDefinitions.FirstOrDefault(x => x.ContainsKey(campaignId))?.Job;
+      if (exmJob == null) return;
+      exmJob.JobStatus = status;
+      exmJob.Status = message;
+    }
+
+    public ExmJob Poll(Guid id)
+    {
+      var spec = this.jobDefinitions.FirstOrDefault(x => x.Job.Id == id);
+      return spec == null ? null : spec.Job;
+    }
+  }
 }
