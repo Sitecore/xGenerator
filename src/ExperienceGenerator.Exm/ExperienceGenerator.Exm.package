@@ -18,6 +18,38 @@
   <Sources>
     <xitems>
       <Entries>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/{F67C6D31-3D39-4CC3-9153-4809B31C099C}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/Launchpad/PageSettings/Buttons/Tools/Exm Experience Generator/{30579168-5C30-49EC-8679-21C56CE53F49}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/{D125260D-DC59-4BD2-ADA9-DBC2A2D53454}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/{86E9EB14-9F9C-4EDC-9CEF-D6B590F1DA8C}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Buttons/{A415820C-F477-4681-A830-33F28B311B36}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/DataSheetStyle/{C9D3968D-D857-42C5-8799-1C475FE7B95E}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/{5ED8B01F-2544-4D85-A22B-402DB57929F6}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/List/{5F825ECC-DDF8-4F6D-8465-6360123488DA}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/PageTitle/{87A66A81-2372-4B80-9C28-2632664B76E7}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Sliders/{40DC87DE-206B-460C-BAB7-7F23A23BD51B}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Texts/{08AD1B64-5C46-46A8-A643-C26397C5B8CC}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Buttons/Delete/{47D56F80-4490-4958-B586-EA520F642599}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Buttons/Pause/{63C3D671-3694-4997-8F2F-B972AB3CECD6}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Buttons/Start/{FA21A68C-EB97-4BC2-8DBA-9DF171C94CF6}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Buttons/Stop/{33433CC7-F370-4628-A7D6-01BE892AAA9F}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/LandingPagesDialog/{D44E05EF-FECB-4945-BB7A-6244DC83E034}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/EmailCampaignEditor/{DAC931A8-8851-4DDD-B96B-94D06B8714DB}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/EmailCampaignEditor/PageSettings/{D6CC328D-C7B2-4C87-A33D-EF0083FE3B32}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/EmailCampaignEditor/PageSettings/EmailCampaignEditor Parameters/{5222D4F9-7EE4-4D2C-B9D3-D6C6C184C222}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/EmailCampaignEditor/PageSettings/Tabs/{646E81F2-9C84-4D06-A409-7AA314D702BA}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/EmailCampaignEditor/PageSettings/Tabs/Overview/{0582868C-343A-4C89-838D-254855F43114}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/EmailCampaignEditor/PageSettings/Tabs/Devices/{73A0EDC4-C61D-4ED4-90B4-EC31FFB70A63}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/EmailCampaignEditor/PageSettings/Tabs/Locations/{733E5260-C41A-42E4-82F8-40F6E6E543D9}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/EmailCampaignEditor/PageSettings/Tabs/Landing Pages/{2A0A1657-07FF-4C11-9ECF-3C38049C17BF}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/List/Sent Messages/{F4E1FC60-F41C-4FF7-96F3-A393CACF1C56}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/List/Sent Messages/Campaign name/{AD79BED6-54A4-411D-A3D7-E80395CAE098}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/List/Sent Messages/Subject/{18A2ECBE-9405-4DF0-B2C6-2A4F256F8016}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/List/Sent Messages/Recipients/{E1AA826E-324A-49A2-82D3-DED3A187F695}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/List/Sent Messages/Open rate/{41EB7827-3EB2-47CB-82CA-D412D5ADB43B}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Sliders/Slider Parameters/{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Texts/Overview/{63F091F4-1812-4987-ADFE-5A3A917B1722}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Texts/Overview/Number of visits generated/{7E23D53B-C163-4E28-8F06-EEA05AA8695D}/invariant/0</x-item>
       </Entries>
       <SkipVersions>False</SkipVersions>
       <Converter>
@@ -42,6 +74,13 @@
       <Entries>
         <x-item>/App_Config/Include/ExperienceGenerator/ExperienceGenerator.Exm.config</x-item>
         <x-item>/bin/ExperienceGenerator.Exm.dll</x-item>
+        <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator</x-item>
+        <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/dialogs</x-item>
+        <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/dialogs/EmailCampaignEditor.js</x-item>
+        <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/DataRepository.js</x-item>
+        <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/ExmGenerator.js</x-item>
+        <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/JobManager.js</x-item>
+        <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/uiUtils.js</x-item>
       </Entries>
       <Converter>
         <FileToEntryConverter>

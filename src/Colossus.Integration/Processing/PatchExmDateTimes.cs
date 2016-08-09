@@ -32,7 +32,7 @@ namespace Colossus.Integration.Processing
                 foreach (var pageEvent in page.PageEvents)
                 {
                     var data = pageEvent.Data;
-                    if (data.Contains("FakeDateTime"))
+                    if (data!=null && data.Contains("FakeDateTime"))
                     {
                         var dataObj = JObject.Parse(data);
                         var fakeDateTime = dataObj["FakeDateTime"].Value<DateTime>().ToUniversalTime();

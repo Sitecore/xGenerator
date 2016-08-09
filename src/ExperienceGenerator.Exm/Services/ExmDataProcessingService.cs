@@ -39,7 +39,6 @@ namespace ExperienceGenerator.Exm.Services
     private readonly Guid exmCampaignId;
     private readonly Random _random = new Random();
     private readonly Database _db = Sitecore.Configuration.Factory.GetDatabase("master");
-    private readonly Dictionary<string, List<Guid>> _contactsPerEmail = new Dictionary<string, List<Guid>>();
     private readonly List<Guid> _unsubscribeFromAllContacts = new List<Guid>();
     private readonly Func<string> _userAgent;
     private readonly ExmContactService _contactService;
@@ -206,7 +205,7 @@ Drop table #SegmentRecordsReduced
       }
 
       var contactIndex = 1;
-      var contactsThisEmail = this._contactsPerEmail[email.ID];
+      var contactsThisEmail = this.GetContactsForEmail(email.RecipientManager.IncludedRecipientListIds, email); ;
       var numContactsForThisEmail = contactsThisEmail.Count;
       foreach (var contactId in contactsThisEmail)
       {
@@ -216,7 +215,7 @@ Drop table #SegmentRecordsReduced
           numContactsForThisEmail));
 
 
-        var contact = this._contactService.GetContact(contactId);
+        var contact = this._contactService.GetContact(contactId.ContactId);
         if (contact == null)
         {
           continue;
@@ -314,8 +313,6 @@ Drop table #SegmentRecordsReduced
 
       this.PublishEmail(messageItem, sendingProcessData);
 
-      this._contactsPerEmail[messageItem.ID] = new List<Guid>();
-
       var numContactsForThisEmail = contactsForThisEmail.Count;
       var contactsRequired = this.campaignDefinition.Events.TotalSent - numContactsForThisEmail;
       if (contactsRequired>0)
@@ -323,7 +320,7 @@ Drop table #SegmentRecordsReduced
         var addlContacts = this._contactService.CreateContacts(contactsRequired);
         var xaList = this._listService.CreateList("Auto List " + DateTime.Now.Ticks, addlContacts );
         messageItem.RecipientManager.AddIncludedRecipientListId(ID.Parse(xaList.Id));
-
+        
         contactsForThisEmail.AddRange(this._listService.GetContacts(xaList));
       }
 
@@ -335,7 +332,6 @@ Drop table #SegmentRecordsReduced
         try
         {
           this.SendEmailToContact(contact, messageItem);
-          this._contactsPerEmail[messageItem.ID].Add(contact.ContactId);
         }
         catch (Exception ex)
         {
