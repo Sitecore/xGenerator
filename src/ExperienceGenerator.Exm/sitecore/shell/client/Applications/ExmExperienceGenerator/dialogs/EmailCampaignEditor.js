@@ -21,7 +21,7 @@
       },
       cleanUI: function () {
         var now = new Date();
-        this.StartDate.viewModel.setDate(new Date(now.getFullYear() - 1, now.getMonth(), now.getDate()));
+        this.StartDate.viewModel.setDate(new Date(new Date(now).setDate(-30 + now.getDate())));
         this.EndDate.viewModel.setDate(now);
         uiUtils.resetSliders(this.EditCampaignDialog.viewModel.$el, this);
         this.LandingPagesContainer.empty();

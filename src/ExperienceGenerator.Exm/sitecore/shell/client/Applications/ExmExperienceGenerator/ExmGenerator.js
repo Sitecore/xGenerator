@@ -58,7 +58,7 @@
 
 
         //self.ProgressBar.set("value", data.CompletedVisitors / total * 100);
-        //self.NumberVisitsValue.set("text", data.CompletedVisits);
+        self.NumberVisitsValue.set("text", data.Status);
         if (data.JobStatus != "Running" && data.JobStatus != "Pending" && data.JobStatus != "Paused") {
           _sc.off("intervalCompleted:ProgressBar");
         }

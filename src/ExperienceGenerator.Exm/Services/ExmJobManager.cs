@@ -3,6 +3,7 @@ namespace ExperienceGenerator.Exm.Services
   using System;
   using System.Collections.Generic;
   using System.Linq;
+  using System.Text.RegularExpressions;
   using ExperienceGenerator.Exm.Models;
   using Sitecore.Jobs;
 
@@ -23,6 +24,7 @@ namespace ExperienceGenerator.Exm.Services
 
     public void Run(ExmJobDefinition jobDefinition)
     {
+      ExmEventsGenerator.Errors = 0;
       jobDefinition.Job.JobStatus = ExperienceGenerator.JobStatus.Running;
       foreach (var keyValuePair in jobDefinition)
       {
@@ -42,6 +44,14 @@ namespace ExperienceGenerator.Exm.Services
       if (exmJob == null) return;
       exmJob.JobStatus = status;
       exmJob.Status = message;
+      var match = Regex.Match(message, "Generating events for contact (\\d*) of (\\d*)");
+      if (match.Success)
+      {
+        exmJob.CompletedContacts = int.Parse(match.Groups[1].Value);
+        exmJob.TotalContacts = int.Parse(match.Groups[2].Value);
+
+      }
+
     }
 
     public ExmJob Poll(Guid id)

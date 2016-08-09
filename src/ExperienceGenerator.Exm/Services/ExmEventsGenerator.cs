@@ -9,6 +9,7 @@ namespace ExperienceGenerator.Exm.Services
   using System.Net.Http;
   using System.Threading;
   using Sitecore.Data;
+  using Sitecore.Diagnostics;
   using Sitecore.Modules.EmailCampaign;
   using Sitecore.Modules.EmailCampaign.Core.Crypto;
   using Sitecore.Modules.EmailCampaign.Core.Extensions;
@@ -17,6 +18,11 @@ namespace ExperienceGenerator.Exm.Services
 
   public static class ExmEventsGenerator
   {
+
+    private static HttpClient HttpClient { get; } = new HttpClient()
+    {
+        Timeout = TimeSpan.FromMinutes(5)
+    };
     public static int Threads { get; set; }
 
     public static int Errors { get; set; }
@@ -36,35 +42,31 @@ namespace ExperienceGenerator.Exm.Services
 
     public static async void RequestUrl(string url, string userAgent = null, string ip = null, string dateTime = null)
     {
-      while (Threads > 10)
+      while (Threads > Environment.ProcessorCount*2)
       {
         Thread.Sleep(1000);
       }
 
       Threads++;
 
-      // Don't use IDisposable HttpClient, seems to cause problems with threads
-      var client = new HttpClient();
-      client.Timeout = TimeSpan.FromMinutes(5);
-      
       if (userAgent != null)
       {
-        client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", userAgent);
+        HttpClient.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", userAgent);
       }
 
       if (ip != null)
       {
-        client.DefaultRequestHeaders.TryAddWithoutValidation("X-Forwarded-For", ip);
+        HttpClient.DefaultRequestHeaders.TryAddWithoutValidation("X-Forwarded-For", ip);
       }
 
       if (dateTime != null)
       {
-        client.DefaultRequestHeaders.TryAddWithoutValidation("X-Exm-RequestTime", dateTime);
+        HttpClient.DefaultRequestHeaders.TryAddWithoutValidation("X-Exm-RequestTime", dateTime);
       }
 
       try
       {
-        var res = await client.PostAsync(url, new StringContent(string.Empty));
+        var res = await HttpClient.PostAsync(url, new StringContent(string.Empty)).ConfigureAwait(false);
         if (!res.IsSuccessStatusCode)
         {
           Errors++;
@@ -73,10 +75,13 @@ namespace ExperienceGenerator.Exm.Services
       }
       catch (Exception ex)
       {
+        Log.Error("EXM GENERATOR", ex, typeof(ExmEventsGenerator));
         Errors++;
       }
-
-      Threads--;
+      finally
+      {
+        Threads--;
+      }
     }
 
     public static void GenerateSent(string hostName, ID contactId, ID messageId, DateTime dateTime)

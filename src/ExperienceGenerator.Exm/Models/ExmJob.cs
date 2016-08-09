@@ -50,5 +50,7 @@ namespace ExperienceGenerator.Exm.Models
         return ExmEventsGenerator.Errors;
       }
     }
+
+    public int TotalContacts { get; set; }
   }
 }

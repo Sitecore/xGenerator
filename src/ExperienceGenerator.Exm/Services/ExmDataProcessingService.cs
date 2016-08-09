@@ -20,6 +20,7 @@ namespace ExperienceGenerator.Exm.Services
   using Sitecore.Data.Items;
   using Sitecore.Diagnostics;
   using Sitecore.EmailCampaign.Analytics.Model;
+  using Sitecore.EmailCampaign.ExperienceAnalytics;
   using Sitecore.Modules.EmailCampaign;
   using Sitecore.Modules.EmailCampaign.Core;
   using Sitecore.Modules.EmailCampaign.Core.Dispatch;
@@ -86,8 +87,12 @@ namespace ExperienceGenerator.Exm.Services
       {
         using (new SecurityDisabler())
         {
+
+          NotifyJobStatus(JobStatus.Running, "Identify manager root...");
+          this.GetManagerRoot();
+
           NotifyJobStatus(JobStatus.Running, "Cleanup...");
-          this.Cleanup();
+          //this.Cleanup();
 
 
           //NotifyJobStatus(JobStatus.Running, "Creating goals...");
@@ -102,8 +107,7 @@ namespace ExperienceGenerator.Exm.Services
           //NotifyJobStatus(JobStatus.Running, "Creating lists...");
           //this._listService.CreateLists();
 
-          NotifyJobStatus(JobStatus.Running, "Identify manager root...");
-          this.GetManagerRoot();
+        
 
           NotifyJobStatus(JobStatus.Running, "Back-dating segments...");
           this.BackDateSegments();
@@ -158,20 +162,40 @@ namespace ExperienceGenerator.Exm.Services
     private void Cleanup()
     {
 
-#warning: Ask Alex Sokolov
+      var key = new KeyBuilder().Add(this._managerRoot.InnerItem.ID.ToGuid()).Add(this.exmCampaignId).ToString();
+      var removeCampaingRecords = $@"
+SELECT [DimensionKeyId] INTO #Dimensions FROM [dbo].[DimensionKeys] WHERE [DimensionKey] LIKE '{key}%';
+Select SegmentRecordId INTO #SegmentRecords from [dbo].[SegmentRecords]
+  where DimensionKeyId in (select * from #Dimensions);
+Select SegmentRecordId INTO #SegmentRecordsReduced from [dbo].[SegmentRecordsReduced]
+  where DimensionKeyId in (select * from #Dimensions);
 
-      //var serviceMessages = this._db.SelectItems("/sitecore/content/Email Campaign/Messages/Service Messages//*[@@templatename='HTML Message']");
-      //foreach (var serviceMessage in serviceMessages)
-      //{
-      //  if (serviceMessage.Fields["Campaign"].Value != string.Empty)
-      //  {
-      //    using (new EditContext(serviceMessage))
-      //    {
-      //      serviceMessage.Fields["Campaign"].Value = string.Empty;
-      //      serviceMessage.Fields["Engagement Plan"].Value = string.Empty;
-      //    }
-      //  }
-      //}
+DELETE FROM [dbo].[Fact_SegmentMetrics] WHERE SegmentRecordId in (select * from #SegmentRecords)
+DELETE FROM [dbo].[Fact_SegmentMetricsReduced] WHERE SegmentRecordId in (select * from #SegmentRecordsReduced)
+DELETE FROM [dbo].[SegmentRecords] WHERE [DimensionKeyId] IN (SELECT * FROM #Dimensions);
+DELETE FROM [dbo].[SegmentRecordsReduced] WHERE [DimensionKeyId] IN (SELECT * FROM #Dimensions);
+
+Drop table #Dimensions
+Drop table #SegmentRecords
+Drop table #SegmentRecordsReduced
+";
+
+      var connectionstring = ConfigurationManager.ConnectionStrings["reporting"];
+      var connection = new SqlConnection(connectionstring.ConnectionString);
+
+      try
+      {
+        connection.Open();
+
+        var clearCommand = new SqlCommand(removeCampaingRecords, connection);
+        clearCommand.ExecuteNonQuery();
+      }
+      finally
+      {
+        connection.Close();
+      }
+
+
     }
 
     private void GenerateEvents(MessageItem email, Funnel funnelDefinition)
@@ -293,6 +317,15 @@ namespace ExperienceGenerator.Exm.Services
       this._contactsPerEmail[messageItem.ID] = new List<Guid>();
 
       var numContactsForThisEmail = contactsForThisEmail.Count;
+      var contactsRequired = this.campaignDefinition.Events.TotalSent - numContactsForThisEmail;
+      if (contactsRequired>0)
+      {
+        var addlContacts = this._contactService.CreateContacts(contactsRequired);
+        var xaList = this._listService.CreateList("Auto List " + DateTime.Now.Ticks, addlContacts );
+        messageItem.RecipientManager.AddIncludedRecipientListId(ID.Parse(xaList.Id));
+
+        contactsForThisEmail.AddRange(this._listService.GetContacts(xaList));
+      }
 
       var contactIndex = 1;
       foreach (var contact in contactsForThisEmail)

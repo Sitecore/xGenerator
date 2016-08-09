@@ -84,6 +84,9 @@
     <Reference Include="Sitecore.EmailCampaign.Cm">
       <HintPath>..\Components\Sitecore.EmailCampaign.Cm.dll</HintPath>
     </Reference>
+    <Reference Include="Sitecore.EmailCampaign.ExperienceAnalytics">
+      <HintPath>..\Components\Sitecore.EmailCampaign.ExperienceAnalytics.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.ExM.Framework">
       <HintPath>..\Components\Sitecore.ExM.Framework.dll</HintPath>
     </Reference>
