@@ -141,6 +141,7 @@
     <Content Include="sitecore\shell\client\Applications\ExmExperienceGenerator\DataRepository.js" />
     <Content Include="sitecore\shell\client\Applications\ExmExperienceGenerator\dialogs\EmailCampaignEditor.js" />
     <Content Include="sitecore\shell\client\Applications\ExmExperienceGenerator\ExmGenerator.js" />
+    <Content Include="sitecore\shell\client\Applications\ExmExperienceGenerator\ExmExperienceGenerator.css" />
     <Content Include="sitecore\shell\client\Applications\ExmExperienceGenerator\JobManager.js" />
     <Content Include="sitecore\shell\client\Applications\ExmExperienceGenerator\uiUtils.js" />
   </ItemGroup>
@@ -176,10 +177,6 @@
     <ProjectReference Include="..\Colossus\Colossus.csproj">
       <Project>{69DEA59C-074A-4825-9A7C-1D83E38D38DB}</Project>
       <Name>Colossus</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ExperienceGenerator.Client\ExperienceGenerator.Client.csproj">
-      <Project>{c1ffdde2-c451-419c-acc1-92fccc027008}</Project>
-      <Name>ExperienceGenerator.Client</Name>
     </ProjectReference>
     <ProjectReference Include="..\ExperienceGenerator\ExperienceGenerator.csproj">
       <Project>{78D36A52-D0E2-4357-80A2-ED237618AD83}</Project>

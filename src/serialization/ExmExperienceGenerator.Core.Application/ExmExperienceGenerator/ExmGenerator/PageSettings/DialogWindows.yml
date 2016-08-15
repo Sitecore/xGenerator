@@ -1,13 +1,13 @@
 ﻿---
-ID: "5ed8b01f-2544-4d85-a22b-402db57929f6"
+ID: "a3237473-d072-4b5f-912c-94dfa8eada65"
 Parent: "86e9eb14-9f9c-4edc-9cef-d6b590f1da8c"
 Template: "a87a00b1-e6db-45ab-8b54-636fec3b5523"
-Path: /sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs
+Path: /sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/DialogWindows
 DB: core
 SharedFields:
 - ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
   Hint: __Sortorder
-  Value: 200
+  Value: 300
 Languages:
 - Language: en
   Versions:
@@ -15,4 +15,4 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20160726T091752Z
+      Value: 20160812T191104Z

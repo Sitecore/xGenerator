@@ -60,7 +60,7 @@ SharedFields:
           ph="ApplicationHeader"
           uid="{91911275-EFF1-41BF-A125-F4DF47A50A83}" />
         <r
-          ds="{EE3F9843-6BFE-4D4F-B18F-2AE2EBF99FE2}"
+          ds="{87A66A81-2372-4B80-9C28-2632664B76E7}"
           id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
           par="Id=HeaderTitle"
           ph="ApplicationHeader.Title"
@@ -131,7 +131,7 @@ SharedFields:
           ph="ApplicationContent.Info"
           uid="{3464C3AA-C169-46E0-9948-6698B2692254}" />
         <r
-          ds="{FE8D64B4-8A74-41D5-AAF3-660F68DB4C98}"
+          ds="{C715D760-D109-4080-813B-40006FEEC60A}"
           id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
           par="Id=SummaryTitle"
           ph="SummaryBorder.Content"
@@ -182,7 +182,7 @@ SharedFields:
           ph="SummaryBorder.Content"
           uid="{8574B095-7DF3-4685-90CD-2E192F65CCBA}" />
         <r
-          ds="{EE043B7A-1636-4831-B4B5-C42AB5962660}"
+          ds="{FA21A68C-EB97-4BC2-8DBA-9DF171C94CF6}"
           id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}"
           par="Click=javascript%3aapp.start()%3b&amp;Id=StartButton"
           ph="StartButtonBorder.Content"
@@ -193,13 +193,13 @@ SharedFields:
           ph="SummaryBorder.Content"
           uid="{F4201388-1BB2-4E34-B129-9A2B36DD1468}" />
         <r
-          ds="{F5A70CEF-C7B7-46D5-A9F7-63A6B8196119}"
+          ds="{63C3D671-3694-4997-8F2F-B972AB3CECD6}"
           id="{26B2B002-BCA0-4968-99E4-01573338B6A9}"
           par="Click=javascript%3aapp.pause()%3b&amp;Id=PauseButton"
           ph="SecondaryButtonBorder.Content"
           uid="{E3B1E902-D2AD-48C0-81D6-F77F39545A5C}" />
         <r
-          ds="{5ABFBC97-EF9E-4660-964A-9BE6D12F3B6E}"
+          ds="{33433CC7-F370-4628-A7D6-01BE892AAA9F}"
           id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}"
           par="Click=javascript%3aapp.stop()%3b&amp;Id=StopButton"
           ph="SecondaryButtonBorder.Content"
@@ -210,7 +210,7 @@ SharedFields:
           ph="SummaryBorder.Content"
           uid="{08B5A934-7BFB-4A82-A0E9-9DF01202F2B2}" />
         <r
-          ds="{77571502-EE04-48C5-AA06-1706EB06C4FC}"
+          ds="{47D56F80-4490-4958-B586-EA520F642599}"
           id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}"
           par="Click=javascript%3aapp.DelWindow.show()%3b&amp;Id=DeleteButton"
           ph="DeleteBorder.Content"
@@ -276,7 +276,7 @@ SharedFields:
           ph="Page.Body"
           uid="{381DDAC6-6E31-442C-9297-36B34C0AAB38}" />
         <r
-          ds="{8552BFB8-60FD-43E5-9844-FE568F409A92}"
+          ds="{C7689B7E-BD2A-4F1E-82CC-35EB6C651792}"
           id="{8B4238F3-D5CD-464D-8DE6-4A69E05CD55B}"
           par="UsePlaceholders=1"
           ph="DelWindow.Content"

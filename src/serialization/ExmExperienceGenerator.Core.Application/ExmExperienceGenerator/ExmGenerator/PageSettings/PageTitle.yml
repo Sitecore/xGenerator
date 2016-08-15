@@ -4,6 +4,10 @@ Parent: "86e9eb14-9f9c-4edc-9cef-d6b590f1da8c"
 Template: "76f63df7-0235-4164-86ab-84b5ec48cb2a"
 Path: /sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/PageTitle
 DB: core
+SharedFields:
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 600
 Languages:
 - Language: da
   Fields:
@@ -51,7 +55,7 @@ Languages:
       Value: sitecore\admin
     - ID: "b3f89d3b-fc37-4699-860e-db8fb37323c1"
       Hint: Text
-      Value: Experience Generator
+      Value: Exm Experience Generator
 - Language: "ja-JP"
   Fields:
   - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"

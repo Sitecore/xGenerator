@@ -1,4 +1,4 @@
-<project>
+<project site="habitat.dev.local" format="Zip Package" targetfilefolder="wwwroot">
   <Metadata>
     <metadata>
       <PackageName>Experience Generator EXM extension</PackageName>
@@ -9,8 +9,8 @@
       <Comment />
       <Attributes />
       <Readme />
-      <Publisher/>
-      <PostStep></PostStep>
+      <Publisher />
+      <PostStep />
       <PackageID />
     </metadata>
   </Metadata>
@@ -24,7 +24,9 @@
         <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/{86E9EB14-9F9C-4EDC-9CEF-D6B590F1DA8C}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Buttons/{A415820C-F477-4681-A830-33F28B311B36}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/DataSheetStyle/{C9D3968D-D857-42C5-8799-1C475FE7B95E}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/DatePickers/{EF512A36-365D-4C3A-8D23-80A7D09BFB92}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/{5ED8B01F-2544-4D85-A22B-402DB57929F6}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/DialogWindows/{A3237473-D072-4B5F-912C-94DFA8EADA65}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/List/{5F825ECC-DDF8-4F6D-8465-6360123488DA}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/PageTitle/{87A66A81-2372-4B80-9C28-2632664B76E7}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Sliders/{40DC87DE-206B-460C-BAB7-7F23A23BD51B}/invariant/0</x-item>
@@ -33,6 +35,7 @@
         <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Buttons/Pause/{63C3D671-3694-4997-8F2F-B972AB3CECD6}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Buttons/Start/{FA21A68C-EB97-4BC2-8DBA-9DF171C94CF6}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Buttons/Stop/{33433CC7-F370-4628-A7D6-01BE892AAA9F}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/DatePickers/DatePicker Parameters/{15762826-BD8D-4C6B-AE1D-19DCF8DAF0B9}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/LandingPagesDialog/{D44E05EF-FECB-4945-BB7A-6244DC83E034}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/EmailCampaignEditor/{DAC931A8-8851-4DDD-B96B-94D06B8714DB}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/EmailCampaignEditor/PageSettings/{D6CC328D-C7B2-4C87-A33D-EF0083FE3B32}/invariant/0</x-item>
@@ -42,6 +45,7 @@
         <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/EmailCampaignEditor/PageSettings/Tabs/Devices/{73A0EDC4-C61D-4ED4-90B4-EC31FFB70A63}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/EmailCampaignEditor/PageSettings/Tabs/Locations/{733E5260-C41A-42E4-82F8-40F6E6E543D9}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/EmailCampaignEditor/PageSettings/Tabs/Landing Pages/{2A0A1657-07FF-4C11-9ECF-3C38049C17BF}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/DialogWindows/DeletionsDialog/{C7689B7E-BD2A-4F1E-82CC-35EB6C651792}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/List/Sent Messages/{F4E1FC60-F41C-4FF7-96F3-A393CACF1C56}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/List/Sent Messages/Campaign name/{AD79BED6-54A4-411D-A3D7-E80395CAE098}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/List/Sent Messages/Subject/{18A2ECBE-9405-4DF0-B2C6-2A4F256F8016}/invariant/0</x-item>
@@ -49,7 +53,10 @@
         <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/List/Sent Messages/Open rate/{41EB7827-3EB2-47CB-82CA-D412D5ADB43B}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Sliders/Slider Parameters/{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Texts/Overview/{63F091F4-1812-4987-ADFE-5A3A917B1722}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Texts/Test summary/{C715D760-D109-4080-813B-40006FEEC60A}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Texts/Overview/End date/{6545DFB9-7194-4656-85A8-D5C47805ED84}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Texts/Overview/Number of visits generated/{7E23D53B-C163-4E28-8F06-EEA05AA8695D}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Texts/Overview/Start date/{E164263B-8E6E-4FAB-8F1D-82CB481AC527}/invariant/0</x-item>
       </Entries>
       <SkipVersions>False</SkipVersions>
       <Converter>
@@ -58,8 +65,8 @@
             <InstallerConfigurationTransform>
               <Options>
                 <BehaviourOptions>
-                  <ItemMode>Merge</ItemMode>
-                  <ItemMergeMode>Merge</ItemMergeMode>
+                  <ItemMode>Undefined</ItemMode>
+                  <ItemMergeMode>Undefined</ItemMergeMode>
                 </BehaviourOptions>
               </Options>
             </InstallerConfigurationTransform>
@@ -81,15 +88,16 @@
         <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/ExmGenerator.js</x-item>
         <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/JobManager.js</x-item>
         <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/uiUtils.js</x-item>
+        <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/ExmExperienceGenerator.css</x-item>
       </Entries>
       <Converter>
         <FileToEntryConverter>
-          <Root>/</Root>
+          <Root />
           <Transforms>
             <InstallerConfigurationTransform>
               <Options>
                 <BehaviourOptions>
-                  <ItemMode>Overwrite</ItemMode>
+                  <ItemMode>Undefined</ItemMode>
                   <ItemMergeMode>Undefined</ItemMergeMode>
                 </BehaviourOptions>
               </Options>

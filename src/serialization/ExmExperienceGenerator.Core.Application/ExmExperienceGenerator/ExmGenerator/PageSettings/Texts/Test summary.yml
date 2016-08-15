@@ -1,39 +1,31 @@
 ﻿---
-ID: "08ad1b64-5c46-46a8-a643-c26397c5b8cc"
-Parent: "86e9eb14-9f9c-4edc-9cef-d6b590f1da8c"
-Template: "a87a00b1-e6db-45ab-8b54-636fec3b5523"
-Path: /sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Texts
+ID: "c715d760-d109-4080-813b-40006feec60a"
+Parent: "08ad1b64-5c46-46a8-a643-c26397c5b8cc"
+Template: "6437cfd5-76ca-48aa-bfbd-8b8d73eb5581"
+Path: /sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Texts/Test summary
 DB: core
 SharedFields:
-- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
-  Hint: __Sortorder
-  Value: 800
+- ID: "a4f985d9-98b3-4b52-aaaf-4344f6e747c6"
+  Hint: __Workflow
+  Value: 
 Languages:
 - Language: da
-  Fields:
-  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
-    Hint: __Display name
-    Value: Tekster
   Versions:
   - Version: 1
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: "20150314T040848:635619029289989014Z"
+      Value: 20160812T190446Z
     - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: sitecore\admin
 - Language: "de-DE"
-  Fields:
-  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
-    Hint: __Display name
-    Value: Texte
   Versions:
   - Version: 1
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: "20150314T041125:635619030852932044Z"
+      Value: 20160812T190446Z
     - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: sitecore\admin
@@ -43,18 +35,17 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20140702T120534
+      Value: 20160812T190446Z
 - Language: "ja-JP"
-  Fields:
-  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
-    Hint: __Display name
-    Value: テキスト
   Versions:
   - Version: 1
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: "20150314T041001:635619030019973845Z"
+      Value: 20160812T190446Z
+    - ID: "3e431de1-525e-47a3-b6b0-1ccbec3a8c98"
+      Hint: __Workflow state
+      Value: 
     - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: sitecore\admin

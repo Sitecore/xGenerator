@@ -4,6 +4,10 @@ Parent: "86e9eb14-9f9c-4edc-9cef-d6b590f1da8c"
 Template: "a87a00b1-e6db-45ab-8b54-636fec3b5523"
 Path: /sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Sliders
 DB: core
+SharedFields:
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 700
 Languages:
 - Language: en
   Versions:
