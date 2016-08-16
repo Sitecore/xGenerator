@@ -63,3 +63,5 @@ Both walkers adds page event data if required from configuration.
 *	Variable Factories in XGenParser class that fill each request with variables based on configuration (device, date, duration, channel, campaign etc.) allow us setup new factory to fill new request variable
 *	Processors in Colossus.Integration library patches all requests with provided request variables.
 *	XGenParser – class that converts configuration to set of requests. Executes all request variable factories.
+
+THIS MODULE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT SUPPORT, WARRANTIES OR CONDITIONS OF ANY KIND.
