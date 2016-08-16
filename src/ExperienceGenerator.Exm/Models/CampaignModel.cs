@@ -1,4 +1,4 @@
-﻿namespace ExperienceGenerator.Exm.Controllers
+﻿namespace ExperienceGenerator.Exm.Models
 {
   using System;
   using System.Collections.Generic;

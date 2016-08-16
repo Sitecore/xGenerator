@@ -257,7 +257,7 @@ SharedFields:
           uid="{A9B5CFC8-C492-4373-990C-1EEE8D2A21E2}" />
         <r
           id="{25D357D3-3648-4336-9B53-55EED7CFA078}"
-          par="Id=PresetList&amp;Items=%7bBinding+DataSource.Items%7d"
+          par="Id=ExmPresetList&amp;Items=%7bBinding+DataSource.Items%7d"
           ph="LoadSettingsBorder.Content"
           uid="{A7CCE6E9-73D9-4094-A902-3B970D977991}" />
         <r
@@ -267,7 +267,7 @@ SharedFields:
           uid="{41BB5514-7DFA-4643-BFC3-0FE75261B846}" />
         <r
           id="{33A02142-2DBD-4034-AEA2-BDF215EB2451}"
-          par="Id=DataSource&amp;Query=%2fsitecore%2fclient%2fApplications%2fExperienceGenerator%2fCommon%2fCampaignsBorder%2f%2f*%5b%40%40tid%3d%27%7bC7089EBD-7AF0-4F14-BEEA-680A465231B1%7d%27%5d&amp;Database=core"
+          par="Id=DataSource&amp;Query=%2fsitecore%2fclient%2fApplications%2fExmExperienceGenerator%2fCommon%2fPresets%2f%2f*%5b%40%40tid%3d%27%7bBA1D3932-28BA-4CC3-9527-38AFC8B529C4%7d%27%5d&amp;Database=core"
           ph="Page.Body"
           uid="{E9EE4E2F-F10F-449C-961B-C4F6738A11C0}" />
         <r

@@ -20,6 +20,11 @@
                 routeTemplate: "api/xgen/exmevents/{action}",
                 defaults: new {controller = "ExmEvents"}
                 );
-        }
+			config.Routes.MapHttpRoute(
+				name: "ExmActionsApi",
+				routeTemplate: "api/xgen/exmactions/{action}/{id}",
+				defaults: new { controller = "ExmActions", id = RouteParameter.Optional }
+				);
+		}
     }
 }

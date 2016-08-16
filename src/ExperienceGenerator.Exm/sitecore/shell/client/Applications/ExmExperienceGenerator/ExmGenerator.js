@@ -1,4 +1,5 @@
 ﻿define(["sitecore", "knockout", "underscore", "/-/speak/v1/exmExperienceGenerator/JobManager.js"], function (_sc, ko, _, jobManager) {
+  console.log("ok");
   var exmGeneratorApp = _sc.Definitions.App.extend({
     initialized: function () {
       this.generatorData = {};
@@ -18,6 +19,68 @@
         this.campaignEditor.showDialog(this.generatorData[selectedItem.get("itemId")]);
       }, this);
     },
+
+    initPresetDataSource: function () {
+      var url = "/api/xgen/exmactions/presetquery";
+      var self = this;
+      $.ajax({
+        url: url,
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+      }).done(function (data) {
+        self.DataSource.set("query", data.query);
+        self.DataSource.refresh();
+      });
+    },
+
+    loadPreset: function () {
+      var self = this;
+      var selectedItem = this.ExmPresetList.attributes.selectedItemId;
+      console.log(selectedItem);
+      var url = "/api/xgen/exmactions/settingspreset?id=" + selectedItem;
+      $.ajax({
+        url: url,
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function () { }
+      }).done(function (data) {
+        self.generatorData = data;
+      });
+    },
+
+    save: function () {
+      var self = this;
+      var name = this.PresetName.attributes.text;
+      console.log(name);
+      if (name == "") {
+        alert("Please enter preset name.");
+      } else {
+        if (_.any(this.DataSource.get("items"), function (item) { return item.itemName === name })) {
+          var overwrite = confirm("Are you sure you want to overwrite settings?");
+          if (!overwrite) return;
+        }
+        this.data = { spec: ko.toJS(this.generatorData), name: name, force: true };
+        console.log(this.data);
+
+        this.data = JSON.stringify(this.data);
+        $.ajax({
+          url: "/api/xgen/exmactions/SaveSettings",
+          type: "POST",
+          data: this.data,
+          dataType: "json",
+          contentType: "application/json; charset=utf-8",
+          success: function () { }
+        }).done(function (data) {
+          self.PresetName.set("text", "");
+          self.DataSource.refresh();
+        }).fail(function (data) {
+          alert(data.responseJSON.ExceptionMessage);
+        });
+      }
+    },
+
     updateCampaignData: function (data) {
       var selectedItem = this.SentCampaignsList.get("selectedItem");
       if (!selectedItem) return;

@@ -1,4 +1,4 @@
-﻿namespace ExperienceGenerator.Exm.Controllers
+﻿namespace ExperienceGenerator.Exm.Models
 {
   public class Funnel
   {
