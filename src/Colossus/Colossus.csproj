@@ -60,6 +60,7 @@
     <Compile Include="CollectionHelpers.cs" />
     <Compile Include="CompositeVariable.cs" />
     <Compile Include="ContactBasedSimulator.cs" />
+    <Compile Include="GetSetHelpers.cs" />
     <Compile Include="IRequestContext.cs" />
     <Compile Include="IVisitRequestContext.cs" />
     <Compile Include="IVisitSimulator.cs" />

@@ -148,7 +148,7 @@ SharedFields:
           uid="{139F49C2-A501-48B5-9FD3-488110E3F18B}" />
         <r
           id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
-          par="Id=NumberVisitsText&amp;Text=Number+of+visits+generated"
+          par="Id=StatusText&amp;Text=Status"
           ph="ColumnPanel1.Content"
           uid="{B62DBAAC-AA82-4616-B751-B42FBC2481B7}" />
         <r
@@ -156,11 +156,6 @@ SharedFields:
           par="Id=ColumnPanel2&amp;GridColumns=3"
           ph="SummaryRow.Content"
           uid="{F1F1DC11-98E3-4A75-AA62-E607549C8F3E}" />
-        <r
-          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
-          par="Id=NumberVisitsValue&amp;Text=0"
-          ph="ColumnPanel2.Content"
-          uid="{035E558A-B02F-4FD0-9AC7-DF9E3458DE10}" />
         <r
           id="{5CB208F6-1860-426B-8221-FAA85B329848}"
           par="Id=ColumnPanel5&amp;GridColumns=12"

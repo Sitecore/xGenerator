@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 using Colossus.Web;
 
-namespace Colossus.Integration.Processing
+namespace Colossus
 {
     public static class GetSetHelpers
     {

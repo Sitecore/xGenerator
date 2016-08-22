@@ -1,5 +1,4 @@
 ﻿define(["sitecore", "knockout", "underscore", "/-/speak/v1/exmExperienceGenerator/JobManager.js"], function (_sc, ko, _, jobManager) {
-  console.log("ok");
   var exmGeneratorApp = _sc.Definitions.App.extend({
     initialized: function () {
       this.generatorData = {};
@@ -97,14 +96,24 @@
       for (var idx in this.generatorData) {
         requestData[idx] = this.adaptDayDistribution(this.generatorData[idx]);
       }
-
-      jobManager.start(requestData, function (data) {
-        self.jobId = data.Id;
-        _sc.on("intervalCompleted:ProgressBar", self.updateJobStatus, self);
-      }, function (error) {
-        alert(error);
+      var that = this;
+      $.ajax({
+        url: "/api/xgen/exmjobs/",
+        type: "POST",
+        data: JSON.stringify(requestData),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function () { }
+      }).done(function (data) {
+        that.running(data);
       });
     },
+
+    running: function (data) {
+      this.jobId = data.Id;
+      _sc.on("intervalCompleted:ProgressBar", this.updateJobStatus, this);
+    },
+
     stop: function () {
       var self = this;
       jobManager.stop(this.jobId, function () {
@@ -114,15 +123,16 @@
     pause: function () {
       console.error("Pause isn't supported");
     },
+
     updateJobStatus: function () {
       var jobId = this.jobId;
       var self = this;
       jobManager.getStatus(jobId, function (data) {
-
-
-        //self.ProgressBar.set("value", data.CompletedVisitors / total * 100);
-        self.NumberVisitsValue.set("text", data.Status);
-        if (data.JobStatus != "Running" && data.JobStatus != "Pending" && data.JobStatus != "Paused") {
+        console.log(data);
+        console.log(data.Status);
+        self.ProgressBar.set("value", data.Progress * 100);
+        self.StatusText.set("text", data.Status);
+        if (data.JobStatus !== "Running" && data.JobStatus !== "Pending" && data.JobStatus !== "Paused") {
           _sc.off("intervalCompleted:ProgressBar");
         }
       });

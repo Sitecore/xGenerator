@@ -15,7 +15,6 @@
     },
 
     start: function (data, callback, errorCallback) {
-      console.log(data);
       $.ajax({
         url: urls.exmJobUrl,
         type: "POST",

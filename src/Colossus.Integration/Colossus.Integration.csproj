@@ -99,10 +99,8 @@
     <Compile Include="GetContextInfo.cs" />
     <Compile Include="Models\ItemInfo.cs" />
     <Compile Include="Processing\ChannelPatcher.cs" />
-    <Compile Include="Processing\PatchExmDateTimes.cs" />
     <Compile Include="Processing\ContactDataProcessor.cs" />
     <Compile Include="Processing\TriggerEventsAction.cs" />
-    <Compile Include="Processing\GetSetHelpers.cs" />
     <Compile Include="Processing\GeoPatcher.cs" />
     <Compile Include="Processing\TriggerOutcomeData.cs" />
     <Compile Include="Processing\TriggerOutcomesAction.cs" />

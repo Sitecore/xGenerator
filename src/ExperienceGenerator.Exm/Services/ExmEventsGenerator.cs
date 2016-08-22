@@ -1,34 +1,41 @@
 ﻿// © 2016 Sitecore Corporation A/S. All rights reserved.
 
+using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using Sitecore.Data;
+using Sitecore.EDS.Core.Reporting;
+using Sitecore.EmailCampaign.Cm.Handlers;
+using Sitecore.ExM.Framework.Diagnostics;
+using Sitecore.ExM.Framework.Distributed.Tasks.TaskPools.ShortRunning;
+using Sitecore.Modules.EmailCampaign;
+using Sitecore.Modules.EmailCampaign.Core.Crypto;
+using Sitecore.Modules.EmailCampaign.Core.Extensions;
+using Sitecore.Modules.EmailCampaign.Core.Links;
+using Sitecore.Modules.EmailCampaign.Messages;
+
 namespace ExperienceGenerator.Exm.Services
 {
-  using System;
-  using System.Collections.Generic;
-  using System.Collections.Specialized;
-  using System.ComponentModel;
-  using System.Net.Http;
-  using System.Threading;
-  using Sitecore.Data;
-  using Sitecore.Diagnostics;
-  using Sitecore.Modules.EmailCampaign;
-  using Sitecore.Modules.EmailCampaign.Core.Crypto;
-  using Sitecore.Modules.EmailCampaign.Core.Extensions;
-  using Sitecore.Modules.EmailCampaign.Core.Links;
-  using Sitecore.Modules.EmailCampaign.Messages;
-
   public static class ExmEventsGenerator
   {
+    public static SemaphoreSlim Pool;
+    private static readonly IStringCipher Cipher;
 
-    private static HttpClient HttpClient { get; } = new HttpClient()
+    static ExmEventsGenerator()
     {
-        Timeout = TimeSpan.FromMinutes(5)
-    };
-    public static int Threads { get; set; }
+      Cipher = Sitecore.Configuration.Factory.CreateObject("exmAuthenticatedCipher", true) as IStringCipher;
+    }
 
     public static int Errors { get; set; }
 
+    public static int Timeouts { get; set; }
+
     public static IEnumerable<TSource> DistinctBy<TSource, TKey>
-        (this IEnumerable<TSource> source, Func<TSource, TKey> keySelector)
+      (this IEnumerable<TSource> source, Func<TSource, TKey> keySelector)
     {
       HashSet<TKey> knownKeys = new HashSet<TKey>();
       foreach (TSource element in source)
@@ -40,66 +47,78 @@ namespace ExperienceGenerator.Exm.Services
       }
     }
 
-    public static async void RequestUrl(string url, string userAgent = null, string ip = null, string dateTime = null)
+   public static void RequestUrl(string url, string userAgent = null, string ip = null, string dateTime = null)
     {
-      while (Threads > Environment.ProcessorCount*2)
-      {
-        Thread.Sleep(1000);
-      }
-
-      Threads++;
-
-      if (userAgent != null)
-      {
-        HttpClient.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", userAgent);
-      }
-
-      if (ip != null)
-      {
-        HttpClient.DefaultRequestHeaders.TryAddWithoutValidation("X-Forwarded-For", ip);
-      }
-
-      if (dateTime != null)
-      {
-        HttpClient.DefaultRequestHeaders.TryAddWithoutValidation("X-Exm-RequestTime", dateTime);
-      }
+      Pool.Wait();
 
       try
       {
-        var res = await HttpClient.PostAsync(url, new StringContent(string.Empty)).ConfigureAwait(false);
+        // Don't use IDisposable HttpClient, seems to cause problems with threads
+        var client = new HttpClient();
+
+
+        if (userAgent != null)
+        {
+          client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", userAgent);
+        }
+        if (ip != null)
+        {
+          client.DefaultRequestHeaders.TryAddWithoutValidation("X-Forwarded-For", ip);
+        }
+
+        if (dateTime != null)
+        {
+          client.DefaultRequestHeaders.TryAddWithoutValidation("X-Exm-RequestTime", dateTime);
+        }
+
+        client.Timeout = TimeSpan.FromSeconds(120);
+
+        var res = client.PostAsync(url, new StringContent(string.Empty)).Result;
         if (!res.IsSuccessStatusCode)
         {
           Errors++;
         }
-
+      }
+      catch (TaskCanceledException)
+      {
+        Timeouts++;
       }
       catch (Exception ex)
       {
-        Log.Error("EXM GENERATOR", ex, typeof(ExmEventsGenerator));
+        Logger.Instance.LogError("ExmEventsGenerator error", ex);
         Errors++;
       }
       finally
       {
-        Threads--;
+        Pool.Release();
       }
     }
 
     public static void GenerateSent(string hostName, ID contactId, ID messageId, DateTime dateTime)
     {
-      var url = string.Format("{0}/api/xgen/exmevents/GenerateSent?contactId={1}&messageId={2}&date={3}", hostName, contactId, messageId, dateTime.ToString("u"));
+      var url =
+        $"{hostName}/api/xgen/exmevents/GenerateSent?contactId={contactId}&messageId={messageId}&date={dateTime.ToString("u")}";
       RequestUrl(url);
     }
-
     public static void GenerateBounce(string hostName, ID contactId, ID messageId, DateTime dateTime)
     {
-      var url = string.Format("{0}/api/xgen/exmevents/GenerateBounce?contactId={1}&messageId={2}&date={3}", hostName, contactId, messageId, dateTime.ToString("u"));
+      var url =
+        $"{hostName}/api/xgen/exmevents/GenerateBounce?contactId={contactId}&messageId={messageId}&date={dateTime.ToString("u")}";
       RequestUrl(url);
     }
-
-    public static void GenerateSpamComplaint(string hostName, ID contactId, ID messageId, string email, DateTime dateTime)
+    
+    public static async Task GenerateSpamComplaint(string hostName, ID contactId, ID messageId, string email, DateTime dateTime)
     {
-      var url = string.Format("{0}/api/xgen/exmevents/GenerateSpam?contactId={1}&messageId={2}&email={3}&&date={4}", hostName, contactId, messageId, email, dateTime.ToString("u"));
-      RequestUrl(url);
+      var messageHandler = new SpamComplaintHandler(Sitecore.Configuration.Factory.CreateObject("exm/spamComplaintsTaskPool", true) as ShortRunningTaskPool);
+
+      var spam = new Complaint
+      {
+        ContactId = Cipher.Encrypt(contactId.ToString()),
+        EmailAddress = email,
+        MessageId = Cipher.Encrypt(messageId.ToString()),
+      };
+
+      await messageHandler.HandleReportedMessages(new[] { spam });
     }
 
     public static void GenerateHandlerEvent(string hostName, Guid userId, MessageItem messageItem, ExmEvents exmEvent, DateTime dateTime, string userAgent = null, string ip = null, string link = null)
@@ -125,30 +144,28 @@ namespace ExperienceGenerator.Exm.Services
           throw new InvalidEnumArgumentException("No such event in ExmEvents");
       }
 
-      var messageId = messageItem.InnerItem.ID;
-
-      var queryStrings = GetQueryParameters(userId, messageId, link);
+      var queryStrings = GetQueryParameters(userId, messageItem, link);
       var encryptedQueryString = QueryStringEncryption.GetDefaultInstance().Encrypt(queryStrings);
 
       var parameters = encryptedQueryString.ToQueryString(true);
 
-      var url = string.Format("{0}/sitecore/{1}{2}", hostName, eventHandler, parameters);
+      var url = $"{hostName}/sitecore/{eventHandler}{parameters}";
       RequestUrl(url, userAgent, ip, dateTime.ToString("u"));
     }
 
-    private static NameValueCollection GetQueryParameters(Guid userId, ID messageId, string link = null)
+    
+    private static NameValueCollection GetQueryParameters(Guid userId, MessageItem messageItem, string link = null)
     {
       var queryStrings = new NameValueCollection
       {
-        [GlobalSettings.AnalyticsContactIdQueryKey] = new ShortID(userId).ToString(),
-        [GlobalSettings.MessageIdQueryKey] = messageId.ToShortID().ToString()
+        [GlobalSettings.AnalyticsContactIdQueryKey] = (new ShortID(userId)).ToString(),
+        [GlobalSettings.MessageIdQueryKey] = messageItem.InnerItem.ID.ToShortID().ToString()
       };
 
       if (link != null)
       {
         queryStrings[MailLinks.UrlQueryKey] = link;
       }
-
       return queryStrings;
     }
   }

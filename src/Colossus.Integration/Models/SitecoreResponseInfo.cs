@@ -38,7 +38,7 @@
 
       var info = new SitecoreResponseInfo
       {
-        ContactId = Tracker.Current.Contact.TryGetValue(c => (Guid?)c.ContactId),
+        ContactId = GetSetHelpers.TryGetValue(Tracker.Current.Contact, c => (Guid?)c.ContactId),
         VisitData =
               ((IUpdatableObject)Tracker.Current.Interaction).TryGetValue(
                   i => i.GetParts().OfType<VisitData>().FirstOrDefault())
