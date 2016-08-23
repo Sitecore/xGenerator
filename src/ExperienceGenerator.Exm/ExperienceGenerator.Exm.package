@@ -1,4 +1,4 @@
-<project>
+<project targetfilefolder="content">
   <Metadata>
     <metadata>
       <PackageName>Experience Generator EXM extension</PackageName>
@@ -65,8 +65,8 @@
             <InstallerConfigurationTransform>
               <Options>
                 <BehaviourOptions>
-                  <ItemMode>Merge</ItemMode>
-                  <ItemMergeMode>Merge</ItemMergeMode>
+                  <ItemMode>Undefined</ItemMode>
+                  <ItemMergeMode>Undefined</ItemMergeMode>
                 </BehaviourOptions>
               </Options>
             </InstallerConfigurationTransform>
@@ -97,7 +97,7 @@
             <InstallerConfigurationTransform>
               <Options>
                 <BehaviourOptions>
-                  <ItemMode>Overwrite</ItemMode>
+                  <ItemMode>Undefined</ItemMode>
                   <ItemMergeMode>Undefined</ItemMergeMode>
                 </BehaviourOptions>
               </Options>
