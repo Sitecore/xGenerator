@@ -1,4 +1,4 @@
-<project site="habitat.dev.local" format="Zip Package" targetfilefolder="wwwroot">
+<project>
   <Metadata>
     <metadata>
       <PackageName>Experience Generator EXM extension</PackageName>
