@@ -123,7 +123,14 @@
     pause: function () {
       console.error("Pause isn't supported");
     },
-
+    deleteData: function () {
+      console.error("Delete isn't supported");
+      //this.DelWindow.hide();
+      //$.ajax({
+      //  url: "/api/xgen/exmactions/flush",
+      //  type: "POST"
+      //});
+    },
     updateJobStatus: function () {
       var jobId = this.jobId;
       var self = this;
@@ -132,9 +139,9 @@
         console.log(data.Status);
         self.ProgressBar.set("value", data.Progress * 100);
         self.StatusText.set("text", data.Status);
-        if (data.JobStatus !== "Running" && data.JobStatus !== "Pending" && data.JobStatus !== "Paused") {
-          _sc.off("intervalCompleted:ProgressBar");
-        }
+        //if (data.JobStatus !== "Running" && data.JobStatus !== "Pending" && data.JobStatus !== "Paused") {
+        //  _sc.off("intervalCompleted:ProgressBar");
+        //}
       });
     },
     adaptDayDistribution: function (data) {

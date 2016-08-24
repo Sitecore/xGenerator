@@ -15,6 +15,7 @@ using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 using Sitecore.EmailCampaign.Analytics.Model;
+using Sitecore.EmailCampaign.ExperienceAnalytics;
 using Sitecore.Modules.EmailCampaign;
 using Sitecore.Modules.EmailCampaign.Core;
 using Sitecore.Modules.EmailCampaign.Core.Gateways;
@@ -145,6 +146,7 @@ namespace ExperienceGenerator.Exm.Services
         var addedContacts = _contactService.CreateContacts(contactsRequired);
         _specification.Job.Status = "Creating lists...";
         var addedList = _listService.CreateList("Auto List " + DateTime.Now.Ticks, addedContacts);
+        _listService.WaitUntilListsUnlocked();
         messageItem.RecipientManager.AddIncludedRecipientListId(ID.Parse(addedList.Id));
         contactsForThisEmail.AddRange(_listService.GetContacts(addedList));
       }
@@ -175,33 +177,40 @@ namespace ExperienceGenerator.Exm.Services
 
     //private void Cleanup()
     //{
-    //  var emailsPath = "/sitecore/content/Email Campaign/Messages/" + DateTime.Now.Year;
-    //  _db.GetItem(emailsPath)?.Delete();
 
-    //  var serviceMessages = _db.SelectItems("/sitecore/content/Email Campaign/Messages/Service Messages//*[@@templatename='HTML Message']");
-    //  foreach (var serviceMessage in serviceMessages)
+    //  var key = new KeyBuilder().Add(this._managerRoot.InnerItem.ID.ToGuid()).Add(_exmCampaignId).ToString();
+    //  var removeCampaingRecords = $@"
+    //    SELECT [DimensionKeyId] INTO #Dimensions FROM [dbo].[DimensionKeys] WHERE [DimensionKey] LIKE '{key}%';
+    //    SELECT SegmentRecordId INTO #SegmentRecords from [dbo].[SegmentRecords]
+    //    WHERE  DimensionKeyId in (select * from #Dimensions);
+    //    SELECT SegmentRecordId INTO #SegmentRecordsReduced from [dbo].[SegmentRecordsReduced]
+    //    WHERE  DimensionKeyId in (select * from #Dimensions);
+
+    //    DELETE FROM [dbo].[Fact_SegmentMetrics] WHERE SegmentRecordId in (select * from #SegmentRecords)
+    //    DELETE FROM [dbo].[Fact_SegmentMetricsReduced] WHERE SegmentRecordId in (select * from #SegmentRecordsReduced)
+    //    DELETE FROM [dbo].[SegmentRecords] WHERE [DimensionKeyId] IN (SELECT * FROM #Dimensions);
+    //    DELETE FROM [dbo].[SegmentRecordsReduced] WHERE [DimensionKeyId] IN (SELECT * FROM #Dimensions);
+
+    //    DROP table #Dimensions
+    //    DROP table #SegmentRecords
+    //    DROP table #SegmentRecordsReduced";
+
+    //  var connectionstring = ConfigurationManager.ConnectionStrings["reporting"];
+    //  var connection = new SqlConnection(connectionstring.ConnectionString);
+
+    //  try
     //  {
-    //    if (serviceMessage.Fields["Campaign"].Value != string.Empty)
-    //    {
-    //      using (new EditContext(serviceMessage))
-    //      {
-    //        serviceMessage.Fields["Campaign"].Value = string.Empty;
-    //        serviceMessage.Fields["Engagement Plan"].Value = string.Empty;
-    //      }
-    //    }
+    //    connection.Open();
+
+    //    var clearCommand = new SqlCommand(removeCampaingRecords, connection);
+    //    clearCommand.ExecuteNonQuery();
+    //  }
+    //  finally
+    //  {
+    //    connection.Close();
     //  }
 
-    //  var engagementPlansPath = "/sitecore/system/Marketing Control Panel/Engagement Plans/Email Campaign/Emails/" + DateTime.Now.Year;
-    //  _db.GetItem(engagementPlansPath)?.Delete();
 
-    //  var campaignsPath = "/sitecore/system/Marketing Control Panel/Campaigns/Emails/" + DateTime.Now.Year;
-    //  _db.GetItem(campaignsPath)?.Delete();
-
-    //  var lists = _db.SelectItems("/sitecore/system/List Manager/All Lists/*[@@templatename='Contact List']");
-    //  foreach (var list in lists)
-    //  {
-    //    list.Delete();
-    //  }
     //}
 
     private async void GenerateEvents(MessageItem email, Funnel funnelDefinition, List<ContactData> contactsForThisEmail)
@@ -285,7 +294,7 @@ namespace ExperienceGenerator.Exm.Services
               unsubscribeEvent, eventDate, userAgent, ip);
           }
         }
-        _specification.Job.CompletedEvents ++;
+        _specification.Job.CompletedEvents++;
       }
     }
 
@@ -385,7 +394,7 @@ namespace ExperienceGenerator.Exm.Services
 
       ExmEventsGenerator.GenerateSent(_managerRoot.Settings.BaseURL, new ID(contact.ContactId), messageItem.InnerItem.ID,
         messageItem.StartTime);
-      _specification.Job.CompletedEmails ++;
+      _specification.Job.CompletedEmails++;
     }
 
     private MessageItem GetEmailMessage(Guid itemId)
