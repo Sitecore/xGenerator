@@ -45,7 +45,8 @@ namespace ExperienceGenerator.Exm.Models
       get
       {
         if (TargetEmails + TargetContacts + TargetEvents + TargetLists == 0) return 0d;
-        return CompletedEmails + CompletedContacts + CompletedEvents + CompletedLists / TargetEmails + TargetContacts + TargetEvents + TargetLists;
+
+        return (double)(CompletedEmails + CompletedContacts + CompletedEvents) / (double)(TargetEmails + TargetContacts + TargetEvents);
       }
     }
     public int OpenSlots => ExmEventsGenerator.Pool?.CurrentCount ?? 0;

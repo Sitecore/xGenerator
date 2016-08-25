@@ -134,14 +134,19 @@
     updateJobStatus: function () {
       var jobId = this.jobId;
       var self = this;
-      jobManager.getStatus(jobId, function (data) {
-        console.log(data);
+      console.log("Update job status for job: " + jobId);
+      $.ajax({
+        url: "/api/xgen/exmjobs/" + jobId,
+        type: "GET"
+      }).done(function (data) {
         console.log(data.Status);
+        console.log(data.JobStatus);
+        console.log(data);
         self.ProgressBar.set("value", data.Progress * 100);
         self.StatusText.set("text", data.Status);
-        //if (data.JobStatus !== "Running" && data.JobStatus !== "Pending" && data.JobStatus !== "Paused") {
-        //  _sc.off("intervalCompleted:ProgressBar");
-        //}
+        if (data.JobStatus === 6 || data.JobStatus === "Completed") {
+          _sc.off("intervalCompleted:ProgressBar");
+        }
       });
     },
     adaptDayDistribution: function (data) {
