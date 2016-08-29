@@ -34,6 +34,8 @@ namespace ExperienceGenerator.Exm.Models
 
     public int TargetLists { get; set; }
 
+    public string CampaignCountLabel { get; set; }
+
     public string Status { get; set; }
 
 		public string LastException { get; set; }

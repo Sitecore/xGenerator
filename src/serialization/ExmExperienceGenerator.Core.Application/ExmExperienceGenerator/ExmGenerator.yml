@@ -148,8 +148,18 @@ SharedFields:
           uid="{139F49C2-A501-48B5-9FD3-488110E3F18B}" />
         <r
           id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
-          par="Id=StatusText&amp;Text=Status"
+          par="Id=CampaignCountText"
           ph="ColumnPanel1.Content"
+          uid="{B62DBAAC-AA82-4616-B751-B42FBC2481B7}" />
+        <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=StatusTextBorder"
+          ph="ColumnPanel1.Content"
+          uid="{0392641F-55B7-4A38-85EE-191FEA65BCFE}" />
+        <r
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
+          par="Id=StatusText"
+          ph="StatusTextBorder.Content"
           uid="{B62DBAAC-AA82-4616-B751-B42FBC2481B7}" />
         <r
           id="{5CB208F6-1860-426B-8221-FAA85B329848}"

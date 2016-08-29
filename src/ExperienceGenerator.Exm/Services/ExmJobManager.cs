@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using ExperienceGenerator.Exm.Models;
 using Sitecore.Jobs;
 
@@ -26,13 +25,28 @@ namespace ExperienceGenerator.Exm.Services
     {
       ExmEventsGenerator.Errors = 0;
       jobDefinition.Job.JobStatus = JobStatus.Running;
+      var jobCount = 1;
       foreach (var keyValuePair in jobDefinition)
       {
+        ClearCounters(jobDefinition.Job);
+        jobDefinition.Job.CampaignCountLabel = $"Generating Data for campaign {jobCount ++} of {jobDefinition.Count}...";
         var exmDataPreparationService = new ExmDataPreparationService(jobDefinition, keyValuePair.Value, keyValuePair.Key);
         exmDataPreparationService.CreateData();
       }
 
       jobDefinition.Job.JobStatus = JobStatus.Complete;
+    }
+
+    private static void ClearCounters(ExmJob job)
+    {
+      job.CompletedContacts = 0;
+      job.CompletedEmails = 0;
+      job.CompletedEvents = 0;
+      job.CompletedLists = 0;
+      job.TargetContacts = 0;
+      job.TargetEmails = 0;
+      job.TargetEvents = 0;
+      job.TargetLists = 0;
     }
 
     public ExmJob Poll(Guid id)

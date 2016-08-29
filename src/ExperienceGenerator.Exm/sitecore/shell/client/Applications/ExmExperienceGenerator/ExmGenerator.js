@@ -91,10 +91,16 @@
 
     // Run exm jobs
     start: function () {
-      var self = this;
+      var checkedItems = this.SentCampaignsList.get("checkedItems");
+      var checkedItemsNo = checkedItems.length;
+      if (checkedItems.length <= 0) {
+        alert("Please select at least one campaign.");
+        return;
+      }
       var requestData = {};
-      for (var idx in this.generatorData) {
-        requestData[idx] = this.adaptDayDistribution(this.generatorData[idx]);
+      for (var i = 0; i < checkedItemsNo; i++) {
+        var itemId = checkedItems[i].itemId;
+        requestData[itemId] = this.adaptDayDistribution(this.generatorData[itemId]);
       }
       var that = this;
       $.ajax({
@@ -143,6 +149,7 @@
         console.log(data.JobStatus);
         console.log(data);
         self.ProgressBar.set("value", data.Progress * 100);
+        self.CampaignCountText.set("text", data.CampaignCountLabel);
         self.StatusText.set("text", data.Status);
         if (data.JobStatus === 6 || data.JobStatus === "Completed") {
           _sc.off("intervalCompleted:ProgressBar");
@@ -150,7 +157,6 @@
       });
     },
     adaptDayDistribution: function (data) {
-
       var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
       var firstDate = new Date(data.endDate);
       var secondDate = new Date(data.startDate);

@@ -15,7 +15,6 @@ using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 using Sitecore.EmailCampaign.Analytics.Model;
-using Sitecore.EmailCampaign.ExperienceAnalytics;
 using Sitecore.Modules.EmailCampaign;
 using Sitecore.Modules.EmailCampaign.Core;
 using Sitecore.Modules.EmailCampaign.Core.Gateways;
@@ -122,6 +121,7 @@ namespace ExperienceGenerator.Exm.Services
         }
 
         _specification.Job.Status = "DONE!";
+        _specification.Job.CampaignCountLabel = "";
         _specification.Job.JobStatus = JobStatus.Complete;
       }
       catch (Exception ex)
