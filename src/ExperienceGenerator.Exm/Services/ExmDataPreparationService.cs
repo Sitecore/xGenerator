@@ -15,6 +15,10 @@ using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 using Sitecore.EmailCampaign.Analytics.Model;
+using Sitecore.EmailCampaign.Server.Contexts;
+using Sitecore.EmailCampaign.Server.Controllers.Dispatch;
+using Sitecore.EmailCampaign.Server.Controllers.Message;
+using Sitecore.EmailCampaign.Server.Responses;
 using Sitecore.Modules.EmailCampaign;
 using Sitecore.Modules.EmailCampaign.Core;
 using Sitecore.Modules.EmailCampaign.Core.Gateways;
@@ -32,6 +36,8 @@ namespace ExperienceGenerator.Exm.Services
 {
   public class ExmDataPreparationService
   {
+    private const string ListManagerOwner = "xGenerator";
+
     private readonly CampaignModel _campaignDefinition;
     private readonly Guid _exmCampaignId;
     private readonly Random _random = new Random();
@@ -90,9 +96,7 @@ namespace ExperienceGenerator.Exm.Services
           ExmEventsGenerator.Pool = new SemaphoreSlim(_specification.Threads);
 
           _specification.Job.Status = "Cleanup...";
-          //TODO-To verify
-          //Cleanup();
-
+          Cleanup();
 
           _specification.Job.Status = "Creating goals...";
           //TODO-To Implement
@@ -137,9 +141,9 @@ namespace ExperienceGenerator.Exm.Services
     private void CreateContactsAndList(MessageItem messageItem, List<ContactData> contactsForThisEmail)
     {
       var contactsRequired = _campaignDefinition.Events.TotalSent - contactsForThisEmail.Count;
-      _specification.Job.TargetContacts = contactsRequired;
-      _specification.Job.TargetEmails = Math.Max(_campaignDefinition.Events.TotalSent, contactsForThisEmail.Count);
-      _specification.Job.TargetEvents = _specification.Job.TargetEmails;
+      _specification.Job.TargetContacts = Math.Max(contactsRequired, 0);
+      _specification.Job.TargetEvents = Math.Max(_campaignDefinition.Events.TotalSent, contactsForThisEmail.Count);
+      //_specification.Job.TargetEmails = _specification.Job.TargetEvents;
       if (contactsRequired > 0)
       {
         _specification.Job.Status = "Creating contacts";
@@ -175,43 +179,54 @@ namespace ExperienceGenerator.Exm.Services
       PublishManager.PublishSmart(_db, targetDatabases, languages);
     }
 
-    //private void Cleanup()
-    //{
+    private void Cleanup()
+    {
+      var emailMessage = _db.SelectItems("/sitecore/content/Email Campaign/Messages/" + DateTime.Now.Year + "//*")?.FirstOrDefault(x => x.ID.Guid == _exmCampaignId);
+      if (emailMessage == null) return;
 
-    //  var key = new KeyBuilder().Add(this._managerRoot.InnerItem.ID.ToGuid()).Add(_exmCampaignId).ToString();
-    //  var removeCampaingRecords = $@"
-    //    SELECT [DimensionKeyId] INTO #Dimensions FROM [dbo].[DimensionKeys] WHERE [DimensionKey] LIKE '{key}%';
-    //    SELECT SegmentRecordId INTO #SegmentRecords from [dbo].[SegmentRecords]
-    //    WHERE  DimensionKeyId in (select * from #Dimensions);
-    //    SELECT SegmentRecordId INTO #SegmentRecordsReduced from [dbo].[SegmentRecordsReduced]
-    //    WHERE  DimensionKeyId in (select * from #Dimensions);
+      var excludedRecipientsListIDs = emailMessage.Fields["Excluded Recipient Lists"].Value.Split('|').ToList();
 
-    //    DELETE FROM [dbo].[Fact_SegmentMetrics] WHERE SegmentRecordId in (select * from #SegmentRecords)
-    //    DELETE FROM [dbo].[Fact_SegmentMetricsReduced] WHERE SegmentRecordId in (select * from #SegmentRecordsReduced)
-    //    DELETE FROM [dbo].[SegmentRecords] WHERE [DimensionKeyId] IN (SELECT * FROM #Dimensions);
-    //    DELETE FROM [dbo].[SegmentRecordsReduced] WHERE [DimensionKeyId] IN (SELECT * FROM #Dimensions);
+      var engagementPlan = _db.SelectItems("/sitecore/system/Marketing Control Panel/Engagement Plans/Email Campaign/Emails//*").FirstOrDefault(x => x.ID.ToString() == emailMessage.Fields["Engagement Plan"].Value);
+      engagementPlan?.Delete();
 
-    //    DROP table #Dimensions
-    //    DROP table #SegmentRecords
-    //    DROP table #SegmentRecordsReduced";
+      var campaign = _db.SelectItems("/sitecore/system/Marketing Control Panel/Campaigns/Emails//*").FirstOrDefault(x => x.ID.ToString() == emailMessage.Fields["Campaign"].Value);
+      campaign?.Delete();
 
-    //  var connectionstring = ConfigurationManager.ConnectionStrings["reporting"];
-    //  var connection = new SqlConnection(connectionstring.ConnectionString);
+      var serviceMessages = _db.SelectItems("/sitecore/content/Email Campaign/Messages/Service Messages//*[@@templatename='HTML Message']");
+      foreach (var serviceMessage in serviceMessages)
+      {
+        if (serviceMessage.Fields["Campaign"].Value != string.Empty)
+        {
+          using (new EditContext(serviceMessage))
+          {
+            serviceMessage.Fields["Campaign"].Value = string.Empty;
+            serviceMessage.Fields["Engagement Plan"].Value = string.Empty;
+          }
+        }
+      }
 
-    //  try
-    //  {
-    //    connection.Open();
+      var lists = _db.SelectItems("/sitecore/system/List Manager/All Lists//*[@@templatename='Contact List']").Where(x => x.Fields["Owner"].Value == ListManagerOwner);
+      foreach (var list in lists)
+      {
+        list.Delete();
+      }
 
-    //    var clearCommand = new SqlCommand(removeCampaingRecords, connection);
-    //    clearCommand.ExecuteNonQuery();
-    //  }
-    //  finally
-    //  {
-    //    connection.Close();
-    //  }
+      var excludeLists = _db.SelectItems("/sitecore/system/List Manager/All Lists//*[@@templatename='Contact List']").Where(x => excludedRecipientsListIDs.Contains(x.ID.ToString())).ToList();
+      foreach (var excludeList in excludeLists)
+      {
+        using (new EditContext(excludeList))
+        {
+          excludeList.Fields["IncludedSources"].Value = string.Empty;
+          excludeList.Fields["ExcludedSources"].Value = string.Empty;
+        }
+      }
 
-
-    //}
+      var globalLists = _db.SelectItems("/sitecore/system/List Manager/All Lists/#E-mail Campaign Manager#/System//*[@@templatename='Contact List']");
+      foreach (var globalList in globalLists)
+      {
+        globalList.Delete();
+      }
+    }
 
     private async void GenerateEvents(MessageItem email, Funnel funnelDefinition, List<ContactData> contactsForThisEmail)
     {
@@ -313,55 +328,76 @@ namespace ExperienceGenerator.Exm.Services
 
     private void SendCampaign(MessageItem messageItem, List<ContactData> contactsForThisEmail)
     {
-      var sendingProcessData = new SendingProcessData(new ID(messageItem.MessageId));
+      //var sendingProcessData = new SendingProcessData(new ID(messageItem.MessageId));
 
       var dateMessageSent = _campaignDefinition.StartDate;
-      var dateMessageFinished = dateMessageSent.AddMinutes(5);
+      var dateMessageFinished = _campaignDefinition.EndDate;
 
-      AdjustEmailStatsWithRetry(messageItem, sendingProcessData, dateMessageSent, dateMessageFinished, 30);
-
-      PublishEmail(messageItem, sendingProcessData);
-
-      var contactIndex = 1;
-      foreach (var contact in contactsForThisEmail)
+      _specification.Job.Status = "Dispatching email...";
+      var dispatchController = new DispatchController();
+      dispatchController.Dispatch(new DispatchRequestContext
       {
-        _specification.Job.Status = $"Sending email to contact {contactIndex++} of {contactsForThisEmail.Count}";
-        try
-        {
-          SendEmailToContact(contact, messageItem);
-        }
-        catch (Exception ex)
-        {
-          _specification.Job.Status = ex.ToString();
-          Log.Error("Failed", ex, this);
-        }
-      }
+        AbTest = new ABTestContext(),
+        Schedule = new ScheduleContext(),
+        RecurringSchedule = new RecurringScheduleContext(),
+        EmulationMode = false,
+        Language = "en",
+        MessageId = messageItem.ID,
+        MultiLanguageEnabled = false,
+        NotificationEmail = null,
+        UseNotificationEmail = false,
+        UsePreferredLanguage = false
+      });
 
-      messageItem.Source.State = MessageState.Sent;
+      WaitUntilSent(messageItem.ID);
+
+      _specification.Job.Status = "Adjusting email stats...";
+
+      AdjustEmailStats(messageItem, dateMessageSent, dateMessageFinished, contactsForThisEmail.Count);
+      //AdjustEmailStatsWithRetry(messageItem, sendingProcessData, dateMessageSent, dateMessageFinished, 30);
+
+      //PublishEmail(messageItem, sendingProcessData);
+
+      //var contactIndex = 1;
+      //foreach (var contact in contactsForThisEmail)
+      //{
+      //  _specification.Job.Status = $"Sending email to contact {contactIndex++} of {contactsForThisEmail.Count}";
+      //  try
+      //  {
+      //    SendEmailToContact(contact, messageItem);
+      //  }
+      //  catch (Exception ex)
+      //  {
+      //    _specification.Job.Status = ex.ToString();
+      //    Log.Error("Failed", ex, this);
+      //  }
+      //}
+
+      //messageItem.Source.State = MessageState.Sent;
       GenerateEvents(messageItem, _campaignDefinition.Events, contactsForThisEmail);
     }
 
 
 
-    private void AdjustEmailStatsWithRetry(MessageItem messageItem, SendingProcessData sendingProcessData,
-      DateTime dateMessageSent, DateTime dateMessageFinished, int retryCount)
-    {
-      int sleepTime = 1000;
+    //private void AdjustEmailStatsWithRetry(MessageItem messageItem, SendingProcessData sendingProcessData,
+    //  DateTime dateMessageSent, DateTime dateMessageFinished, int retryCount)
+    //{
+    //  int sleepTime = 1000;
 
-      for (var i = 0; i < retryCount; i++)
-      {
-        try
-        {
-          AdjustEmailStats(messageItem, sendingProcessData, dateMessageSent, dateMessageFinished);
-          return;
-        }
-        catch (Exception)
-        {
-          Thread.Sleep(sleepTime);
-          sleepTime += 1000;
-        }
-      }
-    }
+    //  for (var i = 0; i < retryCount; i++)
+    //  {
+    //    try
+    //    {
+    //      AdjustEmailStats(messageItem, sendingProcessData, dateMessageSent, dateMessageFinished);
+    //      return;
+    //    }
+    //    catch (Exception)
+    //    {
+    //      Thread.Sleep(sleepTime);
+    //      sleepTime += 1000;
+    //    }
+    //  }
+    //}
 
     private void PublishEmail(MessageItem messageItem, SendingProcessData sendingProcessData)
     {
@@ -424,12 +460,31 @@ namespace ExperienceGenerator.Exm.Services
       return contactsForThisEmail;
     }
 
-    private void AdjustEmailStats(MessageItem messageItem, SendingProcessData sendingProcessData,
-      DateTime dateMessageSent, DateTime dateMessageFinished)
+    private void WaitUntilSent(string messageId)
     {
-      var deployAnalytics = new DeployAnalytics();
-      deployAnalytics.Process(new DispatchNewsletterArgs(messageItem, sendingProcessData));
+      _specification.Job.Status = "Waiting until email sent...";
 
+      while (true)
+      {
+        var messageController = new MessageController();
+        var messageResponse = (MessageResponse)messageController.Message(new MessageContext
+        {
+          Language = "en",
+          MessageId = messageId
+        });
+
+        var messageState = (MessageState)messageResponse.Message.MessageState;
+        if (messageState == MessageState.Sent)
+        {
+          return;
+        }
+
+        Thread.Sleep(1000);
+      }
+    }
+
+    private void AdjustEmailStats(MessageItem messageItem, DateTime dateMessageSent, DateTime dateMessageFinished, int numContactsForThisEmail)
+    {
       messageItem.Source.StartTime = dateMessageSent;
       messageItem.Source.EndTime = dateMessageFinished;
 
@@ -440,20 +495,42 @@ namespace ExperienceGenerator.Exm.Services
         innerItem[FieldIDs.Updated] = DateUtil.ToIsoDate(dateMessageSent);
       }
 
-      var itemUtil = new ItemUtilExt();
-      var campaignItem = itemUtil.GetItem(messageItem.CampaignId);
-      using (new EditContext(campaignItem))
-      {
-        campaignItem["StartDate"] = DateUtil.ToIsoDate(dateMessageSent);
-        campaignItem[CampaignclassificationItem.FieldIDs.Channel] =
-          EcmFactory.GetDefaultFactory().Io.EcmSettings.CampaignClassificationChannel;
-        campaignItem["EndDate"] = DateUtil.ToIsoDate(dateMessageFinished);
-      }
-
       // Updates the totalRecipients and endTime in the EmailCampaign collection.
       EcmFactory.GetDefaultFactory()
-        .Gateways.EcmDataGateway.SetMessageStatisticData(messageItem.CampaignId.ToGuid(), dateMessageSent,
-          dateMessageFinished, FieldUpdate.Set(messageItem.SubscribersIds.Value.Count));
+          .Gateways.EcmDataGateway.SetMessageStatisticData(messageItem.CampaignId.ToGuid(), dateMessageSent,
+              dateMessageFinished, FieldUpdate.Set(numContactsForThisEmail));
     }
+
+    //private void AdjustEmailStats(MessageItem messageItem, SendingProcessData sendingProcessData,
+    //  DateTime dateMessageSent, DateTime dateMessageFinished)
+    //{
+    //  var deployAnalytics = new DeployAnalytics();
+    //  deployAnalytics.Process(new DispatchNewsletterArgs(messageItem, sendingProcessData));
+
+    //  messageItem.Source.StartTime = dateMessageSent;
+    //  messageItem.Source.EndTime = dateMessageFinished;
+
+    //  var innerItem = messageItem.InnerItem;
+    //  using (new EditContext(innerItem))
+    //  {
+    //    innerItem.RuntimeSettings.ReadOnlyStatistics = true;
+    //    innerItem[FieldIDs.Updated] = DateUtil.ToIsoDate(dateMessageSent);
+    //  }
+
+    //  var itemUtil = new ItemUtilExt();
+    //  var campaignItem = itemUtil.GetItem(messageItem.CampaignId);
+    //  using (new EditContext(campaignItem))
+    //  {
+    //    campaignItem["StartDate"] = DateUtil.ToIsoDate(dateMessageSent);
+    //    campaignItem[CampaignclassificationItem.FieldIDs.Channel] =
+    //      EcmFactory.GetDefaultFactory().Io.EcmSettings.CampaignClassificationChannel;
+    //    campaignItem["EndDate"] = DateUtil.ToIsoDate(dateMessageFinished);
+    //  }
+
+    //  // Updates the totalRecipients and endTime in the EmailCampaign collection.
+    //  EcmFactory.GetDefaultFactory()
+    //    .Gateways.EcmDataGateway.SetMessageStatisticData(messageItem.CampaignId.ToGuid(), dateMessageSent,
+    //      dateMessageFinished, FieldUpdate.Set(messageItem.SubscribersIds.Value.Count));
+    //}
   }
 }
