@@ -27,10 +27,12 @@ namespace ExperienceGenerator.Exm.Services
 
     public IEnumerable<Contact> CreateContacts(int numContacts)
     {
+      var addedContacts = new List<Contact>();
       for (var i = 0; i < numContacts; i++)
       {
-        yield return CreateContact();
+        addedContacts.Add(CreateContact());
       }
+      return addedContacts;
     }
 
     public void AddContacts(List<ContactData> contactDataList)

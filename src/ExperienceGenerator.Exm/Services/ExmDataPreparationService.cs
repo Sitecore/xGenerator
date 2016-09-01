@@ -143,7 +143,7 @@ namespace ExperienceGenerator.Exm.Services
       var contactsRequired = _campaignDefinition.Events.TotalSent - contactsForThisEmail.Count;
       _specification.Job.TargetContacts = Math.Max(contactsRequired, 0);
       _specification.Job.TargetEvents = Math.Max(_campaignDefinition.Events.TotalSent, contactsForThisEmail.Count);
-      //_specification.Job.TargetEmails = _specification.Job.TargetEvents;
+      _specification.Job.TargetEmails = _specification.Job.TargetEvents;
       if (contactsRequired > 0)
       {
         _specification.Job.Status = "Creating contacts";
@@ -186,11 +186,11 @@ namespace ExperienceGenerator.Exm.Services
 
       var excludedRecipientsListIDs = emailMessage.Fields["Excluded Recipient Lists"].Value.Split('|').ToList();
 
-      var engagementPlan = _db.SelectItems("/sitecore/system/Marketing Control Panel/Engagement Plans/Email Campaign/Emails//*").FirstOrDefault(x => x.ID.ToString() == emailMessage.Fields["Engagement Plan"].Value);
-      engagementPlan?.Delete();
+      //var engagementPlan = _db.SelectItems("/sitecore/system/Marketing Control Panel/Engagement Plans/Email Campaign/Emails//*").FirstOrDefault(x => x.ID.ToString() == emailMessage.Fields["Engagement Plan"].Value);
+      //engagementPlan?.Delete();
 
-      var campaign = _db.SelectItems("/sitecore/system/Marketing Control Panel/Campaigns/Emails//*").FirstOrDefault(x => x.ID.ToString() == emailMessage.Fields["Campaign"].Value);
-      campaign?.Delete();
+      //var campaign = _db.SelectItems("/sitecore/system/Marketing Control Panel/Campaigns/Emails//*").FirstOrDefault(x => x.ID.ToString() == emailMessage.Fields["Campaign"].Value);
+      //campaign?.Delete();
 
       var serviceMessages = _db.SelectItems("/sitecore/content/Email Campaign/Messages/Service Messages//*[@@templatename='HTML Message']");
       foreach (var serviceMessage in serviceMessages)
@@ -328,50 +328,50 @@ namespace ExperienceGenerator.Exm.Services
 
     private void SendCampaign(MessageItem messageItem, List<ContactData> contactsForThisEmail)
     {
-      //var sendingProcessData = new SendingProcessData(new ID(messageItem.MessageId));
+      var sendingProcessData = new SendingProcessData(new ID(messageItem.MessageId));
 
       var dateMessageSent = _campaignDefinition.StartDate;
       var dateMessageFinished = _campaignDefinition.EndDate;
 
-      _specification.Job.Status = "Dispatching email...";
-      var dispatchController = new DispatchController();
-      dispatchController.Dispatch(new DispatchRequestContext
-      {
-        AbTest = new ABTestContext(),
-        Schedule = new ScheduleContext(),
-        RecurringSchedule = new RecurringScheduleContext(),
-        EmulationMode = false,
-        Language = "en",
-        MessageId = messageItem.ID,
-        MultiLanguageEnabled = false,
-        NotificationEmail = null,
-        UseNotificationEmail = false,
-        UsePreferredLanguage = false
-      });
+      //_specification.Job.Status = "Dispatching email...";
+      //var dispatchController = new DispatchController();
+      //dispatchController.Dispatch(new DispatchRequestContext
+      //{
+      //  AbTest = new ABTestContext(),
+      //  Schedule = new ScheduleContext(),
+      //  RecurringSchedule = new RecurringScheduleContext(),
+      //  EmulationMode = false,
+      //  Language = "en",
+      //  MessageId = messageItem.ID,
+      //  MultiLanguageEnabled = false,
+      //  NotificationEmail = null,
+      //  UseNotificationEmail = false,
+      //  UsePreferredLanguage = false
+      //});
 
-      WaitUntilSent(messageItem.ID);
+      //WaitUntilSent(messageItem.ID);
 
       _specification.Job.Status = "Adjusting email stats...";
 
-      AdjustEmailStats(messageItem, dateMessageSent, dateMessageFinished, contactsForThisEmail.Count);
-      //AdjustEmailStatsWithRetry(messageItem, sendingProcessData, dateMessageSent, dateMessageFinished, 30);
+      //AdjustEmailStats(messageItem, dateMessageSent, dateMessageFinished, contactsForThisEmail.Count);
+      AdjustEmailStatsWithRetry(messageItem, sendingProcessData, dateMessageSent, dateMessageFinished, 30);
 
-      //PublishEmail(messageItem, sendingProcessData);
+      PublishEmail(messageItem, sendingProcessData);
 
-      //var contactIndex = 1;
-      //foreach (var contact in contactsForThisEmail)
-      //{
-      //  _specification.Job.Status = $"Sending email to contact {contactIndex++} of {contactsForThisEmail.Count}";
-      //  try
-      //  {
-      //    SendEmailToContact(contact, messageItem);
-      //  }
-      //  catch (Exception ex)
-      //  {
-      //    _specification.Job.Status = ex.ToString();
-      //    Log.Error("Failed", ex, this);
-      //  }
-      //}
+      var contactIndex = 1;
+      foreach (var contact in contactsForThisEmail)
+      {
+        _specification.Job.Status = $"Sending email to contact {contactIndex++} of {contactsForThisEmail.Count}";
+        try
+        {
+          SendEmailToContact(contact, messageItem);
+        }
+        catch (Exception ex)
+        {
+          _specification.Job.Status = ex.ToString();
+          Log.Error("Failed", ex, this);
+        }
+      }
 
       //messageItem.Source.State = MessageState.Sent;
       GenerateEvents(messageItem, _campaignDefinition.Events, contactsForThisEmail);
@@ -379,25 +379,25 @@ namespace ExperienceGenerator.Exm.Services
 
 
 
-    //private void AdjustEmailStatsWithRetry(MessageItem messageItem, SendingProcessData sendingProcessData,
-    //  DateTime dateMessageSent, DateTime dateMessageFinished, int retryCount)
-    //{
-    //  int sleepTime = 1000;
+    private void AdjustEmailStatsWithRetry(MessageItem messageItem, SendingProcessData sendingProcessData,
+      DateTime dateMessageSent, DateTime dateMessageFinished, int retryCount)
+    {
+      int sleepTime = 1000;
 
-    //  for (var i = 0; i < retryCount; i++)
-    //  {
-    //    try
-    //    {
-    //      AdjustEmailStats(messageItem, sendingProcessData, dateMessageSent, dateMessageFinished);
-    //      return;
-    //    }
-    //    catch (Exception)
-    //    {
-    //      Thread.Sleep(sleepTime);
-    //      sleepTime += 1000;
-    //    }
-    //  }
-    //}
+      for (var i = 0; i < retryCount; i++)
+      {
+        try
+        {
+          AdjustEmailStats(messageItem, sendingProcessData, dateMessageSent, dateMessageFinished);
+          return;
+        }
+        catch (Exception)
+        {
+          Thread.Sleep(sleepTime);
+          sleepTime += 1000;
+        }
+      }
+    }
 
     private void PublishEmail(MessageItem messageItem, SendingProcessData sendingProcessData)
     {
@@ -483,30 +483,8 @@ namespace ExperienceGenerator.Exm.Services
       }
     }
 
-    private void AdjustEmailStats(MessageItem messageItem, DateTime dateMessageSent, DateTime dateMessageFinished, int numContactsForThisEmail)
-    {
-      messageItem.Source.StartTime = dateMessageSent;
-      messageItem.Source.EndTime = dateMessageFinished;
-
-      var innerItem = messageItem.InnerItem;
-      using (new EditContext(innerItem))
-      {
-        innerItem.RuntimeSettings.ReadOnlyStatistics = true;
-        innerItem[FieldIDs.Updated] = DateUtil.ToIsoDate(dateMessageSent);
-      }
-
-      // Updates the totalRecipients and endTime in the EmailCampaign collection.
-      EcmFactory.GetDefaultFactory()
-          .Gateways.EcmDataGateway.SetMessageStatisticData(messageItem.CampaignId.ToGuid(), dateMessageSent,
-              dateMessageFinished, FieldUpdate.Set(numContactsForThisEmail));
-    }
-
-    //private void AdjustEmailStats(MessageItem messageItem, SendingProcessData sendingProcessData,
-    //  DateTime dateMessageSent, DateTime dateMessageFinished)
+    //private void AdjustEmailStats(MessageItem messageItem, DateTime dateMessageSent, DateTime dateMessageFinished, int numContactsForThisEmail)
     //{
-    //  var deployAnalytics = new DeployAnalytics();
-    //  deployAnalytics.Process(new DispatchNewsletterArgs(messageItem, sendingProcessData));
-
     //  messageItem.Source.StartTime = dateMessageSent;
     //  messageItem.Source.EndTime = dateMessageFinished;
 
@@ -517,20 +495,42 @@ namespace ExperienceGenerator.Exm.Services
     //    innerItem[FieldIDs.Updated] = DateUtil.ToIsoDate(dateMessageSent);
     //  }
 
-    //  var itemUtil = new ItemUtilExt();
-    //  var campaignItem = itemUtil.GetItem(messageItem.CampaignId);
-    //  using (new EditContext(campaignItem))
-    //  {
-    //    campaignItem["StartDate"] = DateUtil.ToIsoDate(dateMessageSent);
-    //    campaignItem[CampaignclassificationItem.FieldIDs.Channel] =
-    //      EcmFactory.GetDefaultFactory().Io.EcmSettings.CampaignClassificationChannel;
-    //    campaignItem["EndDate"] = DateUtil.ToIsoDate(dateMessageFinished);
-    //  }
-
     //  // Updates the totalRecipients and endTime in the EmailCampaign collection.
     //  EcmFactory.GetDefaultFactory()
-    //    .Gateways.EcmDataGateway.SetMessageStatisticData(messageItem.CampaignId.ToGuid(), dateMessageSent,
-    //      dateMessageFinished, FieldUpdate.Set(messageItem.SubscribersIds.Value.Count));
+    //      .Gateways.EcmDataGateway.SetMessageStatisticData(messageItem.CampaignId.ToGuid(), dateMessageSent,
+    //          dateMessageFinished, FieldUpdate.Set(numContactsForThisEmail));
     //}
+
+    private void AdjustEmailStats(MessageItem messageItem, SendingProcessData sendingProcessData,
+      DateTime dateMessageSent, DateTime dateMessageFinished)
+    {
+      var deployAnalytics = new DeployAnalytics();
+      deployAnalytics.Process(new DispatchNewsletterArgs(messageItem, sendingProcessData));
+
+      messageItem.Source.StartTime = dateMessageSent;
+      messageItem.Source.EndTime = dateMessageFinished;
+
+      var innerItem = messageItem.InnerItem;
+      using (new EditContext(innerItem))
+      {
+        innerItem.RuntimeSettings.ReadOnlyStatistics = true;
+        innerItem[FieldIDs.Updated] = DateUtil.ToIsoDate(dateMessageSent);
+      }
+
+      var itemUtil = new ItemUtilExt();
+      var campaignItem = itemUtil.GetItem(messageItem.CampaignId);
+      using (new EditContext(campaignItem))
+      {
+        campaignItem["StartDate"] = DateUtil.ToIsoDate(dateMessageSent);
+        campaignItem[CampaignclassificationItem.FieldIDs.Channel] =
+          EcmFactory.GetDefaultFactory().Io.EcmSettings.CampaignClassificationChannel;
+        campaignItem["EndDate"] = DateUtil.ToIsoDate(dateMessageFinished);
+      }
+
+      // Updates the totalRecipients and endTime in the EmailCampaign collection.
+      EcmFactory.GetDefaultFactory()
+        .Gateways.EcmDataGateway.SetMessageStatisticData(messageItem.CampaignId.ToGuid(), dateMessageSent,
+          dateMessageFinished, FieldUpdate.Set(messageItem.SubscribersIds.Value.Count));
+    }
   }
 }
