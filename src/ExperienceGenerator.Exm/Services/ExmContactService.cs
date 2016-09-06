@@ -53,12 +53,13 @@ namespace ExperienceGenerator.Exm.Services
       var contactRepository = new ContactRepository();
 
       var contact = contactRepository.LoadContactReadOnly(identifier);
-      if (contact != null)
+      while (contact != null)
       {
-        DoContactCreated(contact);
-        return contact;
+        ContactCount ++;
+        identifier = "XGen" + ContactCount;
+        contact = contactRepository.LoadContactReadOnly(identifier);
       }
-
+      
       contact = contactRepository.CreateContact(ID.NewID);
       contact.Identifiers.AuthenticationLevel = AuthenticationLevel.None;
       contact.System.Classification = 0;

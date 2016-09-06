@@ -1,14 +1,11 @@
-﻿using System.Configuration;
-using System.Data.SqlClient;
+﻿using System.Collections.Generic;
+using System.Linq;
+using ExperienceGenerator.Data;
 using ExperienceGenerator.Exm.Models;
 using ExperienceGenerator.Exm.Repositories;
 using Newtonsoft.Json.Linq;
-using Sitecore;
-using Sitecore.Analytics.Aggregation;
+using Sitecore.Analytics.Model;
 using Sitecore.Data;
-using Sitecore.Analytics.Data.DataAccess.MongoDb;
-using Sitecore.Cintel.Configuration;
-using Sitecore.ContentSearch;
 
 namespace ExperienceGenerator.Exm.Controllers
 {
@@ -37,30 +34,41 @@ namespace ExperienceGenerator.Exm.Controllers
 			return repo.GetSettingPreset(new ID(id));
 		}
 
-	  //[HttpPost]
-	  //public IHttpActionResult Flush()
-	  //{
-   //   var driver = new MongoDbDriver(ConfigurationManager.ConnectionStrings["analytics"].ConnectionString);
-   //   driver.ResetDatabase();
+    [HttpGet]
+    public List<SelectionOptionGroup> Locations()
+    {
+      return GeoRegion.Regions.Select(region =>
+        new SelectionOptionGroup()
+        {
+          Label = region.Label,
+          Options = region.SubRegions.Select(x => new SelectionOption() { Id = x.Id, Label = x.Label, DefaultWeight = 50 })
+        }).ToList();
+    }
 
-   //   var item = (Context.ContentDatabase ?? Context.Database).GetItem("/sitecore/media library/Images/xgen");
-   //   item?.Delete();
+    //[HttpPost]
+    //public IHttpActionResult Flush()
+    //{
+    //   var driver = new MongoDbDriver(ConfigurationManager.ConnectionStrings["analytics"].ConnectionString);
+    //   driver.ResetDatabase();
 
-   //   var sql = new SqlReportingStorageProvider("reporting");
-   //   sql.DeleteAllReportingData();
+    //   var item = (Context.ContentDatabase ?? Context.Database).GetItem("/sitecore/media library/Images/xgen");
+    //   item?.Delete();
+
+    //   var sql = new SqlReportingStorageProvider("reporting");
+    //   sql.DeleteAllReportingData();
 
 
-   //   var index = ContentSearchManager.GetIndex(CustomerIntelligenceConfig.ContactSearch.SearchIndexName);
-   //   index.Reset();
-   //   index.Refresh();
-   //   using (var ctx = index.CreateUpdateContext())
-   //   {
-   //     ctx.Optimize();
-   //   }
+    //   var index = ContentSearchManager.GetIndex(CustomerIntelligenceConfig.ContactSearch.SearchIndexName);
+    //   index.Reset();
+    //   index.Refresh();
+    //   using (var ctx = index.CreateUpdateContext())
+    //   {
+    //     ctx.Optimize();
+    //   }
 
-   //   return Ok();
+    //   return Ok();
 
-   // }
+    // }
 
-	}
+  }
 }

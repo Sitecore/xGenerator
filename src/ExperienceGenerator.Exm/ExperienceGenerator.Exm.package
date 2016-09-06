@@ -1,9 +1,9 @@
 <project>
   <Metadata>
     <metadata>
-      <PackageName>Experience Generator EXM extension</PackageName>
+      <PackageName>Exm Experience Generator</PackageName>
       <Author>Sitecore</Author>
-      <Version>0.1.2</Version>
+      <Version>0.1.3</Version>
       <Revision />
       <License>SITCORE INTERNAL USE. DO NOT DISTRIBUTE.</License>
       <Comment />
@@ -95,6 +95,7 @@
         <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/JobManager.js</x-item>
         <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/uiUtils.js</x-item>
         <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/ExmExperienceGenerator.css</x-item>
+        <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/CustomMultiSelectList.js</x-item>
       </Entries>
       <Converter>
         <FileToEntryConverter>

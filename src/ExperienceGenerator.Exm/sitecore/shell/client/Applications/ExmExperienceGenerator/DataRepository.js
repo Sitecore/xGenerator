@@ -1,7 +1,7 @@
 ﻿define(["sitecore", "jquery", "underscore"], function (sc, $, _) {
   var urls = {
     devicesUrl: "/api/xgen/devices",
-    locationsUrl: "/api/xgen/locations"
+    locationsUrl: "/api/xgen/exmactions/locations"
   };
 
   var dataRepository = {

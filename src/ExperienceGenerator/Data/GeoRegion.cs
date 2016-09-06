@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Sitecore.Analytics.Model;
 
 namespace ExperienceGenerator.Data
 {
@@ -60,6 +61,20 @@ namespace ExperienceGenerator.Data
                 })
             });
       }
+    }
+
+    public static WhoIsInformation RandomCountryForSubRegion(int subRegionId)
+    {
+      var regions = FileHelpers.ReadLinesFromResource<GeoRegion>("ExperienceGenerator.Data.Regions.txt")
+        .Where(x => x[0] != '#')
+        .Select(x => x.Split('\t')).Where(x => !string.IsNullOrEmpty(x[5]) || !string.IsNullOrEmpty(x[6]))
+        .Select(x => new WhoIsInformation()
+        {
+          AreaCode = x[8],
+          Country = x[1],
+          Region = x[1]
+        });
+      return regions.FirstOrDefault(y=> Convert.ToInt32(y.AreaCode) == subRegionId);
     }
   }
 }

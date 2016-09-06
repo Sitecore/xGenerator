@@ -9,6 +9,7 @@ using ExperienceGenerator.Data;
 using ExperienceGenerator.Exm.Models;
 using Sitecore;
 using Sitecore.Analytics.Data.Items;
+using Sitecore.Analytics.Model;
 using Sitecore.Caching;
 using Sitecore.Common;
 using Sitecore.Data;
@@ -47,20 +48,21 @@ namespace ExperienceGenerator.Exm.Services
     private readonly ExmContactService _contactService;
     private readonly ExmLandingPageService _landingPageService;
     private readonly ExmListService _listService;
+    private readonly Func<WhoIsInformation> _geoData;
 
-    private readonly Func<string> _ip = new[]
-    {
-      //Denmark
-      "194.255.38.57",
-      //USA
-      "204.15.21.186",
-      //Netherlands
-      "94.169.168.18",
-      //Japan
-      "202.246.252.97",
-      //Canada
-      "192.206.151.131"
-    }.Uniform();
+    //private readonly Func<string> _ip = new[]
+    //{
+    //  //Denmark
+    //  "194.255.38.57",
+    //  //USA
+    //  "204.15.21.186",
+    //  //Netherlands
+    //  "94.169.168.18",
+    //  //Japan
+    //  "202.246.252.97",
+    //  //Canada
+    //  "192.206.151.131"
+    //}.Uniform();
 
     private ManagerRoot _managerRoot;
     private readonly Func<int> _eventDay;
@@ -79,7 +81,17 @@ namespace ExperienceGenerator.Exm.Services
       var devices = new DeviceRepository().GetAll().ToDictionary(ga => ga.Id, ga => ga.UserAgent);
       _userAgent = campaignDefinition.Devices.ToDictionary(kvp => devices[kvp.Key], kvp => kvp.Value).Weighted();
 
+      var geoData = GetGeoData(campaignDefinition.Locations);
+      _geoData = geoData.Select(x => x.WhoIs).Weighted(geoData.Select(x => x.Weight).ToArray());
       _eventDay = campaignDefinition.DayDistribution.Select(x => x / 100d).WeightedInts();
+    }
+
+    private List<ExmGeoData> GetGeoData(Dictionary<int, int> weightedIDs)
+    {
+      return weightedIDs.Select(weightedId => new ExmGeoData()
+      {
+        Weight = weightedId.Value, WhoIs = GeoRegion.RandomCountryForSubRegion(weightedId.Key)
+      }).ToList();
     }
 
     public void CreateData()
@@ -254,34 +266,35 @@ namespace ExperienceGenerator.Exm.Services
         else
         {
           var userAgent = _userAgent();
-          var ip = _ip();
+          var geoData = _geoData();
           var eventDay = _eventDay();
           var seconds = _random.Next(60, 86400);
           var eventDate = email.StartTime.AddDays(eventDay).AddSeconds(seconds);
 
-
           var spamPercentage = funnelDefinition.SpamComplaints / 100d;
 
-          if (_random.NextDouble() < funnelDefinition.OpenRate / 100d)
+          if (_random.NextDouble() < funnelDefinition.OpenRate/100d)
           {
-            ExmEventsGenerator.GenerateHandlerEvent(_managerRoot.Settings.BaseURL, contact.ContactId, email,
-              ExmEvents.Open, eventDate, userAgent, ip);
-
-            eventDate = eventDate.AddSeconds(_random.Next(10, 300));
-
             if (_random.NextDouble() < funnelDefinition.ClickRate / 100d)
             {
               // Much less likely to complain if they were interested enough to click the link.
-              spamPercentage = 0.01;
+              spamPercentage = Math.Min(spamPercentage, 0.01);
 
               var link = _landingPageService.GetLandingPage();
 
               ExmEventsGenerator.GenerateHandlerEvent(_managerRoot.Settings.BaseURL, contact.ContactId, email,
-                ExmEvents.Click, eventDate, userAgent, ip, link);
+                ExmEvents.Click, eventDate, userAgent, geoData, link);
+              eventDate = eventDate.AddSeconds(_random.Next(10, 300));
+            }
+            else
+            {
+              ExmEventsGenerator.GenerateHandlerEvent(_managerRoot.Settings.BaseURL, contact.ContactId, email,
+                ExmEvents.Open, eventDate, userAgent, geoData);
+
               eventDate = eventDate.AddSeconds(_random.Next(10, 300));
             }
           }
-
+          
           if (_random.NextDouble() < spamPercentage)
           {
             await ExmEventsGenerator.GenerateSpamComplaint(_managerRoot.Settings.BaseURL, contact.ContactId.ToID(), email.MessageId.ToID(), "email", eventDate);
@@ -306,7 +319,7 @@ namespace ExperienceGenerator.Exm.Services
             }
 
             ExmEventsGenerator.GenerateHandlerEvent(_managerRoot.Settings.BaseURL, contact.ContactId, email,
-              unsubscribeEvent, eventDate, userAgent, ip);
+              unsubscribeEvent, eventDate, userAgent, geoData);
           }
         }
         _specification.Job.CompletedEvents++;

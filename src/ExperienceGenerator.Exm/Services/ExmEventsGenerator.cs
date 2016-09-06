@@ -7,6 +7,9 @@ using System.ComponentModel;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using ExperienceGenerator.Exm.Models;
+using Newtonsoft.Json;
+using Sitecore.Analytics.Model;
 using Sitecore.Data;
 using Sitecore.EDS.Core.Reporting;
 using Sitecore.EmailCampaign.Cm.Handlers;
@@ -47,7 +50,54 @@ namespace ExperienceGenerator.Exm.Services
       }
     }
 
-   public static void RequestUrl(string url, string userAgent = null, string ip = null, string dateTime = null)
+    //public static void RequestUrl(string url, string userAgent = null, string ip = null, string dateTime = null)
+    //{
+    //  Pool.Wait();
+
+    //  try
+    //  {
+    //    Don't use IDisposable HttpClient, seems to cause problems with threads
+    //    var client = new HttpClient();
+
+
+    //    if (userAgent != null)
+    //    {
+    //      client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", userAgent);
+    //    }
+    //    if (ip != null)
+    //    {
+    //      client.DefaultRequestHeaders.TryAddWithoutValidation("X-Forwarded-For", ip);
+    //    }
+
+    //    if (dateTime != null)
+    //    {
+    //      client.DefaultRequestHeaders.TryAddWithoutValidation("X-Exm-RequestTime", dateTime);
+    //    }
+
+    //    client.Timeout = TimeSpan.FromSeconds(120);
+
+    //    var res = client.PostAsync(url, new StringContent(string.Empty)).Result;
+    //    if (!res.IsSuccessStatusCode)
+    //    {
+    //      Errors++;
+    //    }
+    //  }
+    //  catch (TaskCanceledException)
+    //  {
+    //    Timeouts++;
+    //  }
+    //  catch (Exception ex)
+    //  {
+    //    Logger.Instance.LogError("ExmEventsGenerator error", ex);
+    //    Errors++;
+    //  }
+    //  finally
+    //  {
+    //    Pool.Release();
+    //  }
+    //}
+
+    public static void RequestUrl(string url, ExmFakeData fakeData = null)
     {
       Pool.Wait();
 
@@ -56,19 +106,15 @@ namespace ExperienceGenerator.Exm.Services
         // Don't use IDisposable HttpClient, seems to cause problems with threads
         var client = new HttpClient();
 
+        if (fakeData != null)
+        {
+          if (fakeData.UserAgent != null)
+          {
+            client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", fakeData.UserAgent);
+          }
 
-        if (userAgent != null)
-        {
-          client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", userAgent);
-        }
-        if (ip != null)
-        {
-          client.DefaultRequestHeaders.TryAddWithoutValidation("X-Forwarded-For", ip);
-        }
-
-        if (dateTime != null)
-        {
-          client.DefaultRequestHeaders.TryAddWithoutValidation("X-Exm-RequestTime", dateTime);
+          var json = JsonConvert.SerializeObject(fakeData);
+          client.DefaultRequestHeaders.TryAddWithoutValidation("X-Exm-FakeData", json);
         }
 
         client.Timeout = TimeSpan.FromSeconds(120);
@@ -121,7 +167,7 @@ namespace ExperienceGenerator.Exm.Services
       await messageHandler.HandleReportedMessages(new[] { spam });
     }
 
-    public static void GenerateHandlerEvent(string hostName, Guid userId, MessageItem messageItem, ExmEvents exmEvent, DateTime dateTime, string userAgent = null, string ip = null, string link = null)
+    public static void GenerateHandlerEvent(string hostName, Guid userId, MessageItem messageItem, ExmEvents exmEvent, DateTime dateTime, string userAgent = null, WhoIsInformation geoData = null, string link = null)
     {
       string eventHandler;
       switch (exmEvent)
@@ -150,7 +196,13 @@ namespace ExperienceGenerator.Exm.Services
       var parameters = encryptedQueryString.ToQueryString(true);
 
       var url = $"{hostName}/sitecore/{eventHandler}{parameters}";
-      RequestUrl(url, userAgent, ip, dateTime.ToString("u"));
+      var fakeData = new ExmFakeData
+      {
+        UserAgent = userAgent,
+        RequestTime = dateTime,
+        GeoData = geoData
+      };
+      RequestUrl(url, fakeData);
     }
 
     
