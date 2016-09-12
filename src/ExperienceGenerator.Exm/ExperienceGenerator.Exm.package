@@ -90,16 +90,16 @@
         <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator</x-item>
         <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/dialogs</x-item>
         <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/dialogs/EmailCampaignEditor.js</x-item>
+        <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/CustomMultiSelectList.js</x-item>
         <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/DataRepository.js</x-item>
+        <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/ExmExperienceGenerator.css</x-item>
         <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/ExmGenerator.js</x-item>
         <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/JobManager.js</x-item>
         <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/uiUtils.js</x-item>
-        <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/ExmExperienceGenerator.css</x-item>
-        <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/CustomMultiSelectList.js</x-item>
       </Entries>
       <Converter>
         <FileToEntryConverter>
-          <Root />
+          <Root>/</Root>
           <Transforms>
             <InstallerConfigurationTransform>
               <Options>
