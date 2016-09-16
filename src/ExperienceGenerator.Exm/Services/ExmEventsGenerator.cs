@@ -50,53 +50,6 @@ namespace ExperienceGenerator.Exm.Services
       }
     }
 
-    //public static void RequestUrl(string url, string userAgent = null, string ip = null, string dateTime = null)
-    //{
-    //  Pool.Wait();
-
-    //  try
-    //  {
-    //    Don't use IDisposable HttpClient, seems to cause problems with threads
-    //    var client = new HttpClient();
-
-
-    //    if (userAgent != null)
-    //    {
-    //      client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", userAgent);
-    //    }
-    //    if (ip != null)
-    //    {
-    //      client.DefaultRequestHeaders.TryAddWithoutValidation("X-Forwarded-For", ip);
-    //    }
-
-    //    if (dateTime != null)
-    //    {
-    //      client.DefaultRequestHeaders.TryAddWithoutValidation("X-Exm-RequestTime", dateTime);
-    //    }
-
-    //    client.Timeout = TimeSpan.FromSeconds(120);
-
-    //    var res = client.PostAsync(url, new StringContent(string.Empty)).Result;
-    //    if (!res.IsSuccessStatusCode)
-    //    {
-    //      Errors++;
-    //    }
-    //  }
-    //  catch (TaskCanceledException)
-    //  {
-    //    Timeouts++;
-    //  }
-    //  catch (Exception ex)
-    //  {
-    //    Logger.Instance.LogError("ExmEventsGenerator error", ex);
-    //    Errors++;
-    //  }
-    //  finally
-    //  {
-    //    Pool.Release();
-    //  }
-    //}
-
     public static void RequestUrl(string url, ExmFakeData fakeData = null)
     {
       Pool.Wait();

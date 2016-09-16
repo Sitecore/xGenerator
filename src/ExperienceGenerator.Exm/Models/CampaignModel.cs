@@ -10,7 +10,7 @@
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
     public Funnel Events { get; set; }
-    public Dictionary<Guid, int> LandingPages { get; set; }
+    public Dictionary<string, double> LandingPages { get; set; }
     public Dictionary<int, int> Locations { get; set; }
   }
 }

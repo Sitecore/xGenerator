@@ -265,7 +265,6 @@
     <Compile Include="Services\ExmDataPreparationService.cs" />
     <Compile Include="Services\ExmEventsGenerator.cs" />
     <Compile Include="Services\ExmJobManager.cs" />
-    <Compile Include="Services\ExmLandingPageService.cs" />
     <Compile Include="Services\ExmListService.cs" />
     <Compile Include="Templates.cs" />
   </ItemGroup>

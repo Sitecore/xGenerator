@@ -16,10 +16,7 @@ using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 using Sitecore.EmailCampaign.Analytics.Model;
-using Sitecore.EmailCampaign.Server.Contexts;
-using Sitecore.EmailCampaign.Server.Controllers.Dispatch;
-using Sitecore.EmailCampaign.Server.Controllers.Message;
-using Sitecore.EmailCampaign.Server.Responses;
+using Sitecore.Links;
 using Sitecore.Modules.EmailCampaign;
 using Sitecore.Modules.EmailCampaign.Core;
 using Sitecore.Modules.EmailCampaign.Core.Gateways;
@@ -46,23 +43,9 @@ namespace ExperienceGenerator.Exm.Services
     private readonly List<Guid> _unsubscribeFromAllContacts = new List<Guid>();
     private readonly Func<string> _userAgent;
     private readonly ExmContactService _contactService;
-    private readonly ExmLandingPageService _landingPageService;
     private readonly ExmListService _listService;
     private readonly Func<WhoIsInformation> _geoData;
-
-    //private readonly Func<string> _ip = new[]
-    //{
-    //  //Denmark
-    //  "194.255.38.57",
-    //  //USA
-    //  "204.15.21.186",
-    //  //Netherlands
-    //  "94.169.168.18",
-    //  //Japan
-    //  "202.246.252.97",
-    //  //Canada
-    //  "192.206.151.131"
-    //}.Uniform();
+    private readonly Func<string> _goalId;
 
     private ManagerRoot _managerRoot;
     private readonly Func<int> _eventDay;
@@ -75,7 +58,6 @@ namespace ExperienceGenerator.Exm.Services
       _campaignDefinition = campaignDefinition;
       _exmCampaignId = exmCampaignId;
       _contactService = new ExmContactService(specification);
-      _landingPageService = new ExmLandingPageService(campaignDefinition.LandingPages);
       _listService = new ExmListService(specification);
 
       var devices = new DeviceRepository().GetAll().ToDictionary(ga => ga.Id, ga => ga.UserAgent);
@@ -84,13 +66,14 @@ namespace ExperienceGenerator.Exm.Services
       var geoData = GetGeoData(campaignDefinition.Locations);
       _geoData = geoData.Select(x => x.WhoIs).Weighted(geoData.Select(x => x.Weight).ToArray());
       _eventDay = campaignDefinition.DayDistribution.Select(x => x / 100d).WeightedInts();
+      _goalId = campaignDefinition.LandingPages.Keys.Weighted(campaignDefinition.LandingPages.Values.Select(x=>x/100).ToArray());
     }
 
     private List<ExmGeoData> GetGeoData(Dictionary<int, int> weightedIDs)
     {
       return weightedIDs.Select(weightedId => new ExmGeoData()
       {
-        Weight = weightedId.Value, WhoIs = GeoRegion.RandomCountryForSubRegion(weightedId.Key)
+        Weight = weightedId.Value / 100.0, WhoIs = GeoRegion.RandomCountryForSubRegion(weightedId.Key)
       }).ToList();
     }
 
@@ -109,10 +92,6 @@ namespace ExperienceGenerator.Exm.Services
 
           _specification.Job.Status = "Cleanup...";
           Cleanup();
-
-          _specification.Job.Status = "Creating goals...";
-          //TODO-To Implement
-          //this._goalService.CreateGoals();
 
           _specification.Job.Status = "Smart Publish...";
           PublishSmart();
@@ -198,12 +177,6 @@ namespace ExperienceGenerator.Exm.Services
 
       var excludedRecipientsListIDs = emailMessage.Fields["Excluded Recipient Lists"].Value.Split('|').ToList();
 
-      //var engagementPlan = _db.SelectItems("/sitecore/system/Marketing Control Panel/Engagement Plans/Email Campaign/Emails//*").FirstOrDefault(x => x.ID.ToString() == emailMessage.Fields["Engagement Plan"].Value);
-      //engagementPlan?.Delete();
-
-      //var campaign = _db.SelectItems("/sitecore/system/Marketing Control Panel/Campaigns/Emails//*").FirstOrDefault(x => x.ID.ToString() == emailMessage.Fields["Campaign"].Value);
-      //campaign?.Delete();
-
       var serviceMessages = _db.SelectItems("/sitecore/content/Email Campaign/Messages/Service Messages//*[@@templatename='HTML Message']");
       foreach (var serviceMessage in serviceMessages)
       {
@@ -277,10 +250,20 @@ namespace ExperienceGenerator.Exm.Services
           {
             if (_random.NextDouble() < funnelDefinition.ClickRate / 100d)
             {
-              // Much less likely to complain if they were interested enough to click the link.
               spamPercentage = Math.Min(spamPercentage, 0.01);
 
-              var link = _landingPageService.GetLandingPage();
+              var link = "/";
+              var goal = _goalId();
+              ID goalId;
+              if (ID.TryParse(goal, out goalId) && !ID.IsNullOrEmpty(goalId))
+              {
+                var goalItem = _db.GetItem(goalId);
+                if (goalItem != null)
+                {
+                  link = LinkManager.GetItemUrl(goalItem);
+                }
+              }
+
 
               ExmEventsGenerator.GenerateHandlerEvent(_managerRoot.Settings.BaseURL, contact.ContactId, email,
                 ExmEvents.Click, eventDate, userAgent, geoData, link);
@@ -346,27 +329,8 @@ namespace ExperienceGenerator.Exm.Services
       var dateMessageSent = _campaignDefinition.StartDate;
       var dateMessageFinished = _campaignDefinition.EndDate;
 
-      //_specification.Job.Status = "Dispatching email...";
-      //var dispatchController = new DispatchController();
-      //dispatchController.Dispatch(new DispatchRequestContext
-      //{
-      //  AbTest = new ABTestContext(),
-      //  Schedule = new ScheduleContext(),
-      //  RecurringSchedule = new RecurringScheduleContext(),
-      //  EmulationMode = false,
-      //  Language = "en",
-      //  MessageId = messageItem.ID,
-      //  MultiLanguageEnabled = false,
-      //  NotificationEmail = null,
-      //  UseNotificationEmail = false,
-      //  UsePreferredLanguage = false
-      //});
+     _specification.Job.Status = "Adjusting email stats...";
 
-      //WaitUntilSent(messageItem.ID);
-
-      _specification.Job.Status = "Adjusting email stats...";
-
-      //AdjustEmailStats(messageItem, dateMessageSent, dateMessageFinished, contactsForThisEmail.Count);
       AdjustEmailStatsWithRetry(messageItem, sendingProcessData, dateMessageSent, dateMessageFinished, 30);
 
       PublishEmail(messageItem, sendingProcessData);
@@ -386,7 +350,6 @@ namespace ExperienceGenerator.Exm.Services
         }
       }
 
-      //messageItem.Source.State = MessageState.Sent;
       GenerateEvents(messageItem, _campaignDefinition.Events, contactsForThisEmail);
     }
 
@@ -473,47 +436,7 @@ namespace ExperienceGenerator.Exm.Services
       return contactsForThisEmail;
     }
 
-    private void WaitUntilSent(string messageId)
-    {
-      _specification.Job.Status = "Waiting until email sent...";
-
-      while (true)
-      {
-        var messageController = new MessageController();
-        var messageResponse = (MessageResponse)messageController.Message(new MessageContext
-        {
-          Language = "en",
-          MessageId = messageId
-        });
-
-        var messageState = (MessageState)messageResponse.Message.MessageState;
-        if (messageState == MessageState.Sent)
-        {
-          return;
-        }
-
-        Thread.Sleep(1000);
-      }
-    }
-
-    //private void AdjustEmailStats(MessageItem messageItem, DateTime dateMessageSent, DateTime dateMessageFinished, int numContactsForThisEmail)
-    //{
-    //  messageItem.Source.StartTime = dateMessageSent;
-    //  messageItem.Source.EndTime = dateMessageFinished;
-
-    //  var innerItem = messageItem.InnerItem;
-    //  using (new EditContext(innerItem))
-    //  {
-    //    innerItem.RuntimeSettings.ReadOnlyStatistics = true;
-    //    innerItem[FieldIDs.Updated] = DateUtil.ToIsoDate(dateMessageSent);
-    //  }
-
-    //  // Updates the totalRecipients and endTime in the EmailCampaign collection.
-    //  EcmFactory.GetDefaultFactory()
-    //      .Gateways.EcmDataGateway.SetMessageStatisticData(messageItem.CampaignId.ToGuid(), dateMessageSent,
-    //          dateMessageFinished, FieldUpdate.Set(numContactsForThisEmail));
-    //}
-
+    
     private void AdjustEmailStats(MessageItem messageItem, SendingProcessData sendingProcessData,
       DateTime dateMessageSent, DateTime dateMessageFinished)
     {
@@ -540,7 +463,6 @@ namespace ExperienceGenerator.Exm.Services
         campaignItem["EndDate"] = DateUtil.ToIsoDate(dateMessageFinished);
       }
 
-      // Updates the totalRecipients and endTime in the EmailCampaign collection.
       EcmFactory.GetDefaultFactory()
         .Gateways.EcmDataGateway.SetMessageStatisticData(messageItem.CampaignId.ToGuid(), dateMessageSent,
           dateMessageFinished, FieldUpdate.Set(messageItem.SubscribersIds.Value.Count));
