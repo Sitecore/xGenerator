@@ -85,7 +85,7 @@
     </xitems>
     <xfiles>
       <Entries>
-        <x-item>/App_Config/Include/ExperienceGenerator/ExperienceGenerator.Exm.config</x-item>
+        <x-item>/App_Config/Include/Z.ExperienceGenerator/ExperienceGenerator.Exm.config</x-item>
         <x-item>/bin/ExperienceGenerator.Exm.dll</x-item>
         <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator</x-item>
         <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/dialogs</x-item>
