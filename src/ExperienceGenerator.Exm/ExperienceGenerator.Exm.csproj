@@ -230,7 +230,7 @@
     <Content Include="sitecore\shell\client\Applications\ExmExperienceGenerator\uiUtils.js" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Config\Include\ExperienceGenerator\ExperienceGenerator.Exm.config">
+    <Content Include="App_Config\Include\Z.ExperienceGenerator\ExperienceGenerator.Exm.config">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="ExperienceGenerator.Exm.package">
