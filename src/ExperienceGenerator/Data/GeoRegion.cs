@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Sitecore.Analytics.Model;
+using Sitecore.Shell.Framework.Commands.Preferences;
 
 namespace ExperienceGenerator.Data
 {
@@ -16,6 +17,7 @@ namespace ExperienceGenerator.Data
 
     public Func<GeoData, Func<City>> Selector { get; set; }
 
+    private static readonly Random Random = new Random();
 
     public static IEnumerable<GeoRegion> Regions
     {
@@ -73,8 +75,9 @@ namespace ExperienceGenerator.Data
           AreaCode = x[8],
           Country = x[1],
           Region = x[1]
-        });
-      return regions.FirstOrDefault(y=> Convert.ToInt32(y.AreaCode) == subRegionId);
+        }).ToList();
+      var macthingRegions = regions.Where(x => Convert.ToInt32(x.AreaCode) == subRegionId).ToList();
+      return macthingRegions[Random.Next(macthingRegions.Count - 1)];
     }
   }
 }

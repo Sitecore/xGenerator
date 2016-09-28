@@ -66,7 +66,10 @@ namespace ExperienceGenerator.Exm.Services
       var geoData = GetGeoData(campaignDefinition.Locations);
       _geoData = geoData.Select(x => x.WhoIs).Weighted(geoData.Select(x => x.Weight).ToArray());
       _eventDay = campaignDefinition.DayDistribution.Select(x => x / 100d).WeightedInts();
-      _goalId = campaignDefinition.LandingPages.Keys.Weighted(campaignDefinition.LandingPages.Values.Select(x=>x/100).ToArray());
+      if (campaignDefinition.LandingPages.Count > 0)
+      {
+        _goalId = campaignDefinition.LandingPages.Keys.Weighted(campaignDefinition.LandingPages.Values.Select(x => x / 100).ToArray());
+      }  
     }
 
     private List<ExmGeoData> GetGeoData(Dictionary<int, int> weightedIDs)
@@ -253,18 +256,20 @@ namespace ExperienceGenerator.Exm.Services
               spamPercentage = Math.Min(spamPercentage, 0.01);
 
               var link = "/";
-              var goal = _goalId();
-              ID goalId;
-              if (ID.TryParse(goal, out goalId) && !ID.IsNullOrEmpty(goalId))
+              if (_goalId != null)
               {
-                var goalItem = _db.GetItem(goalId);
-                if (goalItem != null)
+                var goal = _goalId();
+                ID goalId;
+                if (ID.TryParse(goal, out goalId) && !ID.IsNullOrEmpty(goalId))
                 {
-                  link = LinkManager.GetItemUrl(goalItem);
+                  var goalItem = _db.GetItem(goalId);
+                  if (goalItem != null)
+                  {
+                    link = LinkManager.GetItemUrl(goalItem);
+                  }
                 }
               }
-
-
+              
               ExmEventsGenerator.GenerateHandlerEvent(_managerRoot.Settings.BaseURL, contact.ContactId, email,
                 ExmEvents.Click, eventDate, userAgent, geoData, link);
               eventDate = eventDate.AddSeconds(_random.Next(10, 300));
