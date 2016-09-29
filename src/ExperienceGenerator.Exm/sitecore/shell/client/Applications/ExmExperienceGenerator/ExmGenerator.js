@@ -14,7 +14,6 @@
 
       this.SentCampaignsList.on("change:selectedItem", function (list, selectedItem) {
         if (!selectedItem) return;
-
         this.campaignEditor.showDialog(this.generatorData[selectedItem.get("itemId")]);
       }, this);
     },
@@ -36,7 +35,6 @@
     loadPreset: function () {
       var self = this;
       var selectedItem = this.ExmPresetList.attributes.selectedItemId;
-      console.log(selectedItem);
       var url = "/api/xgen/exmactions/settingspreset?id=" + selectedItem;
       $.ajax({
         url: url,
@@ -52,7 +50,6 @@
     save: function () {
       var self = this;
       var name = this.PresetName.attributes.text;
-      console.log(name);
       if (name == "") {
         alert("Please enter preset name.");
       } else {
@@ -61,7 +58,6 @@
           if (!overwrite) return;
         }
         this.data = { spec: ko.toJS(this.generatorData), name: name, force: true };
-        console.log(this.data);
 
         this.data = JSON.stringify(this.data);
         $.ajax({
@@ -145,9 +141,7 @@
         url: "/api/xgen/exmjobs/" + jobId,
         type: "GET"
       }).done(function (data) {
-        console.log(data.Status);
-        console.log(data.JobStatus);
-        console.log(data);
+        
         self.ProgressBar.set("value", data.Progress * 100);
         self.CampaignCountText.set("text", data.CampaignCountLabel);
         self.StatusText.set("text", data.Status);

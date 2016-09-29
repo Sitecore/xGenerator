@@ -79,7 +79,6 @@
           locations: uiUtils.parseSlidersContainer(this.LocationsExpander.viewModel.$el),
           landingPages: uiUtils.parseSlidersContainer(this.LandingPagesListExpander.viewModel.$el)
         };
-
         return data;
       },
 
@@ -100,20 +99,21 @@
             distributionControls.push(this[idx]);
           }
         }
-
         var sortedControls = _.sortBy(distributionControls, function (item) { return item.get("name") });
-        return _.map(sortedControls, function (item) { return item.get("text") });
+        return _.map(sortedControls, function (item) {
+          return item.get("selectedValue");
+        });
       },
       setDayDistribution: function (days) {
         for (var idx in days) {
-          this["TrafficDistribution" + idx].set("text", +days[idx]);
+          this["TrafficDistribution" + idx].set("selectedValue", +days[idx]);
         }
       },
 
       fillUI: function (editingParameters) {
         this.StartDate.viewModel.setDate(new Date(editingParameters.startDate));
         this.EndDate.viewModel.setDate(new Date(editingParameters.endDate));
-
+        //console.log(editingParameters.dayDistribution);
         this.setDayDistribution(editingParameters.dayDistribution);
 
         var events = editingParameters.events;

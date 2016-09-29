@@ -1,0 +1,123 @@
+﻿@using System.Globalization
+@using Newtonsoft.Json
+@using Sitecore
+@using Sitecore.Data
+@using Sitecore.Data.Items
+@using Sitecore.Mvc
+@using Sitecore.Mvc.Presentation
+@using Sitecore.Web.UI.Controls.Common.UserControls
+@using UserControl = Sitecore.Web.UI.Controls.Common.UserControls.UserControl
+@model RenderingModel
+@{
+  var userControl = this.Html.Sitecore().Controls().GetUserControl(this.Model.Rendering);
+  var cssClass = "sc-VerticalSlider";
+  userControl.Requires.Script("client", "VerticalSlider.js");
+  var minimum = userControl.GetDouble("Minimum", "minimum");
+  var maximum = userControl.GetDouble("Maximum", "maximum");
+  var step = userControl.GetDouble("Step", "step", 1);
+  var titleValuesStep = userControl.GetDouble("TitleValuesStep", "titleValuesStep", 1);
+  var selectedValue = userControl.GetString("SelectedValue", "selectedValue");
+  var selectedValueStart = userControl.GetString("SelectedValueStart", "selectedValueStart");
+  var selectedValueEnd = userControl.GetString("SelectedValueEnd", "selectedValueEnd");
+  var displayFieldName = userControl.GetString("DisplayFieldName", "displayFieldName");
+  var valueFieldName = userControl.GetString("ValueFieldName", "valueFieldName");
+  var value = userControl.GetString("Value", "value");
+  var type = userControl.GetString("Type", "type");
+  var isEnabled = userControl.GetBool("IsEnabled", "isEnabled", true);
+  var isVisible = userControl.GetBool("IsVisible", "isVisible", true);
+  var hideTooltip = userControl.GetBool("HideTooltip", "hideTooltip", false);
+
+  var isTitleBar = userControl.GetBool("IsTitleBar", "IsTitleBar", true);
+  var titleValueSuffix = userControl.GetString("TitleValueSuffix", "TitleValueSuffix");
+  var titleValueAffix = userControl.GetString("TitleValueAffix", "TitleValueAffix");
+
+  var items = GetItems(userControl, displayFieldName, valueFieldName);
+
+  userControl.Attributes["data-sc-step"] = step.ToString(CultureInfo.InvariantCulture);
+  userControl.Attributes["data-sc-titlevaluesstep"] = titleValuesStep.ToString(CultureInfo.InvariantCulture);
+  userControl.Attributes["data-sc-minimum"] = minimum.ToString(CultureInfo.InvariantCulture);
+  userControl.Attributes["data-sc-maximum"] = maximum.ToString(CultureInfo.InvariantCulture);
+  userControl.Attributes["data-sc-items"] = items;
+  userControl.Attributes["data-sc-displayfieldname"] = displayFieldName;
+  userControl.Attributes["data-sc-valuefieldname"] = valueFieldName;
+  userControl.Attributes["data-sc-value"] = value;
+  userControl.Attributes["data-sc-selectedvalue"] = selectedValue;
+  userControl.Attributes["data-sc-selectedvaluestart"] = selectedValueStart;
+  userControl.Attributes["data-sc-selectedvalueend"] = selectedValueEnd;
+  userControl.Attributes["data-sc-type"] = type;
+  userControl.Attributes["data-sc-isenabled"] = isEnabled.ToString().ToLowerInvariant();
+  userControl.Attributes["data-sc-isvisible"] = isVisible.ToString().ToLowerInvariant();
+
+  userControl.Attributes["data-sc-istitlebar"] = isTitleBar.ToString().ToLowerInvariant();
+  userControl.Attributes["data-sc-hidetooltip"] = hideTooltip.ToString().ToLowerInvariant();
+  userControl.Attributes["data-sc-titlevaluesuffix"] = titleValueSuffix;
+  userControl.Attributes["data-sc-titlevalueaffix"] = titleValueAffix;
+
+  userControl.DataBind = "enabled: isEnabled, visible: isVisible";
+
+  userControl.AppendClass(cssClass);
+  var htmlAttributes = userControl.HtmlAttributes;
+}
+
+@functions
+{
+  private static ID GetId([NotNull] UserControl userControl, [NotNull] string parameterName)
+  {
+      ID id;
+      return ID.TryParse(userControl.GetString(parameterName), out id) ? id : ID.Null;
+  }
+
+  /// <summary>
+  /// Gets the items.
+  /// </summary>
+  /// <param name="userControl">The user control.</param>
+  /// <param name="displayFieldName">Display name of the field.</param>
+  /// <param name="valueFieldName">Name of the value field.</param>
+  /// <returns>List of items.</returns>
+  private static string GetItems([NotNull] UserControl userControl, [CanBeNull] string displayFieldName, [CanBeNull] string valueFieldName)
+  {
+      var rootItem = ClientHost.Items.GetItem(GetId(userControl, "ItemsDataSource"));
+      if (rootItem == null)
+      {
+          return string.Empty;
+      }
+
+      var items = new List<dynamic>();
+
+      foreach (Item child in rootItem.Children)
+      {
+          if (child == null)
+          {
+              continue;
+          }
+          var itemName = string.IsNullOrEmpty(displayFieldName) ? child.DisplayName : child[displayFieldName];
+          var itemId = child.ID.ToString();
+          var value = string.IsNullOrEmpty(valueFieldName) ? child.ID.ToString() : child[valueFieldName];
+          var description = child["description"] ?? string.Empty;
+
+          var imageUrl = "";
+          if (child["imageUrl"] != null)
+          {
+              imageUrl = child["imageUrl"];
+          }
+
+          items.Add(new { itemId = itemId, itemName = itemName, value = value, imageUrl = imageUrl, description = description });
+      }
+
+      return JsonConvert.SerializeObject(items);
+  }
+}
+
+<div @htmlAttributes>
+
+    @{
+      if (isTitleBar)
+      {
+        <div class="titleBar"></div>
+      }
+    }
+    <input class="sliderControl"
+           type="text"
+           data-slider-orientation="vertical"
+           data-slider-tooltip="hide" style="display: none;">
+</div>

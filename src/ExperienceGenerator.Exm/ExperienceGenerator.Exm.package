@@ -42,6 +42,7 @@
         <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/EmailCampaignEditor/PageSettings/{D6CC328D-C7B2-4C87-A33D-EF0083FE3B32}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/EmailCampaignEditor/PageSettings/EmailCampaignEditor Parameters/{5222D4F9-7EE4-4D2C-B9D3-D6C6C184C222}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/EmailCampaignEditor/PageSettings/Tabs/{646E81F2-9C84-4D06-A409-7AA314D702BA}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/EmailCampaignEditor/PageSettings/VerticalSlider/{56AA26DD-F98D-48E1-80D4-1E139602E141}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/EmailCampaignEditor/PageSettings/Tabs/Overview/{0582868C-343A-4C89-838D-254855F43114}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/EmailCampaignEditor/PageSettings/Tabs/Devices/{73A0EDC4-C61D-4ED4-90B4-EC31FFB70A63}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/EmailCampaignEditor/PageSettings/Tabs/Locations/{733E5260-C41A-42E4-82F8-40F6E6E543D9}/invariant/0</x-item>
@@ -96,10 +97,16 @@
         <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/ExmGenerator.js</x-item>
         <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/JobManager.js</x-item>
         <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/uiUtils.js</x-item>
+        <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/VerticalSlider</x-item>
+        <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/VerticalSlider/bootstrap-slider.js</x-item>
+        <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/VerticalSlider/VerticalSlider.cshtml</x-item>
+        <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/VerticalSlider/VerticalSlider.css</x-item>
+        <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/VerticalSlider/VerticalSlider.js</x-item>
+        <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/VerticalSlider/VerticalSlider.test.js</x-item>
       </Entries>
       <Converter>
         <FileToEntryConverter>
-          <Root>/</Root>
+          <Root />
           <Transforms>
             <InstallerConfigurationTransform>
               <Options>
