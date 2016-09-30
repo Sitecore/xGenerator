@@ -1,0 +1,18 @@
+﻿---
+ID: "56aa26dd-f98d-48e1-80d4-1e139602e141"
+Parent: "d6cc328d-c7b2-4c87-a33d-ef0083fe3b32"
+Template: "99f8905d-4a87-4eb8-9f8b-a9bebfb3add6"
+Path: /sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/EmailCampaignEditor/PageSettings/VerticalSlider
+DB: core
+SharedFields:
+- ID: "3d08db46-2267-41b0-bc52-be69fd618633"
+  Hint: Cacheable
+  Type: Checkbox
+  Value: 0
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Value: "20160930T124140:636108361005346935Z"

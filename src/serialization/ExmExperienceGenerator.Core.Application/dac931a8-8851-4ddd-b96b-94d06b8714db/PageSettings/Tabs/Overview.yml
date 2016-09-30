@@ -29,13 +29,13 @@ SharedFields:
           uid="{DDBD8EBA-56AF-40C7-ACB3-7A27B3765FF5}" />
         <r
           id="{C4393722-39FA-4869-9582-3A8EB8983A0D}"
-          par="UsePadding=1&amp;Id=RowPanel2&amp;PaddingType=Left"
+          par="UsePadding=1&amp;Id=FirstRow&amp;PaddingType=Left"
           ph="OverviewExpander.Body"
           uid="{88EFC93C-1478-458E-8C81-7D96D980F3A9}" />
         <r
           id="{5CB208F6-1860-426B-8221-FAA85B329848}"
           par="Id=DatesCol&amp;GridColumns=4"
-          ph="RowPanel2.Content"
+          ph="FirstRow.Content"
           uid="{CEA1E341-E288-4D4C-826B-2741D1B5DE6C}" />
         <r
           id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
@@ -67,106 +67,18 @@ SharedFields:
           ph="DatesBorder.Content"
           uid="{72809B20-9343-4938-8CA1-0C1DC2F93BD3}" />
         <r
-          id="{5CB208F6-1860-426B-8221-FAA85B329848}"
-          par="Id=DailyCol&amp;GridColumns=4"
-          ph="RowPanel2.Content"
-          uid="{A61855A5-B0C5-4EFC-894F-A65598EA3061}" />
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=SlidersBorder&amp;PaddingType=Top&amp;UsePadding=1"
+          ph="DatesCol.Content"
+          uid="{F0F7CBD2-C861-4964-ADD2-96FBDE348D1F}" />
         <r
           id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
-          par="Id=DailyDistributionBorder&amp;PaddingType=Top&amp;UsePadding=1"
-          ph="DailyCol.Content"
-          uid="{37690544-0D03-4444-80B0-411422BF524B}" />
-        <r
-          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
-          par="Id=DailyText&amp;Text=Daily+distribution"
-          ph="DailyDistributionBorder.Content"
-          uid="{8479CE17-8DE6-43DF-9874-B8FB4045ACE6}" />
-        <r
-          ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
-          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
-          par="Type=range&amp;Id=TrafficDistribution0"
-          ph="DailyDistributionBorder.Content"
-          uid="{2E358888-95D4-4995-ABCD-A921B4A893D7}" />
-        <r
-          ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
-          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
-          par="Type=range&amp;Id=TrafficDistribution1"
-          ph="DailyDistributionBorder.Content"
-          uid="{D4E0F6BE-6C10-4EA0-8368-7FFAE2A6CA80}" />
-        <r
-          ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
-          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
-          par="Type=range&amp;Id=TrafficDistribution2"
-          ph="DailyDistributionBorder.Content"
-          uid="{0B81A4F2-00AE-465F-A010-AD6C9FDB4CA5}" />
-        <r
-          ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
-          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
-          par="Type=range&amp;Id=TrafficDistribution3"
-          ph="DailyDistributionBorder.Content"
-          uid="{073C191C-E15C-4C71-ABB2-27C8FAEDF27C}" />
-        <r
-          ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
-          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
-          par="Type=range&amp;Id=TrafficDistribution4"
-          ph="DailyDistributionBorder.Content"
-          uid="{9B5B9210-790B-417C-B754-BD08689CEF71}" />
-        <r
-          ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
-          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
-          par="Type=range&amp;Id=TrafficDistribution5"
-          ph="DailyDistributionBorder.Content"
-          uid="{3EE848FF-F10F-437D-B93C-30EE5CD1DCC0}" />
-        <r
-          id="{C4393722-39FA-4869-9582-3A8EB8983A0D}"
-          par="UsePadding=1&amp;Id=RowPanel3&amp;PaddingType=LeftBottom"
-          ph="OverviewExpander.Body"
-          uid="{56FA8F1E-7704-43B8-81C5-11C854F55FA2}" />
-        <r
-          id="{5CB208F6-1860-426B-8221-FAA85B329848}"
-          par="Id=UniqueOpenRate&amp;GridColumns=4"
-          ph="RowPanel3.Content"
-          uid="{2C04DFA3-F9B8-4771-AB14-80A300B667C1}" />
-        <r
-          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
-          par="Id=UniqueOpenRateBorder&amp;PaddingType=Top"
-          ph="UniqueOpenRate.Content"
-          uid="{24DFFA55-5596-49CC-99C7-CE8F30B0B3A0}" />
-        <r
-          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
-          par="Id=UniqueOpenRateText&amp;Text=Unique+Open+Rate"
-          ph="UniqueOpenRateBorder.Content"
-          uid="{15F54ED5-6C07-46AB-A308-5AE9840089A9}" />
-        <r
-          ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
-          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
-          par="Type=range&amp;Id=UniqueOpenRateDistribution"
-          ph="UniqueOpenRateBorder.Content"
-          uid="{BDA49151-1076-4C29-97CA-A8AA8CC23753}" />
-        <r
-          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
-          par="Id=UniqueClickRateBorder&amp;PaddingType=Top"
-          ph="UniqueOpenRate.Content"
-          uid="{93D6C5B1-272F-40CA-BDFC-1DB180C7C2B4}" />
-        <r
-          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
-          par="Id=UniqueClickRateText&amp;Text=Unique+Click+Rate"
-          ph="UniqueClickRateBorder.Content"
-          uid="{0A2DDE78-DB22-46FD-933C-60200554860D}" />
-        <r
-          ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
-          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
-          par="Type=range&amp;Id=UniqueClickRateDistribution"
-          ph="UniqueClickRateBorder.Content"
-          uid="{DDF6394B-610B-412D-9AF3-DFFDB5241313}" />
-        <r
-          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
-          par="Id=BouncedBorder&amp;PaddingType=Top"
-          ph="UniqueOpenRate.Content"
+          par="Id=BouncedBorder&amp;PaddingType=Top&amp;UsePadding=1"
+          ph="SlidersBorder.Content"
           uid="{40339463-99EF-4FB5-B51B-B8E4E28E6701}" />
         <r
           id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
-          par="Id=BouncedText&amp;Text=Bounced"
+          par="&amp;Id=BouncedText&amp;Text=Bounced"
           ph="BouncedBorder.Content"
           uid="{63350CFA-007E-4540-A946-83151378E3BB}" />
         <r
@@ -176,34 +88,113 @@ SharedFields:
           ph="BouncedBorder.Content"
           uid="{290C5864-121D-4D1D-8271-761518BF2B75}" />
         <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=UnsubscribedBorder&amp;PaddingType=Top&amp;UsePadding=1"
+          ph="SlidersBorder.Content"
+          uid="{93C748CD-58A9-4FD4-9576-5B3F4DA2B999}" />
+        <r
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
+          par="&amp;Id=UnsubscribedText&amp;Text=Unsubscribed"
+          ph="UnsubscribedBorder.Content"
+          uid="{255933D4-0AA4-45E4-8630-5AE0462C9913}" />
+        <r
+          ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
+          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
+          par="Type=range&amp;IsEnabled=1&amp;Id=UnsubscribedDistribution&amp;IsVisible=1"
+          ph="UnsubscribedBorder.Content"
+          uid="{CAA9CCB4-84E3-4778-B69B-AB749FCF86F7}" />
+        <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=SpamComplaintsBorder&amp;PaddingType=Top&amp;UsePadding=1"
+          ph="SlidersBorder.Content"
+          uid="{E0DA8381-E96D-4FC4-91A5-1CC91F9B9304}" />
+        <r
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
+          par="&amp;Id=SpamComplaintsText&amp;Text=Spam+Complaints"
+          ph="SpamComplaintsBorder.Content"
+          uid="{69AD4077-7C03-4BB3-AFAA-6EAA508B60DC}" />
+        <r
+          ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
+          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
+          par="Type=range&amp;IsEnabled=1&amp;Id=SpamComplaintsDistribution&amp;IsVisible=1"
+          ph="SpamComplaintsBorder.Content"
+          uid="{5B8090D9-D67F-44F7-9959-712C029D6F76}" />
+        <r
           id="{5CB208F6-1860-426B-8221-FAA85B329848}"
-          par="Id=OpenRate&amp;GridColumns=4"
-          ph="RowPanel3.Content"
-          uid="{F7EA76AB-3C41-4350-9B60-7B2D3BEB37AB}" />
+          par="Id=SentColumn&amp;GridColumns=4"
+          ph="FirstRow.Content"
+          uid="{7DACD46F-703C-4CDC-B0BE-CF5D7F77C2E1}" />
+        <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=TotalSentBorder&amp;PaddingType=Top&amp;UsePadding=1"
+          ph="SentColumn.Content"
+          uid="{0084DFA1-5BAB-4C55-8FFB-5D5D49B6DDCD}" />
+        <r
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
+          par="&amp;Id=TotalSentText&amp;Text=Total+Sent"
+          ph="TotalSentBorder.Content"
+          uid="{048D192D-62E5-46DE-8191-740C2ED04425}" />
+        <r
+          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
+          par="Type=text&amp;IsEnabled=1&amp;Id=TotalSent&amp;IsVisible=1"
+          ph="TotalSentBorder.Content"
+          uid="{18B49702-BC9A-49C2-8D89-C1C00C2EADC5}" />
+        <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=DeliveredBorder&amp;PaddingType=Top"
+          ph="SentColumn.Content"
+          uid="{7A04191B-57DA-4BF2-A72B-9BCDC72EB367}" />
+        <r
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
+          par="&amp;Id=DeliveredText&amp;Text=Delivered"
+          ph="DeliveredBorder.Content"
+          uid="{9DA32606-6C5F-47A6-ABC3-B0F78632DF8D}" />
+        <r
+          ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
+          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
+          par="Type=range&amp;IsEnabled=1&amp;Id=DeliveredDistribution&amp;IsVisible=1"
+          ph="DeliveredBorder.Content"
+          uid="{32A25141-20CC-4B26-8B81-C482E99563D4}" />
         <r
           id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
           par="Id=OpenRateBorder&amp;PaddingType=Top"
-          ph="OpenRate.Content"
+          ph="SentColumn.Content"
           uid="{60E45B7B-463C-478C-AFD0-43A3991C397E}" />
         <r
           id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
-          par="Id=OpenRateText&amp;Text=Open+Rate"
+          par="&amp;Id=OpenRateText&amp;Text=Open+Rate"
           ph="OpenRateBorder.Content"
           uid="{0D6D277E-C237-4280-92E3-CDCA08489A96}" />
         <r
           ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
           id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
-          par="Type=range&amp;Id=OpenRateDistribution"
+          par="Type=range&amp;IsEnabled=1&amp;Id=OpenRateDistribution&amp;IsVisible=1"
           ph="OpenRateBorder.Content"
           uid="{3219DB37-5654-4124-BF56-3B675F39DA5A}" />
         <r
           id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=UniqueOpenRateBorder&amp;PaddingType=Top"
+          ph="SentColumn.Content"
+          uid="{24DFFA55-5596-49CC-99C7-CE8F30B0B3A0}" />
+        <r
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
+          par="&amp;Id=UniqueOpenRateText&amp;Text=Unique+Open+Rate"
+          ph="UniqueOpenRateBorder.Content"
+          uid="{15F54ED5-6C07-46AB-A308-5AE9840089A9}" />
+        <r
+          ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
+          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
+          par="Type=range&amp;IsEnabled=1&amp;Id=UniqueOpenRateDistribution&amp;IsVisible=1"
+          ph="UniqueOpenRateBorder.Content"
+          uid="{BDA49151-1076-4C29-97CA-A8AA8CC23753}" />
+        <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
           par="Id=ClickRateBorder&amp;PaddingType=Top"
-          ph="OpenRate.Content"
+          ph="SentColumn.Content"
           uid="{72D77942-682A-4DF1-9808-317DBD6D61ED}" />
         <r
           id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
-          par="Id=ClickRateText&amp;Text=Click+Rate"
+          par="&amp;Id=ClickRateText&amp;Text=Click+Rate"
           ph="ClickRateBorder.Content"
           uid="{86F593CD-AED1-40F9-BBDE-70FDD7882E51}" />
         <r
@@ -214,72 +205,116 @@ SharedFields:
           uid="{AB86AD44-074E-4E5E-BE15-14B8ED1691FE}" />
         <r
           id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
-          par="Id=UnsubscribedBorder&amp;PaddingType=Top"
-          ph="OpenRate.Content"
-          uid="{93C748CD-58A9-4FD4-9576-5B3F4DA2B999}" />
+          par="Id=UniqueClickRateBorder&amp;PaddingType=Top"
+          ph="SentColumn.Content"
+          uid="{93D6C5B1-272F-40CA-BDFC-1DB180C7C2B4}" />
         <r
           id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
-          par="Id=UnsubscribedText&amp;Text=Unsubscribed"
-          ph="UnsubscribedBorder.Content"
-          uid="{255933D4-0AA4-45E4-8630-5AE0462C9913}" />
+          par="&amp;Id=UniqueClickRateText&amp;Text=Unique+Click+Rate"
+          ph="UniqueClickRateBorder.Content"
+          uid="{0A2DDE78-DB22-46FD-933C-60200554860D}" />
         <r
           ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
           id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
-          par="Type=range&amp;Id=UnsubscribedDistribution"
-          ph="UnsubscribedBorder.Content"
-          uid="{CAA9CCB4-84E3-4778-B69B-AB749FCF86F7}" />
+          par="Type=range&amp;IsEnabled=1&amp;Id=UniqueClickRateDistribution&amp;IsVisible=1"
+          ph="UniqueClickRateBorder.Content"
+          uid="{DDF6394B-610B-412D-9AF3-DFFDB5241313}" />
         <r
           id="{5CB208F6-1860-426B-8221-FAA85B329848}"
-          par="Id=SentColumn&amp;GridColumns=4"
-          ph="RowPanel3.Content"
-          uid="{7DACD46F-703C-4CDC-B0BE-CF5D7F77C2E1}" />
+          par="Id=DailyCol&amp;GridColumns=4"
+          ph="FirstRow.Content"
+          uid="{A61855A5-B0C5-4EFC-894F-A65598EA3061}" />
+        <r
+          id="{C4393722-39FA-4869-9582-3A8EB8983A0D}"
+          par="UsePadding=1&amp;Id=DailyTextRow&amp;PaddingType=Left"
+          ph="DailyCol.Content"
+          uid="{7E841C8E-CFB0-4AB5-9177-49AE29A9641D}" />
         <r
           id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
-          par="Id=TotalSentBorder&amp;PaddingType=Top"
-          ph="SentColumn.Content"
-          uid="{0084DFA1-5BAB-4C55-8FFB-5D5D49B6DDCD}" />
+          par="Id=DailyTextBorder&amp;PaddingType=Top&amp;UsePadding=1&amp;ShowBorder=0"
+          ph="DailyTextRow.Content"
+          uid="{7DCF9E80-8B76-4FCF-8385-1BCFBBCD7D7A}" />
         <r
           id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
-          par="Id=TotalSentText&amp;Text=Total+Sent"
-          ph="TotalSentBorder.Content"
-          uid="{048D192D-62E5-46DE-8191-740C2ED04425}" />
+          par="Id=DailyText&amp;Text=Daily+distribution"
+          ph="DailyTextBorder.Content"
+          uid="{8479CE17-8DE6-43DF-9874-B8FB4045ACE6}" />
         <r
-          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
-          par="Type=text&amp;Id=TotalSent"
-          ph="TotalSentBorder.Content"
-          uid="{18B49702-BC9A-49C2-8D89-C1C00C2EADC5}" />
+          id="{C4393722-39FA-4869-9582-3A8EB8983A0D}"
+          par="Id=TrafficDistributionRow"
+          ph="DailyCol.Content"
+          uid="{86C20D87-6F25-4EE3-979E-CFB228131451}" />
         <r
           id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
-          par="Id=DeliveredBorder&amp;PaddingType=Top"
-          ph="SentColumn.Content"
-          uid="{7A04191B-57DA-4BF2-A72B-9BCDC72EB367}" />
+          par="Id=TrafficBorder&amp;PaddingType=Top&amp;UsePadding=1"
+          ph="TrafficDistributionRow.Content"
+          uid="{AEAA0B47-F51B-4A0E-9913-6A1194B5C368}" />
         <r
-          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
-          par="Id=DeliveredText&amp;Text=Delivered"
-          ph="DeliveredBorder.Content"
-          uid="{9DA32606-6C5F-47A6-ABC3-B0F78632DF8D}" />
+          id="{5CB208F6-1860-426B-8221-FAA85B329848}"
+          par="Id=TrafficDistribution0Col&amp;GridColumns=1"
+          ph="TrafficBorder.Content"
+          uid="{76797453-2BED-4F36-B1E6-D019C1B1118E}" />
         <r
           ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
-          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
-          par="Type=range&amp;Id=DeliveredDistribution"
-          ph="DeliveredBorder.Content"
-          uid="{32A25141-20CC-4B26-8B81-C482E99563D4}" />
+          id="{56AA26DD-F98D-48E1-80D4-1E139602E141}"
+          par="Id=TrafficDistribution0"
+          ph="TrafficDistribution0Col.Content"
+          uid="{B4156858-B964-4547-95FB-27F8D7AB0E46}" />
         <r
-          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
-          par="Id=SpamComplaintsBorder&amp;PaddingType=Top"
-          ph="SentColumn.Content"
-          uid="{E0DA8381-E96D-4FC4-91A5-1CC91F9B9304}" />
-        <r
-          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
-          par="Id=SpamComplaintsText&amp;Text=Spam+Complaints"
-          ph="SpamComplaintsBorder.Content"
-          uid="{69AD4077-7C03-4BB3-AFAA-6EAA508B60DC}" />
+          id="{5CB208F6-1860-426B-8221-FAA85B329848}"
+          par="Id=TrafficDistribution1Col&amp;GridColumns=1"
+          ph="TrafficBorder.Content"
+          uid="{A017B722-7051-467F-AD00-D08EC35683EE}" />
         <r
           ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
-          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
-          par="Type=range&amp;Id=SpamComplaintsDistribution"
-          ph="SpamComplaintsBorder.Content"
-          uid="{5B8090D9-D67F-44F7-9959-712C029D6F76}" />
+          id="{56AA26DD-F98D-48E1-80D4-1E139602E141}"
+          par="Id=TrafficDistribution1"
+          ph="TrafficDistribution1Col.Content"
+          uid="{E34ABB71-FBAC-414A-9686-E7A37661B52A}" />
+        <r
+          id="{5CB208F6-1860-426B-8221-FAA85B329848}"
+          par="Id=TrafficDistribution2Col&amp;GridColumns=1"
+          ph="TrafficBorder.Content"
+          uid="{B5BF9487-2EB0-4B68-A45D-EE38A85CFF10}" />
+        <r
+          ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
+          id="{56AA26DD-F98D-48E1-80D4-1E139602E141}"
+          par="Id=TrafficDistribution2"
+          ph="TrafficDistribution2Col.Content"
+          uid="{B867AB27-5E63-4202-8675-29FB8FBF75E4}" />
+        <r
+          id="{5CB208F6-1860-426B-8221-FAA85B329848}"
+          par="Id=TrafficDistribution3Col&amp;GridColumns=1"
+          ph="TrafficBorder.Content"
+          uid="{4EF3B1BB-BAA6-48FD-8DD0-F1F2E39632FD}" />
+        <r
+          ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
+          id="{56AA26DD-F98D-48E1-80D4-1E139602E141}"
+          par="Id=TrafficDistribution3"
+          ph="TrafficDistribution3Col.Content"
+          uid="{0EABA54A-2B6E-472D-9BF9-48C16C616AF4}" />
+        <r
+          id="{5CB208F6-1860-426B-8221-FAA85B329848}"
+          par="Id=TrafficDistribution4Col&amp;GridColumns=1"
+          ph="TrafficBorder.Content"
+          uid="{02678D69-5D8F-48FF-B1DF-E699EDB4FC23}" />
+        <r
+          ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
+          id="{56AA26DD-F98D-48E1-80D4-1E139602E141}"
+          par="Id=TrafficDistribution4"
+          ph="TrafficDistribution4Col.Content"
+          uid="{93F6BB94-87FE-45E6-A425-6F05D8E4C8B8}" />
+        <r
+          id="{5CB208F6-1860-426B-8221-FAA85B329848}"
+          par="Id=TrafficDistribution5Col&amp;GridColumns=1"
+          ph="TrafficBorder.Content"
+          uid="{FF83A5C2-3B59-42DF-BD0D-53E47BD47D41}" />
+        <r
+          ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
+          id="{56AA26DD-F98D-48E1-80D4-1E139602E141}"
+          par="Id=TrafficDistribution5"
+          ph="TrafficDistribution5Col.Content"
+          uid="{E72E9AA2-6376-4BCB-9644-E6AAC8402943}" />
       </d>
     </r>
 Languages:
