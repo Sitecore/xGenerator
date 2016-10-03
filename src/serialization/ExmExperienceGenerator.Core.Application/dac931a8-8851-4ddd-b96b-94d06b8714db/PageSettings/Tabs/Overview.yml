@@ -251,7 +251,7 @@ SharedFields:
           uid="{AEAA0B47-F51B-4A0E-9913-6A1194B5C368}" />
         <r
           id="{5CB208F6-1860-426B-8221-FAA85B329848}"
-          par="Id=TrafficDistribution0Col&amp;GridColumns=1"
+          par="Id=TrafficDistribution0Col&amp;GridColumns=2"
           ph="TrafficBorder.Content"
           uid="{76797453-2BED-4F36-B1E6-D019C1B1118E}" />
         <r
@@ -262,7 +262,7 @@ SharedFields:
           uid="{B4156858-B964-4547-95FB-27F8D7AB0E46}" />
         <r
           id="{5CB208F6-1860-426B-8221-FAA85B329848}"
-          par="Id=TrafficDistribution1Col&amp;GridColumns=1"
+          par="Id=TrafficDistribution1Col&amp;GridColumns=2"
           ph="TrafficBorder.Content"
           uid="{A017B722-7051-467F-AD00-D08EC35683EE}" />
         <r
@@ -273,7 +273,7 @@ SharedFields:
           uid="{E34ABB71-FBAC-414A-9686-E7A37661B52A}" />
         <r
           id="{5CB208F6-1860-426B-8221-FAA85B329848}"
-          par="Id=TrafficDistribution2Col&amp;GridColumns=1"
+          par="Id=TrafficDistribution2Col&amp;GridColumns=2"
           ph="TrafficBorder.Content"
           uid="{B5BF9487-2EB0-4B68-A45D-EE38A85CFF10}" />
         <r
@@ -284,7 +284,7 @@ SharedFields:
           uid="{B867AB27-5E63-4202-8675-29FB8FBF75E4}" />
         <r
           id="{5CB208F6-1860-426B-8221-FAA85B329848}"
-          par="Id=TrafficDistribution3Col&amp;GridColumns=1"
+          par="Id=TrafficDistribution3Col&amp;GridColumns=2"
           ph="TrafficBorder.Content"
           uid="{4EF3B1BB-BAA6-48FD-8DD0-F1F2E39632FD}" />
         <r
@@ -295,7 +295,7 @@ SharedFields:
           uid="{0EABA54A-2B6E-472D-9BF9-48C16C616AF4}" />
         <r
           id="{5CB208F6-1860-426B-8221-FAA85B329848}"
-          par="Id=TrafficDistribution4Col&amp;GridColumns=1"
+          par="Id=TrafficDistribution4Col&amp;GridColumns=2"
           ph="TrafficBorder.Content"
           uid="{02678D69-5D8F-48FF-B1DF-E699EDB4FC23}" />
         <r
