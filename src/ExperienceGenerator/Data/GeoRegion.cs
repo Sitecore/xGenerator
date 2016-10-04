@@ -74,10 +74,23 @@ namespace ExperienceGenerator.Data
         {
           AreaCode = x[8],
           Country = x[1],
-          Region = x[1]
+          Region = x[1],
+          City= RandomCityForCountry(x[1])
         }).ToList();
       var macthingRegions = regions.Where(x => Convert.ToInt32(x.AreaCode) == subRegionId).ToList();
       return macthingRegions[Random.Next(macthingRegions.Count - 1)];
+    }
+
+    public static string RandomCityForCountry(string countryCode)
+    {
+     var cities = FileHelpers.ReadLinesFromResource<GeoData>("ExperienceGenerator.Data.cities15000.txt")
+          .Skip(1)
+          .Where(l => !l.StartsWith("#"))
+          .Select(l => City.FromCsv(l.Split('\t')))
+          .OrderBy(c => c.Population)
+          .ToList();
+      var matchingCities = cities.Where(x=> x.CountryCode == countryCode).ToList();
+      return matchingCities[Random.Next(matchingCities.Count - 1)].Name;
     }
   }
 }
