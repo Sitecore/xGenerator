@@ -90,7 +90,7 @@ namespace ExperienceGenerator.Data
           .OrderBy(c => c.Population)
           .ToList();
       var matchingCities = cities.Where(x=> x.CountryCode == countryCode).ToList();
-      return matchingCities[Random.Next(matchingCities.Count - 1)].Name;
+      return matchingCities.Any()? matchingCities[Random.Next(matchingCities.Count - 1)].Name:string.Empty;
     }
   }
 }
