@@ -61,7 +61,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Components\Sitecore.Analytics.dll</HintPath>
     </Reference>
-    <Reference Include="Sitecore.Analytics.Model, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Sitecore.Analytics.Model, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Components\Sitecore.Analytics.Model.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.FakeDb, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Sitecore.FakeDb.1.0.1\lib\net45\Sitecore.FakeDb.dll</HintPath>
       <Private>True</Private>

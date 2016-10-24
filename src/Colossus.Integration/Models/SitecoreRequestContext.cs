@@ -9,7 +9,7 @@
 
         public string ColossusHandlerUrl
         {
-            get { return this.TransformUrl("/sitecore/admin/colossus.ashx"); }
+            get { return this.TransformUrl("/colossus.ashx"); }
         }
 
         public SitecoreRequestContext(string sitecoreRootUri, Visitor visitor) : base(visitor)

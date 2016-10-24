@@ -1,1 +1,0 @@
-Copy the assemblies from Sitecore XP 8.0 to this folder.

@@ -13,5 +13,6 @@
     public List<SelectionOption> OrganicSearch { get; set; }
     public List<SelectionOption> PpcSearch { get; set; }
     public List<SelectionOptionGroup> OutcomeGroups { get; set; }
+    public bool TrackerIsEnabled { get; set; }
   }
 }
