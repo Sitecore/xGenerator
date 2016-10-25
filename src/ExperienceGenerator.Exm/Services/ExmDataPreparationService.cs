@@ -470,7 +470,10 @@ namespace ExperienceGenerator.Exm.Services
 
       EcmFactory.GetDefaultFactory()
         .Gateways.EcmDataGateway.SetMessageStatisticData(messageItem.CampaignId.ToGuid(), dateMessageSent,
-          dateMessageFinished, FieldUpdate.Set(messageItem.SubscribersIds.Value.Count));
+          dateMessageFinished, FieldUpdate.Set(messageItem.SubscribersIds.Value.Count), 
+          FieldUpdate.Set(messageItem.SubscribersIncludeCount.Value), 
+          FieldUpdate.Set(messageItem.SubscribersExcludeCount.Value),
+          FieldUpdate.Set(messageItem.SubscribersGlobalOptOutCount.Value));
     }
   }
 }

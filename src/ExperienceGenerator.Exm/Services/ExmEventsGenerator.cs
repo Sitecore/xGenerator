@@ -169,7 +169,7 @@ namespace ExperienceGenerator.Exm.Services
 
       if (link != null)
       {
-        queryStrings[MailLinks.UrlQueryKey] = link;
+        queryStrings[LinksManager.UrlQueryKey] = link;
       }
       return queryStrings;
     }
