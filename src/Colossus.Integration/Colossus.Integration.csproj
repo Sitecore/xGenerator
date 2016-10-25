@@ -145,7 +145,7 @@
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <Content Include="Colossus.ashx" />
-    <Content Include="web.config" />
+    <None Include="web.config" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
