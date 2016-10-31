@@ -69,13 +69,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Components\Sitecore.Analytics.dll</HintPath>
     </Reference>
-    <Reference Include="Sitecore.Analytics.Aggregation, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Components\Sitecore.Analytics.Aggregation.dll</HintPath>
+    <Reference Include="Sitecore.Analytics.Aggregation, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.Analytics.Aggregation.NoReferences.8.2.160729\lib\NET452\Sitecore.Analytics.Aggregation.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Sitecore.Analytics.Automation.Aggregation, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Components\Sitecore.Analytics.Automation.Aggregation.dll</HintPath>
+    <Reference Include="Sitecore.Analytics.Automation.Aggregation, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.Analytics.Automation.Aggregation.NoReferences.8.2.160729\lib\NET452\Sitecore.Analytics.Automation.Aggregation.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Sitecore.Analytics.Core, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -89,21 +89,21 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Components\Sitecore.Analytics.Model.dll</HintPath>
     </Reference>
-    <Reference Include="Sitecore.Analytics.MongoDB, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Components\Sitecore.Analytics.MongoDB.dll</HintPath>
+    <Reference Include="Sitecore.Analytics.MongoDB, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.Analytics.MongoDB.NoReferences.8.2.160729\lib\NET452\Sitecore.Analytics.MongoDB.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Sitecore.Analytics.Sql, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Components\Sitecore.Analytics.Sql.dll</HintPath>
+    <Reference Include="Sitecore.Analytics.Sql, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.Analytics.Sql.NoReferences.8.2.160729\lib\NET452\Sitecore.Analytics.Sql.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Sitecore.Cintel, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Components\Sitecore.Cintel.dll</HintPath>
+    <Reference Include="Sitecore.Cintel, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.Cintel.NoReferences.8.2.160729\lib\NET452\Sitecore.Cintel.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Sitecore.Cintel.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Components\Sitecore.Cintel.Client.dll</HintPath>
+    <Reference Include="Sitecore.Cintel.Client, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.Cintel.Client.NoReferences.8.2.160729\lib\NET452\Sitecore.Cintel.Client.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Sitecore.ContentSearch, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -115,50 +115,57 @@
     </Reference>
     <Reference Include="Sitecore.EDS.Core, Version=3.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Components\Sitecore.EDS.Core.dll</HintPath>
+      <HintPath>..\components\Sitecore.EDS.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Sitecore.EmailCampaign">
-      <HintPath>..\Components\Sitecore.EmailCampaign.dll</HintPath>
+    <Reference Include="Sitecore.EmailCampaign, Version=3.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\components\Sitecore.EmailCampaign.dll</HintPath>
     </Reference>
-    <Reference Include="Sitecore.EmailCampaign.Analytics.Model">
-      <HintPath>..\Components\Sitecore.EmailCampaign.Analytics.Model.dll</HintPath>
+    <Reference Include="Sitecore.EmailCampaign.Analytics.Model, Version=3.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\components\Sitecore.EmailCampaign.Analytics.Model.dll</HintPath>
     </Reference>
-    <Reference Include="Sitecore.EmailCampaign.Cm">
-      <HintPath>..\Components\Sitecore.EmailCampaign.Cm.dll</HintPath>
+    <Reference Include="Sitecore.EmailCampaign.Cm, Version=3.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\components\Sitecore.EmailCampaign.Cm.dll</HintPath>
     </Reference>
-    <Reference Include="Sitecore.EmailCampaign.ExperienceAnalytics">
-      <HintPath>..\Components\Sitecore.EmailCampaign.ExperienceAnalytics.dll</HintPath>
+    <Reference Include="Sitecore.EmailCampaign.Content">
+      <HintPath>..\components\Sitecore.EmailCampaign.Content.dll</HintPath>
     </Reference>
-    <Reference Include="Sitecore.EmailCampaign.Server">
-      <HintPath>..\Components\Sitecore.EmailCampaign.Server.dll</HintPath>
+    <Reference Include="Sitecore.EmailCampaign.ExperienceAnalytics, Version=3.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\components\Sitecore.EmailCampaign.ExperienceAnalytics.dll</HintPath>
     </Reference>
-    <Reference Include="Sitecore.ExM.Framework">
-      <HintPath>..\Components\Sitecore.ExM.Framework.dll</HintPath>
+    <Reference Include="Sitecore.ExM.Framework, Version=3.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.ExM.Framework.NoReferences.3.3.160527\lib\NET45\Sitecore.ExM.Framework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Sitecore.Kernel">
       <HintPath>..\Components\Sitecore.Kernel.dll</HintPath>
     </Reference>
-    <Reference Include="Sitecore.ListManagement, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Components\Sitecore.ListManagement.dll</HintPath>
+    <Reference Include="Sitecore.ListManagement, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.ListManagement.NoReferences.8.2.160729\lib\NET452\Sitecore.ListManagement.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Sitecore.ListManagement.ContentSearch, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Components\Sitecore.ListManagement.ContentSearch.dll</HintPath>
+    <Reference Include="Sitecore.ListManagement.ContentSearch, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.ListManagement.ContentSearch.NoReferences.8.2.160729\lib\NET452\Sitecore.ListManagement.ContentSearch.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Sitecore.ListManagement.Services, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Components\Sitecore.ListManagement.Services.dll</HintPath>
+    <Reference Include="Sitecore.ListManagement.Services, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.ListManagement.Services.NoReferences.8.2.160729\lib\NET452\Sitecore.ListManagement.Services.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Sitecore.Marketing, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Components\Sitecore.Marketing.dll</HintPath>
     </Reference>
-    <Reference Include="Sitecore.Services.Core">
-      <HintPath>..\Components\Sitecore.Services.Core.dll</HintPath>
+    <Reference Include="Sitecore.Services.Core, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.Services.Core.NoReferences.8.2.160729\lib\NET452\Sitecore.Services.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Sitecore.Services.Infrastructure">
-      <HintPath>..\Components\Sitecore.Services.Infrastructure.dll</HintPath>
+    <Reference Include="Sitecore.Services.Infrastructure, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.Services.Infrastructure.NoReferences.8.2.160729\lib\NET452\Sitecore.Services.Infrastructure.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
