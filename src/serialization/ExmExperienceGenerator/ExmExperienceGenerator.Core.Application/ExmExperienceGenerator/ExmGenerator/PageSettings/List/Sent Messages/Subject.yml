@@ -1,0 +1,35 @@
+﻿---
+ID: "18a2ecbe-9405-4df0-b2c6-2a4f256f8016"
+Parent: "f4e1fc60-f41c-4ff7-96f3-a393cacf1c56"
+Template: "d3cefe6e-e51b-4a84-b92e-aaf8aa8e8dc8"
+Path: /sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/List/Sent Messages/Subject
+DB: core
+SharedFields:
+- ID: "35e827ff-bb6c-4ed6-b79f-c41750ea5d46"
+  Hint: HTMLTemplate
+  Value: "{{subject}}"
+- ID: "b2a46ae4-38f9-4538-a2b3-8021083e0e40"
+  Hint: Sortable
+  Type: Checkbox
+  Value: 1
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 125
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20130408T114934
+    - ID: "2e9fd749-0f47-4397-8ba2-c56c65366bf0"
+      Hint: HeaderText
+      Value: Subject
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin
+    - ID: "75388012-d191-4561-8074-5340e149c0a5"
+      Hint: SortField
+      Value: subject
