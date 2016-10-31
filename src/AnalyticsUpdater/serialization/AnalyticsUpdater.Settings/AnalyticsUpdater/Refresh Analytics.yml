@@ -1,14 +1,14 @@
 ﻿---
-ID: ad488697-75a8-4245-b391-bd1809d5bf58
-Parent: db25db51-df03-401c-96f6-aeb3274a8474
-Template: a90f48c4-4d4f-41d7-8497-070a9a50304e
+ID: "ad488697-75a8-4245-b391-bd1809d5bf58"
+Parent: "db25db51-df03-401c-96f6-aeb3274a8474"
+Template: "a90f48c4-4d4f-41d7-8497-070a9a50304e"
 Path: /sitecore/system/Settings/AnalyticsUpdater/Refresh Analytics
 DB: master
 SharedFields:
-- ID: 72b1c86f-ae19-4534-abcf-0692378d41cf
+- ID: "72b1c86f-ae19-4534-abcf-0692378d41cf"
   Hint: Data Source
   Value: analytics
-- ID: a61cc636-3272-4fb6-bcf9-762940047a78
+- ID: "a61cc636-3272-4fb6-bcf9-762940047a78"
   Hint: Query
   Value: |
     function UpdateAnalyticsDateTime(days) {
@@ -70,9 +70,10 @@ Languages:
   Versions:
   - Version: 1
     Fields:
-    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20160303T153329Z
-    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
-      Value: sitecore\admin
+      Value: |
+        sitecore\admin

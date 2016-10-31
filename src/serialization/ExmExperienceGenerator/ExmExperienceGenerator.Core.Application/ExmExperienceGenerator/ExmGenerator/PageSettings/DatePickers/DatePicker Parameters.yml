@@ -1,0 +1,18 @@
+﻿---
+ID: "15762826-bd8d-4c6b-ae1d-19dcf8daf0b9"
+Parent: "ef512a36-365d-4c3a-8d23-80a7d09bfb92"
+Template: "a006af51-8c91-4229-a590-c7a853684249"
+Path: /sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/DatePickers/DatePicker Parameters
+DB: core
+SharedFields:
+- ID: "c37f3302-2d96-40f0-801a-21ed80a645d3"
+  Hint: ViewMode
+  Value: Textbox
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150505T114002Z

@@ -1,5 +1,5 @@
 ﻿<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <publishUrl>http://sc81u31</publishUrl>
+    <publishUrl>http://xgenerator.dev.local</publishUrl>
   </PropertyGroup>
 </Project>

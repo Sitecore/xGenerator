@@ -1,0 +1,131 @@
+
+.sc-tabcontrol .sc-text {
+  display: inline-block;
+  padding-top: 15px;
+}
+
+.small-slider-unit-label {
+  width: 33%;
+  float: left;
+}
+
+.small-slider-unit-slider {
+  width: 67%;
+  float: right;
+}
+
+.small-slider-unit {
+  height: 40px;
+}
+
+.large-slider-unit {
+  height: 40px;
+}
+
+.truncate {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.channel-sectionlabel {
+  font-weight: 700;
+  width: 20%;
+  float: left;
+  padding-top: 10px;
+  border-bottom: thin solid #8B8B8B;
+  height: 37px;
+}
+
+.channel-innerlabel {
+  width: 60%;
+  float: left;
+  padding-top: 10px;
+  height: 37px;
+  border-bottom: thin solid #8B8B8B;
+}
+
+.channel-slider {
+  width: 20%;
+  float: right;
+  border-bottom: thin solid #8B8B8B;
+  height: 37px;
+}
+
+.end-button-area {
+  width: 20%;
+  float: right;
+  border-bottom: thin solid #8B8B8B;
+  height: 37px;
+}
+
+.end-button {
+  float: inherit;
+}
+
+.landingpage-channel-slider {
+  width: 20%;
+  float: left;
+  border-bottom: thin solid #8B8B8B;
+  height: 37px;
+}
+
+
+input[type=range] {
+  -webkit-appearance: none;
+  border-style: none;
+  box-shadow: none;
+}
+
+  input[type=range]::-webkit-slider-runnable-track {
+    width: 300px;
+    height: 5px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+  }
+
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #338ae0;
+    margin-top: -4px;
+  }
+
+  input[type=range]:focus {
+    outline: none;
+  }
+
+    input[type=range]:focus::-webkit-slider-runnable-track {
+      background: #ccc;
+    }
+
+div[data-sc-id="InternalSearchTermsBorder"] table {
+  background: rgb(179, 179, 179) !important;
+}
+
+div[data-sc-id="ExternalSearchTermsBorder"] table {
+  background: rgb(179, 179, 179) !important;
+}
+
+div[data-sc-id="InternalSearchTermsBorder"] .sc-advancedExpander-header {
+  border-color: rgb(179, 179, 179) !important;
+}
+
+div[data-sc-id="ExternalSearchTermsBorder"] .sc-advancedExpander-header {
+  border-color: rgb(179, 179, 179) !important;
+}
+
+div[data-sc-id="SummaryRow"] {
+  background: white;
+}
+
+[data-sc-id=ImageContactPanel] img {
+  width: 100%;
+}
+
+.ui-datepicker { z-index: 9999 !important; }

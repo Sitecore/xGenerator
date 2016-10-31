@@ -34,13 +34,13 @@ namespace ExperienceGenerator.Data
 
             if (AdjustToTimeZone)
             {
-              if (target.Start.Kind != DateTimeKind.Local && target.End.Kind != DateTimeKind.Local)
-              {
+                target.Start = DateTime.SpecifyKind(target.Start, DateTimeKind.Utc);
+                target.End = DateTime.SpecifyKind(target.End, DateTimeKind.Utc);
+
                 target.Start = TimeZoneInfo.ConvertTimeFromUtc(target.Start, city.TimeZoneInfo);
                 target.End = TimeZoneInfo.ConvertTimeFromUtc(target.End, city.TimeZoneInfo);
               }
             }
-        }
 
         public override IEnumerable<string> ProvidedVariables
         {
@@ -52,6 +52,6 @@ namespace ExperienceGenerator.Data
                     "Currency", "TimeZone"
                 };
             }
-        }        
+        }
     }
 }
