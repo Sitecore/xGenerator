@@ -108,7 +108,7 @@ namespace ExperienceGenerator.Exm.Services
     
     public static async Task GenerateSpamComplaint(string hostName, ID contactId, ID messageId, string email, DateTime dateTime)
     {
-      var messageHandler = new SpamComplaintHandler(Sitecore.Configuration.Factory.CreateObject("exm/spamComplaintsTaskPool", true) as ShortRunningTaskPool);
+      var messageHandler = new SpamComplaintHandler(Sitecore.Configuration.Factory.CreateObject("exm/spamComplaintsTaskPool", true) as ShortRunningTaskPool, Sitecore.Configuration.Factory.CreateObject("exm/recipientListManagementTaskPool", true) as ShortRunningTaskPool);
 
       var spam = new Complaint
       {
@@ -169,7 +169,7 @@ namespace ExperienceGenerator.Exm.Services
 
       if (link != null)
       {
-        queryStrings[MailLinks.UrlQueryKey] = link;
+        queryStrings[LinksManager.UrlQueryKey] = link;
       }
       return queryStrings;
     }

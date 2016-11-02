@@ -1,0 +1,1 @@
+Place Sitecore assemblies here

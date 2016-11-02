@@ -1,6 +1,6 @@
 #Experience Generator
 
-Generate "realistically looking" traffic for Sitecore sites with configurable patterns, including:
+Generate "realistically looking" traffic for the Sitecore Experience Database (xDB) with configurable patterns, including:
 
  - Trends over time
  - Identified contacts with multiple visits
@@ -14,9 +14,11 @@ Generate "realistically looking" traffic for Sitecore sites with configurable pa
  - Campaigns
 
 For build instructions please refer to [Build Instructions.txt](src/Build instructions.txt)
+
 #Experience Profile Generator
 
-Generate visits for Sitecore Contact with configurable settings:
+Generate visits for Sitecore contacts (xProfile) with configurable settings:
+
  - Contact information
  - Visit pages
  - Recency
@@ -25,12 +27,8 @@ Generate visits for Sitecore Contact with configurable settings:
  - Goals
  - Channel
 
-
-
-
-
-
 #Solution structure:
+
 **ExperienceGenerator.Client** – SPEAK v1 applications to manipulate with configuration of created data. 
 Includes Experience generator and Experience Profile generator tools
 
@@ -63,3 +61,5 @@ Both walkers adds page event data if required from configuration.
 *	Variable Factories in XGenParser class that fill each request with variables based on configuration (device, date, duration, channel, campaign etc.) allow us setup new factory to fill new request variable
 *	Processors in Colossus.Integration library patches all requests with provided request variables.
 *	XGenParser – class that converts configuration to set of requests. Executes all request variable factories.
+
+THIS MODULE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT SUPPORT, WARRANTIES OR CONDITIONS OF ANY KIND.

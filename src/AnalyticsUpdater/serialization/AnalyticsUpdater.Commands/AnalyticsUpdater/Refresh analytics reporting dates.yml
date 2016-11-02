@@ -1,15 +1,15 @@
 ﻿---
-ID: 9186ad55-4f98-40d6-bd31-a46fedf38c74
-Parent: 3b4dca1b-34db-465a-9d3e-4b2cf833ff0f
-Template: bdb6fa46-2f76-4bde-8138-52b56c2fc47e
+ID: "9186ad55-4f98-40d6-bd31-a46fedf38c74"
+Parent: "3b4dca1b-34db-465a-9d3e-4b2cf833ff0f"
+Template: "bdb6fa46-2f76-4bde-8138-52b56c2fc47e"
 Path: /sitecore/content/Applications/Control Panel/AnalyticsUpdater/Refresh analytics reporting dates
 DB: core
-BranchID: c5f1aa82-f831-477e-ba04-11d435d476e4
+BranchID: "c5f1aa82-f831-477e-ba04-11d435d476e4"
 SharedFields:
-- ID: 20f47b0c-b146-4847-ac4d-0b25983514b3
+- ID: "20f47b0c-b146-4847-ac4d-0b25983514b3"
   Hint: Click
-  Value: demotools:refreshAnalytics
-- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Value: "demotools:refreshAnalytics"
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
   Hint: __Sortorder
   Value: 0
 Languages:
@@ -17,12 +17,13 @@ Languages:
   Versions:
   - Version: 1
     Fields:
-    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20160302T145644Z
-    - ID: 48323b75-9f6a-4779-ac8b-a01da56b35b3
+    - ID: "48323b75-9f6a-4779-ac8b-a01da56b35b3"
       Hint: Header
       Value: Refresh analytics reporting dates
-    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
-      Value: sitecore\admin
+      Value: |
+        sitecore\admin

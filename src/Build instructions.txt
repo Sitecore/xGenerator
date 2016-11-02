@@ -2,19 +2,10 @@ Copy the assemblies from Sitecore XP 8 to the "Components" folder in the solutio
 NuGet package restore is used for other dependencies
 
 Deployment to Sitecore install:
-Install the package from ExperienceGenerator.Client\ExperienceGenerator.zip to create the required items
-
-Copy ExperienceGenerator.Client\App_Config\* to the root of the installation
-Copy Colossus.Integration\App_Config\* to the root of the installation
-Copy all non-Sitecore assemblies from ExperienceGenerator.Client\bin to the bin folder of the installation (i.e. those not already there)
-
-
-To verify deployment, open /api/xgen/options. 
-If this is blank/gives an error try:
-1. Stop IIS
-2. Delete all folders in C:\Windows\Microsoft.NET\Framework64\v4.0.30319\Temporary ASP.NET Files\root
-3. Start IIS
-
+1)  Open "src\ExperienceGenerator.Client\App_Config\Include\ExperienceGenerator\zExperienceGenerator.DevSettings.config" and change "experienceGeneratorSource" variable to xGenerator source location
+2) Open "src\publishsettings.targets" and change publishUrl to the Sitecore host name
+3) Perform Web publish for all web projects in solution using "local" profile
+4) Go to the %isntanceName%/unicorn.aspx page and synchronize "ExperienceGenerator" configuration 
 
 Building the installation package requires Sitecore Rocks.
 The package definition is in ExperienceGenerator.Client\ExperienceGenerator.package. You need to point it to a Sitecore install with Experience Generator installed to build the package.

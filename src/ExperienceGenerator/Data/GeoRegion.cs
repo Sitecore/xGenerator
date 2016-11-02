@@ -19,6 +19,10 @@ namespace ExperienceGenerator.Data
 
     private static readonly Random Random = new Random();
 
+    private static IEnumerable<string> _allRegions;
+
+    private static IEnumerable<string> _allCities;
+
     public static IEnumerable<GeoRegion> Regions
     {
       get
@@ -67,17 +71,40 @@ namespace ExperienceGenerator.Data
 
     public static WhoIsInformation RandomCountryForSubRegion(int subRegionId)
     {
-      var regions = FileHelpers.ReadLinesFromResource<GeoRegion>("ExperienceGenerator.Data.Regions.txt")
+      if (_allRegions == null)
+      {
+        _allRegions = FileHelpers.ReadLinesFromResource<GeoRegion>("ExperienceGenerator.Data.Regions.txt");
+      }
+      //var macthingRegions = _allRegions.Where(x => x[0] != '#' && Convert.ToInt32(x[8]) == subRegionId).ToList();
+
+      var macthingRegions = _allRegions
         .Where(x => x[0] != '#')
-        .Select(x => x.Split('\t')).Where(x => !string.IsNullOrEmpty(x[5]) || !string.IsNullOrEmpty(x[6]))
+        .Select(x => x.Split('\t')).Where(x => (!string.IsNullOrEmpty(x[5]) || !string.IsNullOrEmpty(x[6])) && Convert.ToInt32(x[8]) == subRegionId)
         .Select(x => new WhoIsInformation()
         {
           AreaCode = x[8],
           Country = x[1],
-          Region = x[1]
+          Region = x[1],
+          City= RandomCityForCountry(x[1])
         }).ToList();
-      var macthingRegions = regions.Where(x => Convert.ToInt32(x.AreaCode) == subRegionId).ToList();
+      
       return macthingRegions[Random.Next(macthingRegions.Count - 1)];
+    }
+
+    public static string RandomCityForCountry(string countryCode)
+    {
+      if (_allCities == null)
+      {
+        _allCities = FileHelpers.ReadLinesFromResource<GeoData>("ExperienceGenerator.Data.cities15000.txt");
+      }
+      var matchingCities = _allCities
+          .Skip(1)
+          .Where(l => !l.StartsWith("#") && l[8].ToString() == countryCode)
+          .Select(l => City.FromCsv(l.Split('\t')))
+          .OrderBy(c => c.Population)
+          .ToList();
+      
+      return matchingCities.Any()? matchingCities[Random.Next(matchingCities.Count - 1)].Name:string.Empty;
     }
   }
 }
