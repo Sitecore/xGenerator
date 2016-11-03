@@ -23,10 +23,10 @@ BEGIN
 	DECLARE @languageId int
 	DECLARE @devicenameid int
 	DECLARE @duplicate int
-	DECLARE @views int
-	DECLARE @visits int
-	DECLARE @duration int
-	DECLARE @value int
+	DECLARE @views bigint
+	DECLARE @visits bigint
+	DECLARE @duration bigint
+	DECLARE @value bigint
 	
 	DECLARE fact_pvbylanguage CURSOR FOR
 	SELECT date, SiteNameId, ItemId, LanguageId, DeviceNameId,Views, Visits, Duration, Value from dbo.Fact_PageViewsByLanguage where date <= @lastUpdate
