@@ -116,7 +116,7 @@ SharedFields:
           uid="{4A90452E-2B38-4B1E-90B4-D8DE2E79E646}" />
         <r
           id="{327FD09D-41D6-4F15-8B18-611799364853}"
-          par="Id=MultiSelectList&amp;PageScriptFileName=%2fsitecore%2fshell%2fclient%2fSpeak%2fAssets%2flib%2fui%2f1.1%2fbehaviors%2fMultiSelectList.js&amp;Name=MultiSelectList"
+          par="Id=MultiSelectList&amp;PageScriptFileName=%2fsitecore%2fshell%2fclient%2fApplications%2fExmExperienceGenerator%2fCustomMultiSelectList.js&amp;Name=MultiSelectList"
           ph="CampaignsExpander.Body"
           uid="{2FEFD3C7-AA81-4AE7-904D-0C2A947F82C0}" />
         <r
@@ -160,7 +160,7 @@ SharedFields:
           id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
           par="Id=StatusText"
           ph="StatusTextBorder.Content"
-          uid="{B62DBAAC-AA82-4616-B751-B42FBC2481B7}" />
+          uid="{413BAE7D-2FB2-4CE2-B1A7-0A2D3085EB9A}" />
         <r
           id="{5CB208F6-1860-426B-8221-FAA85B329848}"
           par="Id=ColumnPanel2&amp;GridColumns=3"
