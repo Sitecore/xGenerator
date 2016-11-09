@@ -48,11 +48,11 @@ namespace ExperienceGenerator.Exm.Models
       {
         if (TargetEmails + TargetContacts + TargetEvents + TargetLists == 0) return 0d;
 
-        var contactsProgress = (double)CompletedContacts/(double)TargetContacts;
-        var emailsProgress = (double)CompletedEmails / (double)TargetEmails;
-        var eventsProgress = (double)CompletedEvents / (double)TargetEvents;
+        var contactsProgress = TargetContacts == 0 ? 1d : (double)CompletedContacts / (double)TargetContacts;
+        var emailsProgress = TargetEmails == 0 ? 1d : (double)CompletedEmails / (double)TargetEmails;
+        var eventsProgress = TargetEvents == 0 ? 1d : (double)CompletedEvents / (double)TargetEvents;
 
-        return (contactsProgress*0.1) + (emailsProgress*0.2) + (eventsProgress*0.7);
+        return (contactsProgress * 0.1) + (emailsProgress * 0.2) + (eventsProgress * 0.7);
 
       }
     }
