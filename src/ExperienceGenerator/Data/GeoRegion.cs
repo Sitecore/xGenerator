@@ -21,7 +21,7 @@ namespace ExperienceGenerator.Data
 
     private static IEnumerable<string> _allRegions;
 
-    private static IEnumerable<string> _allCities;
+    private static IList<City> _allCities;
 
     public static IEnumerable<GeoRegion> Regions
     {
@@ -93,17 +93,18 @@ namespace ExperienceGenerator.Data
 
     public static string RandomCityForCountry(string countryCode)
     {
-      if (_allCities == null)
+   if (_allCities == null)
       {
-        _allCities = FileHelpers.ReadLinesFromResource<GeoData>("ExperienceGenerator.Data.cities15000.txt");
+        _allCities = FileHelpers.ReadLinesFromResource<GeoData>("ExperienceGenerator.Data.cities15000.txt")
+         .Skip(1)
+         .Where(l => !l.StartsWith("#"))
+         .Select(l => City.FromCsv(l.Split('\t')))
+         .OrderBy(c => c.Population)
+         .ToList();
       }
-      var matchingCities = _allCities
-          .Skip(1)
-          .Where(l => !l.StartsWith("#") && l[8].ToString() == countryCode)
-          .Select(l => City.FromCsv(l.Split('\t')))
-          .OrderBy(c => c.Population)
-          .ToList();
-      
+
+      var matchingCities = _allCities.Where(x => x.CountryCode == countryCode).ToList();
+         
       return matchingCities.Any()? matchingCities[Random.Next(matchingCities.Count - 1)].Name:string.Empty;
     }
   }
