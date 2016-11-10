@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using ExperienceGenerator.Exm.Models;
+using Microsoft.Ajax.Utilities;
 using Sitecore.Analytics.Model.Entities;
 using Sitecore.Analytics.Tracking;
 using Sitecore.Configuration;
@@ -89,52 +90,35 @@ namespace ExperienceGenerator.Exm.Services
     }
 
 
-    public IEnumerable<ContactData> GetContacts(ContactList xaList)
+    public IEnumerable<ContactData> GetContacts(ContactList xaList, int expectedContacts)
     {
-      return ListManager.GetContacts(xaList).ToList();
-    }
-
-    internal void WaitUntilListsUnlocked()
-    {
-      bool hasUnlocked;
-
-      _specification.Job.Status = "Waiting for lists to unlock...";
-
-      var tries = 0;
-      do
+      var contacts = ListManager.GetContacts(xaList).ToList();
+      if (contacts.Count != 0)
       {
-        hasUnlocked = false;
-        tries++;
-
-        var lockedLists = new List<string>();
-        foreach (var list in ListManager.GetAll())
-        {
-          if (ListManager.IsLocked(list) || ListManager.IsInUse(list))
-          {
-            if (tries > _specification.ListUnlockedAttempts)
-            {
-              UnlockList(list);
-            }
-            else
-            {
-              hasUnlocked = true;
-              lockedLists.Add(list.Name);
-            }
-          }
-        }
-
-        if (hasUnlocked)
-        {
-          _specification.Job.Status = string.Format(
-              "Waiting for lists to unlock {0}/{1} ({2})...",
-              tries,
-              _specification.ListUnlockedAttempts,
-              string.Join(", ", lockedLists));
-          Thread.Sleep(1000);
-        }
-      } while (hasUnlocked);
+        WaitUntilListUnlocked(xaList);
+      }
+      return contacts;
     }
 
+    internal void WaitUntilListUnlocked(ContactList xaList)
+    {
+      var tries = 0;
+      while (tries <= _specification.ListUnlockedAttempts && !IsListReady(xaList))
+      {
+        tries++;
+        _specification.Job.Status = $"Waiting for list '{xaList.Name}' to unlock ({tries}/{_specification.ListUnlockedAttempts})";
+        Thread.Sleep(1000);
+      }
+      if (tries > _specification.ListUnlockedAttempts)
+      {
+        UnlockList(xaList);
+      }
+    }
+    private bool IsListReady(ContactList xaList)
+    {
+      return ListManager.GetAll().ToList().Any(x=>x.Id == xaList.Id) && !(ListManager.IsLocked(xaList) || ListManager.IsInUse(xaList));
+    }
+    
     private void UnlockList(ContactList list)
     {
       if (!ListManager.IsLocked(list) && !ListManager.IsInUse(list))

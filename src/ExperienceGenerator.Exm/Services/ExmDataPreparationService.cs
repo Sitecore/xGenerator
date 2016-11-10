@@ -144,9 +144,9 @@ namespace ExperienceGenerator.Exm.Services
         var addedContacts = _contactService.CreateContacts(contactsRequired);
         _specification.Job.Status = "Creating lists...";
         var addedList = _listService.CreateList("Auto List " + DateTime.Now.Ticks, addedContacts);
-        _listService.WaitUntilListsUnlocked();
+        _listService.WaitUntilListUnlocked(addedList);
         messageItem.RecipientManager.AddIncludedRecipientListId(ID.Parse(addedList.Id));
-        contactsForThisEmail.AddRange(_listService.GetContacts(addedList));
+        contactsForThisEmail.AddRange(_listService.GetContacts(addedList, contactsRequired));
       }
     }
 
@@ -175,12 +175,13 @@ namespace ExperienceGenerator.Exm.Services
 
     private void Cleanup()
     {
-      var emailMessage = _db.SelectItems("/sitecore/content/Email Campaign/Messages/" + DateTime.Now.Year + "//*")?.FirstOrDefault(x => x.ID.Guid == _exmCampaignId);
+      var emailMessage = _db.GetItem(new ID(_exmCampaignId));
       if (emailMessage == null) return;
 
       var excludedRecipientsListIDs = emailMessage.Fields["Excluded Recipient Lists"].Value.Split('|').ToList();
-
-      var serviceMessages = _db.SelectItems("/sitecore/content/Email Campaign/Messages/Service Messages//*[@@templatename='HTML Message']");
+      var pathParts = emailMessage.Paths.FullPath.Split(new[] { "/Messages"}, StringSplitOptions.None);
+      var partialPath = pathParts[0];
+      var serviceMessages = _db.SelectItems($"{partialPath}/Messages/Service Messages//*[@@templatename='HTML Message']");
       foreach (var serviceMessage in serviceMessages)
       {
         if (serviceMessage.Fields["Campaign"].Value != string.Empty)
