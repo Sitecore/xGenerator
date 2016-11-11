@@ -99,7 +99,8 @@ namespace ExperienceGenerator.Data
          .Skip(1)
          .Where(l => !l.StartsWith("#"))
          .Select(l => City.FromCsv(l.Split('\t')))
-         .OrderBy(c => c.Population)
+         .OrderByDescending(c => c.Population)
+         .Take(10)
          .ToList();
       }
 
