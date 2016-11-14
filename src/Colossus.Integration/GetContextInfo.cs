@@ -35,11 +35,11 @@
           }
         }
 
-        var info = SitecoreResponseInfo.FromContext();
-        if (info != null)
-        {
-          ctx.Response.Headers.AddChunked(DataEncoding.ResponseDataKey, DataEncoding.EncodeHeaderValue(info));
-        }
+        //var info = SitecoreResponseInfo.FromContext();
+        //if (info != null)
+        //{
+        //  ctx.Response.Headers.AddChunked(DataEncoding.ResponseDataKey, DataEncoding.EncodeHeaderValue(info));
+        //}
       }
     }
   }
