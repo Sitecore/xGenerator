@@ -100,11 +100,10 @@ namespace ExperienceGenerator.Data
          .Where(l => !l.StartsWith("#"))
          .Select(l => City.FromCsv(l.Split('\t')))
          .OrderByDescending(c => c.Population)
-         .Take(10)
          .ToList();
       }
 
-      var matchingCities = _allCities.Where(x => x.CountryCode == countryCode).ToList();
+      var matchingCities = _allCities.Where(x => x.CountryCode == countryCode).Take(10).ToList();
          
       return matchingCities.Any()? matchingCities[Random.Next(matchingCities.Count - 1)].Name:string.Empty;
     }
