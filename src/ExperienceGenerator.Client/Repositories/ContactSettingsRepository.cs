@@ -1,28 +1,26 @@
-﻿using Sitecore.ContentSearch.Utilities;
+﻿using Newtonsoft.Json.Linq;
+using Sitecore.Data;
+using Sitecore.Data.Items;
 
 namespace ExperienceGenerator.Client.Repositories
 {
-  using Newtonsoft.Json.Linq;
-  using Sitecore.Data;
-  using Sitecore.Data.Items;
-
-  public class ContactSettingsRepository : SettingsRepository
-  {
-    public ContactSettingsRepository() : base()
+    public class ContactSettingsRepository : SettingsRepository
     {
+        public ContactSettingsRepository()
+        {
+        }
 
-    }
-    public ContactSettingsRepository(Database database) : base(database)
-    {
+        public ContactSettingsRepository(Database database) : base(database)
+        {
+        }
 
+        private const string contactPresetsRootPath = "/sitecore/client/Applications/ExperienceGenerator/Common/Contacts";
+        protected override Item PresetsRoot => Database.GetItem(contactPresetsRootPath);
+
+        public JArray GetContactSettingPreset(ID id)
+        {
+            var preset = PresetsRoot.Axes.SelectSingleItem($"//*[@@id='{id}']");
+            return preset == null ? null : CreateArray(preset);
+        }
     }
-    private const string contactPresetsRootPath = "/sitecore/client/Applications/ExperienceGenerator/Common/Contacts";
-    protected override Item PresetsRoot => this.Database.GetItem(contactPresetsRootPath);
-    
-    public JArray GetContactSettingPreset(ID id)
-    {
-      var preset = this.PresetsRoot.Axes.SelectSingleItem($"//*[@@id='{id}']");
-      return preset == null ? null : this.CreateArray(preset);
-    }
-  }
 }
