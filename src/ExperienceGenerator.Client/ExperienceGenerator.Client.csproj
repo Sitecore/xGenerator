@@ -67,9 +67,8 @@
       <HintPath>..\packages\Rainbow.Storage.Yaml.1.4.0\lib\net452\Rainbow.Storage.Yaml.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Sitecore.Analytics, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\components\Sitecore.Analytics.dll</HintPath>
+    <Reference Include="Sitecore.Analytics">
+      <HintPath>..\packages\Sitecore.Analytics.NoReferences.8.2.160729\lib\NET452\Sitecore.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Analytics.Aggregation, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Sitecore.Analytics.Aggregation.NoReferences.8.2.160729\lib\NET452\Sitecore.Analytics.Aggregation.dll</HintPath>
@@ -83,13 +82,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Components\Sitecore.Analytics.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Sitecore.Analytics.DataAccess, Version=8.0.5138.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Components\Sitecore.Analytics.DataAccess.dll</HintPath>
-    </Reference>
-    <Reference Include="Sitecore.Analytics.Model, Version=8.0.5138.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Components\Sitecore.Analytics.Model.dll</HintPath>
+    <Reference Include="Sitecore.Analytics.DataAccess">
+      <HintPath>..\packages\Sitecore.Analytics.DataAccess.NoReferences.8.2.160729\lib\NET452\Sitecore.Analytics.DataAccess.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Analytics.MongoDB, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Sitecore.Analytics.MongoDB.NoReferences.8.2.160729\lib\NET452\Sitecore.Analytics.MongoDB.dll</HintPath>
@@ -99,21 +93,11 @@
       <HintPath>..\packages\Sitecore.Analytics.Sql.NoReferences.8.2.160729\lib\NET452\Sitecore.Analytics.Sql.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Sitecore.Cintel, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Components\Sitecore.Cintel.dll</HintPath>
+    <Reference Include="Sitecore.Cintel">
+      <HintPath>..\packages\Sitecore.Cintel.NoReferences.8.2.160729\lib\NET452\Sitecore.Cintel.dll</HintPath>
     </Reference>
-    <Reference Include="Sitecore.Cintel.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Components\Sitecore.Cintel.Client.dll</HintPath>
-    </Reference>
-    <Reference Include="Sitecore.ContentSearch, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Components\Sitecore.ContentSearch.dll</HintPath>
-    </Reference>
-    <Reference Include="Sitecore.ContentSearch.Analytics, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Components\Sitecore.ContentSearch.Analytics.dll</HintPath>
+    <Reference Include="Sitecore.ContentSearch">
+      <HintPath>..\packages\Sitecore.ContentSearch.NoReferences.8.2.160729\lib\NET452\Sitecore.ContentSearch.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.ContentSearch.Analytics.Client, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Sitecore.ContentSearch.Analytics.Client.NoReferences.8.2.160729\lib\NET452\Sitecore.ContentSearch.Analytics.Client.dll</HintPath>
@@ -125,10 +109,6 @@
     </Reference>
     <Reference Include="Sitecore.Kernel">
       <HintPath>..\Components\Sitecore.Kernel.dll</HintPath>
-    </Reference>
-    <Reference Include="Sitecore.Marketing, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Components\Sitecore.Marketing.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
