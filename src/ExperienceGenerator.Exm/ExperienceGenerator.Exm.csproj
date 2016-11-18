@@ -35,6 +35,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -260,27 +261,33 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ExmActionsController.cs" />
-    <Compile Include="Infrastructure\ExmPatchTracker.cs" />
+    <Compile Include="Infrastructure\LinqExtensions.cs" />
+    <Compile Include="Infrastructure\PatchTracker.cs" />
     <Compile Include="Infrastructure\PatchExmDateTimes.cs" />
+    <Compile Include="Infrastructure\ShortGuid.cs" />
     <Compile Include="Models\CampaignModel.cs" />
     <Compile Include="Controllers\ExmEventsController.cs" />
     <Compile Include="Controllers\ExperienceGeneratorExmJobsController.cs" />
-    <Compile Include="Models\ExmDataPreparationModel.cs" />
-    <Compile Include="Models\ExmFakeData.cs" />
-    <Compile Include="Models\ExmGeoData.cs" />
+    <Compile Include="Models\JobDefinition.cs" />
+    <Compile Include="Models\FakeData.cs" />
+    <Compile Include="Models\GeoData.cs" />
     <Compile Include="Models\Funnel.cs" />
     <Compile Include="Infrastructure\SitecoreRouteInitializer.cs" />
-    <Compile Include="Models\ExmJob.cs" />
+    <Compile Include="Models\Job.cs" />
     <Compile Include="Models\Preset.cs" />
     <Compile Include="Models\SelectionOption.cs" />
     <Compile Include="Models\SelectionOptionGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\SettingsRepository.cs" />
-    <Compile Include="Services\ExmContactService.cs" />
-    <Compile Include="Services\ExmDataPreparationService.cs" />
-    <Compile Include="Services\ExmEventsGenerator.cs" />
-    <Compile Include="Services\ExmJobManager.cs" />
-    <Compile Include="Services\ExmListService.cs" />
+    <Compile Include="Services\AdjustEmailStatsService.cs" />
+    <Compile Include="Repositories\ContactRepository.cs" />
+    <Compile Include="Services\CreateDataService.cs" />
+    <Compile Include="Services\EventType.cs" />
+    <Compile Include="Services\JobManager.cs" />
+    <Compile Include="Repositories\ContactListRepository.cs" />
+    <Compile Include="Services\GenerateEventService.cs" />
+    <Compile Include="Repositories\RandomizeEventService.cs" />
+    <Compile Include="Services\UnlockListService.cs" />
     <Compile Include="Templates.cs" />
   </ItemGroup>
   <ItemGroup>

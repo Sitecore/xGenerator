@@ -8,7 +8,7 @@
         public static void Register(HttpConfiguration config)
         {
 
-            ExmJobManager.Instance = new ExmJobManager();
+            JobManager.Instance = new JobManager();
 
             config.Routes.MapHttpRoute(
                 name: "ExperienceGeneratorExmJobsApi",

@@ -3,7 +3,7 @@ using Sitecore.Analytics.Model;
 
 namespace ExperienceGenerator.Exm.Models
 {
-    public class ExmFakeData
+    public class RequestHeaderInfo
     {
         public string UserAgent { get; set; }
 

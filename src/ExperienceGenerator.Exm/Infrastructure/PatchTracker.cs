@@ -10,7 +10,7 @@ using Sitecore.Analytics.Pipelines.InitializeTracker;
 
 namespace ExperienceGenerator.Exm.Infrastructure
 {
-	public class ExmPatchTracker : InitializeTrackerProcessor
+	public class PatchTracker : InitializeTrackerProcessor
 	{
 		public override void Process(InitializeTrackerArgs args)
 		{
@@ -34,7 +34,7 @@ namespace ExperienceGenerator.Exm.Infrastructure
 				return;
 			}
 
-			var fakeData = JsonConvert.DeserializeObject<ExmFakeData>(fakeDataJson);
+			var fakeData = JsonConvert.DeserializeObject<RequestHeaderInfo>(fakeDataJson);
 
 			if (!string.IsNullOrEmpty(fakeData.UserAgent))
 			{

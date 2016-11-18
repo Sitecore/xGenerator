@@ -2,7 +2,7 @@
 
 namespace ExperienceGenerator.Exm.Models
 {
-  public class ExmGeoData
+  public class GeoData
   {
     public double Weight { get; set; }
 
