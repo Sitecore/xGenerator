@@ -5,8 +5,10 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using ExperienceGenerator.Exm.Models;
+using ExperienceGenerator.Exm.Repositories;
 using Newtonsoft.Json;
 using Sitecore.Analytics.Model;
+using Sitecore.Common;
 using Sitecore.Data;
 using Sitecore.EDS.Core.Reporting;
 using Sitecore.EmailCampaign.Cm.Handlers;
@@ -23,7 +25,6 @@ namespace ExperienceGenerator.Exm.Services
 {
     public static class GenerateEventService
     {
-        public static SemaphoreSlim Pool;
         private static readonly IStringCipher Cipher;
 
         static GenerateEventService()
@@ -35,10 +36,8 @@ namespace ExperienceGenerator.Exm.Services
 
         public static int Timeouts { get; set; }
 
-        private static void RequestUrl(string url, RequestHeaderInfo requestHeaderInfo = null)
+        private static bool RequestUrl(string url, RequestHeaderInfo requestHeaderInfo = null)
         {
-            Pool.Wait();
-
             try
             {
                 // Don't use IDisposable HttpClient, seems to cause problems with threads
@@ -60,7 +59,8 @@ namespace ExperienceGenerator.Exm.Services
                 var res = client.PostAsync(url, new StringContent(string.Empty)).Result;
                 if (!res.IsSuccessStatusCode)
                 {
-                    Errors++;
+                    Sitecore.Diagnostics.Log.Warn($"Exm Generator request to \'{url}\' failed with '{res.StatusCode}'", res);
+                    return false;
                 }
             }
             catch (TaskCanceledException)
@@ -70,41 +70,40 @@ namespace ExperienceGenerator.Exm.Services
             catch (Exception ex)
             {
                 Logger.Instance.LogError("GenerateEventService error", ex);
+                return false;
+            }
+            return true;
+        }
+
+        public static void GenerateSent(string hostName, Guid contactId, MessageItem message, DateTime dateTime)
+        {
+            var url = $"{hostName}/api/xgen/exmevents/GenerateSent?contactId={contactId}&messageId={message.MessageId}&date={dateTime.ToString("u")}";
+            if (!RequestUrl(url))
                 Errors++;
-            }
-            finally
-            {
-                Pool.Release();
-            }
         }
 
-        public static void GenerateSent(string hostName, ID contactId, ID messageId, DateTime dateTime)
+        private static void GenerateBounce(string hostName, Guid contactId, MessageItem message, DateTime dateTime)
         {
-            var url = $"{hostName}/api/xgen/exmevents/GenerateSent?contactId={contactId}&messageId={messageId}&date={dateTime.ToString("u")}";
-            RequestUrl(url);
+            var url = $"{hostName}/api/xgen/exmevents/GenerateBounce?contactId={contactId}&messageId={message.MessageId}&date={dateTime.ToString("u")}";
+            if (!RequestUrl(url))
+                Errors++;
         }
 
-        public static void GenerateBounce(string hostName, ID contactId, ID messageId, DateTime dateTime)
-        {
-            var url = $"{hostName}/api/xgen/exmevents/GenerateBounce?contactId={contactId}&messageId={messageId}&date={dateTime.ToString("u")}";
-            RequestUrl(url);
-        }
-
-        public static async Task GenerateSpamComplaint(string hostName, ID contactId, ID messageId, string email, DateTime dateTime)
+        private static async void GenerateSpamComplaint(string hostName, Guid contactId, MessageItem message, DateTime dateTime)
         {
             var messageHandler = new SpamComplaintHandler(Factory.CreateObject("exm/spamComplaintsTaskPool", true) as ShortRunningTaskPool, Factory.CreateObject("exm/recipientListManagementTaskPool", true) as ShortRunningTaskPool);
 
             var spam = new Complaint
                        {
                            ContactId = Cipher.Encrypt(contactId.ToString()),
-                           EmailAddress = email,
-                           MessageId = Cipher.Encrypt(messageId.ToString())
+                           EmailAddress = message.To,
+                           MessageId = Cipher.Encrypt(message.MessageId.ToString())
                        };
 
             await messageHandler.HandleReportedMessages(new[] {spam});
         }
 
-        public static void GenerateHandlerEvent(string hostName, Guid userId, MessageItem messageItem, EventType eventType, DateTime dateTime, string userAgent = null, WhoIsInformation geoData = null, string link = null)
+        public static void GenerateHandlerEvent(string hostName, Guid contactId, MessageItem messageItem, EventType eventType, DateTime dateTime, string userAgent, WhoIsInformation geoData, string link)
         {
             string eventHandler;
             switch (eventType)
@@ -123,11 +122,17 @@ namespace ExperienceGenerator.Exm.Services
                 case EventType.Click:
                     eventHandler = "RedirectUrlPage.aspx";
                     break;
+                case EventType.Bounce:
+                    GenerateBounce(hostName, contactId, messageItem, dateTime);
+                    return;
+                case EventType.SpamComplaint:
+                    GenerateSpamComplaint(hostName, contactId, messageItem, dateTime);
+                    return;
                 default:
                     throw new InvalidEnumArgumentException("No such event in ExmEvents");
             }
 
-            var queryStrings = GetQueryParameters(userId, messageItem, link);
+            var queryStrings = GetQueryParameters(contactId, messageItem, link);
             var encryptedQueryString = QueryStringEncryption.GetDefaultInstance().Encrypt(queryStrings);
 
             var parameters = encryptedQueryString.ToQueryString(true);
@@ -139,7 +144,8 @@ namespace ExperienceGenerator.Exm.Services
                                RequestTime = dateTime,
                                GeoData = geoData
                            };
-            RequestUrl(url, fakeData);
+            if (!RequestUrl(url, fakeData))
+                Errors++;
         }
 
 
@@ -156,6 +162,23 @@ namespace ExperienceGenerator.Exm.Services
                 queryStrings[LinksManager.UrlQueryKey] = link;
             }
             return queryStrings;
+        }
+
+        public static void GenerateContactMessageEvents(Job job, MessageContactEvents events)
+        {
+            var startStatus = job.Status;
+            var messageItem = events.MessageItem;
+            var hostName = messageItem.ManagerRoot.Settings.BaseURL;
+            var whoIsInformation = events.GeoData;
+            var userAgent = events.UserAgent;
+            var landingPageUrl = events.LandingPageUrl;
+            var contactId = events.ContactId;
+
+            foreach (var messageEvent in events.Events)
+            {
+                job.Status = startStatus + $" - {messageEvent.EventType}";
+                GenerateHandlerEvent(hostName, contactId, messageItem, messageEvent.EventType, messageEvent.EventTime, userAgent, whoIsInformation, landingPageUrl);
+            }
         }
     }
 }

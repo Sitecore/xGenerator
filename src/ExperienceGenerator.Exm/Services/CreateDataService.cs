@@ -28,109 +28,56 @@ namespace ExperienceGenerator.Exm.Services
 {
     public class CreateDataService
     {
-        private const string ListManagerOwner = "xGenerator";
-
         private readonly RandomContactMessageEventsFactory _randomContactMessageEventsFactory;
 
-        private readonly CampaignModel _campaign;
+        private readonly CampaignSettings _campaign;
         private readonly Guid _exmCampaignId;
         private readonly List<Guid> _unsubscribeFromAllContacts = new List<Guid>();
-        private readonly ContactRepository _contactRepository;
         private readonly ContactListRepository _contactListRepository;
         private readonly AdjustEmailStatisticsService _adjustEmailStatisticsService;
-        private readonly Job _job;
 
-        public CreateDataService(Job job, Guid exmCampaignId, CampaignModel campaign)
+        public CreateDataService(Guid exmCampaignId, CampaignSettings campaign)
         {
-            _job = job;
             _campaign = campaign;
             _exmCampaignId = exmCampaignId;
-            _contactRepository = new ContactRepository(job);
-            _contactListRepository = new ContactListRepository(job);
+            _contactListRepository = new ContactListRepository();
             _adjustEmailStatisticsService = new AdjustEmailStatisticsService();
-            _randomContactMessageEventsFactory = new RandomContactMessageEventsFactory(_contactRepository, _campaign);
+            _randomContactMessageEventsFactory = new RandomContactMessageEventsFactory(_campaign);
         }
 
-        public void CreateData()
+        public void CreateData(Job job)
         {
-            using (new SiteContextSwitcher(SiteContext.GetSite("website")))
+            using (new SecurityDisabler())
             {
-                using (new SecurityDisabler())
-                {
-                    SetJobStatus("Get Message Item...");
-                    var messageItem = GetMessageItem(_exmCampaignId);
+                job.Status = "Get Message Item...";
+                var messageItem = GetMessageItem(_exmCampaignId);
 
-                    SetJobStatus("Cleanup...");
+                var siteContext = GetSiteContextForMessage(messageItem);
+                using (new SiteContextSwitcher(siteContext))
+                {
+                    job.Status = "Cleanup...";
                     Cleanup(messageItem);
 
-                    SetJobStatus("Smart Publish...");
-                    PublishSmart();
+                    job.Status = "Get Contacts For Message...";
+                    var contactsForMessage = GetMessageContacts(job, messageItem);
 
-                    SetJobStatus("Get Contacts For Message...");
-                    var contactsForMessage = GetMessageContacts(messageItem);
-
-                    SetJobStatus("Back-dating segments...");
+                    job.Status = "Back-dating segments...";
                     BackDateSegments();
 
-                    SetJobStatus("Creating emails...");
-                    SendCampaign(messageItem, contactsForMessage);
+                    job.Status = "Creating emails...";
+                    SendCampaign(job, messageItem, contactsForMessage);
                 }
             }
         }
 
-        private List<ContactData> GetMessageContacts(MessageItem messageItem)
+        private static SiteContext GetSiteContextForMessage(MessageItem messageItem)
         {
-            AssociateListToMessage(messageItem);
-            var contactsForMessage = GetExistingContactsForMessage(messageItem);
-
-            CreateContactsAndList(messageItem, contactsForMessage);
-            return contactsForMessage;
+            return SiteContext.GetSite(messageItem.ManagerRoot.Settings.WebsiteSiteConfigurationName);
         }
 
-        private void AssociateListToMessage(MessageItem messageItem)
+        private List<ContactData> GetMessageContacts(Job job, MessageItem messageItem)
         {
-            if (string.IsNullOrEmpty(_campaign.ContactList))
-                return;
-            ID contactListID;
-            if (!ID.TryParse(_campaign.ContactList, out contactListID) || ID.IsNullOrEmpty(contactListID))
-                return;
-            if (!_contactListRepository.Exists(contactListID))
-                return;
-            if (messageItem.RecipientManager.IncludedRecipientListIds.Contains(contactListID))
-                return;
-
-            messageItem.RecipientManager.AddIncludedRecipientListId(contactListID);
-        }
-
-        private List<ContactData> GetExistingContactsForMessage(MessageItem messageItem)
-        {
-            var contactsForThisEmail = _contactListRepository.GetContactsForEmail(messageItem.RecipientManager.IncludedRecipientListIds, _unsubscribeFromAllContacts);
-            _contactRepository.AddContacts(contactsForThisEmail);
-            return contactsForThisEmail;
-        }
-
-        private void SetJobStatus(string statusText)
-        {
-            _job.Status = statusText;
-        }
-
-        private void CreateContactsAndList(MessageItem messageItem, List<ContactData> contactsForMessage)
-        {
-            var contactsRequired = _campaign.Events.TotalSent - contactsForMessage.Count;
-            _job.TargetContacts = Math.Max(contactsRequired, 0);
-            _job.TargetEvents = Math.Max(_campaign.Events.TotalSent, contactsForMessage.Count);
-            _job.TargetEmails = _job.TargetEvents;
-            if (contactsRequired <= 0)
-                return;
-
-            SetJobStatus("Creating contacts");
-            var addedContacts = _contactRepository.CreateContacts(contactsRequired);
-
-            SetJobStatus("Creating lists...");
-            var addedList = _contactListRepository.CreateList("Auto List " + DateTime.Now.Ticks, addedContacts);
-
-            messageItem.RecipientManager.AddIncludedRecipientListId(ID.Parse(addedList.Id));
-            contactsForMessage.AddRange(_contactListRepository.GetContacts(addedList, contactsRequired));
+            return _contactListRepository.GetContacts(messageItem, _unsubscribeFromAllContacts);
         }
 
         private void BackDateSegments()
@@ -149,61 +96,28 @@ namespace ExperienceGenerator.Exm.Services
             CacheManager.ClearAllCaches();
         }
 
-        private void PublishSmart()
-        {
-            var targetDatabases = new[] {Factory.GetDatabase("web")};
-            Database masterDatabase = Factory.GetDatabase("master");
-            var languages = masterDatabase.Languages;
-            var handle = PublishManager.PublishSmart(masterDatabase, targetDatabases, languages);
-            var start = DateTime.Now;
-            while (!PublishManager.GetStatus(handle).IsDone)
-            {
-                if (DateTime.Now - start > TimeSpan.FromMinutes(1))
-                    break;
-            }
-        }
-
         private void Cleanup(MessageItem messageItem)
         {
-            var excludedRecipientsListIDs = messageItem.InnerItem.Fields["Excluded Recipient Lists"].Value.Split('|').ToList();
+            RemoveTrackingOnServiceMails(messageItem);
+        }
+
+        private static void RemoveTrackingOnServiceMails(MessageItem messageItem)
+        {
             var managerRootPath = messageItem.ManagerRoot.InnerItem.Paths.FullPath;
             var serviceMessages = messageItem.InnerItem.Database.SelectItems($"{managerRootPath}/Messages/Service Messages//*[@@templatename='HTML Message']");
             foreach (var serviceMessage in serviceMessages)
             {
-                if (serviceMessage.Fields["Campaign"].Value != string.Empty)
+                if (serviceMessage.Fields["Campaign"].Value == string.Empty)
+                    continue;
+                using (new EditContext(serviceMessage))
                 {
-                    using (new EditContext(serviceMessage))
-                    {
-                        serviceMessage.Fields["Campaign"].Value = string.Empty;
-                        serviceMessage.Fields["Engagement Plan"].Value = string.Empty;
-                    }
+                    serviceMessage.Fields["Campaign"].Value = string.Empty;
+                    serviceMessage.Fields["Engagement Plan"].Value = string.Empty;
                 }
-            }
-
-            var lists = messageItem.InnerItem.Database.SelectItems("/sitecore/system/List Manager/All Lists//*[@@templatename='Contact List']").Where(x => x.Fields["Owner"].Value == ListManagerOwner);
-            foreach (var list in lists)
-            {
-                list.Delete();
-            }
-
-            var excludeLists = messageItem.InnerItem.Database.SelectItems("/sitecore/system/List Manager/All Lists//*[@@templatename='Contact List']").Where(x => excludedRecipientsListIDs.Contains(x.ID.ToString())).ToList();
-            foreach (var excludeList in excludeLists)
-            {
-                using (new EditContext(excludeList))
-                {
-                    excludeList.Fields["IncludedSources"].Value = string.Empty;
-                    excludeList.Fields["ExcludedSources"].Value = string.Empty;
-                }
-            }
-
-            var globalLists = messageItem.InnerItem.Database.SelectItems("/sitecore/system/List Manager/All Lists/#E-mail Campaign Manager#/System//*[@@templatename='Contact List']");
-            foreach (var globalList in globalLists)
-            {
-                globalList.Delete();
             }
         }
 
-        private async void GenerateEvents(MessageItem email, Funnel funnelDefinition, List<ContactData> contactsForThisEmail)
+        private void GenerateEvents(Job job, MessageItem email, Funnel funnelDefinition, List<ContactData> contactsForThisEmail)
         {
             if (funnelDefinition == null)
             {
@@ -215,37 +129,21 @@ namespace ExperienceGenerator.Exm.Services
                 var contactIndex = 1;
                 foreach (var contactData in contactsForThisEmail)
                 {
-                    SetJobStatus($"Generating events for contact {contactIndex++} of {contactsForThisEmail.Count}");
+                    if (job.JobStatus == JobStatus.Cancelling)
+                        return;
+
+                    job.Status = $"Generating events for contact {contactIndex++} of {contactsForThisEmail.Count}";
 
                     var events = _randomContactMessageEventsFactory.CreateRandomContactMessageEvents(contactData, funnelDefinition, email);
-                    foreach (var messageEvent in events.Events)
+
+                    GenerateEventService.GenerateContactMessageEvents(job, events);
+
+                    if (events.Events.Any(e => e.EventType == EventType.UnsubscribeFromAll))
                     {
-                        switch (messageEvent.EventType)
-                        {
-                            case EventType.Open:
-                                GenerateEventService.GenerateHandlerEvent(events.MessageItem.ManagerRoot.Settings.BaseURL, events.ContactId, email, EventType.Open, messageEvent.EventTime, events.UserAgent, events.GeoData);
-                                break;
-                            case EventType.Unsubscribe:
-                                GenerateEventService.GenerateHandlerEvent(events.MessageItem.ManagerRoot.Settings.BaseURL, events.ContactId, email, EventType.Unsubscribe, messageEvent.EventTime, events.UserAgent, events.GeoData);
-                                break;
-                            case EventType.UnsubscribeFromAll:
-                                GenerateEventService.GenerateHandlerEvent(events.MessageItem.ManagerRoot.Settings.BaseURL, events.ContactId, email, EventType.UnsubscribeFromAll, messageEvent.EventTime, events.UserAgent, events.GeoData);
-                                _unsubscribeFromAllContacts.Add(events.ContactId);
-                                break;
-                            case EventType.Click:
-                                GenerateEventService.GenerateHandlerEvent(events.MessageItem.ManagerRoot.Settings.BaseURL, events.ContactId, email, EventType.Click, messageEvent.EventTime, events.UserAgent, events.GeoData, events.LandingPageUrl);
-                                break;
-                            case EventType.Bounce:
-                                GenerateEventService.GenerateBounce(events.MessageItem.ManagerRoot.Settings.BaseURL, events.ContactId.ToID(), email.MessageId.ToID(), email.StartTime.AddMinutes(1));
-                                break;
-                            case EventType.SpamComplaint:
-                                await GenerateEventService.GenerateSpamComplaint(events.MessageItem.ManagerRoot.Settings.BaseURL, events.ContactId.ToID(), email.MessageId.ToID(), "email", messageEvent.EventTime);
-                                break;
-                            default:
-                                throw new ArgumentOutOfRangeException();
-                        }
+                        _unsubscribeFromAllContacts.Add(events.ContactId);
                     }
-                    _job.CompletedEvents++;
+
+                    job.CompletedEvents++;
                 }
             }
             catch (Exception ex)
@@ -255,30 +153,33 @@ namespace ExperienceGenerator.Exm.Services
             }
         }
 
-        private void SendCampaign(MessageItem messageItem, List<ContactData> contactsForThisEmail)
+        private void SendCampaign(Job job, MessageItem messageItem, List<ContactData> contactsForThisEmail)
         {
-            SetJobStatus("Adjusting email stats...");
+            job.Status = "Adjusting email stats...";
 
-            _adjustEmailStatisticsService.AdjustEmailStatistics(_job, messageItem, _campaign);
+            _adjustEmailStatisticsService.AdjustEmailStatistics(job, messageItem, _campaign);
 
             PublishEmail(messageItem);
 
             var contactIndex = 1;
             foreach (var contact in contactsForThisEmail)
             {
-                SetJobStatus($"Sending email to contact {contactIndex++} of {contactsForThisEmail.Count}");
+                if (job.JobStatus == JobStatus.Cancelling)
+                    return;
+
+                job.Status = $"Sending email to contact {contactIndex++} of {contactsForThisEmail.Count}";
                 try
                 {
-                    SendEmailToContact(contact, messageItem);
+                    SendEmailToContact(job, contact, messageItem);
                 }
                 catch (Exception ex)
                 {
-                    SetJobStatus(ex.ToString());
+                    job.Status = ex.ToString();
                     Log.Error("Failed", ex, this);
                 }
             }
 
-            GenerateEvents(messageItem, _campaign.Events, contactsForThisEmail);
+            GenerateEvents(job, messageItem, _campaign.Events, contactsForThisEmail);
         }
 
 
@@ -296,7 +197,7 @@ namespace ExperienceGenerator.Exm.Services
             new PublishDispatchItems().Process(dispatchArgs);
         }
 
-        private void SendEmailToContact(ContactData contact, MessageItem messageItem)
+        private void SendEmailToContact(Job job, ContactData contact, MessageItem messageItem)
         {
             var customValues = new ExmCustomValues
                                {
@@ -309,8 +210,8 @@ namespace ExperienceGenerator.Exm.Services
 
             EcmFactory.GetDefaultFactory().Bl.DispatchManager.EnrollOrUpdateContact(contact.ContactId, new DispatchQueueItem(), messageItem.PlanId.ToGuid(), Constants.SendCompletedStateName, customValues);
 
-            GenerateEventService.GenerateSent(messageItem.ManagerRoot.Settings.BaseURL, new ID(contact.ContactId), messageItem.InnerItem.ID, messageItem.StartTime);
-            _job.CompletedEmails++;
+            GenerateEventService.GenerateSent(messageItem.ManagerRoot.Settings.BaseURL, contact.ContactId, messageItem, messageItem.StartTime);
+            job.CompletedEmails++;
         }
 
         private MessageItem GetMessageItem(Guid itemId)

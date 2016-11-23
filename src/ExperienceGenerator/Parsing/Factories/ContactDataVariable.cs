@@ -1,9 +1,9 @@
-﻿namespace ExperienceGenerator.Parsing.Factories
-{
-    using System.Collections.Generic;
-    using Colossus;
-    using Faker;
+﻿using System.Collections.Generic;
+using Colossus;
+using Faker;
 
+namespace ExperienceGenerator.Parsing.Factories
+{
     public class ContactDataVariable : VisitorVariablesBase
     {
         public static int VisitorIndex;
@@ -12,29 +12,26 @@
 
         public ContactDataVariable(double identifiedPercentage)
         {
-            this.IdentifiedPercentage = identifiedPercentage;
+            IdentifiedPercentage = identifiedPercentage;
         }
 
         public override void SetValues(SimulationObject target)
         {
-            if (Randomness.Random.NextDouble() < this.IdentifiedPercentage)
-            {
-                target.Variables["ContactId"] = "XGen" + VisitorIndex;
-                VisitorIndex++;
+            if (!(Randomness.Random.NextDouble() < IdentifiedPercentage))
+                return;
 
-                var firstname = Name.First();
-                var lastname = Name.Last();
-                var email = Internet.Email(firstname + " " + lastname);
+            target.Variables["ContactId"] = "XGen" + VisitorIndex;
+            VisitorIndex++;
 
-                target.Variables["ContactFirstName"] = firstname;
-                target.Variables["ContactLastName"] = lastname;
-                target.Variables["ContactEmail"] = email;
-            }
+            var firstname = Name.First();
+            var lastname = Name.Last();
+            var email = Internet.Email(firstname + " " + lastname);
+
+            target.Variables["ContactFirstName"] = firstname;
+            target.Variables["ContactLastName"] = lastname;
+            target.Variables["ContactEmail"] = email;
         }
 
-        public override IEnumerable<string> ProvidedVariables => new[]
-        {
-      "ContactId", "ContactFirstName", "ContactLastName", "ContactEmail"
-        };
+        public override IEnumerable<string> ProvidedVariables => new[] {"ContactId", "ContactFirstName", "ContactLastName", "ContactEmail"};
     }
 }

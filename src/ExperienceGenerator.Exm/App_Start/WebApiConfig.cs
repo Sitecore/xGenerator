@@ -12,8 +12,8 @@
 
             config.Routes.MapHttpRoute(
                 name: "ExperienceGeneratorExmJobsApi",
-                routeTemplate: "api/xgen/exmjobs/{id}",
-                defaults: new {controller = "ExperienceGeneratorExmJobs",  id = RouteParameter.Optional}
+                routeTemplate: "api/xgen/exmjobs/{action}/{id}",
+                defaults: new {controller = "ExmJobs",  id = RouteParameter.Optional}
                 );
             config.Routes.MapHttpRoute(
                 name: "ExperienceGeneratorExmEventsApi",

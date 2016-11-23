@@ -34,7 +34,7 @@ namespace ExperienceGenerator.Exm.Models
 
         public int TargetLists { get; set; }
 
-        public string CampaignCountLabel { get; set; }
+        public string JobName { get; set; }
 
         public string Status { get; set; }
 
@@ -56,8 +56,6 @@ namespace ExperienceGenerator.Exm.Models
                 return contactsProgress*0.1 + emailsProgress*0.2 + eventsProgress*0.7;
             }
         }
-
-        public int OpenSlots => GenerateEventService.Pool?.CurrentCount ?? 0;
 
         public int Errors => GenerateEventService.Errors;
 

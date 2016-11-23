@@ -23,6 +23,9 @@ namespace ExperienceGenerator.Exm.Services
             var tries = 0;
             while (tries <= UNLOCK_ATTEMPTS && !IsListReady(xaList))
             {
+                if (job.JobStatus == JobStatus.Cancelling)
+                    return;
+
                 tries++;
                 job.Status = $"Waiting for list '{xaList.Name}' to unlock ({tries}/{UNLOCK_ATTEMPTS})";
                 Thread.Sleep(1000);

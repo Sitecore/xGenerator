@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ExperienceGenerator.Exm.Models
 {
-    public class CampaignModel
+    public class CampaignSettings
     {
         public IEnumerable<int> DayDistribution { get; set; }
         public Dictionary<string, int> Devices { get; set; }
@@ -12,6 +12,5 @@ namespace ExperienceGenerator.Exm.Models
         public Funnel Events { get; set; }
         public Dictionary<string, double> LandingPages { get; set; }
         public Dictionary<int, int> Locations { get; set; }
-        public string ContactList { get; set; }
     }
 }

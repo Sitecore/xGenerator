@@ -15,20 +15,14 @@ namespace ExperienceGenerator.Exm.Repositories
 {
     public class ContactRepository
     {
-        public readonly Job _job;
-        private readonly string[] _languages = {"en", "uk"};
-        private readonly List<Contact> _contacts = new List<Contact>();
         private readonly Sitecore.Analytics.Data.ContactRepository _contactRepository;
 
-        public int ContactCount { get; private set; }
-
-        public ContactRepository(Job job)
+        public ContactRepository()
         {
             _contactRepository = new Sitecore.Analytics.Data.ContactRepository();
-            _job = job;
         }
 
-        public IEnumerable<Contact> CreateContacts(int numContacts)
+        public IEnumerable<Contact> CreateContacts(Job job, int numContacts)
         {
             var addedContacts = new List<Contact>();
             for (var i = 0; i < numContacts; i++)
@@ -38,22 +32,16 @@ namespace ExperienceGenerator.Exm.Repositories
             return addedContacts;
         }
 
-        public void AddContacts(List<ContactData> contactDataList)
-        {
-            var contactRepository = new Sitecore.Analytics.Data.ContactRepository();
-            _contacts.AddRange(contactDataList.Select(x => contactRepository.LoadContactReadOnly(x.Identifier)));
-        }
-
         public Contact GetContact(Guid id)
         {
-            return _contacts.FirstOrDefault(x => x.ContactId == id);
+            return _contactRepository.LoadContactReadOnly(id);
         }
 
         private Contact CreateContact()
         {
             var identifier = CreateUniqueIdentifier();
 
-            Contact contact = _contactRepository.CreateContact(ID.NewID);
+            var contact = _contactRepository.CreateContact(ID.NewID);
             contact.Identifiers.AuthenticationLevel = AuthenticationLevel.None;
             contact.System.Classification = 0;
             contact.ContactSaveMode = ContactSaveMode.AlwaysSave;
@@ -61,10 +49,10 @@ namespace ExperienceGenerator.Exm.Repositories
             contact.System.OverrideClassification = 0;
             contact.System.Value = 0;
             contact.System.VisitCount = 0;
-
+/*
             var contactPreferences = contact.GetFacet<IContactPreferences>("Preferences");
-            contactPreferences.Language = _languages[ContactCount%_languages.Length];
-
+            contactPreferences.Language = _languages;
+*/
             var contactPersonalInfo = contact.GetFacet<IContactPersonalInfo>("Personal");
             contactPersonalInfo.FirstName = Name.First();
             contactPersonalInfo.Surname = Name.Last();
@@ -77,7 +65,6 @@ namespace ExperienceGenerator.Exm.Repositories
             var options = new ContactSaveOptions(true, leaseOwner, null);
             _contactRepository.SaveContact(contact, options);
 
-            DoContactCreated(contact);
             return contact;
         }
 
@@ -92,13 +79,6 @@ namespace ExperienceGenerator.Exm.Repositories
                 contact = _contactRepository.LoadContactReadOnly(identifier);
             }
             return identifier;
-        }
-
-        private void DoContactCreated(Contact contact)
-        {
-            _contacts.Add(contact);
-            _job.CompletedContacts++;
-            ContactCount++;
         }
     }
 }

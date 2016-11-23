@@ -242,7 +242,6 @@
     <Content Include="sitecore\shell\client\Applications\ExmExperienceGenerator\dialogs\EmailCampaignEditor.js" />
     <Content Include="sitecore\shell\client\Applications\ExmExperienceGenerator\ExmGenerator.js" />
     <Content Include="sitecore\shell\client\Applications\ExmExperienceGenerator\ExmExperienceGenerator.css" />
-    <Content Include="sitecore\shell\client\Applications\ExmExperienceGenerator\JobManager.js" />
     <Content Include="sitecore\shell\client\Applications\ExmExperienceGenerator\uiUtils.js" />
   </ItemGroup>
   <ItemGroup>
@@ -261,14 +260,15 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ExmActionsController.cs" />
+    <Compile Include="Models\ListSettings.cs" />
     <Compile Include="Infrastructure\LinqExtensions.cs" />
     <Compile Include="Infrastructure\PatchTracker.cs" />
     <Compile Include="Infrastructure\PatchExmDateTimes.cs" />
     <Compile Include="Infrastructure\ShortGuid.cs" />
-    <Compile Include="Models\CampaignModel.cs" />
+    <Compile Include="Models\CampaignSettings.cs" />
     <Compile Include="Controllers\ExmEventsController.cs" />
-    <Compile Include="Controllers\ExperienceGeneratorExmJobsController.cs" />
-    <Compile Include="Models\JobDefinition.cs" />
+    <Compile Include="Controllers\ExmJobsController.cs" />
+    <Compile Include="Models\ExmGeneratorSettings.cs" />
     <Compile Include="Models\FakeData.cs" />
     <Compile Include="Models\GeoData.cs" />
     <Compile Include="Models\Funnel.cs" />
@@ -278,6 +278,8 @@
     <Compile Include="Models\SelectionOption.cs" />
     <Compile Include="Models\SelectionOptionGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Models\MessageContactEvents.cs" />
+    <Compile Include="Repositories\RandomContactMessageEventsFactory.cs" />
     <Compile Include="Repositories\SettingsRepository.cs" />
     <Compile Include="Services\AdjustEmailStatsService.cs" />
     <Compile Include="Repositories\ContactRepository.cs" />
@@ -286,7 +288,9 @@
     <Compile Include="Services\JobManager.cs" />
     <Compile Include="Repositories\ContactListRepository.cs" />
     <Compile Include="Services\GenerateEventService.cs" />
-    <Compile Include="Repositories\RandomizeEventService.cs" />
+    <Compile Include="Models\MessageContactEvent.cs" />
+    <Compile Include="Services\IndexService.cs" />
+    <Compile Include="Services\PublishService.cs" />
     <Compile Include="Services\UnlockListService.cs" />
     <Compile Include="Templates.cs" />
   </ItemGroup>

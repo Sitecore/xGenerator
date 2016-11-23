@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Colossus.Statistics;
@@ -18,16 +18,16 @@ namespace ExperienceGenerator.Exm.Repositories
     public class RandomContactMessageEventsFactory
     {
         private readonly ContactRepository _contactRepository;
-        private readonly CampaignModel _campaign;
+        private readonly CampaignSettings _campaign;
         private readonly Random _random = new Random();
         private Dictionary<string, int> _userAgents;
         private Func<WhoIsInformation> _geoData;
         private Func<int> _eventDay;
         private Func<string> _landingPages;
 
-        public RandomContactMessageEventsFactory(ContactRepository contactRepository, CampaignModel campaign)
+        public RandomContactMessageEventsFactory(CampaignSettings campaign)
         {
-            _contactRepository = contactRepository;
+            _contactRepository = new ContactRepository();
             _campaign = campaign;
         }
 
@@ -104,18 +104,18 @@ namespace ExperienceGenerator.Exm.Repositories
 
                         events.Add(new MessageContactEvent
                                    {
-                            EventType = EventType.Click,
-                            EventTime = eventTime
+                                       EventType = EventType.Click,
+                                       EventTime = eventTime
                                    });
                     }
                     else
                     {
                         eventTime = eventTime.AddSeconds(_random.Next(10, 300));
                         events.Add(new MessageContactEvent
-                        {
-                            EventType = EventType.Open,
-                            EventTime = eventTime
-                        });
+                                   {
+                                       EventType = EventType.Open,
+                                       EventTime = eventTime
+                                   });
                     }
                 }
 
@@ -123,10 +123,10 @@ namespace ExperienceGenerator.Exm.Repositories
                 {
                     eventTime = eventTime.AddSeconds(_random.Next(10, 300));
                     events.Add(new MessageContactEvent
-                    {
-                        EventType = EventType.SpamComplaint,
-                        EventTime = eventTime
-                    });
+                               {
+                                   EventType = EventType.SpamComplaint,
+                                   EventTime = eventTime
+                               });
                 }
 
                 if (_random.NextDouble() < funnel.Unsubscribed / 100d)
@@ -136,18 +136,18 @@ namespace ExperienceGenerator.Exm.Repositories
                     if (_random.NextDouble() < funnel.UnsubscribedFromAll / 100d)
                     {
                         events.Add(new MessageContactEvent
-                        {
-                            EventType = EventType.UnsubscribeFromAll,
-                            EventTime = eventTime
-                        });
+                                   {
+                                       EventType = EventType.UnsubscribeFromAll,
+                                       EventTime = eventTime
+                                   });
                     }
                     else
                     {
                         events.Add(new MessageContactEvent
-                        {
-                            EventType = EventType.Unsubscribe,
-                            EventTime = eventTime
-                        });
+                                   {
+                                       EventType = EventType.Unsubscribe,
+                                       EventTime = eventTime
+                                   });
                     }
                 }
             }
@@ -179,21 +179,5 @@ namespace ExperienceGenerator.Exm.Repositories
 
             return landingPageItem == null ? "/" : LinkManager.GetItemUrl(landingPageItem);
         }
-    }
-
-    public class MessageContactEvents
-    {
-        public MessageItem MessageItem { get; set; }
-        public Guid ContactId { get; set; }
-        public string UserAgent { get; set; }
-        public WhoIsInformation GeoData { get; set; }
-        public string LandingPageUrl { get; set; }
-        public IEnumerable<MessageContactEvent> Events { get; set; }
-    }
-
-    public class MessageContactEvent
-    {
-        public DateTime EventTime { get; set; }
-        public EventType EventType { get; set; }
     }
 }

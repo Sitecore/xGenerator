@@ -18,15 +18,13 @@ namespace ExperienceGenerator.Exm.Repositories
 {
     public class ContactListRepository
     {
-        private const string ListManagerOwner = "xGenerator";
+        private const string DefaultListManagerOwner = "xGenerator";
 
-        private readonly Job _job;
         private readonly ListManager<ContactList, ContactData> _listManager;
         private readonly UnlockListService _unlockListService;
 
-        public ContactListRepository(Job job)
+        public ContactListRepository()
         {
-            _job = job;
             _listManager = (ListManager<ContactList, ContactData>) Factory.CreateObject("contactListManager", false);
             _unlockListService = new UnlockListService();
         }
@@ -37,20 +35,20 @@ namespace ExperienceGenerator.Exm.Repositories
             return _listManager.FindById(id.ToShortID().ToString());
         }
 
-        public ContactList CreateList(string name, IEnumerable<Contact> addlContacts)
+        public ContactList CreateList(Job job, string name, IEnumerable<Contact> addContacts, string listManagerOwner = DefaultListManagerOwner)
         {
             var contactList = new ContactList
                               {
                                   Name = name,
-                                  Owner = ListManagerOwner,
+                                  Owner = listManagerOwner,
                                   Type = ListRowType.ContactList
                               };
 
             _listManager.Create(contactList);
-            _listManager.AssociateContacts(contactList, addlContacts.Select(MapContactToContactData));
-            _job.CompletedLists++;
+            _listManager.AssociateContacts(contactList, addContacts.Select(MapContactToContactData));
+            job.CompletedLists++;
 
-            _unlockListService.UnlockList(_job, contactList);
+            _unlockListService.UnlockList(job, contactList);
 
             return contactList;
         }
@@ -92,19 +90,15 @@ namespace ExperienceGenerator.Exm.Repositories
         }
 
 
-        public IEnumerable<ContactData> GetContacts(ContactList xaList, int expectedContacts)
+        public IEnumerable<ContactData> GetContacts(Job job, ContactList xaList)
         {
-            var contacts = _listManager.GetContacts(xaList).ToList();
-            if (contacts.Count != 0)
-            {
-                _unlockListService.UnlockList(_job, xaList);
-            }
-            return contacts;
+            return _listManager.GetContacts(xaList).ToList();
         }
 
 
-        public List<ContactData> GetContactsForEmail(IEnumerable<ID> lists, IEnumerable<Guid> unsubscribeFromAllContacts)
+        public List<ContactData> GetContacts(MessageItem message, IEnumerable<Guid> excludeContacts)
         {
+            var lists = message.RecipientManager.IncludedRecipientListIds;
             var contactsForThisEmail = new List<ContactData>();
 
             foreach (var listId in lists)
@@ -116,7 +110,7 @@ namespace ExperienceGenerator.Exm.Repositories
                 contactsForThisEmail.AddRange(contacts);
             }
 
-            contactsForThisEmail = contactsForThisEmail.DistinctBy(x => x.ContactId).Where(x => !unsubscribeFromAllContacts.Contains(x.ContactId)).ToList();
+            contactsForThisEmail = contactsForThisEmail.DistinctBy(x => x.ContactId).Where(x => !excludeContacts.Contains(x.ContactId)).ToList();
 
             return contactsForThisEmail;
         }

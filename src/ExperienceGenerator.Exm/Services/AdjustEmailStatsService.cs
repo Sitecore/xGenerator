@@ -22,7 +22,7 @@ namespace ExperienceGenerator.Exm.Services
     {
         const int RETRY_COUNT = 30;
 
-        public void AdjustEmailStatistics(Job job, MessageItem messageItem, CampaignModel campaign)
+        public void AdjustEmailStatistics(Job job, MessageItem messageItem, CampaignSettings campaign)
         {
             SetStatisticsOnCampaignAndEngagementPlan(messageItem);
 
