@@ -37,6 +37,8 @@ namespace ExperienceGenerator.Exm.Repositories
 
         public ContactList CreateList(Job job, string name, IEnumerable<Contact> addContacts, string listManagerOwner = DefaultListManagerOwner)
         {
+            job.Status = $"Creating List {name}";
+
             var contactList = new ContactList
                               {
                                   Name = name,

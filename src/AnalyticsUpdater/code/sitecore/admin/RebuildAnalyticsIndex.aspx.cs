@@ -8,7 +8,7 @@
   {
     protected void Page_Load(object sender, EventArgs e)
     {
-      UpdateAnalyticsVisitsRepository.RebuildAnalyticsIndex();
+      RebuildAnalyticsIndexService.RebuildAnalyticsIndex();
       this.Response.Write("Done!");
     }
   }

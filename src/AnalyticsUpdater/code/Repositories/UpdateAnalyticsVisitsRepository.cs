@@ -53,7 +53,7 @@ namespace AnalyticsUpdater.Repositories
 
                 UpdateLastRefreshDate();
 
-                RebuildAnalyticsIndexService.RebuildAnalyticsIndex();
+                RebuildAnalyticsIndex();
             }
             catch (Exception ex)
             {
@@ -101,13 +101,37 @@ namespace AnalyticsUpdater.Repositories
             }
         }
 
+        public static void RebuildAnalyticsIndex()
+        {
+            using (new SecurityDisabler())
+            {
+                ContentSearchManager.GetIndex("sitecore_analytics_index").Reset();
+                var poolPath = "aggregationProcessing/processingPools/live";
+                var pool = Factory.CreateObject(poolPath, true) as ProcessingPool;
+                var beforeRebuild = pool.GetCurrentStatus().ItemsPending;
+                var driver = MongoDbDriver.FromConnectionString("analytics");
+                var visitorData = driver.Interactions.FindAllAs<VisitData>();
+                var keys = visitorData.Select(data => new InteractionKey(data.ContactId, data.InteractionId));
+                foreach (var key in keys)
+                {
+                    var poolItem = new ProcessingPoolItem(key.ToByteArray());
+                    pool.Add(poolItem);
+                }
+
+                while (pool.GetCurrentStatus().ItemsPending > beforeRebuild)
+                {
+                    Thread.Sleep(1000);
+                }
+            }
+        }
+
         private void MoveMongoDate(int days)
         {
             var refreshAnalyticsQuery = _masterDb.GetItem(new ID("{AD488697-75A8-4245-B391-BD1809D5BF58}"));
             var scriptTxt = refreshAnalyticsQuery.Fields["Query"].Value;
             var connectionStringName = refreshAnalyticsQuery.Fields["Data Source"].Value;
             var item = ConfigurationManager.ConnectionStrings[connectionStringName];
-            var driver = new UpdateAnalyticsVisitsRepository.JsMongoDbDriver(item.ConnectionString);
+            var driver = new JsMongoDbDriver(item.ConnectionString);
             driver.Eval(scriptTxt, days);
         }
 

@@ -38,7 +38,7 @@ namespace ExperienceGenerator.Exm.Services
 
         private bool IsListReady(ContactList xaList)
         {
-            return _listManager.GetAll().ToList().Any(x => x.Id == xaList.Id) && !(_listManager.IsLocked(xaList) || _listManager.IsInUse(xaList));
+            return _listManager.FindById(xaList.Id) != null && !_listManager.IsLocked(xaList) && !_listManager.IsInUse(xaList);
         }
 
         private void UnlockList(ContactList list)
@@ -50,7 +50,8 @@ namespace ExperienceGenerator.Exm.Services
 
             Logger.Instance.LogWarn($"Force unlocking list {list.Id} - {list.DisplayName}");
             var lockTest = _listManager.GetLock(list);
-            _listManager.Unlock(lockTest);
+            if (lockTest != null)
+                _listManager.Unlock(lockTest);
         }
 
     }

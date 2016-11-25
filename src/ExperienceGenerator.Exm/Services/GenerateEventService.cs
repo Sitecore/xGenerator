@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -36,12 +37,22 @@ namespace ExperienceGenerator.Exm.Services
 
         public static int Timeouts { get; set; }
 
-        private static bool RequestUrl(string url, RequestHeaderInfo requestHeaderInfo = null)
+        private static ResponseData RequestUrl(string url, RequestHeaderInfo requestHeaderInfo = null, CookieContainer cookieContainer = null)
         {
+            var responseData = new ResponseData();
             try
             {
                 // Don't use IDisposable HttpClient, seems to cause problems with threads
-                var client = new HttpClient();
+                if (cookieContainer == null)
+                {
+                    cookieContainer = new CookieContainer();
+                }
+                HttpMessageHandler handler = new HttpClientHandler()
+                                             {
+                                                 CookieContainer = cookieContainer
+                                             };
+                var client = new HttpClient(handler);
+                responseData.Cookies = cookieContainer;
 
                 if (requestHeaderInfo != null)
                 {
@@ -60,7 +71,7 @@ namespace ExperienceGenerator.Exm.Services
                 if (!res.IsSuccessStatusCode)
                 {
                     Sitecore.Diagnostics.Log.Warn($"Exm Generator request to \'{url}\' failed with '{res.StatusCode}'", res);
-                    return false;
+                    return responseData;
                 }
             }
             catch (TaskCanceledException)
@@ -70,22 +81,23 @@ namespace ExperienceGenerator.Exm.Services
             catch (Exception ex)
             {
                 Logger.Instance.LogError("GenerateEventService error", ex);
-                return false;
+                return responseData;
             }
-            return true;
+            responseData.IsSuccessful = true;
+            return responseData;
         }
 
         public static void GenerateSent(string hostName, Guid contactId, MessageItem message, DateTime dateTime)
         {
             var url = $"{hostName}/api/xgen/exmevents/GenerateSent?contactId={contactId}&messageId={message.MessageId}&date={dateTime.ToString("u")}";
-            if (!RequestUrl(url))
+            if (!RequestUrl(url).IsSuccessful)
                 Errors++;
         }
 
         private static void GenerateBounce(string hostName, Guid contactId, MessageItem message, DateTime dateTime)
         {
             var url = $"{hostName}/api/xgen/exmevents/GenerateBounce?contactId={contactId}&messageId={message.MessageId}&date={dateTime.ToString("u")}";
-            if (!RequestUrl(url))
+            if (!RequestUrl(url).IsSuccessful)
                 Errors++;
         }
 
@@ -144,8 +156,20 @@ namespace ExperienceGenerator.Exm.Services
                                RequestTime = dateTime,
                                GeoData = geoData
                            };
-            if (!RequestUrl(url, fakeData))
+            var response = RequestUrl(url, fakeData);
+            if (!response.IsSuccessful)
                 Errors++;
+
+            if (response.IsSuccessful && eventType == EventType.Click)
+            {
+                EndSession(hostName, response);
+            }
+        }
+
+        private static void EndSession(string hostName, ResponseData response)
+        {
+            var url = $"{hostName}/sitecore/EndSession.aspx";
+            RequestUrl(url, cookieContainer: response.Cookies);
         }
 
 
@@ -180,5 +204,11 @@ namespace ExperienceGenerator.Exm.Services
                 GenerateHandlerEvent(hostName, contactId, messageItem, messageEvent.EventType, messageEvent.EventTime, userAgent, whoIsInformation, landingPageUrl);
             }
         }
+    }
+
+    internal class ResponseData
+    {
+        public bool IsSuccessful { get; set; }
+        public CookieContainer Cookies { get; set; }
     }
 }

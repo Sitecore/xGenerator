@@ -5,13 +5,15 @@ using Colossus.Statistics;
 using ExperienceGenerator.Data;
 using ExperienceGenerator.Exm.Models;
 using ExperienceGenerator.Exm.Services;
+using ExperienceGenerator.Repositories;
+using ExperienceGenerator.Services;
 using Sitecore;
 using Sitecore.Analytics.Model;
 using Sitecore.Data;
+using Sitecore.Data.Items;
 using Sitecore.Links;
 using Sitecore.ListManagement.ContentSearch.Model;
 using Sitecore.Modules.EmailCampaign.Messages;
-using GeoData = ExperienceGenerator.Exm.Models.GeoData;
 
 namespace ExperienceGenerator.Exm.Repositories
 {
@@ -21,14 +23,18 @@ namespace ExperienceGenerator.Exm.Repositories
         private readonly CampaignSettings _campaign;
         private readonly Random _random = new Random();
         private Dictionary<string, int> _userAgents;
-        private Func<WhoIsInformation> _geoData;
-        private Func<int> _eventDay;
-        private Func<string> _landingPages;
+        private Func<string> _getRandomRegion;
+        private Func<int> _getRandomEventDay;
+        private Func<string> _getRandomLandingPage;
+        private readonly GeoDataRepository _geoDataRepository;
+        private readonly GetRandomCityService _getRandomCityService;
 
         public RandomContactMessageEventsFactory(CampaignSettings campaign)
         {
             _contactRepository = new ContactRepository();
             _campaign = campaign;
+            _getRandomCityService = new GetRandomCityService();
+            _geoDataRepository = new GeoDataRepository();
         }
 
         private Dictionary<string, int> GetAllUserAgents()
@@ -44,23 +50,13 @@ namespace ExperienceGenerator.Exm.Repositories
             return _userAgents.Weighted().Invoke();
         }
 
-        private List<GeoData> GetAllGeoData(Dictionary<int, int> weightedIDs)
-        {
-            return weightedIDs.Select(weightedId => new GeoData
-                                                    {
-                                                        Weight = weightedId.Value/100.0,
-                                                        WhoIs = GeoRegion.RandomCountryForSubRegion(weightedId.Key)
-                                                    }).ToList();
-        }
-
         private WhoIsInformation GetRandomGeoData()
         {
-            if (_geoData == null)
+            if (_getRandomRegion == null)
             {
-                var geoData = GetAllGeoData(_campaign.Locations);
-                _geoData = geoData.Select(x => x.WhoIs).Weighted(geoData.Select(x => x.Weight).ToArray());
+                _getRandomRegion = _campaign.Locations.Select(x => x.Key).Weighted(_campaign.Locations.Values.Select(i => (double)i).ToArray());
             }
-            return _geoData();
+            return _getRandomCityService.GetRandomCity(_getRandomRegion()).ToWhoIsInformation();
         }
 
         [NotNull]
@@ -78,7 +74,7 @@ namespace ExperienceGenerator.Exm.Repositories
             }
             messageContactEvents.ContactId = contact.ContactId;
 
-            if (_random.NextDouble() < funnel.Bounced/100d)
+            if (RandomizeBounceEvent(funnel))
             {
                 events.Add(new MessageContactEvent
                            {
@@ -92,13 +88,17 @@ namespace ExperienceGenerator.Exm.Repositories
                 messageContactEvents.GeoData = GetRandomGeoData();
                 var eventTime = GetRandomEventTime(messageItem);
 
-                var spamPercentage = funnel.SpamComplaints/100d;
-                if (_random.NextDouble() < funnel.OpenRate/100d)
+                if (RandomizeOpenEvent(funnel))
                 {
-                    if (_random.NextDouble() < funnel.ClickRate/100d)
+                    AddEventDelay(ref eventTime);
+                    events.Add(new MessageContactEvent {
+                        EventType = EventType.Open,
+                        EventTime = eventTime
+                    });
+
+                    if (RandomizeClickEvent(funnel))
                     {
-                        spamPercentage = Math.Min(spamPercentage, 0.01);
-                        eventTime = eventTime.AddSeconds(_random.Next(10, 300));
+                        AddEventDelay(ref eventTime);
 
                         messageContactEvents.LandingPageUrl = GetRandomLandingPageUrl(messageItem);
 
@@ -108,20 +108,11 @@ namespace ExperienceGenerator.Exm.Repositories
                                        EventTime = eventTime
                                    });
                     }
-                    else
-                    {
-                        eventTime = eventTime.AddSeconds(_random.Next(10, 300));
-                        events.Add(new MessageContactEvent
-                                   {
-                                       EventType = EventType.Open,
-                                       EventTime = eventTime
-                                   });
-                    }
                 }
 
-                if (_random.NextDouble() < spamPercentage)
+                if (RandomizeSpamComplaintEvent(funnel, events))
                 {
-                    eventTime = eventTime.AddSeconds(_random.Next(10, 300));
+                    AddEventDelay(ref eventTime);
                     events.Add(new MessageContactEvent
                                {
                                    EventType = EventType.SpamComplaint,
@@ -129,11 +120,11 @@ namespace ExperienceGenerator.Exm.Repositories
                                });
                 }
 
-                if (_random.NextDouble() < funnel.Unsubscribed / 100d)
+                if (RandomizeUnsubscribeEvent(funnel))
                 {
-                    eventTime = eventTime.AddSeconds(_random.Next(10, 300));
+                    AddEventDelay(ref eventTime);
 
-                    if (_random.NextDouble() < funnel.UnsubscribedFromAll / 100d)
+                    if (RandomizeUnsubscribeAllEvent(funnel))
                     {
                         events.Add(new MessageContactEvent
                                    {
@@ -154,11 +145,46 @@ namespace ExperienceGenerator.Exm.Repositories
             return messageContactEvents;
         }
 
+        private void AddEventDelay(ref DateTime eventTime, int seconds = 300)
+        {
+            eventTime = eventTime.AddSeconds(_random.Next(10, seconds));
+        }
+
+        private bool RandomizeUnsubscribeAllEvent(Funnel funnel)
+        {
+            return _random.NextDouble() < funnel.UnsubscribedFromAll / 100d;
+        }
+
+        private bool RandomizeUnsubscribeEvent(Funnel funnel)
+        {
+            return _random.NextDouble() < funnel.Unsubscribed / 100d;
+        }
+
+        private bool RandomizeSpamComplaintEvent(Funnel funnel, List<MessageContactEvent> events)
+        {
+            return _random.NextDouble() < funnel.SpamComplaints/100d && events.All(e => e.EventType != EventType.Click);
+        }
+
+        private bool RandomizeClickEvent(Funnel funnel)
+        {
+            return _random.NextDouble() < funnel.ClickRate/100d;
+        }
+
+        private bool RandomizeOpenEvent(Funnel funnel)
+        {
+            return _random.NextDouble() < funnel.OpenRate/100d;
+        }
+
+        private bool RandomizeBounceEvent(Funnel funnel)
+        {
+            return _random.NextDouble() < funnel.Bounced/100d;
+        }
+
         private DateTime GetRandomEventTime(MessageItem messageItem)
         {
-            if (_eventDay == null)
-                _eventDay = _campaign.DayDistribution.Select(x => x/100d).WeightedInts();
-            var days = _eventDay.Invoke();
+            if (_getRandomEventDay == null)
+                _getRandomEventDay = _campaign.DayDistribution.Select(x => x/100d).WeightedInts();
+            var days = _getRandomEventDay.Invoke();
             var seconds = _random.Next(60, 86400);
             return messageItem.StartTime.AddDays(days).AddSeconds(seconds);
         }
@@ -167,17 +193,23 @@ namespace ExperienceGenerator.Exm.Repositories
         {
             if (_campaign.LandingPages.Count == 0)
                 return "/";
-            if (_landingPages == null)
-                _landingPages = _campaign.LandingPages.Keys.Weighted(_campaign.LandingPages.Values.Select(x => x / 100).ToArray());
+            if (_getRandomLandingPage == null)
+                _getRandomLandingPage = _campaign.LandingPages.Keys.Weighted(_campaign.LandingPages.Values.Select(x => x / 100).ToArray());
 
-            var stringID = _landingPages();
+            var stringID = _getRandomLandingPage();
             ID landingPageID;
             if (!ID.TryParse(stringID, out landingPageID) || ID.IsNullOrEmpty(landingPageID))
                 return null;
 
             var landingPageItem = message.InnerItem.Database.GetItem(landingPageID);
 
-            return landingPageItem == null ? "/" : LinkManager.GetItemUrl(landingPageItem);
+            return landingPageItem == null ? "/" : GetItemUrl(landingPageItem);
+        }
+
+        private static string GetItemUrl(Item landingPageItem)
+        {
+            var uri = new Uri(LinkManager.GetItemUrl(landingPageItem));
+            return uri.PathAndQuery;
         }
     }
 }

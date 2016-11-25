@@ -101,8 +101,7 @@ namespace Colossus.Statistics
                 var index = dist.Next();
                 if (index < 0 || index >= values.Length)
                 {
-                    throw new ArgumentOutOfRangeException("dist",
-                        "The value returned by the random distribution is out of range for the values");
+                     throw new ArgumentOutOfRangeException(nameof(dist), "The value returned by the random distribution is out of range for the values");
                 }
 
                 return values[(int) index];

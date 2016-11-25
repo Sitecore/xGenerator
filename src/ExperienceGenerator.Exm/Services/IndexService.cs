@@ -13,12 +13,10 @@ namespace ExperienceGenerator.Exm.Services
 {
     public static class IndexService
     {
-        public static void IndexContactLists(Job job)
+        public static void RebuildListIndexes(Job job)
         {
             job.Status = "Rebuilding Contact List Index";
-            ContentSearchManager.GetIndex(ListManagementSettings.ContactListIndexName).Rebuild();
-            job.Status = "Rebuilding Contacts Index";
-            ContentSearchManager.GetIndex(ListManagementSettings.ContactsIndexName).Rebuild();
+            ContentSearchManager.GetIndex(ListManagementSettings.ContactListIndexName).Rebuild(IndexingOptions.ForcedIndexing);
         }
     }
 }

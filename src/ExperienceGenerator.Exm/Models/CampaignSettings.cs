@@ -11,6 +11,6 @@ namespace ExperienceGenerator.Exm.Models
         public DateTime EndDate { get; set; }
         public Funnel Events { get; set; }
         public Dictionary<string, double> LandingPages { get; set; }
-        public Dictionary<int, int> Locations { get; set; }
+        public Dictionary<string, int> Locations { get; set; }
     }
 }

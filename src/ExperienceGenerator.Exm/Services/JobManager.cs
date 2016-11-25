@@ -41,6 +41,7 @@ namespace ExperienceGenerator.Exm.Services
         {
             settings.Job.JobStatus = JobStatus.Running;
             settings.Job.Started = DateTime.Now;
+            settings.Job.JobName = $"Generating new list '{settings.Name}' with '{settings.Recipients}' recipients";
 
             try
             {
@@ -48,9 +49,10 @@ namespace ExperienceGenerator.Exm.Services
                 var contactRepository = new ContactRepository();
                 var contacts = contactRepository.CreateContacts(settings.Job, settings.Recipients);
 
-                settings.Job.Status = $"Creating List {settings.Name}";
                 var contactListRepository = new ContactListRepository();
                 contactListRepository.CreateList(settings.Job, settings.Name, contacts);
+
+                IndexService.RebuildListIndexes(settings.Job);
 
                 settings.Job.JobStatus = JobStatus.Complete;
                 settings.Job.Status = "DONE!";
@@ -73,14 +75,10 @@ namespace ExperienceGenerator.Exm.Services
 
             settings.Job.JobStatus = JobStatus.Running;
             settings.Job.Started = DateTime.Now;
+            settings.Job.JobName = $"Generating campaign data for {settings.Count} campaign(s)";
 
             try
             {
-                settings.Job.Status = "Publishing...";
-                PublishService.PublishSmart();
-
-                IndexService.IndexContactLists(settings.Job);
-
                 CreateDataForAllCampaigns(settings.Job, settings);
 
                 settings.Job.JobStatus = JobStatus.Complete;
@@ -115,6 +113,7 @@ namespace ExperienceGenerator.Exm.Services
                 {
                     Log.Error($"EXM Generator failed for campaign: {keyValuePair.Key}", ex, this);
                     job.LastException = ex.ToString();
+                    throw;
                 }
             }
         }
@@ -124,28 +123,17 @@ namespace ExperienceGenerator.Exm.Services
             var campaignId = keyValuePair.Key;
             var campaign = keyValuePair.Value;
 
-            LogCreateDataStartForCampaign(job, campaignId);
+            var campaignItem = Context.Database.GetItem(new ID(campaignId));
+            job.JobName = $"Generating data for campaign {campaignItem.Name}";
             try
             {
-                var createDataService = new CreateDataService(campaignId, campaign);
+                var createDataService = new GenerateCampaignDataService(campaignId, campaign);
                 createDataService.CreateData(job);
             }
             finally
             {
-                LogCreateDataEndForCampaign(job, campaignId);
+                job.JobName = "";
             }
-
-        }
-
-        private void LogCreateDataEndForCampaign(Job job, Guid campaignId)
-        {
-            job.JobName = "";
-        }
-
-        private void LogCreateDataStartForCampaign(Job job, Guid campaignId)
-        {
-            var campaignItem = Context.Database.GetItem(new ID(campaignId));
-            job.JobName = $"Generating Data for campaign {campaignItem.Name}";
         }
 
 

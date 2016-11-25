@@ -26,7 +26,7 @@ using Constants = Sitecore.Modules.EmailCampaign.Core.Constants;
 
 namespace ExperienceGenerator.Exm.Services
 {
-    public class CreateDataService
+    public class GenerateCampaignDataService
     {
         private readonly RandomContactMessageEventsFactory _randomContactMessageEventsFactory;
 
@@ -36,7 +36,7 @@ namespace ExperienceGenerator.Exm.Services
         private readonly ContactListRepository _contactListRepository;
         private readonly AdjustEmailStatisticsService _adjustEmailStatisticsService;
 
-        public CreateDataService(Guid exmCampaignId, CampaignSettings campaign)
+        public GenerateCampaignDataService(Guid exmCampaignId, CampaignSettings campaign)
         {
             _campaign = campaign;
             _exmCampaignId = exmCampaignId;

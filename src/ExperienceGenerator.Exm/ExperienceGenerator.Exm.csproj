@@ -62,6 +62,9 @@
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MongoDB.Driver">
+      <HintPath>..\packages\mongocsharpdriver.1.10.0\lib\net35\MongoDB.Driver.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -94,6 +97,9 @@
       <HintPath>..\packages\Sitecore.Analytics.MongoDB.NoReferences.8.2.160729\lib\NET452\Sitecore.Analytics.MongoDB.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Sitecore.Analytics.Processing">
+      <HintPath>..\packages\Sitecore.Analytics.Processing.NoReferences.8.2.160729\lib\NET452\Sitecore.Analytics.Processing.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.Analytics.Sql, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Sitecore.Analytics.Sql.NoReferences.8.2.160729\lib\NET452\Sitecore.Analytics.Sql.dll</HintPath>
       <Private>True</Private>
@@ -124,6 +130,10 @@
     </Reference>
     <Reference Include="Sitecore.EmailCampaign.Analytics.Model, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Sitecore.EmailCampaign.Analytics.Model.NoReferences.3.4.161028\lib\NET452\Sitecore.EmailCampaign.Analytics.Model.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.EmailCampaign.Cd, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.EmailCampaign.Cd.NoReferences.3.4.161028\lib\NET452\Sitecore.EmailCampaign.Cd.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Sitecore.EmailCampaign.Cm, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -237,6 +247,7 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="sitecore\EndSession.aspx" />
     <Content Include="sitecore\shell\client\Applications\ExmExperienceGenerator\CustomMultiSelectList.js" />
     <Content Include="sitecore\shell\client\Applications\ExmExperienceGenerator\DataRepository.js" />
     <Content Include="sitecore\shell\client\Applications\ExmExperienceGenerator\dialogs\EmailCampaignEditor.js" />
@@ -269,8 +280,7 @@
     <Compile Include="Controllers\ExmEventsController.cs" />
     <Compile Include="Controllers\ExmJobsController.cs" />
     <Compile Include="Models\ExmGeneratorSettings.cs" />
-    <Compile Include="Models\FakeData.cs" />
-    <Compile Include="Models\GeoData.cs" />
+    <Compile Include="Models\RequestHeaderInfo.cs" />
     <Compile Include="Models\Funnel.cs" />
     <Compile Include="Infrastructure\SitecoreRouteInitializer.cs" />
     <Compile Include="Models\Job.cs" />
@@ -290,8 +300,14 @@
     <Compile Include="Services\GenerateEventService.cs" />
     <Compile Include="Models\MessageContactEvent.cs" />
     <Compile Include="Services\IndexService.cs" />
-    <Compile Include="Services\PublishService.cs" />
     <Compile Include="Services\UnlockListService.cs" />
+    <Compile Include="sitecore\EndSession.aspx.cs">
+      <DependentUpon>EndSession.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sitecore\EndSession.aspx.designer.cs">
+      <DependentUpon>EndSession.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Templates.cs" />
   </ItemGroup>
   <ItemGroup>

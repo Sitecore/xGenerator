@@ -15,6 +15,9 @@ namespace ExperienceGenerator.Data
         public static IEnumerable<string> ReadLinesFromResource<TAssembly>(string path, bool zipped = false)
         {
             var stream = typeof(TAssembly).Assembly.GetManifestResourceStream(path);
+            if (stream == null)
+                throw new ArgumentNullException(nameof(stream));
+
             if (zipped)
             {
                 stream = new GZipStream(stream, CompressionMode.Decompress);

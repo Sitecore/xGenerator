@@ -94,7 +94,6 @@
             },
 
             createList: function() {
-                var self = this;
                 var name = this.ListName.attributes.text;
                 var recipients = parseInt(this.ListCount.attributes.text);
                 console.log(name);
@@ -108,7 +107,7 @@
                 console.log(this.data);
 
                 this.data = JSON.stringify(this.data);
-                var that = this;
+                var self = this;
                 $.ajax({
                         url: "/api/xgen/exmjobs/CreateList",
                         type: "POST",
@@ -118,7 +117,7 @@
                         success: function() {}
                     })
                     .done(function(data) {
-                        that.running(data);
+                        self.running(data);
                     })
                     .fail(function(data) {
                         alert(data.responseJSON.Message);
@@ -136,11 +135,10 @@
 
             // Run exm jobs
             start: function() {
-                if (this.jobId) {
+                if (this.isRunning()) {
                     if (!confirm("A job is already running. Start anyway?"))
                         return;
-                    _sc.off("intervalCompleted:ProgressBar");
-                    this.jobId = undefined;
+                    this.stopped();
                 }
                 var checkedItems = this.SentCampaignsList.get("checkedItems");
                 var checkedItemsNo = checkedItems.length;
@@ -158,7 +156,7 @@
                     }
                     requestData[itemId] = this.adaptDayDistribution(settings);
                 }
-                var that = this;
+                var self = this;
                 $.ajax({
                         url: "/api/xgen/exmjobs/CreateCampaignData",
                         type: "POST",
@@ -168,7 +166,7 @@
                         success: function() {}
                     })
                     .done(function(data) {
-                        that.running(data);
+                        self.running(data);
                     })
                     .fail(function(data) {
                         alert(data.responseJSON.Message);
@@ -180,7 +178,18 @@
                 _sc.on("intervalCompleted:ProgressBar", this.updateJobStatus, this);
             },
 
+            isRunning: function() {
+                return this.jobId;
+            },
+
+            stopped: function() {
+                _sc.off("intervalCompleted:ProgressBar");
+                this.jobId = undefined;
+            },
+
             stop: function() {
+                if (!this.isRunning())
+                    return;
                 var jobId = this.jobId;
                 var self = this;
                 $.ajax({
@@ -188,9 +197,8 @@
                         type: "GET"
                     })
                     .done(function() {
-                        self.jobId = undefined;
                         self.StatusText.set("text", "Stopped!");
-                        _sc.off("intervalCompleted:ProgressBar");
+                        self.stopped();
                     });
             },
             pause: function() {
@@ -199,7 +207,9 @@
             deleteData: function() {
                 console.error("Delete isn't supported");
             },
-            updateJobStatus: function() {
+            updateJobStatus: function () {
+                if (!this.isRunning())
+                    return;
                 var jobId = this.jobId;
                 var self = this;
                 console.log("Update job status for job: " + jobId);
@@ -215,7 +225,7 @@
                         self.CampaignCountText.set("text", data.JobName);
                         self.StatusText.set("text", data.Status);
                         if (data.JobStatus >= 4 || data.JobStatus === "Completed") {
-                            _sc.off("intervalCompleted:ProgressBar");
+                            self.stopped();
                         }
                     });
             },
