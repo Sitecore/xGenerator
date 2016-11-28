@@ -96,9 +96,29 @@ namespace ExperienceGenerator.Exm.Services
 
         private static void GenerateBounce(string hostName, Guid contactId, MessageItem message, DateTime dateTime)
         {
-            var url = $"{hostName}/api/xgen/exmevents/GenerateBounce?contactId={contactId}&messageId={message.MessageId}&date={dateTime.ToString("u")}";
+            var eventHandlePath = GetEventHandlePath(EventType.Bounce);
+            var url = $"{hostName}{eventHandlePath}?contactId={contactId}&messageId={message.MessageId}&date={dateTime.ToString("u")}";
             if (!RequestUrl(url).IsSuccessful)
                 Errors++;
+        }
+
+        public static string GetEventHandlePath(EventType eventType)
+        {
+            switch (eventType)
+            {
+                case EventType.Open:
+                    return "/sitecore/RegisterEmailOpened.ashx";
+                case EventType.Unsubscribe:
+                case EventType.UnsubscribeFromAll:
+                case EventType.Click:
+                    return "/sitecore/RedirectUrlPage.aspx";
+                case EventType.Bounce:
+                    return "/api/xgen/exmevents/GenerateBounce";
+                case EventType.SpamComplaint:
+                    return null;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(eventType), eventType, null);
+            }
         }
 
         private static async void GenerateSpamComplaint(string hostName, Guid contactId, MessageItem message, DateTime dateTime)
@@ -117,22 +137,22 @@ namespace ExperienceGenerator.Exm.Services
 
         public static void GenerateHandlerEvent(string hostName, Guid contactId, MessageItem messageItem, EventType eventType, DateTime dateTime, string userAgent, WhoIsInformation geoData, string link)
         {
-            string eventHandler;
+            string eventHandlerPath;
             switch (eventType)
             {
                 case EventType.Open:
-                    eventHandler = "RegisterEmailOpened.ashx";
+                    eventHandlerPath = GetEventHandlePath(EventType.Open);
                     break;
                 case EventType.Unsubscribe:
-                    eventHandler = "RedirectUrlPage.aspx";
+                    eventHandlerPath = GetEventHandlePath(EventType.Unsubscribe);
                     link = "/sitecore/Unsubscribe.aspx";
                     break;
                 case EventType.UnsubscribeFromAll:
-                    eventHandler = "RedirectUrlPage.aspx";
+                    eventHandlerPath = GetEventHandlePath(EventType.UnsubscribeFromAll);
                     link = "/sitecore/UnsubscribeFromAll.aspx";
                     break;
                 case EventType.Click:
-                    eventHandler = "RedirectUrlPage.aspx";
+                    eventHandlerPath = GetEventHandlePath(EventType.Click);
                     break;
                 case EventType.Bounce:
                     GenerateBounce(hostName, contactId, messageItem, dateTime);
@@ -149,7 +169,7 @@ namespace ExperienceGenerator.Exm.Services
 
             var parameters = encryptedQueryString.ToQueryString(true);
 
-            var url = $"{hostName}/sitecore/{eventHandler}{parameters}";
+            var url = $"{hostName}{eventHandlerPath}{parameters}";
             var fakeData = new RequestHeaderInfo
                            {
                                UserAgent = userAgent,

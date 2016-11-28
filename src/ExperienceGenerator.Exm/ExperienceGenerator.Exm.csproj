@@ -140,6 +140,10 @@
       <HintPath>..\packages\Sitecore.EmailCampaign.Cm.NoReferences.3.4.161028\lib\NET452\Sitecore.EmailCampaign.Cm.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Sitecore.EmailCampaign.Cm.UI, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.EmailCampaign.Cm.UI.NoReferences.3.4.161028\lib\NET452\Sitecore.EmailCampaign.Cm.UI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Sitecore.EmailCampaign.Content, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Sitecore.EmailCampaign.Content.NoReferences.3.4.161028\lib\NET452\Sitecore.EmailCampaign.Content.dll</HintPath>
       <Private>True</Private>
@@ -271,6 +275,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ExmActionsController.cs" />
+    <Compile Include="Infrastructure\UpdateFakeGeoData.cs" />
     <Compile Include="Models\ListSettings.cs" />
     <Compile Include="Infrastructure\LinqExtensions.cs" />
     <Compile Include="Infrastructure\PatchTracker.cs" />

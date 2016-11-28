@@ -43,20 +43,33 @@ namespace ExperienceGenerator.Exm.Repositories
             return _campaign.Devices.ToDictionary(kvp => devices[kvp.Key], kvp => kvp.Value);
         }
 
-        private string GetRandomUserAgent()
+        private string GetRandomUserAgent(City addCityKey)
         {
             if (_userAgents == null)
                 _userAgents = GetAllUserAgents();
-            return _userAgents.Weighted().Invoke();
+            var userAgent = _userAgents.Weighted().Invoke();
+
+            var cityUserAgent = $"city:{addCityKey.GeoNameId}";
+            var lastComment = userAgent.LastIndexOf(")", StringComparison.Ordinal);
+            if (lastComment == -1)
+            {
+                userAgent += $"({cityUserAgent})";
+            }
+            else
+            {
+                userAgent = $"{userAgent.Substring(0, lastComment)}; {cityUserAgent}{userAgent.Substring(lastComment)}";
+            }
+            return userAgent;
         }
 
-        private WhoIsInformation GetRandomGeoData()
+        private City GetRandomCity()
         {
             if (_getRandomRegion == null)
             {
-                _getRandomRegion = _campaign.Locations.Select(x => x.Key).Weighted(_campaign.Locations.Values.Select(i => (double)i).ToArray());
+                _getRandomRegion = _campaign.Locations.Select(x => x.Key).Weighted(_campaign.Locations.Values.Select(i => (double) i).ToArray());
             }
-            return _getRandomCityService.GetRandomCity(_getRandomRegion()).ToWhoIsInformation();
+            var randomCity = _getRandomCityService.GetRandomCity(_getRandomRegion());
+            return randomCity;
         }
 
         [NotNull]
@@ -66,6 +79,9 @@ namespace ExperienceGenerator.Exm.Repositories
             var events = new List<MessageContactEvent>();
             messageContactEvents.Events = events;
             messageContactEvents.MessageItem = messageItem;
+            var randomCity = GetRandomCity();
+            messageContactEvents.GeoData = randomCity.ToWhoIsInformation();
+            messageContactEvents.UserAgent = GetRandomUserAgent(randomCity);
 
             var contact = _contactRepository.GetContact(contactData.ContactId);
             if (contact == null)
@@ -84,8 +100,6 @@ namespace ExperienceGenerator.Exm.Repositories
             }
             else
             {
-                messageContactEvents.UserAgent = GetRandomUserAgent();
-                messageContactEvents.GeoData = GetRandomGeoData();
                 var eventTime = GetRandomEventTime(messageItem);
 
                 if (RandomizeOpenEvent(funnel))

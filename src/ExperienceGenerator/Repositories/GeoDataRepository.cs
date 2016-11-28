@@ -10,6 +10,7 @@ namespace ExperienceGenerator.Repositories
     {
         private static GeoDataCache _cache;
         private static readonly object _lock = new object();
+        private List<City> _cities;
 
         private static GeoDataCache Cache
         {
@@ -23,13 +24,17 @@ namespace ExperienceGenerator.Repositories
         }
 
 
-        public List<City> Cities => Cache.Cities;
+        public List<City> Cities => _cities ?? (_cities = Cache.Cities.ToList());
         public List<Continent> Continents => Cache.Continents;
         public List<Country> Countries => Cache.Countries.Values.ToList();
 
         public List<City> CitiesByCountry(int isoNumeric)
         {
             return Cache.CitiesByCountry[isoNumeric].ToList();
+        }
+        public City CityByID(int id)
+        {
+            return Cache.Cities.FirstOrDefault(c => c.GeoNameId == id);
         }
     }
 }

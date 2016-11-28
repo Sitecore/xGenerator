@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using Colossus;
 using Newtonsoft.Json;
 using Sitecore.Analytics.Model;
-using Sitecore.Diagnostics;
 
 namespace ExperienceGenerator.Data
 {
@@ -20,7 +20,6 @@ namespace ExperienceGenerator.Data
         public string RegionCode { get; set; }
         public int? Population { get; set; }
         public string TimeZone { get; set; }
-
         public Country Country { get; set; }
 
         [JsonIgnore]
@@ -31,17 +30,17 @@ namespace ExperienceGenerator.Data
         public static City FromCsv(string[] row, Dictionary<string, Country> countries, List<Region> regions, Dictionary<string, string> timeZones)
         {
             var city = new City
-                   {
-                       GeoNameId = int.Parse(row[0]),
-                       CountryCode = row[1].ToUpperInvariant(),
-                       AsciiName = row[2],
-                       Name = row[3],
-                       RegionCode = row[4],
-                       Population = IfSpecified(row[5], s => int.Parse(s, _defaultCultureInfo)),
-                       Latitude = IfSpecified(row[6], s => double.Parse(s, _defaultCultureInfo)),
-                       Longitude = IfSpecified(row[7], s => double.Parse(s, _defaultCultureInfo)),
-                       TimeZone = row[8]
-                   };
+                       {
+                           GeoNameId = int.Parse(row[0]),
+                           CountryCode = row[1].ToUpperInvariant(),
+                           AsciiName = row[2],
+                           Name = row[3],
+                           RegionCode = row[4],
+                           Population = IfSpecified(row[5], s => int.Parse(s, _defaultCultureInfo)),
+                           Latitude = IfSpecified(row[6], s => double.Parse(s, _defaultCultureInfo)),
+                           Longitude = IfSpecified(row[7], s => double.Parse(s, _defaultCultureInfo)),
+                           TimeZone = row[8]
+                       };
 
             if (!countries.ContainsKey(city.CountryCode))
                 return null;
@@ -59,6 +58,10 @@ namespace ExperienceGenerator.Data
             return city;
         }
 
+        /// <summary>
+        /// Generates a fake IP address to make this city identifiable
+        /// </summary>
+        /// <returns></returns>
         private static TimeZoneInfo GetTimeZone(Dictionary<string, string> timeZonesNames, string id)
         {
             var windowsName = timeZonesNames.GetOrDefault(id);

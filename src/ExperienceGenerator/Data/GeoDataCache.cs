@@ -48,7 +48,7 @@ namespace ExperienceGenerator.Data
             return countries.Values.Where(x => citiesByCountry.ContainsKey(x.IsoNumeric)).ToDictionary(x => x.Iso);
         }
 
-        private static Dictionary<int, City[]> GetCitiesByCountry(List<City> cities)
+        private static Dictionary<int, City[]> GetCitiesByCountry(IEnumerable<City> cities)
         {
             return cities.GroupBy(c => c.Country.IsoNumeric).ToDictionary(c => c.Key, c => c.ToArray());
         }
@@ -103,9 +103,7 @@ namespace ExperienceGenerator.Data
         {
             var linesFromResource = FileHelpers.ReadLinesFromResource<GeoDataCache>("ExperienceGenerator.Data.cities.txt");
             var cityObjects = linesFromResource.Select(l => City.FromCsv(l.Split('\t'), countries, regions, timeZones)).Where(c => c != null);
-            var cities = cityObjects.OrderBy(c => c.Population).ToList();
-
-            return cities;
+            return cityObjects.OrderByDescending(c => c.Population).ToList();
         }
 
         private static Dictionary<string, Country> LoadCountriesFromResource(List<Region> regions)

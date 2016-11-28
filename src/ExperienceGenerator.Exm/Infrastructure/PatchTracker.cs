@@ -50,7 +50,9 @@ namespace ExperienceGenerator.Exm.Infrastructure
 			if (fakeData.GeoData != null)
 			{
 				args.Session.Interaction.SetGeoData(fakeData.GeoData);
-			}
+                args.Session.Interaction.UpdateLocationReference();
+
+            }
 		}
 	}
 }
