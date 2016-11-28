@@ -29,7 +29,8 @@ namespace ExperienceGenerator.Data
         public string ContinentCode { get; set; }
         public string SubcontinentCode { get; set; }
 
-        private static CultureInfo enUs = CultureInfo.GetCultureInfo("en-US");
+        private static readonly CultureInfo _defaultCulture = CultureInfo.GetCultureInfo("en-US");
+
         public static Country FromCsv(string[] row)
         {
             var index = 0;
@@ -41,7 +42,7 @@ namespace ExperienceGenerator.Data
                 Fips = row[index++],
                 Name = row[index++],
                 Capital = row[index++],
-                Area = IfSpecified(row[index++], s=>double.Parse(s, enUs)),
+                Area = IfSpecified(row[index++], s=>double.Parse(s, _defaultCulture)),
                 Population = IfSpecified(row[index++], int.Parse),
                 Continent = row[index++],
                 TopLevelDomain = row[index++],
@@ -53,7 +54,7 @@ namespace ExperienceGenerator.Data
                 Languages = row[index++].Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries),
                 GeoNameId = IfSpecified(row[index++], int.Parse),
                 Neighbours = row[index++].Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries),
-                EquivalentFipsCode = row[index++]
+                EquivalentFipsCode = row[index]
             };
         }
 

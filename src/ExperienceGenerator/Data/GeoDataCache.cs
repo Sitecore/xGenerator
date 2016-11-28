@@ -1,12 +1,16 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Resources;
 using Colossus;
 using Sitecore.Diagnostics;
+using Sitecore.ExperienceAnalytics.Api;
 
 namespace ExperienceGenerator.Data
 {
-    public class GeoData
+    internal class GeoDataCache
     {
         public Dictionary<string, Country> Countries { get; set; }
         public List<City> Cities { get; set; }
@@ -14,25 +18,19 @@ namespace ExperienceGenerator.Data
         public Dictionary<int, City[]> CitiesByCountry { get; set; }
         public List<Continent> Continents { get; set; }
 
-        private static TimeZoneInfo GetTimeZone(Dictionary<string, string> timeZonesNames, string id)
+        public static GeoDataCache FromResource()
         {
-            var windowsName = timeZonesNames.GetOrDefault(id);
-            return windowsName == null ? TimeZoneInfo.Local : TimeZoneInfo.FindSystemTimeZoneById(windowsName);
-        }
-
-        public static GeoData FromResource()
-        {
-            var continents = LoadContinentsFromResource();
-            var countries = LoadCountriesFromResource();
-            var timeZones = LoadTimeZonesFromResource();
             var regions = LoadRegionsFromResource();
+            var continents = LoadContinentsFromResource();
+            var countries = LoadCountriesFromResource(regions);
+            var timeZones = LoadTimeZonesFromResource();
             var cities = LoadCitiesFromResource(countries, regions, timeZones);
 
             var citiesByCountry = GetCitiesByCountry(cities);
 
             countries = ReduceToCountriesWithCities(countries, citiesByCountry);
 
-            return new GeoData
+            return new GeoDataCache
                    {
                        Countries = countries,
                        Cities = cities,
@@ -82,7 +80,7 @@ namespace ExperienceGenerator.Data
 
         private static Dictionary<string, string> LoadTimeZonesFromResource()
         {
-            var timeZoneNames = FileHelpers.ReadLinesFromResource<GeoData>("ExperienceGenerator.Data.timezones.txt").Skip(1).Select(l => l.Split('\t')).Select(row => new
+            var timeZoneNames = FileHelpers.ReadLinesFromResource<GeoDataCache>("ExperienceGenerator.Data.timezones.txt").Skip(1).Select(l => l.Split('\t')).Select(row => new
                                                                                                                                                                       {
                                                                                                                                                                           TzId = row[2],
                                                                                                                                                                           Windows = row[0]
@@ -103,26 +101,20 @@ namespace ExperienceGenerator.Data
 
         private static List<City> LoadCitiesFromResource(Dictionary<string, Country> countries, List<Region> regions, Dictionary<string, string> timeZones)
         {
-            var cities = FileHelpers.ReadLinesFromResource<GeoData>("ExperienceGenerator.Data.cities15000.txt").Skip(1).Where(l => !l.StartsWith("#")).Select(l => City.FromCsv(l.Split('\t'))).OrderBy(c => c.Population).ToList();
-
-            foreach (var city in cities)
-            {
-                city.Country = countries[city.CountryCode];
-                city.TimeZoneInfo = GetTimeZone(timeZones, city.TimeZone);
-                var region = regions.FirstOrDefault(r => r.CountryCode == city.CountryCode && r.RegionCode == city.RegionCode);
-                if (region == null)
-                {
-                    Log.Warn($"Region '{city.RegionCode}' for country '{city.CountryCode} {city.Country}' does not exist in Sitecore", city);
-                    city.RegionCode = "";
-                }
-            }
+            var linesFromResource = FileHelpers.ReadLinesFromResource<GeoDataCache>("ExperienceGenerator.Data.cities.txt");
+            var cityObjects = linesFromResource.Select(l => City.FromCsv(l.Split('\t'), countries, regions, timeZones)).Where(c => c != null);
+            var cities = cityObjects.OrderBy(c => c.Population).ToList();
 
             return cities;
         }
 
-        private static Dictionary<string, Country> LoadCountriesFromResource()
+        private static Dictionary<string, Country> LoadCountriesFromResource(List<Region> regions)
         {
-            var countries = FileHelpers.ReadLinesFromResource<GeoData>("ExperienceGenerator.Data.countryInfo.txt").Where(l => !l.StartsWith("#")).Select(l => Country.FromCsv(l.Split('\t'))).ToDictionary(c => c.Iso);
+            var linesFromResource = FileHelpers.ReadLinesFromResource<GeoDataCache>("ExperienceGenerator.Data.countryInfo.txt");
+            var excludingComments = linesFromResource.Where(l => !l.StartsWith("#"));
+            var countryObjects = excludingComments.Select(l => Country.FromCsv(l.Split('\t')));
+            var excludingWithoutRegions = countryObjects.Where(c => regions.Any(r => r.CountryCode == c.Iso));
+            var countries = excludingWithoutRegions.ToDictionary(c => c.Iso);
 
             FixCountryDomains(countries);
 
@@ -133,22 +125,43 @@ namespace ExperienceGenerator.Data
 
         private static List<Region> LoadRegionsFromResource()
         {
-            var regions = FileHelpers.ReadLinesFromResource<GeoData>("ExperienceGenerator.Data.SitecoreRegions.txt").Select(l => Region.FromCsv(l.Split('\t'))).ToList();
-
-            return regions;
+            var resources = new ResourceManager("Sitecore.ExperienceAnalytics.Api.Resources.RegionResources", typeof(IReportingService).Assembly);
+            using (var resourceSet = resources.GetResourceSet(CultureInfo.InvariantCulture, true, true))
+            {
+                return resourceSet.Cast<DictionaryEntry>().Select(CreateRegionFromResource).ToList();
+            }
         }
 
-        private static void SetContinentOnContries(Dictionary<string, Country> countries)
+        private static Region CreateRegionFromResource(DictionaryEntry resource)
         {
-            foreach (var row in FileHelpers.ReadLinesFromResource<GeoData>("ExperienceGenerator.Data.CountriesByContinent.txt").Where(l => l[0] != '#').Select(l => l.Split('\t')))
+            var keys = ((string) resource.Key).Split('_');
+            var regionName = (string) resource.Value;
+            return new Region()
             {
-                if (string.IsNullOrEmpty(row[3]) || string.IsNullOrEmpty(row[7]) || string.IsNullOrEmpty(row[8]))
+                CountryCode = keys[0],
+                RegionCode = keys[1],
+                Name = regionName
+            };
+        }
+
+        private static void SetContinentOnContries(IReadOnlyDictionary<string, Country> countries)
+        {
+            var linesFromResource = FileHelpers.ReadLinesFromResource<GeoDataCache>("ExperienceGenerator.Data.CountriesByContinent.txt");
+            var excludingComments = linesFromResource.Where(l => l[0] != '#');
+            var toColumns = excludingComments.Select(l => l.Split('\t'));
+            foreach (var row in toColumns)
+            {
+                var countryCode = row[1];
+                var continentCode = row[7];
+                var subcontinentCode = row[8];
+
+                if (string.IsNullOrEmpty(countryCode) || string.IsNullOrEmpty(continentCode) || string.IsNullOrEmpty(subcontinentCode))
                     continue;
-                var country = countries.Values.FirstOrDefault(c => c.IsoNumeric == int.Parse(row[3]));
-                if (country == null)
+                if (!countries.ContainsKey(countryCode ))
                     continue;
-                country.ContinentCode = row[7];
-                country.SubcontinentCode = row[8];
+                var country = countries[countryCode];
+                country.ContinentCode = continentCode;
+                country.SubcontinentCode = subcontinentCode;
             }
         }
 

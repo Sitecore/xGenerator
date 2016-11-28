@@ -10,7 +10,6 @@ namespace ExperienceGenerator.Data
     {
         public string Code { get; set; }
         public string Name { get; set; }
-
         public IEnumerable<Continent> SubContinents { get; set; }
     }
 }

@@ -8,16 +8,16 @@ namespace ExperienceGenerator.Repositories
 {
     public class GeoDataRepository
     {
-        private static GeoData _cache;
+        private static GeoDataCache _cache;
         private static readonly object _lock = new object();
 
-        private static GeoData Cache
+        private static GeoDataCache Cache
         {
             get
             {
                 lock (_lock)
                 {
-                    return _cache ?? (_cache = GeoData.FromResource());
+                    return _cache ?? (_cache = GeoDataCache.FromResource());
                 }
             }
         }

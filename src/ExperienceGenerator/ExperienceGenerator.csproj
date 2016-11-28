@@ -60,6 +60,10 @@
       <HintPath>..\packages\Sitecore.ContentSearch.Analytics.NoReferences.8.2.160729\lib\NET452\Sitecore.ContentSearch.Analytics.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Sitecore.ExperienceAnalytics.Api, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.ExperienceAnalytics.Api.NoReferences.8.2.160729\lib\NET452\Sitecore.ExperienceAnalytics.Api.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Sitecore.Kernel, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Sitecore.Kernel.NoReferences.8.2.160729\lib\NET452\Sitecore.Kernel.dll</HintPath>
       <Private>True</Private>
@@ -86,7 +90,7 @@
     <Compile Include="Data\Continent.cs" />
     <Compile Include="Data\Region.cs" />
     <Compile Include="Services\GetRandomCityService.cs" />
-    <Compile Include="Data\GeoData.cs" />
+    <Compile Include="Data\GeoDataCache.cs" />
     <Compile Include="Data\GeoVariables.cs" />
     <Compile Include="Data\ItemInfoClient.cs" />
     <Compile Include="JobInfo.cs" />
@@ -130,7 +134,6 @@
     <EmbeddedResource Include="Data\timezones.txt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Data\cities15000.txt" />
     <EmbeddedResource Include="Data\countryInfo.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -143,10 +146,7 @@
     <EmbeddedResource Include="Data\devices.txt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Data\SitecoreRegions.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Data\ImportantCities.txt" />
+    <EmbeddedResource Include="Data\cities.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
