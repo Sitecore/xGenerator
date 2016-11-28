@@ -96,7 +96,17 @@ SharedFields:
           uid="{7A907A84-E626-4024-B79C-3507C50D319B}" />
         <r
           id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
-          par="Id=CampaignsBorder&amp;PaddingType=Top&amp;UsePadding=1"
+          par="Id=InstructionsBorder&amp;PaddingType=All&amp;UsePadding=1&amp;ShowBorder=1"
+          ph="Main.Content"
+          uid="{6DA1287A-9CA9-481B-BB45-BEE4E201DC56}" />
+        <r
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
+          par="Id=InstructionsText&amp;TextType=Label&amp;Text=This+tool+will+send+to+the+recipients+assigned+to+the+selected+campaign.+To+send+to+new+recipients%3a+generate+new+contact+lists+by+using+the+%22List+Generation%22+in+the+right+column+and+assign+these+manually+to+the+campaigns.+Please+make+sure+all+lists+are+processed+and+unlocked+before+generating+data+for+a+campaign."
+          ph="InstructionsBorder.Content"
+          uid="{4670AFCB-CA58-4CD2-A5E8-74D944EB1705}" />
+        <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=CampaignsBorder&amp;PaddingType=Top&amp;UsePadding=1&amp;ShowBorder=0"
           ph="Main.Content"
           uid="{433B1F1D-A095-4EA3-888B-28DEBB07E153}" />
         <r
@@ -143,29 +153,24 @@ SharedFields:
           uid="{941DFA91-8C55-4695-BD10-97FF25E78AA7}" />
         <r
           id="{5CB208F6-1860-426B-8221-FAA85B329848}"
-          par="Id=ColumnPanel1&amp;GridColumns=9"
+          par="Id=ColumnPanel&amp;GridColumns=12"
           ph="SummaryRow.Content"
-          uid="{139F49C2-A501-48B5-9FD3-488110E3F18B}" />
+          uid="{BC94EAF9-2221-47C4-9AA0-19B56A4D4BA7}" />
         <r
           id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
           par="Id=CampaignCountText"
-          ph="ColumnPanel1.Content"
+          ph="ColumnPanel.Content"
           uid="{B62DBAAC-AA82-4616-B751-B42FBC2481B7}" />
         <r
           id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
           par="Id=StatusTextBorder"
-          ph="ColumnPanel1.Content"
+          ph="ColumnPanel.Content"
           uid="{0392641F-55B7-4A38-85EE-191FEA65BCFE}" />
         <r
           id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
           par="Id=StatusText"
           ph="StatusTextBorder.Content"
           uid="{D3DD3EB2-9B86-4393-9EB9-B4721E16AEB2}" />
-        <r
-          id="{5CB208F6-1860-426B-8221-FAA85B329848}"
-          par="Id=ColumnPanel2&amp;GridColumns=3"
-          ph="SummaryRow.Content"
-          uid="{F1F1DC11-98E3-4A75-AA62-E607549C8F3E}" />
         <r
           id="{5CB208F6-1860-426B-8221-FAA85B329848}"
           par="Id=ColumnPanel5&amp;GridColumns=12"

@@ -61,30 +61,5 @@ namespace ExperienceGenerator.Exm.Controllers
                                                                                                   })
                                                       }).ToList();
         }
-
-        //[HttpPost]
-        //public IHttpActionResult Flush()
-        //{
-        //   var driver = new MongoDbDriver(ConfigurationManager.ConnectionStrings["analytics"].ConnectionString);
-        //   driver.ResetDatabase();
-
-        //   var item = (Context.ContentDatabase ?? Context.Database).GetItem("/sitecore/media library/Images/xgen");
-        //   item?.Delete();
-
-        //   var sql = new SqlReportingStorageProvider("reporting");
-        //   sql.DeleteAllReportingData();
-
-
-        //   var index = ContentSearchManager.GetIndex(CustomerIntelligenceConfig.ContactSearch.SearchIndexName);
-        //   index.Reset();
-        //   index.Refresh();
-        //   using (var ctx = index.CreateUpdateContext())
-        //   {
-        //     ctx.Optimize();
-        //   }
-
-        //   return Ok();
-
-        // }
     }
 }

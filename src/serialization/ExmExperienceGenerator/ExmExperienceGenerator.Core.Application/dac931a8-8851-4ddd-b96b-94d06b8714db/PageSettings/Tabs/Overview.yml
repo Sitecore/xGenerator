@@ -124,66 +124,13 @@ SharedFields:
           uid="{56FA8F1E-7704-43B8-81C5-11C854F55FA2}" />
         <r
           id="{5CB208F6-1860-426B-8221-FAA85B329848}"
-          par="Id=UniqueOpenRate&amp;GridColumns=4"
+          par="Id=Row3Column1&amp;GridColumns=4"
           ph="RowPanel3.Content"
-          uid="{2C04DFA3-F9B8-4771-AB14-80A300B667C1}" />
-        <r
-          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
-          par="Id=UniqueOpenRateBorder&amp;PaddingType=Top"
-          ph="UniqueOpenRate.Content"
-          uid="{24DFFA55-5596-49CC-99C7-CE8F30B0B3A0}" />
-        <r
-          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
-          par="Id=UniqueOpenRateText&amp;Text=Unique+Open+Rate"
-          ph="UniqueOpenRateBorder.Content"
-          uid="{15F54ED5-6C07-46AB-A308-5AE9840089A9}" />
-        <r
-          ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
-          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
-          par="Type=range&amp;Id=UniqueOpenRateDistribution"
-          ph="UniqueOpenRateBorder.Content"
-          uid="{BDA49151-1076-4C29-97CA-A8AA8CC23753}" />
-        <r
-          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
-          par="Id=UniqueClickRateBorder&amp;PaddingType=Top"
-          ph="UniqueOpenRate.Content"
-          uid="{93D6C5B1-272F-40CA-BDFC-1DB180C7C2B4}" />
-        <r
-          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
-          par="Id=UniqueClickRateText&amp;Text=Unique+Click+Rate"
-          ph="UniqueClickRateBorder.Content"
-          uid="{0A2DDE78-DB22-46FD-933C-60200554860D}" />
-        <r
-          ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
-          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
-          par="Type=range&amp;Id=UniqueClickRateDistribution"
-          ph="UniqueClickRateBorder.Content"
-          uid="{DDF6394B-610B-412D-9AF3-DFFDB5241313}" />
-        <r
-          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
-          par="Id=BouncedBorder&amp;PaddingType=Top"
-          ph="UniqueOpenRate.Content"
-          uid="{40339463-99EF-4FB5-B51B-B8E4E28E6701}" />
-        <r
-          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
-          par="Id=BouncedText&amp;Text=Bounced"
-          ph="BouncedBorder.Content"
-          uid="{63350CFA-007E-4540-A946-83151378E3BB}" />
-        <r
-          ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
-          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
-          par="Type=range&amp;Id=BouncedDistribution"
-          ph="BouncedBorder.Content"
-          uid="{290C5864-121D-4D1D-8271-761518BF2B75}" />
-        <r
-          id="{5CB208F6-1860-426B-8221-FAA85B329848}"
-          par="Id=OpenRate&amp;GridColumns=4"
-          ph="RowPanel3.Content"
-          uid="{F7EA76AB-3C41-4350-9B60-7B2D3BEB37AB}" />
+          uid="{DDA9AB6E-5C80-4674-92DA-D598A1B0E3F5}" />
         <r
           id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
           par="Id=OpenRateBorder&amp;PaddingType=Top"
-          ph="OpenRate.Content"
+          ph="Row3Column1.Content"
           uid="{60E45B7B-463C-478C-AFD0-43A3991C397E}" />
         <r
           id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
@@ -199,7 +146,7 @@ SharedFields:
         <r
           id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
           par="Id=ClickRateBorder&amp;PaddingType=Top"
-          ph="OpenRate.Content"
+          ph="Row3Column1.Content"
           uid="{72D77942-682A-4DF1-9808-317DBD6D61ED}" />
         <r
           id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
@@ -213,9 +160,30 @@ SharedFields:
           ph="ClickRateBorder.Content"
           uid="{AB86AD44-074E-4E5E-BE15-14B8ED1691FE}" />
         <r
+          id="{5CB208F6-1860-426B-8221-FAA85B329848}"
+          par="Id=Row3Column2&amp;GridColumns=4"
+          ph="RowPanel3.Content"
+          uid="{F7EA76AB-3C41-4350-9B60-7B2D3BEB37AB}" />
+        <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=BouncedBorder&amp;PaddingType=Top"
+          ph="Row3Column2.Content"
+          uid="{40339463-99EF-4FB5-B51B-B8E4E28E6701}" />
+        <r
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
+          par="Id=BouncedText&amp;Text=Bounced"
+          ph="BouncedBorder.Content"
+          uid="{63350CFA-007E-4540-A946-83151378E3BB}" />
+        <r
+          ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
+          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
+          par="Type=range&amp;Id=BouncedDistribution"
+          ph="BouncedBorder.Content"
+          uid="{290C5864-121D-4D1D-8271-761518BF2B75}" />
+        <r
           id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
           par="Id=UnsubscribedBorder&amp;PaddingType=Top"
-          ph="OpenRate.Content"
+          ph="Row3Column2.Content"
           uid="{93C748CD-58A9-4FD4-9576-5B3F4DA2B999}" />
         <r
           id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
@@ -229,29 +197,30 @@ SharedFields:
           ph="UnsubscribedBorder.Content"
           uid="{CAA9CCB4-84E3-4778-B69B-AB749FCF86F7}" />
         <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=UnsubscribedFromAllBorder&amp;PaddingType=Top"
+          ph="Row3Column2.Content"
+          uid="{F57F2D67-9A38-4650-98EC-FFAB79DBA372}" />
+        <r
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
+          par="Id=UnsubscribedFromAllText&amp;Text=Unsubscribed+from+all"
+          ph="UnsubscribedFromAllBorder.Content"
+          uid="{B546628F-13D0-4192-B5EE-735FFF6B7CC8}" />
+        <r
+          ds="{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}"
+          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
+          par="Type=range&amp;Id=UnsubscribedFromAllDistribution"
+          ph="UnsubscribedFromAllBorder.Content"
+          uid="{1F190872-F537-413D-A3D6-C4284B6021BF}" />
+        <r
           id="{5CB208F6-1860-426B-8221-FAA85B329848}"
-          par="Id=SentColumn&amp;GridColumns=4"
+          par="Id=Row3Column3&amp;GridColumns=4"
           ph="RowPanel3.Content"
           uid="{7DACD46F-703C-4CDC-B0BE-CF5D7F77C2E1}" />
         <r
           id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
-          par="Id=TotalSentBorder&amp;PaddingType=Top"
-          ph="SentColumn.Content"
-          uid="{0084DFA1-5BAB-4C55-8FFB-5D5D49B6DDCD}" />
-        <r
-          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
-          par="Id=TotalSentText&amp;Text=Total+Sent"
-          ph="TotalSentBorder.Content"
-          uid="{048D192D-62E5-46DE-8191-740C2ED04425}" />
-        <r
-          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
-          par="Type=text&amp;Id=TotalSent"
-          ph="TotalSentBorder.Content"
-          uid="{18B49702-BC9A-49C2-8D89-C1C00C2EADC5}" />
-        <r
-          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
           par="Id=DeliveredBorder&amp;PaddingType=Top"
-          ph="SentColumn.Content"
+          ph="Row3Column3.Content"
           uid="{7A04191B-57DA-4BF2-A72B-9BCDC72EB367}" />
         <r
           id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
@@ -267,7 +236,7 @@ SharedFields:
         <r
           id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
           par="Id=SpamComplaintsBorder&amp;PaddingType=Top"
-          ph="SentColumn.Content"
+          ph="Row3Column3.Content"
           uid="{E0DA8381-E96D-4FC4-91A5-1CC91F9B9304}" />
         <r
           id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"

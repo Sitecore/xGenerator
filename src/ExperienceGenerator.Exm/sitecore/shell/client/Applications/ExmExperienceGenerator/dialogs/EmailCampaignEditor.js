@@ -70,13 +70,11 @@
           startDate: this.StartDate.viewModel.getDate().toISOString(),
           endDate: this.EndDate.viewModel.getDate().toISOString(),
           events: {
-            uniqueOpenRate: this.UniqueOpenRateDistribution.get("text"),
-            uniqueClickRate: this.UniqueClickRateDistribution.get("text"),
             bounced: this.BouncedDistribution.get("text"),
             openRate: this.OpenRateDistribution.get("text"),
             clickRate: this.ClickRateDistribution.get("text"),
             unsubscribed: this.UnsubscribedDistribution.get("text"),
-            totalSent: this.TotalSent.get("text"),
+            unsubscribedFromAll: this.UnsubscribedFromAllDistribution.get("text"),
             delivered: this.DeliveredDistribution.get("text"),
             spamComplaints: this.SpamComplaintsDistribution.get("text")
           },
@@ -123,13 +121,11 @@
         this.setDayDistribution(editingParameters.dayDistribution);
 
         var events = editingParameters.events;
-        this.UniqueOpenRateDistribution.set("text", events.uniqueOpenRate);
-        this.UniqueClickRateDistribution.set("text", events.uniqueClickRate);
         this.BouncedDistribution.set("text", events.bounced);
         this.OpenRateDistribution.set("text", events.openRate);
         this.ClickRateDistribution.set("text", events.clickRate);
         this.UnsubscribedDistribution.set("text", events.unsubscribed);
-        this.TotalSent.set("text", events.totalSent);
+        this.UnsubscribedFromAllDistribution.set("text", events.unsubscribedFromAll);
         this.DeliveredDistribution.set("text", events.delivered);
         this.SpamComplaintsDistribution.set("text", events.spamComplaints);
 
