@@ -167,6 +167,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ExperienceGeneratorActionsController.cs" />
     <Compile Include="Controllers\ExperienceGeneratorJobsController.cs" />
+    <Compile Include="Controllers\SiteRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

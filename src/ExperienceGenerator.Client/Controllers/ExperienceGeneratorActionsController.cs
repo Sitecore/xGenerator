@@ -27,45 +27,19 @@ namespace ExperienceGenerator.Client.Controllers
     public class ExperienceGeneratorActionsController : ApiController
     {
         private readonly GeoDataRepository _getDataRepository;
+        private readonly SiteRepository _siteRepository;
 
         public ExperienceGeneratorActionsController()
         {
+            _siteRepository = new SiteRepository();
             _getDataRepository = new GeoDataRepository();
-        }
-
-        private static SiteInfo[] GetSites(bool all)
-        {
-            var excludedSites = new HashSet<string>();
-
-            var exportNode = Factory.GetConfigNode("experienceGenerator/excludeSites") as XmlElement;
-            if (exportNode != null)
-            {
-                var sites = exportNode.SelectNodes("site");
-                if (sites != null)
-                {
-                    foreach (var site in sites.OfType<XmlElement>())
-                    {
-                        excludedSites.Add(site.GetAttribute("name"));
-                    }
-                }
-            }
-
-
-            return SiteManager.GetSites().Select(s => new SiteContext(new Sitecore.Web.SiteInfo(s.Properties))).Select(site => new SiteInfo
-                                                                                                                               {
-                                                                                                                                   Id = site.Name,
-                                                                                                                                   Host = StringUtil.GetString(site.TargetHostName.Split('|')[0], site.HostName.Split('|')[0]),
-                                                                                                                                   StartPath = site.RootPath + site.StartItem,
-                                                                                                                                   Label = site.Name,
-                                                                                                                                   Database = site.Database != null ? site.Database.Name : ""
-                                                                                                                               }).Where(site => all || !excludedSites.Contains(site.Id)).ToArray();
         }
 
 
         [HttpGet]
         public IEnumerable<SiteInfo> Websites(bool all = false)
         {
-            return GetSites(all);
+            return all ? _siteRepository.Sites : _siteRepository.ValidSites;
         }
 
 
@@ -88,7 +62,7 @@ namespace ExperienceGenerator.Client.Controllers
                     Language.TryParse(language, out itemLanguage);
                 }
 
-                yield return ItemInfo.FromItem(item, GetSites(false).Select(w => w.Id), maxDepth, itemLanguage);
+                yield return ItemInfo.FromItem(item, _siteRepository.ValidSites.Select(w => w.Id), maxDepth, itemLanguage);
             }
         }
 
@@ -99,7 +73,7 @@ namespace ExperienceGenerator.Client.Controllers
             var options = new ConfigurationOptions
                           {
                               TrackerIsEnabled = !Settings.GetBoolSetting("ExperienceGenerator.DistributedEnvironment", false),
-                              Websites = GetSites(false).Select(s => new SelectionOption
+                              Websites = _siteRepository.ValidSites.Select(s => new SelectionOption
                                                                      {
                                                                          Id = s.Id,
                                                                          Label = s.Label,
@@ -107,7 +81,6 @@ namespace ExperienceGenerator.Client.Controllers
                                                                      }).ToList(),
                               LocationGroups = Locations()
                           };
-
 
 
             var db = Database.GetDatabase("master");
@@ -189,15 +162,15 @@ namespace ExperienceGenerator.Client.Controllers
         public List<SelectionOptionGroup> Locations()
         {
             return _getDataRepository.Continents.Select(continent => new SelectionOptionGroup
-                                                      {
-                                                          Label = continent.Name,
-                                                          Options = continent.SubContinents.Select(x => new SelectionOption
-                                                                                                  {
-                                                                                                      Id = x.Code,
-                                                                                                      Label = x.Name,
-                                                                                                      DefaultWeight = 50
-                                                                                                  })
-                                                      }).ToList();
+                                                                     {
+                                                                         Label = continent.Name,
+                                                                         Options = continent.SubContinents.Select(x => new SelectionOption
+                                                                                                                       {
+                                                                                                                           Id = x.Code,
+                                                                                                                           Label = x.Name,
+                                                                                                                           DefaultWeight = 50
+                                                                                                                       })
+                                                                     }).ToList();
         }
 
         private static IEnumerable<SelectionOptionGroup> SelectChannelGroups(Item channelsRoot)
