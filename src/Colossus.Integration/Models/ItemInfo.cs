@@ -75,7 +75,7 @@ namespace Colossus.Integration.Models
                 foreach (var website in websites)
                 {
                     Context.SetActiveSite(website);
-                    var options = LinkManager.GetDefaultUrlOptions();                    
+                    var options = LinkManager.GetDefaultUrlOptions();
                     options.AlwaysIncludeServerUrl = true;
                     if (language != null)
                     {

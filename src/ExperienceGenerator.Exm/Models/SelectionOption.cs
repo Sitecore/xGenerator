@@ -1,14 +1,14 @@
 ﻿namespace ExperienceGenerator.Exm.Models
 {
-  public class SelectionOption
-  {
-    public string Id { get; set; }
-    public string Label { get; set; }
-    public double DefaultWeight { get; set; }
-
-    public SelectionOption()
+    public class SelectionOption
     {
-      this.DefaultWeight = 50;
+        public string Id { get; set; }
+        public string Label { get; set; }
+        public double DefaultWeight { get; set; }
+
+        public SelectionOption()
+        {
+            DefaultWeight = 50;
+        }
     }
-  }
 }

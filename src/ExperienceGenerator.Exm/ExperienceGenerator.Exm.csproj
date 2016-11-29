@@ -35,6 +35,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -60,6 +61,9 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="MongoDB.Driver">
+      <HintPath>..\packages\mongocsharpdriver.1.10.0\lib\net35\MongoDB.Driver.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -93,6 +97,9 @@
       <HintPath>..\packages\Sitecore.Analytics.MongoDB.NoReferences.8.2.160729\lib\NET452\Sitecore.Analytics.MongoDB.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Sitecore.Analytics.Processing">
+      <HintPath>..\packages\Sitecore.Analytics.Processing.NoReferences.8.2.160729\lib\NET452\Sitecore.Analytics.Processing.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.Analytics.Sql, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Sitecore.Analytics.Sql.NoReferences.8.2.160729\lib\NET452\Sitecore.Analytics.Sql.dll</HintPath>
       <Private>True</Private>
@@ -125,8 +132,16 @@
       <HintPath>..\packages\Sitecore.EmailCampaign.Analytics.Model.NoReferences.3.4.161028\lib\NET452\Sitecore.EmailCampaign.Analytics.Model.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Sitecore.EmailCampaign.Cd, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.EmailCampaign.Cd.NoReferences.3.4.161028\lib\NET452\Sitecore.EmailCampaign.Cd.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Sitecore.EmailCampaign.Cm, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Sitecore.EmailCampaign.Cm.NoReferences.3.4.161028\lib\NET452\Sitecore.EmailCampaign.Cm.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.EmailCampaign.Cm.UI, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.EmailCampaign.Cm.UI.NoReferences.3.4.161028\lib\NET452\Sitecore.EmailCampaign.Cm.UI.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Sitecore.EmailCampaign.Content, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -236,12 +251,12 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="sitecore\EndSession.aspx" />
     <Content Include="sitecore\shell\client\Applications\ExmExperienceGenerator\CustomMultiSelectList.js" />
     <Content Include="sitecore\shell\client\Applications\ExmExperienceGenerator\DataRepository.js" />
     <Content Include="sitecore\shell\client\Applications\ExmExperienceGenerator\dialogs\EmailCampaignEditor.js" />
     <Content Include="sitecore\shell\client\Applications\ExmExperienceGenerator\ExmGenerator.js" />
     <Content Include="sitecore\shell\client\Applications\ExmExperienceGenerator\ExmExperienceGenerator.css" />
-    <Content Include="sitecore\shell\client\Applications\ExmExperienceGenerator\JobManager.js" />
     <Content Include="sitecore\shell\client\Applications\ExmExperienceGenerator\uiUtils.js" />
   </ItemGroup>
   <ItemGroup>
@@ -260,27 +275,44 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ExmActionsController.cs" />
-    <Compile Include="Infrastructure\ExmPatchTracker.cs" />
+    <Compile Include="Infrastructure\UpdateFakeGeoData.cs" />
+    <Compile Include="Models\ListSettings.cs" />
+    <Compile Include="Infrastructure\LinqExtensions.cs" />
+    <Compile Include="Infrastructure\PatchTracker.cs" />
     <Compile Include="Infrastructure\PatchExmDateTimes.cs" />
-    <Compile Include="Models\CampaignModel.cs" />
+    <Compile Include="Infrastructure\ShortGuid.cs" />
+    <Compile Include="Models\CampaignSettings.cs" />
     <Compile Include="Controllers\ExmEventsController.cs" />
-    <Compile Include="Controllers\ExperienceGeneratorExmJobsController.cs" />
-    <Compile Include="Models\ExmDataPreparationModel.cs" />
-    <Compile Include="Models\ExmFakeData.cs" />
-    <Compile Include="Models\ExmGeoData.cs" />
+    <Compile Include="Controllers\ExmJobsController.cs" />
+    <Compile Include="Models\ExmGeneratorSettings.cs" />
+    <Compile Include="Models\RequestHeaderInfo.cs" />
     <Compile Include="Models\Funnel.cs" />
     <Compile Include="Infrastructure\SitecoreRouteInitializer.cs" />
-    <Compile Include="Models\ExmJob.cs" />
+    <Compile Include="Models\Job.cs" />
     <Compile Include="Models\Preset.cs" />
     <Compile Include="Models\SelectionOption.cs" />
     <Compile Include="Models\SelectionOptionGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Models\MessageContactEvents.cs" />
+    <Compile Include="Repositories\RandomContactMessageEventsFactory.cs" />
     <Compile Include="Repositories\SettingsRepository.cs" />
-    <Compile Include="Services\ExmContactService.cs" />
-    <Compile Include="Services\ExmDataPreparationService.cs" />
-    <Compile Include="Services\ExmEventsGenerator.cs" />
-    <Compile Include="Services\ExmJobManager.cs" />
-    <Compile Include="Services\ExmListService.cs" />
+    <Compile Include="Services\AdjustEmailStatsService.cs" />
+    <Compile Include="Repositories\ContactRepository.cs" />
+    <Compile Include="Services\CreateDataService.cs" />
+    <Compile Include="Services\EventType.cs" />
+    <Compile Include="Services\JobManager.cs" />
+    <Compile Include="Repositories\ContactListRepository.cs" />
+    <Compile Include="Services\GenerateEventService.cs" />
+    <Compile Include="Models\MessageContactEvent.cs" />
+    <Compile Include="Services\IndexService.cs" />
+    <Compile Include="Services\UnlockListService.cs" />
+    <Compile Include="sitecore\EndSession.aspx.cs">
+      <DependentUpon>EndSession.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sitecore\EndSession.aspx.designer.cs">
+      <DependentUpon>EndSession.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Templates.cs" />
   </ItemGroup>
   <ItemGroup>

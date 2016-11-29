@@ -8,21 +8,21 @@ namespace ExperienceGenerator.Data
     public class GeoVariables : VisitorVariablesBase
     {
         public bool AdjustToTimeZone { get; set; }
-        private readonly Func<City> _city;
+        private readonly Func<City> _getCity;
 
-        public GeoVariables(Func<City> city, bool adjustToTimeZone = false)
+        public GeoVariables(Func<City> getCity, bool adjustToTimeZone = false)
         {
             AdjustToTimeZone = adjustToTimeZone;
-            _city = city;
+            _getCity = getCity;
         }
 
         public override void SetValues(SimulationObject target)
         {
-            var city = _city();
+            var city = _getCity();
             if (city == null) return;
             target.Variables["Country"] = city.CountryCode;
             target.Variables["Continent"] = city.Country.Continent;
-            target.Variables["Region"] = city.Admin1;
+            target.Variables["Region"] = city.RegionCode;
             target.Variables["City"] = city.AsciiName;
             target.Variables["Tld"] = city.Country.TopLevelDomain;
             target.Variables["DomainPostfix"] = city.Country.DomainPostFix;
@@ -32,26 +32,19 @@ namespace ExperienceGenerator.Data
             target.Variables["Currency"] = city.Country.CurrencyCode;
             target.Variables["TimeZone"] = city.TimeZoneInfo.StandardName;
 
-            if (AdjustToTimeZone)
-            {
-                target.Start = DateTime.SpecifyKind(target.Start, DateTimeKind.Utc);
-                target.End = DateTime.SpecifyKind(target.End, DateTimeKind.Utc);
+            if (!AdjustToTimeZone)
+                return;
+            target.Start = DateTime.SpecifyKind(target.Start, DateTimeKind.Utc);
+            target.End = DateTime.SpecifyKind(target.End, DateTimeKind.Utc);
 
-                target.Start = TimeZoneInfo.ConvertTimeFromUtc(target.Start, city.TimeZoneInfo);
-                target.End = TimeZoneInfo.ConvertTimeFromUtc(target.End, city.TimeZoneInfo);
-              }
-            }
-
-        public override IEnumerable<string> ProvidedVariables
-        {
-            get
-            {
-                return new[]
-                {
-                    "Country", "Continent", "Region", "City", "Tld", "DomainPostfix", "Latitude", "Longitude",
-                    "Currency", "TimeZone"
-                };
-            }
+            target.Start = TimeZoneInfo.ConvertTimeFromUtc(target.Start, city.TimeZoneInfo);
+            target.End = TimeZoneInfo.ConvertTimeFromUtc(target.End, city.TimeZoneInfo);
         }
+
+        public override IEnumerable<string> ProvidedVariables => new[]
+                                                                 {
+                                                                     "Country", "Continent", "Region", "City", "Tld", "DomainPostfix", "Latitude", "Longitude",
+                                                                     "Currency", "TimeZone"
+                                                                 };
     }
 }

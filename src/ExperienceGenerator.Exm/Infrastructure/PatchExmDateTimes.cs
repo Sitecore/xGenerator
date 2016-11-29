@@ -13,7 +13,7 @@ namespace ExperienceGenerator.Exm.Infrastructure
     {
         public override void Process(CommitSessionPipelineArgs args)
         {
-            Assert.ArgumentNotNull(args, "args");
+            Assert.ArgumentNotNull(args, nameof(args));
             Assert.IsNotNull(args.Session, "args.Session");
             Assert.IsNotNull(args.Session.Interaction, "args.Session.Interaction");
 

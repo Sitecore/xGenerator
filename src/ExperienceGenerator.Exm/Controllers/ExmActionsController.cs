@@ -4,6 +4,7 @@ using System.Web.Http;
 using ExperienceGenerator.Data;
 using ExperienceGenerator.Exm.Models;
 using ExperienceGenerator.Exm.Repositories;
+using ExperienceGenerator.Repositories;
 using Newtonsoft.Json.Linq;
 using Sitecore.Data;
 
@@ -11,6 +12,13 @@ namespace ExperienceGenerator.Exm.Controllers
 {
     public class ExmActionsController : ApiController
     {
+        private readonly GeoDataRepository _geoDataRepository;
+
+        public ExmActionsController()
+        {
+            _geoDataRepository = new GeoDataRepository();
+        }
+
         [HttpGet]
         public IHttpActionResult PresetQuery()
         {
@@ -42,41 +50,16 @@ namespace ExperienceGenerator.Exm.Controllers
         [HttpGet]
         public List<SelectionOptionGroup> Locations()
         {
-            return GeoRegion.Regions.Select(region => new SelectionOptionGroup
+            return _geoDataRepository.Continents.Select(continent => new SelectionOptionGroup
                                                       {
-                                                          Label = region.Label,
-                                                          Options = region.SubRegions.Select(x => new SelectionOption
+                                                          Label = continent.Name,
+                                                          Options = continent.SubContinents.Select(x => new SelectionOption
                                                                                                   {
-                                                                                                      Id = x.Id,
-                                                                                                      Label = x.Label,
+                                                                                                      Id = x.Code,
+                                                                                                      Label = x.Name,
                                                                                                       DefaultWeight = 50
                                                                                                   })
                                                       }).ToList();
         }
-
-        //[HttpPost]
-        //public IHttpActionResult Flush()
-        //{
-        //   var driver = new MongoDbDriver(ConfigurationManager.ConnectionStrings["analytics"].ConnectionString);
-        //   driver.ResetDatabase();
-
-        //   var item = (Context.ContentDatabase ?? Context.Database).GetItem("/sitecore/media library/Images/xgen");
-        //   item?.Delete();
-
-        //   var sql = new SqlReportingStorageProvider("reporting");
-        //   sql.DeleteAllReportingData();
-
-
-        //   var index = ContentSearchManager.GetIndex(CustomerIntelligenceConfig.ContactSearch.SearchIndexName);
-        //   index.Reset();
-        //   index.Refresh();
-        //   using (var ctx = index.CreateUpdateContext())
-        //   {
-        //     ctx.Optimize();
-        //   }
-
-        //   return Ok();
-
-        // }
     }
 }

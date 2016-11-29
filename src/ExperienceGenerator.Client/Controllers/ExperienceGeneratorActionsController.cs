@@ -8,6 +8,7 @@ using ExperienceGenerator.Client.Models;
 using ExperienceGenerator.Client.Repositories;
 using ExperienceGenerator.Data;
 using ExperienceGenerator.Models;
+using ExperienceGenerator.Repositories;
 using Newtonsoft.Json.Linq;
 using Sitecore;
 using Sitecore.Analytics.Aggregation;
@@ -25,39 +26,20 @@ namespace ExperienceGenerator.Client.Controllers
 {
     public class ExperienceGeneratorActionsController : ApiController
     {
-        private static SiteInfo[] GetSites(bool all)
+        private readonly GeoDataRepository _getDataRepository;
+        private readonly SiteRepository _siteRepository;
+
+        public ExperienceGeneratorActionsController()
         {
-            var excludedSites = new HashSet<string>();
-
-            var exportNode = Factory.GetConfigNode("experienceGenerator/excludeSites") as XmlElement;
-            if (exportNode != null)
-            {
-                var sites = exportNode.SelectNodes("site");
-                if (sites != null)
-                {
-                    foreach (var site in sites.OfType<XmlElement>())
-                    {
-                        excludedSites.Add(site.GetAttribute("name"));
-                    }
-                }
-            }
-
-
-            return SiteManager.GetSites().Select(s => new SiteContext(new Sitecore.Web.SiteInfo(s.Properties))).Select(site => new SiteInfo
-                                                                                                                               {
-                                                                                                                                   Id = site.Name,
-                                                                                                                                   Host = StringUtil.GetString(site.TargetHostName.Split('|')[0], site.HostName.Split('|')[0]),
-                                                                                                                                   StartPath = site.RootPath + site.StartItem,
-                                                                                                                                   Label = site.Name,
-                                                                                                                                   Database = site.Database != null ? site.Database.Name : ""
-                                                                                                                               }).Where(site => all || !excludedSites.Contains(site.Id)).ToArray();
+            _siteRepository = new SiteRepository();
+            _getDataRepository = new GeoDataRepository();
         }
 
 
         [HttpGet]
         public IEnumerable<SiteInfo> Websites(bool all = false)
         {
-            return GetSites(all);
+            return all ? _siteRepository.Sites : _siteRepository.ValidSites;
         }
 
 
@@ -80,7 +62,7 @@ namespace ExperienceGenerator.Client.Controllers
                     Language.TryParse(language, out itemLanguage);
                 }
 
-                yield return ItemInfo.FromItem(item, GetSites(false).Select(w => w.Id), maxDepth, itemLanguage);
+                yield return ItemInfo.FromItem(item, _siteRepository.ValidSites.Select(w => w.Id), maxDepth, itemLanguage);
             }
         }
 
@@ -88,17 +70,18 @@ namespace ExperienceGenerator.Client.Controllers
         [HttpGet]
         public ConfigurationOptions Options()
         {
-            var options = new ConfigurationOptions();
+            var options = new ConfigurationOptions
+                          {
+                              TrackerIsEnabled = !Settings.GetBoolSetting("ExperienceGenerator.DistributedEnvironment", false),
+                              Websites = _siteRepository.ValidSites.Select(s => new SelectionOption
+                                                                     {
+                                                                         Id = s.Id,
+                                                                         Label = s.Label,
+                                                                         DefaultWeight = s.Id == "website" ? 100 : 50
+                                                                     }).ToList(),
+                              LocationGroups = Locations()
+                          };
 
-            options.TrackerIsEnabled = !Settings.GetBoolSetting("ExperienceGenerator.DistributedEnvironment", false);
-
-            options.Websites = GetSites(false).Select(s => new SelectionOption
-                                                           {
-                                                               Id = s.Id,
-                                                               Label = s.Label,
-                                                               DefaultWeight = s.Id == "website" ? 100 : 50
-                                                           }).ToList();
-            options.LocationGroups = Locations();
 
             var db = Database.GetDatabase("master");
             var channels = db.GetItem(KnownItems.ChannelsRoot);
@@ -178,16 +161,16 @@ namespace ExperienceGenerator.Client.Controllers
         [HttpGet]
         public List<SelectionOptionGroup> Locations()
         {
-            return GeoRegion.Regions.Select(region => new SelectionOptionGroup
-                                                      {
-                                                          Label = region.Label,
-                                                          Options = region.SubRegions.Select(x => new SelectionOption
-                                                                                                  {
-                                                                                                      Id = x.Id,
-                                                                                                      Label = x.Label,
-                                                                                                      DefaultWeight = 50
-                                                                                                  })
-                                                      }).ToList();
+            return _getDataRepository.Continents.Select(continent => new SelectionOptionGroup
+                                                                     {
+                                                                         Label = continent.Name,
+                                                                         Options = continent.SubContinents.Select(x => new SelectionOption
+                                                                                                                       {
+                                                                                                                           Id = x.Code,
+                                                                                                                           Label = x.Name,
+                                                                                                                           DefaultWeight = 50
+                                                                                                                       })
+                                                                     }).ToList();
         }
 
         private static IEnumerable<SelectionOptionGroup> SelectChannelGroups(Item channelsRoot)
@@ -261,13 +244,13 @@ namespace ExperienceGenerator.Client.Controllers
         [HttpGet]
         public List<Country> Countries()
         {
-            return new GeoDataRepository().GetCountries();
+            return new GeoDataRepository().Countries;
         }
 
         [HttpGet]
         public List<City> Cities(int id)
         {
-            return new GeoDataRepository().GetCities(id);
+            return new GeoDataRepository().CitiesByCountry(id);
         }
 
 
@@ -305,33 +288,6 @@ namespace ExperienceGenerator.Client.Controllers
             }
 
             return Ok();
-        }
-    }
-
-    public class GeoDataRepository
-    {
-        private static GeoData _cache;
-        private static readonly object _lock = new object();
-
-        private static GeoData Cache
-        {
-            get
-            {
-                lock (_lock)
-                {
-                    return _cache ?? (_cache = GeoData.FromResource());
-                }
-            }
-        }
-
-        public List<Country> GetCountries()
-        {
-            return Cache.Countries.Values.ToList();
-        }
-
-        public List<City> GetCities(int isoNumeric)
-        {
-            return Cache.CitiesByCountry[isoNumeric].ToList();
         }
     }
 }

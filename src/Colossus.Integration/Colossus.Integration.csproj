@@ -87,6 +87,10 @@
       <HintPath>..\packages\Sitecore.Cintel.Client.NoReferences.8.2.160729\lib\NET452\Sitecore.Cintel.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Sitecore.ContentTesting, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.ContentTesting.NoReferences.8.2.160729\lib\NET452\Sitecore.ContentTesting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Sitecore.ExperienceAnalytics, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Sitecore.ExperienceAnalytics.NoReferences.8.2.160729\lib\NET452\Sitecore.ExperienceAnalytics.dll</HintPath>
       <Private>True</Private>

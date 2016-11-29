@@ -57,6 +57,10 @@
       <HintPath>..\..\packages\mongocsharpdriver.1.10.0\lib\net35\MongoDB.Driver.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Sitecore.Analytics, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Sitecore.Analytics.NoReferences.8.2.160729\lib\NET452\Sitecore.Analytics.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Sitecore.Analytics.Model, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Sitecore.Analytics.Model.NoReferences.8.2.160729\lib\NET452\Sitecore.Analytics.Model.dll</HintPath>
       <Private>True</Private>
@@ -120,6 +124,7 @@
     <Compile Include="Commands\UpdateAnalytics.cs" />
     <Compile Include="Installer\PostSteps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\RebuildAnalyticsIndexService.cs" />
     <Compile Include="Repositories\UpdateAnalyticsRepository.cs" />
     <Compile Include="sitecore\admin\RebuildAnalyticsIndex.aspx.cs">
       <DependentUpon>RebuildAnalyticsIndex.aspx</DependentUpon>
