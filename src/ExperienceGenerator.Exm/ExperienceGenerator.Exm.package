@@ -32,8 +32,6 @@
         <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/PageTitle/{87A66A81-2372-4B80-9C28-2632664B76E7}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Sliders/{40DC87DE-206B-460C-BAB7-7F23A23BD51B}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Texts/{08AD1B64-5C46-46A8-A643-C26397C5B8CC}/invariant/0</x-item>
-        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Buttons/Delete/{47D56F80-4490-4958-B586-EA520F642599}/invariant/0</x-item>
-        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Buttons/Pause/{63C3D671-3694-4997-8F2F-B972AB3CECD6}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Buttons/Start/{FA21A68C-EB97-4BC2-8DBA-9DF171C94CF6}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Buttons/Stop/{33433CC7-F370-4628-A7D6-01BE892AAA9F}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/DatePickers/DatePicker Parameters/{15762826-BD8D-4C6B-AE1D-19DCF8DAF0B9}/invariant/0</x-item>
