@@ -35,20 +35,28 @@ namespace Colossus.Integration
                 return;
             }
 
-            var requestInfo = HttpContext.Current.ColossusInfo();
-            if (requestInfo == null)
+            try
             {
-                if (PatchExmRequestTime(args)) return;
-            }
+                var requestInfo = HttpContext.Current.ColossusInfo();
+                if (requestInfo == null)
+                {
+                    if (PatchExmRequestTime(args)) return;
+                }
 
-            if (requestInfo == null)
-            {
-                return;
-            }
+                if (requestInfo == null)
+                {
+                    return;
+                }
 
-            foreach (var patcher in Patchers)
+                foreach (var patcher in Patchers)
+                {
+                    patcher.UpdateSession(args.Session, requestInfo);
+                }
+            }
+            catch (Exception ex)
             {
-                patcher.UpdateSession(args.Session, requestInfo);
+                //Log but ignore errors to avoid interrupting standard analytics
+                Log.Error("xGenerator PatchTracker failed.", ex);
             }
         }
 

@@ -7,6 +7,7 @@ using ExperienceGenerator.Exm.Models;
 using Newtonsoft.Json;
 using Sitecore.Analytics;
 using Sitecore.Analytics.Pipelines.InitializeTracker;
+using Sitecore.Diagnostics;
 
 namespace ExperienceGenerator.Exm.Infrastructure
 {
@@ -19,14 +20,22 @@ namespace ExperienceGenerator.Exm.Infrastructure
 				return;
 			}
 
-			var requestInfo = HttpContext.Current.ColossusInfo();
-			if (requestInfo == null)
-			{
-				PatchFakeExmData(args);
-			}
-		}
+		    try
+		    {
+			    var requestInfo = HttpContext.Current.ColossusInfo();
+			    if (requestInfo == null)
+			    {
+				    PatchFakeExmData(args);
+			    }
+            }
+            catch (Exception ex)
+            {
+                //Log but ignore errors to avoid interrupting standard analytics
+                Log.Error("EXM PatchTracker failed.", ex);
+            }
+        }
 
-		private void PatchFakeExmData(InitializeTrackerArgs args)
+        private void PatchFakeExmData(InitializeTrackerArgs args)
 		{
 			var fakeDataJson = args.HttpContext.Request.Headers["X-Exm-FakeData"];
 			if (string.IsNullOrEmpty(fakeDataJson))
