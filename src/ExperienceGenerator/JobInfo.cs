@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.UI.WebControls;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
 namespace ExperienceGenerator
 {
-
-    public interface  IJobInfo
+    public interface IJobInfo
     {
         int TargetVisitors { get; }
 
@@ -26,13 +26,16 @@ namespace ExperienceGenerator
         JobSpecification Specification { get; }
 
         [JsonConverter(typeof(StringEnumConverter))]
-        JobStatus JobStatus { get; }        
+        JobStatus JobStatus { get; }
+
+        [JsonConverter(typeof(StringArrayConverter))]
+        string StatusText { get; }
     }
 
     public enum JobStatus
     {
         Pending,
-        Running,  
+        Running,
         Paused,
         Cancelling,
         Cancelled,
@@ -46,54 +49,75 @@ namespace ExperienceGenerator
 
         public string StatusUrl { get; set; }
 
-        public string LastException { get
+        public string LastException
         {
-            return Segments.Select(s => s.LastException).FirstOrDefault(e => e != null);
-        }}
+            get { return Segments.Select(s => s.LastException).FirstOrDefault(e => e != null); }
+        }
 
         public DateTime? Started
         {
-            get { return Segments.Where(s=>s.Started.HasValue).Min(s => s.Started); }
+            get { return Segments.Where(s => s.Started.HasValue).Min(s => s.Started); }
         }
 
         public DateTime? Ended
         {
-            get
-            {
-                return Segments.All(s => s.Ended.HasValue) ? Segments.Max(s => s.Ended) : null;
-            }
+            get { return Segments.All(s => s.Ended.HasValue) ? Segments.Max(s => s.Ended) : null; }
         }
 
         public JobStatus JobStatus
         {
             get
             {
-                if (Segments.All(s => s.JobStatus == JobStatus.Complete)) return JobStatus.Complete;
-                if (Segments.All(s => s.JobStatus == JobStatus.Pending)) return JobStatus.Pending;
-                if (Segments.All(s => s.JobStatus == JobStatus.Paused)) return JobStatus.Paused;
-                if (Segments.Any(s => s.JobStatus == JobStatus.Cancelling)) return JobStatus.Cancelling;
-                if (Segments.Any(s => s.JobStatus == JobStatus.Running)) return JobStatus.Running;                
+                if (Segments.All(s => s.JobStatus == JobStatus.Complete))
+                    return JobStatus.Complete;
+                if (Segments.All(s => s.JobStatus == JobStatus.Pending))
+                    return JobStatus.Pending;
+                if (Segments.All(s => s.JobStatus == JobStatus.Paused))
+                    return JobStatus.Paused;
+                if (Segments.Any(s => s.JobStatus == JobStatus.Cancelling))
+                    return JobStatus.Cancelling;
+                if (Segments.Any(s => s.JobStatus == JobStatus.Running))
+                    return JobStatus.Running;
 
                 return Segments.Min(s => s.JobStatus);
             }
         }
 
-        public int TargetVisitors { get { return Segments.Sum(segment => segment.TargetVisitors); } }
-        public int CompletedVisitors { get { return Segments.Sum(segment => segment.CompletedVisitors); }}
+        public string StatusText
+        {
+            get { return string.Join("\r\n", Segments.Select(s => s.StatusText).ToArray()); }
+        }
+
+        public int TargetVisitors
+        {
+            get { return Segments.Sum(segment => segment.TargetVisitors); }
+        }
+
+        public int CompletedVisitors
+        {
+            get { return Segments.Sum(segment => segment.CompletedVisitors); }
+        }
 
         public double Progress
         {
             get
             {
-                if (TargetVisitors == 0) return 1d;
+                if (TargetVisitors == 0)
+                    return 1d;
                 return CompletedVisitors/(double) TargetVisitors;
             }
         }
 
-        public int CompletedVisits { get { return Segments.Sum(segment => segment.CompletedVisits); } }        
+        public int CompletedVisits
+        {
+            get { return Segments.Sum(segment => segment.CompletedVisits); }
+        }
 
-        public int Exceptions { get { return Segments.Sum(segment => segment.Exceptions); } }
-               
+        public int Exceptions
+        {
+            get { return Segments.Sum(segment => segment.Exceptions); }
+        }
+
         public JobSpecification Specification { get; set; }
 
         public List<JobSegment> Segments { get; set; }
@@ -150,7 +174,6 @@ namespace ExperienceGenerator
         }
 
         public int TargetVisitors { get; set; }
-
         public int CompletedVisitors { get; set; }
         public int CompletedVisits { get; set; }
         public int Exceptions { get; set; }
@@ -158,8 +181,9 @@ namespace ExperienceGenerator
         public DateTime? Started { get; set; }
         public DateTime? Ended { get; set; }
         public JobStatus JobStatus { get; set; }
+        public string StatusText { get; set; }
 
         [JsonIgnore]
-        public JobSpecification Specification { get; set; }        
+        public JobSpecification Specification { get; set; }
     }
 }

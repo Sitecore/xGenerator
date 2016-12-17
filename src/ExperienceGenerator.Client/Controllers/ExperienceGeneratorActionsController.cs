@@ -62,7 +62,7 @@ namespace ExperienceGenerator.Client.Controllers
                     Language.TryParse(language, out itemLanguage);
                 }
 
-                yield return ItemInfo.FromItem(item, _siteRepository.ValidSites.Select(w => w.Id), maxDepth, itemLanguage);
+                yield return ItemInfo.FromItem(item, _siteRepository.ValidSites.Select(w => w.Id), maxDepth ?? 0, itemLanguage);
             }
         }
 

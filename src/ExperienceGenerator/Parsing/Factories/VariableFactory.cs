@@ -8,16 +8,13 @@ namespace ExperienceGenerator.Parsing.Factories
     {
         public virtual void UpdateSegment(VisitorSegment segment, JToken definition, XGenParser parser)
         {
-            
         }
 
         public virtual void SetDefaults(VisitorSegment segment, XGenParser parser)
         {
-            
         }
 
-        public static VariableFactory Lambda(Action<VisitorSegment, JToken, XGenParser> updateSegment = null,
-            Action<VisitorSegment, XGenParser> setDefaults = null)
+        public static VariableFactory Lambda(Action<VisitorSegment, JToken, XGenParser> updateSegment = null, Action<VisitorSegment, XGenParser> setDefaults = null)
         {
             return new LambdaFactory(updateSegment, setDefaults);
         }

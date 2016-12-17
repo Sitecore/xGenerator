@@ -1,77 +1,70 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Colossus;
-using Colossus.Integration;
+using Colossus.Integration.Models;
 using Colossus.Statistics;
-using Newtonsoft.Json.Linq;
 using ExperienceGenerator.Data;
 using ExperienceGenerator.Models;
+using Newtonsoft.Json.Linq;
 
 namespace ExperienceGenerator.Parsing.Factories
 {
-  using Colossus.Integration.Models;
-
-  public class LandingPageFactory : VariableFactory
+    public class LandingPageFactory : VariableFactory
     {
         public override void UpdateSegment(VisitorSegment segment, JToken definition, XGenParser parser)
         {
-            var randomPagePct = definition.Value<double?>("RandomPagePercentage") ?? 0.2;
+            if (definition["Site"] == null || !definition["Site"].Any())
+                throw new Exception($"No sites defined.");
+            var siteId = parser.ParseWeightedSet<string>(definition["Site"]);
 
-            Func<string> siteId = () => "website";
-            if (definition["Site"] != null && definition["Site"].Any())
-            {
-                siteId = parser.ParseWeightedSet<string>(definition["Site"]);
-            }
-
+            var randomPagePct = 1d;
             Func<string> landingPage = () => null;
             if (definition["Item"] != null && definition["Item"].Any())
             {
                 landingPage = parser.ParseWeightedSet<string>(definition["Item"]);
-            }
-            else
-            {
-                randomPagePct = 1d;
+                randomPagePct = definition.Value<double?>("RandomPagePercentage") ?? 0.2;
             }
 
+            var randomPages = GetRandomPages(parser);
+
+            segment.VisitVariables.AddOrReplace(new LandingPageVariable(() =>
+                                                                        {
+                                                                            var page = parser.InfoClient.GetItemInfo(landingPage());
+                                                                            var site = parser.InfoClient.Sites[siteId()];
+                                                                            if (page == null || Randomness.Random.NextDouble() < randomPagePct)
+                                                                            {
+                                                                                return Tuple.Create(site, randomPages[site.Id]());
+                                                                            }
+
+                                                                            for (var i = 0; i < 10 && !page.Path.StartsWith(site.StartPath); i++)
+                                                                            {
+                                                                                site = parser.InfoClient.Sites[siteId()];
+                                                                            }
+
+                                                                            return Tuple.Create(site, page);
+                                                                        }, parser.InfoClient));
+        }
+
+        private Dictionary<string, Func<ItemInfo>> GetRandomPages(XGenParser parser)
+        {
             var randomPages = new Dictionary<string, Func<ItemInfo>>();
 
-            foreach (var site in parser.InfoClient.Sites.Values
-                .Where(s => !string.IsNullOrEmpty(s.StartPath)))
+            foreach (var site in parser.InfoClient.Sites.Values.Where(s => !string.IsNullOrEmpty(s.StartPath)))
             {
                 var root = parser.InfoClient.Query(site.StartPath, maxDepth: null).FirstOrDefault();
                 if (root == null)
                 {
-                    throw new Exception(string.Format("Root item for site {0} does not exist ({1})", site.Id, site.StartPath));
+                    throw new Exception($"Root item for site {site.Id} does not exist ({site.StartPath})");
                 }
                 var homePct = 0.5;
-                if (root.Children.Count == 0) homePct = 1;
-                var other = GetDescendants(root.Children).Select(t => t.Item1)
-                    .Where(item => item.HasLayout).OrderBy(item => Randomness.Random.NextDouble())
-                    .Exponential(0.8, 10);
+                if (root.Children.Count == 0)
+                    homePct = 1;
+                var other = GetDescendants(root.Children).Select(t => t.Item1).Where(item => item.HasLayout).OrderBy(item => Randomness.Random.NextDouble()).Exponential(0.8, 10);
 
                 randomPages[site.Id] = () => Randomness.Random.NextDouble() < homePct ? root : other();
             }
-
-
-            segment.VisitVariables.AddOrReplace(new LandingPageVariable(() =>
-            {
-                var page = parser.InfoClient.GetItemInfo(landingPage());
-                var site = parser.InfoClient.Sites[siteId()];
-                if (page == null || Randomness.Random.NextDouble() < randomPagePct)
-                {
-                    return Tuple.Create(site, randomPages[site.Id]());
-                }
-
-                for (var i = 0; i < 10 && !page.Path.StartsWith(site.StartPath); i++)
-                {
-                    site = parser.InfoClient.Sites[siteId()];
-                }
-
-                return Tuple.Create(site, page);
-            }, parser.InfoClient));
+            return randomPages;
         }
 
         public override void SetDefaults(VisitorSegment segment, XGenParser parser)
@@ -79,7 +72,7 @@ namespace ExperienceGenerator.Parsing.Factories
             UpdateSegment(segment, new JObject(), parser);
         }
 
-        IEnumerable<Tuple<ItemInfo, int>> GetDescendants(IEnumerable<ItemInfo> items, int depth = 1)
+        private IEnumerable<Tuple<ItemInfo, int>> GetDescendants(IEnumerable<ItemInfo> items, int depth = 1)
         {
             foreach (var item in items)
             {
@@ -91,7 +84,7 @@ namespace ExperienceGenerator.Parsing.Factories
             }
         }
 
-        class LandingPageVariable : VisitorVariablesBase
+        private class LandingPageVariable : VisitorVariableBase
         {
             private readonly Func<Tuple<SiteInfo, ItemInfo>> _siteAndItem;
             private readonly ItemInfoClient _itemInfo;
@@ -102,8 +95,8 @@ namespace ExperienceGenerator.Parsing.Factories
                 _siteAndItem = siteAndItem;
                 _itemInfo = itemInfo;
 
-                DependentVariables.Add("Language"); //TODO: Language?
-                DependentVariables.Add("Campaign");
+                DependentVariables.Add(VariableKey.Language); //TODO: Language?
+                DependentVariables.Add(VariableKey.Campaign);
             }
 
             public override void SetValues(SimulationObject target)
@@ -112,39 +105,34 @@ namespace ExperienceGenerator.Parsing.Factories
                 var site = data.Item1;
                 var item = data.Item2;
 
-                target.Variables.Add("Site", site.Id);
+                target.Variables.Add(VariableKey.Site, site.Id);
                 if (!string.IsNullOrEmpty(site.Host))
                 {
-                    target.Variables.Add("Host", "http://" + site.Host.Split('|')[0]);
+                    target.Variables.Add(VariableKey.Host, "http://" + site.Host.Split('|')[0]);
                 }
 
-                var lang = target.GetVariable<string>("Language");
+                var lang = target.GetVariable<string>(VariableKey.Language);
                 if (!string.IsNullOrEmpty(lang) && item.Language != lang)
                 {
                     item = _itemInfo.GetItemInfo(item.Id.ToString(), lang);
                 }
 
-                var url = item.SiteUrls[site.Id].Url;
+                var url = item.SiteUrls[site.Id];
                 if (url.Contains("://"))
                 {
                     url = new Uri(url).PathAndQuery;
                 }
 
-                var campaignId = target.GetVariable<string>("Campaign");
+                var campaignId = target.GetVariable<string>(VariableKey.Campaign);
                 if (!string.IsNullOrEmpty(campaignId))
                 {
                     url += (url.Contains("?") ? "&" : "?") + "sc_camp=" + campaignId;
                 }
 
-                target.Variables.Add("LandingPage", url);
+                target.Variables.Add(VariableKey.LandingPage, url);
             }
 
-            public override IEnumerable<string> ProvidedVariables
-            {
-                get { return new[] { "Site", "Host", "LandingPage" }; }
-            }
-
+            public override IEnumerable<VariableKey> ProvidedVariables => new[] {VariableKey.Site, VariableKey.Host, VariableKey.LandingPage};
         }
-
     }
 }

@@ -8,7 +8,7 @@ namespace Colossus
 {
     public abstract class SimulationObject
     {
-        public Dictionary<string, object> Variables { get; private set; }
+        public Dictionary<VariableKey, object> Variables { get; private set; }
 
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
@@ -19,7 +19,7 @@ namespace Colossus
             Start = DateTime.Now;
             End = DateTime.Now;
 
-            Variables = new Dictionary<string, object>();
+            Variables = new Dictionary<VariableKey, object>();
         }
     }
 }

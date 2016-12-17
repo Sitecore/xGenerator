@@ -99,8 +99,8 @@ namespace Colossus
             var httpRequest = request as HttpWebRequest;
             if (httpRequest != null)
             {                
-                httpRequest.UserAgent = CurrentRequest.GetVariable("UserAgent", "Colossus");
-                httpRequest.Referer = CurrentRequest.GetVariable("Referrer", CurrentRequest.GetVariable("Referer", ""));
+                httpRequest.UserAgent = CurrentRequest.GetVariable(VariableKey.UserAgent, "Colossus");
+                httpRequest.Referer = CurrentRequest.GetVariable(VariableKey.Referrer, CurrentRequest.GetVariable(VariableKey.Referer, ""));
             }
             request.Headers.AddChunked(DataEncoding.RequestDataKey, DataEncoding.EncodeHeaderValue(info));
         }

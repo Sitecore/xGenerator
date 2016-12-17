@@ -1,16 +1,17 @@
-﻿using Sitecore.Globalization;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Sitecore;
+using Sitecore.Configuration;
+using Sitecore.Data.Fields;
+using Sitecore.Data.Items;
+using Sitecore.Globalization;
+using Sitecore.Links;
+using Sitecore.Sites;
 
 namespace Colossus.Integration.Models
 {
-  using System;
-  using System.Collections.Generic;
-  using System.Linq;
-  using Sitecore;
-  using Sitecore.Data.Fields;
-  using Sitecore.Data.Items;
-  using Sitecore.Links;
-
-  public class ItemInfo
+    public class ItemInfo
     {
         public Guid Id { get; set; }
 
@@ -28,7 +29,7 @@ namespace Colossus.Integration.Models
 
         public Guid? ParentId { get; set; }
 
-        public Dictionary<string,ItemUrl> SiteUrls { get; set; }
+        public Dictionary<string, string> SiteUrls { get; set; }
 
         public string Path { get; set; }
         public List<ItemInfo> Children { get; set; }
@@ -37,71 +38,59 @@ namespace Colossus.Integration.Models
 
         public ItemInfo()
         {
-            this.Fields = new Dictionary<string, string>();            
-            this.Children = new List<ItemInfo>();
-            this.SiteUrls = new Dictionary<string, ItemUrl>();
+            Fields = new Dictionary<string, string>();
+            Children = new List<ItemInfo>();
+            SiteUrls = new Dictionary<string, string>();
         }
 
-        public static ItemInfo FromItem(Item item, IEnumerable<string> websites = null, int? maxDepth = null, Language language = null)
+        public static ItemInfo FromItem(Item item, IEnumerable<string> websites = null, int maxDepth = 0, Language language = null)
         {
-            var info = new ItemInfo();
-            info.Id = item.ID.Guid;
-            info.Name = item.Name;            
-            info.DisplayName = item.DisplayName;
-            info.Version = item.Version.Number;
-            info.Language = item.Language.Name;
-            info.Path = item.Paths.FullPath;
-            info.ParentId = item.ParentID.Guid;
-
-            info.TemplateId = item.TemplateID.Guid;
-            info.TemplateName = info.TemplateName;
-
-            info.HasLayout = item.Fields[FieldIDs.LayoutField] != null
-                             && !string.IsNullOrEmpty(item.Fields[FieldIDs.LayoutField].Value);
+            var info = new ItemInfo
+                       {
+                           Id = item.ID.Guid,
+                           Name = item.Name,
+                           DisplayName = item.DisplayName,
+                           Version = item.Version.Number,
+                           Language = item.Language.Name,
+                           Path = item.Paths.FullPath,
+                           ParentId = item.ParentID.Guid,
+                           TemplateId = item.TemplateID.Guid,
+                           HasLayout = item.Fields[FieldIDs.LayoutField] != null && !string.IsNullOrEmpty(item.Fields[FieldIDs.LayoutField].Value)
+                       };
 
             foreach (Field field in item.Fields)
             {
                 info.Fields[field.Name] = field.Value;
             }
 
-            if (!maxDepth.HasValue || maxDepth > 0)
-            {                
-                info.Children = item.Children.Select(child => FromItem(child, websites, maxDepth.HasValue ? maxDepth - 1 : null)).ToList();
+            if (maxDepth > 0)
+            {
+                info.Children = item.Children.Select(child => FromItem(child, websites, maxDepth - 1)).ToList();
             }
 
             if (websites != null)
             {
-                var current = Context.GetSiteName();
-                foreach (var website in websites)
+                foreach (var siteName in websites)
                 {
-                    Context.SetActiveSite(website);
-                    var options = LinkManager.GetDefaultUrlOptions();
-                    options.AlwaysIncludeServerUrl = true;
-                    if (language != null)
-                    {
-                      options.Language = language;
-                    }
+                    var site = Factory.GetSite(siteName);
+                    if (site == null)
+                        continue;
 
-                    info.SiteUrls[website] = new ItemUrl
+                    using (new SiteContextSwitcher(site))
                     {
-                        Url = LinkManager.GetItemUrl(item, options),
-                        InSiteContext = item.Paths.FullPath.StartsWith(Context.Site.RootPath + Context.Site.StartItem)
-                    };
-                }
-                if (!string.IsNullOrEmpty(current))
-                {
-                    Context.SetActiveSite(current);
+                        var options = LinkManager.GetDefaultUrlOptions();
+                        options.AlwaysIncludeServerUrl = true;
+                        if (language != null)
+                        {
+                            options.Language = language;
+                        }
+
+                        info.SiteUrls[siteName] = LinkManager.GetItemUrl(item, options);
+                    }
                 }
             }
 
-
             return info;
         }
-    }
-
-    public class ItemUrl
-    {
-        public string Url { get; set; }
-        public bool InSiteContext { get; set; }
     }
 }

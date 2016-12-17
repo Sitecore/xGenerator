@@ -1,15 +1,15 @@
+using System.Collections.Generic;
+
 namespace Colossus.Integration.Models
 {
-  using System.Collections.Generic;
-
-  public class PageDefinition
-  {
-    public PageDefinition()
+    public class PageDefinition
     {
-      this.RequestVariables = new Dictionary<string, object>();
+        public PageDefinition()
+        {
+            RequestVariables = new Dictionary<VariableKey, object>();
+        }
 
+        public string Path { get; set; }
+        public Dictionary<VariableKey, object> RequestVariables { get; set; }
     }
-    public string Path { get; set; }
-    public Dictionary<string, object> RequestVariables { get; set; }
-  }
 }

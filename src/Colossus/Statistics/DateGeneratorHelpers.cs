@@ -1,21 +1,16 @@
 using System;
-using Sitecore.Syndication;
 
 namespace Colossus.Statistics
 {
     public static class DateGeneratorHelpers
     {
-        
-        public static DateGenerator Year(this DateGenerator date,            
-            Action<TrendBuilder> trend)
+        public static DateGenerator Year(this DateGenerator date, Action<TrendBuilder> trend)
         {
             ValidateDateGeneratorRange(date);
 
-            var builder = new TrendBuilder(
-                min: DateGenerator.DateToYearFraction(date.Start.Value),
-                max: DateGenerator.DateToYearFraction(date.End.Value));
+            var builder = new TrendBuilder(DateGenerator.DateToYearFraction(date.StartDate.Value), DateGenerator.DateToYearFraction(date.EndDate.Value));
             trend(builder);
-            
+
             date.YearGenerator = builder.Build();
             return date;
         }
@@ -24,10 +19,7 @@ namespace Colossus.Statistics
         {
             ValidateDateGeneratorRange(date);
 
-            var builder = new TrendBuilder(
-                min: 0,
-                max: 1,
-                cyclic: true);
+            var builder = new TrendBuilder(0, 1, cyclic: true);
 
             trend(builder);
 
@@ -40,10 +32,7 @@ namespace Colossus.Statistics
         {
             ValidateDateGeneratorRange(date);
 
-            var builder = new TrendBuilder(
-                min: 1,
-                max: 13,
-                cyclic: true);
+            var builder = new TrendBuilder(1, 13, cyclic: true);
 
             trend(builder);
 
@@ -56,10 +45,7 @@ namespace Colossus.Statistics
         {
             //ValidateDateGeneratorRange(date);
 
-            var builder = new TrendBuilder(
-                min: 0,
-                max: 7,
-                cyclic: true);
+            var builder = new TrendBuilder(0, 7, cyclic: true);
 
             trend(builder);
 
@@ -71,10 +57,7 @@ namespace Colossus.Statistics
         {
             //ValidateDateGeneratorRange(date);
 
-            var builder = new TrendBuilder(
-                min: 0,
-                max: 24,
-                cyclic: true);
+            var builder = new TrendBuilder(0, 24, cyclic: true);
 
             trend(builder);
 
@@ -83,13 +66,12 @@ namespace Colossus.Statistics
         }
 
 
-        static void ValidateDateGeneratorRange(DateGenerator generator)
+        private static void ValidateDateGeneratorRange(DateGenerator generator)
         {
-            if (!generator.Start.HasValue || !generator.End.HasValue)
+            if (!generator.StartDate.HasValue || !generator.EndDate.HasValue)
             {
-                throw new DateRangeNotInitializedException();                   
+                throw new DateRangeNotInitializedException();
             }
         }
-
     }
 }

@@ -19,100 +19,99 @@ namespace ExperienceGenerator.Parsing
     public class XGenParser
     {
         private readonly string _sitecoreRoot;
-        public static Dictionary<string, VariableFactory> Factories { get; set; }
+        public static Dictionary<VariableKey, VariableFactory> Factories { get; set; }
         public ItemInfoClient InfoClient { get; set; }
         private readonly GeoDataRepository _geoDataRepository;
 
         static XGenParser()
         {
-            Factories = new Dictionary<string, VariableFactory>
+            Factories = new Dictionary<VariableKey, VariableFactory>
                         {
-                            {"PageViews", VariableFactory.Lambda((segment, token, parser) => segment.VisitVariables.AddOrReplace(Variables.Random("PageViews", new PoissonGenerator(token.Value<double>()).Truncate(1, 20))))},
-                            {"VisitCount", VariableFactory.Lambda((segment, token, parser) => segment.VisitorVariables.AddOrReplace(Variables.Random("VisitCount", new PoissonGenerator(token.Value<double>()).Truncate(1, 20))))},
-                            {"BounceRate", VariableFactory.Lambda((segment, token, parser) => segment.VisitVariables.AddOrReplace(Variables.Boolean("Bounce", token.Value<double>())))},
-                            {"Duration", VariableFactory.Lambda((segment, token, parser) =>
-                                                                {
-                                                                    var mean = token.Value<double>();
-                                                                    segment.RequestVariables.AddOrReplace(Variables.Duration(new SkewNormalGenerator(mean, mean, 3), 1));
-                                                                })},
-                            {"StartDate", VariableFactory.Lambda((segment, token, parser) => segment.DateGenerator.Start = token.Value<DateTime>())},
-                            {"EndDate", VariableFactory.Lambda((segment, token, parser) => segment.DateGenerator.End = token.Value<DateTime>())},
-                            {"DayOfWeek", VariableFactory.Lambda((segment, token, parser) => segment.DateGenerator.DayOfWeek(t => t.Clear().Weighted(builder =>
-                                                                                                                                                     {
-                                                                                                                                                         foreach (var kv in (JObject) token)
-                                                                                                                                                         {
-                                                                                                                                                             DayOfWeek day;
-                                                                                                                                                             builder.Add(Enum.TryParse(kv.Key, out day) ? (int) day : int.Parse(kv.Key), kv.Value.Value<double>());
-                                                                                                                                                         }
-                                                                                                                                                     })))},
-                            {"YearlyTrend", VariableFactory.Lambda((segment, token, parser) =>
-                                                                   {
-                                                                       if (token.Value<double>() != 1)
-                                                                       {
-                                                                           segment.DateGenerator.Year(t => t.Clear().MoveAbsolutePercentage(0).LineAbsolutePercentage(1, token.Value<double>()));
-                                                                       }
-                                                                       //segment.DateGenerator.YearWeight = 1;
-                                                                   })},
-                            {"Month", new MonthFactory()},
-                            {"Identified", VariableFactory.Lambda((segment, token, parser) => segment.VisitorVariables.AddOrReplace(new ContactDataVariable(token.Value<double>())))},
-                            {"Campaign", VariableFactory.Lambda((segment, token, parser) =>
-                                                                {
-                                                                    var campaignPct = token.Value<double?>("Percentage") ?? 1;
-                                                                    var campaigns = parser.ParseWeightedSet<string>(token["Weights"]);
-                                                                    segment.VisitVariables.AddOrReplace(Variables.Random("Campaign", () => Randomness.Random.NextDouble() < campaignPct ? campaigns() : null, true));
-                                                                })},
-                            {"Channel", VariableFactory.Lambda((segment, token, parser) =>
-                                                               {
-                                                                   var channelPct = token.Value<double?>("Percentage") ?? 1;
-                                                                   var channels = parser.ParseWeightedSet<string>(token["Weights"]);
-                                                                   segment.VisitVariables.AddOrReplace(Variables.Random("Channel", () => Randomness.Random.NextDouble() < channelPct ? channels() : null, true));
-                                                               })},
-                            {"Referrer", VariableFactory.Lambda((segment, token, parser) => segment.VisitVariables.AddOrReplace(Variables.Random("Referrer", parser.ParseWeightedSet<string>(token), true)))},
-                            {"Geo", VariableFactory.Lambda((segment, token, parser) =>
-                                                           {
-                                                               var regionId = parser.ParseWeightedSet<string>(token["Region"]);
-                                                               segment.VisitorVariables.AddOrReplace(new GeoVariables(() => new GetRandomCityService().GetRandomCity(regionId())));
-                                                           })},
-                            {"Devices", VariableFactory.Lambda((segment, token, parser) =>
-                                                               {
-                                                                   Func<string> userAgent;
-                                                                   if (!token.HasValues)
-                                                                   {
-                                                                       userAgent = new DeviceRepository().GetAll().Select(d => d.UserAgent).Exponential(.8, 8);
-                                                                   }
-                                                                   else
-                                                                   {
-                                                                       var id = parser.ParseWeightedSet<string>(token);
-                                                                       userAgent = () => new DeviceRepository().GetAll().ToDictionary(ga => ga.Id, ga => ga)[id()].UserAgent;
-                                                                   }
-                                                                   segment.VisitorVariables.AddOrReplace(Variables.Random("UserAgent", userAgent));
-                                                               })},
-                            {"Outcomes", VariableFactory.Lambda((segment, token, parser) =>
-                                                                {
-                                                                    var value = new NormalGenerator(10, 5).Truncate(1);
-                                                                    segment.VisitVariables.AddOrReplace(new OutcomeVariable(parser.ParseSet<string>(token), value.Next));
-                                                                })},
-                            {"InternalSearch", VariableFactory.Lambda((segment, token, parser) =>
-                                                                      {
-                                                                          var searchPct = token.Value<double?>("Percentage") ?? 0.2;
-                                                                          var keywords = parser.ParseWeightedSet<string>(token["Keywords"]);
-                                                                          segment.VisitVariables.AddOrReplace(Variables.Random("InternalSearch", () => Randomness.Random.NextDouble() < searchPct ? keywords() : null, true));
-                                                                      })},
-                            {"ExternalSearch", VariableFactory.Lambda((segment, token, parser) =>
-                                                                      {
-                                                                          var searchPct = token.Value<double?>("Percentage") ?? 0.2;
-                                                                          var keywords = parser.ParseWeightedSet<string>(token["Keywords"]);
+                            {VariableKey.PageViews, VariableFactory.Lambda((segment, token, parser) => segment.VisitVariables.AddOrReplace(Variables.Random(VariableKey.PageViews, new PoissonGenerator(token.Value<double>()).Truncate(1, 20))))},
+                            {VariableKey.VisitCount, VariableFactory.Lambda((segment, token, parser) => segment.VisitorVariables.AddOrReplace(Variables.Random(VariableKey.VisitCount, new PoissonGenerator(token.Value<double>()).Truncate(1, 20))))},
+                            {VariableKey.BounceRate, VariableFactory.Lambda((segment, token, parser) => segment.VisitVariables.AddOrReplace(Variables.Boolean(VariableKey.Bounce, token.Value<double>())))},
+                            {VariableKey.Duration, VariableFactory.Lambda((segment, token, parser) =>
+                                                                          {
+                                                                              var mean = token.Value<double>();
+                                                                              segment.RequestVariables.AddOrReplace(Variables.Duration(new SkewNormalGenerator(mean, mean, 3), 1));
+                                                                          })},
+                            {VariableKey.StartDate, VariableFactory.Lambda((segment, token, parser) => segment.DateGenerator.StartDate = token.Value<DateTime>())},
+                            {VariableKey.EndDate, VariableFactory.Lambda((segment, token, parser) => segment.DateGenerator.EndDate = token.Value<DateTime>())},
+                            {VariableKey.DayOfWeek, VariableFactory.Lambda((segment, token, parser) => segment.DateGenerator.DayOfWeek(t => t.Clear().Weighted(builder =>
+                                                                                                                                                               {
+                                                                                                                                                                   foreach (var kv in (JObject) token)
+                                                                                                                                                                   {
+                                                                                                                                                                       DayOfWeek day;
+                                                                                                                                                                       builder.Add(Enum.TryParse(kv.Key, out day) ? (int) day : int.Parse(kv.Key), kv.Value.Value<double>());
+                                                                                                                                                                   }
+                                                                                                                                                               })))},
+                            {VariableKey.YearlyTrend, VariableFactory.Lambda((segment, token, parser) =>
+                                                                             {
+                                                                                 if (token.Value<double>() != 1d)
+                                                                                 {
+                                                                                     segment.DateGenerator.Year(t => t.Clear().MoveAbsolutePercentage(0).LineAbsolutePercentage(1, token.Value<double>()));
+                                                                                 }
+                                                                             })},
+                            {VariableKey.Month, new MonthFactory()},
+                            {VariableKey.Identified, VariableFactory.Lambda((segment, token, parser) => segment.VisitorVariables.AddOrReplace(new ContactDataVariable(token.Value<double>())))},
+                            {VariableKey.Campaign, VariableFactory.Lambda((segment, token, parser) =>
+                                                                          {
+                                                                              var campaignPct = token.Value<double?>("Percentage") ?? 1;
+                                                                              var campaigns = parser.ParseWeightedSet<string>(token["Weights"]);
+                                                                              segment.VisitVariables.AddOrReplace(Variables.Random(VariableKey.Campaign, () => Randomness.Random.NextDouble() < campaignPct ? campaigns() : null, true));
+                                                                          })},
+                            {VariableKey.Channel, VariableFactory.Lambda((segment, token, parser) =>
+                                                                         {
+                                                                             var channelPct = token.Value<double?>("Percentage") ?? 1;
+                                                                             var channels = parser.ParseWeightedSet<string>(token["Weights"]);
+                                                                             segment.VisitVariables.AddOrReplace(Variables.Random(VariableKey.Channel, () => Randomness.Random.NextDouble() < channelPct ? channels() : null, true));
+                                                                         })},
+                            {VariableKey.Referrer, VariableFactory.Lambda((segment, token, parser) => segment.VisitVariables.AddOrReplace(Variables.Random(VariableKey.Referrer, parser.ParseWeightedSet<string>(token), true)))},
+                            {VariableKey.Geo, VariableFactory.Lambda((segment, token, parser) =>
+                                                                     {
+                                                                         var regionId = parser.ParseWeightedSet<string>(token["Region"]);
+                                                                         segment.VisitorVariables.AddOrReplace(new GeoVariables(() => new GetRandomCityService().GetRandomCity(regionId())));
+                                                                     })},
+                            {VariableKey.Devices, VariableFactory.Lambda((segment, token, parser) =>
+                                                                         {
+                                                                             Func<string> userAgent;
+                                                                             if (!token.HasValues)
+                                                                             {
+                                                                                 userAgent = new DeviceRepository().GetAll().Select(d => d.UserAgent).Exponential(.8, 8);
+                                                                             }
+                                                                             else
+                                                                             {
+                                                                                 var id = parser.ParseWeightedSet<string>(token);
+                                                                                 userAgent = () => new DeviceRepository().GetAll().ToDictionary(ga => ga.Id, ga => ga)[id()].UserAgent;
+                                                                             }
+                                                                             segment.VisitorVariables.AddOrReplace(Variables.Random(VariableKey.UserAgent, userAgent));
+                                                                         })},
+                            {VariableKey.Outcomes, VariableFactory.Lambda((segment, token, parser) =>
+                                                                          {
+                                                                              var value = new NormalGenerator(10, 5).Truncate(1);
+                                                                              segment.VisitVariables.AddOrReplace(new OutcomeVariable(parser.ParseSet<string>(token), value.Next));
+                                                                          })},
+                            {VariableKey.InternalSearch, VariableFactory.Lambda((segment, token, parser) =>
+                                                                                {
+                                                                                    var searchPct = token.Value<double?>("Percentage") ?? 0.2;
+                                                                                    var keywords = parser.ParseWeightedSet<string>(token["Keywords"]);
+                                                                                    segment.VisitVariables.AddOrReplace(Variables.Random(VariableKey.InternalSearch, () => Randomness.Random.NextDouble() < searchPct ? keywords() : null, true));
+                                                                                })},
+                            {VariableKey.ExternalSearch, VariableFactory.Lambda((segment, token, parser) =>
+                                                                                {
+                                                                                    var searchPct = token.Value<double?>("Percentage") ?? 0.2;
+                                                                                    var keywords = parser.ParseWeightedSet<string>(token["Keywords"]);
 
-                                                                          var engineId = parser.ParseWeightedSet<string>(token["Engine"]);
+                                                                                    var engineId = parser.ParseWeightedSet<string>(token["Engine"]);
 
-                                                                          segment.VisitVariables.AddOrReplace(new ExternalSearchVariable(() => Randomness.Random.NextDouble() >= searchPct ? null : SearchEngine.SearchEngines.ToDictionary(s => s.Id)[engineId()], () => new[] {keywords()}));
-                                                                      })},
-                            {"Language", VariableFactory.Lambda((segment, token, parser) =>
-                                                                {
-                                                                    var languages = parser.ParseWeightedSet<string>(token);
-                                                                    segment.VisitVariables.AddOrReplace(Variables.Random("Language", languages));
-                                                                })},
-                            {"LandingPage", new LandingPageFactory()}
+                                                                                    segment.VisitVariables.AddOrReplace(new ExternalSearchVariable(() => Randomness.Random.NextDouble() >= searchPct ? null : SearchEngine.SearchEngines.ToDictionary(s => s.Id)[engineId()], () => new[] {keywords()}));
+                                                                                })},
+                            {VariableKey.Language, VariableFactory.Lambda((segment, token, parser) =>
+                                                                          {
+                                                                              var languages = parser.ParseWeightedSet<string>(token);
+                                                                              segment.VisitVariables.AddOrReplace(Variables.Random(VariableKey.Language, languages));
+                                                                          })},
+                            {VariableKey.LandingPage, new LandingPageFactory()}
                         };
         }
 
@@ -151,7 +150,7 @@ namespace ExperienceGenerator.Parsing
                     segment.VisitVariables.Add(ExtractContact(contact));
 
                     //set channel (can be overriden below)
-                    segment.VisitVariables.Add(new SingleVisitorVariable<string>("Channel", visit => interaction.ChannelId));
+                    segment.VisitVariables.Add(new SingleVisitorVariable<string>(VariableKey.Channel, visit => interaction.ChannelId));
 
 
                     //set search options
@@ -168,7 +167,7 @@ namespace ExperienceGenerator.Parsing
                     SetUserAgent(segment);
 
                     //set datetime
-                    segment.DateGenerator.Start = DateTime.Today.AddHours(12).AddMinutes(Randomness.Random.Next(-240, 240)).AddSeconds(Randomness.Random.Next(-240, 240)).Add(TimeSpan.Parse(interaction.Recency));
+                    segment.DateGenerator.StartDate = DateTime.Today.AddHours(12).AddMinutes(Randomness.Random.Next(-240, 240)).AddSeconds(Randomness.Random.Next(-240, 240)).Add(TimeSpan.Parse(interaction.Recency));
 
 
                     //set outcomes
@@ -179,7 +178,7 @@ namespace ExperienceGenerator.Parsing
                         segment.VisitVariables.AddOrReplace(new OutcomeVariable(() => new HashSet<string>(outcomes), value.Next));
                     }
 
-                    var pageItemInfos = interaction.Pages?.ToArray() ?? Enumerable.Empty<PageItemInfo>();
+                    var pageItemInfos = interaction.Pages?.ToArray() ?? Enumerable.Empty<PageItemInfo>().ToArray();
                     var pages = new List<PageDefinition>();
 
 
@@ -200,12 +199,12 @@ namespace ExperienceGenerator.Parsing
                         //set goals
                         if (page.Goals != null)
                         {
-                            pageDefinition.RequestVariables.Add("TriggerEvents", page.Goals.Select(x => new TriggerEventData
-                                                                                                        {
-                                                                                                            Id = x.Id,
-                                                                                                            Name = x.DisplayName,
-                                                                                                            IsGoal = true
-                                                                                                        }).ToList());
+                            pageDefinition.RequestVariables.Add(VariableKey.TriggerEvents, page.Goals.Select(x => new TriggerEventData
+                                                                                                                  {
+                                                                                                                      Id = x.Id,
+                                                                                                                      Name = x.DisplayName,
+                                                                                                                      IsGoal = true
+                                                                                                                  }).ToList());
                         }
                         pages.Add(pageDefinition);
                     }
@@ -221,7 +220,7 @@ namespace ExperienceGenerator.Parsing
         private static void SetUserAgent(VisitorSegment segment)
         {
             var userAgent = new DeviceRepository().GetAll().Select(d => d.UserAgent).Exponential(.8, 8);
-            segment.RequestVariables.Add(Variables.Random("UserAgent", userAgent));
+            segment.RequestVariables.Add(Variables.Random(VariableKey.UserAgent, userAgent));
         }
 
         private static IdentifiedContactDataVariable ExtractContact(JToken contact)
@@ -261,9 +260,9 @@ namespace ExperienceGenerator.Parsing
 
                 if (type != JobType.Contacts)
                 {
-                    segment.VisitorVariables.Add(Variables.Random("VisitCount", new PoissonGenerator(3).Truncate(1, 10)));
-                    segment.VisitorVariables.Add(Variables.Random("PageViews", new PoissonGenerator(3).Truncate(1, 10)));
-                    segment.VisitVariables.Add(Variables.Random("Pause", new NormalGenerator(7, 7).Truncate(0.25)));
+                    segment.VisitorVariables.Add(Variables.Random(VariableKey.VisitCount, new PoissonGenerator(3).Truncate(1, 10)));
+                    segment.VisitorVariables.Add(Variables.Random(VariableKey.PageViews, new PoissonGenerator(3).Truncate(1, 10)));
+                    segment.VisitVariables.Add(Variables.Random(VariableKey.Pause, new NormalGenerator(7, 7).Truncate(0.25)));
                 }
 
                 var visitorBehavior = new RandomWalk(_sitecoreRoot);
@@ -280,7 +279,7 @@ namespace ExperienceGenerator.Parsing
                     }
                 }
 
-                var usedFactories = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase);
+                var usedFactories = new HashSet<VariableKey>();
 
                 foreach (var prop in def)
                 {
@@ -289,14 +288,18 @@ namespace ExperienceGenerator.Parsing
                         continue;
                     }
 
+                    var variableKey = ParseKey(prop.Key);
+                    if (!variableKey.HasValue)
+                        throw new Exception($"Variable key '{prop.Key}' not registered.");
+
                     try
                     {
-                        Factories[prop.Key].UpdateSegment(segment, prop.Value, this);
-                        usedFactories.Add(prop.Key);
+                        Factories[variableKey.Value].UpdateSegment(segment, prop.Value, this);
+                        usedFactories.Add(variableKey.Value);
                     }
                     catch (KeyNotFoundException)
                     {
-                        throw new Exception(string.Format("No factory registered for {0}", prop.Key));
+                        throw new Exception($"No factory registered for {variableKey}");
                     }
                 }
 
@@ -311,6 +314,14 @@ namespace ExperienceGenerator.Parsing
             return segments.Values.Weighted();
         }
 
+        private VariableKey? ParseKey(string stringValue)
+        {
+            VariableKey key;
+            if (!Enum.TryParse(stringValue, true, out key))
+                return null;
+            return key;
+        }
+
         public Func<ISet<TValue>> ParseSet<TValue>(JToken token)
         {
             var set = (JObject) token;
@@ -321,7 +332,12 @@ namespace ExperienceGenerator.Parsing
 
             foreach (var kv in set)
             {
-                probs.Add((TValue) converter.ConvertFromString(kv.Key), kv.Value.Value<double>());
+                var key = (TValue) converter.ConvertFromString(kv.Key);
+                var value = kv.Value.Value<double>();
+                if (key != null)
+                {
+                    probs.Add(key, value);
+                }
             }
 
             return () =>

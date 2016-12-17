@@ -2,39 +2,30 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Routing;
 
 namespace Colossus.Web
 {
-    public class WebVisitRequestContext<TResponseInfo> : IVisitRequestContext<TResponseInfo>        
-        where TResponseInfo : ResponseInfo, new()
+    public class WebVisitRequestContext<TResponseInfo> : IVisitRequestContext<TResponseInfo> where TResponseInfo : ResponseInfo, new()
     {
+        public Request LastRequest => Visit.Requests.LastOrDefault();
 
-        public Request LastRequest
-        {
-            get { return Visit.Requests.LastOrDefault(); }
-        }
+        public TResponseInfo LastResponse => VisitorContext.LastResponse;
 
-        public TResponseInfo LastResponse
-        {
-            get { return VisitorContext.LastResponse; }
-        }
-       
         public event EventHandler<VisitEventArgs> VisitEnded;
-        
-        public WebRequestContext<TResponseInfo> VisitorContext { get; private set; }
 
-        public Visit Visit { get; private set; }        
+        public WebRequestContext<TResponseInfo> VisitorContext { get; }
 
-        internal protected WebVisitRequestContext(WebRequestContext<TResponseInfo> visitorContext, Visit visit)
+        public Visit Visit { get; }
+
+        protected internal WebVisitRequestContext(WebRequestContext<TResponseInfo> visitorContext, Visit visit)
         {
             Visit = visit;
             VisitorContext = visitorContext;
         }
 
         private TimeSpan _pause;
+
         public void Pause(TimeSpan duration)
         {
             _pause += duration;
@@ -52,17 +43,17 @@ namespace Colossus.Web
             return VisitorContext.Execute(request, requestAction);
         }
 
-        public TResponseInfo Request(string url, TimeSpan? duration = null, object variables = null, Func<string, WebClient, string> requestAction = null)
+        public TResponseInfo Request(string url, TimeSpan? duration = null, IDictionary<VariableKey, object> variables = null, Func<string, WebClient, string> requestAction = null)
         {
             if (_disposed)
             {
                 throw new ObjectDisposedException("Visit has ended");
-            }            
+            }
 
-            var request = Visit.AddRequest(VisitorContext.TransformUrl(url, Visit), duration, GetAndResetPause());            
+            var request = Visit.AddRequest(VisitorContext.TransformUrl(url, Visit), duration, GetAndResetPause());
             if (variables != null)
             {
-                foreach (var kv in (variables as IDictionary<string, object>) ?? new RouteValueDictionary(variables))
+                foreach (var kv in variables)
                 {
                     request.Variables.Add(kv.Key, kv.Value);
                 }
@@ -74,14 +65,14 @@ namespace Colossus.Web
         private bool _disposed;
 
         protected virtual void EndVisit()
-        {            
+        {
             OnVisitEnded(new VisitEventArgs(Visit));
         }
 
         protected virtual void OnVisitEnded(VisitEventArgs e)
         {
-            EventHandler<VisitEventArgs> handler = VisitEnded;
-            if (handler != null) handler(this, e);
+            var handler = VisitEnded;
+            handler?.Invoke(this, e);
         }
 
 

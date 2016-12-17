@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Policy;
 
 namespace Colossus
 {
@@ -16,10 +15,13 @@ namespace Colossus
             Requests = new List<Request>();
         }
 
-        public Request AddRequest(string url, TimeSpan? duration = null, TimeSpan? pause = null,
-            string durationVariable = "Duration", string pauseVariable = "Pause")
+        public Request AddRequest(string url, TimeSpan? duration = null, TimeSpan? pause = null)
         {
-            var request = new Request { Visit = this, Url = url };
+            var request = new Request
+                          {
+                              Visit = this,
+                              Url = url
+                          };
             if (Visitor.Segment != null)
             {
                 foreach (var v in Visitor.Segment.RequestVariables)
@@ -29,21 +31,20 @@ namespace Colossus
             }
 
             var lastRequest = Requests.Count > 0 ? Requests[Requests.Count - 1].End : Start;
-            lastRequest += pause ?? request.GetVariable(pauseVariable, request.GetVariable("Pause", TimeSpan.Zero));
+            lastRequest += request.GetVariable(VariableKey.Pause, request.GetVariable(VariableKey.Pause, TimeSpan.Zero));
 
             request.Start = lastRequest;
-            request.End = lastRequest + (duration ?? request.GetVariable(durationVariable, request.GetVariable("Duration", TimeSpan.Zero)));
-
+            request.End = lastRequest + (request.GetVariable(VariableKey.Duration, request.GetVariable(VariableKey.Duration, TimeSpan.Zero)));
 
             End = request.End;
             Visitor.End = End;
 
-            if (Requests.Count == 0 && !request.Variables.ContainsKey("Referrer"))
+            if (Requests.Count == 0 && !request.Variables.ContainsKey(VariableKey.Referrer))
             {
-                var referrer = this.GetVariable<string>("Referrer");
+                var referrer = this.GetVariable<string>(VariableKey.Referrer);
                 if (!string.IsNullOrEmpty(referrer))
                 {
-                    request.Variables.Add("Referrer", referrer);
+                    request.Variables.Add(VariableKey.Referrer, referrer);
                 }
             }
 

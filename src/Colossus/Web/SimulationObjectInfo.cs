@@ -6,7 +6,7 @@ namespace Colossus.Web
 {
     public abstract class SimulationObjectInfo
     {
-        public IDictionary<string, object> Variables { get; set; }
+        public IDictionary<VariableKey, object> Variables { get; set; }
 
         public DateTime Start { get; set; }
         public DateTime End { get; set; }

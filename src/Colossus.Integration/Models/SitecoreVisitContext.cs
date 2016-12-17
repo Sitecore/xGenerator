@@ -1,29 +1,29 @@
-﻿namespace Colossus.Integration.Models
+﻿using System;
+using System.Net;
+using Colossus.Web;
+using Sitecore.Analytics.Model;
+
+namespace Colossus.Integration.Models
 {
-  using System;
-  using System.Net;
-  using Colossus.Web;
-  using Sitecore.Analytics.Model;
-
-  public class SitecoreVisitRequestContext : WebVisitRequestContext<SitecoreResponseInfo>
+    public class SitecoreVisitRequestContext : WebVisitRequestContext<SitecoreResponseInfo>
     {
-        public new SitecoreRequestContext VisitorContext
-        {
-            get { return base.VisitorContext as SitecoreRequestContext; }
-        }
+        public new SitecoreRequestContext VisitorContext => base.VisitorContext as SitecoreRequestContext;
 
-        public SitecoreVisitRequestContext(WebRequestContext<SitecoreResponseInfo> visitorContext, Visit visit)
-            : base(visitorContext, visit)
+        public SitecoreVisitRequestContext(WebRequestContext<SitecoreResponseInfo> visitorContext, Visit visit) : base(visitorContext, visit)
         {
-
         }
 
         public VisitData VisitData { get; protected set; }
 
         protected override void EndVisit()
         {
-            var req = new Request { Visit = this.Visit, Url = this.VisitorContext.ColossusHandlerUrl, EndVisit = true };
-            this.Execute(req);
+            var req = new Request
+                      {
+                          Visit = Visit,
+                          Url = VisitorContext.ColossusHandlerUrl,
+                          EndVisit = true
+                      };
+            Execute(req);
             base.EndVisit();
         }
 
@@ -32,7 +32,7 @@
             var response = base.Execute(request, requestAction);
             if (response.VisitData != null)
             {
-                this.VisitData = response.VisitData;
+                VisitData = response.VisitData;
             }
             return response;
         }

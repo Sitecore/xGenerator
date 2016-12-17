@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Colossus
 {
-    public class CompositeVariable : VisitorVariablesBase
+    public class CompositeVariable : VisitorVariableBase
     {
-        public IVisitorVariables Var1 { get; set; }
-        public IVisitorVariables Var2 { get; set; }
+        public IVisitorVariable Var1 { get; set; }
+        public IVisitorVariable Var2 { get; set; }
         public double Var2Prob { get; set; }
 
-        public CompositeVariable(IVisitorVariables var1, IVisitorVariables var2, double var2Prob)
+        public CompositeVariable(IVisitorVariable var1, IVisitorVariable var2, double var2Prob)
         {
             Var1 = var1;
             Var2 = var2;
@@ -26,20 +23,11 @@ namespace Colossus
             var.SetValues(target);
         }
 
-        public override IEnumerable<string> ProvidedVariables { get
-        {
-            return Var1.ProvidedVariables.Concat(Var2.ProvidedVariables).Distinct();
-        } }
+        public override IEnumerable<VariableKey> ProvidedVariables => Var1.ProvidedVariables.Concat(Var2.ProvidedVariables).Distinct();
 
-        public IEnumerable<string> DependendtVariables
-        {
-            get
-            {
-                return Var1.DependendtVariables.Concat(Var2.DependendtVariables).Distinct();
-            }
-        }
+        public IEnumerable<VariableKey> DependendtVariables => Var1.DependentVariables.Concat(Var2.DependentVariables).Distinct();
 
-        protected override bool Equals(VisitorVariablesBase other)
+        protected override bool Equals(VisitorVariableBase other)
         {
             var o = other as CompositeVariable;
 

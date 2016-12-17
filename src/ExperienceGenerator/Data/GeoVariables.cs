@@ -5,7 +5,7 @@ using Colossus.Integration.Behaviors;
 
 namespace ExperienceGenerator.Data
 {
-    public class GeoVariables : VisitorVariablesBase
+    public class GeoVariables : VisitorVariableBase
     {
         public bool AdjustToTimeZone { get; set; }
         private readonly Func<City> _getCity;
@@ -20,17 +20,17 @@ namespace ExperienceGenerator.Data
         {
             var city = _getCity();
             if (city == null) return;
-            target.Variables["Country"] = city.CountryCode;
-            target.Variables["Continent"] = city.Country.Continent;
-            target.Variables["Region"] = city.RegionCode;
-            target.Variables["City"] = city.AsciiName;
-            target.Variables["Tld"] = city.Country.TopLevelDomain;
-            target.Variables["DomainPostfix"] = city.Country.DomainPostFix;
-            target.Variables["Latitude"] = city.Latitude;
-            target.Variables["Longitude"] = city.Longitude;
+            target.Variables[VariableKey.Country] = city.CountryCode;
+            target.Variables[VariableKey.Continent] = city.Country.Continent;
+            target.Variables[VariableKey.Region] = city.RegionCode;
+            target.Variables[VariableKey.City] = city.AsciiName;
+            target.Variables[VariableKey.Tld] = city.Country.TopLevelDomain;
+            target.Variables[VariableKey.DomainPostfix] = city.Country.DomainPostFix;
+            target.Variables[VariableKey.Latitude] = city.Latitude;
+            target.Variables[VariableKey.Longitude] = city.Longitude;
 
-            target.Variables["Currency"] = city.Country.CurrencyCode;
-            target.Variables["TimeZone"] = city.TimeZoneInfo.StandardName;
+            target.Variables[VariableKey.Currency] = city.Country.CurrencyCode;
+            target.Variables[VariableKey.TimeZone] = city.TimeZoneInfo.StandardName;
 
             if (!AdjustToTimeZone)
                 return;
@@ -41,10 +41,10 @@ namespace ExperienceGenerator.Data
             target.End = TimeZoneInfo.ConvertTimeFromUtc(target.End, city.TimeZoneInfo);
         }
 
-        public override IEnumerable<string> ProvidedVariables => new[]
+        public override IEnumerable<VariableKey> ProvidedVariables => new[]
                                                                  {
-                                                                     "Country", "Continent", "Region", "City", "Tld", "DomainPostfix", "Latitude", "Longitude",
-                                                                     "Currency", "TimeZone"
+                                                                     VariableKey.Country, VariableKey.Continent, VariableKey.Region, VariableKey.City, VariableKey.Tld, VariableKey.DomainPostfix, VariableKey.Latitude, VariableKey.Longitude,
+                                                                     VariableKey.Currency, VariableKey.TimeZone
                                                                  };
     }
 }

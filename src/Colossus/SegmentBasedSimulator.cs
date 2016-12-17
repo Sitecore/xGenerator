@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Colossus.Statistics;
 
 namespace Colossus
@@ -18,7 +17,6 @@ namespace Colossus
         {
         }
 
-
         public SegmentBasedSimulator(Func<VisitorSegment> segments)
         {
             _segments = segments;
@@ -28,11 +26,12 @@ namespace Colossus
         {
             var segment = _segments();
 
+            var visitorDate = segment.DateGenerator.NextDate();
             var visitor = new Visitor(segment)
                           {
-                              Start = segment.DateGenerator.NextDate()
+                              Start = visitorDate,
+                              End = visitorDate
                           };
-            visitor.End = visitor.Start;
 
             foreach (var var in segment.VisitorVariables)
             {

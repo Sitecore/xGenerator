@@ -16,9 +16,9 @@ namespace Colossus
         public IEnumerable<Visitor> GetVisitors(int count)
         {
             return _visitorSegment.Select(visitorSegment => new Visitor(visitorSegment)
-                                              {
-                                                  Start = visitorSegment.DateGenerator?.Start ?? DateTime.Now
-                                              });
+                                                            {
+                                                                Start = visitorSegment.DateGenerator?.StartDate ?? DateTime.Now
+                                                            });
         }
     }
 }

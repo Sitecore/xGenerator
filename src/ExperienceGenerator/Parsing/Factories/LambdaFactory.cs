@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Colossus;
 using Newtonsoft.Json.Linq;
 
@@ -21,12 +17,12 @@ namespace ExperienceGenerator.Parsing.Factories
 
         public override void UpdateSegment(VisitorSegment segment, JToken definition, XGenParser parser)
         {
-            if (_updateSegment != null) _updateSegment(segment, definition, parser);
+            _updateSegment?.Invoke(segment, definition, parser);
         }
 
         public override void SetDefaults(VisitorSegment segment, XGenParser parser)
         {
-            if (_setDefaults != null) _setDefaults(segment, parser);            
+            _setDefaults?.Invoke(segment, parser);
         }
     }
 }

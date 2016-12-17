@@ -172,7 +172,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\SitecoreRouteInitializer.cs" />
-    <Compile Include="Infrastructure\XGenSitecoreJobManager.cs" />
     <Compile Include="KnownItems.cs" />
     <Compile Include="Models\OptionTypes.cs" />
     <Compile Include="Models\SelectionOptionGroup.cs" />

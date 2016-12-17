@@ -1,29 +1,24 @@
-﻿using System;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 using Colossus;
-using Colossus.Integration;
-using Colossus.Integration.Processing;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using Colossus.Integration.Models;
 using ExperienceGenerator.Models;
+using Newtonsoft.Json;
 
 namespace ExperienceGenerator.Data
 {
-  using Colossus.Integration.Models;
-
-  public class ItemInfoClient
+    public class ItemInfoClient
     {
         public string ItemServiceRoot { get; set; }
 
         public ItemInfoClient(string itemServiceRoot)
         {
-            if (!itemServiceRoot.EndsWith("/")) itemServiceRoot += "/";
+            if (!itemServiceRoot.EndsWith("/"))
+                itemServiceRoot += "/";
 
             ItemServiceRoot = itemServiceRoot;
         }
@@ -31,18 +26,10 @@ namespace ExperienceGenerator.Data
         private readonly ConcurrentDictionary<string, ItemInfo> _cache = new ConcurrentDictionary<string, ItemInfo>();
 
         private Dictionary<string, SiteInfo> _sites;
+
         public Dictionary<string, SiteInfo> Sites
         {
-            get
-            {
-                if (_sites == null)
-                {
-                    _sites = Request<SiteInfo[]>("websites")                        
-                        .ToDictionary(s=>s.Id);
-                }
-
-                return _sites;
-            }
+            get { return _sites ?? (_sites = Request<SiteInfo[]>("websites").ToDictionary(s => s.Id)); }
         }
 
 
@@ -53,12 +40,10 @@ namespace ExperienceGenerator.Data
 
         public IEnumerable<ItemInfo> Query(string query, string language = null, int? maxDepth = 0)
         {
-            var url = new StringBuilder()                
-                .Append("items?query=")
-                .Append(HttpUtility.UrlEncode(query));
+            var url = new StringBuilder().Append("items?query=").Append(HttpUtility.UrlEncode(query));
             if (maxDepth.HasValue)
-            {            
-              url.Append("&maxDepth=").Append(maxDepth);
+            {
+                url.Append("&maxDepth=").Append(maxDepth);
             }
             if (!string.IsNullOrEmpty(language))
             {
@@ -70,20 +55,12 @@ namespace ExperienceGenerator.Data
 
         public ItemInfo GetItemInfo(string itemId, string language = null)
         {
-            if (string.IsNullOrEmpty(itemId)) return null;
+            if (string.IsNullOrEmpty(itemId))
+                return null;
 
             var key = language + "/" + itemId;
-                                                   
-            return _cache.GetOrAdd(key, _=> 
-                Query(itemId, language, 0).FirstOrDefault());
-        }
 
-        public string GetUrl(string itemId, string language = null, string site = null)
-        {
-            return GetItemInfo(itemId, language)
-                .TryGetValue(item => item.SiteUrls.GetOrDefault(site ?? "website")
-                    .TryGetValue(url => url.Url));
-
+            return _cache.GetOrAdd(key, _ => Query(itemId, language, 0).FirstOrDefault());
         }
     }
 }

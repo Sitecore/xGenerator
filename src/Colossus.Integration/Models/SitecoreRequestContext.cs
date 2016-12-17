@@ -44,7 +44,7 @@
             var host = this.SitecoreRootUri;
             if (visit != null)
             {
-                var visitHost = visit.GetVariable<string>("Host");
+                var visitHost = visit.GetVariable<string>(VariableKey.Host);
                 if (!string.IsNullOrEmpty(visitHost))
                 {
                     host = new Uri(visitHost);

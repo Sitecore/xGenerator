@@ -16,7 +16,7 @@ namespace ExperienceGenerator.Client
             //Disable dimension cache to enable flush of reporting database
             Dimension.EnableCaching = false;
 
-            XGenJobManager.Instance = new XGenSitecoreJobManager();
+            XGenJobManager.Instance = new XGenJobManager();
 
             config.Routes.MapHttpRoute(
                 name: "ExperienceGeneratorJobsApi",

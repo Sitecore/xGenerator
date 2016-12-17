@@ -4,7 +4,7 @@ using Faker;
 
 namespace ExperienceGenerator.Parsing.Factories
 {
-    public class ContactDataVariable : VisitorVariablesBase
+    public class ContactDataVariable : VisitorVariableBase
     {
         public static int VisitorIndex;
 
@@ -20,18 +20,18 @@ namespace ExperienceGenerator.Parsing.Factories
             if (!(Randomness.Random.NextDouble() < IdentifiedPercentage))
                 return;
 
-            target.Variables["ContactId"] = "XGen" + VisitorIndex;
+            target.Variables[VariableKey.ContactId] = "XGen" + VisitorIndex;
             VisitorIndex++;
 
             var firstname = Name.First();
             var lastname = Name.Last();
             var email = Internet.Email(firstname + " " + lastname);
 
-            target.Variables["ContactFirstName"] = firstname;
-            target.Variables["ContactLastName"] = lastname;
-            target.Variables["ContactEmail"] = email;
+            target.Variables[VariableKey.ContactFirstName] = firstname;
+            target.Variables[VariableKey.ContactLastName] = lastname;
+            target.Variables[VariableKey.ContactEmail] = email;
         }
 
-        public override IEnumerable<string> ProvidedVariables => new[] {"ContactId", "ContactFirstName", "ContactLastName", "ContactEmail"};
+        public override IEnumerable<VariableKey> ProvidedVariables => new[] {VariableKey.ContactId, VariableKey.ContactFirstName, VariableKey.ContactLastName, VariableKey.ContactEmail};
     }
 }

@@ -7,13 +7,13 @@ namespace Colossus
 {
     public static class GetSetHelpers
     {
-
         public static RequestInfo ColossusInfo(this HttpContext ctx)
         {
-            if (ctx == null) return null;
+            if (ctx == null)
+                return null;
 
             var info = ctx.Items[DataEncoding.RequestDataKey] as RequestInfo;
-            
+
 
             if (info == null)
             {
@@ -27,31 +27,21 @@ namespace Colossus
             return info;
         }
 
-        
-        public static TValue TryGetValue<TObject, TValue>(this TObject o, Func<TObject, TValue> getter,
-            TValue defaultValue = default(TValue))
+
+        public static TValue TryGetValue<TObject, TValue>(this TObject o, Func<TObject, TValue> getter, TValue defaultValue = default(TValue))
         {
             return o == null ? defaultValue : getter(o);
         }
 
-        public static bool SetIfPresent(this IDictionary<string, object> dict, string key, Action<string> action)
-        {
-            return dict.SetIfPresent<string>(key, action);
-        }
-
-        public static bool SetIfPresent<TValue>(this IDictionary<string, object> dict, string key, Action<TValue> action)
+        public static bool SetIfPresent<TKey, TValue>(this IDictionary<TKey, object> dict, TKey key, Action<TValue> action)
         {
             object val;
-            if (dict.TryGetValue(key, out val))
-            {
-                if (val is TValue)
-                {
-                    action((TValue) val);
-                    return true;
-                }
-            }
-
-            return false;
+            if (!dict.TryGetValue(key, out val))
+                return false;
+            if (!(val is TValue))
+                return false;
+            action((TValue) val);
+            return true;
         }
     }
 }

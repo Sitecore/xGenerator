@@ -3,21 +3,21 @@
   using System.Collections.Generic;
   using Colossus;
 
-  public class IdentifiedContactDataVariable : VisitorVariablesBase
+  public class IdentifiedContactDataVariable : VisitorVariableBase
   {
     public override void SetValues(SimulationObject target)
     {
-      target.Variables["ContactId"] = this.Email;
-      target.Variables["ContactFirstName"] = this.FirstName;
-      target.Variables["ContactMiddleName"] = this.MiddleName;
-      target.Variables["ContactLastName"] = this.LastName;
-      target.Variables["ContactEmail"] = this.Email;
-      target.Variables["ContactGender"] = this.Gender;
-      target.Variables["ContactBirthDate"] = this.BirthDate;
-      target.Variables["ContactJobTitle"] = this.JobTitle;
-      target.Variables["ContactPhone"] = this.Phone;
-      target.Variables["ContactPicture"] = this.Picture;
-      target.Variables["ContactAddress"] = this.Address;
+      target.Variables[VariableKey.ContactId] = this.Email;
+      target.Variables[VariableKey.ContactFirstName] = this.FirstName;
+      target.Variables[VariableKey.ContactMiddleName] = this.MiddleName;
+      target.Variables[VariableKey.ContactLastName] = this.LastName;
+      target.Variables[VariableKey.ContactEmail] = this.Email;
+      target.Variables[VariableKey.ContactGender] = this.Gender;
+      target.Variables[VariableKey.ContactBirthDate] = this.BirthDate;
+      target.Variables[VariableKey.ContactJobTitle] = this.JobTitle;
+      target.Variables[VariableKey.ContactPhone] = this.Phone;
+      target.Variables[VariableKey.ContactPicture] = this.Picture;
+      target.Variables[VariableKey.ContactAddress] = this.Address;
     }
 
     public string Email { get; set; }
@@ -32,19 +32,19 @@
     public string Address { get; set; }
 
 
-    public override IEnumerable<string> ProvidedVariables => new[]
+    public override IEnumerable<VariableKey> ProvidedVariables => new[]
     {
-      "ContactId",
-      "ContactFirstName",
-      "ContactMiddleName",
-      "ContactLastName",
-      "ContactEmail",
-      "ContactGender",
-      "ContactBirthDate",
-      "ContactJobTitle",
-      "ContactPhone",
-      "ContactPicture",
-      "ContactAddress"
+      VariableKey.ContactId,
+      VariableKey.ContactFirstName,
+      VariableKey.ContactMiddleName,
+      VariableKey.ContactLastName,
+      VariableKey.ContactEmail,
+      VariableKey.ContactGender,
+      VariableKey.ContactBirthDate,
+      VariableKey.ContactJobTitle,
+      VariableKey.ContactPhone,
+      VariableKey.ContactPicture,
+      VariableKey.ContactAddress
     };
   }
 }
