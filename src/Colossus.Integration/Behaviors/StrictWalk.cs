@@ -24,7 +24,7 @@ namespace Colossus.Integration.Behaviors
         {
             using (var visitContext = ctx.NewVisit())
             {
-                var outcomes = visitContext.Visit.GetVariable<IEnumerable<TriggerOutcomeData>>(VariableKey.TriggerOutcomes);
+                var outcomes = visitContext.Visit.GetVariable<IEnumerable<TriggerOutcomeData>>(VariableKey.TriggerOutcomes)?.ToArray();
                 visitContext.Visit.Variables.Remove(VariableKey.TriggerOutcomes);
 
                 UploadContactPicture(visitContext.Visit.Variables);

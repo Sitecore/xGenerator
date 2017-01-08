@@ -31,7 +31,7 @@ namespace Colossus
             }
 
             var lastRequest = Requests.Count > 0 ? Requests[Requests.Count - 1].End : Start;
-            lastRequest += request.GetVariable(VariableKey.Pause, request.GetVariable(VariableKey.Pause, TimeSpan.Zero));
+            lastRequest += pause ?? request.GetVariable(VariableKey.Pause, TimeSpan.Zero);
 
             request.Start = lastRequest;
             request.End = lastRequest + (request.GetVariable(VariableKey.Duration, request.GetVariable(VariableKey.Duration, TimeSpan.Zero)));

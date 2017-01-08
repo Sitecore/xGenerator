@@ -14,9 +14,6 @@ namespace Colossus.Integration
             }
         }
 
-        public bool IsReusable
-        {
-            get { return false; }
-        }
+        public bool IsReusable => false;
     }
 }

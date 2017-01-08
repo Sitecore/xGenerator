@@ -40,20 +40,10 @@ namespace Colossus.Statistics
             return Random(key, () => Randomness.Random.NextDouble() < probability);
         }
 
-        public static IVisitorVariable TimeSpan(VariableKey key, IRandomGenerator seconds, double? min = 0d, double? max = null)
+        public static IVisitorVariable Duration(IRandomGenerator seconds)
         {
-            seconds = seconds.Truncate(min, max);
-            return Random(key, () => System.TimeSpan.FromSeconds(seconds.Next()));
-        }
-
-        public static IVisitorVariable Duration(IRandomGenerator seconds, double? min = 1d, double? max = null)
-        {
-            return TimeSpan(VariableKey.Duration, seconds, min, max);
-        }
-
-        public static IVisitorVariable Pause(IRandomGenerator seconds, double? min = 0d, double? max = null)
-        {
-            return TimeSpan(VariableKey.Pause, seconds, min, max);
+            var generator = seconds.Truncate(1d, 60d);
+            return Random(VariableKey.Duration, () => TimeSpan.FromSeconds(generator.Next()));
         }
     }
 }

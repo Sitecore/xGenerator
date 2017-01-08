@@ -33,7 +33,7 @@ namespace ExperienceGenerator.Parsing
                             {VariableKey.Duration, VariableFactory.Lambda((segment, token, parser) =>
                                                                           {
                                                                               var mean = token.Value<double>();
-                                                                              segment.RequestVariables.AddOrReplace(Variables.Duration(new SkewNormalGenerator(mean, mean, 3), 1));
+                                                                              segment.RequestVariables.AddOrReplace(Variables.Duration(new SkewNormalGenerator(mean, mean, 3)));
                                                                           })},
                             {VariableKey.StartDate, VariableFactory.Lambda((segment, token, parser) => segment.DateGenerator.StartDate = token.Value<DateTime>())},
                             {VariableKey.EndDate, VariableFactory.Lambda((segment, token, parser) => segment.DateGenerator.EndDate = token.Value<DateTime>())},
@@ -262,7 +262,7 @@ namespace ExperienceGenerator.Parsing
                 {
                     segment.VisitorVariables.Add(Variables.Random(VariableKey.VisitCount, new PoissonGenerator(3).Truncate(1, 10)));
                     segment.VisitorVariables.Add(Variables.Random(VariableKey.PageViews, new PoissonGenerator(3).Truncate(1, 10)));
-                    segment.VisitVariables.Add(Variables.Random(VariableKey.Pause, new NormalGenerator(7, 7).Truncate(0.25)));
+                    segment.VisitVariables.Add(Variables.Random(VariableKey.Pause, new NormalGenerator(7, 7).Truncate(0.25, 1)));
                 }
 
                 var visitorBehavior = new RandomWalk(_sitecoreRoot);

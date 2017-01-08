@@ -18,15 +18,15 @@ namespace ExperienceGenerator.Parsing.Factories
                 throw new Exception($"No sites defined.");
             var siteId = parser.ParseWeightedSet<string>(definition["Site"]);
 
-            var randomPagePct = 1d;
-            Func<string> landingPage = () => null;
-            if (definition["Item"] != null && definition["Item"].Any())
+            var landingPage = GetLandingPagesFromDefinition(definition, parser);
+            var randomPagePct = GetRandomPagePercentageFromDefinition(definition);
+            if (landingPage == null)
             {
-                landingPage = parser.ParseWeightedSet<string>(definition["Item"]);
-                randomPagePct = definition.Value<double?>("RandomPagePercentage") ?? 0.2;
+                landingPage = () => null;
+                randomPagePct = 1d;
             }
 
-            var randomPages = GetRandomPages(parser);
+            var sitePages = GetSitePages(parser);
 
             segment.VisitVariables.AddOrReplace(new LandingPageVariable(() =>
                                                                         {
@@ -34,7 +34,7 @@ namespace ExperienceGenerator.Parsing.Factories
                                                                             var site = parser.InfoClient.Sites[siteId()];
                                                                             if (page == null || Randomness.Random.NextDouble() < randomPagePct)
                                                                             {
-                                                                                return Tuple.Create(site, randomPages[site.Id]());
+                                                                                return Tuple.Create(site, sitePages[site.Id]());
                                                                             }
 
                                                                             for (var i = 0; i < 10 && !page.Path.StartsWith(site.StartPath); i++)
@@ -46,13 +46,25 @@ namespace ExperienceGenerator.Parsing.Factories
                                                                         }, parser.InfoClient));
         }
 
-        private Dictionary<string, Func<ItemInfo>> GetRandomPages(XGenParser parser)
+        private double GetRandomPagePercentageFromDefinition(JToken definition)
+        {
+            return definition.Value<double?>("RandomPagePercentage") ?? 0.2;
+        }
+
+        private static Func<string> GetLandingPagesFromDefinition(JToken definition, XGenParser parser)
+        {
+            if (definition["Item"] == null || !definition["Item"].Any())
+                return null;
+            return parser.ParseWeightedSet<string>(definition["Item"]);
+        }
+
+        private Dictionary<string, Func<ItemInfo>> GetSitePages(XGenParser parser)
         {
             var randomPages = new Dictionary<string, Func<ItemInfo>>();
 
             foreach (var site in parser.InfoClient.Sites.Values.Where(s => !string.IsNullOrEmpty(s.StartPath)))
             {
-                var root = parser.InfoClient.Query(site.StartPath, maxDepth: null).FirstOrDefault();
+                var root = parser.InfoClient.Query(site.StartPath, maxDepth: 4).FirstOrDefault();
                 if (root == null)
                 {
                     throw new Exception($"Root item for site {site.Id} does not exist ({site.StartPath})");
@@ -60,11 +72,16 @@ namespace ExperienceGenerator.Parsing.Factories
                 var homePct = 0.5;
                 if (root.Children.Count == 0)
                     homePct = 1;
-                var other = GetDescendants(root.Children).Select(t => t.Item1).Where(item => item.HasLayout).OrderBy(item => Randomness.Random.NextDouble()).Exponential(0.8, 10);
+                var other = GetSitePages(root).Exponential(0.8, 10);
 
                 randomPages[site.Id] = () => Randomness.Random.NextDouble() < homePct ? root : other();
             }
             return randomPages;
+        }
+
+        private IOrderedEnumerable<ItemInfo> GetSitePages(ItemInfo root)
+        {
+            return GetDescendants(new [] {root}).Select(t => t.Item1).Where(item => item.HasLayout).OrderBy(item => Randomness.Random.NextDouble());
         }
 
         public override void SetDefaults(VisitorSegment segment, XGenParser parser)

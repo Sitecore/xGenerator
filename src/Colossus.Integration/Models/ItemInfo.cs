@@ -45,6 +45,8 @@ namespace Colossus.Integration.Models
 
         public static ItemInfo FromItem(Item item, IEnumerable<string> websites = null, int maxDepth = 0, Language language = null)
         {
+            IEnumerable<string> sites = websites?.ToArray();
+
             var info = new ItemInfo
                        {
                            Id = item.ID.Guid,
@@ -58,39 +60,56 @@ namespace Colossus.Integration.Models
                            HasLayout = item.Fields[FieldIDs.LayoutField] != null && !string.IsNullOrEmpty(item.Fields[FieldIDs.LayoutField].Value)
                        };
 
+            AssignFields(item, info);
+            AssignChildren(item, sites, maxDepth, info);
+            AssignSiteUrls(item, sites, language, info);
+
+            return info;
+        }
+
+        private static void AssignFields(Item item, ItemInfo info)
+        {
             foreach (Field field in item.Fields)
             {
                 info.Fields[field.Name] = field.Value;
             }
+        }
 
+        private static void AssignChildren(Item item, IEnumerable<string> websites, int maxDepth, ItemInfo info)
+        {
             if (maxDepth > 0)
             {
                 info.Children = item.Children.Select(child => FromItem(child, websites, maxDepth - 1)).ToList();
             }
+        }
 
-            if (websites != null)
+        private static void AssignSiteUrls(Item item, IEnumerable<string> websites, Language language, ItemInfo info)
+        {
+            if (websites == null)
+                return;
+
+            foreach (var siteName in websites)
             {
-                foreach (var siteName in websites)
+                var site = Factory.GetSite(siteName);
+                if (site == null)
+                    continue;
+
+                using (new SiteContextSwitcher(site))
                 {
-                    var site = Factory.GetSite(siteName);
-                    if (site == null)
-                        continue;
-
-                    using (new SiteContextSwitcher(site))
+                    var options = LinkManager.GetDefaultUrlOptions();
+                    options.AlwaysIncludeServerUrl = true;
+                    if (language != null)
                     {
-                        var options = LinkManager.GetDefaultUrlOptions();
-                        options.AlwaysIncludeServerUrl = true;
-                        if (language != null)
-                        {
-                            options.Language = language;
-                        }
-
-                        info.SiteUrls[siteName] = LinkManager.GetItemUrl(item, options);
+                        options.Language = language;
                     }
+                    if (language == null || string.Equals(site.Language, language.Name, StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        options.LanguageEmbedding = LanguageEmbedding.Never;
+                    }
+
+                    info.SiteUrls[siteName] = LinkManager.GetItemUrl(item, options);
                 }
             }
-
-            return info;
         }
     }
 }

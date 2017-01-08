@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Colossus.Integration.Models;
 using Colossus.Integration.Processing;
+using HtmlAgilityPack;
 using Sitecore.Analytics;
 
 namespace Colossus.Integration.Behaviors
@@ -104,17 +105,25 @@ namespace Colossus.Integration.Behaviors
 
         protected virtual string GetNextUrl(SitecoreResponseInfo response)
         {
-            var links = response.DocumentNode.SelectNodes("//a[@href]");
-            if (links != null)
-            {
-                var localLinks = links.Select(l => l.GetAttributeValue("href", "")).Where(l => l.StartsWith("/") && !l.EndsWith(".aspx")).ToArray();
-                if (localLinks.Length > 0)
-                {
-                    return localLinks[Randomness.Random.Next(0, localLinks.Length)];
-                }
-            }
+            return GetRandomLocalLinkOnPage(response);
+        }
 
-            return null;
+        private static string GetRandomLocalLinkOnPage(SitecoreResponseInfo response)
+        {
+            var localLinks = GetLocalLinksOnPage(response);
+            return localLinks?.Length > 0 ? localLinks[Randomness.Random.Next(0, localLinks.Length)] : null;
+        }
+
+        private static string[] GetLocalLinksOnPage(SitecoreResponseInfo response)
+        {
+            var links = GetLinksOnPage(response);
+            var localLinks = links?.Select(l => l.GetAttributeValue("href", "")).Where(l => l.StartsWith("/") && !l.EndsWith(".aspx"));
+            return localLinks?.Distinct().ToArray();
+        }
+
+        private static HtmlNodeCollection GetLinksOnPage(SitecoreResponseInfo response)
+        {
+            return response.DocumentNode.SelectNodes("//a[@href]");
         }
     }
 }

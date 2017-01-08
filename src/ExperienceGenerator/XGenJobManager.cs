@@ -81,17 +81,9 @@ namespace ExperienceGenerator
         {
             try
             {
-                if (IsJobStopped(job, false))
+                if (!IsJobStopped(job, false))
                 {
-                    job.Started = DateTime.Now;
-
-                    if (job.JobStatus == JobStatus.Pending)
-                    {
-                        job.JobStatus = JobStatus.Running;
-                    }
-                    Randomness.Seed((job.Id.GetHashCode() + DateTime.Now.Ticks).GetHashCode());
-
-                    SimulateVisitors(job);
+                    StartJob(job);
                 }
 
                 job.Ended = DateTime.Now;
@@ -103,6 +95,19 @@ namespace ExperienceGenerator
                 job.Ended = DateTime.Now;
                 job.LastException = ex.ToString();
             }
+        }
+
+        private static void StartJob(JobSegment job)
+        {
+            job.Started = DateTime.Now;
+
+            if (job.JobStatus == JobStatus.Pending)
+            {
+                job.JobStatus = JobStatus.Running;
+            }
+            Randomness.Seed((job.Id.GetHashCode() + DateTime.Now.Ticks).GetHashCode());
+
+            SimulateVisitors(job);
         }
 
         private static void SimulateVisitors(JobSegment job)

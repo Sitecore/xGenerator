@@ -28,7 +28,6 @@ namespace ExperienceGenerator
         [JsonConverter(typeof(StringEnumConverter))]
         JobStatus JobStatus { get; }
 
-        [JsonConverter(typeof(StringArrayConverter))]
         string StatusText { get; }
     }
 
