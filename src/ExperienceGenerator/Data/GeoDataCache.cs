@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Resources;
 using Colossus;
 using Sitecore.Diagnostics;
@@ -20,7 +21,7 @@ namespace ExperienceGenerator.Data
 
         public static GeoDataCache FromResource()
         {
-            var regions = LoadRegionsFromResource();
+            var regions = LoadRegionsFromSitecore();
             var continents = LoadContinentsFromResource();
             var countries = LoadCountriesFromResource(regions);
             var timeZones = LoadTimeZonesFromResource();
@@ -121,21 +122,21 @@ namespace ExperienceGenerator.Data
             return countries;
         }
 
-        private static List<Region> LoadRegionsFromResource()
+        private static List<Region> LoadRegionsFromSitecore()
         {
-            var resources = new ResourceManager("Sitecore.ExperienceAnalytics.Api.Resources.RegionResources", typeof(IReportingService).Assembly);
-            using (var resourceSet = resources.GetResourceSet(CultureInfo.InvariantCulture, true, true))
-            {
-                return resourceSet.Cast<DictionaryEntry>().Select(CreateRegionFromResource).ToList();
-            }
+            var regions = Type.GetType("Sitecore.ExperienceAnalytics.Api.GeoLocationTranslations.Regions, Sitecore.ExperienceAnalytics.Api");
+            if (regions == null)
+                return new List<Region>();
+            var members = regions.GetFields();
+            return members.Where(memberInfo => memberInfo.IsLiteral).Select(CreateRegionFromConst).ToList();
         }
 
-        private static Region CreateRegionFromResource(DictionaryEntry resource)
+        private static Region CreateRegionFromConst(FieldInfo member)
         {
-            var keys = ((string) resource.Key).Split('_');
-            var regionName = (string) resource.Value;
-            return new Region()
-            {
+            var keys = ((string)member.Name).Split('_');
+            var regionName = (string)member.GetRawConstantValue();
+            return new Region
+                   {
                 CountryCode = keys[0],
                 RegionCode = keys[1],
                 Name = regionName
