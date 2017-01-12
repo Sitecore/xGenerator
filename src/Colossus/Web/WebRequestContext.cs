@@ -22,14 +22,10 @@ namespace Colossus
 
         public event EventHandler<VisitEventArgs> VisitEnded;
 
-        public event EventHandler<RequestEventArgs> RequestStarted;
-
-        public event EventHandler<RequestEventArgs> RequestEnded;       
-
 
         public bool ThrowWebExceptions { get; set; }
 
-        public WebRequestContext(Visitor visitor)
+        protected WebRequestContext(Visitor visitor)
         {
             Visitor = visitor;
             WebClient = new CookieCollectingWebClient(this);
@@ -72,22 +68,16 @@ namespace Colossus
         }
 
 
-        internal TResponseInfo Execute(Request request, Func<string, WebClient, string> requestAction = null)
+        internal TResponseInfo Execute(Request request)
         {
-            OnRequestStarted(new RequestEventArgs(request));
-
             LastResponse = null;
             CurrentRequest = request;
 
-            requestAction = requestAction ?? ((url, wc) => wc.DownloadString(url));
-
-            var response = requestAction(request.Url, WebClient);
+            var response = WebClient.DownloadString(request.Url);
             if (LastResponse != null)
             {
                 LastResponse.Response = response;
             }
-
-            OnRequestEnded(new RequestEventArgs(request));
 
             return LastResponse;
         }        
@@ -103,6 +93,7 @@ namespace Colossus
                 httpRequest.Referer = CurrentRequest.GetVariable("Referrer", CurrentRequest.GetVariable("Referer", ""));
             }
             request.Headers.AddChunked(DataEncoding.RequestDataKey, DataEncoding.EncodeHeaderValue(info));
+            request.Headers.Add("X-DisableDemo", "true");
         }
 
         public virtual void ParseResponse(WebResponse response)
@@ -131,18 +122,6 @@ namespace Colossus
             EventHandler<VisitEventArgs> handler = VisitEnded;
             if (handler != null) handler(this, e);
         }
-
-        protected virtual void OnRequestStarted(RequestEventArgs e)
-        {
-            EventHandler<RequestEventArgs> handler = RequestStarted;
-            if (handler != null) handler(this, e);
-        }
-        protected virtual void OnRequestEnded(RequestEventArgs e)
-        {
-            EventHandler<RequestEventArgs> handler = RequestEnded;
-            if (handler != null) handler(this, e);
-        }
-
 
         private class CookieCollectingWebClient : WebClient
         {

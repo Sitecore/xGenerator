@@ -47,12 +47,12 @@ namespace Colossus.Web
             return pause;
         }
 
-        protected virtual TResponseInfo Execute(Request request, Func<string, WebClient, string> requestAction = null)
+        protected virtual TResponseInfo Execute(Request request)
         {
-            return VisitorContext.Execute(request, requestAction);
+            return VisitorContext.Execute(request);
         }
 
-        public TResponseInfo Request(string url, TimeSpan? duration = null, object variables = null, Func<string, WebClient, string> requestAction = null)
+        public TResponseInfo Request(string url, TimeSpan? duration = null, object variables = null)
         {
             if (_disposed)
             {
@@ -68,7 +68,7 @@ namespace Colossus.Web
                 }
             }
 
-            return Execute(request, requestAction);
+            return Execute(request);
         }
 
         private bool _disposed;

@@ -21,7 +21,7 @@
     {
       using (var visitContext = ctx.NewVisit())
       {
-        var outcomes = visitContext.Visit.GetVariable<IEnumerable<TriggerOutcomeData>>("TriggerOutcomes");
+        var outcomes = visitContext.Visit.GetVariable<IEnumerable<TriggerOutcomeData>>("TriggerOutcomes")?.ToArray();
         visitContext.Visit.Variables.Remove("TriggerOutcomes");
 
         UploadContactPicture(visitContext.Visit.Variables);

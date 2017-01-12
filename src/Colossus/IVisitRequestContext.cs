@@ -17,6 +17,6 @@ namespace Colossus
 
         void Pause(TimeSpan duration);
 
-        TResponseInfo Request(string url, TimeSpan? duration = null, object variables = null, Func<string, WebClient, string> requestAction = null);
+        TResponseInfo Request(string url, TimeSpan? duration = null, object variables = null);
     }
 }

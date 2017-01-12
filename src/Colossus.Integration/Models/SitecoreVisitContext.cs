@@ -27,9 +27,9 @@
             base.EndVisit();
         }
 
-        protected override SitecoreResponseInfo Execute(Request request, Func<string, WebClient, string> requestAction = null)
+        protected override SitecoreResponseInfo Execute(Request request)
         {
-            var response = base.Execute(request, requestAction);
+            var response = base.Execute(request);
             if (response.VisitData != null)
             {
                 this.VisitData = response.VisitData;

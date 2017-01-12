@@ -63,6 +63,7 @@ namespace ExperienceGenerator.Exm.Services
 
                     var json = JsonConvert.SerializeObject(requestHeaderInfo);
                     client.DefaultRequestHeaders.TryAddWithoutValidation("X-Exm-FakeData", json);
+                    client.DefaultRequestHeaders.TryAddWithoutValidation("X-DisableDemo", "true");
                 }
 
                 client.Timeout = TimeSpan.FromSeconds(120);
