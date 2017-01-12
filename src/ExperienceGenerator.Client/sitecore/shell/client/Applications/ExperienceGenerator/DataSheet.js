@@ -138,8 +138,9 @@ define(["sitecore", "underscore"],
                 this.appendRowToDOM(targetBorderId, text, guid, encodeURIComponent(text));
             },
 
-            appendRowToDOM: function(targetBorderId, text, guid, datascid, action, weight) {
-                action = action || "Delete";
+            appendRowToDOM: function (targetBorderId, text, guid, datascid, action, weight) {
+                if(action = null || action == "none" || action == "")
+                action = "Delete";
                 var output = "";
                 var that = this;
                 var $target = $("div[data-sc-id='" + targetBorderId + "']");
