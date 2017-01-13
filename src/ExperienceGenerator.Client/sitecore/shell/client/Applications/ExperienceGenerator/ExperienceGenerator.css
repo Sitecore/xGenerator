@@ -127,3 +127,7 @@ div[data-sc-id="SummaryRow"] {
 [data-sc-id=ImageContactPanel] img {
   width: 100%;
 }
+
+_:-ms-lang(x), [data-sc-id=ImageContactPanel] img {
+width: auto;
+}
