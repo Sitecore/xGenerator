@@ -9,13 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Colossus.Integration", "src
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExperienceGenerator", "src\ExperienceGenerator\ExperienceGenerator.csproj", "{78D36A52-D0E2-4357-80A2-ED237618AD83}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{508BBA3F-938E-484A-B569-DC00E1267626}"
-	ProjectSection(SolutionItems) = preProject
-		src\.nuget\NuGet.Config = src\.nuget\NuGet.Config
-		src\.nuget\NuGet.exe = src\.nuget\NuGet.exe
-		src\.nuget\NuGet.targets = src\.nuget\NuGet.targets
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build instructions", "Build instructions", "{5B235030-0420-4D54-AD0C-826EF59AB9E3}"
 	ProjectSection(SolutionItems) = preProject
 		src\Build instructions.txt = src\Build instructions.txt
