@@ -263,6 +263,7 @@
     <Content Include="App_Config\Include\Unicorn\Unicorn.Configs.Default.example" />
     <Content Include="App_Config\Include\Unicorn\Unicorn.config" />
     <Content Include="App_Config\Include\Unicorn\Unicorn.AutoPublish.config" />
+    <Content Include="App_Config\Include\Z.ExperienceGenerator\zExperienceGenerator.Exm.DevSettings.config" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Web.config">
       <SubType>Designer</SubType>
