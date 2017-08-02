@@ -64,37 +64,37 @@
       <HintPath>..\..\packages\Rainbow.Storage.Yaml.1.4.2\lib\net452\Rainbow.Storage.Yaml.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Analytics, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Sitecore.Analytics.NoReferences.8.2.170407\lib\NET452\Sitecore.Analytics.dll</HintPath>
+      <HintPath>..\..\packages\Sitecore.Analytics.NoReferences.8.2.170614\lib\NET452\Sitecore.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Analytics.Aggregation, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Sitecore.Analytics.Aggregation.NoReferences.8.2.170407\lib\NET452\Sitecore.Analytics.Aggregation.dll</HintPath>
+      <HintPath>..\..\packages\Sitecore.Analytics.Aggregation.NoReferences.8.2.170614\lib\NET452\Sitecore.Analytics.Aggregation.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Analytics.Automation.Aggregation, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Sitecore.Analytics.Automation.Aggregation.NoReferences.8.2.170407\lib\NET452\Sitecore.Analytics.Automation.Aggregation.dll</HintPath>
+      <HintPath>..\..\packages\Sitecore.Analytics.Automation.Aggregation.NoReferences.8.2.170614\lib\NET452\Sitecore.Analytics.Automation.Aggregation.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Analytics.DataAccess, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Sitecore.Analytics.DataAccess.NoReferences.8.2.170407\lib\NET452\Sitecore.Analytics.DataAccess.dll</HintPath>
+      <HintPath>..\..\packages\Sitecore.Analytics.DataAccess.NoReferences.8.2.170614\lib\NET452\Sitecore.Analytics.DataAccess.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Analytics.MongoDB, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Sitecore.Analytics.MongoDB.NoReferences.8.2.170407\lib\NET452\Sitecore.Analytics.MongoDB.dll</HintPath>
+      <HintPath>..\..\packages\Sitecore.Analytics.MongoDB.NoReferences.8.2.170614\lib\NET452\Sitecore.Analytics.MongoDB.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Analytics.Sql, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Sitecore.Analytics.Sql.NoReferences.8.2.170407\lib\NET452\Sitecore.Analytics.Sql.dll</HintPath>
+      <HintPath>..\..\packages\Sitecore.Analytics.Sql.NoReferences.8.2.170614\lib\NET452\Sitecore.Analytics.Sql.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Cintel, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Sitecore.Cintel.NoReferences.8.2.170407\lib\NET452\Sitecore.Cintel.dll</HintPath>
+      <HintPath>..\..\packages\Sitecore.Cintel.NoReferences.8.2.170614\lib\NET452\Sitecore.Cintel.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.ContentSearch, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Sitecore.ContentSearch.NoReferences.8.2.170407\lib\NET452\Sitecore.ContentSearch.dll</HintPath>
+      <HintPath>..\..\packages\Sitecore.ContentSearch.NoReferences.8.2.170614\lib\NET452\Sitecore.ContentSearch.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.ContentSearch.Analytics.Client, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Sitecore.ContentSearch.Analytics.Client.NoReferences.8.2.170407\lib\NET452\Sitecore.ContentSearch.Analytics.Client.dll</HintPath>
+      <HintPath>..\..\packages\Sitecore.ContentSearch.Analytics.Client.NoReferences.8.2.170614\lib\NET452\Sitecore.ContentSearch.Analytics.Client.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.ContentSearch.Client, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Sitecore.ContentSearch.Client.NoReferences.8.2.170407\lib\NET452\Sitecore.ContentSearch.Client.dll</HintPath>
+      <HintPath>..\..\packages\Sitecore.ContentSearch.Client.NoReferences.8.2.170614\lib\NET452\Sitecore.ContentSearch.Client.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Kernel, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Sitecore.Kernel.NoReferences.8.2.170407\lib\NET452\Sitecore.Kernel.dll</HintPath>
+      <HintPath>..\..\packages\Sitecore.Kernel.NoReferences.8.2.170614\lib\NET452\Sitecore.Kernel.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
@@ -173,7 +173,9 @@
     <Compile Include="Templates.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Config\Include\ExperienceGenerator\ExperienceGenerator.config">
       <SubType>Designer</SubType>
     </Content>
@@ -208,7 +210,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>57017</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
