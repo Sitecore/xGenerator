@@ -57,6 +57,20 @@ Both walkers adds page event data if required from configuration.
 6.	Sitecore receives requests as is, setups analytics tracker by calling own pipelines
 7.	Colossus.Intergration processors executed inside Sitecore pipelines to patch analytics tracker with current customizations of request
 
+## Installation Instructions
+
+Deployment to Sitecore:
+
+1)  Open "src\ExperienceGenerator.Client\App_Config\Include\ExperienceGenerator\zExperienceGenerator.DevSettings.config" and change "experienceGeneratorSource" variable to xGenerator source location
+2) Open "src\publishsettings.targets" and change publishUrl to the Sitecore host name
+3) Open ExperienceGenerator.sln in Visual Studio
+4) Perform Web publish for all web projects in solution using "local" profile
+5) Go to the %isntanceName%/unicorn.aspx page and synchronize "ExperienceGenerator" configuration 
+
+## Package Building Instructions
+- Building the installation package requires Sitecore Rocks.
+- The package definition is in ExperienceGenerator.Client\ExperienceGenerator.package. You need to point it to a Sitecore install with Experience Generator installed to build the package.
+
 ## Extension points:
 *	Variable Factories in XGenParser class that fill each request with variables based on configuration (device, date, duration, channel, campaign etc.) allow us setup new factory to fill new request variable
 *	Processors in Colossus.Integration library patches all requests with provided request variables.

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ExperienceGenerator</RootNamespace>
     <AssemblyName>ExperienceGenerator</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -33,37 +33,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Faker.NET4">
-      <HintPath>..\..\packages\Faker.Net.1.0.3\lib\net40\Faker.NET4.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Sitecore.Analytics, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Sitecore.Analytics.NoReferences.8.2.170614\lib\NET452\Sitecore.Analytics.dll</HintPath>
-    </Reference>
-    <Reference Include="Sitecore.Analytics.DataAccess, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Sitecore.Analytics.DataAccess.NoReferences.8.2.170614\lib\NET452\Sitecore.Analytics.DataAccess.dll</HintPath>
-    </Reference>
-    <Reference Include="Sitecore.Analytics.Model, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Sitecore.Analytics.Model.NoReferences.8.2.170614\lib\NET452\Sitecore.Analytics.Model.dll</HintPath>
-    </Reference>
-    <Reference Include="Sitecore.ContentSearch, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Sitecore.ContentSearch.NoReferences.8.2.170614\lib\NET452\Sitecore.ContentSearch.dll</HintPath>
-    </Reference>
-    <Reference Include="Sitecore.ContentSearch.Analytics, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Sitecore.ContentSearch.Analytics.NoReferences.8.2.170614\lib\NET452\Sitecore.ContentSearch.Analytics.dll</HintPath>
-    </Reference>
-    <Reference Include="Sitecore.ExperienceAnalytics.Api, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Sitecore.ExperienceAnalytics.Api.NoReferences.8.2.170614\lib\NET452\Sitecore.ExperienceAnalytics.Api.dll</HintPath>
-    </Reference>
-    <Reference Include="Sitecore.Kernel, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Sitecore.Kernel.NoReferences.8.2.170614\lib\NET452\Sitecore.Kernel.dll</HintPath>
-    </Reference>
-    <Reference Include="Sitecore.Marketing, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Sitecore.Marketing.NoReferences.8.2.170614\lib\NET452\Sitecore.Marketing.dll</HintPath>
-    </Reference>
+    <PackageReference Include="Faker.Net" Version="1.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+    <PackageReference Include="Sitecore.Analytics.DataAccess.NoReferences" Version="9.0.180604" />
+    <PackageReference Include="Sitecore.Analytics.Model.NoReferences" Version="9.0.180604" />
+    <PackageReference Include="Sitecore.Analytics.NoReferences" Version="9.0.180604" />
+    <PackageReference Include="Sitecore.ContentSearch.Analytics.NoReferences" Version="8.2.171121" />
+    <PackageReference Include="Sitecore.ContentSearch.NoReferences" Version="9.0.180604" />
+    <PackageReference Include="Sitecore.ExperienceAnalytics.Api.NoReferences" Version="9.0.180604" />
+    <PackageReference Include="Sitecore.Kernel.NoReferences" Version="9.0.180604" />
+    <PackageReference Include="Sitecore.Marketing.NoReferences" Version="9.0.180604" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -120,7 +101,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Data\timezones.txt" />

@@ -36,11 +36,9 @@ define(["underscore"], function (_) {
     currItr.channelName = host.TrafficChannelComboBox.get("selectedItem").$displayName;
     currItr.channelId = host.TrafficChannelComboBox.get("selectedItem").itemId;
 
-    currItr.campaignName = host.CampaignComboBox.get("selectedItem").$displayName;
+    currItr.campaignName = "None";
 
-    currItr.campaignId = host.CampaignComboBox.get("selectedItem").itemId != emptyCampaign
-      ? host.CampaignComboBox.get("selectedItem").itemId
-      : null;
+      currItr.campaignId = "";
 
     currItr.recency = parseInt(host.RecencyValue.get("text")) || 0;
     currItr.geoData = host.City.get("selectedItem");

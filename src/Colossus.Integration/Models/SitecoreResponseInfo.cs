@@ -39,7 +39,7 @@ namespace Colossus.Integration.Models
             var info = new SitecoreResponseInfo
                        {
                            ContactId = Tracker.Current.Contact.TryGetValue(c => (Guid?) c.ContactId),
-                           VisitData = ((IUpdatableObject) Tracker.Current.Interaction).TryGetValue(i => i.GetParts().OfType<VisitData>().FirstOrDefault())
+                           VisitData = Tracker.Current.Interaction.ToVisitData()
                        };
 
 

@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Web.Http;
-using System.Xml;
 using Colossus.Integration.Models;
 using ExperienceGenerator.Client.Models;
 using ExperienceGenerator.Client.Repositories;
@@ -12,7 +10,6 @@ using ExperienceGenerator.Repositories;
 using Newtonsoft.Json.Linq;
 using Sitecore;
 using Sitecore.Analytics.Aggregation;
-using Sitecore.Analytics.Data.DataAccess.MongoDb;
 using Sitecore.Analytics.Data.Items;
 using Sitecore.Cintel.Configuration;
 using Sitecore.Configuration;
@@ -20,7 +17,6 @@ using Sitecore.ContentSearch;
 using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Globalization;
-using Sitecore.Sites;
 
 namespace ExperienceGenerator.Client.Controllers
 {
@@ -268,8 +264,8 @@ namespace ExperienceGenerator.Client.Controllers
         [HttpPost]
         public IHttpActionResult Flush()
         {
-            var driver = new MongoDbDriver(ConfigurationManager.ConnectionStrings["analytics"].ConnectionString);
-            driver.ResetDatabase();
+            //var driver = new MongoDbDriver(ConfigurationManager.ConnectionStrings["analytics"].ConnectionString);
+            //driver.ResetDatabase();
 
             var item = (Context.ContentDatabase ?? Context.Database).GetItem("/sitecore/media library/Images/xgen");
             item?.Delete();

@@ -8,7 +8,7 @@ using Sitecore;
 using Sitecore.Analytics;
 using Sitecore.Analytics.Data.DataAccess.MongoDb;
 using Sitecore.Analytics.Model;
-using Sitecore.Analytics.Processing.ProcessingPool;
+//using Sitecore.Analytics.Processing.ProcessingPool;
 using Sitecore.Configuration;
 using Sitecore.ContentSearch;
 using Sitecore.Data;
@@ -53,7 +53,7 @@ namespace AnalyticsUpdater.Repositories
 
                 UpdateLastRefreshDate();
 
-                RebuildAnalyticsIndexService.RebuildAnalyticsIndex();
+                //RebuildAnalyticsIndexService.RebuildAnalyticsIndex();
             }
             catch (Exception ex)
             {

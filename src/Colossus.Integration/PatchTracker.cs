@@ -56,7 +56,7 @@ namespace Colossus.Integration
             catch (Exception ex)
             {
                 //Log but ignore errors to avoid interrupting standard analytics
-                Log.Error("xGenerator PatchTracker failed.", ex);
+                Log.Error("xGenerator PatchTracker failed.", ex, this);
             }
         }
 
