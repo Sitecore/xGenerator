@@ -13,8 +13,7 @@ Generate "realistically looking" traffic for the Sitecore Experience Database (x
  - Outcomes
  - Campaigns
 
-For build instructions please refer to [Build Instructions.txt](src/Build instructions.txt)
-
+# Experience Profile Generator
 # Experience Profile Generator
 
 Generate visits for Sitecore contacts (xProfile) with configurable settings:
@@ -65,7 +64,7 @@ Deployment to Sitecore:
 2) Open "src\publishsettings.targets" and change publishUrl to the Sitecore host name
 3) Open ExperienceGenerator.sln in Visual Studio
 4) Perform Web publish for all web projects in solution using "local" profile
-5) Go to the %isntanceName%/unicorn.aspx page and synchronize "ExperienceGenerator" configuration 
+5) Go to the %instanceName%/unicorn.aspx page and synchronize "ExperienceGenerator" configuration 
 
 ## Package Building Instructions
 - Building the installation package requires Sitecore Rocks.
