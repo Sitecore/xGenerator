@@ -1,6 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Colossus;
 using Faker;
+using Sitecore.Analytics;
+using Sitecore.Analytics.Model;
+using Sitecore.Diagnostics;
 
 namespace ExperienceGenerator.Parsing.Factories
 {
@@ -23,15 +27,14 @@ namespace ExperienceGenerator.Parsing.Factories
             target.Variables["ContactId"] = "XGen" + VisitorIndex;
             VisitorIndex++;
 
-            var firstname = Name.First();
-            var lastname = Name.Last();
-            var email = Internet.Email(firstname + " " + lastname);
+            var firstName = Name.First();
+            var lastName = Name.Last();
 
-            target.Variables["ContactFirstName"] = firstname;
-            target.Variables["ContactLastName"] = lastname;
-            target.Variables["ContactEmail"] = email;
+            target.Variables["ContactFirstName"] = firstName;
+            target.Variables["ContactLastName"] = lastName;
+            target.Variables["ContactEmail"] = Internet.Email(firstName + " " + lastName);
         }
 
-        public override IEnumerable<string> ProvidedVariables => new[] {"ContactId", "ContactFirstName", "ContactLastName", "ContactEmail"};
+        public override IEnumerable<string> ProvidedVariables => new[] { "ContactId", "ContactFirstName", "ContactLastName", "ContactEmail" };
     }
 }

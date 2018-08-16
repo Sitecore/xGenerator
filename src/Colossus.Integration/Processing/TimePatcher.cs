@@ -1,28 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Colossus.Web;
-using Sitecore.Analytics;
 using Sitecore.Analytics.Tracking;
-using Sitecore.Sites;
 
 namespace Colossus.Integration.Processing
 {
     public class TimePatcher : ISessionPatcher
     {
         public void UpdateSession(Session session, RequestInfo requestInfo)
-        {         
+        {
+            var startDate = DateTime.SpecifyKind(requestInfo.Visit.Start, DateTimeKind.Utc);
+            var endDate = DateTime.SpecifyKind(requestInfo.Visit.End, DateTimeKind.Utc);
 
-            session.Interaction.StartDateTime = requestInfo.Visit.Start;
-            session.Interaction.EndDateTime = requestInfo.Visit.End;
+            session.Interaction.StartDateTime = startDate;
+            session.Interaction.EndDateTime = endDate;
 
             var page = session.Interaction.CurrentPage;
             if (page != null)
             {
-                page.DateTime = requestInfo.Start;
-                page.Duration = (int)Math.Round((requestInfo.End - requestInfo.Start).TotalMilliseconds);
+                var requestInfoStart = DateTime.SpecifyKind(requestInfo.Start, DateTimeKind.Utc);
+                var requestInfoEnd = DateTime.SpecifyKind(requestInfo.End, DateTimeKind.Utc);
+
+                page.DateTime = requestInfoStart;
+                page.Duration = (int)Math.Round((requestInfoEnd - requestInfoStart).TotalMilliseconds);
             }
         }
     }
