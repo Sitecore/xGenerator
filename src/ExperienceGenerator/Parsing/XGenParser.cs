@@ -168,7 +168,20 @@ namespace ExperienceGenerator.Parsing
                     SetUserAgent(segment);
 
                     //set datetime
-                    segment.DateGenerator.Start = DateTime.Today.AddHours(12).AddMinutes(Randomness.Random.Next(-240, 240)).AddSeconds(Randomness.Random.Next(-240, 240)).Add(TimeSpan.Parse(interaction.Recency));
+
+                    //Visits while happen in this interval adjusted for the interaction's local time.
+                    const double minHour = 6, maxHour = 23;
+
+                    //Does the interaction have a time zone? If not use UTC.
+                    var tz = interaction.GeoData?.TimeZoneInfo ?? TimeZoneInfo.Utc;
+
+                    //Pick a random time between min and max hour. DateTimeKind.Unspecified is used because we are converting to local time next.
+                    var startDate = DateTime.SpecifyKind(DateTime.Today.AddHours(minHour + Randomness.Random.NextDouble() * (maxHour - minHour)), DateTimeKind.Unspecified);
+
+                    startDate = TimeZoneInfo.ConvertTimeToUtc(startDate, tz); //Convert from local time to UTC.
+
+                    //"Recency" indicates how many days ago the visit happened. Hence substract this number of days.
+                    segment.DateGenerator.Start = startDate.Add(-TimeSpan.Parse(interaction.Recency));
 
 
                     //set outcomes
