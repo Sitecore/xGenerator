@@ -134,7 +134,9 @@ namespace Colossus.Integration.Processing
                     // and make sure you set the ContactSaveMode as demonstrated
                     //Tracker.Current.Contact.ContactSaveMode = ContactSaveMode.AlwaysSave;
                     //manager.SaveContactToCollectionDb(Sitecore.Analytics.Tracker.Current.Contact);
-                    Tracker.Current.Session.IdentifyAs("xGenerator", Tracker.Current.Contact.ContactId.ToString("N"));
+                    
+                    //Use the email to uniquely identify the contact between visits.
+                    Tracker.Current.Session.IdentifyAs("xGenerator", emailValue);
 
                     Log.Info($"ExperienceGenerator ContactDataProcessor: Session Identified using xGenerator", this);
 
