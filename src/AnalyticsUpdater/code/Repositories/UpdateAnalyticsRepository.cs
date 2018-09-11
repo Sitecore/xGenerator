@@ -1,37 +1,32 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using System.Threading;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using Sitecore;
 using Sitecore.Analytics;
 using Sitecore.Analytics.Data.DataAccess.MongoDb;
-using Sitecore.Analytics.Model;
-//using Sitecore.Analytics.Processing.ProcessingPool;
 using Sitecore.Configuration;
-using Sitecore.ContentSearch;
 using Sitecore.Data;
 using Sitecore.Data.Fields;
 using Sitecore.Data.Items;
 using Sitecore.Data.SqlServer;
 using Sitecore.Diagnostics;
 using Sitecore.Jobs;
-using Sitecore.SecurityModel;
 
 namespace AnalyticsUpdater.Repositories
 {
     public class UpdateAnalyticsVisitsRepository
     {
         private readonly Item _controlPannelSettings;
-        private readonly Database _coreDb;
         private readonly Database _masterDb;
 
         public UpdateAnalyticsVisitsRepository()
         {
-            _coreDb = Factory.GetDatabase("core");
+            var coreDb = Factory.GetDatabase("core");
             _masterDb = Factory.GetDatabase("master");
-            _controlPannelSettings = _coreDb.GetItem(new ID("{CFAF8BF6-7AB2-4A3D-8A87-35F64D0D8FD8}"));
+            _controlPannelSettings = coreDb.GetItem(new ID("{CFAF8BF6-7AB2-4A3D-8A87-35F64D0D8FD8}"));
         }
 
         public void Run()
@@ -107,7 +102,7 @@ namespace AnalyticsUpdater.Repositories
             var scriptTxt = refreshAnalyticsQuery.Fields["Query"].Value;
             var connectionStringName = refreshAnalyticsQuery.Fields["Data Source"].Value;
             var item = ConfigurationManager.ConnectionStrings[connectionStringName];
-            var driver = new UpdateAnalyticsVisitsRepository.JsMongoDbDriver(item.ConnectionString);
+            var driver = new JsMongoDbDriver(item.ConnectionString);
             driver.Eval(scriptTxt, days);
         }
 
@@ -117,10 +112,11 @@ namespace AnalyticsUpdater.Repositories
             using (new EditContext(_controlPannelSettings))
             {
                 _controlPannelSettings.Editing.BeginEdit();
-                var lastUpdateField = new DateField(_controlPannelSettings.Fields["Last Refresh Date"])
-                                      {
-                                          Value = DateUtil.ToIsoDate(DateTime.UtcNow)
-                                      };
+                //var lastUpdateField = new DateField(_controlPannelSettings.Fields["Last Refresh Date"])
+                //                      {
+                //                          Value = DateUtil.ToIsoDate(DateTime.UtcNow)
+                //                      };
+                _controlPannelSettings.Fields["Last Refresh Date"].Value = DateUtil.ToIsoDate(DateTime.UtcNow);
                 _controlPannelSettings.Editing.EndEdit();
             }
         }
@@ -173,9 +169,14 @@ namespace AnalyticsUpdater.Repositories
             {
             }
 
-            public BsonValue Eval(BsonJavaScript code, params object[] args)
+            public void Eval(BsonJavaScript code, params object[] args)
             {
-                return Database.Eval(EvalFlags.None, code, args);
+                var evalArgs = new EvalArgs()
+                {
+                    Args = ((IEnumerable<BsonValue>)args),
+                    Code = code
+                };
+                Database.Eval(evalArgs);
             }
         }
     }

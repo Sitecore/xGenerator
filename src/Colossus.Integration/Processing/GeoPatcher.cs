@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Colossus.Web;
-using Sitecore.Analytics;
+﻿using Colossus.Web;
 using Sitecore.Analytics.Model;
 using Sitecore.Analytics.Tracking;
 

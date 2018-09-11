@@ -1,13 +1,13 @@
-using System.Linq;
 using System.Threading;
 using ExperienceGenerator.Exm.Models;
 using Sitecore.Configuration;
 using Sitecore.ExM.Framework.Diagnostics;
 using Sitecore.ListManagement;
-using Sitecore.ListManagement.ContentSearch.Model;
 
 namespace ExperienceGenerator.Exm.Services
 {
+    //TODO: This might be able to go away. Locked Lists no longer a thing in Sitecore 9
+
     public class UnlockListService
     {
         private readonly ListManager<ContactList, ContactData> _listManager;

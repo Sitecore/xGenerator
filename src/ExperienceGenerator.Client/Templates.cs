@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace ExperienceGenerator.Client
+﻿namespace ExperienceGenerator.Client
 {
   using Sitecore.Data;
-  using Sitecore.Shell.Framework.Commands.System;
 
-  public static class Templates
+    public static class Templates
   {
     public struct Preset
     {

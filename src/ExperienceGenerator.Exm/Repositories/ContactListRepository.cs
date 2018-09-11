@@ -7,17 +7,19 @@ using ExperienceGenerator.Exm.Services;
 using Sitecore.Analytics.Model.Entities;
 using Sitecore.Analytics.Tracking;
 using Sitecore.Configuration;
-using Sitecore.ContentSearch.Utilities;
 using Sitecore.Data;
 using Sitecore.ListManagement;
-using Sitecore.ListManagement.ContentSearch.Model;
 using Sitecore.ListManagement.Services;
+using Sitecore.Modules.EmailCampaign.ListManager;
 using Sitecore.Modules.EmailCampaign.Messages;
 
 namespace ExperienceGenerator.Exm.Repositories
 {
     public class ContactListRepository
     {
+        //TODO: Make This into Sitecore 9 Contact List Friendly
+
+
         private const string DefaultListManagerOwner = "xGenerator";
 
         private readonly ListManager<ContactList, ContactData> _listManager;

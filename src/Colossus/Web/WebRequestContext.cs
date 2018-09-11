@@ -3,7 +3,6 @@ using System.IO;
 using System.Net;
 using System.Web.Hosting;
 using Colossus.Web;
-using Sitecore.ApplicationCenter.Applications;
 
 namespace Colossus
 {

@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using Colossus;
 using Colossus.Statistics;
 using ExperienceGenerator.Data;
 using ExperienceGenerator.Repositories;
 using Sitecore;
-using Sitecore.Analytics.Model;
 
 namespace ExperienceGenerator.Services
 {

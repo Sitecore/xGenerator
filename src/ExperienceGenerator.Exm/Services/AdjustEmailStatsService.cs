@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
-using System.Web;
 using ExperienceGenerator.Exm.Models;
 using Sitecore;
 using Sitecore.Analytics.Data.Items;
 using Sitecore.Data;
 using Sitecore.Data.Items;
-using Sitecore.ListManagement.ContentSearch;
 using Sitecore.Modules.EmailCampaign.Core;
 using Sitecore.Modules.EmailCampaign.Core.Dispatch;
 using Sitecore.Modules.EmailCampaign.Core.Gateways;

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using ExperienceGenerator.Repositories;
-using Sitecore.Analytics.Model;
+﻿using System.Collections.Generic;
 
 namespace ExperienceGenerator.Data
 {

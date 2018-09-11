@@ -2,9 +2,8 @@
 {
   using System;
   using System.Web.UI;
-  using AnalyticsUpdater.Repositories;
 
-  public class RebuildAnalyticsIndex : Page
+    public class RebuildAnalyticsIndex : Page
   {
     protected void Page_Load(object sender, EventArgs e)
     {

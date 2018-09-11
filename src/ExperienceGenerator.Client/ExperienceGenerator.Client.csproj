@@ -44,7 +44,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Configy" Version="1.0.0" />
-    <PackageReference Include="Kamsar.WebConsole" Version="2.0.0" />
+    <PackageReference Include="Kamsar.WebConsole" Version="2.0.1" />
     <PackageReference Include="MicroCHAP" Version="1.2.2.2" />
     <PackageReference Include="Microsoft.AspNet.WebApi" Version="5.2.3" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.3" />

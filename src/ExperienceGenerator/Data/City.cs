@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Net;
 using Colossus;
 using Newtonsoft.Json;
 using Sitecore.Analytics.Model;

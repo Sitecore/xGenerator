@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using ExperienceGenerator.Exm.Infrastructure;
 using ExperienceGenerator.Exm.Models;
 using Faker;
@@ -9,13 +8,14 @@ using Sitecore.Analytics.Model;
 using Sitecore.Analytics.Model.Entities;
 using Sitecore.Analytics.Tracking;
 using Sitecore.Data;
-using Sitecore.ListManagement.ContentSearch.Model;
 
 namespace ExperienceGenerator.Exm.Repositories
 {
     public class ContactRepository
     {
         private readonly Sitecore.Analytics.Data.ContactRepository _contactRepository;
+        
+        //TODO: Convert to Sitecore 9 Contact Repo
 
         public ContactRepository()
         {

@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using MathNet.Numerics.RootFinding;
-using Sitecore.Shell.Framework.Commands.TemplateBuilder;
 
 namespace Colossus.Statistics
 {   

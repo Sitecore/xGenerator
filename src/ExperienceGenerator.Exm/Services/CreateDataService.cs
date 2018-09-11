@@ -3,23 +3,18 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Threading;
 using ExperienceGenerator.Exm.Models;
 using ExperienceGenerator.Exm.Repositories;
 using Sitecore.Caching;
 using Sitecore.Common;
-using Sitecore.Configuration;
 using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 using Sitecore.EmailCampaign.Analytics.Model;
-using Sitecore.ListManagement;
-using Sitecore.ListManagement.ContentSearch.Model;
 using Sitecore.Modules.EmailCampaign.Core.Dispatch;
 using Sitecore.Modules.EmailCampaign.Core.Pipelines.DispatchNewsletter;
 using Sitecore.Modules.EmailCampaign.Factories;
 using Sitecore.Modules.EmailCampaign.Messages;
-using Sitecore.Publishing;
 using Sitecore.SecurityModel;
 using Sitecore.Sites;
 using Constants = Sitecore.Modules.EmailCampaign.Core.Constants;
@@ -75,6 +70,7 @@ namespace ExperienceGenerator.Exm.Services
             return SiteContext.GetSite(messageItem.ManagerRoot.Settings.WebsiteSiteConfigurationName);
         }
 
+        //TODO: Convert to using Sitecore 9 EXM Message Contact
         private List<ContactData> GetMessageContacts(Job job, MessageItem messageItem)
         {
             return _contactListRepository.GetContacts(messageItem, _unsubscribeFromAllContacts);

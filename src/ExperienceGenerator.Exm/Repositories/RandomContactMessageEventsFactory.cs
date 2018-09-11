@@ -8,11 +8,9 @@ using ExperienceGenerator.Exm.Services;
 using ExperienceGenerator.Repositories;
 using ExperienceGenerator.Services;
 using Sitecore;
-using Sitecore.Analytics.Model;
 using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Links;
-using Sitecore.ListManagement.ContentSearch.Model;
 using Sitecore.Modules.EmailCampaign.Messages;
 
 namespace ExperienceGenerator.Exm.Repositories
@@ -72,6 +70,7 @@ namespace ExperienceGenerator.Exm.Repositories
             return randomCity;
         }
 
+        //TODO: Convert to using a Sitecore 9 version of EXM Message Events
         [NotNull]
         public MessageContactEvents CreateRandomContactMessageEvents(ContactData contactData, Funnel funnel, MessageItem messageItem)
         {

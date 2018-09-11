@@ -1,11 +1,4 @@
-using System.Linq;
-using System.Threading;
-using Sitecore.Analytics.Data.DataAccess.MongoDb;
-using Sitecore.Analytics.Model;
 //using Sitecore.Analytics.Processing.ProcessingPool;
-using Sitecore.Configuration;
-using Sitecore.ContentSearch;
-using Sitecore.SecurityModel;
 
 namespace AnalyticsUpdater.Repositories
 {

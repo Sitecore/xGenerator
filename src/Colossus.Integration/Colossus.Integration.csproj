@@ -44,19 +44,22 @@
     <PackageReference Include="51Degrees.mobi" Version="3.1.11.1" />
     <PackageReference Include="Antlr" Version="3.5.0.2" />
     <PackageReference Include="HtmlAgilityPack" Version="1.4.9.5" />
-    <PackageReference Include="Microsoft.AspNet.Razor" Version="3.2.4" />
-    <PackageReference Include="Microsoft.AspNet.WebPages" Version="3.2.4" />
+    <PackageReference Include="Microsoft.AspNet.Razor" Version="3.2.3" />
+    <PackageReference Include="Microsoft.AspNet.WebPages" Version="3.2.3" />
     <PackageReference Include="Microsoft.Web.Infrastructure" Version="1.0.0.0" />
     <PackageReference Include="Sitecore.Analytics.Core.NoReferences" Version="9.0.180604" />
     <PackageReference Include="Sitecore.Analytics.DataAccess.NoReferences" Version="9.0.180604" />
     <PackageReference Include="Sitecore.Analytics.Model.NoReferences" Version="9.0.180604" />
     <PackageReference Include="Sitecore.Analytics.NoReferences" Version="9.0.180604" />
     <PackageReference Include="Sitecore.Analytics.XConnect.NoReferences" Version="9.0.180604" />
+    <PackageReference Include="Sitecore.CES.DeviceDetection.NoReferences">
+      <Version>9.0.180604</Version>
+    </PackageReference>
     <PackageReference Include="Sitecore.Cintel.Client.NoReferences" Version="9.0.180604" />
     <PackageReference Include="Sitecore.Cintel.NoReferences" Version="9.0.180604" />
     <PackageReference Include="Sitecore.ContentTesting.NoReferences" Version="9.0.180604" />
     <PackageReference Include="Sitecore.ExperienceAnalytics.NoReferences" Version="9.0.180604" />
-    <PackageReference Include="Sitecore.Framework.Conditions" Version="1.1.12" />
+    <PackageReference Include="Sitecore.Framework.Conditions" Version="3.0.1" />
     <PackageReference Include="Sitecore.ItemWebApi.NoReferences" Version="9.0.180604" />
     <PackageReference Include="Sitecore.Kernel.NoReferences" Version="9.0.180604" />
     <PackageReference Include="Sitecore.Marketing.NoReferences" Version="9.0.180604" />
@@ -67,10 +70,6 @@
     <PackageReference Include="Sitecore.XConnect.NoReferences" Version="9.0.180604" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="FiftyOne.Foundation, Version=3.1.11.1, Culture=neutral, PublicKeyToken=e967ae578dabd98e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\References\FiftyOne.Foundation.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web" />

@@ -1,5 +1,4 @@
 using System;
-using Sitecore.Syndication;
 
 namespace Colossus.Statistics
 {

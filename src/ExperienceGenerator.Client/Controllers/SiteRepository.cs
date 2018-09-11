@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
 using ExperienceGenerator.Models;
-using Sitecore;
 using Sitecore.Configuration;
 using Sitecore.Sites;
 

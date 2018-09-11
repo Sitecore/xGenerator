@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AnalyticsUpdater.Installer
+﻿namespace AnalyticsUpdater.Installer
 {
   using System.Collections.Specialized;
   using System.Configuration;
