@@ -1,5 +1,8 @@
 # Experience Generator
 
+[![Build status](https://ci.appveyor.com/api/projects/status/b610w5q4qosfyh7r/branch/master?svg=true)](https://ci.appveyor.com/project/jeanfrancoislarente/xgenerator/branch/master)
+
+
 Generate "realistically looking" traffic for the Sitecore Experience Database (xDB) with configurable patterns, including:
 
  - Trends over time
@@ -13,7 +16,6 @@ Generate "realistically looking" traffic for the Sitecore Experience Database (x
  - Outcomes
  - Campaigns
 
-# Experience Profile Generator
 # Experience Profile Generator
 
 Generate visits for Sitecore contacts (xProfile) with configurable settings:
