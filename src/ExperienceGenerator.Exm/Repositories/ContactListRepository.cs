@@ -1,127 +1,130 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using ExperienceGenerator.Exm.Infrastructure;
 using ExperienceGenerator.Exm.Models;
-using ExperienceGenerator.Exm.Services;
-using Sitecore.Analytics.Model.Entities;
-using Sitecore.Analytics.Tracking;
-using Sitecore.Configuration;
 using Sitecore.Data;
+using Sitecore.DependencyInjection;
 using Sitecore.ListManagement;
-using Sitecore.ListManagement.Services;
-using Sitecore.Modules.EmailCampaign.ListManager;
+using Sitecore.ListManagement.Services.Model;
+using Sitecore.ListManagement.XConnect;
+using Sitecore.Marketing.Definitions.ContactLists;
+using Sitecore.Modules.EmailCampaign.Factories;
 using Sitecore.Modules.EmailCampaign.Messages;
+using Sitecore.Services.Core;
+using Sitecore.XConnect;
+using Sitecore.XConnect.Collection.Model;
 
 namespace ExperienceGenerator.Exm.Repositories
 {
     public class ContactListRepository
     {
-        //TODO: Make This into Sitecore 9 Contact List Friendly
-
 
         private const string DefaultListManagerOwner = "xGenerator";
-
-        private readonly ListManager<ContactList, ContactData> _listManager;
-        private readonly UnlockListService _unlockListService;
+        private readonly IContactListProvider _listManager;
+        private readonly ISubscriptionService _subscriptionService;
+        private readonly IRepository<ContactListModel> _contactListRepository;
+        private readonly IContactProvider _contactProvider;
+        private readonly IRecipientManagerFactory _recipientManagerFactory;
 
         public ContactListRepository()
         {
-            _listManager = (ListManager<ContactList, ContactData>) Factory.CreateObject("contactListManager", false);
-            _unlockListService = new UnlockListService();
+
+            _listManager = (IContactListProvider) ServiceLocator.ServiceProvider.GetService(typeof(IContactListProvider));
+            _contactProvider = (IContactProvider) ServiceLocator.ServiceProvider.GetService(typeof(IContactProvider));
+            _subscriptionService = (ISubscriptionService) ServiceLocator.ServiceProvider.GetService(typeof(ISubscriptionService));
+            _recipientManagerFactory = (IRecipientManagerFactory)ServiceLocator.ServiceProvider.GetService(typeof(IRecipientManagerFactory));
+            _contactListRepository = (IRepository<ContactListModel>) ServiceLocator.ServiceProvider.GetService(typeof(IRepository<ContactListModel>));
         }
 
 
-        public ContactList GetList(ID id)
+        private ContactList GetList(ID id)
         {
-            return _listManager.FindById(id.ToShortID().ToString());
+            return GetList(id.ToGuid());
+        }
+
+        private ContactList GetList(Guid id)
+        {
+            return _listManager.Get(id, CultureInfo.CurrentCulture);
         }
 
         public ContactList CreateList(Job job, string name, IEnumerable<Contact> addContacts, string listManagerOwner = DefaultListManagerOwner)
         {
             job.Status = $"Creating List {name}";
 
-            var contactList = new ContactList
-                              {
-                                  Name = name,
-                                  Owner = listManagerOwner,
-                                  Type = ListRowType.ContactList
-                              };
+            var listId = Guid.NewGuid();
+            var newDef = new ContactListModel
+            {
+                Name = name,
+                Id = listId.ToString(),
+                Type = ListType.ContactList.ToString(),
+                Owner = listManagerOwner,
+                Description = "Generated list by Experience Generator"
+            };
 
-            _listManager.Create(contactList);
-            _listManager.AssociateContacts(contactList, addContacts.Select(MapContactToContactData));
+            _contactListRepository.Add(newDef);
+
+
+            if (addContacts != null)
+            {
+                _subscriptionService.Subscribe(listId, addContacts);
+
+            }
+
             job.CompletedLists++;
+            return GetList(listId);
 
-            _unlockListService.UnlockList(job, contactList);
-
-            return contactList;
         }
 
-        private ContactData MapContactToContactData(Contact contact)
+
+        public IEnumerable<Contact> GetContacts(Job job, ContactList xaList)
         {
-            var result = new ContactData
-                         {
-                             ContactId = contact.ContactId,
-                             Identifier = contact.Identifiers.Identifier
-                         };
-
-            var contactPersonalInfo = contact.GetFacet<IContactPersonalInfo>("Personal");
-            result.FirstName = contactPersonalInfo.FirstName;
-            result.MiddleName = contactPersonalInfo.MiddleName;
-            result.Surname = contactPersonalInfo.Surname;
-            result.Nickname = contactPersonalInfo.Nickname;
-
-            if (contactPersonalInfo.BirthDate != null)
+            string[] facets =
             {
-                result.BirthDate = contactPersonalInfo.BirthDate.Value;
+                CollectionModel.FacetKeys.PersonalInformation,
+                CollectionModel.FacetKeys.EmailAddressList,
+                CollectionModel.FacetKeys.ListSubscriptions
+            };
+            var contactList = _listManager.Get(xaList.ContactListDefinition.Id, xaList.ContactListDefinition.Culture);
+            var contactBatchEnumerator = _contactProvider.GetContactBatchEnumerator(contactList, 200, facets);
+            var contacts = new List<Contact>();
+            while (contactBatchEnumerator.MoveNext())
+            {
+                var batch = contactBatchEnumerator.Current;
+                if (batch != null)
+                    contacts.AddRange(batch.ToList());
             }
 
-            result.Gender = contactPersonalInfo.Gender;
-            result.JobTitle = contactPersonalInfo.JobTitle;
-            result.Suffix = contactPersonalInfo.Suffix;
-            result.Title = contactPersonalInfo.Title;
-
-            var contactEmailAddresses = contact.GetFacet<IContactEmailAddresses>("Emails");
-            result.PreferredEmail = contactEmailAddresses.Entries[contactEmailAddresses.Preferred].SmtpAddress;
-
-            result.IdentificationLevel = contact.Identifiers.IdentificationLevel.ToString();
-            result.Classification = contact.System.Classification;
-            result.VisitCount = contact.System.VisitCount;
-            result.Value = contact.System.Value;
-            result.IntegrationLabel = contact.System.IntegrationLabel;
-
-            return result;
+            return contacts;
         }
 
 
-        public IEnumerable<ContactData> GetContacts(Job job, ContactList xaList)
+        public IEnumerable<Contact> GetContacts(MessageItem message, IEnumerable<Guid> excludeContacts)
         {
-            return _listManager.GetContacts(xaList).ToList();
-        }
-
-
-        public List<ContactData> GetContacts(MessageItem message, IEnumerable<Guid> excludeContacts)
-        {
-            var lists = message.RecipientManager.IncludedRecipientListIds;
-            var contactsForThisEmail = new List<ContactData>();
-
-            foreach (var listId in lists)
+            string[] facets =
             {
-                var list = GetList(listId);
-                if (list == null)
-                    continue;
-                var contacts = _listManager.GetContacts(list);
-                contactsForThisEmail.AddRange(contacts);
+                CollectionModel.FacetKeys.PersonalInformation,
+                CollectionModel.FacetKeys.EmailAddressList,
+                CollectionModel.FacetKeys.ListSubscriptions
+            };
+            var recipientManager = _recipientManagerFactory.GetRecipientManager(message);
+            var contactBatchEnumerator = recipientManager.GetMessageRecipients(200,null, facets);
+
+            var contacts = new List<Contact>();
+            while (contactBatchEnumerator.MoveNext())
+            {
+                var batch = contactBatchEnumerator.Current;
+                if (batch != null)
+                    contacts.AddRange(batch.ToList());
             }
 
-            contactsForThisEmail = contactsForThisEmail.DistinctBy(x => x.ContactId).Where(x => !excludeContacts.Contains(x.ContactId)).ToList();
-
-            return contactsForThisEmail;
+            return contacts.DistinctBy(x => x.Id).Where(x => x.Id.HasValue && !excludeContacts.Contains(x.Id.Value));
         }
 
-        public bool Exists(ID contactListID)
+        public bool Exists(ID contactListId)
         {
-            return GetList(contactListID) != null;
+            return GetList(contactListId) != null;
         }
     }
 }

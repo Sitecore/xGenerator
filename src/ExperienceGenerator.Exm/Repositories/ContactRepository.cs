@@ -19,9 +19,9 @@ namespace ExperienceGenerator.Exm.Repositories
             _contactRepository = new Sitecore.Analytics.Data.ContactRepository();
         }
 
-        public IEnumerable<Sitecore.Analytics.Tracking.Contact> CreateContacts(Job job, int numContacts)
+        public IEnumerable<Contact> CreateContacts(Job job, int numContacts)
         {
-            var addedContacts = new List<Sitecore.Analytics.Tracking.Contact>();
+            var addedContacts = new List<Contact>();
             for (var i = 0; i < numContacts; i++)
             {
                 addedContacts.Add(CreateContact());
@@ -39,7 +39,7 @@ namespace ExperienceGenerator.Exm.Repositories
             return _contactRepository.LoadContact(id);
         }
 
-        private Sitecore.Analytics.Tracking.Contact CreateContact()
+        private Contact CreateContact()
         {
             var identifier = CreateUniqueIdentifier();
 
@@ -58,13 +58,12 @@ namespace ExperienceGenerator.Exm.Repositories
 
                 var contactEmailAddresses = new EmailAddressList(new EmailAddress(Internet.Email($"{contactPersonalInfo.FirstName} {contactPersonalInfo.LastName}"), true),"Work");
                 client.SetFacet(xGenContact, EmailAddressList.DefaultFacetKey, contactEmailAddresses);
-
+                
                 client.Submit();
+
+                return client.Get(new IdentifiedContactReference(identifier.Source, identifier.Identifier),
+                    new ExpandOptions(), new TimeSpan(300));
             }
-
-            var contact = _contactRepository.LoadContact(identifier.Source, identifier.Identifier);
-
-            return contact;
         }
 
         private ContactIdentifier CreateUniqueIdentifier()
