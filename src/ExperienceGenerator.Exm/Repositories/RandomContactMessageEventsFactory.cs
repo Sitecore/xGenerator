@@ -12,6 +12,7 @@ using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Links;
 using Sitecore.Modules.EmailCampaign.Messages;
+using Sitecore.XConnect;
 
 namespace ExperienceGenerator.Exm.Repositories
 {
@@ -72,7 +73,7 @@ namespace ExperienceGenerator.Exm.Repositories
 
         //TODO: Convert to using a Sitecore 9 version of EXM Message Events
         [NotNull]
-        public MessageContactEvents CreateRandomContactMessageEvents(ContactData contactData, Funnel funnel, MessageItem messageItem)
+        public MessageContactEvents CreateRandomContactMessageEvents(Contact contactData, Funnel funnel, MessageItem messageItem)
         {
             var messageContactEvents = new MessageContactEvents();
             var events = new List<MessageContactEvent>();

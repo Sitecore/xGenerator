@@ -14,9 +14,9 @@ namespace ExperienceGenerator.Exm.Services
     public class JobManager
     {
         public static JobManager Instance;
-        public static string _repeatStatus;
-        public static int _repeatStatusCount;
-        public Job _activeJob;
+        private static string _repeatStatus;
+        private static int _repeatStatusCount;
+        private Job _activeJob;
 
         public Job StartJob(ExmGeneratorSettings settings)
         {

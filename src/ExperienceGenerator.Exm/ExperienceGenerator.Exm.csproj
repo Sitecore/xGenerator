@@ -135,6 +135,9 @@
     <Reference Include="Sitecore.EmailCampaign.ExperienceAnalytics, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Sitecore.EmailCampaign.ExperienceAnalytics.NoReferences.9.0.180604\lib\NET462\Sitecore.EmailCampaign.ExperienceAnalytics.dll</HintPath>
     </Reference>
+    <Reference Include="Sitecore.EmailCampaign.Model, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Sitecore.EmailCampaign.Model.NoReferences.9.0.180604\lib\NET462\Sitecore.EmailCampaign.Model.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.EmailCampaign.Server, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Sitecore.EmailCampaign.Server.NoReferences.9.0.180604\lib\NET462\Sitecore.EmailCampaign.Server.dll</HintPath>
     </Reference>
