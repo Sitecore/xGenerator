@@ -51,8 +51,6 @@ namespace ExperienceGenerator.Exm.Services
                 var contactListRepository = new ContactListRepository();
                 contactListRepository.CreateList(settings.Job, settings.Name, contacts);
 
-                IndexService.RebuildListIndexes(settings.Job);
-
                 settings.Job.JobStatus = JobStatus.Complete;
                 settings.Job.Status = "DONE!";
                 Log.Info($"EXMGenerator completed: {settings.Job.CompletedContacts}", this);

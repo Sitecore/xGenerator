@@ -15,6 +15,8 @@ using Sitecore.EmailCampaign.Cm.Dispatch;
 using Sitecore.EmailCampaign.Cm.Pipelines.DispatchNewsletter;
 using Sitecore.ExM.Framework.Diagnostics;
 using Sitecore.Modules.EmailCampaign.Core;
+using Sitecore.Modules.EmailCampaign.Core.Data;
+using Sitecore.Modules.EmailCampaign.Factories;
 using Sitecore.Modules.EmailCampaign.Messages;
 using Sitecore.Modules.EmailCampaign.Services;
 using Sitecore.SecurityModel;
@@ -37,6 +39,8 @@ namespace ExperienceGenerator.Exm.Services
         private readonly ILogger _logger;
         private readonly AdjustEmailStatisticsService _adjustEmailStatisticsService;
         private readonly IDispatchManager _dispatchManager;
+        private readonly IRecipientManagerFactory _recipientManagerFactory;
+        private readonly EcmDataProvider _ecmDataProvider;
 
         public GenerateCampaignDataService(Guid exmCampaignId, CampaignSettings campaign)
         {
@@ -45,6 +49,8 @@ namespace ExperienceGenerator.Exm.Services
             _contactListRepository = new ContactListRepository();
             _exmCampaignService = (IExmCampaignService)ServiceLocator.ServiceProvider.GetService(typeof(IExmCampaignService));
             _dispatchManager = (IDispatchManager)ServiceLocator.ServiceProvider.GetService(typeof(IDispatchManager));
+            _ecmDataProvider = (EcmDataProvider)ServiceLocator.ServiceProvider.GetService(typeof(EcmDataProvider));
+            _recipientManagerFactory = (IRecipientManagerFactory)ServiceLocator.ServiceProvider.GetService(typeof(IRecipientManagerFactory));
             _logger = (ILogger)ServiceLocator.ServiceProvider.GetService(typeof(ILogger));
             _itemUtilExt = (ItemUtilExt)ServiceLocator.ServiceProvider.GetService(typeof(ItemUtilExt));
             _adjustEmailStatisticsService = new AdjustEmailStatisticsService();
@@ -164,7 +170,7 @@ namespace ExperienceGenerator.Exm.Services
         {
             job.Status = "Adjusting email stats...";
 
-            _adjustEmailStatisticsService.AdjustEmailStatistics(job, messageItem, _campaign);
+            _adjustEmailStatisticsService.AdjustEmailStatistics(_ecmDataProvider,_recipientManagerFactory.GetRecipientManager(messageItem), job, messageItem, _campaign);
 
             PublishEmail(messageItem);
             var listOfContacts = contactsForThisEmail.ToList();
