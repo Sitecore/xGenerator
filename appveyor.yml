@@ -1,0 +1,22 @@
+version: 9.0.2.{build}
+pull_requests:
+  do_not_increment_build_number: true
+image: Visual Studio 2017
+assembly_info:
+  patch: true
+  file: '**\AssemblyInfo.*'
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version}'
+before_build:
+- ps: msbuild ExperienceGenerator.sln /t:clean /restore
+build:
+  project: ExperienceGenerator.sln
+  verbosity: normal
+environment:
+  access_token:
+    secure: 48ZRV74CeC0RAqmAVMdTpeahzqc4EifTQokp31h7bvNal8t/16DmpzzxpEMSRSai
+  git_email:
+    secure: UAfy/P3FPG30Q+suI1b+s1dx681urUjw59gx6wUVmvg=
+  git_fullname:
+    secure: vnLPnvBeWKmNKFKI671+N9KFQA5KQNhKZPwt2ycFILk=
