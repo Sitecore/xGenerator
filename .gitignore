@@ -161,4 +161,5 @@ $RECYCLE.BIN/
 
 /src/Components/**/*.dll
 /src/packages/
-/.vs/
+.vs/
+*.bak
