@@ -319,7 +319,6 @@
     <Compile Include="Repositories\ContactListRepository.cs" />
     <Compile Include="Services\GenerateEventService.cs" />
     <Compile Include="Models\MessageContactEvent.cs" />
-    <Compile Include="Services\IndexService.cs" />
     <Compile Include="Services\UnlockListService.cs" />
     <Compile Include="sitecore\EndSession.aspx.cs">
       <DependentUpon>EndSession.aspx</DependentUpon>
