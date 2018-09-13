@@ -5,7 +5,6 @@ using Colossus.Statistics;
 using ExperienceGenerator.Data;
 using ExperienceGenerator.Exm.Models;
 using ExperienceGenerator.Exm.Services;
-using ExperienceGenerator.Repositories;
 using ExperienceGenerator.Services;
 using Sitecore;
 using Sitecore.Data;
@@ -25,7 +24,6 @@ namespace ExperienceGenerator.Exm.Repositories
         private Func<string> _getRandomRegion;
         private Func<int> _getRandomEventDay;
         private Func<string> _getRandomLandingPage;
-        private readonly GeoDataRepository _geoDataRepository;
         private readonly GetRandomCityService _getRandomCityService;
 
         public RandomContactMessageEventsFactory(CampaignSettings campaign)
@@ -33,7 +31,6 @@ namespace ExperienceGenerator.Exm.Repositories
             _contactRepository = new ContactRepository();
             _campaign = campaign;
             _getRandomCityService = new GetRandomCityService();
-            _geoDataRepository = new GeoDataRepository();
         }
 
         private Dictionary<string, int> GetAllUserAgents()
@@ -71,7 +68,6 @@ namespace ExperienceGenerator.Exm.Repositories
             return randomCity;
         }
 
-        //TODO: Convert to using a Sitecore 9 version of EXM Message Events
         [NotNull]
         public MessageContactEvents CreateRandomContactMessageEvents(Contact contactData, Funnel funnel, MessageItem messageItem)
         {
@@ -82,8 +78,10 @@ namespace ExperienceGenerator.Exm.Repositories
             var randomCity = GetRandomCity();
             messageContactEvents.GeoData = randomCity.ToWhoIsInformation();
             messageContactEvents.UserAgent = GetRandomUserAgent(randomCity);
+            if (!contactData.Id.HasValue) return messageContactEvents;
 
-            var contact = _contactRepository.GetContact(contactData.ContactId);
+            var contact = _contactRepository.GetContact(contactData.Id.Value);
+
             if (contact == null)
             {
                 return messageContactEvents;
@@ -210,12 +208,12 @@ namespace ExperienceGenerator.Exm.Repositories
             if (_getRandomLandingPage == null)
                 _getRandomLandingPage = _campaign.LandingPages.Keys.Weighted(_campaign.LandingPages.Values.Select(x => x / 100).ToArray());
 
-            var stringID = _getRandomLandingPage();
-            ID landingPageID;
-            if (!ID.TryParse(stringID, out landingPageID) || ID.IsNullOrEmpty(landingPageID))
+            var stringId = _getRandomLandingPage();
+
+            if (!ID.TryParse(stringId, out var landingPageId) || ID.IsNullOrEmpty(landingPageId))
                 return null;
 
-            var landingPageItem = message.InnerItem.Database.GetItem(landingPageID);
+            var landingPageItem = message.InnerItem.Database.GetItem(landingPageId);
 
             return landingPageItem == null ? "/" : GetItemUrl(landingPageItem);
         }

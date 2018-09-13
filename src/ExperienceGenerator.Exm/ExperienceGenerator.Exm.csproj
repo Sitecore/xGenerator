@@ -138,11 +138,17 @@
     <Reference Include="Sitecore.EmailCampaign.Model, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Sitecore.EmailCampaign.Model.NoReferences.9.0.180604\lib\NET462\Sitecore.EmailCampaign.Model.dll</HintPath>
     </Reference>
+    <Reference Include="Sitecore.EmailCampaign.Model.Web, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Sitecore.EmailCampaign.Model.Web.NoReferences.9.0.180604\lib\NET462\Sitecore.EmailCampaign.Model.Web.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.EmailCampaign.Server, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Sitecore.EmailCampaign.Server.NoReferences.9.0.180604\lib\NET462\Sitecore.EmailCampaign.Server.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.ExM.Framework, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Sitecore.ExM.Framework.NoReferences.9.0.180604\lib\NET462\Sitecore.ExM.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Framework.Messaging.Abstractions, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Sitecore.Framework.Messaging.Abstractions.2.0.0\lib\net462\Sitecore.Framework.Messaging.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Kernel, Version=11.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Sitecore.Kernel.NoReferences.9.0.180604\lib\NET462\Sitecore.Kernel.dll</HintPath>

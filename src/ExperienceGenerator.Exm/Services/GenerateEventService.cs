@@ -8,27 +8,23 @@ using ExperienceGenerator.Exm.Models;
 using Newtonsoft.Json;
 using Sitecore.Analytics.Model;
 using Sitecore.Data;
-using Sitecore.EDS.Core.Reporting;
-using Sitecore.EmailCampaign.Cm.Handlers;
 using Sitecore.ExM.Framework.Diagnostics;
-using Sitecore.ExM.Framework.Distributed.Tasks.TaskPools.ShortRunning;
-using Sitecore.Modules.EmailCampaign;
+using Sitecore.EmailCampaign.Model.Web.Settings;
 using Sitecore.Modules.EmailCampaign.Core.Crypto;
 using Sitecore.Modules.EmailCampaign.Core.Extensions;
 using Sitecore.Modules.EmailCampaign.Core.Links;
 using Sitecore.Modules.EmailCampaign.Messages;
-using Factory = Sitecore.Configuration.Factory;
 
 namespace ExperienceGenerator.Exm.Services
 {
     public static class GenerateEventService
     {
-        private static readonly IStringCipher Cipher;
+        //private static readonly IStringCipher Cipher;
 
-        static GenerateEventService()
-        {
-            Cipher = Factory.CreateObject("exmAuthenticatedCipher", true) as IStringCipher;
-        }
+        //static GenerateEventService()
+        //{
+            //Cipher = Factory.CreateObject("exmAuthenticatedCipher", true) as IStringCipher;
+        //}
 
         public static int Errors { get; set; }
 
@@ -100,37 +96,32 @@ namespace ExperienceGenerator.Exm.Services
                 Errors++;
         }
 
+        private static void GenerateSpam(string hostName, Guid contactId, MessageItem message, DateTime dateTime)
+        {
+            var eventHandlePath = GetEventHandlePath(EventType.SpamComplaint);
+            var url = $"{hostName}{eventHandlePath}?contactId={contactId}&messageId={message.MessageId}&date={dateTime.ToString("u")}";
+            if (!RequestUrl(url).IsSuccessful)
+                Errors++;
+        }
+
+
         public static string GetEventHandlePath(EventType eventType)
         {
             switch (eventType)
             {
                 case EventType.Open:
-                    return "/sitecore/RegisterEmailOpened.ashx";
+                    return "/sitecore modules/Web/EXM/RegisterEmailOpened.ashx";
                 case EventType.Unsubscribe:
                 case EventType.UnsubscribeFromAll:
                 case EventType.Click:
-                    return "/sitecore/RedirectUrlPage.aspx";
+                    return "/sitecore modules/Web/EXM/RedirectUrlPage.aspx";
                 case EventType.Bounce:
                     return "/api/xgen/exmevents/GenerateBounce";
                 case EventType.SpamComplaint:
-                    return null;
+                    return "/api/xgen/exmevents/GenerateSpam";
                 default:
                     throw new ArgumentOutOfRangeException(nameof(eventType), eventType, null);
             }
-        }
-
-        private static async void GenerateSpamComplaint(string hostName, Guid contactId, MessageItem message, DateTime dateTime)
-        {
-            var messageHandler = new SpamComplaintHandler(Factory.CreateObject("exm/spamComplaintsTaskPool", true) as ShortRunningTaskPool, Factory.CreateObject("exm/recipientListManagementTaskPool", true) as ShortRunningTaskPool);
-
-            var spam = new Complaint
-                       {
-                           ContactId = Cipher.Encrypt(contactId.ToString()),
-                           EmailAddress = message.To,
-                           MessageId = Cipher.Encrypt(message.MessageId.ToString())
-                       };
-
-            await messageHandler.HandleReportedMessages(new[] {spam});
         }
 
         public static void GenerateHandlerEvent(string hostName, Guid contactId, MessageItem messageItem, EventType eventType, DateTime dateTime, string userAgent, WhoIsInformation geoData, string link)
@@ -143,11 +134,11 @@ namespace ExperienceGenerator.Exm.Services
                     break;
                 case EventType.Unsubscribe:
                     eventHandlerPath = GetEventHandlePath(EventType.Unsubscribe);
-                    link = "/sitecore/Unsubscribe.aspx";
+                    link = "/sitecore modules/Web/EXM/Unsubscribe.aspx";
                     break;
                 case EventType.UnsubscribeFromAll:
                     eventHandlerPath = GetEventHandlePath(EventType.UnsubscribeFromAll);
-                    link = "/sitecore/UnsubscribeFromAll.aspx";
+                    link = "/sitecore modules/Web/EXM/UnsubscribeFromAll.aspx";
                     break;
                 case EventType.Click:
                     eventHandlerPath = GetEventHandlePath(EventType.Click);
@@ -156,7 +147,7 @@ namespace ExperienceGenerator.Exm.Services
                     GenerateBounce(hostName, contactId, messageItem, dateTime);
                     return;
                 case EventType.SpamComplaint:
-                    GenerateSpamComplaint(hostName, contactId, messageItem, dateTime);
+                    GenerateSpam(hostName, contactId, messageItem, dateTime);
                     return;
                 default:
                     throw new InvalidEnumArgumentException("No such event in ExmEvents");
