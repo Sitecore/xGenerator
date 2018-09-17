@@ -34,7 +34,9 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Faker.Net" Version="1.0.3" />
-    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>9.0.1</Version>
+    </PackageReference>
     <PackageReference Include="Sitecore.Analytics.DataAccess.NoReferences" Version="9.0.180604" />
     <PackageReference Include="Sitecore.Analytics.Model.NoReferences" Version="9.0.180604" />
     <PackageReference Include="Sitecore.Analytics.NoReferences" Version="9.0.180604" />
@@ -42,6 +44,9 @@
     <PackageReference Include="Sitecore.ExperienceAnalytics.Api.NoReferences" Version="9.0.180604" />
     <PackageReference Include="Sitecore.Kernel.NoReferences" Version="9.0.180604" />
     <PackageReference Include="Sitecore.Marketing.NoReferences" Version="9.0.180604" />
+    <PackageReference Include="System.ComponentModel.TypeConverter">
+      <Version>4.3.0</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

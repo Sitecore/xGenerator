@@ -50,7 +50,9 @@
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.3" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.3" />
     <PackageReference Include="Microsoft.AspNet.WebApi.WebHost" Version="5.2.3" />
-    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>9.0.1</Version>
+    </PackageReference>
     <PackageReference Include="Rainbow" Version="2.0.0" />
     <PackageReference Include="Rainbow.Core" Version="2.0.0" />
     <PackageReference Include="Rainbow.Storage.Sc" Version="2.0.0" />
@@ -63,6 +65,9 @@
     <PackageReference Include="Sitecore.ContentSearch.Client.NoReferences" Version="9.0.180604" />
     <PackageReference Include="Sitecore.ContentSearch.NoReferences" Version="9.0.180604" />
     <PackageReference Include="Sitecore.Kernel.NoReferences" Version="9.0.180604" />
+    <PackageReference Include="System.ComponentModel.TypeConverter">
+      <Version>4.3.0</Version>
+    </PackageReference>
     <PackageReference Include="Unicorn" Version="4.0.2" />
     <PackageReference Include="Unicorn.Core" Version="4.0.2" />
     <PackageReference Include="WebBackgrounder" Version="0.2.0" />
