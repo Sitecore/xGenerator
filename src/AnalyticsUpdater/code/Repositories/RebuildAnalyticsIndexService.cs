@@ -1,6 +1,5 @@
 using System.Linq;
 using System.Threading;
-using Sitecore.Analytics.Data.DataAccess.MongoDb;
 using Sitecore.Analytics.Model;
 //using Sitecore.Analytics.Processing.ProcessingPool;
 using Sitecore.Configuration;
@@ -9,6 +8,7 @@ using Sitecore.SecurityModel;
 
 namespace AnalyticsUpdater.Repositories
 {
+    //TODO: This class is commented out - Due to Mongo dependancy gone in SC 9 - Had reference to SC 8.2
     public class RebuildAnalyticsIndexService
     {
         //public static void RebuildAnalyticsIndex()

@@ -6,7 +6,6 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using Sitecore;
 using Sitecore.Analytics;
-using Sitecore.Analytics.Data.DataAccess.MongoDb;
 using Sitecore.Analytics.Model;
 //using Sitecore.Analytics.Processing.ProcessingPool;
 using Sitecore.Configuration;
@@ -107,8 +106,9 @@ namespace AnalyticsUpdater.Repositories
             var scriptTxt = refreshAnalyticsQuery.Fields["Query"].Value;
             var connectionStringName = refreshAnalyticsQuery.Fields["Data Source"].Value;
             var item = ConfigurationManager.ConnectionStrings[connectionStringName];
-            var driver = new UpdateAnalyticsVisitsRepository.JsMongoDbDriver(item.ConnectionString);
-            driver.Eval(scriptTxt, days);
+            //TODO: This class is commented out - Due to Mongo dependancy gone in SC 9 - Had reference to SC 8.2
+            //var driver = new UpdateAnalyticsVisitsRepository.JsMongoDbDriver(item.ConnectionString);
+            //driver.Eval(scriptTxt, days);
         }
 
         private void UpdateLastRefreshDate()
@@ -167,16 +167,17 @@ namespace AnalyticsUpdater.Repositories
             return lastUpdateField.DateTime;
         }
 
-        private class JsMongoDbDriver : MongoDbDriver
-        {
-            public JsMongoDbDriver(string connectionString) : base(connectionString)
-            {
-            }
+        //TODO: This class is commented out - Due to Mongo dependancy gone in SC 9 - Had reference to SC 8.2
+        //private class JsMongoDbDriver : MongoDbDriver
+        //{
+        //    public JsMongoDbDriver(string connectionString) : base(connectionString)
+        //    {
+        //    }
 
-            public BsonValue Eval(BsonJavaScript code, params object[] args)
-            {
-                return Database.Eval(EvalFlags.None, code, args);
-            }
-        }
+        //    public BsonValue Eval(BsonJavaScript code, params object[] args)
+        //    {
+        //        return Database.Eval(EvalFlags.None, code, args);
+        //    }
+        //}
     }
 }

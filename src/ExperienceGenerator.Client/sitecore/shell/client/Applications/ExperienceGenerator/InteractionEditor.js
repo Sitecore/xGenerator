@@ -82,7 +82,7 @@ define(["underscore"], function (_) {
 
   self.loadCities = function (control, selectedCountry) {
     if (!selectedCountry) return;
-    var url = "/api/xgen/cities/" + selectedCountry.IsoNumeric;
+    var url = "/clientapi/xgen/cities/" + selectedCountry.IsoNumeric;
     $.ajax({
       url: url,
       type: "GET",
@@ -94,7 +94,7 @@ define(["underscore"], function (_) {
     });
   };
   self.loadCountries = function () {
-    var url = "/api/xgen/countries";
+    var url = "/clientapi/xgen/countries";
     $.ajax({
       url: url,
       type: "GET",

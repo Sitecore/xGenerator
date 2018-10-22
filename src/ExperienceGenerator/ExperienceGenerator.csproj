@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ExperienceGenerator</RootNamespace>
     <AssemblyName>ExperienceGenerator</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -32,18 +32,40 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Faker.Net" Version="1.0.3" />
-    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
-    <PackageReference Include="Sitecore.Analytics.DataAccess.NoReferences" Version="9.0.180604" />
-    <PackageReference Include="Sitecore.Analytics.Model.NoReferences" Version="9.0.180604" />
-    <PackageReference Include="Sitecore.Analytics.NoReferences" Version="9.0.180604" />
-    <PackageReference Include="Sitecore.ContentSearch.Analytics.NoReferences" Version="8.2.171121" />
-    <PackageReference Include="Sitecore.ContentSearch.NoReferences" Version="9.0.180604" />
-    <PackageReference Include="Sitecore.ExperienceAnalytics.Api.NoReferences" Version="9.0.180604" />
-    <PackageReference Include="Sitecore.Kernel.NoReferences" Version="9.0.180604" />
-    <PackageReference Include="Sitecore.Marketing.NoReferences" Version="9.0.180604" />
-  </ItemGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'vNext|AnyCPU'">
+    <OutputPath>bin\vNext\</OutputPath>
+  </PropertyGroup>
+  <Choose>
+    <When Condition=" '$(Configuration)'=='vNext' ">
+      <ItemGroup>
+        <PackageReference Include="Faker.Net" Version="1.0.3" />
+        <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+        <PackageReference Include="Sitecore.Analytics.Aggregation" Version="12.0.0-r*" />
+        <PackageReference Include="Sitecore.Analytics.DataAccess" Version="12.0.0-r*" />
+        <PackageReference Include="Sitecore.Analytics.Model" Version="12.0.0-r*" />
+        <PackageReference Include="Sitecore.Analytics" Version="12.0.0-r*" />
+        <PackageReference Include="Sitecore.ContentSearch.Analytics" Version="4.0.0-r*" />
+        <PackageReference Include="Sitecore.ContentSearch" Version="4.0.0-r*" />
+        <PackageReference Include="Sitecore.ExperienceAnalytics.Api" Version="4.0.0-r*" />
+        <PackageReference Include="Sitecore.Kernel" Version="12.0.0-r*" />
+        <PackageReference Include="Sitecore.Marketing" Version="13.0.0-r*" />
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <PackageReference Include="Faker.Net" Version="1.0.3" />
+        <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+        <PackageReference Include="Sitecore.Analytics.DataAccess.NoReferences" Version="9.0.180604" />
+        <PackageReference Include="Sitecore.Analytics.Model.NoReferences" Version="9.0.180604" />
+        <PackageReference Include="Sitecore.Analytics.NoReferences" Version="9.0.180604" />
+        <PackageReference Include="Sitecore.ContentSearch.Analytics.NoReferences" Version="8.2.171121" />
+        <PackageReference Include="Sitecore.ContentSearch.NoReferences" Version="9.0.180604" />
+        <PackageReference Include="Sitecore.ExperienceAnalytics.Api.NoReferences" Version="9.0.180604" />
+        <PackageReference Include="Sitecore.Kernel.NoReferences" Version="9.0.180604" />
+        <PackageReference Include="Sitecore.Marketing.NoReferences" Version="9.0.180604" />
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -100,7 +122,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Data\timezones.txt" />

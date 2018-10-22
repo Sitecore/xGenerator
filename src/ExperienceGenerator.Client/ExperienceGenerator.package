@@ -1,9 +1,9 @@
-<project>
+<project site="https://habitathome91.dev.local" format="Zip Package" targetfilefolder="wwwroot">
   <Metadata>
     <metadata>
       <PackageName>Experience Generator</PackageName>
       <Author>Sitecore</Author>
-      <Version>0.1.2</Version>
+      <Version>9.1-Preview</Version>
       <Revision />
       <License>SITCORE INTERNAL USE. DO NOT DISTRIBUTE.</License>
       <Comment />
@@ -18,8 +18,8 @@ set ExperienceGenerator.DistributedEnvironment setting to 'true'
 2) Extract this package as zip archive. 
 Copy all extracted files from 'files' folder to your CD instance.
       </Readme>
-      <Publisher/>
-      <PostStep>AnalyticsUpdater.Installer.PostStep, AnalyticsUpdater</PostStep>
+      <Publisher />
+      <PostStep />
       <PackageID />
     </metadata>
   </Metadata>
@@ -73,115 +73,12 @@ Copy all extracted files from 'files' folder to your CD instance.
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/DataSheet/PageSettings/Messages/No items found/{78A6B05D-7421-4BB0-8FE6-B7EEBA88CD85}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/DataSheet/PageSettings/DialogWindows/DevicesDialog/{B0353F86-B4E3-4683-B3A8-338D79BEDACC}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/DataSheet/PageSettings/Tabs/Devices/{CCC32E1C-61CA-4A18-BDA1-23F088342C06}/invariant/0</x-item>
-      </Entries>
-      <SkipVersions>False</SkipVersions>
-      <Converter>
-        <ItemToEntryConverter>
-          <Transforms>
-            <InstallerConfigurationTransform>
-              <Options>
-                <BehaviourOptions>
-                  <ItemMode>Merge</ItemMode>
-                  <ItemMergeMode>Merge</ItemMergeMode>
-                </BehaviourOptions>
-              </Options>
-            </InstallerConfigurationTransform>
-          </Transforms>
-        </ItemToEntryConverter>
-      </Converter>
-      <Include />
-      <Exclude />
-      <Name>Items</Name>
-    </xitems>
-    <xfiles>
-      <Entries>
-        <x-item>/App_Config/Include/ExperienceGenerator/ExperienceGenerator.config</x-item>
-        <x-item>/App_Config/Include/Colossus/Colossus.config</x-item>
-        <x-item>/bin/ExperienceGenerator.Client.dll</x-item>
-        <x-item>/bin/ExperienceGenerator.dll</x-item>
-        <x-item>/bin/Colossus.dll</x-item>
-        <x-item>/bin/Colossus.Integration.dll</x-item>
-        <x-item>/bin/MathNet.Numerics.dll</x-item>
-        <x-item>/Colossus.ashx</x-item>
-        <x-item>/bin/Faker.NET4.dll</x-item>
-        <x-item>/sitecore/shell/client/Applications/ExperienceGenerator/DataSheet.js</x-item>
-        <x-item>/sitecore/shell/client/Applications/ExperienceGenerator/ExperienceGenerator.css</x-item>
-        <x-item>/sitecore/shell/Themes/Standard/ExperienceGenerator.zip</x-item>
-        <x-item>/bin/FiftyOne.Foundation.dll</x-item>
-      </Entries>
-      <Converter>
-        <FileToEntryConverter>
-          <Root>/</Root>
-          <Transforms>
-            <InstallerConfigurationTransform>
-              <Options>
-                <BehaviourOptions>
-                  <ItemMode>Overwrite</ItemMode>
-                  <ItemMergeMode>Undefined</ItemMergeMode>
-                </BehaviourOptions>
-              </Options>
-            </InstallerConfigurationTransform>
-          </Transforms>
-        </FileToEntryConverter>
-      </Converter>
-      <Include />
-      <Exclude />
-      <Name>Files</Name>
-    </xfiles>
-     <xfiles>
-      <Entries>
-        <x-item>/sitecore/shell/client/Applications/ExperienceGenerator/Contacts.js</x-item>
-        <x-item>/sitecore/shell/client/Applications/ExperienceGenerator/InteractionEditor.js</x-item>
-      </Entries>
-      <Converter>
-        <FileToEntryConverter>
-          <Root>/</Root>
-          <Transforms>
-            <InstallerConfigurationTransform>
-              <Options>
-                <BehaviourOptions>
-                  <ItemMode>Overwrite</ItemMode>
-                  <ItemMergeMode>Undefined</ItemMergeMode>
-                </BehaviourOptions>
-              </Options>
-            </InstallerConfigurationTransform>
-          </Transforms>
-        </FileToEntryConverter>
-      </Converter>
-      <Include />
-      <Exclude />
-      <Name>Profile generator files</Name>
-    </xfiles>
-    <xitems>
-      <Entries>
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Common/{94EEE1CE-F99F-42A9-8CC3-43E7043286E5}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Common/Presets/{B4EF340E-BE30-4959-A586-11DDF7C6F66C}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Common/Templates/{30BAC1EB-8D67-4837-8393-12B29B2FF2CD}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Common/Templates/Settings Preset/{C7089EBD-7AF0-4F14-BEEA-680A465231B1}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Common/Templates/Settings Preset/Data/{F8BC9A3C-FC0B-41C1-9C61-8BBD21CE3931}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Common/Templates/Settings Preset/Data/Specification/{A0EE2080-2CC8-4DE0-8EFD-8E29CD39194F}/invariant/0</x-item>
-      </Entries>
-      <SkipVersions>False</SkipVersions>
-      <Converter>
-        <ItemToEntryConverter>
-          <Transforms>
-            <InstallerConfigurationTransform>
-              <Options>
-                <BehaviourOptions>
-                  <ItemMode>Merge</ItemMode>
-                  <ItemMergeMode>Merge</ItemMergeMode>
-                </BehaviourOptions>
-              </Options>
-            </InstallerConfigurationTransform>
-          </Transforms>
-        </ItemToEntryConverter>
-      </Converter>
-      <Include />
-      <Exclude />
-      <Name>Common</Name>
-    </xitems>
-    <xitems>
-      <Entries>
         <x-item>/core/sitecore/content/Applications/Control Panel/AnalyticsUpdater/{3B4DCA1B-34DB-465A-9D3E-4B2CF833FF0F}/invariant/0</x-item>
         <x-item>/core/sitecore/content/Applications/Control Panel/AnalyticsUpdater/Refresh analytics reporting dates/{9186AD55-4F98-40D6-BD31-A46FEDF38C74}/invariant/0</x-item>
         <x-item>/core/sitecore/system/Settings/AnalyticsUpdater/{4F8AF373-7561-4D9B-B38E-6F196338EE63}/invariant/0</x-item>
@@ -192,55 +89,6 @@ Copy all extracted files from 'files' folder to your CD instance.
         <x-item>/core/sitecore/templates/AnalyticsUpdater/Analytics Updater Settings/Analytics/Last Refresh Date/{0D827949-A185-4BDB-8086-07ECF23DD416}/invariant/0</x-item>
         <x-item>/master/sitecore/system/Settings/AnalyticsUpdater/{DB25DB51-DF03-401C-96F6-AEB3274A8474}/invariant/0</x-item>
         <x-item>/master/sitecore/system/Settings/AnalyticsUpdater/Refresh Analytics/{AD488697-75A8-4245-B391-BD1809D5BF58}/invariant/0</x-item>
-      </Entries>
-      <SkipVersions>False</SkipVersions>
-      <Converter>
-        <ItemToEntryConverter>
-          <Transforms>
-            <InstallerConfigurationTransform>
-              <Options>
-                <BehaviourOptions>
-                  <ItemMode>Merge</ItemMode>
-                  <ItemMergeMode>Merge</ItemMergeMode>
-                </BehaviourOptions>
-              </Options>
-            </InstallerConfigurationTransform>
-          </Transforms>
-        </ItemToEntryConverter>
-      </Converter>
-      <Include />
-      <Exclude />
-      <Name>AnalyticsUpdaterItems</Name>
-    </xitems>
-    <xfiles>
-      <Entries>
-        <x-item>/App_Config/Include/Feature/AnalyticsUpdater.config</x-item>
-        <x-item>/bin/AnalyticsUpdater.dll</x-item>
-        <x-item>/RefreshAnalytics.sql</x-item>
-        <x-item>/sitecore/shell/Applications/Dialogs/UpdateAnalytics.xml</x-item>
-        <x-item>/sitecore/admin/RebuildAnalyticsIndex.aspx</x-item>
-      </Entries>
-      <Converter>
-        <FileToEntryConverter>
-          <Root>/</Root>
-          <Transforms>
-            <InstallerConfigurationTransform>
-              <Options>
-                <BehaviourOptions>
-                  <ItemMode>Overwrite</ItemMode>
-                  <ItemMergeMode>Undefined</ItemMergeMode>
-                </BehaviourOptions>
-              </Options>
-            </InstallerConfigurationTransform>
-          </Transforms>
-        </FileToEntryConverter>
-      </Converter>
-      <Include />
-      <Exclude />
-      <Name>AnalyticsUpdaterFiles</Name>
-    </xfiles>
-    <xitems>
-      <Entries>
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Common/Contacts/{ED72A22E-57B8-4DA2-9B00-AF77D25840E3}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/{2C9E7C3D-8979-4677-9030-76E8CA0ED9D2}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/{9D7FAB6C-778A-460E-B6EE-508222174804}/invariant/0</x-item>
@@ -301,8 +149,8 @@ Copy all extracted files from 'files' folder to your CD instance.
             <InstallerConfigurationTransform>
               <Options>
                 <BehaviourOptions>
-                  <ItemMode>Merge</ItemMode>
-                  <ItemMergeMode>Merge</ItemMergeMode>
+                  <ItemMode>Undefined</ItemMode>
+                  <ItemMergeMode>Undefined</ItemMergeMode>
                 </BehaviourOptions>
               </Options>
             </InstallerConfigurationTransform>
@@ -311,8 +159,50 @@ Copy all extracted files from 'files' folder to your CD instance.
       </Converter>
       <Include />
       <Exclude />
-      <Name>ProfileGeneratorItems</Name>
+      <Name>Items</Name>
     </xitems>
+    <xfiles>
+      <Entries>
+        <x-item>/App_Config/Include/ExperienceGenerator/ExperienceGenerator.config</x-item>
+        <x-item>/App_Config/Include/Colossus/Colossus.config</x-item>
+        <x-item>/bin/ExperienceGenerator.Client.dll</x-item>
+        <x-item>/bin/ExperienceGenerator.dll</x-item>
+        <x-item>/bin/Colossus.dll</x-item>
+        <x-item>/bin/Colossus.Integration.dll</x-item>
+        <x-item>/bin/MathNet.Numerics.dll</x-item>
+        <x-item>/Colossus.ashx</x-item>
+        <x-item>/bin/Faker.NET4.dll</x-item>
+        <x-item>/sitecore/shell/client/Applications/ExperienceGenerator/DataSheet.js</x-item>
+        <x-item>/sitecore/shell/client/Applications/ExperienceGenerator/ExperienceGenerator.css</x-item>
+        <x-item>/sitecore/shell/Themes/Standard/ExperienceGenerator.zip</x-item>
+        <x-item>/bin/FiftyOne.Foundation.dll</x-item>
+        <x-item>/sitecore/shell/client/Applications/ExperienceGenerator/Contacts.js</x-item>
+        <x-item>/sitecore/shell/client/Applications/ExperienceGenerator/InteractionEditor.js</x-item>
+        <x-item>/App_Config/Include/Feature/AnalyticsUpdater.config</x-item>
+        <x-item>/bin/AnalyticsUpdater.dll</x-item>
+        <x-item>/RefreshAnalytics.sql</x-item>
+        <x-item>/sitecore/shell/Applications/Dialogs/UpdateAnalytics.xml</x-item>
+        <x-item>/sitecore/admin/RebuildAnalyticsIndex.aspx</x-item>
+      </Entries>
+      <Converter>
+        <FileToEntryConverter>
+          <Root />
+          <Transforms>
+            <InstallerConfigurationTransform>
+              <Options>
+                <BehaviourOptions>
+                  <ItemMode>Undefined</ItemMode>
+                  <ItemMergeMode>Undefined</ItemMergeMode>
+                </BehaviourOptions>
+              </Options>
+            </InstallerConfigurationTransform>
+          </Transforms>
+        </FileToEntryConverter>
+      </Converter>
+      <Include />
+      <Exclude />
+      <Name>Files</Name>
+    </xfiles>
   </Sources>
   <Converter>
     <TrivialConverter>

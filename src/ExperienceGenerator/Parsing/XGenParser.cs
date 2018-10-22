@@ -120,7 +120,7 @@ namespace ExperienceGenerator.Parsing
         {
             _sitecoreRoot = sitecoreRoot;
             _geoDataRepository = new GeoDataRepository();
-            InfoClient = new ItemInfoClient(new Uri(new Uri(sitecoreRoot), "/api/xgen/").ToString());
+            InfoClient = new ItemInfoClient(new Uri(new Uri(sitecoreRoot), "/clientapi/xgen/").ToString());
         }
 
         public virtual IEnumerable<VisitorSegment> ParseContacts(JToken definition, JobType type)
