@@ -49,18 +49,16 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
             deleteSelected: function(controlName) {
                 var control = this[controlName];
                 var filteredItem = control.get("items");
-
                 var checkedItems = control.get("checkedItems");
 
-                filteredItem = _.difference(filteredItem, checkedItems);
-
                 control.unset("items", { silent: true });
-                control.set("items", filteredItem);
+                control.set("items", checkedItems);
                 if (controlName === "InteractionList") {
-                    this.ContactList.get("selectedItem").set("interactions", filteredItem);
-
+                    var interactions = this.ContactList.get("selectedItem").get("interactions");
+                    _.each(checkedItems, function (item) { interactions.splice(interactions.indexOf(item), 1) });
+                    this.setInteractions(interactions);
                 }
-
+                control.viewModel.uncheckItems(control.get("checkedItems"));
             },
             duplicateSelected: function(controlName) {
                 var control = this[controlName];
