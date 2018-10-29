@@ -35,11 +35,8 @@ define(["underscore"], function (_) {
   self.getInteraction = function () {
     currItr.channelName = host.TrafficChannelComboBox.get("selectedItem").$displayName;
     currItr.channelId = host.TrafficChannelComboBox.get("selectedItem").itemId;
-
-    currItr.campaignName = "None";
-
-      currItr.campaignId = "";
-
+    currItr.campaignName = host.CampaignComboBox.get("selectedItem").$displayName;
+    currItr.campaignId = host.CampaignComboBox.get("selectedItem").itemId;
     currItr.recency = parseInt(host.RecencyValue.get("text")) || 0;
     currItr.geoData = host.City.get("selectedItem");
     currItr.location = host.City.get("selectedItem").Name + host.City.get("selectedItem").CountryCode;
