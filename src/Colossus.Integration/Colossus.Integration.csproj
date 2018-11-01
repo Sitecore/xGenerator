@@ -120,6 +120,7 @@
     <Compile Include="Models\PageDefinition.cs" />
     <Compile Include="GetContextInfo.cs" />
     <Compile Include="Models\ItemInfo.cs" />
+    <Compile Include="Pipelines\EndAnalytics.cs" />
     <Compile Include="Processing\ChannelPatcher.cs" />
     <Compile Include="Processing\ContactDataProcessor.cs" />
     <Compile Include="Processing\TriggerEventsAction.cs" />
