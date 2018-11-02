@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using Colossus;
 
 namespace ExperienceGenerator
@@ -11,16 +12,14 @@ namespace ExperienceGenerator
     {
         public static XGenJobManager Instance { get; set; }
 
-
         protected XGenJobManager()
         {
-            Threads = Environment.ProcessorCount*2;
+            
         }
 
         private readonly ConcurrentDictionary<Guid, JobInfo> _jobs = new ConcurrentDictionary<Guid, JobInfo>();
 
-
-        public int Threads { get; set; }
+        //public int Threads { get; set; }
         public virtual TimeSpan WarmUpInterval { get; set; } = TimeSpan.FromSeconds(10);
 
         public IEnumerable<JobInfo> Jobs => _jobs.Values.ToArray();
@@ -34,29 +33,13 @@ namespace ExperienceGenerator
             //Try create a simulator to see if the spec contains any errors, to report them in the creating thread
             spec.CreateSimulator();
 
-            var batchSize = (int) Math.Floor(info.Specification.VisitorCount/(double) Threads);
-
-            for (var i = 0; i < Threads; i++)
+            var segment = new JobSegment(info)
             {
-                Thread.Sleep(1000);
-                var count = i == Threads - 1 ? info.Specification.VisitorCount - i*batchSize : batchSize;
+                TargetVisitors = info.Specification.VisitorCount
+            };
+            info.Segments.Add(segment);
 
-                if (count <= 0)
-                    continue;
-                var segment = new JobSegment(info)
-                              {
-                                  TargetVisitors = count
-                              };
-                info.Segments.Add(segment);
-
-                StartJob(info, segment);
-
-                if (i == 0)
-                {
-                    // Fix for concurrent creating of Contacts.
-                    Thread.Sleep(WarmUpInterval);
-                }
-            }
+            StartJob(info, segment);
 
             return info;
         }
@@ -67,9 +50,7 @@ namespace ExperienceGenerator
             return _jobs.TryGetValue(id, out info) ? info : null;
         }
 
-
         protected abstract void StartJob(JobInfo info, JobSegment job);
-
 
         protected void Process(JobSegment job)
         {
@@ -83,10 +64,12 @@ namespace ExperienceGenerator
                     {
                         job.JobStatus = JobStatus.Running;
                     }
+
                     Randomness.Seed((job.Id.GetHashCode() + DateTime.Now.Ticks).GetHashCode());
                     var simulator = job.Specification.CreateSimulator();
+                    var visitorCount = simulator.GetVisitors(job.TargetVisitors);
 
-                    foreach (var visitor in simulator.GetVisitors(job.TargetVisitors))
+                    Parallel.ForEach(visitorCount, (visitor, loopState) =>
                     {
                         while (job.JobStatus == JobStatus.Paused)
                         {
@@ -95,7 +78,7 @@ namespace ExperienceGenerator
 
                         if (job.JobStatus > JobStatus.Paused)
                         {
-                            break;
+                            loopState.Break();
                         }
 
                         try
@@ -112,9 +95,8 @@ namespace ExperienceGenerator
                         }
 
                         ++job.CompletedVisitors;
-                    }
+                    });
                 }
-
 
                 job.Ended = DateTime.Now;
                 job.JobStatus = job.CompletedVisitors < job.TargetVisitors ? JobStatus.Cancelled : JobStatus.Complete;

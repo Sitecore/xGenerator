@@ -32,22 +32,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'vNext|AnyCPU'">
-    <OutputPath>bin\vNext\</OutputPath>
-  </PropertyGroup> 
-  <Choose>
-    <When Condition=" '$(Configuration)'=='vNext' ">
-      <ItemGroup>
-		<PackageReference Include="Sitecore.Kernel" Version="12.0.0-r*" />
-      </ItemGroup>
-    </When>
-    <Otherwise>
-      <ItemGroup>
-        <PackageReference Include="Sitecore.Kernel.NoReferences" Version="9.0.180604" />
-      </ItemGroup>
-    </Otherwise>
-  </Choose>
   <ItemGroup>
+	<PackageReference Include="Sitecore.Kernel" Version="12.0.0-r*" />
     <PackageReference Include="HtmlAgilityPack" Version="1.4.9.5" />
     <PackageReference Include="MathNet.Numerics" Version="3.5.0" />
     <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.3" />
