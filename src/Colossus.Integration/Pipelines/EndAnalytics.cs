@@ -29,13 +29,23 @@ namespace Colossus.Integration
                 var startDate = DateTime.SpecifyKind(requestInfo.Visit.Start, DateTimeKind.Utc);
                 var endDate = DateTime.SpecifyKind(requestInfo.Visit.End, DateTimeKind.Utc);
 
-                var pageEvents = Tracker.Current.Interaction.CurrentPage.PageEvents;
+                var currentPage = Tracker.Current.Interaction.CurrentPage;
 
+                // Catch all page events and set the date to something in line with the simulated date for this visit
+                var pageEvents = currentPage.PageEvents;
                 foreach (var evnt in pageEvents)
                 {
                     evnt.DateTime = endDate;
                     evnt.Timestamp = endDate.Ticks;
                 }
+
+                // Catch all MV Tests and set the ExposureTime value to the start of the page visit
+                var mvTest = currentPage.MvTest;
+                if (mvTest.ExposureTime != null)
+                {
+                    mvTest.ExposureTime = startDate;
+                }
+                
             }
             catch (Exception ex)
             {

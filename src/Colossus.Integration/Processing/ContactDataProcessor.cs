@@ -12,6 +12,7 @@ namespace Colossus.Integration.Processing
     using System;
     using Colossus.Web;
     using Sitecore;
+    using Sitecore.Analytics.Model;
     using Sitecore.Data.Items;
 
     public class ContactDataProcessor : ISessionPatcher
@@ -121,6 +122,16 @@ namespace Colossus.Integration.Processing
 
             #endregion
 
+            //Use the email to uniquely identify the contact between visits.
+            if (!String.IsNullOrWhiteSpace(emailValue))
+            {
+                Tracker.Current.Session.IdentifyAs("xGenerator", emailValue);
+            }
+            else
+            {
+                Tracker.Current.Session.IdentifyAs("xGenerator", Tracker.Current.Contact.ContactId.ToString("N"));
+            }
+
             var manager = Sitecore.Configuration.Factory.CreateObject("tracking/contactManager", true) as Sitecore.Analytics.Tracking.ContactManager;
 
             if (Tracker.Current.Contact.IsNew)
@@ -134,9 +145,10 @@ namespace Colossus.Integration.Processing
                     // and make sure you set the ContactSaveMode as demonstrated
                     //Tracker.Current.Contact.ContactSaveMode = ContactSaveMode.AlwaysSave;
                     //manager.SaveContactToCollectionDb(Sitecore.Analytics.Tracker.Current.Contact);
-                    
-                    //Use the email to uniquely identify the contact between visits.
-                    Tracker.Current.Session.IdentifyAs("xGenerator", emailValue);
+                    //Sitecore.Analytics.Tracker.Current.Contact.ContactSaveMode = ContactSaveMode.AlwaysSave;
+                    //manager.SaveContactToCollectionDb(Sitecore.Analytics.Tracker.Current.Contact);
+                    Sitecore.Analytics.Tracker.Current.Contact.ContactSaveMode = ContactSaveMode.AlwaysSave;
+                    manager.SaveContactToCollectionDb(Sitecore.Analytics.Tracker.Current.Contact);
 
                     Log.Info($"ExperienceGenerator ContactDataProcessor: Session Identified using xGenerator", this);
 
@@ -173,13 +185,15 @@ namespace Colossus.Integration.Processing
                                 client.SetFacet(contact, AddressList.DefaultFacetKey, addresses);
                                 Log.Info($"ExperienceGenerator ContactDataProcessor: AddressFacet set for New Contact", this);
 
-                                var phoneNumbers = new PhoneNumberList(new PhoneNumber("1", phoneNumberValue), "Home");
+                                var phoneNumbers = new PhoneNumberList(new PhoneNumber(String.Empty, phoneNumberValue), "Home");
                                 client.SetFacet(contact, PhoneNumberList.DefaultFacetKey, phoneNumbers);
                                 Log.Info($"ExperienceGenerator ContactDataProcessor: PhoneNumberFacet set for New Contact", this);
 
                                 client.Submit();
 
                                 //var contactRemovedFromSession = manager.RemoveFromSession(Tracker.Current.Contact.ContactId);
+                                manager.RemoveFromSession(Sitecore.Analytics.Tracker.Current.Contact.ContactId);
+                                Sitecore.Analytics.Tracker.Current.Session.Contact = manager.LoadContact(Sitecore.Analytics.Tracker.Current.Contact.ContactId);
                             }
                         }
                         catch (XdbExecutionException ex)
@@ -193,6 +207,9 @@ namespace Colossus.Integration.Processing
             {
                 Log.Info($"ExperienceGenerator ContactDataProcessor: Tracker.Current.Contact.IsNew: {Tracker.Current.Contact.IsNew}, TrackerContactId: {Tracker.Current.Contact.ContactId:N}", this);
                 var anyIdentifier = Tracker.Current.Contact.Identifiers.FirstOrDefault();
+
+                //Sitecore.Analytics.Tracker.Current.Contact.ContactSaveMode = ContactSaveMode.AlwaysSave;
+                //manager.SaveContactToCollectionDb(Sitecore.Analytics.Tracker.Current.Contact);
 
                 if (anyIdentifier != null)
                 {
@@ -280,7 +297,7 @@ namespace Colossus.Integration.Processing
                                     if (string.IsNullOrEmpty(phoneNumbersFacet.PreferredPhoneNumber.Number))
                                     {
                                         Log.Info($"ExperienceGenerator ContactDataProcessor: TrackerContactId: {Tracker.Current.Contact.ContactId:N}, XConnectContactId: {contact.Id.ToString()}, PhoneNumbersFacet is not null", this);
-                                        phoneNumbersFacet.PreferredPhoneNumber = new PhoneNumber("1", phoneNumberValue);
+                                        phoneNumbersFacet.PreferredPhoneNumber = new PhoneNumber(String.Empty, phoneNumberValue);
                                         phoneNumbersFacet.PreferredKey = "Home";
                                         client.SetFacet(contact, PhoneNumberList.DefaultFacetKey, phoneNumbersFacet);
                                     }
@@ -288,12 +305,15 @@ namespace Colossus.Integration.Processing
                                 else
                                 {
                                     Log.Info($"ExperienceGenerator ContactDataProcessor: TrackerContactId: {Tracker.Current.Contact.ContactId:N}, XConnectContactId: {contact.Id.ToString()}, PhoneNumbersFacet is null", this);
-                                    var phoneNumbers = new PhoneNumberList(new PhoneNumber("1", phoneNumberValue), "Home");
+                                    var phoneNumbers = new PhoneNumberList(new PhoneNumber(String.Empty, phoneNumberValue), "Home");
                                     client.SetFacet(contact, PhoneNumberList.DefaultFacetKey, phoneNumbers);
                                 }
 
                                 client.Submit();
                                 //var contactRemovedFromSession = manager.RemoveFromSession(Tracker.Current.Contact.ContactId);
+
+                                manager.RemoveFromSession(Sitecore.Analytics.Tracker.Current.Contact.ContactId);
+                                Sitecore.Analytics.Tracker.Current.Session.Contact = manager.LoadContact(Sitecore.Analytics.Tracker.Current.Contact.ContactId);
                             }
                         }
                         catch (XdbExecutionException ex)

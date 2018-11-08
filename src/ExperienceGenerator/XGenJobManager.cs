@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Colossus;
+using Newtonsoft.Json;
 
 namespace ExperienceGenerator
 {
@@ -12,9 +14,19 @@ namespace ExperienceGenerator
     {
         public static XGenJobManager Instance { get; set; }
 
+        private ParallelOptions ParallelOptions = new ParallelOptions { MaxDegreeOfParallelism = Convert.ToInt32(Math.Ceiling((Environment.ProcessorCount * 0.75) * 2.0)) };
+
+        [JsonConstructor]
         protected XGenJobManager()
         {
-            
+
+        }
+
+        // maxProcessingUsagePercentage is between 0 and 1 (ex: 0.75)
+        [JsonConstructor]
+        protected XGenJobManager(double maxProcessingUsagePercentage)
+        {
+            ParallelOptions.MaxDegreeOfParallelism = Convert.ToInt32(Math.Ceiling((Environment.ProcessorCount * maxProcessingUsagePercentage) * 2.0));
         }
 
         private readonly ConcurrentDictionary<Guid, JobInfo> _jobs = new ConcurrentDictionary<Guid, JobInfo>();
@@ -68,8 +80,9 @@ namespace ExperienceGenerator
                     Randomness.Seed((job.Id.GetHashCode() + DateTime.Now.Ticks).GetHashCode());
                     var simulator = job.Specification.CreateSimulator();
                     var visitorCount = simulator.GetVisitors(job.TargetVisitors);
+                    var partitioner = Partitioner.Create(visitorCount, EnumerablePartitionerOptions.NoBuffering);
 
-                    Parallel.ForEach(visitorCount, (visitor, loopState) =>
+                    Parallel.ForEach(partitioner, ParallelOptions, (visitor, loopState) =>
                     {
                         while (job.JobStatus == JobStatus.Paused)
                         {

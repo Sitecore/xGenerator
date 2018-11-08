@@ -41,30 +41,31 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-	<!-- <PackageReference Include="51Degrees.mobi" Version="3.1.11.1" /> -->
-	<PackageReference Include="Antlr" Version="3.5.0.2" />
-	<PackageReference Include="HtmlAgilityPack" Version="1.4.9.5" />
-	<PackageReference Include="Microsoft.AspNet.Razor" Version="3.2.4" />
-	<PackageReference Include="Microsoft.AspNet.WebPages" Version="3.2.4" />
-	<PackageReference Include="Microsoft.Web.Infrastructure" Version="1.0.0.0" />
-	<PackageReference Include="Sitecore.Analytics.Core" Version="12.0.0-r*" />
-	<PackageReference Include="Sitecore.Analytics.DataAccess" Version="12.0.0-r*" />
-	<PackageReference Include="Sitecore.Analytics.Model" Version="12.0.0-r*" />
-	<PackageReference Include="Sitecore.Analytics" Version="12.0.0-r*" />
-	<PackageReference Include="Sitecore.Analytics.XConnect" Version="12.0.0-r*" />
-	<PackageReference Include="Sitecore.Cintel.Client" Version="4.0.0-r*" />
-	<PackageReference Include="Sitecore.Cintel" Version="4.0.0-r*" />
-	<PackageReference Include="Sitecore.ContentTesting" Version="13.0.0-r*" />
-	<!-- <PackageReference Include="Sitecore.ExperienceAnalytics.NoReferences" Version="9.0.180604" /> -->
-	<PackageReference Include="Sitecore.Framework.Conditions" Version="3.1.0" />
-	<PackageReference Include="Sitecore.ItemWebApi.NoReferences" Version="3.0.0-r*" />
-	<PackageReference Include="Sitecore.Kernel" Version="12.0.0-r*" />
-	<PackageReference Include="Sitecore.Marketing" Version="13.0.0-r*" />
-	<PackageReference Include="Sitecore.Mvc" Version="3.0.0-r*" />
-	<PackageReference Include="Sitecore.XConnect.Client.Configuration" Version="2.0.0-r*" />
-	<PackageReference Include="Sitecore.XConnect.Client" Version="2.0.0-r*" />
-	<PackageReference Include="Sitecore.XConnect.Collection.Model" Version="2.0.0-r*" />
-	<PackageReference Include="Sitecore.XConnect" Version="2.0.0-r*" />
+    <!-- <PackageReference Include="51Degrees.mobi" Version="3.1.11.1" /> -->
+    <PackageReference Include="Antlr" Version="3.5.0.2" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.4.9.5" />
+    <PackageReference Include="Microsoft.AspNet.Razor" Version="3.2.4" />
+    <PackageReference Include="Microsoft.AspNet.WebPages" Version="3.2.4" />
+    <PackageReference Include="Microsoft.Web.Infrastructure" Version="1.0.0.0" />
+    <PackageReference Include="Sitecore.Analytics.Core" Version="12.0.0-r*" />
+    <PackageReference Include="Sitecore.Analytics.DataAccess" Version="12.0.0-r*" />
+    <PackageReference Include="Sitecore.Analytics.Model" Version="12.0.0-r*" />
+    <PackageReference Include="Sitecore.Analytics" Version="12.0.0-r*" />
+    <PackageReference Include="Sitecore.Analytics.XConnect" Version="12.0.0-r*" />
+    <PackageReference Include="Sitecore.Cintel.Client" Version="4.0.0-r*" />
+    <PackageReference Include="Sitecore.Cintel" Version="4.0.0-r*" />
+    <PackageReference Include="Sitecore.ContentTesting" Version="13.0.0-r*" />
+    <PackageReference Include="Sitecore.ContentTesting.Model" Version="13.0.0-r*" />
+    <!-- <PackageReference Include="Sitecore.ExperienceAnalytics.NoReferences" Version="9.0.180604" /> -->
+    <PackageReference Include="Sitecore.Framework.Conditions" Version="3.1.0" />
+    <PackageReference Include="Sitecore.ItemWebApi.NoReferences" Version="3.0.0-r*" />
+    <PackageReference Include="Sitecore.Kernel" Version="12.0.0-r*" />
+    <PackageReference Include="Sitecore.Marketing" Version="13.0.0-r*" />
+    <PackageReference Include="Sitecore.Mvc" Version="3.0.0-r*" />
+    <PackageReference Include="Sitecore.XConnect.Client.Configuration" Version="2.0.0-r*" />
+    <PackageReference Include="Sitecore.XConnect.Client" Version="2.0.0-r*" />
+    <PackageReference Include="Sitecore.XConnect.Collection.Model" Version="2.0.0-r*" />
+    <PackageReference Include="Sitecore.XConnect" Version="2.0.0-r*" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -110,7 +111,9 @@
     <Content Include="App_Config\Include\Colossus\Colossus.config" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <Content Include="Colossus.ashx" />
-    <None Include="web.config" />
+    <None Include="web.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
       <SubType>Designer</SubType>

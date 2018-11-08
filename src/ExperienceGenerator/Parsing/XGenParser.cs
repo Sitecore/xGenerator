@@ -181,8 +181,11 @@ namespace ExperienceGenerator.Parsing
                     startDate = TimeZoneInfo.ConvertTimeToUtc(startDate, tz); //Convert from local time to UTC.
 
                     //"Recency" indicates how many days ago the visit happened. Hence substract this number of days.
-                    segment.DateGenerator.Start = startDate.Add(-TimeSpan.Parse(interaction.Recency));
-
+                    int parseRecency;
+                    var success = Int32.TryParse(interaction.Recency, out parseRecency);
+                    if (!success) throw new Exception("Error parsing interaction recency (days since interaction) to integer value");
+                    var ensurePositiveRecency = Math.Abs(parseRecency);
+                    segment.DateGenerator.Start = startDate.Add(-TimeSpan.Parse(ensurePositiveRecency.ToString()));
 
                     //set outcomes
                     if (interaction.Outcomes != null)
@@ -194,7 +197,6 @@ namespace ExperienceGenerator.Parsing
 
                     var pageItemInfos = interaction.Pages?.ToArray() ?? Enumerable.Empty<PageItemInfo>();
                     var pages = new List<PageDefinition>();
-
 
                     //set campaign (can be overriden below)
                     if (!string.IsNullOrEmpty(interaction.CampaignId) && pageItemInfos.Any())
@@ -218,6 +220,7 @@ namespace ExperienceGenerator.Parsing
                                                                                                             Id = x.Id,
                                                                                                             Name = x.DisplayName,
                                                                                                             IsGoal = true
+
                                                                                                         }).ToList());
                         }
                         pages.Add(pageDefinition);
