@@ -1,7 +1,8 @@
-﻿namespace ExperienceGenerator.Parsing.Factories
+﻿using System.Collections.Generic;
+using Colossus;
+
+namespace ExperienceGenerator.Parsing.Factories
 {
-  using System.Collections.Generic;
-  using Colossus;
 
   public class IdentifiedContactDataVariable : VisitorVariablesBase
   {
@@ -30,7 +31,6 @@
     public string Phone { get; set; }
     public string Picture { get; set; }
     public string Address { get; set; }
-
 
     public override IEnumerable<string> ProvidedVariables => new[]
     {

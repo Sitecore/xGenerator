@@ -6,7 +6,6 @@ using Colossus.Statistics;
 using ExperienceGenerator.Data;
 using ExperienceGenerator.Repositories;
 using Sitecore;
-using Sitecore.Analytics.Model;
 
 namespace ExperienceGenerator.Services
 {
@@ -26,12 +25,12 @@ namespace ExperienceGenerator.Services
 
             var cities = _geoDataRepository.Cities.Where(c => c.Country.SubcontinentCode == subcontinentCode);
             return Sets.Weighted<City>(builder =>
-                                       {
-                                           foreach (var city in cities)
-                                           {
-                                               builder.Add(city, city.Population ?? 0);
-                                           }
-                                       })();
+               {
+                   foreach (var city in cities)
+                   {
+                       builder.Add(city, city.Population ?? 0);
+                   }
+               })();
         }
     }
 }

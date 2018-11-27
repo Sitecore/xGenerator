@@ -1,8 +1,4 @@
-﻿using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ExperienceGenerator.Models
+﻿namespace ExperienceGenerator.Models
 {
   public class SiteInfo
     {

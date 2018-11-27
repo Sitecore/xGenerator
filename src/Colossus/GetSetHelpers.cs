@@ -26,7 +26,6 @@ namespace Colossus
 
             return info;
         }
-
         
         public static TValue TryGetValue<TObject, TValue>(this TObject o, Func<TObject, TValue> getter,
             TValue defaultValue = default(TValue))

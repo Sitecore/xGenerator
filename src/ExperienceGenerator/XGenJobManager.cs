@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,7 +18,6 @@ namespace ExperienceGenerator
         [JsonConstructor]
         protected XGenJobManager()
         {
-
         }
 
         // maxProcessingUsagePercentage is between 0 and 1 (ex: 0.75)

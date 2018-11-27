@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Colossus
 {
@@ -18,7 +15,6 @@ namespace Colossus
             Var2 = var2;
             Var2Prob = var2Prob;
         }
-
 
         public override void SetValues(SimulationObject target)
         {

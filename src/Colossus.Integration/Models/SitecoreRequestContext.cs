@@ -1,9 +1,9 @@
-﻿namespace Colossus.Integration.Models
-{
-  using System;
-  using System.Net;
+﻿using System;
+using System.Net;
 
-  public class SitecoreRequestContext : WebRequestContext<SitecoreResponseInfo>
+namespace Colossus.Integration.Models
+{
+    public class SitecoreRequestContext : WebRequestContext<SitecoreResponseInfo>
     {
         public Uri SitecoreRootUri { get; set; }        
 
@@ -52,7 +52,6 @@
             }
             return new Uri(host, uri).ToString();
         }
-
 
         public new SitecoreVisitRequestContext NewVisit()
         {

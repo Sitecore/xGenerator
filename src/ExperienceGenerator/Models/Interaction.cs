@@ -1,8 +1,9 @@
+using System.Collections.Generic;
+using ExperienceGenerator.Data;
+using Newtonsoft.Json;
+
 namespace ExperienceGenerator.Models
 {
-  using System.Collections.Generic;
-  using ExperienceGenerator.Data;
-  using Newtonsoft.Json;
 
   public class Interaction
 

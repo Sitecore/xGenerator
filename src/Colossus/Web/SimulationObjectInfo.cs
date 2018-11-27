@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Colossus.Web
 {
@@ -10,9 +9,6 @@ namespace Colossus.Web
 
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
-
-
-
 
         public void SetValuesFromObject(SimulationObject simObject)
         {            

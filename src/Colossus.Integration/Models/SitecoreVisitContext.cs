@@ -1,13 +1,10 @@
-﻿using System.Threading;
+﻿using Colossus.Web;
+using Sitecore.Analytics.Model;
 
 namespace Colossus.Integration.Models
 {
-  using System;
-  using System.Net;
-  using Colossus.Web;
-  using Sitecore.Analytics.Model;
 
-  public class SitecoreVisitRequestContext : WebVisitRequestContext<SitecoreResponseInfo>
+    public class SitecoreVisitRequestContext : WebVisitRequestContext<SitecoreResponseInfo>
     {
         public new SitecoreRequestContext VisitorContext
         {

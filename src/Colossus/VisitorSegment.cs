@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Colossus.Statistics;
 
 namespace Colossus
@@ -21,7 +19,6 @@ namespace Colossus
 
         public Func<IVisitorBehavior> Behavior { get; set; }
         
-
         public VisitorSegment(string name)
         {
             Name = name;
@@ -31,7 +28,6 @@ namespace Colossus
             DateGenerator = new DateGenerator();
         }
                
-
         public void SortVariables()
         {
             VisitorVariables = VisitorVariables.TopologicalSort(

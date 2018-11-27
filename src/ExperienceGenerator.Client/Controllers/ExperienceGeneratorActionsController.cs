@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web.Http;
 using Colossus.Integration.Models;
@@ -9,11 +11,8 @@ using ExperienceGenerator.Models;
 using ExperienceGenerator.Repositories;
 using Newtonsoft.Json.Linq;
 using Sitecore;
-using Sitecore.Analytics.Aggregation;
 using Sitecore.Analytics.Data.Items;
-using Sitecore.Cintel.Configuration;
 using Sitecore.Configuration;
-using Sitecore.ContentSearch;
 using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Globalization;
@@ -49,7 +48,7 @@ namespace ExperienceGenerator.Client.Controllers
         public IEnumerable<ItemInfo> Items(string query, int? maxDepth = null, string language = null)
         {
             var db = Database.GetDatabase("web");
-
+            
             foreach (var item in db.SelectItems(query))
             {
                 Language itemLanguage = null;
@@ -264,24 +263,50 @@ namespace ExperienceGenerator.Client.Controllers
         [HttpPost]
         public IHttpActionResult Flush()
         {
+
+            var shardMapConnectionString = ConfigurationManager.ConnectionStrings["collection"].ConnectionString;
+            if (shardMapConnectionString == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok();
+            }
+            var shards = new List<string>();
+            using (var conn = new SqlConnection(shardMapConnectionString))
+            {
+                conn.Open();
+                var builder = new SqlConnectionStringBuilder(shardMapConnectionString);
+                using (var dr = new SqlCommand("SELECT ServerName, DatabaseName FROM __ShardManagement.ShardsGlobal", conn).ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        builder.DataSource = dr.GetString(0);
+                        builder.InitialCatalog = dr.GetString(1);
+                        shards.Add(builder.ToString());
+                    }
+                }
+            }
+
             //var driver = new MongoDbDriver(ConfigurationManager.ConnectionStrings["analytics"].ConnectionString);
             //driver.ResetDatabase();
 
-            var item = (Context.ContentDatabase ?? Context.Database).GetItem("/sitecore/media library/Images/xgen");
-            item?.Delete();
+            //var item = (Context.ContentDatabase ?? Context.Database).GetItem("/sitecore/media library/Images/xgen");
+            //item?.Delete();
 
-            var sql = new SqlReportingStorageProvider("reporting");
-            sql.ExcludedTableFromDataDeletion("dbo", "Segments");
-            sql.DeleteAllReportingData();
+            //var sql = new SqlReportingStorageProvider("reporting");
+            //sql.ExcludedTableFromDataDeletion("dbo", "Segments");
+            //sql.DeleteAllReportingData();
 
 
-            var index = ContentSearchManager.GetIndex(CustomerIntelligenceConfig.ContactSearch.SearchIndexName);
-            index.Reset();
-            index.Refresh();
-            using (var ctx = index.CreateUpdateContext())
-            {
-                ctx.Optimize();
-            }
+            //var index = ContentSearchManager.GetIndex(CustomerIntelligenceConfig.ContactSearch.SearchIndexName);
+            //index.Reset();
+            //index.Refresh();
+            //using (var ctx = index.CreateUpdateContext())
+            //{
+            //    ctx.Optimize();
+            //}
 
             return Ok();
         }

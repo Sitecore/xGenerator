@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace ExperienceGenerator.Exm.Services
+﻿namespace ExperienceGenerator.Exm.Services
 {
     public enum EventType
     {

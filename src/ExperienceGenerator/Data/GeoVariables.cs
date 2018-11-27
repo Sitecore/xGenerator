@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Colossus;
-using Colossus.Integration.Behaviors;
 
 namespace ExperienceGenerator.Data
 {

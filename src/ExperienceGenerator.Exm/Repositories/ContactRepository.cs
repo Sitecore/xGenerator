@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using ExperienceGenerator.Exm.Infrastructure;
 using ExperienceGenerator.Exm.Models;
 using Faker;
-using Sitecore.Analytics.DataAccess;
-using Sitecore.Analytics.Model;
-using Sitecore.Analytics.Model.Entities;
-using Sitecore.Analytics.Tracking;
-using Sitecore.Data;
-using Sitecore.ListManagement.ContentSearch.Model;
+using Sitecore.XConnect;
+using Sitecore.XConnect.Client;
+using Sitecore.XConnect.Client.Configuration;
+using Sitecore.XConnect.Collection.Model;
 
 namespace ExperienceGenerator.Exm.Repositories
 {
@@ -32,51 +29,58 @@ namespace ExperienceGenerator.Exm.Repositories
             return addedContacts;
         }
 
-        public Contact GetContact(Guid id)
+        private XConnectClient GetXConnectClient()
         {
-            return _contactRepository.LoadContactReadOnly(id);
+            return SitecoreXConnectClientConfiguration.GetClient();
+        }
+
+        public Sitecore.Analytics.Tracking.Contact GetContact(Guid id)
+        {
+            return _contactRepository.LoadContact(id);
         }
 
         private Contact CreateContact()
         {
             var identifier = CreateUniqueIdentifier();
 
-            var contact = _contactRepository.CreateContact(ID.NewID);
-            contact.Identifiers.AuthenticationLevel = AuthenticationLevel.None;
-            contact.System.Classification = 0;
-            contact.ContactSaveMode = ContactSaveMode.AlwaysSave;
-            contact.Identifiers.Identifier = identifier;
-            contact.System.OverrideClassification = 0;
-            contact.System.Value = 0;
-            contact.System.VisitCount = 0;
-/*
-            var contactPreferences = contact.GetFacet<IContactPreferences>("Preferences");
-            contactPreferences.Language = _languages;
-*/
-            var contactPersonalInfo = contact.GetFacet<IContactPersonalInfo>("Personal");
-            contactPersonalInfo.FirstName = Name.First();
-            contactPersonalInfo.Surname = Name.Last();
+            using (var client = GetXConnectClient())
+            {
+                var xGenContact = new Contact(identifier);
+                
+                client.AddContact(xGenContact);
 
-            var contactEmailAddresses = contact.GetFacet<IContactEmailAddresses>("Emails");
-            contactEmailAddresses.Entries.Create("Work").SmtpAddress = Internet.Email($"{contactPersonalInfo.FirstName} {contactPersonalInfo.Surname}");
-            contactEmailAddresses.Preferred = "Work";
+                var contactPersonalInfo = new PersonalInformation()
+                {
+                    FirstName = Name.First(),
+                    LastName = Name.Last()
+                };
+                client.SetFacet(xGenContact, PersonalInformation.DefaultFacetKey, contactPersonalInfo);
 
-            var leaseOwner = new LeaseOwner("CONTACT_CREATE", LeaseOwnerType.OutOfRequestWorker);
-            var options = new ContactSaveOptions(true, leaseOwner, null);
-            _contactRepository.SaveContact(contact, options);
+                var contactEmailAddresses = new EmailAddressList(new EmailAddress(Internet.Email($"{contactPersonalInfo.FirstName} {contactPersonalInfo.LastName}"), true),"Work");
+                client.SetFacet(xGenContact, EmailAddressList.DefaultFacetKey, contactEmailAddresses);
+                
+                client.Submit();
 
-            return contact;
+                xGenContact = client.Get<Contact>(new IdentifiedContactReference(identifier.Source, identifier.Identifier),
+                    new ExpandOptions());
+
+                return xGenContact;
+            }
         }
 
-        private string CreateUniqueIdentifier()
+        private ContactIdentifier CreateUniqueIdentifier()
         {
-            var identifier = "xGen_" + ShortGuid.NewGuid();
+            const string source = "ExperienceGenerator";
 
-            var contact = _contactRepository.LoadContactReadOnly(identifier);
-            while (contact != null)
+            var identValue = "xGen_" + ShortGuid.NewGuid();
+
+            var identifier = new ContactIdentifier(source,identValue, ContactIdentifierType.Known);
+            
+            var contact = _contactRepository.LoadContact(identifier.Source, identifier.Identifier);
+
+            if (contact != null)
             {
-                identifier = "xGen_" + ShortGuid.NewGuid();
-                contact = _contactRepository.LoadContactReadOnly(identifier);
+                identifier = CreateUniqueIdentifier();
             }
             return identifier;
         }

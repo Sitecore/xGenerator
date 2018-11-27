@@ -1,8 +1,8 @@
-﻿namespace ExperienceGenerator.Models
-{
-  using System;
-  using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
+namespace ExperienceGenerator.Models
+{
   public class JsonItemInfo
   {
 

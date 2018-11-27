@@ -1,14 +1,14 @@
 ﻿using Sitecore.Globalization;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Sitecore;
+using Sitecore.Data.Fields;
+using Sitecore.Data.Items;
+using Sitecore.Links;
 
 namespace Colossus.Integration.Models
 {
-  using System;
-  using System.Collections.Generic;
-  using System.Linq;
-  using Sitecore;
-  using Sitecore.Data.Fields;
-  using Sitecore.Data.Items;
-  using Sitecore.Links;
 
   public class ItemInfo
     {

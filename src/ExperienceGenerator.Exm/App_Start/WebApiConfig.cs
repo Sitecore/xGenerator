@@ -12,17 +12,17 @@
 
             config.Routes.MapHttpRoute(
                 name: "ExperienceGeneratorExmJobsApi",
-                routeTemplate: "api/xgen/exmjobs/{action}/{id}",
+                routeTemplate: "clientapi/xgen/exmjobs/{action}/{id}",
                 defaults: new {controller = "ExmJobs",  id = RouteParameter.Optional}
                 );
             config.Routes.MapHttpRoute(
                 name: "ExperienceGeneratorExmEventsApi",
-                routeTemplate: "api/xgen/exmevents/{action}",
+                routeTemplate: "clientapi/xgen/exmevents/{action}",
                 defaults: new {controller = "ExmEvents"}
                 );
 			config.Routes.MapHttpRoute(
 				name: "ExmActionsApi",
-				routeTemplate: "api/xgen/exmactions/{action}/{id}",
+				routeTemplate: "clientapi/xgen/exmactions/{action}/{id}",
 				defaults: new { controller = "ExmActions", id = RouteParameter.Optional }
 				);
 		}

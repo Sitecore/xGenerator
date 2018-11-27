@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Policy;
 
 namespace Colossus
 {
     public class Visit : SimulationObject
     {
         public Visitor Visitor { get; set; }
-
 
         public List<Request> Requests { get; set; }
 

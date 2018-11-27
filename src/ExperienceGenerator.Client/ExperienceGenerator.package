@@ -1,14 +1,29 @@
-<project site="https://habitathome91.dev.local" format="Zip Package" targetfilefolder="wwwroot">
+<project site="hh1551xgen.dev.local" format="Zip Package" targetfilefolder="wwwroot">
   <Metadata>
     <metadata>
       <PackageName>Experience Generator</PackageName>
-      <Author>Sitecore</Author>
-      <Version>9.1-Preview</Version>
+      <Author>Sitecore Demo Team</Author>
+      <Version>9.1</Version>
       <Revision />
-      <License>SITCORE INTERNAL USE. DO NOT DISTRIBUTE.</License>
+      <License>Copyright 2018 Sitecore Corporation A/S
+
+Licensed under the Apache License, Version 2.0 (the "License"); 
+You may not use this solution except in compliance with the License. 
+
+Apache license present below and can a copy of the License can also be obtained  at
+       http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, 
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, 
+either express or implied. 
+See the License for the specific language governing permissions 
+and limitations under the License.</License>
       <Comment />
       <Attributes />
       <Readme>
+*** Never install on a production environment! ***	  
+	  
 If You are installing this package on distributed environment,
 please follow next steps:
 
@@ -79,16 +94,6 @@ Copy all extracted files from 'files' folder to your CD instance.
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Common/Templates/Settings Preset/{C7089EBD-7AF0-4F14-BEEA-680A465231B1}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Common/Templates/Settings Preset/Data/{F8BC9A3C-FC0B-41C1-9C61-8BBD21CE3931}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Common/Templates/Settings Preset/Data/Specification/{A0EE2080-2CC8-4DE0-8EFD-8E29CD39194F}/invariant/0</x-item>
-        <x-item>/core/sitecore/content/Applications/Control Panel/AnalyticsUpdater/{3B4DCA1B-34DB-465A-9D3E-4B2CF833FF0F}/invariant/0</x-item>
-        <x-item>/core/sitecore/content/Applications/Control Panel/AnalyticsUpdater/Refresh analytics reporting dates/{9186AD55-4F98-40D6-BD31-A46FEDF38C74}/invariant/0</x-item>
-        <x-item>/core/sitecore/system/Settings/AnalyticsUpdater/{4F8AF373-7561-4D9B-B38E-6F196338EE63}/invariant/0</x-item>
-        <x-item>/core/sitecore/system/Settings/AnalyticsUpdater/Analytics Updater Settings/{CFAF8BF6-7AB2-4A3D-8A87-35F64D0D8FD8}/invariant/0</x-item>
-        <x-item>/core/sitecore/templates/AnalyticsUpdater/{F0932727-F92B-40AF-A89A-796BCBBA8A91}/invariant/0</x-item>
-        <x-item>/core/sitecore/templates/AnalyticsUpdater/Analytics Updater Settings/{511B6C4F-3A50-4825-B377-F334F3DFC06C}/invariant/0</x-item>
-        <x-item>/core/sitecore/templates/AnalyticsUpdater/Analytics Updater Settings/Analytics/{FC841551-6185-45F9-B869-D59BCBA401A4}/invariant/0</x-item>
-        <x-item>/core/sitecore/templates/AnalyticsUpdater/Analytics Updater Settings/Analytics/Last Refresh Date/{0D827949-A185-4BDB-8086-07ECF23DD416}/invariant/0</x-item>
-        <x-item>/master/sitecore/system/Settings/AnalyticsUpdater/{DB25DB51-DF03-401C-96F6-AEB3274A8474}/invariant/0</x-item>
-        <x-item>/master/sitecore/system/Settings/AnalyticsUpdater/Refresh Analytics/{AD488697-75A8-4245-B391-BD1809D5BF58}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Common/Contacts/{ED72A22E-57B8-4DA2-9B00-AF77D25840E3}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/{2C9E7C3D-8979-4677-9030-76E8CA0ED9D2}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/{9D7FAB6C-778A-460E-B6EE-508222174804}/invariant/0</x-item>
@@ -141,6 +146,49 @@ Copy all extracted files from 'files' folder to your CD instance.
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/Texts/Test summary/{BD7B246F-77CC-4C93-B0A0-C2024E053805}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/ExperienceGenerator/Contacts/PageSettings/TextsParameters/{05F09618-FC9F-4263-8946-6ED5D525F741}/invariant/0</x-item>
         <x-item>/core/sitecore/client/Applications/Launchpad/PageSettings/Buttons/Tools/Contact Experience Generator/{E45C19E0-F3FA-45D6-90D5-C295803A7CE3}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/{F67C6D31-3D39-4CC3-9153-4809B31C099C}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/Launchpad/PageSettings/Buttons/Tools/Exm Experience Generator/{30579168-5C30-49EC-8679-21C56CE53F49}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/{D125260D-DC59-4BD2-ADA9-DBC2A2D53454}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/Common/{5D3D25BF-5F54-428C-B52E-A78A95DEDF92}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/{86E9EB14-9F9C-4EDC-9CEF-D6B590F1DA8C}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Buttons/{A415820C-F477-4681-A830-33F28B311B36}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/DataSheetStyle/{C9D3968D-D857-42C5-8799-1C475FE7B95E}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/DatePickers/{EF512A36-365D-4C3A-8D23-80A7D09BFB92}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/{5ED8B01F-2544-4D85-A22B-402DB57929F6}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/DialogWindows/{A3237473-D072-4B5F-912C-94DFA8EADA65}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/List/{5F825ECC-DDF8-4F6D-8465-6360123488DA}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/PageTitle/{87A66A81-2372-4B80-9C28-2632664B76E7}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Sliders/{40DC87DE-206B-460C-BAB7-7F23A23BD51B}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Texts/{08AD1B64-5C46-46A8-A643-C26397C5B8CC}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Buttons/Start/{FA21A68C-EB97-4BC2-8DBA-9DF171C94CF6}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Buttons/Stop/{33433CC7-F370-4628-A7D6-01BE892AAA9F}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/DatePickers/DatePicker Parameters/{15762826-BD8D-4C6B-AE1D-19DCF8DAF0B9}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/LandingPagesDialog/{D44E05EF-FECB-4945-BB7A-6244DC83E034}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/EmailCampaignEditor/{DAC931A8-8851-4DDD-B96B-94D06B8714DB}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/EmailCampaignEditor/PageSettings/{D6CC328D-C7B2-4C87-A33D-EF0083FE3B32}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/EmailCampaignEditor/PageSettings/EmailCampaignEditor Parameters/{5222D4F9-7EE4-4D2C-B9D3-D6C6C184C222}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/EmailCampaignEditor/PageSettings/Tabs/{646E81F2-9C84-4D06-A409-7AA314D702BA}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/EmailCampaignEditor/PageSettings/Tabs/Overview/{0582868C-343A-4C89-838D-254855F43114}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/EmailCampaignEditor/PageSettings/Tabs/Devices/{73A0EDC4-C61D-4ED4-90B4-EC31FFB70A63}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/EmailCampaignEditor/PageSettings/Tabs/Locations/{733E5260-C41A-42E4-82F8-40F6E6E543D9}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Dialogs/EmailCampaignEditor/PageSettings/Tabs/Landing Pages/{2A0A1657-07FF-4C11-9ECF-3C38049C17BF}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/DialogWindows/DeletionsDialog/{C7689B7E-BD2A-4F1E-82CC-35EB6C651792}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/List/Sent Messages/{F4E1FC60-F41C-4FF7-96F3-A393CACF1C56}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/List/Sent Messages/Campaign name/{AD79BED6-54A4-411D-A3D7-E80395CAE098}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/List/Sent Messages/Subject/{18A2ECBE-9405-4DF0-B2C6-2A4F256F8016}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/List/Sent Messages/Recipients/{E1AA826E-324A-49A2-82D3-DED3A187F695}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/List/Sent Messages/Open rate/{41EB7827-3EB2-47CB-82CA-D412D5ADB43B}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Sliders/Slider Parameters/{42C0F5BC-B06E-4D4E-90DD-0BE69B18A586}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Texts/Overview/{63F091F4-1812-4987-ADFE-5A3A917B1722}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Texts/Test summary/{C715D760-D109-4080-813B-40006FEEC60A}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Texts/Overview/End date/{6545DFB9-7194-4656-85A8-D5C47805ED84}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Texts/Overview/Number of visits generated/{7E23D53B-C163-4E28-8F06-EEA05AA8695D}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/ExmGenerator/PageSettings/Texts/Overview/Start date/{E164263B-8E6E-4FAB-8F1D-82CB481AC527}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/Common/Presets/{3A9F920B-2350-4088-B9A7-2DEDFEF1CBC9}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/Common/Templates/{3FB06C33-1F02-4282-9036-6D0ACA42342F}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/Common/Templates/Settings Preset/{BA1D3932-28BA-4CC3-9527-38AFC8B529C4}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/Common/Templates/Settings Preset/Data/{05BA1057-954F-4DA7-A8D5-C1896BA9AD33}/invariant/0</x-item>
+        <x-item>/core/sitecore/client/Applications/ExmExperienceGenerator/Common/Templates/Settings Preset/Data/Specification/{387FB35F-D93F-47ED-A7B3-48B070B28297}/invariant/0</x-item>
       </Entries>
       <SkipVersions>False</SkipVersions>
       <Converter>
@@ -178,11 +226,16 @@ Copy all extracted files from 'files' folder to your CD instance.
         <x-item>/bin/FiftyOne.Foundation.dll</x-item>
         <x-item>/sitecore/shell/client/Applications/ExperienceGenerator/Contacts.js</x-item>
         <x-item>/sitecore/shell/client/Applications/ExperienceGenerator/InteractionEditor.js</x-item>
-        <x-item>/App_Config/Include/Feature/AnalyticsUpdater.config</x-item>
-        <x-item>/bin/AnalyticsUpdater.dll</x-item>
-        <x-item>/RefreshAnalytics.sql</x-item>
-        <x-item>/sitecore/shell/Applications/Dialogs/UpdateAnalytics.xml</x-item>
-        <x-item>/sitecore/admin/RebuildAnalyticsIndex.aspx</x-item>
+        <x-item>/App_Config/Include/Z.ExperienceGenerator/ExperienceGenerator.Exm.config</x-item>
+        <x-item>/bin/ExperienceGenerator.Exm.dll</x-item>
+        <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator</x-item>
+        <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/dialogs</x-item>
+        <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/dialogs/EmailCampaignEditor.js</x-item>
+        <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/CustomMultiSelectList.js</x-item>
+        <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/DataRepository.js</x-item>
+        <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/ExmExperienceGenerator.css</x-item>
+        <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/ExmGenerator.js</x-item>
+        <x-item>/sitecore/shell/client/Applications/ExmExperienceGenerator/uiUtils.js</x-item>
       </Entries>
       <Converter>
         <FileToEntryConverter>

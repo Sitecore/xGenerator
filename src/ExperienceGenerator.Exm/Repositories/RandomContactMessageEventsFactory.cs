@@ -5,15 +5,13 @@ using Colossus.Statistics;
 using ExperienceGenerator.Data;
 using ExperienceGenerator.Exm.Models;
 using ExperienceGenerator.Exm.Services;
-using ExperienceGenerator.Repositories;
 using ExperienceGenerator.Services;
 using Sitecore;
-using Sitecore.Analytics.Model;
 using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Links;
-using Sitecore.ListManagement.ContentSearch.Model;
 using Sitecore.Modules.EmailCampaign.Messages;
+using Sitecore.XConnect;
 
 namespace ExperienceGenerator.Exm.Repositories
 {
@@ -26,7 +24,6 @@ namespace ExperienceGenerator.Exm.Repositories
         private Func<string> _getRandomRegion;
         private Func<int> _getRandomEventDay;
         private Func<string> _getRandomLandingPage;
-        private readonly GeoDataRepository _geoDataRepository;
         private readonly GetRandomCityService _getRandomCityService;
 
         public RandomContactMessageEventsFactory(CampaignSettings campaign)
@@ -34,7 +31,6 @@ namespace ExperienceGenerator.Exm.Repositories
             _contactRepository = new ContactRepository();
             _campaign = campaign;
             _getRandomCityService = new GetRandomCityService();
-            _geoDataRepository = new GeoDataRepository();
         }
 
         private Dictionary<string, int> GetAllUserAgents()
@@ -73,7 +69,7 @@ namespace ExperienceGenerator.Exm.Repositories
         }
 
         [NotNull]
-        public MessageContactEvents CreateRandomContactMessageEvents(ContactData contactData, Funnel funnel, MessageItem messageItem)
+        public MessageContactEvents CreateRandomContactMessageEvents(Contact contactData, Funnel funnel, MessageItem messageItem)
         {
             var messageContactEvents = new MessageContactEvents();
             var events = new List<MessageContactEvent>();
@@ -82,13 +78,15 @@ namespace ExperienceGenerator.Exm.Repositories
             var randomCity = GetRandomCity();
             messageContactEvents.GeoData = randomCity.ToWhoIsInformation();
             messageContactEvents.UserAgent = GetRandomUserAgent(randomCity);
+            if (!contactData.Id.HasValue) return messageContactEvents;
 
-            var contact = _contactRepository.GetContact(contactData.ContactId);
-            if (contact == null)
-            {
-                return messageContactEvents;
-            }
-            messageContactEvents.ContactId = contact.ContactId;
+            //var contact = _contactRepository.GetContact(contactData.Id.Value);
+
+            //if (contact == null)
+            //{
+            //    return messageContactEvents;
+            //}
+            messageContactEvents.ContactId = contactData.Id.Value;
 
             if (RandomizeBounceEvent(funnel))
             {
@@ -210,19 +208,22 @@ namespace ExperienceGenerator.Exm.Repositories
             if (_getRandomLandingPage == null)
                 _getRandomLandingPage = _campaign.LandingPages.Keys.Weighted(_campaign.LandingPages.Values.Select(x => x / 100).ToArray());
 
-            var stringID = _getRandomLandingPage();
-            ID landingPageID;
-            if (!ID.TryParse(stringID, out landingPageID) || ID.IsNullOrEmpty(landingPageID))
+            var stringId = _getRandomLandingPage();
+
+            if (!ID.TryParse(stringId, out var landingPageId) || ID.IsNullOrEmpty(landingPageId))
                 return null;
 
-            var landingPageItem = message.InnerItem.Database.GetItem(landingPageID);
+            var landingPageItem = message.InnerItem.Database.GetItem(landingPageId);
 
             return landingPageItem == null ? "/" : GetItemUrl(landingPageItem);
         }
 
         private static string GetItemUrl(Item landingPageItem)
         {
-            var uri = new Uri(LinkManager.GetItemUrl(landingPageItem));
+            var options = LinkManager.GetDefaultUrlOptions();
+            options.AlwaysIncludeServerUrl = true;
+
+            var uri = new Uri(LinkManager.GetItemUrl(landingPageItem, options));
             return uri.PathAndQuery;
         }
     }

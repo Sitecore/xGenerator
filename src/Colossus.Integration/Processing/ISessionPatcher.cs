@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Colossus.Web;
+﻿using Colossus.Web;
 using Sitecore.Analytics.Tracking;
 
 namespace Colossus.Integration.Processing

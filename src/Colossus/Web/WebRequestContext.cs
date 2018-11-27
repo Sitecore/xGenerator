@@ -14,14 +14,11 @@ namespace Colossus
 
         public string BaseUrl { get; set; }
 
-
         protected WebClient WebClient { get; private set; }
-
 
         public event EventHandler<VisitEventArgs> VisitStarted;        
 
         public event EventHandler<VisitEventArgs> VisitEnded;
-
 
         public bool ThrowWebExceptions { get; set; }
 
@@ -61,12 +58,10 @@ namespace Colossus
             return pause;
         }
 
-
         public virtual string TransformUrl(string uri, Visit visit = null)
         {
             return uri;
         }
-
 
         internal TResponseInfo Execute(Request request)
         {
@@ -184,7 +179,6 @@ namespace Colossus
 
                     response = wex.Response;
                 }
-
 
                 _context.ParseResponse(response);
 

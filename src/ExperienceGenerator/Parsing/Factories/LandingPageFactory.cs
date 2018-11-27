@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Colossus;
-using Colossus.Integration;
 using Colossus.Statistics;
 using Newtonsoft.Json.Linq;
 using ExperienceGenerator.Data;
@@ -95,7 +92,6 @@ namespace ExperienceGenerator.Parsing.Factories
         {
             private readonly Func<Tuple<SiteInfo, ItemInfo>> _siteAndItem;
             private readonly ItemInfoClient _itemInfo;
-
 
             public LandingPageVariable(Func<Tuple<SiteInfo, ItemInfo>> siteAndItem, ItemInfoClient itemInfo)
             {

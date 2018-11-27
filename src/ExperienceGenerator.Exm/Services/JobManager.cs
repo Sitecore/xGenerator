@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using ExperienceGenerator.Exm.Models;
 using ExperienceGenerator.Exm.Repositories;
@@ -8,6 +7,7 @@ using Sitecore;
 using Sitecore.Data;
 using Sitecore.Diagnostics;
 using Sitecore.Jobs;
+using Sitecore.SecurityModel;
 using Job = ExperienceGenerator.Exm.Models.Job;
 
 namespace ExperienceGenerator.Exm.Services
@@ -15,9 +15,9 @@ namespace ExperienceGenerator.Exm.Services
     public class JobManager
     {
         public static JobManager Instance;
-        public static string _repeatStatus;
-        public static int _repeatStatusCount;
-        public Job _activeJob;
+        private static string _repeatStatus;
+        private static int _repeatStatusCount;
+        private Job _activeJob;
 
         public Job StartJob(ExmGeneratorSettings settings)
         {
@@ -50,18 +50,21 @@ namespace ExperienceGenerator.Exm.Services
                 var contacts = contactRepository.CreateContacts(settings.Job, settings.Recipients);
 
                 var contactListRepository = new ContactListRepository();
-                contactListRepository.CreateList(settings.Job, settings.Name, contacts);
 
-                IndexService.RebuildListIndexes(settings.Job);
+                using (new SecurityDisabler())
+                {
+                    contactListRepository.CreateList(settings.Job, settings.Name, contacts);
+                }
 
                 settings.Job.JobStatus = JobStatus.Complete;
                 settings.Job.Status = "DONE!";
                 Log.Info($"EXMGenerator completed: {settings.Job.CompletedContacts}", this);
             }
-            catch
+            catch(Exception ex)
             {
                 settings.Job.Status = "Failed!";
                 settings.Job.JobStatus = JobStatus.Failed;
+                Log.Error(string.Format("EXMGenerator failed: {0}", ex.Message), ex, this);
             }
             finally
             {

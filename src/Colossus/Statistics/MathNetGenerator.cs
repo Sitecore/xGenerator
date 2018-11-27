@@ -14,7 +14,6 @@ namespace Colossus.Statistics
         public double Scale { get; set; }
         public double Offset { get; set; }
 
-
         private MathNetGenerator(double scale = 1, double offset = 0)
         {
             Scale = scale;

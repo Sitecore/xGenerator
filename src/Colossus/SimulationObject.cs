@@ -13,7 +13,6 @@ namespace Colossus
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
 
-
         protected SimulationObject()
         {
             Start = DateTime.Now;

@@ -122,14 +122,19 @@ namespace Colossus.Integration.Processing
 
             #endregion
 
+            var xGenIdentifier = Tracker.Current.Contact.Identifiers.FirstOrDefault(x => x.Source == "xGenerator");
+
             //Use the email to uniquely identify the contact between visits.
-            if (!String.IsNullOrWhiteSpace(emailValue))
+            if (xGenIdentifier == null)
             {
-                Tracker.Current.Session.IdentifyAs("xGenerator", emailValue);
-            }
-            else
-            {
-                Tracker.Current.Session.IdentifyAs("xGenerator", Tracker.Current.Contact.ContactId.ToString("N"));
+                if (!String.IsNullOrWhiteSpace(emailValue))
+                {
+                    Tracker.Current.Session.IdentifyAs("xGenerator", emailValue);
+                }
+                else
+                {
+                    Tracker.Current.Session.IdentifyAs("xGenerator", Tracker.Current.Contact.ContactId.ToString("N"));
+                }
             }
 
             var manager = Sitecore.Configuration.Factory.CreateObject("tracking/contactManager", true) as Sitecore.Analytics.Tracking.ContactManager;
@@ -143,19 +148,24 @@ namespace Colossus.Integration.Processing
                     // Save contact to xConnect; at this point, a contact has an anonymous
                     // TRACKER IDENTIFIER, which follows a specific format. Do not use the contactId overload
                     // and make sure you set the ContactSaveMode as demonstrated
-                    //Tracker.Current.Contact.ContactSaveMode = ContactSaveMode.AlwaysSave;
-                    //manager.SaveContactToCollectionDb(Sitecore.Analytics.Tracker.Current.Contact);
-                    //Sitecore.Analytics.Tracker.Current.Contact.ContactSaveMode = ContactSaveMode.AlwaysSave;
-                    //manager.SaveContactToCollectionDb(Sitecore.Analytics.Tracker.Current.Contact);
                     Sitecore.Analytics.Tracker.Current.Contact.ContactSaveMode = ContactSaveMode.AlwaysSave;
                     manager.SaveContactToCollectionDb(Sitecore.Analytics.Tracker.Current.Contact);
 
                     Log.Info($"ExperienceGenerator ContactDataProcessor: Session Identified using xGenerator", this);
 
                     // Now that the contact is saved, you can retrieve it using the tracker identifier
-                    // NOTE: Sitecore.Analytics.XConnect.DataAccess.Constants.IdentifierSource is marked internal in 9.0 Initial - use "xDB.Tracker"
-                    var trackerIdentifier = new IdentifiedContactReference(Sitecore.Analytics.XConnect.DataAccess.Constants.IdentifierSource, Tracker.Current.Contact.ContactId.ToString("N"));
 
+                    IdentifiedContactReference trackerIdentifier;
+                    var anyIdentifier = Tracker.Current.Contact.Identifiers.FirstOrDefault(x => (x.Source == "xGenerator" || x.Source == Sitecore.Analytics.XConnect.DataAccess.Constants.IdentifierSource));
+                    if (anyIdentifier != null)
+                    {
+                        trackerIdentifier = new IdentifiedContactReference(anyIdentifier.Source, anyIdentifier.Identifier); ;
+                    }
+                    else
+                    {
+                        trackerIdentifier = new IdentifiedContactReference(Sitecore.Analytics.XConnect.DataAccess.Constants.IdentifierSource, Tracker.Current.Contact.ContactId.ToString("N"));
+                    }
+                    
                     using (var client = Sitecore.XConnect.Client.Configuration.SitecoreXConnectClientConfiguration.GetClient())
                     {
                         try
@@ -177,23 +187,28 @@ namespace Colossus.Integration.Processing
 
                                 Log.Info($"ExperienceGenerator ContactDataProcessor: PersonalInformationFacet set for New Contact", this);
 
-                                var emails = new EmailAddressList(new EmailAddress(emailValue, true), "Home");
-                                client.SetFacet(contact, EmailAddressList.DefaultFacetKey, emails);
-                                Log.Info($"ExperienceGenerator ContactDataProcessor: EmailFacet set for New Contact", this);
+                                if (!string.IsNullOrWhiteSpace(emailValue))
+                                {
+                                    var emails = new EmailAddressList(new EmailAddress(emailValue, true), "Home");
+                                    client.SetFacet(contact, EmailAddressList.DefaultFacetKey, emails);
+                                    Log.Info($"ExperienceGenerator ContactDataProcessor: EmailFacet set for New Contact", this);
+                                }
 
-                                var addresses = new AddressList(new Address { AddressLine1 = addressValue }, "Home");
-                                client.SetFacet(contact, AddressList.DefaultFacetKey, addresses);
-                                Log.Info($"ExperienceGenerator ContactDataProcessor: AddressFacet set for New Contact", this);
+                                if (!string.IsNullOrWhiteSpace(addressValue))
+                                {
+                                    var addresses = new AddressList(new Address { AddressLine1 = addressValue }, "Home");
+                                    client.SetFacet(contact, AddressList.DefaultFacetKey, addresses);
+                                    Log.Info($"ExperienceGenerator ContactDataProcessor: AddressFacet set for New Contact", this);
+                                }
 
-                                var phoneNumbers = new PhoneNumberList(new PhoneNumber(String.Empty, phoneNumberValue), "Home");
-                                client.SetFacet(contact, PhoneNumberList.DefaultFacetKey, phoneNumbers);
-                                Log.Info($"ExperienceGenerator ContactDataProcessor: PhoneNumberFacet set for New Contact", this);
+                                if (!string.IsNullOrWhiteSpace(phoneNumberValue))
+                                {
+                                    var phoneNumbers = new PhoneNumberList(new PhoneNumber(String.Empty, phoneNumberValue), "Home");
+                                    client.SetFacet(contact, PhoneNumberList.DefaultFacetKey, phoneNumbers);
+                                    Log.Info($"ExperienceGenerator ContactDataProcessor: PhoneNumberFacet set for New Contact", this);
+                                }
 
                                 client.Submit();
-
-                                //var contactRemovedFromSession = manager.RemoveFromSession(Tracker.Current.Contact.ContactId);
-                                manager.RemoveFromSession(Sitecore.Analytics.Tracker.Current.Contact.ContactId);
-                                Sitecore.Analytics.Tracker.Current.Session.Contact = manager.LoadContact(Sitecore.Analytics.Tracker.Current.Contact.ContactId);
                             }
                         }
                         catch (XdbExecutionException ex)
@@ -206,10 +221,7 @@ namespace Colossus.Integration.Processing
             else if (!Tracker.Current.Contact.IsNew && manager != null)
             {
                 Log.Info($"ExperienceGenerator ContactDataProcessor: Tracker.Current.Contact.IsNew: {Tracker.Current.Contact.IsNew}, TrackerContactId: {Tracker.Current.Contact.ContactId:N}", this);
-                var anyIdentifier = Tracker.Current.Contact.Identifiers.FirstOrDefault();
-
-                //Sitecore.Analytics.Tracker.Current.Contact.ContactSaveMode = ContactSaveMode.AlwaysSave;
-                //manager.SaveContactToCollectionDb(Sitecore.Analytics.Tracker.Current.Contact);
+                var anyIdentifier = Tracker.Current.Contact.Identifiers.FirstOrDefault(x => x.Source == "xGenerator");
 
                 if (anyIdentifier != null)
                 {
@@ -258,62 +270,67 @@ namespace Colossus.Integration.Processing
                                     });
                                 }
 
-                                if (emailFacet != null)
+                                if (!string.IsNullOrWhiteSpace(emailValue))
                                 {
-                                    if (string.IsNullOrEmpty(emailFacet.PreferredEmail.SmtpAddress))
+                                    if (emailFacet != null)
                                     {
-                                        Log.Info($"ExperienceGenerator ContactDataProcessor: TrackerContactId: {Tracker.Current.Contact.ContactId:N}, XConnectContactId: {contact.Id.ToString()}, EmailFacet is not null", this);
-                                        emailFacet.PreferredEmail = new EmailAddress(emailValue, true);
-                                        emailFacet.PreferredKey = "Home";
-                                        client.SetFacet(contact, EmailAddressList.DefaultFacetKey, emailFacet);
+                                        if (string.IsNullOrEmpty(emailFacet.PreferredEmail.SmtpAddress))
+                                        {
+                                            Log.Info($"ExperienceGenerator ContactDataProcessor: TrackerContactId: {Tracker.Current.Contact.ContactId:N}, XConnectContactId: {contact.Id.ToString()}, EmailFacet is not null", this);
+                                            emailFacet.PreferredEmail = new EmailAddress(emailValue, true);
+                                            emailFacet.PreferredKey = "Home";
+                                            client.SetFacet(contact, EmailAddressList.DefaultFacetKey, emailFacet);
+                                        }
                                     }
-                                }
-                                else
-                                {
-                                    Log.Info($"ExperienceGenerator ContactDataProcessor: TrackerContactId: {Tracker.Current.Contact.ContactId:N}, XConnectContactId: {contact.Id.ToString()}, EmailFacet is null", this);
-                                    var emails = new EmailAddressList(new EmailAddress(emailValue, true), "Home");
-                                    client.SetFacet(contact, EmailAddressList.DefaultFacetKey, emails);
+                                    else
+                                    {
+                                        Log.Info($"ExperienceGenerator ContactDataProcessor: TrackerContactId: {Tracker.Current.Contact.ContactId:N}, XConnectContactId: {contact.Id.ToString()}, EmailFacet is null", this);
+                                        var emails = new EmailAddressList(new EmailAddress(emailValue, true), "Home");
+                                        client.SetFacet(contact, EmailAddressList.DefaultFacetKey, emails);
+                                    }
                                 }
 
-                                if (addressFacet != null)
+                                if (!string.IsNullOrWhiteSpace(addressValue))
                                 {
-                                    if (string.IsNullOrEmpty(addressFacet.PreferredAddress.AddressLine1))
+                                    if (addressFacet != null)
                                     {
-                                        Log.Info($"ExperienceGenerator ContactDataProcessor: TrackerContactId: {Tracker.Current.Contact.ContactId:N}, XConnectContactId: {contact.Id.ToString()}, AddressFacet is not null", this);
-                                        addressFacet.PreferredAddress = new Address() { AddressLine1 = addressValue };
-                                        addressFacet.PreferredKey = "Home";
-                                        client.SetFacet(contact, AddressList.DefaultFacetKey, addressFacet);
+                                        if (string.IsNullOrEmpty(addressFacet.PreferredAddress.AddressLine1))
+                                        {
+                                            Log.Info($"ExperienceGenerator ContactDataProcessor: TrackerContactId: {Tracker.Current.Contact.ContactId:N}, XConnectContactId: {contact.Id.ToString()}, AddressFacet is not null", this);
+                                            addressFacet.PreferredAddress = new Address() { AddressLine1 = addressValue };
+                                            addressFacet.PreferredKey = "Home";
+                                            client.SetFacet(contact, AddressList.DefaultFacetKey, addressFacet);
+                                        }
                                     }
-                                }
-                                else
-                                {
-                                    Log.Info($"ExperienceGenerator ContactDataProcessor: TrackerContactId: {Tracker.Current.Contact.ContactId:N}, XConnectContactId: {contact.Id.ToString()}, AddressFacet is null", this);
-                                    var addresses = new AddressList(new Address { AddressLine1 = addressValue }, "Home");
-                                    client.SetFacet(contact, AddressList.DefaultFacetKey, addresses);
+                                    else
+                                    {
+                                        Log.Info($"ExperienceGenerator ContactDataProcessor: TrackerContactId: {Tracker.Current.Contact.ContactId:N}, XConnectContactId: {contact.Id.ToString()}, AddressFacet is null", this);
+                                        var addresses = new AddressList(new Address { AddressLine1 = addressValue }, "Home");
+                                        client.SetFacet(contact, AddressList.DefaultFacetKey, addresses);
+                                    }
                                 }
 
-                                if (phoneNumbersFacet != null)
+                                if (!string.IsNullOrWhiteSpace(phoneNumberValue))
                                 {
-                                    if (string.IsNullOrEmpty(phoneNumbersFacet.PreferredPhoneNumber.Number))
+                                    if (phoneNumbersFacet != null)
                                     {
-                                        Log.Info($"ExperienceGenerator ContactDataProcessor: TrackerContactId: {Tracker.Current.Contact.ContactId:N}, XConnectContactId: {contact.Id.ToString()}, PhoneNumbersFacet is not null", this);
-                                        phoneNumbersFacet.PreferredPhoneNumber = new PhoneNumber(String.Empty, phoneNumberValue);
-                                        phoneNumbersFacet.PreferredKey = "Home";
-                                        client.SetFacet(contact, PhoneNumberList.DefaultFacetKey, phoneNumbersFacet);
+                                        if (string.IsNullOrEmpty(phoneNumbersFacet.PreferredPhoneNumber.Number))
+                                        {
+                                            Log.Info($"ExperienceGenerator ContactDataProcessor: TrackerContactId: {Tracker.Current.Contact.ContactId:N}, XConnectContactId: {contact.Id.ToString()}, PhoneNumbersFacet is not null", this);
+                                            phoneNumbersFacet.PreferredPhoneNumber = new PhoneNumber(String.Empty, phoneNumberValue);
+                                            phoneNumbersFacet.PreferredKey = "Home";
+                                            client.SetFacet(contact, PhoneNumberList.DefaultFacetKey, phoneNumbersFacet);
+                                        }
                                     }
-                                }
-                                else
-                                {
-                                    Log.Info($"ExperienceGenerator ContactDataProcessor: TrackerContactId: {Tracker.Current.Contact.ContactId:N}, XConnectContactId: {contact.Id.ToString()}, PhoneNumbersFacet is null", this);
-                                    var phoneNumbers = new PhoneNumberList(new PhoneNumber(String.Empty, phoneNumberValue), "Home");
-                                    client.SetFacet(contact, PhoneNumberList.DefaultFacetKey, phoneNumbers);
+                                    else
+                                    {
+                                        Log.Info($"ExperienceGenerator ContactDataProcessor: TrackerContactId: {Tracker.Current.Contact.ContactId:N}, XConnectContactId: {contact.Id.ToString()}, PhoneNumbersFacet is null", this);
+                                        var phoneNumbers = new PhoneNumberList(new PhoneNumber(String.Empty, phoneNumberValue), "Home");
+                                        client.SetFacet(contact, PhoneNumberList.DefaultFacetKey, phoneNumbers);
+                                    }
                                 }
 
                                 client.Submit();
-                                //var contactRemovedFromSession = manager.RemoveFromSession(Tracker.Current.Contact.ContactId);
-
-                                manager.RemoveFromSession(Sitecore.Analytics.Tracker.Current.Contact.ContactId);
-                                Sitecore.Analytics.Tracker.Current.Session.Contact = manager.LoadContact(Sitecore.Analytics.Tracker.Current.Contact.ContactId);
                             }
                         }
                         catch (XdbExecutionException ex)

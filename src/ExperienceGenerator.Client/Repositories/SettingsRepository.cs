@@ -16,7 +16,6 @@
 
     public SettingsRepository() : this(Sitecore.Configuration.Factory.GetDatabase("core"))
     {
-
     }
 
     private const string presetsRootPath = "/sitecore/client/Applications/ExperienceGenerator/Common/Presets";
@@ -38,28 +37,22 @@
         return presetRoot;
       }
     }
+
     public void Save(string name, JObject spec)
     {
-
       this.Save(name, spec.ToString());
-
     }
-
-
 
     public void Save(string name, JArray spec)
     {
-
       this.Save(name, spec.ToString());
     }
     private void Save(string name, string spec)
     {
-
       var templateId = Templates.Preset.ID;
 
       var presetRoot = this.SitePresetRoot;
      
-
       var presetItem = presetRoot.Children.FirstOrDefault(x => x.Name == name)??presetRoot.Add(name, new TemplateID(templateId));
 
       presetItem.Editing.BeginEdit();
@@ -73,8 +66,6 @@
       var presetRoot = root.Add(siteName, new TemplateID(Sitecore.TemplateIDs.Folder));
       return presetRoot;
     }
-
-
 
     public JObject GetSettingPreset(ID id)
     {

@@ -54,8 +54,6 @@ namespace Colossus
     public class SingleVisitorVariable<TValue> : VisitorVariablesBase
     {
         public string Key { get; set; }
-
-
         public Func<SimulationObject, TValue> Sampler { get; set; }
         public bool OmitIfNull { get; set; }
 
@@ -75,12 +73,10 @@ namespace Colossus
             }
         }
 
-
         public override IEnumerable<string> ProvidedVariables
         {
             get { yield return Key; }
         }
-
 
         protected override bool Equals(VisitorVariablesBase other)
         {

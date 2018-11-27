@@ -18,15 +18,14 @@ namespace Colossus.Web
 
         public static string ResponseDataKey = "X-Colossus-Response";
 
-
         public static int ChunkSize = 8096;
 
         public static void AddChunked(this NameValueCollection headers, string key, string value)
         {
-            var chunks = Enumerable.Range(0, (int) Math.Ceiling(value.Length/(double) ChunkSize))
-                .Select(i => value.Substring(i*ChunkSize, Math.Min(value.Length - i*ChunkSize, ChunkSize))).ToArray();
-            
-            headers.Add(key, ""+chunks.Length);
+            var chunks = Enumerable.Range(0, (int)Math.Ceiling(value.Length / (double)ChunkSize))
+                .Select(i => value.Substring(i * ChunkSize, Math.Min(value.Length - i * ChunkSize, ChunkSize))).ToArray();
+
+            headers.Add(key, "" + chunks.Length);
 
             var ix = 0;
             foreach (var chunk in chunks)
@@ -50,7 +49,6 @@ namespace Colossus.Web
 
             return null;
         }
-
 
         private static byte[] Compress(byte[] bytes)
         {

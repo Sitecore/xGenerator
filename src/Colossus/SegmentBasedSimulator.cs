@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Colossus.Statistics;
 
 namespace Colossus
@@ -17,7 +16,6 @@ namespace Colossus
         public SegmentBasedSimulator(Action<WeightedSetBuilder<VisitorSegment>> segments) : this(Sets.Weighted(segments))
         {
         }
-
 
         public SegmentBasedSimulator(Func<VisitorSegment> segments)
         {
