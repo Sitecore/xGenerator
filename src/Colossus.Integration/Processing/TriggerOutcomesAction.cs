@@ -39,11 +39,16 @@ namespace Colossus.Integration.Processing
                         throw new Exception("Outcome not found");
                     }
 
-                    Tracker.Current.Interaction.CurrentPage.RegisterOutcome(Tracker.MarketingDefinitions.Outcomes[definition.Id], "USD", definition.IsMonetaryValueApplicable ? o.MonetaryValue : 0.0m);
+                    var visitPageList = Tracker.Current.Interaction.GetPages();
+                    Random rand = new Random();
+                    int index = rand.Next(0, visitPageList.Count());
+                    var randomVisitPage = visitPageList.ElementAt(index);
 
-                    var added = Tracker.Current.Interaction.CurrentPage.Outcomes.First(x => x.OutcomeDefinitionId == definition.Id);
+                    randomVisitPage.RegisterOutcome(Tracker.MarketingDefinitions.Outcomes[definition.Id], "USD", definition.IsMonetaryValueApplicable ? o.MonetaryValue : 0.0m);
+                    
+                    var added = randomVisitPage.Outcomes.First(x => x.OutcomeDefinitionId == definition.Id);
 
-                    var utcTimeStamp = (o.DateTime ?? tracker.CurrentPage.DateTime).AddMilliseconds(ix + 1);
+                    var utcTimeStamp = randomVisitPage.DateTime.AddMilliseconds(ix + 1);
 
                     added.Timestamp = DateTime.SpecifyKind(utcTimeStamp, DateTimeKind.Utc);
 
