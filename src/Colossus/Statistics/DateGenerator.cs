@@ -25,7 +25,6 @@ namespace Colossus.Statistics
             End = end;
         }
 
-
         public DateTime NextDate()
         {
             var d = DateTime.Now;

@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Colossus.Web;
 using Sitecore;
 using Sitecore.Analytics;
-using Sitecore.Analytics.DataAccess;
 using Sitecore.Analytics.Model;
 using Sitecore.ContentTesting.Extensions;
 using Sitecore.Layouts;

@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using ExperienceGenerator.Data;
-using Sitecore.Analytics.Model;
 
 namespace ExperienceGenerator.Repositories
 {
@@ -22,7 +20,6 @@ namespace ExperienceGenerator.Repositories
                 }
             }
         }
-
 
         public List<City> Cities => _cities ?? (_cities = Cache.Cities.ToList());
         public List<Continent> Continents => Cache.Continents;

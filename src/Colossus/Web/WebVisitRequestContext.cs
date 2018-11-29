@@ -1,9 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Routing;
 
 namespace Colossus.Web
@@ -26,8 +24,9 @@ namespace Colossus.Web
         
         public WebRequestContext<TResponseInfo> VisitorContext { get; private set; }
 
-        public Visit Visit { get; private set; }        
+        public Visit Visit { get; private set; }
 
+        [JsonConstructor]
         internal protected WebVisitRequestContext(WebRequestContext<TResponseInfo> visitorContext, Visit visit)
         {
             Visit = visit;
@@ -83,7 +82,6 @@ namespace Colossus.Web
             EventHandler<VisitEventArgs> handler = VisitEnded;
             if (handler != null) handler(this, e);
         }
-
 
         public void Dispose()
         {

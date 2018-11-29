@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Colossus.Web;
-using Sitecore.Analytics;
+﻿using Colossus.Web;
 using Sitecore.Analytics.Model;
 using Sitecore.Analytics.Tracking;
 
@@ -22,7 +16,7 @@ namespace Colossus.Integration.Processing
                     | requestInfo.Visitor.Variables.SetIfPresent("Region", v => whois.Region = v)
                     | requestInfo.Visitor.Variables.SetIfPresent("City", v => whois.City = v))
                 {
-                    session.Interaction.SetGeoData(whois);
+                    session.Interaction.SetWhoIsInformation(whois);
                 }
             }
         }

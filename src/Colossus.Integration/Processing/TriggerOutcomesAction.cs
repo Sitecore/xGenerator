@@ -1,23 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 using Colossus.Web;
 using Sitecore.Analytics;
-//using Sitecore.Analytics.Outcome;
-//using Sitecore.Analytics.Outcome.Extensions;
-//using Sitecore.Analytics.Outcome.Model;
-using Sitecore.Analytics.Tracking;
-using Sitecore.Common;
-using Sitecore.Configuration;
-using Sitecore.Data;
 using Sitecore.Data.Managers;
-using Sitecore.Data.Serialization;
-using Sitecore.Globalization;
-using Sitecore.Mvc.Extensions;
-using Sitecore.XConnect;
 
 namespace Colossus.Integration.Processing
 {
@@ -52,11 +39,16 @@ namespace Colossus.Integration.Processing
                         throw new Exception("Outcome not found");
                     }
 
-                    Tracker.Current.CurrentPage.RegisterOutcome(Tracker.MarketingDefinitions.Outcomes[definition.Id], "USD", definition.IsMonetaryValueApplicable ? o.MonetaryValue : 0.0m);
+                    var visitPageList = Tracker.Current.Interaction.GetPages();
+                    Random rand = new Random();
+                    int index = rand.Next(0, visitPageList.Count());
+                    var randomVisitPage = visitPageList.ElementAt(index);
 
-                    var added = Tracker.Current.CurrentPage.Outcomes.First(x => x.OutcomeDefinitionId == definition.Id);
+                    randomVisitPage.RegisterOutcome(Tracker.MarketingDefinitions.Outcomes[definition.Id], "USD", definition.IsMonetaryValueApplicable ? o.MonetaryValue : 0.0m);
+                    
+                    var added = randomVisitPage.Outcomes.First(x => x.OutcomeDefinitionId == definition.Id);
 
-                    var utcTimeStamp = (o.DateTime ?? tracker.CurrentPage.DateTime).AddMilliseconds(ix + 1);
+                    var utcTimeStamp = randomVisitPage.DateTime.AddMilliseconds(ix + 1);
 
                     added.Timestamp = DateTime.SpecifyKind(utcTimeStamp, DateTimeKind.Utc);
 

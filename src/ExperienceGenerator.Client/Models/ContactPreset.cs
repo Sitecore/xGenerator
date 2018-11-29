@@ -1,6 +1,7 @@
-﻿namespace ExperienceGenerator.Client.Models
+﻿using Newtonsoft.Json.Linq;
+
+namespace ExperienceGenerator.Client.Models
 {
-  using Newtonsoft.Json.Linq;
 
   public class ContactPreset
   {

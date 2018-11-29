@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web;
+using Colossus.Integration.Models;
 using Colossus.Integration.Processing;
 using Sitecore.Analytics;
 using Sitecore.Mvc.Pipelines.Request.RequestEnd;
@@ -27,8 +27,6 @@ namespace Colossus.Integration
         public ActionExecutor()
         {
             RequestActions = new List<IRequestAction>();
-
-
             RequestActions.Add(new TriggerEventsAction());
             RequestActions.Add(new TriggerOutcomesAction());
         }
@@ -47,11 +45,11 @@ namespace Colossus.Integration
                     }
                 }
 
-                //var info = SitecoreResponseInfo.FromContext();
-                //if (info != null)
-                //{
-                //  ctx.Response.Headers.AddChunked(DataEncoding.ResponseDataKey, DataEncoding.EncodeHeaderValue(info));
-                //}
+                var info = SitecoreResponseInfo.FromContext();
+                if (info != null)
+                {
+                  //ctx.Response.Headers.AddChunked(DataEncoding.ResponseDataKey, DataEncoding.EncodeHeaderValue(info));
+                }
             }
         }
     }

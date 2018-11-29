@@ -76,6 +76,7 @@ namespace Colossus.Integration
 
             args.Session.Interaction.StartDateTime = requestTime;
             args.Session.Interaction.EndDateTime = requestTime.AddSeconds(5);
+
             return true;
         }
     }

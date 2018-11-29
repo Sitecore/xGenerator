@@ -1,13 +1,10 @@
-﻿using System.Threading;
+﻿using Colossus.Web;
+using Sitecore.Analytics.Model;
 
 namespace Colossus.Integration.Models
 {
-  using System;
-  using System.Net;
-  using Colossus.Web;
-  using Sitecore.Analytics.Model;
 
-  public class SitecoreVisitRequestContext : WebVisitRequestContext<SitecoreResponseInfo>
+    public class SitecoreVisitRequestContext : WebVisitRequestContext<SitecoreResponseInfo>
     {
         public new SitecoreRequestContext VisitorContext
         {
@@ -25,22 +22,6 @@ namespace Colossus.Integration.Models
 
         protected override void EndVisit()
         {
-            ////lock (syncRoot)
-            ////{
-            ////    var req = new Request
-            ////    {
-            ////        Visit = this.Visit,
-            ////        Url = this.VisitorContext.ColossusHandlerUrl,
-            ////        EndVisit = true
-            ////    };
-
-            ////    this.Execute(req);
-            ////    base.EndVisit();
-            ////    Thread.Sleep(5000);
-            ////}
-            //var req = new Request { Visit = this.Visit, Url = this.VisitorContext.ColossusHandlerUrl, EndVisit = true };
-            //this.Execute(req);
-            //base.EndVisit();
             lock (syncRoot)
             {
                 var req = new Request
@@ -52,7 +33,6 @@ namespace Colossus.Integration.Models
 
                 this.Execute(req);
                 base.EndVisit();
-                Thread.Sleep(5000);
             }
         }
 

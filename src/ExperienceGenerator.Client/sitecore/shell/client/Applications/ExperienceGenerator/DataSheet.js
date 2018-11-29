@@ -17,7 +17,7 @@ define(["sitecore", "underscore"],
             },
 
             initPresetDataSource: function() {
-                var url = "/api/xgen/presetquery";
+                var url = "/clientapi/xgen/presetquery";
                 var self = this;
                 $.ajax({
                         url: url,
@@ -34,14 +34,14 @@ define(["sitecore", "underscore"],
             loadOptions: function() {
                 var that = this;
                 $.ajax({
-                        url: "/api/xgen/options"
+                        url: "/clientapi/xgen/options"
                     })
                     .done(function(data) {
                         that.populate(data);
                     });
 
                 $.ajax({
-                        url: "/api/xgen/devices"
+                        url: "/clientapi/xgen/devices"
                     })
                     .done(function(data) {
 
@@ -307,7 +307,7 @@ define(["sitecore", "underscore"],
             deleteData: function() {
                 this.DelWindow.hide();
                 $.ajax({
-                    url: "/api/xgen/flush",
+                    url: "/clientapi/xgen/flush",
                     type: "POST"
                 });
             },
@@ -318,13 +318,13 @@ define(["sitecore", "underscore"],
                 if (this.paused) {
                     _sc.off("intervalCompleted:ProgressBar");
                     $.ajax({
-                        url: "/api/xgen/jobs/" + this.jobId + "?pause=true",
+                        url: "/clientapi/xgen/jobs/" + this.jobId + "?pause=true",
                         type: "GET"
                     });
                 } else {
                     _sc.on("intervalCompleted:ProgressBar", this.updateProgress, this);
                     $.ajax({
-                        url: "/api/xgen/jobs/" + this.jobId + "?pause=false",
+                        url: "/clientapi/xgen/jobs/" + this.jobId + "?pause=false",
                         type: "GET"
                     });
                 }
@@ -336,7 +336,7 @@ define(["sitecore", "underscore"],
                 }
                 var that = this;
                 $.ajax({
-                        url: "/api/xgen/jobs/" + this.jobId,
+                        url: "/clientapi/xgen/jobs/" + this.jobId,
                         type: "DELETE",
                     })
                     .done(function(data) {
@@ -357,7 +357,7 @@ define(["sitecore", "underscore"],
                 this.data = JSON.stringify(this.data);
                 var that = this;
                 $.ajax({
-                        url: "/api/xgen/jobs",
+                        url: "/clientapi/xgen/jobs",
                         type: "POST",
                         data: this.data,
                         contentType: "application/json; charset=utf-8",
@@ -387,7 +387,7 @@ define(["sitecore", "underscore"],
                 var jobId = this.jobId;
                 var that = this;
                 $.ajax({
-                        url: "/api/xgen/jobs/" + that.jobId,
+                        url: "/clientapi/xgen/jobs/" + that.jobId,
                         type: "GET"
                     })
                     .done(function(data) {
@@ -510,7 +510,7 @@ define(["sitecore", "underscore"],
             loadPreset: function() {
                 var self = this;
                 var selectedItem = this.PresetList.attributes.selectedItemId;
-                var url = "/api/xgen/settingspreset?id=" + selectedItem;
+                var url = "/clientapi/xgen/settingspreset?id=" + selectedItem;
                 $.ajax({
                         url: url,
                         type: "GET",
@@ -543,7 +543,7 @@ define(["sitecore", "underscore"],
                     this.data = JSON.stringify(this.data);
                     var that = this;
                     $.ajax({
-                            url: "/api/xgen/savesettings",
+                            url: "/clientapi/xgen/savesettings",
                             type: "POST",
                             data: this.data,
                             dataType: "json",

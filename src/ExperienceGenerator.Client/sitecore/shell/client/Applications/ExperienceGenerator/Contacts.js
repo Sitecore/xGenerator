@@ -250,7 +250,7 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
             },
 
             initPresetDataSource: function() {
-                var url = "/api/xgen/presetquery";
+                var url = "/clientapi/xgen/presetquery";
                 var self = this;
                 $.ajax({
                         url: url,
@@ -267,7 +267,7 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
             loadOptions: function() {
                 var that = this;
                 $.ajax({
-                        url: "/api/xgen/options"
+                        url: "/clientapi/xgen/options"
                     })
                     .done(function(data) {
                         that.populate(data);
@@ -290,7 +290,7 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
             deleteData: function() {
                 this.DelWindow.hide();
                 $.ajax({
-                    url: "/api/xgen/flush",
+                    url: "/clientapi/xgen/flush",
                     type: "POST"
                 });
             },
@@ -301,13 +301,13 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
                 if (this.paused) {
                     _sc.off("intervalCompleted:ProgressBar");
                     $.ajax({
-                        url: "/api/xgen/jobs/" + this.jobId + "?pause=true",
+                        url: "/clientapi/xgen/jobs/" + this.jobId + "?pause=true",
                         type: "GET"
                     });
                 } else {
                     _sc.on("intervalCompleted:ProgressBar", this.updateProgress, this);
                     $.ajax({
-                        url: "/api/xgen/jobs/" + this.jobId + "?pause=false",
+                        url: "/clientapi/xgen/jobs/" + this.jobId + "?pause=false",
                         type: "GET"
                     });
                 }
@@ -320,7 +320,7 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
                 var that = this;
                 _sc.off("intervalCompleted:ProgressBar");
                 $.ajax({
-                        url: "/api/xgen/jobs/" + this.jobId,
+                        url: "/clientapi/xgen/jobs/" + this.jobId,
                         type: "DELETE"
                     })
                     .done(function(data) {
@@ -339,7 +339,7 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
                 this.data = JSON.stringify(this.data);
                 var that = this;
                 $.ajax({
-                        url: "/api/xgen/jobs",
+                        url: "/clientapi/xgen/jobs",
                         type: "POST",
                         data: this.data,
                         contentType: "application/json; charset=utf-8",
@@ -365,7 +365,7 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
                 var jobId = this.jobId;
                 var that = this;
                 $.ajax({
-                        url: "/api/xgen/jobs/" + that.jobId,
+                        url: "/clientapi/xgen/jobs/" + that.jobId,
                         type: "GET",
                     })
                     .done(function(data) {
@@ -389,7 +389,7 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
             loadPreset: function() {
                 var self = this;
                 var selectedItem = this.PresetList.attributes.selectedItemId;
-                var url = "/api/xgen/contactsettingspreset?id=" + selectedItem;
+                var url = "/clientapi/xgen/contactsettingspreset?id=" + selectedItem;
                 $.ajax({
                         url: url,
                         type: "GET",
@@ -425,7 +425,7 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
 
                     this.data = JSON.stringify(this.data);
                     $.ajax({
-                            url: "/api/xgen/SaveContactsSettings",
+                            url: "/clientapi/xgen/SaveContactsSettings",
                             type: "POST",
                             data: this.data,
                             dataType: "json",

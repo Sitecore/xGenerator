@@ -1,8 +1,8 @@
-﻿namespace ExperienceGenerator.Models
-{
-  using System.Collections.Generic;
-  using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
+namespace ExperienceGenerator.Models
+{
   public class PageItemInfo : JsonItemInfo
   {
     [JsonProperty("goals", Required = Required.Default)]

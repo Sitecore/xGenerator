@@ -1,11 +1,12 @@
-﻿namespace Colossus.Integration.Behaviors
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Colossus.Integration.Models;
+using Colossus.Integration.Processing;
+using Sitecore.Analytics;
+
+namespace Colossus.Integration.Behaviors
 {
-  using System;
-  using System.Collections.Generic;
-  using System.Linq;
-  using Colossus.Integration.Models;
-  using Colossus.Integration.Processing;
-  using Sitecore.Analytics;
 
   public class RandomWalk : SitecoreBehavior
   {
@@ -17,7 +18,6 @@
     protected override IEnumerable<Visit> Commit(SitecoreRequestContext ctx)
     {
       var visits = ctx.Visitor.GetVariable<double>("VisitCount", 1);
-
 
       for (var i = 0; i < visits; i++)
       {
@@ -46,7 +46,6 @@
             pageViews = 1;
           }
 
-
           var internalSearchIndex = Randomness.Random.Next(0, pageViews);
 
           for (var j = 0; j < pageViews; j++)
@@ -60,7 +59,6 @@
             {
               history.Add(nextUrl);
             }
-
 
             //Add outcomes to last visit
             var variables = new Dictionary<string, object>();
@@ -87,7 +85,6 @@
                 });
               }
             }
-
 
             if (events.Count > 0)
             {

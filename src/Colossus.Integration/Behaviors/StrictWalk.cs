@@ -1,17 +1,20 @@
-﻿namespace Colossus.Integration.Behaviors
-{
-  using System;
-  using System.Collections.Generic;
-  using System.IO;
-  using System.Linq;
-  using System.Text.RegularExpressions;
-  using Colossus.Integration.Models;
-  using Colossus.Integration.Processing;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
+using Colossus.Integration.Models;
+using Colossus.Integration.Processing;
+using Newtonsoft.Json;
 
-  public class StrictWalk : SitecoreBehavior
+namespace Colossus.Integration.Behaviors
+{
+
+    public class StrictWalk : SitecoreBehavior
   {
     private readonly List<PageDefinition> pages;
 
+    [JsonConstructor]
     public StrictWalk(string sitecoreUrl, IEnumerable<PageDefinition> pages) : base(sitecoreUrl)
     {
       this.pages = pages.ToList();
@@ -65,9 +68,6 @@
         var item = Sitecore.Resources.Media.MediaManager.Creator.CreateFromStream(stream, "/contacts/", options);
         variables["ContactPicture"] = item.ID;
       }
-
-      // Sitecore.Data.Items.MediaItem mediaItem = new Sitecore.Data.Items.MediaItem(item);
-
     }
   }
 }

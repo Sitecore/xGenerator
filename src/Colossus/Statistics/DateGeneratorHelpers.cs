@@ -82,7 +82,6 @@ namespace Colossus.Statistics
             return date;
         }
 
-
         static void ValidateDateGeneratorRange(DateGenerator generator)
         {
             if (!generator.Start.HasValue || !generator.End.HasValue)

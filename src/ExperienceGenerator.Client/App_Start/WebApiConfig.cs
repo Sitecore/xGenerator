@@ -20,13 +20,14 @@ namespace ExperienceGenerator.Client
 
             config.Routes.MapHttpRoute(
                 name: "ExperienceGeneratorJobsApi",
-                routeTemplate: "api/xgen/jobs/{id}",
+                routeTemplate: "clientapi/xgen/jobs/{id}",
                 defaults: new {controller = "ExperienceGeneratorJobs", id = RouteParameter.Optional}
                 );
 
+            
             config.Routes.MapHttpRoute(
                 name: "ExperienceGeneratorActionsApi",
-                routeTemplate: "api/xgen/{action}/{id}",
+                routeTemplate: "clientapi/xgen/{action}/{id}",
                 defaults: new {controller = "ExperienceGeneratorActions", id = RouteParameter.Optional}
                 );
         }

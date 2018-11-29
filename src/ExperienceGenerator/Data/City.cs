@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Net;
 using Colossus;
 using Newtonsoft.Json;
 using Sitecore.Analytics.Model;
@@ -45,9 +43,10 @@ namespace ExperienceGenerator.Data
             if (!countries.ContainsKey(city.CountryCode))
                 return null;
 
-            var region = regions.FirstOrDefault(r => r.CountryCode == city.CountryCode && r.RegionCode == city.RegionCode);
-            if (region == null)
-                return null;
+            // ToDo: Temporarily Removed - Bug in Sitecore 9 where all regions are not returned as integers as expected leading to xGen failure. PSS ticket available to fix this but will wait for it to be fixed in platform.
+            //var region = regions.FirstOrDefault(r => r.CountryCode == city.CountryCode && r.RegionCode == city.RegionCode);
+            //if (region == null)
+            //    return null;
 
             var timeZoneInfo = GetTimeZone(timeZones, city.TimeZone);
             if (timeZoneInfo == null)

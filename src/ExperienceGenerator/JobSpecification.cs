@@ -14,7 +14,6 @@ namespace ExperienceGenerator
 
         public JObject Specification { get; set; }
 
-
         public IVisitSimulator CreateSimulator()
         {
             var parser = new XGenParser(RootUrl);

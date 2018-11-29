@@ -1,7 +1,8 @@
-﻿namespace Colossus.Integration.Behaviors
+﻿using System.Collections.Generic;
+using Colossus.Integration.Models;
+
+namespace Colossus.Integration.Behaviors
 {
-  using System.Collections.Generic;
-  using Colossus.Integration.Models;
 
   public abstract class SitecoreBehavior : IVisitorBehavior
   {
@@ -11,7 +12,6 @@
     {
       this.SitecoreUrl = sitecoreUrl;
     }
-
 
     public IEnumerable<Visit> Commit(Visitor visitor)
     {

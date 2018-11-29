@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MathNet.Numerics.Distributions;
+﻿using MathNet.Numerics.Distributions;
 
 namespace Colossus.Statistics
 {
@@ -12,7 +7,6 @@ namespace Colossus.Statistics
         public double Scale { get; set; }
         public double Offset { get; set; }
         private Beta _beta;
-
 
         public BetaGenerator(double a, double b, double scale = 1, double offset = 0)
         {

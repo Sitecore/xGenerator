@@ -14,14 +14,11 @@ namespace Colossus
 
         public string BaseUrl { get; set; }
 
-
         protected WebClient WebClient { get; private set; }
-
 
         public event EventHandler<VisitEventArgs> VisitStarted;        
 
         public event EventHandler<VisitEventArgs> VisitEnded;
-
 
         public bool ThrowWebExceptions { get; set; }
 
@@ -61,18 +58,18 @@ namespace Colossus
             return pause;
         }
 
-
         public virtual string TransformUrl(string uri, Visit visit = null)
         {
             return uri;
         }
 
-
         internal TResponseInfo Execute(Request request)
         {
+            WebRequest.DefaultWebProxy = null;
+
             LastResponse = null;
             CurrentRequest = request;
-
+            var webClient = new WebClient { Proxy = null };
             var response = WebClient.DownloadString(request.Url);
             if (LastResponse != null)
             {
@@ -82,7 +79,6 @@ namespace Colossus
             return LastResponse;
         }        
        
-
         public virtual void PrepareRequest(WebRequest request)
         {
             var info = RequestInfo.FromVisit(CurrentRequest);            
@@ -148,8 +144,6 @@ namespace Colossus
                 return request;
             }
 
-
-
             private static object _writeLock = new object();
             protected override WebResponse GetWebResponse(WebRequest request)
             {
@@ -185,7 +179,6 @@ namespace Colossus
 
                     response = wex.Response;
                 }
-
 
                 _context.ParseResponse(response);
 

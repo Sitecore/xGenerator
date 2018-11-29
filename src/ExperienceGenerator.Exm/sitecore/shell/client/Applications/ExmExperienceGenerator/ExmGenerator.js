@@ -27,7 +27,7 @@
             },
 
             initPresetDataSource: function() {
-                var url = "/api/xgen/exmactions/presetquery";
+                var url = "/clientapi/xgen/exmactions/presetquery";
                 var self = this;
                 $.ajax({
                         url: url,
@@ -45,7 +45,7 @@
                 var self = this;
                 var selectedItem = this.ExmPresetList.attributes.selectedItemId;
                 console.log(selectedItem);
-                var url = "/api/xgen/exmactions/settingspreset?id=" + selectedItem;
+                var url = "/clientapi/xgen/exmactions/settingspreset?id=" + selectedItem;
                 $.ajax({
                         url: url,
                         type: "GET",
@@ -76,7 +76,7 @@
 
                     this.data = JSON.stringify(this.data);
                     $.ajax({
-                            url: "/api/xgen/exmactions/SaveSettings",
+                            url: "/clientapi/xgen/exmactions/SaveSettings",
                             type: "POST",
                             data: this.data,
                             dataType: "json",
@@ -109,7 +109,7 @@
                 this.data = JSON.stringify(this.data);
                 var self = this;
                 $.ajax({
-                        url: "/api/xgen/exmjobs/CreateList",
+                        url: "/clientapi/xgen/exmjobs/CreateList",
                         type: "POST",
                         data: this.data,
                         contentType: "application/json; charset=utf-8",
@@ -158,7 +158,7 @@
                 }
                 var self = this;
                 $.ajax({
-                        url: "/api/xgen/exmjobs/CreateCampaignData",
+                        url: "/clientapi/xgen/exmjobs/CreateCampaignData",
                         type: "POST",
                         data: JSON.stringify(requestData),
                         contentType: "application/json; charset=utf-8",
@@ -193,7 +193,7 @@
                 var jobId = this.jobId;
                 var self = this;
                 $.ajax({
-                        url: "/api/xgen/exmjobs/Stop?id=" + jobId,
+                        url: "/clientapi/xgen/exmjobs/Stop?id=" + jobId,
                         type: "GET"
                     })
                     .done(function() {
@@ -214,7 +214,7 @@
                 var self = this;
                 console.log("Update job status for job: " + jobId);
                 $.ajax({
-                        url: "/api/xgen/exmjobs/Status?id=" + jobId,
+                        url: "/clientapi/xgen/exmjobs/Status?id=" + jobId,
                         type: "GET"
                     })
                     .done(function(data) {

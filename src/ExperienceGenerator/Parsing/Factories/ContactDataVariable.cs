@@ -1,10 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Colossus;
 using Faker;
-using Sitecore.Analytics;
-using Sitecore.Analytics.Model;
-using Sitecore.Diagnostics;
 
 namespace ExperienceGenerator.Parsing.Factories
 {

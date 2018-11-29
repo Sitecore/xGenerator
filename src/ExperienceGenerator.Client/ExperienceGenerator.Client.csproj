@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ExperienceGenerator.Client</RootNamespace>
     <AssemblyName>ExperienceGenerator.Client</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -50,36 +50,33 @@
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.3" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.3" />
     <PackageReference Include="Microsoft.AspNet.WebApi.WebHost" Version="5.2.3" />
-    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="Rainbow" Version="2.0.0" />
     <PackageReference Include="Rainbow.Core" Version="2.0.0" />
     <PackageReference Include="Rainbow.Storage.Sc" Version="2.0.0" />
     <PackageReference Include="Rainbow.Storage.Yaml" Version="2.0.0" />
-    <PackageReference Include="Sitecore.Analytics.Aggregation.NoReferences" Version="9.0.180604" />
-    <PackageReference Include="Sitecore.Analytics.DataAccess.NoReferences" Version="9.0.180604" />
-    <PackageReference Include="Sitecore.Analytics.NoReferences" Version="9.0.180604" />
-    <PackageReference Include="Sitecore.Analytics.Sql.NoReferences" Version="9.0.180604" />
-    <PackageReference Include="Sitecore.Cintel.NoReferences" Version="9.0.180604" />
-    <PackageReference Include="Sitecore.ContentSearch.Client.NoReferences" Version="9.0.180604" />
-    <PackageReference Include="Sitecore.ContentSearch.NoReferences" Version="9.0.180604" />
-    <PackageReference Include="Sitecore.Kernel.NoReferences" Version="9.0.180604" />
+    <PackageReference Include="Sitecore.Analytics.Aggregation" Version="12.0.0-r*" />
+    <PackageReference Include="Sitecore.Analytics.DataAccess" Version="12.0.0-r*" />
+    <PackageReference Include="Sitecore.Analytics" Version="12.0.0-r*" />
+    <PackageReference Include="Sitecore.Analytics.Sql" Version="12.0.0-r*" />
+    <PackageReference Include="Sitecore.Cintel" Version="4.0.0-r*" />
+    <PackageReference Include="Sitecore.ContentSearch.Client" Version="4.0.0-r*" />
+    <PackageReference Include="Sitecore.ContentSearch" Version="4.0.0-r*" />
+    <PackageReference Include="Sitecore.Kernel" Version="12.0.0-r*" />
     <PackageReference Include="Unicorn" Version="4.0.2" />
     <PackageReference Include="Unicorn.Core" Version="4.0.2" />
     <PackageReference Include="WebBackgrounder" Version="0.2.0" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
-    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Config\Include\ExperienceGenerator\ExperienceGenerator.Serialization.config" />
@@ -139,6 +136,7 @@
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>

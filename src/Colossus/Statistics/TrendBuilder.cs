@@ -8,9 +8,7 @@ namespace Colossus.Statistics
     {
         public double? Min { get; set; }
         public double? Max { get; set; }
-
         public double Shift { get; set; }
-
         public bool Cyclic { get; set; }
 
         public TrendBuilder(double? min = null, double? max = null, double? offset = null, double? level = null, bool cyclic = false)
@@ -27,7 +25,6 @@ namespace Colossus.Statistics
 
         private double _offset;
         private double _level;
-
 
         public TrendBuilder SetLevel(double level)
         {
@@ -56,7 +53,6 @@ namespace Colossus.Statistics
         {
             return MoveRelative(offset, level, true);
         }
-
 
         public TrendBuilder LineAbsolute(double offset, double level, bool pct = false)
         {

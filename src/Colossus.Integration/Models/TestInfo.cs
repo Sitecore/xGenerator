@@ -13,7 +13,6 @@ namespace Colossus.Integration.Models
 
         public byte[] Combination { get; set; }
 
-
         public List<TestVariableInfo> Variables { get; set; }
 
         public static TestInfo FromTestCombination(TestCombination combination)
@@ -27,16 +26,16 @@ namespace Colossus.Integration.Models
                        Name = combination.Testset.Name,
                        Combination = combination.Combination,
                        Variables = combination.Testset.Variables.Select(v => new TestVariableInfo
-                                                                             {
-                                                                                 Id = v.Id,
-                                                                                 Label = v.Label,
-                                                                                 Values = v.Values.Select(vv => new TestValueInfo
-                                                                                                                {
-                                                                                                                    Id = vv.Id,
-                                                                                                                    Label = vv.Label,
-                                                                                                                    IsOrginal = vv.IsOriginal
-                                                                                                                }).ToList()
-                                                                             }).ToList()
+                         {
+                             Id = v.Id,
+                             Label = v.Label,
+                             Values = v.Values.Select(vv => new TestValueInfo
+                                {
+                                    Id = vv.Id,
+                                    Label = vv.Label,
+                                    IsOrginal = vv.IsOriginal
+                                }).ToList()
+                         }).ToList()
                    };
         }
     }
@@ -45,16 +44,13 @@ namespace Colossus.Integration.Models
     {
         public Guid Id { get; set; }
         public string Label { get; set; }
-
         public List<TestValueInfo> Values { get; set; }
     }
 
     public class TestValueInfo
     {
         public Guid Id { get; set; }
-
         public string Label { get; set; }
-
         public bool IsOrginal { get; set; }
     }
 }

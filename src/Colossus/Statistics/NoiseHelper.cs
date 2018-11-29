@@ -20,7 +20,6 @@ namespace Colossus.Statistics
             return d + Randomness.Random.NextDouble()*scale;
         }
 
-
         public static double Shift(this double val, double shift, double min = 0, double max = 1)
         {
             val = (val - min + shift) % (max - min);
@@ -31,7 +30,6 @@ namespace Colossus.Statistics
             val += min;
             return val;
         }
-
 
         public static IRandomGenerator Offset(this IRandomGenerator gen, double offset, double? min = null,
             double? max = null, bool round = false)

@@ -10,7 +10,6 @@ namespace Colossus.Web
     {
         public string SegmentName { get; set; }
 
-    
         public static VisitorInfo FromVisitor(Visitor v)
         {
             var info = new VisitorInfo {SegmentName = v.Segment != null ? v.Segment.Name : null};

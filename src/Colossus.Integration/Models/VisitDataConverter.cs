@@ -1,12 +1,12 @@
-﻿namespace Colossus.Integration.Models
-{
-  using System;
-  using System.Collections.Generic;
-  using Colossus.Integration.Processing;
-  using FiftyOne.Foundation.Mobile.Detection;
-  using Sitecore.Analytics.Model;
+﻿using System;
+using System.Collections.Generic;
+using Colossus.Integration.Processing;
+using FiftyOne.Foundation.Mobile.Detection;
+using Sitecore.Analytics.Model;
 
-  public static class VisitDataConverter
+namespace Colossus.Integration.Models
+{
+    public static class VisitDataConverter
     {
 
         public static IEnumerable<VisitData> ToVisitData(this Visitor visitor)
@@ -101,7 +101,7 @@
                                 IsGoal = te.IsGoal,
                                 DateTime = page.DateTime                                
                             };
-                            
+
                             vd.Value += pe.Value;
 
                             if (te.CustomValues != null)

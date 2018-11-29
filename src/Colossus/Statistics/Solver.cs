@@ -110,7 +110,6 @@ namespace Colossus.Statistics
                     throw new Exception(String.Format("Error is {0}", fb));
             }
 
-
             return b;
         }
     }
