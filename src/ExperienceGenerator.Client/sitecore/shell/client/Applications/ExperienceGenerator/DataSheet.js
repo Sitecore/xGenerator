@@ -93,8 +93,8 @@ define(["sitecore", "underscore"],
                         output += "<div class='channel-innerlabel truncate'>" + childNode.data.title + "</div>";
                         output +=
                             "<div class='landingpage-channel-slider'><input class='form-control sc-textbox sc-ds-slider' data-sc-id='" + id + "' value='" + weights[id] + "' type='range'/></div>";
-                        output +=
-                            "<div class='end-button-area'><button class='btn btn-default end-button'><span class='sc-button-text'>Delete</span></button></div>";
+                        //output +=
+                        //    "<div class='end-button-area'><button class='btn btn-default end-button'><span class='sc-button-text'>Delete</span></button></div>";
                         output += "</div>";
                         var $output = $(output);
                         $target.append($output);
@@ -304,13 +304,14 @@ define(["sitecore", "underscore"],
                 this.ContentDeliveryValue.set("text", window.location.origin);
             },
 
-            deleteData: function() {
-                this.DelWindow.hide();
-                $.ajax({
-                    url: "/clientapi/xgen/flush",
-                    type: "POST"
-                });
-            },
+            // No longer works in Sitecore 9 - To be revisited in a futur erelease
+            //deleteData: function() {
+            //    this.DelWindow.hide();
+            //    $.ajax({
+            //        url: "/clientapi/xgen/flush",
+            //        type: "POST"
+            //    });
+            //},
 
             pause: function() {
                 this.paused = !this.paused;

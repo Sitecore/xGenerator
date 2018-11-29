@@ -44,17 +44,17 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Configy" Version="1.0.0" />
-    <PackageReference Include="Kamsar.WebConsole" Version="2.0.0" />
+    <PackageReference Include="Kamsar.WebConsole" Version="2.0.1" />
     <PackageReference Include="MicroCHAP" Version="1.2.2.2" />
     <PackageReference Include="Microsoft.AspNet.WebApi" Version="5.2.3" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.3" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.3" />
     <PackageReference Include="Microsoft.AspNet.WebApi.WebHost" Version="5.2.3" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="Rainbow" Version="2.0.0" />
-    <PackageReference Include="Rainbow.Core" Version="2.0.0" />
-    <PackageReference Include="Rainbow.Storage.Sc" Version="2.0.0" />
-    <PackageReference Include="Rainbow.Storage.Yaml" Version="2.0.0" />
+    <PackageReference Include="Rainbow" Version="2.0.2" />
+    <PackageReference Include="Rainbow.Core" Version="2.0.2" />
+    <PackageReference Include="Rainbow.Storage.Sc" Version="2.0.2" />
+    <PackageReference Include="Rainbow.Storage.Yaml" Version="2.0.2" />
     <PackageReference Include="Sitecore.Analytics.Aggregation" Version="12.0.0-r*" />
     <PackageReference Include="Sitecore.Analytics.DataAccess" Version="12.0.0-r*" />
     <PackageReference Include="Sitecore.Analytics" Version="12.0.0-r*" />
@@ -63,8 +63,8 @@
     <PackageReference Include="Sitecore.ContentSearch.Client" Version="4.0.0-r*" />
     <PackageReference Include="Sitecore.ContentSearch" Version="4.0.0-r*" />
     <PackageReference Include="Sitecore.Kernel" Version="12.0.0-r*" />
-    <PackageReference Include="Unicorn" Version="4.0.2" />
-    <PackageReference Include="Unicorn.Core" Version="4.0.2" />
+    <PackageReference Include="Unicorn" Version="4.0.4" />
+    <PackageReference Include="Unicorn.Core" Version="4.0.4" />
     <PackageReference Include="WebBackgrounder" Version="0.2.0" />
   </ItemGroup>
   <ItemGroup>
@@ -101,6 +101,7 @@
     </Content>
     <Content Include="App_Config\Include\Unicorn\Unicorn.AutoPublish.config" />
     <Content Include="App_Config\Include\ExperienceGenerator\zExperienceGenerator.DevSettings.config" />
+    <Content Include="App_Config\Include\ExperienceGenerator\ExperienceGenerator.Processing.Aggregation.Services.config" />
     <None Include="Global.asax" />
     <Content Include="sitecore\shell\client\Applications\ExperienceGenerator\InteractionEditor.js" />
     <Content Include="sitecore\shell\Themes\Standard\ExperienceGenerator.zip" />

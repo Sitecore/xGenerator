@@ -1,9 +1,9 @@
 /*/ THIS CODE IS FOR PROTOTYPE ONLY!!!! /*/
 define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/InteractionEditor.js"],
-    function(_sc, ko, _, interactionEditor) {
+    function (_sc, ko, _, interactionEditor) {
         var DataSheet = _sc.Definitions.App.extend({
             interactionEditor: interactionEditor,
-            addContact: function() {
+            addContact: function () {
                 this.ContactList.unset("selectedItemId");
                 var contacts = this.ContactList.get("items");
                 var newContact = {
@@ -24,7 +24,7 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
                 this.selectLastElement(this.ContactList);
             },
 
-            addItemToList: function(sourceControl, targetControl) {
+            addItemToList: function (sourceControl, targetControl) {
                 var selected = this[sourceControl].get("selectedItem");
                 if (!selected) return;
 
@@ -34,7 +34,7 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
                 this[targetControl].set("items", existingOutcomes);
             },
 
-            addInteraction: function() {
+            addInteraction: function () {
                 var contact = this.ContactList.get("selectedItem");
                 if (!contact) return;
 
@@ -46,28 +46,31 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
 
                 interactionEditor.editInteraction(newInteraction);
             },
-            deleteSelected: function(controlName) {
+            deleteSelected: function (controlName) {
                 var control = this[controlName];
                 var filteredItem = control.get("items");
                 var checkedItems = control.get("checkedItems");
 
-                control.unset("items", { silent: true });
                 control.set("items", checkedItems);
+                filteredItem = _.difference(filteredItem, checkedItems);
+                control.unset("items", { silent: true });
+                control.set("items", filteredItem);
+
                 if (controlName === "InteractionList") {
-                    var interactions = this.ContactList.get("selectedItem").get("interactions");
+                    var interactions = this.ContactList.get("filteredItem").get("interactions");
                     _.each(checkedItems, function (item) { interactions.splice(interactions.indexOf(item), 1) });
                     this.setInteractions(interactions);
                 }
                 control.viewModel.uncheckItems(control.get("checkedItems"));
             },
-            duplicateSelected: function(controlName) {
+            duplicateSelected: function (controlName) {
                 var control = this[controlName];
                 var filteredItem = control.get("items");
 
                 var checkedItems = control.get("checkedItems");
 
                 _.each(checkedItems,
-                    function(item) {
+                    function (item) {
                         var newItem = _.clone(item);
                         newItem["itemId"] = this.guid();
                         filteredItem.push(newItem);
@@ -82,17 +85,17 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
                     while (interactions.length > 0) {
                         interactions.pop();
                     }
-                    _.each(filteredItem, function(item) { interactions.push(item); });
+                    _.each(filteredItem, function (item) { interactions.push(item); });
 
                     this.setInteractions(interactions);
                 }
                 control.viewModel.uncheckItems(control.get("checkedItems"));
             },
-            selectLastElement: function(control) {
+            selectLastElement: function (control) {
                 control.viewModel.$el.find("tr").eq(-2).find("td:last").click();
             },
 
-            initialized: function() {
+            initialized: function () {
                 interactionEditor.initialize(this);
 
                 this.landingPages = "";
@@ -117,9 +120,9 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
                 var that = this;
                 $("[data-sc-id=ImageContactPanel]").prepend($file);
                 $file.on("change",
-                    function() {
+                    function () {
                         var fileReader = new FileReader();
-                        fileReader.onload = function(e) {
+                        fileReader.onload = function (e) {
 
                             var canvas = $("<canvas style='display:none'/>")[0];
                             var ctx = canvas.getContext("2d");
@@ -130,7 +133,7 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
 
 
                             var img = new Image;
-                            img.onload = function() {
+                            img.onload = function () {
                                 var iw = img.width;
                                 var ih = img.height;
                                 var scale = Math.min((maxW / iw), (maxH / ih));
@@ -154,7 +157,7 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
                 this.ContactList.on("change:selectedItem", this.loadSelectedContact, this);
                 this.InteractionList.on("change:selectedItem", this.openEditInteractionModal, this);
                 this.PrimeEmailValue.on("change:text",
-                    function(model, text) {
+                    function (model, text) {
                         var $parent = model.viewModel.$el.parent();
 
                         if (!text && !$parent.hasClass("has-error") || (text && $parent.hasClass("has-error"))) {
@@ -165,7 +168,7 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
                     this);
 
                 this.ContactImage.on("change:src",
-                    function(model, value) {
+                    function (model, value) {
                         this.ContactList.get("selectedItem").set("image", value);
                         for (var idx in this.ContactList.attributes.items) {
                             var contact = this.ContactList.attributes.items[idx];
@@ -177,7 +180,7 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
                     },
                     this);
                 this.BirthdayValue.on("change:date",
-                    function(model, value) {
+                    function (model, value) {
                         model.unset("text");
                         model.set("text", value);
                     },
@@ -185,14 +188,14 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
 
                 this.applyTwoWayBindings();
             },
-            applyTwoWayBindings: function() {
+            applyTwoWayBindings: function () {
                 for (var key in this.bindingMap) {
                     if (this.bindingMap.hasOwnProperty(key)) {
                         this[key].on("change:text", this.updateSelectedContact, this);
                     }
                 }
             },
-            interactionsOKButton: function() {
+            interactionsOKButton: function () {
                 var itr = interactionEditor.retrieveInteraction();
                 var interactions = this.ContactList.get("selectedItem").get("interactions");
                 if (!itr.itemId) {
@@ -210,11 +213,11 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
 
                 this.setInteractions(interactions);
             },
-            openEditInteractionModal: function(control, selectedItem) {
+            openEditInteractionModal: function (control, selectedItem) {
                 if (!selectedItem) return;
                 interactionEditor.editInteraction(selectedItem.attributes);
             },
-            updateSelectedContact: function(model) {
+            updateSelectedContact: function (model) {
                 var key = model.get("name");
                 for (var idx in this.ContactList.attributes.items) {
                     var contact = this.ContactList.attributes.items[idx];
@@ -225,7 +228,7 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
                 this.ContactList.get("selectedItem").set(this.bindingMap[key], this[key].get("text"));
             },
 
-            loadSelectedContact: function(control, selectedItem) {
+            loadSelectedContact: function (control, selectedItem) {
                 if (!selectedItem) {
                     return;
                 }
@@ -239,63 +242,64 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
                 this.setInteractions(selectedItem.get("interactions"));
                 this.ContactImage.set("imageUrl", selectedItem.get("image"));
             },
-            setInteractions: function(interactions) {
+            setInteractions: function (interactions) {
                 interactions = interactions || this.InteractionList.get("items");
 
-                var sorted = _.sortBy(interactions, function(x) { return +x["recency"]; });
+                var sorted = _.sortBy(interactions, function (x) { return +x["recency"]; });
                 sorted.reverse();
 
                 this.InteractionList.unset("items", { silent: true });
                 this.InteractionList.set("items", sorted);
             },
 
-            initPresetDataSource: function() {
+            initPresetDataSource: function () {
                 var url = "/clientapi/xgen/presetquery";
                 var self = this;
                 $.ajax({
-                        url: url,
-                        type: "GET",
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                    })
-                    .done(function(data) {
+                    url: url,
+                    type: "GET",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                })
+                    .done(function (data) {
                         self.DataSource.set("query", data.query);
                         self.DataSource.refresh();
                     });
             },
 
-            loadOptions: function() {
+            loadOptions: function () {
                 var that = this;
                 $.ajax({
-                        url: "/clientapi/xgen/options"
-                    })
-                    .done(function(data) {
+                    url: "/clientapi/xgen/options"
+                })
+                    .done(function (data) {
                         that.populate(data);
                     });
             },
 
-            guid: function() {
+            guid: function () {
                 return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g,
-                    function(c) {
+                    function (c) {
                         var r = Math.random() * 16 | 0, v = c == "x" ? r : (r & 0x3 | 0x8);
                         return v.toString(16);
                     });
             },
 
 
-            dialogCancelButton: function(DialogWindow) {
+            dialogCancelButton: function (DialogWindow) {
                 this[DialogWindow].hide();
             },
 
-            deleteData: function() {
-                this.DelWindow.hide();
-                $.ajax({
-                    url: "/clientapi/xgen/flush",
-                    type: "POST"
-                });
-            },
+            // No longer works in Sitecore 9 - To be revisited in a futur erelease
+            //deleteData: function() {
+            //    this.DelWindow.hide();
+            //    $.ajax({
+            //        url: "/clientapi/xgen/flush",
+            //        type: "POST"
+            //    });
+            //},
 
-            pause: function() {
+            pause: function () {
                 this.paused = !this.paused;
                 //ToDo: toggle event listener for intervalCompleted:ProgressBar
                 if (this.paused) {
@@ -312,7 +316,7 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
                     });
                 }
             },
-            stop: function() {
+            stop: function () {
                 if (!this.jobId) {
                     //No job has ever been started
                     return;
@@ -320,15 +324,15 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
                 var that = this;
                 _sc.off("intervalCompleted:ProgressBar");
                 $.ajax({
-                        url: "/clientapi/xgen/jobs/" + this.jobId,
-                        type: "DELETE"
-                    })
-                    .done(function(data) {
+                    url: "/clientapi/xgen/jobs/" + this.jobId,
+                    type: "DELETE"
+                })
+                    .done(function (data) {
                         that.stopped(data);
                     });
             },
 
-            start: function() {
+            start: function () {
                 if (this.jobId && !confirm("A job is already running. Start anyway?")) {
                     return;
                 }
@@ -339,36 +343,36 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
                 this.data = JSON.stringify(this.data);
                 var that = this;
                 $.ajax({
-                        url: "/clientapi/xgen/jobs",
-                        type: "POST",
-                        data: this.data,
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function() {}
-                    })
-                    .done(function(data) {
+                    url: "/clientapi/xgen/jobs",
+                    type: "POST",
+                    data: this.data,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function () { }
+                })
+                    .done(function (data) {
                         that.running(data);
                     });
             },
 
-            running: function(data) {
+            running: function (data) {
                 this.jobId = data.Id;
                 _sc.on("intervalCompleted:ProgressBar", this.updateProgress, this);
             },
 
-            stopped: function(data) {
+            stopped: function (data) {
                 this.jobId = undefined;
                 _sc.off("intervalCompleted:ProgressBar");
             },
 
-            updateProgress: function() {
+            updateProgress: function () {
                 var jobId = this.jobId;
                 var that = this;
                 $.ajax({
-                        url: "/clientapi/xgen/jobs/" + that.jobId,
-                        type: "GET",
-                    })
-                    .done(function(data) {
+                    url: "/clientapi/xgen/jobs/" + that.jobId,
+                    type: "GET",
+                })
+                    .done(function (data) {
                         var total = 0;
                         var contacts = data.Specification.Specification.Contacts;
                         for (var i = 0; i < contacts.length; i++) {
@@ -386,20 +390,20 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
                         }
                     });
             },
-            loadPreset: function() {
+            loadPreset: function () {
                 var self = this;
                 var selectedItem = this.PresetList.attributes.selectedItemId;
                 var url = "/clientapi/xgen/contactsettingspreset?id=" + selectedItem;
                 $.ajax({
-                        url: url,
-                        type: "GET",
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function() {}
-                    })
-                    .done(function(data) {
+                    url: url,
+                    type: "GET",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function () { }
+                })
+                    .done(function (data) {
                         _.each(data,
-                            function(item) {
+                            function (item) {
                                 item["itemId"] = self.guid();
                                 item["image"] = item["image"] || "";
                             });
@@ -409,13 +413,13 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
                     });
             },
 
-            save: function(name) {
+            save: function (name) {
                 var self = this;
                 var name = this.PresetName.attributes.text;
                 if (name == "") {
                     alert("Please enter preset name.");
                 } else {
-                    if (_.any(this.DataSource.get("items"), function(item) { return item.itemName === name })) {
+                    if (_.any(this.DataSource.get("items"), function (item) { return item.itemName === name })) {
                         var overwrite = confirm("Are you sure you want to overwrite settings?");
                         if (!overwrite) return;
                     }
@@ -425,23 +429,23 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
 
                     this.data = JSON.stringify(this.data);
                     $.ajax({
-                            url: "/clientapi/xgen/SaveContactsSettings",
-                            type: "POST",
-                            data: this.data,
-                            dataType: "json",
-                            contentType: "application/json; charset=utf-8",
-                            success: function() {}
-                        })
-                        .done(function(data) {
+                        url: "/clientapi/xgen/SaveContactsSettings",
+                        type: "POST",
+                        data: this.data,
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function () { }
+                    })
+                        .done(function (data) {
                             self.PresetName.set("text", "");
                             self.DataSource.refresh();
                         })
-                        .fail(function(data) {
+                        .fail(function (data) {
                             alert(data.responseJSON.ExceptionMessage);
                         });
                 }
             },
-            adapt: function(doc) {
+            adapt: function (doc) {
 
                 return {
                     Type: 1,
@@ -449,7 +453,7 @@ define(["sitecore", "knockout", "underscore", "/-/speak/v1/experienceGenerator/I
                     Specification: {
                         Contacts: doc,
                         Segments: {
-                        
+
                         }
                     }
                 };

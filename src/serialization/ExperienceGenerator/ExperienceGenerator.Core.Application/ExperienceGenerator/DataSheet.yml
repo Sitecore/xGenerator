@@ -67,7 +67,7 @@ SharedFields:
           uid="{32287D12-BCD6-4C6B-A8B2-D3BD6E8B1094}" />
         <r
           id="{C80807A7-AD13-4693-9822-DD840CB266C5}"
-          par="Click=javascript%3a+window.history.back()+&amp;Id=BackButton&amp;Text=Back"
+          par="Text=Back&amp;Click=javascript%3a+window.history.back()+&amp;Id=BackButton"
           ph="ApplicationHeader.Back"
           uid="{13E6027C-1281-44BD-903A-2D6F278E00D5}" />
         <r
@@ -76,7 +76,7 @@ SharedFields:
           uid="{F9479D7A-82E0-4DC1-9958-71917F1430FA}" />
         <r
           id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
-          par="Id=Main&amp;UsePadding=1"
+          par="UsePadding=1&amp;Id=Main"
           ph="ApplicationContent.Main"
           uid="{704DB678-EF88-46F9-A383-5D038D75FE42}" />
         <r
@@ -97,7 +97,7 @@ SharedFields:
           uid="{EC41B22D-1DC1-4ECE-8AF3-2B34A7D4ED11}" />
         <r
           id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
-          par="Id=SummaryBorder&amp;UsePadding=1"
+          par="UsePadding=1&amp;Id=SummaryBorder"
           ph="ApplicationContent.Info"
           uid="{61A804BB-8DA8-44B5-A7B6-1974D9E86271}" />
         <r
@@ -108,67 +108,67 @@ SharedFields:
           uid="{B2A5BDFA-62D2-46B3-9F32-5CC9847A072D}" />
         <r
           id="{C4393722-39FA-4869-9582-3A8EB8983A0D}"
-          par="UsePadding=1&amp;Id=SummaryRow&amp;PaddingType=All"
+          par="PaddingType=All&amp;UsePadding=1&amp;Id=SummaryRow"
           ph="SummaryBorder.Content"
           uid="{E89E86B9-7DD3-46A8-852B-24694BC9B36C}" />
         <r
           id="{5CB208F6-1860-426B-8221-FAA85B329848}"
-          par="Id=ColumnPanel1&amp;GridColumns=9"
+          par="GridColumns=9&amp;Id=ColumnPanel1"
           ph="SummaryRow.Content"
           uid="{302B42DF-0E41-4982-B226-FF5023FD48AA}" />
         <r
           id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
-          par="Id=NumberVisitsText&amp;Text=Number+of+visits+generated"
+          par="Text=Number+of+visits+generated&amp;Id=NumberVisitsText"
           ph="ColumnPanel1.Content"
           uid="{1C86225B-B378-41D2-9328-17440D254B1C}" />
         <r
           id="{5CB208F6-1860-426B-8221-FAA85B329848}"
-          par="Id=ColumnPanel2&amp;GridColumns=3"
+          par="GridColumns=3&amp;Id=ColumnPanel2"
           ph="SummaryRow.Content"
           uid="{60468E6F-AB4C-44F8-942A-214015D9EEF1}" />
         <r
           id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
-          par="Id=NumberVisitsValue&amp;Text=0"
+          par="Text=0&amp;Id=NumberVisitsValue"
           ph="ColumnPanel2.Content"
           uid="{825BBAAF-3751-4334-A482-A2EDBB8373CA}" />
         <r
           id="{5CB208F6-1860-426B-8221-FAA85B329848}"
-          par="Id=ColumnPanel3&amp;GridColumns=9"
+          par="GridColumns=9&amp;Id=ColumnPanel3"
           ph="SummaryRow.Content"
           uid="{6ED4B180-F673-4051-8697-F0376F2B8EB2}" />
         <r
           id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
-          par="Id=NumberContactsText&amp;Text=Number+of+contacts+generated"
+          par="Text=Number+of+contacts+generated&amp;Id=NumberContactsText"
           ph="ColumnPanel3.Content"
           uid="{9473DE26-9274-4D8D-91FD-6A30FC444CE6}" />
         <r
           id="{5CB208F6-1860-426B-8221-FAA85B329848}"
-          par="Id=ColumnPanel4&amp;GridColumns=3"
+          par="GridColumns=3&amp;Id=ColumnPanel4"
           ph="SummaryRow.Content"
           uid="{95FF7C94-D010-48CD-94E2-6CE3B87726A4}" />
         <r
           id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
-          par="Id=NumberContactsValue&amp;Text=0"
+          par="Text=0&amp;Id=NumberContactsValue"
           ph="ColumnPanel4.Content"
           uid="{AAE4C3BD-C5B7-4106-9F41-E4E5E4DD01B3}" />
         <r
           id="{5CB208F6-1860-426B-8221-FAA85B329848}"
-          par="Id=ColumnPanel5&amp;GridColumns=12"
+          par="GridColumns=12&amp;Id=ColumnPanel5"
           ph="SummaryRow.Content"
           uid="{42A4AAA6-C24F-4F5C-AB32-EE7BC9A58E66}" />
         <r
           id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
-          par="Id=ProgressBorder&amp;PaddingType=Top&amp;UsePadding=1"
+          par="PaddingType=Top&amp;UsePadding=1&amp;Id=ProgressBorder"
           ph="ColumnPanel5.Content"
           uid="{00135897-51D8-4846-85D3-718B9CA089C1}" />
         <r
           id="{AF6438A4-8295-4925-90B3-2BF97D3515AF}"
-          par="UpdateInterval=1000&amp;Value=0&amp;Id=ProgressBar&amp;MaxValue=100"
+          par="MaxValue=100&amp;UpdateInterval=1000&amp;Value=0&amp;Id=ProgressBar"
           ph="ProgressBorder.Content"
           uid="{208C3826-C402-4B35-AE37-12808AAFD82D}" />
         <r
           id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
-          par="Id=StartButtonBorder&amp;UsePadding=1&amp;ShowBorder=0"
+          par="ShowBorder=0&amp;UsePadding=1&amp;Id=StartButtonBorder"
           ph="SummaryBorder.Content"
           uid="{7394EEDF-6504-40D9-A6E5-88B532D89D18}" />
         <r
@@ -179,7 +179,7 @@ SharedFields:
           uid="{8BA6E8F3-DEFB-444E-9469-486A59E20B27}" />
         <r
           id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
-          par="Id=SecondaryButtonBorder&amp;UsePadding=1&amp;ShowBorder=0"
+          par="ShowBorder=0&amp;UsePadding=1&amp;Id=SecondaryButtonBorder"
           ph="SummaryBorder.Content"
           uid="{D245A96A-20F8-42FB-8E13-1B2A0AB8EF00}" />
         <r
@@ -196,33 +196,27 @@ SharedFields:
           uid="{7D988C87-AFC6-434C-ABE1-3867973C2A57}" />
         <r
           id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
-          par="Id=DeleteBorder&amp;PaddingType=All&amp;UsePadding=1"
+          par="PaddingType=All&amp;UsePadding=1&amp;Id=DeleteBorder"
           ph="SummaryBorder.Content"
           uid="{8DB07743-CC80-4DBE-A107-B14DD78EC9EF}" />
         <r
-          ds="{77571502-EE04-48C5-AA06-1706EB06C4FC}"
-          id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}"
-          par="Click=javascript%3aapp.DelWindow.show()%3b&amp;Id=DeleteButton"
-          ph="DeleteBorder.Content"
-          uid="{4E560427-B6CA-49C5-84E1-E622EADECC06}" />
-        <r
           id="{442BD093-FBAD-4E36-BC08-489E16C82D08}"
-          par="Id=Presets&amp;Header=Presets&amp;IsCollapsible=1"
+          par="Header=Presets&amp;IsCollapsible=1&amp;Id=Presets"
           ph="ApplicationContent.Info"
           uid="{B0D9D891-E955-4FA2-B6EC-65FA8E229854}" />
         <r
           id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
-          par="Id=PresetsBorder&amp;UsePadding=1"
+          par="UsePadding=1&amp;Id=PresetsBorder"
           ph="Presets.Body"
           uid="{002B264C-DFDD-4AB4-9B20-D0E8F68DF311}" />
         <r
           id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
-          par="Id=SaveSettingsBorder&amp;ShowBorder=0"
+          par="ShowBorder=0&amp;Id=SaveSettingsBorder"
           ph="PresetsBorder.Content"
           uid="{D5D1116C-40C0-4FD8-8069-348E1B3524C5}" />
         <r
           id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
-          par="Id=PresetNameTitle&amp;Text=Preset+name"
+          par="Text=Preset+name&amp;Id=PresetNameTitle"
           ph="SaveSettingsBorder.Content"
           uid="{BE5036B0-6F55-4A95-B594-016D2B405499}" />
         <r
@@ -232,27 +226,27 @@ SharedFields:
           uid="{A198E9D8-9FCE-40FD-9DD8-D2696DEE187A}" />
         <r
           id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}"
-          par="Click=javascript%3aapp.save()%3b&amp;Id=SaveSettings&amp;Text=Save+Settings"
+          par="Text=Save+Settings&amp;Click=javascript%3aapp.save()%3b&amp;Id=SaveSettings"
           ph="SaveSettingsBorder.Content"
           uid="{30271081-599D-40B7-8764-D74F40E5B3E5}" />
         <r
           id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
-          par="Id=LoadSettingsBorder&amp;PaddingType=Top&amp;UsePadding=1"
+          par="PaddingType=Top&amp;UsePadding=1&amp;Id=LoadSettingsBorder"
           ph="PresetsBorder.Content"
           uid="{AB0EBB11-595F-400B-B400-002D3DFC49F1}" />
         <r
           id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
-          par="Id=LoadPresetTitle&amp;Text=Select+preset+to+load+settings"
+          par="Text=Select+preset+to+load+settings&amp;Id=LoadPresetTitle"
           ph="LoadSettingsBorder.Content"
           uid="{951F2793-54F8-4229-98F2-7A432AE083AA}" />
         <r
           id="{25D357D3-3648-4336-9B53-55EED7CFA078}"
-          par="Id=PresetList&amp;Items=%7bBinding+DataSource.Items%7d"
+          par="Items=%7bBinding+DataSource.Items%7d&amp;Id=PresetList"
           ph="LoadSettingsBorder.Content"
           uid="{A11C53E6-0885-4BE0-B93C-C4FEB3E823AF}" />
         <r
           id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}"
-          par="Click=javascript%3aapp.loadPreset()%3b&amp;Id=LoadPreset&amp;Text=Load+Preset"
+          par="Text=Load+Preset&amp;Click=javascript%3aapp.loadPreset()%3b&amp;Id=LoadPreset"
           ph="LoadSettingsBorder.Content"
           uid="{40F1CCEB-3413-4097-A367-D6F0C2B6E60C}" />
         <r
@@ -263,7 +257,7 @@ SharedFields:
           uid="{85DE6C46-24FA-43D8-B5CD-5DDD97B07615}" />
         <r
           id="{33A02142-2DBD-4034-AEA2-BDF215EB2451}"
-          par="Id=DataSource&amp;Query=%2fsitecore%2fclient%2fApplications%2fExperienceGenerator%2fCommon%2fPresets%2f%2f*%5b%40%40tid%3d%27%7bC7089EBD-7AF0-4F14-BEEA-680A465231B1%7d%27%5d&amp;Database=core"
+          par="Query=%2fsitecore%2fclient%2fApplications%2fExperienceGenerator%2fCommon%2fPresets%2f%2f*%5b%40%40tid%3d%27%7bC7089EBD-7AF0-4F14-BEEA-680A465231B1%7d%27%5d&amp;Database=core&amp;Id=DataSource"
           ph="Page.Body"
           uid="{09DE6E13-921B-459B-9844-8022DBAE6E33}" />
         <r
@@ -290,12 +284,12 @@ SharedFields:
           uid="{D596A2DA-466D-4F5E-B468-7F9525D14FC3}" />
         <r
           id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}"
-          par="Click=javascript%3aapp.dialogOKButton(%22LandingPageTreeView%22%2c+%22AddLandingPagesWindow%22%2c+%22LandingPagesListInnerPanel%22+%2c+%22landingPages%22)&amp;Id=OkButton1&amp;ButtonType=Primary&amp;Text=OK"
+          par="ButtonType=Primary&amp;Text=OK&amp;Click=javascript%3aapp.dialogOKButton(%22LandingPageTreeView%22%2c+%22AddLandingPagesWindow%22%2c+%22LandingPagesListInnerPanel%22+%2c+%22landingPages%22)&amp;Id=OkButton1"
           ph="AddLandingPagesWindow.Buttons"
           uid="{58845FC2-FB5E-4B28-B99F-1AB0A22C7A26}" />
         <r
           id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}"
-          par="Click=javascript%3aapp.dialogCancelButton(+%22AddLandingPagesWindow%22)&amp;Id=CancelButton1&amp;Text=Cancel"
+          par="Text=Cancel&amp;Click=javascript%3aapp.dialogCancelButton(+%22AddLandingPagesWindow%22)&amp;Id=CancelButton1"
           ph="AddLandingPagesWindow.Buttons"
           uid="{0EBC356F-699A-4EE7-9509-AAAE52468FFC}" />
         <r
@@ -311,12 +305,12 @@ SharedFields:
           uid="{0EE1FF82-A5D6-40B9-BF32-931B2965C9C3}" />
         <r
           id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}"
-          par="Click=javascript%3aapp.dialogOKButton(%22DeviceTreeView%22%2c+%22AddDeviceWindow%22%2c+%22DeviceListInnerPanel%22+%2c+%22devices%22)&amp;Id=OkButton4&amp;ButtonType=Primary&amp;Text=OK"
+          par="ButtonType=Primary&amp;Text=OK&amp;Click=javascript%3aapp.dialogOKButton(%22DeviceTreeView%22%2c+%22AddDeviceWindow%22%2c+%22DeviceListInnerPanel%22+%2c+%22devices%22)&amp;Id=OkButton4"
           ph="AddDeviceWindow.Buttons"
           uid="{AD4B19AC-699B-4762-92FB-93998139EB98}" />
         <r
           id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}"
-          par="Click=javascript%3aapp.dialogCancelButton(+%22AddDeviceWindow%22)&amp;Id=CancelButton1&amp;Text=Cancel"
+          par="Text=Cancel&amp;Click=javascript%3aapp.dialogCancelButton(+%22AddDeviceWindow%22)&amp;Id=CancelButton1"
           ph="AddDeviceWindow.Buttons"
           uid="{4AA54FA6-A967-44F1-A866-5136A8D778AD}" />
         <r
@@ -332,12 +326,12 @@ SharedFields:
           uid="{9FF7F530-BEBB-4C7B-8EF4-C037FF03773E}" />
         <r
           id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}"
-          par="Click=javascript%3aapp.dialogOKButton(%22CampaignsTreeView%22%2c+%22AddCampaignsWindow%22%2c+%22CampaignsListInnerPanelBottomBorder%22+%2c+%22campaigns%22)&amp;Id=OkButton2&amp;ButtonType=Primary&amp;Text=OK"
+          par="ButtonType=Primary&amp;Text=OK&amp;Click=javascript%3aapp.dialogOKButton(%22CampaignsTreeView%22%2c+%22AddCampaignsWindow%22%2c+%22CampaignsListInnerPanelBottomBorder%22+%2c+%22campaigns%22)&amp;Id=OkButton2"
           ph="AddCampaignsWindow.Buttons"
           uid="{76D2E73C-21F7-412A-8BC0-C4D1B9C35505}" />
         <r
           id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}"
-          par="Click=javascript%3aapp.dialogCancelButton(+%22AddCampaignsWindow%22)&amp;Id=CancelButton2&amp;Text=Cancel"
+          par="Text=Cancel&amp;Click=javascript%3aapp.dialogCancelButton(+%22AddCampaignsWindow%22)&amp;Id=CancelButton2"
           ph="AddCampaignsWindow.Buttons"
           uid="{08D1A42F-C84B-45B2-B360-C6B6D9D5497E}" />
         <r
@@ -353,17 +347,17 @@ SharedFields:
           uid="{157F7B7E-74B6-4D48-805D-2B7A482227AD}" />
         <r
           id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}"
-          par="Click=javascript%3aapp.dialogOKButton(%22CampaignsTreeView%22%2c+%22AddCampaignsWindow%22%2c+%22CampaignsListInnerPanelBottomBorder%22+%2c+%22campaigns%22)&amp;Id=OkButton3&amp;ButtonType=Primary&amp;Text=OK"
+          par="ButtonType=Primary&amp;Text=OK&amp;Click=javascript%3aapp.dialogOKButton(%22CampaignsTreeView%22%2c+%22AddCampaignsWindow%22%2c+%22CampaignsListInnerPanelBottomBorder%22+%2c+%22campaigns%22)&amp;Id=OkButton3"
           ph="SingleCampaignWindow.Buttons"
           uid="{F78D4899-040A-4CCA-885B-84B75DC4B09F}" />
         <r
           id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}"
-          par="Click=javascript%3aapp.dialogCancelButton(+%22AddCampaignsWindow%22)&amp;Id=CancelButton3&amp;Text=Cancel"
+          par="Text=Cancel&amp;Click=javascript%3aapp.dialogCancelButton(+%22AddCampaignsWindow%22)&amp;Id=CancelButton3"
           ph="SingleCampaignWindow.Buttons"
           uid="{86F4FF84-03C9-4DD7-A360-14FA61201342}" />
         <r
           id="{B60FB581-44D1-4372-86A2-D6E494F020E1}"
-          par="HeaderText=Delete+all+visitor+data+in+the+solution%3f&amp;Id=DelWindow&amp;Size=%7bDFE6D45B-ED26-4D2C-8C5C-5A1EA07B1DEF%7d"
+          par="HeaderText=Delete+all+visitor+data+in+the+solution%3f&amp;Size=%7bDFE6D45B-ED26-4D2C-8C5C-5A1EA07B1DEF%7d&amp;Id=DelWindow"
           ph="Page.Body"
           uid="{66729823-5935-40B5-81BD-CF3864725FA9}" />
         <r
@@ -374,7 +368,7 @@ SharedFields:
           uid="{007B6DF5-C02E-460F-BCFB-767E55673E36}" />
         <r
           id="{913AB005-2527-4C2D-9827-FB3A8DFB135C}"
-          par="Click=javascript%3aapp.dialogCancelButton(+%22DelWindow%22)&amp;Id=CancelButton&amp;Text=Cancel"
+          par="Text=Cancel&amp;Click=javascript%3aapp.dialogCancelButton(+%22DelWindow%22)&amp;Id=CancelButton"
           ph="DelWindow.Buttons"
           uid="{ED253273-EAC6-4363-AE77-F9710BBEF47B}" />
       </d>

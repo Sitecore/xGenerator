@@ -56,7 +56,6 @@
     <PackageReference Include="Sitecore.Marketing" Version="13.0.0-r*" />
     <PackageReference Include="Sitecore.ContentSearch" Version="4.0.0-r*" />
     <PackageReference Include="Sitecore.EDS.Core" Version="7.0.0-r*" />
-    <!--<PackageReference Include="Sitecore.EmailCampaign.Analytics.Model" Version="7.0.0-r*" />-->
     <PackageReference Include="Sitecore.EmailCampaign.Cd" Version="7.0.0-r*" />
     <PackageReference Include="Sitecore.EmailCampaign.Cm" Version="7.0.0-r*" />
     <PackageReference Include="Sitecore.EmailCampaign.Cm.UI" Version="7.0.0-r*" />
@@ -75,16 +74,6 @@
     <PackageReference Include="Sitecore.XConnect.Client.Configuration.XConnect" Version="2.0.0-r*" />
     <PackageReference Include="Sitecore.XConnect.Client" Version="2.0.0-r*" />
     <PackageReference Include="Sitecore.XConnect.Collection.Model" Version="2.0.0-r*" />
-  </ItemGroup>
-  <ItemGroup>
-    <!-- <PackageReference Include="Configy" Version="1.0.0" />
-    <PackageReference Include="Kamsar.WebConsole" Version="2.0.1" />
-    <PackageReference Include="MicroCHAP" Version="1.2.2.2" />
-    <PackageReference Include="Rainbow.Core" Version="2.0.0" />
-    <PackageReference Include="Rainbow.Storage.Sc" Version="2.0.0" />
-    <PackageReference Include="Rainbow.Storage.Yaml" Version="2.0.0" />
-    <PackageReference Include="Unicorn" Version="4.0.2" />
-    <PackageReference Include="Unicorn.Core" Version="4.0.2" /> -->
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Net.Http" />
