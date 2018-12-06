@@ -13,9 +13,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExperienceGenerator", "src\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5B235030-0420-4D54-AD0C-826EF59AB9E3}"
 	ProjectSection(SolutionItems) = preProject
-		src\publishsettings.targets = src\publishsettings.targets
+		cake-config.json = cake-config.json
+		nuget.config = nuget.config
 		README.md = README.md
-		src\ExperienceGenerator.Client\App_Config\Include\ExperienceGenerator\zExperienceGenerator.DevSettings.config = src\ExperienceGenerator.Client\App_Config\Include\ExperienceGenerator\zExperienceGenerator.DevSettings.config
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExperienceGenerator.Exm", "src\ExperienceGenerator.Exm\ExperienceGenerator.Exm.csproj", "{45448AAC-DC97-4DC6-B7A0-D1B5700B2511}"
