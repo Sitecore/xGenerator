@@ -13,18 +13,19 @@ using Sitecore.Modules.EmailCampaign.Core.Contacts;
 using Sitecore.Modules.EmailCampaign.Messages;
 using Sitecore.Modules.EmailCampaign.Services;
 using Constants = Sitecore.EmailCampaign.Cm.Constants;
+using Sitecore.DependencyInjection;
 
 namespace ExperienceGenerator.Exm.Controllers
 {
     public class ExmEventsController : ApiController
     {
-        private IExmCampaignService _exmService;
-        private IContactService _contactService;
+        public IExmCampaignService _exmService;
+        public IContactService _contactService;
 
-        public ExmEventsController(IExmCampaignService exmService, IContactService contactService)
+        public ExmEventsController()
         {
-            _exmService = exmService;
-            _contactService = contactService;
+            _exmService = (IExmCampaignService)ServiceLocator.ServiceProvider.GetService(typeof(IExmCampaignService));
+            _contactService = (IContactService)ServiceLocator.ServiceProvider.GetService(typeof(IContactService));
         }
 
         [HttpPost]
@@ -50,7 +51,7 @@ namespace ExperienceGenerator.Exm.Controllers
             return Ok();
         }
 
-        private SentContactEntry GenerateSentContactEntry(MessageItem messageItem, Guid contactId)
+        public SentContactEntry GenerateSentContactEntry(MessageItem messageItem, Guid contactId)
         {
             var entry = new SentContactEntry();
             var contact = _contactService.GetContact(contactId.ToID());
@@ -100,7 +101,7 @@ namespace ExperienceGenerator.Exm.Controllers
             return Ok();
         }
 
-        private DateTime TryParseDate(string date)
+        public DateTime TryParseDate(string date)
         {
             DateTime dateTime;
             if (string.IsNullOrEmpty(date) || !DateTime.TryParse(date, out dateTime))
@@ -111,7 +112,7 @@ namespace ExperienceGenerator.Exm.Controllers
             return dateTime.ToUniversalTime();
         }
 
-        private MessageItem GetMessageItem(Guid itemId)
+        public MessageItem GetMessageItem(Guid itemId)
         {
             return _exmService.GetMessageItem(itemId);
         }

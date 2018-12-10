@@ -31,15 +31,14 @@ namespace Colossus.Integration.Models
 
         public static SitecoreResponseInfo FromContext()
         {
-            if (Tracker.Current == null)
+            if (Tracker.Current == null || Tracker.Current.Interaction == null || Tracker.Current.Contact == null)
                 return null;
 
             var info = new SitecoreResponseInfo
-                       {
-                           ContactId = Tracker.Current.Contact.TryGetValue(c => (Guid?) c.ContactId),
-                           VisitData = Tracker.Current.Interaction.ToVisitData()
-                       };
-
+            {
+                ContactId = Tracker.Current.Contact.TryGetValue(c => (Guid?)c.ContactId),
+                VisitData = Tracker.Current.Interaction.ToVisitData()
+            };
 
             if (Context.Page != null)
             {
@@ -47,9 +46,9 @@ namespace Colossus.Integration.Models
                 {
                     var s = rendering.Settings;
                     var renderingInfo = new RenderingInfo
-                                        {
-                                            Item = rendering.RenderingItem.TryGetValue(item => ItemInfo.FromItem(item.InnerItem))
-                                        };
+                    {
+                        Item = rendering.RenderingItem.TryGetValue(item => ItemInfo.FromItem(item.InnerItem))
+                    };
                     if (s != null)
                     {
                         renderingInfo.Conditions = s.Conditions;
