@@ -1,9 +1,9 @@
 {
-  "WebsiteRoot": "C:\\inetpub\\wwwroot\\habitathome.dev.local",
-  "InstanceUrl": "https://habitathome.dev.local/",
-  "SolutionName": "ExperienceGenerator.sln",
-  "ProjectFolder": "C:\\projects\\xGenerator",
-  "BuildConfiguration": "Debug",
-  "BuildToolVersions": "VS2017",
-  "RunCleanBuilds": false
+    "WebsiteRoot": "C:\\inetpub\\wwwroot\\xgenerator.dev.local",
+    "InstanceUrl": "https://xgenerator.dev.local/",
+    "SolutionName": "ExperienceGenerator.sln",
+    "ProjectFolder": "C:\\projects\\xGenerator",
+    "BuildConfiguration": "Debug",
+    "BuildToolVersions": "VS2017",
+    "RunCleanBuilds": false
 }
