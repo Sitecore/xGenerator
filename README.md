@@ -9,9 +9,11 @@ What do you get:
 
 **Quick start** - You can get started with the released Sitecore installation package - https://github.com/Sitecore/xGenerator/releases/download/9.1.0.0/ExperienceGenerator_91.zip. Just install it like any other Sitecore package with the Sitecore installation wizard or get it by default when deploying the Habitat Home demo website.
 
-**Custom development** - If you want to make code updates for Experience Generator, you can clone the repository and use visual studio publishing to your Sitecore websites. You can also build your own customized Sitecore installation package with the preset Sitecore Rocks package generator.
-
 ![xgenapps](https://user-images.githubusercontent.com/2945323/49397102-b5669c80-f708-11e8-86d6-bc71e358a09d.jpg)
+
+**Custom development** - If you want to make code updates for Experience Generator, you can clone the repository and get started. You can also build your own customized Sitecore installation package with the preset Sitecore Rocks package generator.
+
+You can deploy your custom changes to a Sitecore installation for testing by reviewing the Installation Instructions listed further down in the ReadMe.
 
 # Experience Generator
 
