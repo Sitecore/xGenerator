@@ -111,7 +111,7 @@ namespace ExperienceGenerator.Parsing.Factories
                 target.Variables.Add("Site", site.Id);
                 if (!string.IsNullOrEmpty(site.Host))
                 {
-                    target.Variables.Add("Host", "https://" + site.Host.Split('|')[0]);
+                    target.Variables.Add("Host", "http://" + site.Host.Split('|')[0]);
                 }
 
                 var lang = target.GetVariable<string>("Language");
