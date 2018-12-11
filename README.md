@@ -4,7 +4,7 @@
 
 What do you get:
 - **Experience Generator (xGenerator)** - Create realistic analytics data for Experience Analytics, MV Tests, Path Analyzer, etc.
-- **Profile Experience Generator (xProfileGenerator)** - Create deep analytics for individual visitors to show deep data for xProfile.
+- **Profile Experience Generator (xProfileGenerator)** - Create deep analytics for individual visitors to show robust data for xProfile.
 - **EXM Experience Generator (ExmGenerator)** - Create realistic analytics data for EXM messages.
 
 **Quick start** - You can get started with the released Sitecore installation package - https://github.com/Sitecore/xGenerator/releases/download/9.1.0.0/ExperienceGenerator_91.zip. Just install it like any other Sitecore package with the Sitecore installation wizard or get it by default when deploying the Habitat Home demo website.
