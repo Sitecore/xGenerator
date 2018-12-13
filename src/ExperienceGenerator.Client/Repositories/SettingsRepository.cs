@@ -1,12 +1,13 @@
 ﻿namespace ExperienceGenerator.Client.Repositories
 {
-  using System.Collections.Generic;
-  using System.Linq;
-  using Newtonsoft.Json.Linq;
-  using Sitecore.Data;
-  using Sitecore.Data.Items;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Newtonsoft.Json.Linq;
+    using Sitecore.Data;
+    using Sitecore.Data.Items;
+    using Sitecore.SecurityModel;
 
-  public class SettingsRepository
+    public class SettingsRepository
   {
 
     public SettingsRepository(Database database)
@@ -26,15 +27,17 @@
     {
       get
       {
-        var siteName = Sitecore.Context.Site.Name;
-        var presetPath = $"{this.PresetsRoot.Paths.FullPath}/{siteName}";
-        var presetRoot = this.Database.GetItem(presetPath);
-        if (presetRoot == null)
+        using (new SecurityDisabler())
         {
-          return this.CreateSiteFolder(this.PresetsRoot);
+            var siteName = Sitecore.Context.Site.Name;
+            var presetPath = $"{this.PresetsRoot.Paths.FullPath}/{siteName}";
+            var presetRoot = this.Database.GetItem(presetPath);
+            if (presetRoot == null)
+            {
+                return this.CreateSiteFolder(this.PresetsRoot);
+            }
+            return presetRoot;
         }
-
-        return presetRoot;
       }
     }
 
