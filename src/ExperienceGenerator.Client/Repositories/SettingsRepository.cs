@@ -5,6 +5,7 @@
   using Newtonsoft.Json.Linq;
   using Sitecore.Data;
   using Sitecore.Data.Items;
+  using Sitecore.SecurityModel;
 
   public class SettingsRepository
   {
@@ -26,15 +27,17 @@
     {
       get
       {
-        var siteName = Sitecore.Context.Site.Name;
-        var presetPath = $"{this.PresetsRoot.Paths.FullPath}/{siteName}";
-        var presetRoot = this.Database.GetItem(presetPath);
-        if (presetRoot == null)
+        using (new SecurityDisabler())
         {
-          return this.CreateSiteFolder(this.PresetsRoot);
+            var siteName = Sitecore.Context.Site.Name;
+            var presetPath = $"{this.PresetsRoot.Paths.FullPath}/{siteName}";
+            var presetRoot = this.Database.GetItem(presetPath);
+            if (presetRoot == null)
+            {
+                return this.CreateSiteFolder(this.PresetsRoot);
+            }
+            return presetRoot;
         }
-
-        return presetRoot;
       }
     }
 
@@ -69,13 +72,16 @@
 
     public JObject GetSettingPreset(ID id)
     {
-      var preset = this.SitePresetRoot.Axes.SelectSingleItem($"//*[@@id='{id}']");
-      if (preset == null)
-      {
-        return null;
-      }
+        using (new SecurityDisabler())
+        {
+            var preset = this.SitePresetRoot.Axes.SelectSingleItem($"//*[@@id='{id}']");
+            if (preset == null)
+            {
+                return null;
+            }
 
-      return this.Create(preset);
+            return this.Create(preset);
+        }
     }
 
     public List<Item> GetPresets()
