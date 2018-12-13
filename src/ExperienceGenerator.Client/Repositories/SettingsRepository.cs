@@ -72,13 +72,16 @@
 
     public JObject GetSettingPreset(ID id)
     {
-      var preset = this.SitePresetRoot.Axes.SelectSingleItem($"//*[@@id='{id}']");
-      if (preset == null)
-      {
-        return null;
-      }
+        using (new SecurityDisabler())
+        {
+            var preset = this.SitePresetRoot.Axes.SelectSingleItem($"//*[@@id='{id}']");
+            if (preset == null)
+            {
+                return null;
+            }
 
-      return this.Create(preset);
+            return this.Create(preset);
+        }
     }
 
     public List<Item> GetPresets()

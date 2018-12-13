@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using Sitecore.Data;
 using Sitecore.Data.Items;
+using Sitecore.SecurityModel;
 
 namespace ExperienceGenerator.Client.Repositories
 {
@@ -19,8 +20,11 @@ namespace ExperienceGenerator.Client.Repositories
 
         public JArray GetContactSettingPreset(ID id)
         {
-            var preset = PresetsRoot.Axes.SelectSingleItem($"//*[@@id='{id}']");
-            return preset == null ? null : CreateArray(preset);
+            using (new SecurityDisabler())
+            {
+                var preset = PresetsRoot.Axes.SelectSingleItem($"//*[@@id='{id}']");
+                return preset == null ? null : CreateArray(preset);
+            }
         }
     }
 }
