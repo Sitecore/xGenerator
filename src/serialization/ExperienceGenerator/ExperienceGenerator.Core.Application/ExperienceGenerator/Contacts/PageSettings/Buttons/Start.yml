@@ -65,7 +65,7 @@ Languages:
   Fields:
   - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
     Hint: __Display name
-    Value: 保存
+    Value: 開始
   Versions:
   - Version: 1
     Fields:
@@ -78,4 +78,4 @@ Languages:
         sitecore\admin
     - ID: "99a761cf-5262-4d10-b53e-4cd9e79c232d"
       Hint: Text
-      Value: 保存
+      Value: 開始

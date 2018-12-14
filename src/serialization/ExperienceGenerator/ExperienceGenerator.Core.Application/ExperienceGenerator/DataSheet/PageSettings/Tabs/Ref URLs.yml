@@ -145,7 +145,7 @@ Languages:
   Fields:
   - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
     Hint: __Display name
-    Value: ページ
+    Value: 参照URL
   Versions:
   - Version: 1
     Fields:
@@ -158,4 +158,4 @@ Languages:
         sitecore\admin
     - ID: "aea872fb-aa91-4d1a-b877-3ca6fbbb4fd4"
       Hint: Header
-      Value: ページ
+      Value: 参照URL
