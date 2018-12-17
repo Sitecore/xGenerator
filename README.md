@@ -1,7 +1,21 @@
-# Experience Generator
-
 [![Build status](https://ci.appveyor.com/api/projects/status/b610w5q4qosfyh7r/branch/master?svg=true)](https://ci.appveyor.com/project/jeanfrancoislarente/xgenerator/branch/master)
 
+## Experience Generator has been updated and released for Sitecore 9.1! Hooray!
+
+What do you get:
+- **Experience Generator (xGenerator)** - Create realistic analytics data for Experience Analytics, MV Tests, Path Analyzer, etc.
+- **Profile Experience Generator (xProfileGenerator)** - Create deep analytics for individual visitors to show robust data for xProfile.
+- **EXM Experience Generator (ExmGenerator)** - Create realistic analytics data for EXM messages.
+
+**Quick start** - You can get started with the released Sitecore installation package - https://github.com/Sitecore/xGenerator/releases/download/9.1.0.0/ExperienceGenerator_91.zip. Just install it like any other Sitecore package with the Sitecore installation wizard or get it by default when deploying the Habitat Home demo website.
+
+![xgenapps](https://user-images.githubusercontent.com/2945323/49397102-b5669c80-f708-11e8-86d6-bc71e358a09d.jpg)
+
+**Custom development** - If you want to make code updates for Experience Generator, you can clone the repository and get started. You can also build your own customized Sitecore installation package with the preset Sitecore Rocks package generator.
+
+You can deploy your custom changes to a Sitecore installation for testing by reviewing the Installation Instructions listed further down in the ReadMe.
+
+# Experience Generator
 
 Generate "realistically looking" traffic for the Sitecore Experience Database (xDB) with configurable patterns, including:
 
@@ -46,7 +60,7 @@ Contains tools that allow serialize\deserialize all XGenerator data to custom we
 Adds custom handlers to Sitecore pipelines to be able patch current request based on received data from Colossus request headers.
 Contains walkers to visit sitecore pages with required behavior strategy:
 *	Strict walker – uses predefined strict pages list, used in xProfile Generator
-* Random walker – opens random page or landing page. According to required count of visits\bounces parses html output, extracts <a href=”…”/> elements with relative hyperlink path and choose random one to visit if possible.
+* Random walker – opens random page or landing page. According to required count of visits\bounces parses html output, extracts `<a href="..."/>` elements with relative hyperlink path and choose random one to visit if possible.
 Both walkers adds page event data if required from configuration.
 
 ## General processing flow for XGenerator:
@@ -59,14 +73,24 @@ Both walkers adds page event data if required from configuration.
 7.	Colossus.Intergration processors executed inside Sitecore pipelines to patch analytics tracker with current customizations of request
 
 ## Installation Instructions
+In order to deploy the assets, you need either Visual Studio 2017 or MSBuild Tools for Visual Studio 2017.
+Installation instructions assume using **PowerShell 5.1** in _**administrative**_ mode.
 
-Deployment to Sitecore:
+The following is a list of default values / assumptions for install locations
 
-1)  Open "src\ExperienceGenerator.Client\App_Config\Include\ExperienceGenerator\zExperienceGenerator.DevSettings.config" and change "experienceGeneratorSource" variable to xGenerator source location
-2) Open "src\publishsettings.targets" and change publishUrl to the Sitecore host name
-3) Open ExperienceGenerator.sln in Visual Studio
-4) Perform Web publish for all web projects in solution using "local" profile
-5) Go to the %instanceName%/unicorn.aspx page and synchronize "ExperienceGenerator" configuration 
+- **Project location:**	    	`c:\projects\xgenerator\`
+- **Instance Url:**				`xgenerator.dev.local`
+- **Website Root:**				`c:\inetpub\wwwroot\xgenerator.dev.local`
+
+If you do **not want to use the default settings**, you need to adjust the appropriate values in `cake-config.json` file:
+
+- **ProjectFolder**
+- **InstanceUrl**
+- **WebsiteRoot**
+
+The cake script will automatically create a publishSettings.targets.user file with the value of the InstanceUrl specified in the cake-config.json file.
+
+- Run **`.\build.ps1`**
 
 ## Package Building Instructions
 - Building the installation package requires Sitecore Rocks.

@@ -10,9 +10,6 @@ namespace Colossus.Integration
     {
         public void Process(PipelineArgs args)
         {
-            Assert.ArgumentNotNull(args, "args");
-            Assert.IsNotNull(Tracker.Current, "Tracker.Current is not initialized");
-
             if (Tracker.Current == null)
             {
                 return;

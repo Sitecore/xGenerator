@@ -46,10 +46,6 @@ namespace Colossus.Integration
                 }
 
                 var info = SitecoreResponseInfo.FromContext();
-                if (info != null)
-                {
-                  //ctx.Response.Headers.AddChunked(DataEncoding.ResponseDataKey, DataEncoding.EncodeHeaderValue(info));
-                }
             }
         }
     }
