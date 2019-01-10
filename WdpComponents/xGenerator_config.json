@@ -1,0 +1,16 @@
+{
+    "scwdps": [
+      {
+        "role": "single",
+        "parametersXml": "xGenerator_parameters.xml",
+        "sccpls": [
+          "xGenerator_cargo.sccpl"
+        ],
+        "embedSccpls": [
+          "xGenerator_cargo_embeded.sccpl"
+        ],
+        "sourcePackagePattern": "xGenerator",
+        "additionalWdpContentsFolders": []
+      }
+    ]
+  }

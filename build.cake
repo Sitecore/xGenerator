@@ -6,6 +6,7 @@
 
 
 #load "local:?path=CakeScripts/helper-methods.cake"
+#load "local:?path=CakeScripts/xml-helpers.cake"
 
 
 var target = Argument<string>("Target", "Default");
@@ -13,6 +14,11 @@ var configuration = new Configuration();
 var cakeConsole = new CakeConsole();
 var configJsonFile = "cake-config.json";
 var unicornSyncScript = $"./scripts/Unicorn/Sync.ps1";
+
+var deploymentRootPath = "";
+var devSitecoreUserName = Argument("DEV_SITECORE_USERNAME", EnvironmentVariable("DEV_SITECORE_USERNAME"));
+var devSitecorePassword = Argument("DEV_SITECORE_PASSWORD", EnvironmentVariable("DEV_SITECORE_PASSWORD"));
+
 
 /*===============================================
 ================ MAIN TASKS =====================
@@ -23,11 +29,34 @@ Setup(context =>
 	cakeConsole.ForegroundColor = ConsoleColor.Yellow;	
     var configFile = new FilePath(configJsonFile);
     configuration = DeserializeJsonFromFile<Configuration>(configFile);
+
+    if (target.Contains("WDP")){
+         deploymentRootPath = $"{configuration.DeployFolder}\\{configuration.Version}\\xGenerator";
+    }
+    else{
+    deploymentRootPath = configuration.WebsiteRoot;
+    }
+  
+    if ((target.Contains("WDP") ) && 
+    ((string.IsNullOrEmpty(devSitecorePassword)) || (string.IsNullOrEmpty(devSitecoreUserName)))){
+        cakeConsole.WriteLine("");
+        cakeConsole.WriteLine("");
+        Warning("       ***********  WARNING  ***************        ");
+        cakeConsole.WriteLine("");
+        Warning("You have not supplied your dev.sitecore.com credentials.");
+        Warning("Some of the build tasks selected require assets that are hosted on dev.sitecore.com.");
+        Warning("If these assets have not previously been downloaded, the script will fail.");
+        Warning("You can avoid this warning by supplying values for 'DEV_SITECORE_USERNAME' and 'DEV_SITECORE_PASSWORD' as environment variables or ScriptArgs");
+        cakeConsole.WriteLine("");
+        Information("Example: .\\build.ps1 -Target Build-WDP -ScriptArgs --DEV_SITECORE_USERNAME=your_user@email.com, --DEV_SITECORE_PASSWORD=<your-password>");
+        cakeConsole.WriteLine("");
+        Warning("       *************************************        ");
+    }
 });
 
 Task("Default")
 .WithCriteria(configuration != null)
-.IsDependentOn("Clean")
+.IsDependentOn("CleanBuildFolders")
 .IsDependentOn("Modify-PublishSettings")
 .IsDependentOn("Publish-Projects")
 .IsDependentOn("Apply-Xml-Transform")
@@ -36,12 +65,57 @@ Task("Default")
 
 
 /*===============================================
+=========== Packaging - Main Tasks ==============
+===============================================*/
+Task("Build-WDP")
+.WithCriteria(configuration != null)
+.IsDependentOn("CleanAll")
+.IsDependentOn("Publish-Projects")
+.IsDependentOn("Publish-YML")
+.IsDependentOn("Prepare-Transform-Files")
+.IsDependentOn("Publish-Post-Steps")
+.IsDependentOn("Create-WDP");
+
+
+
+
+/*===============================================
 ================= SUB TASKS =====================
 ===============================================*/
 
-Task("Clean").Does(() => {
+Task("CleanAll")
+.IsDependentOn("CleanBuildFolders")
+.IsDependentOn("CleanDeployFolder");
+
+Task("CleanBuildFolders").Does(() => {
+    // Clean project build folders
     CleanDirectories($"{configuration.SourceFolder}/**/obj");
     CleanDirectories($"{configuration.SourceFolder}/**/bin");
+
+});
+
+Task("CleanDeployFolder").Does(() => {
+var folderBase = $"{configuration.Version}\\xGenerator";
+    // Clean deployment folders
+     string[] folders = { $"\\{folderBase}" };
+
+    foreach (string folder in folders)
+    {
+        Information($"Cleaning: {folder}");
+        if (DirectoryExists($"{configuration.DeployFolder}{folder}"))
+        {
+            try
+            {
+                CleanDirectories($"{configuration.DeployFolder}{folder}");
+            } catch
+            {
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.WriteLine($"The folder under path \'{configuration.DeployFolder}{folder}\' is still in use by a process. Exiting...");
+                Console.ResetColor();
+                Environment.Exit(0);
+            }
+        }
+    }
 });
 
 Task("Build-Solution")
@@ -55,10 +129,10 @@ Task("Publish-Projects")
     var colossus = $"{configuration.SourceFolder}\\Colossus.Integration";
     var xgen = $"{configuration.SourceFolder}\\ExperienceGenerator.Client";
     var exmGen = $"{configuration.SourceFolder}\\ExeprienceGenerator.Exm";
-
-    PublishProject(colossus, configuration.WebsiteRoot);
-    PublishProject(xgen, configuration.WebsiteRoot);
-    PublishProject(exmGen, configuration.WebsiteRoot);
+    
+    PublishProject(colossus, deploymentRootPath);
+    PublishProject(xgen, deploymentRootPath);
+    PublishProject(exmGen, deploymentRootPath);
 });
 
 Task("Apply-Xml-Transform").Does(() => {
@@ -118,4 +192,128 @@ Task("Sync-Unicorn").Does(() => {
                                                         }));
 });
 
+
+
+/*===============================================
+============ Packaging Tasks ====================
+===============================================*/
+Task("Create-WDP")
+.IsDependentOn("Prepare-Environment")
+.IsDependentOn("Generate-UpdatePackage")
+.IsDependentOn("Generate-WDP");
+
+Task("Publish-YML").Does(() => {
+
+	var serializationFilesFilter = $@"{configuration.ProjectFolder}\**\*.yml";
+    var destination = $@"{deploymentRootPath}\App_Data";
+
+    if (!DirectoryExists(destination)){
+        CreateFolder(destination);
+    }
+
+    try
+    {
+        var files = GetFiles(serializationFilesFilter).Select(x=>x.FullPath).ToList();
+
+        CopyFiles(files , destination, preserveFolderStructure: true);
+    }
+    catch (System.Exception ex)
+    {
+        WriteError(ex.Message);
+    }
+
+
+});
+
+
+Task("Generate-UpdatePackage").Does(() => {
+	StartPowershellFile ($"{configuration.ProjectFolder}\\HelperScripts\\Generate-UpdatePackage.ps1", args =>
+        {
+            args.AppendQuoted($"{configuration.ProjectFolder}\\cake-config.json");
+        });
+		});
+
+Task("Generate-WDP").Does(() => {
+	StartPowershellFile ($"{configuration.ProjectFolder}\\HelperScripts\\Generate-WDP.ps1", args =>
+        {
+            args.AppendQuoted($"{configuration.ProjectFolder}\\cake-config.json");
+        });
+		});
+
+Task("Prepare-Environment").Does(() => {
+	StartPowershellFile ($"{configuration.ProjectFolder}\\HelperScripts\\Prepare-Environment.ps1", args => {
+        args.AppendQuoted($"{configuration.ProjectFolder}\\cake-config.json");
+        args.AppendSecret(devSitecoreUserName);
+        args.AppendSecret(devSitecorePassword);
+        });
+    });    
+
+
+
+/*===============================================
+=============== Utility Tasks ===================
+===============================================*/
+
+Task("Prepare-Transform-Files").Does(()=>{
+    
+    var destination = $@"{deploymentRootPath}\xGenerator";  
+     var colossus = $"{configuration.SourceFolder}\\Colossus.Integration";
+    var xgen = $"{configuration.SourceFolder}\\ExperienceGenerator.Client";
+    var exmGen = $"{configuration.SourceFolder}\\ExeprienceGenerator.Exm";
+
+    var layers = new string[] { colossus, xgen, exmGen};
+  
+    foreach(var layer in layers)
+    {
+        var xdtFiles = GetTransformFiles(layer);
+        
+        List<string> files;
+        
+        files = xdtFiles.Select(x => x.FullPath).Where(x=>!x.Contains(".azure")).ToList();
+
+        foreach (var file in files)
+        {
+            FilePath xdtFilePath = (FilePath)file;
+            
+            var fileToTransform = Regex.Replace(xdtFilePath.FullPath, ".+code/(.+/*.xdt)", "$1");
+            fileToTransform = Regex.Replace(fileToTransform, ".sc-internal", "");
+
+            FilePath sourceTransform = $"{destination}\\{fileToTransform}";
+            
+            if (!FileExists(sourceTransform)){
+                CreateFolder(sourceTransform.GetDirectory().FullPath);
+                CopyFile(xdtFilePath.FullPath,sourceTransform);
+            }
+            else {
+                MergeFile(sourceTransform.FullPath	    // Source File
+                        , xdtFilePath.FullPath			// Tranforms file (*.xdt)
+                        , sourceTransform.FullPath);		// Target File
+            }
+        }
+    }
+});
+
+Task("Publish-Post-Steps").Does(() => {
+
+	var serializationFilesFilter = $@"{configuration.ProjectFolder}\**\*.poststep";
+    var destination = $@"{deploymentRootPath}\App_Data\poststeps";
+
+    if (!DirectoryExists(destination))
+    {
+        CreateFolder(destination);
+    }
+
+    try
+    {
+        var files = GetFiles(serializationFilesFilter).Select(x=>x.FullPath).ToList();
+
+        CopyFiles(files, destination, preserveFolderStructure: false);
+    }
+    catch (System.Exception ex)
+    {
+        WriteError(ex.Message);
+    }
+
+
+});
 RunTarget(target);

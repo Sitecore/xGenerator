@@ -14,6 +14,9 @@ public class Configuration
     public string ProjectFolder {get;set;}
     public string BuildConfiguration {get;set;}
     public bool RunCleanBuilds {get;set;}
+    public string DeployFolder {get;set;}
+    public string Version {get;set;}
+    
     public string BuildToolVersions 
     {
         set 
