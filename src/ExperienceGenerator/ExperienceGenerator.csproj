@@ -33,16 +33,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-	<PackageReference Include="Faker.Net" Version="1.0.3" />
-	<PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-	<PackageReference Include="Sitecore.Analytics.Aggregation" Version="12.0.0-r*" />
-	<PackageReference Include="Sitecore.Analytics.DataAccess" Version="12.0.0-r*" />
-	<PackageReference Include="Sitecore.Analytics.Model" Version="12.0.0-r*" />
-	<PackageReference Include="Sitecore.Analytics" Version="12.0.0-r*" />
-	<PackageReference Include="Sitecore.ContentSearch" Version="4.0.0-r*" />
-	<PackageReference Include="Sitecore.ExperienceAnalytics.Api" Version="4.0.0-r*" />
-	<PackageReference Include="Sitecore.Kernel" Version="12.0.0-r*" />
-	<PackageReference Include="Sitecore.Marketing" Version="13.0.0-r*" />
+    <PackageReference Include="Faker.Net" Version="1.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="Sitecore.Analytics.Aggregation" Version="12.0.0-r*" />
+    <PackageReference Include="Sitecore.Analytics.DataAccess" Version="12.0.0-r*" />
+    <PackageReference Include="Sitecore.Analytics.Model" Version="12.0.0-r*" />
+    <PackageReference Include="Sitecore.Analytics" Version="12.0.0-r*" />
+    <PackageReference Include="Sitecore.ContentSearch" Version="4.0.0-r*" />
+    <PackageReference Include="Sitecore.ExperienceAnalytics.Api" Version="4.0.0-r*" />
+    <PackageReference Include="Sitecore.Kernel" Version="12.0.0-r*" />
+    <PackageReference Include="Sitecore.Marketing" Version="13.0.0-r*" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -60,6 +60,7 @@
     <Compile Include="Data\FileHelpers.cs" />
     <Compile Include="Data\Continent.cs" />
     <Compile Include="Data\Region.cs" />
+    <Compile Include="Parsing\Factories\MvTestVariable.cs" />
     <Compile Include="Services\GetRandomCityService.cs" />
     <Compile Include="Data\GeoDataCache.cs" />
     <Compile Include="Data\GeoVariables.cs" />

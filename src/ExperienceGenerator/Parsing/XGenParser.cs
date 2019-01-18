@@ -12,6 +12,7 @@ using ExperienceGenerator.Models;
 using ExperienceGenerator.Parsing.Factories;
 using ExperienceGenerator.Repositories;
 using ExperienceGenerator.Services;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace ExperienceGenerator.Parsing
@@ -112,7 +113,14 @@ namespace ExperienceGenerator.Parsing
                                                                     var languages = parser.ParseWeightedSet<string>(token);
                                                                     segment.VisitVariables.AddOrReplace(Variables.Random("Language", languages));
                                                                 })},
-                            {"LandingPage", new LandingPageFactory()}
+                            {"LandingPage", new LandingPageFactory()},
+                            {"MvTests", VariableFactory.Lambda((segment, token, parser) =>
+                                                                {
+                                                                    var mvTestId = token.Value<string>("TestId");
+                                                                    var variants = token.Value<string>("Variants").ToString(); //parser.ParseWeightedSet<string>(token["Variants"]);
+                                                                    segment.VisitVariables.AddOrReplace(new MvTestVariable(mvTestId, variants));
+                                                                })}
+
                         };
         }
 
