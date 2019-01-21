@@ -21,6 +21,7 @@ namespace Colossus.Integration
             Patchers.Add(new GeoPatcher());
             Patchers.Add(new TimePatcher());
             Patchers.Add(new ContactDataProcessor());
+            Patchers.Add(new MvTestPatcher());
         }
 
         public void AddPatcher(ISessionPatcher patcher)

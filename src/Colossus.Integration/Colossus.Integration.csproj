@@ -85,7 +85,7 @@
     <Compile Include="Pipelines\EndAnalytics.cs" />
     <Compile Include="Processing\ChannelPatcher.cs" />
     <Compile Include="Processing\ContactDataProcessor.cs" />
-    <Compile Include="Processing\MvVariantData.cs" />
+    <Compile Include="Processing\MvTestPatcher.cs" />
     <Compile Include="Processing\TriggerEventsAction.cs" />
     <Compile Include="Processing\GeoPatcher.cs" />
     <Compile Include="Processing\TriggerOutcomeData.cs" />
