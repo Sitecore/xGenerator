@@ -117,8 +117,9 @@ namespace ExperienceGenerator.Parsing
                             {"MvTests", VariableFactory.Lambda((segment, token, parser) =>
                                                                 {
                                                                     var mvTestId = token.Value<string>("TestId");
-                                                                    var variants = token.Value<string>("Variants").ToString(); //parser.ParseWeightedSet<string>(token["Variants"]);
-                                                                    segment.VisitVariables.AddOrReplace(new MvTestVariable(mvTestId, variants));
+                                                                    var variants = parser.ParseWeightedSet<string>(token["Variants"]);
+                                                                    segment.VisitVariables.AddOrReplace(Variables.Random("PreferredExperience", () => variants(), true));
+                                                                    segment.VisitVariables.AddOrReplace(Variables.Fixed("MvTestId", mvTestId));
                                                                 })}
 
                         };

@@ -60,7 +60,6 @@
     <Compile Include="Data\FileHelpers.cs" />
     <Compile Include="Data\Continent.cs" />
     <Compile Include="Data\Region.cs" />
-    <Compile Include="Parsing\Factories\MvTestVariable.cs" />
     <Compile Include="Services\GetRandomCityService.cs" />
     <Compile Include="Data\GeoDataCache.cs" />
     <Compile Include="Data\GeoVariables.cs" />
