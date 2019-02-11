@@ -42,7 +42,7 @@ Generate visits for Sitecore contacts (xProfile) with configurable settings:
  - Goals
  - Channel
 
-#Solution structure:
+# Solution Structure
 
 **ExperienceGenerator.Client** – SPEAK v1 applications to manipulate with configuration of created data. 
 Includes Experience generator and Experience Profile generator tools
