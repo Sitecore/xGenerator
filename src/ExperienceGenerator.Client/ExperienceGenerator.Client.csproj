@@ -51,20 +51,20 @@
     <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.6" />
     <PackageReference Include="Microsoft.AspNet.WebApi.WebHost" Version="5.2.6" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="Rainbow" Version="2.0.2" />
-    <PackageReference Include="Rainbow.Core" Version="2.0.2" />
-    <PackageReference Include="Rainbow.Storage.Sc" Version="2.0.2" />
-    <PackageReference Include="Rainbow.Storage.Yaml" Version="2.0.2" />
-    <PackageReference Include="Sitecore.Analytics.Aggregation" Version="12.0.0-r*" />
-    <PackageReference Include="Sitecore.Analytics.DataAccess" Version="12.0.0-r*" />
-    <PackageReference Include="Sitecore.Analytics" Version="12.0.0-r*" />
-    <PackageReference Include="Sitecore.Analytics.Sql" Version="12.0.0-r*" />
-    <PackageReference Include="Sitecore.Cintel" Version="4.0.0-r*" />
-    <PackageReference Include="Sitecore.ContentSearch.Client" Version="4.0.0-r*" />
-    <PackageReference Include="Sitecore.ContentSearch" Version="4.0.0-r*" />
-    <PackageReference Include="Sitecore.Kernel" Version="12.0.0-r*" />
-    <PackageReference Include="Unicorn" Version="4.0.4" />
-    <PackageReference Include="Unicorn.Core" Version="4.0.4" />
+    <PackageReference Include="Rainbow" Version="2.0.6" />
+    <PackageReference Include="Rainbow.Core" Version="2.0.6" />
+    <PackageReference Include="Rainbow.Storage.Sc" Version="2.0.6" />
+    <PackageReference Include="Rainbow.Storage.Yaml" Version="2.0.6" />
+    <PackageReference Include="Sitecore.Analytics.Aggregation" Version="9.1.1" />
+    <PackageReference Include="Sitecore.Analytics.DataAccess" Version="9.1.1" />
+    <PackageReference Include="Sitecore.Analytics" Version="9.1.1" />
+    <PackageReference Include="Sitecore.Analytics.Sql" Version="9.1.1" />
+    <PackageReference Include="Sitecore.Cintel" Version="9.1.1" />
+    <PackageReference Include="Sitecore.ContentSearch.Client" Version="9.1.1" />
+    <PackageReference Include="Sitecore.ContentSearch" Version="9.1.1" />
+    <PackageReference Include="Sitecore.Kernel" Version="9.1.1" />
+    <PackageReference Include="Unicorn" Version="4.0.8" />
+    <PackageReference Include="Unicorn.Core" Version="4.0.8" />
     <PackageReference Include="WebBackgrounder" Version="0.2.0" />
   </ItemGroup>
   <ItemGroup>
@@ -94,7 +94,6 @@
     <Content Include="App_Config\Include\Unicorn\Unicorn.Remote.config.disabled" />
     <Content Include="App_Config\Include\Unicorn\Unicorn.PowerShell.config" />
     <Content Include="App_Config\Include\Unicorn\Unicorn.Dilithium.config.example" />
-    <Content Include="App_Config\Include\Unicorn\Unicorn.Deployed.config.disabled" />
     <Content Include="App_Config\Include\Unicorn\Unicorn.DataProvider.config" />
     <Content Include="App_Config\Include\Unicorn\Unicorn.config">
       <SubType>Designer</SubType>
@@ -102,6 +101,13 @@
     <Content Include="App_Config\Include\Unicorn\Unicorn.AutoPublish.config" />
     <Content Include="App_Config\Include\ExperienceGenerator\zExperienceGenerator.DevSettings.config" />
     <Content Include="App_Config\Include\ExperienceGenerator\ExperienceGenerator.Processing.Aggregation.Services.config" />
+    <Content Include="App_Config\Include\Unicorn\Unicorn.Configs.Default.example" />
+    <Content Include="App_Config\Include\Unicorn\Unicorn.Configs.Dependency.config.example" />
+    <Content Include="App_Config\Include\Unicorn\Unicorn.Configs.NewItemsOnly.example" />
+    <Content Include="App_Config\Include\Unicorn\Unicorn.CustomSerializationFolder.config.example" />
+    <Content Include="App_Config\Include\Unicorn\Unicorn.UI.DeployedContentEditorWarnings.config.disabled" />
+    <Content Include="App_Config\Include\Unicorn\Unicorn.UI.IdentityServer.config.disabled" />
+    <Content Include="App_Config\Include\Unicorn\Unicorn.zSharedSecret.config.example" />
     <None Include="Global.asax" />
     <Content Include="sitecore\shell\client\Applications\ExperienceGenerator\InteractionEditor.js" />
     <Content Include="sitecore\shell\Themes\Standard\ExperienceGenerator.zip" />
