@@ -51,20 +51,20 @@
     <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.6" />
     <PackageReference Include="Microsoft.AspNet.WebApi.WebHost" Version="5.2.6" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="Rainbow" Version="2.0.2" />
-    <PackageReference Include="Rainbow.Core" Version="2.0.2" />
-    <PackageReference Include="Rainbow.Storage.Sc" Version="2.0.2" />
-    <PackageReference Include="Rainbow.Storage.Yaml" Version="2.0.2" />
-    <PackageReference Include="Sitecore.Analytics.Aggregation" Version="12.0.0-r*" />
-    <PackageReference Include="Sitecore.Analytics.DataAccess" Version="12.0.0-r*" />
-    <PackageReference Include="Sitecore.Analytics" Version="12.0.0-r*" />
-    <PackageReference Include="Sitecore.Analytics.Sql" Version="12.0.0-r*" />
-    <PackageReference Include="Sitecore.Cintel" Version="4.0.0-r*" />
-    <PackageReference Include="Sitecore.ContentSearch.Client" Version="4.0.0-r*" />
-    <PackageReference Include="Sitecore.ContentSearch" Version="4.0.0-r*" />
-    <PackageReference Include="Sitecore.Kernel" Version="12.0.0-r*" />
-    <PackageReference Include="Unicorn" Version="4.0.4" />
-    <PackageReference Include="Unicorn.Core" Version="4.0.4" />
+    <PackageReference Include="Rainbow" Version="2.1.0" />
+    <PackageReference Include="Rainbow.Core" Version="2.1.0" />
+    <PackageReference Include="Rainbow.Storage.Sc" Version="2.1.0" />
+    <PackageReference Include="Rainbow.Storage.Yaml" Version="2.1.0" />
+    <PackageReference Include="Sitecore.Analytics.Aggregation" Version="9.2.0-r002893" />
+    <PackageReference Include="Sitecore.Analytics.DataAccess" Version="9.2.0-r002893" />
+    <PackageReference Include="Sitecore.Analytics" Version="9.2.0-r002893" />
+    <PackageReference Include="Sitecore.Analytics.Sql" Version="9.2.0-r002893" />
+    <PackageReference Include="Sitecore.Cintel" Version="9.2.0-r002893" />
+    <PackageReference Include="Sitecore.ContentSearch.Client" Version="9.2.0-r002893" />
+    <PackageReference Include="Sitecore.ContentSearch" Version="9.2.0-r002893" />
+    <PackageReference Include="Sitecore.Kernel" Version="9.2.0-r002893" />
+    <PackageReference Include="Unicorn" Version="4.1.0" />
+    <PackageReference Include="Unicorn.Core" Version="4.1.0" />
     <PackageReference Include="WebBackgrounder" Version="0.2.0" />
   </ItemGroup>
   <ItemGroup>
