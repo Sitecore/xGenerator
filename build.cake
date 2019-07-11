@@ -54,7 +54,7 @@ Task("Publish-Projects")
 .Does(() => {
     var colossus = $"{configuration.SourceFolder}\\Colossus.Integration";
     var xgen = $"{configuration.SourceFolder}\\ExperienceGenerator.Client";
-    var exmGen = $"{configuration.SourceFolder}\\ExeprienceGenerator.Exm";
+    var exmGen = $"{configuration.SourceFolder}\\ExperienceGenerator.Exm";
 
     PublishProject(colossus, configuration.WebsiteRoot);
     PublishProject(xgen, configuration.WebsiteRoot);
