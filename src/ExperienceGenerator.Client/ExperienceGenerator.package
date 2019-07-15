@@ -1,11 +1,11 @@
-<project site="hh1551xgen.dev.local" format="Zip Package" targetfilefolder="wwwroot">
+<project site="https://test92v6.dev.local/" format="Zip Package" targetfilefolder="wwwroot">
   <Metadata>
     <metadata>
       <PackageName>Experience Generator</PackageName>
       <Author>Sitecore Demo Team</Author>
-      <Version>9.1</Version>
+      <Version>9.2</Version>
       <Revision />
-      <License>Copyright 2018 Sitecore Corporation A/S
+      <License>Copyright 2019 Sitecore Corporation A/S
 
 Licensed under the Apache License, Version 2.0 (the "License"); 
 You may not use this solution except in compliance with the License. 
@@ -33,7 +33,7 @@ set ExperienceGenerator.DistributedEnvironment setting to 'true'
 2) Extract this package as zip archive. 
 Copy all extracted files from 'files' folder to your CD instance.
       </Readme>
-      <Publisher />
+      <Publisher>Sitecore</Publisher>
       <PostStep />
       <PackageID />
     </metadata>
