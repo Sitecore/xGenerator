@@ -1,12 +1,11 @@
-#addin "Cake.XdtTransform"
-#addin "Cake.Powershell"
-#addin "Cake.Http"
-#addin "Cake.Json"
-#addin "Newtonsoft.Json"
-
+#addin nuget:?package=Cake.Azure&version=0.3.0
+#addin nuget:?package=Cake.Http&version=0.6.1
+#addin nuget:?package=Cake.Json&version=3.0.1
+#addin nuget:?package=Cake.Powershell&version=0.4.8
+#addin nuget:?package=Cake.XdtTransform&version=0.16.0
+#addin nuget:?package=Newtonsoft.Json&version=11.0.1
 
 #load "local:?path=CakeScripts/helper-methods.cake"
-
 
 var target = Argument<string>("Target", "Default");
 var configuration = new Configuration();
@@ -103,7 +102,7 @@ Task("Sync-Unicorn").Does(() => {
     var unicornUrl = configuration.InstanceUrl + "unicorn.aspx";
     Information("Sync Unicorn items from url: " + unicornUrl);
 
-    var authenticationFile = new FilePath($"{configuration.WebsiteRoot}/App_config/Include/Unicorn.SharedSecret.config");
+    var authenticationFile = new FilePath($"{configuration.WebsiteRoot}/App_config/Include/Unicorn/Unicorn.zSharedSecret.config");
     var xPath = "/configuration/sitecore/unicorn/authenticationProvider/SharedSecret";
 
     string sharedSecret = XmlPeek(authenticationFile, xPath);
