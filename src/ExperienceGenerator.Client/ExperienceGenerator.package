@@ -1,4 +1,4 @@
-<project site="https://hh93v2.dev.local" format="Zip Package" targetfilefolder="wwwroot">
+<project site="" format="Zip Package" targetfilefolder="wwwroot">
   <Metadata>
     <metadata>
       <PackageName>Experience Generator</PackageName>
