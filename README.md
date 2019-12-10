@@ -1,6 +1,6 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/b610w5q4qosfyh7r/branch/master?svg=true)](https://ci.appveyor.com/project/jeanfrancoislarente/xgenerator/branch/master)
 
-## Experience Generator has been updated and released for Sitecore 9.1! Hooray!
+## Experience Generator
 
 What do you get:
 - **Experience Generator (xGenerator)** - Create realistic analytics data for Experience Analytics, MV Tests, Path Analyzer, etc.
