@@ -35,14 +35,14 @@
   <ItemGroup>
     <PackageReference Include="Faker.Net" Version="1.0.3" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="Sitecore.Analytics.Aggregation" Version="9.2.0-r002893" />
-    <PackageReference Include="Sitecore.Analytics.DataAccess" Version="9.2.0-r002893" />
-    <PackageReference Include="Sitecore.Analytics.Model" Version="9.2.0-r002893" />
-    <PackageReference Include="Sitecore.Analytics" Version="9.2.0-r002893" />
-    <PackageReference Include="Sitecore.ContentSearch" Version="9.2.0-r002893" />
-    <PackageReference Include="Sitecore.ExperienceAnalytics.Api" Version="9.2.0-r002893" />
-    <PackageReference Include="Sitecore.Kernel" Version="9.2.0-r002893" />
-    <PackageReference Include="Sitecore.Marketing" Version="9.2.0-r002893" />
+    <PackageReference Include="Sitecore.Analytics.Aggregation" Version="9.3.0" />
+    <PackageReference Include="Sitecore.Analytics.DataAccess" Version="9.3.0" />
+    <PackageReference Include="Sitecore.Analytics.Model" Version="9.3.0" />
+    <PackageReference Include="Sitecore.Analytics" Version="9.3.0" />
+    <PackageReference Include="Sitecore.ContentSearch" Version="9.3.0" />
+    <PackageReference Include="Sitecore.ExperienceAnalytics.Api" Version="9.3.0" />
+    <PackageReference Include="Sitecore.Kernel" Version="9.3.0" />
+    <PackageReference Include="Sitecore.Marketing" Version="9.3.0" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

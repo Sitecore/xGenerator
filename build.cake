@@ -1,12 +1,10 @@
-#addin "Cake.XdtTransform"
-#addin "Cake.Powershell"
-#addin "Cake.Http"
-#addin "Cake.Json"
-#addin "Newtonsoft.Json"
-
+#addin nuget:?package=Cake.XdtTransform&version=0.16.0
+#addin nuget:?package=Cake.Powershell&version=0.4.8
+#addin nuget:?package=Cake.Http&version=0.7.0
+#addin nuget:?package=Cake.Json&version=4.0.0
+#addin nuget:?package=Newtonsoft.Json&version=11.0.2
 
 #load "local:?path=CakeScripts/helper-methods.cake"
-
 
 var target = Argument<string>("Target", "Default");
 var configuration = new Configuration();
