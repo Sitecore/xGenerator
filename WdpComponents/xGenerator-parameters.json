@@ -1,0 +1,6 @@
+{
+    "setParameters": {
+        "Application Path": "[variables('singleWebAppNameTidy']",
+        "Core Admin Connection String": "[concat('Encrypt=True;TrustServerCertificate=False;Data Source=', variables('sqlServerFqdnTidy'), ',1433;Initial Catalog=',variables('coreSqlDatabaseNameTidy'),';User Id=', parameters('sqlServerLogin'), ';Password=', parameters('sqlServerPassword'), ';')]"
+    }
+}
