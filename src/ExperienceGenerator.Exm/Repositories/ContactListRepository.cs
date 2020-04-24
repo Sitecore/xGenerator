@@ -68,13 +68,14 @@ namespace ExperienceGenerator.Exm.Repositories
             using (new SecurityDisabler())
             {
                 // list creation runs on a separate thread as 'extranet\anonymous', so SecurityDisabler on this thread does not apply
-                var item = Sitecore.Context.Database.GetItem("/sitecore/system/Marketing Control Panel/Contact Lists");
+                Database master = Sitecore.Configuration.Factory.GetDatabase("master");
+                var item = master.GetItem("/sitecore/system/Marketing Control Panel/Contact Lists");
                 string accessRights = item["__Security"];
                 try
                 {
                     // temporarily give access to the anonymous user
                     item.Editing.BeginEdit();
-                    item["__Security"] = "au|extranet\\Anonymous|pe|+item:create|+item:write|+item:read|pd|+item:create|+item:write|+item:read|";
+                    item.Fields["__Security"].Value = "au|extranet\\Anonymous|pe|+item:create|+item:read|+item:rename|+item:delete|+item:write|+item:admin|pd|+item:create|+item:read|+item:rename|+item:delete|+item:write|+item:admin|";
                     item.Editing.EndEdit();
 
                     // create list

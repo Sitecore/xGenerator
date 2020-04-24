@@ -31,7 +31,7 @@
         {
             var siteName = Sitecore.Context.Site.Name;
             var presetPath = $"{this.PresetsRoot.Paths.FullPath}/{siteName}";
-            var presetRoot = this.Database.GetItem(presetPath);
+                    var presetRoot = this.Database.GetItem(presetPath);
             if (presetRoot == null)
             {
                 return this.CreateSiteFolder(this.PresetsRoot);
@@ -55,12 +55,15 @@
       var templateId = Templates.Preset.ID;
 
       var presetRoot = this.SitePresetRoot;
-     
-      var presetItem = presetRoot.Children.FirstOrDefault(x => x.Name == name)??presetRoot.Add(name, new TemplateID(templateId));
 
-      presetItem.Editing.BeginEdit();
-      presetItem[Templates.Preset.Fields.Specification] = spec;
-      presetItem.Editing.EndEdit();
+            using (new SecurityDisabler())
+            {
+                var presetItem = presetRoot.Children.FirstOrDefault(x => x.Name == name) ?? presetRoot.Add(name, new TemplateID(templateId));
+
+                presetItem.Editing.BeginEdit();
+                presetItem[Templates.Preset.Fields.Specification] = spec;
+                presetItem.Editing.EndEdit();
+            }
     }
 
     protected Item CreateSiteFolder(Item root)
