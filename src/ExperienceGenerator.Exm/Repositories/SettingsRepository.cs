@@ -5,6 +5,7 @@ using Sitecore;
 using Sitecore.Configuration;
 using Sitecore.Data;
 using Sitecore.Data.Items;
+using Sitecore.SecurityModel;
 
 namespace ExperienceGenerator.Exm.Repositories
 {
@@ -56,12 +57,14 @@ namespace ExperienceGenerator.Exm.Repositories
 
             var presetRoot = SitePresetRoot;
 
+            using (new SecurityDisabler())
+            {
+                var presetItem = presetRoot.Children.FirstOrDefault(x => x.Name == name) ?? presetRoot.Add(name, new TemplateID(templateId));
 
-            var presetItem = presetRoot.Children.FirstOrDefault(x => x.Name == name) ?? presetRoot.Add(name, new TemplateID(templateId));
-
-            presetItem.Editing.BeginEdit();
-            presetItem[Templates.Preset.Fields.Specification] = spec;
-            presetItem.Editing.EndEdit();
+                presetItem.Editing.BeginEdit();
+                presetItem[Templates.Preset.Fields.Specification] = spec;
+                presetItem.Editing.EndEdit();
+            }
         }
 
         protected Item CreateSiteFolder(Item root)
