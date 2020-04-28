@@ -1,12 +1,10 @@
-#addin "Cake.XdtTransform"
-#addin "Cake.Powershell"
-#addin "Cake.Http"
-#addin "Cake.Json"
-#addin "Newtonsoft.Json"
-
+#addin nuget:?package=Cake.XdtTransform&version=0.16.0
+#addin nuget:?package=Cake.Powershell&version=0.4.8
+#addin nuget:?package=Cake.Http&version=0.7.0
+#addin nuget:?package=Cake.Json&version=4.0.0
+#addin nuget:?package=Newtonsoft.Json&version=11.0.2
 
 #load "local:?path=CakeScripts/helper-methods.cake"
-
 
 var target = Argument<string>("Target", "Default");
 var configuration = new Configuration();
@@ -54,7 +52,7 @@ Task("Publish-Projects")
 .Does(() => {
     var colossus = $"{configuration.SourceFolder}\\Colossus.Integration";
     var xgen = $"{configuration.SourceFolder}\\ExperienceGenerator.Client";
-    var exmGen = $"{configuration.SourceFolder}\\ExeprienceGenerator.Exm";
+    var exmGen = $"{configuration.SourceFolder}\\ExperienceGenerator.Exm";
 
     PublishProject(colossus, configuration.WebsiteRoot);
     PublishProject(xgen, configuration.WebsiteRoot);
@@ -103,7 +101,7 @@ Task("Sync-Unicorn").Does(() => {
     var unicornUrl = configuration.InstanceUrl + "unicorn.aspx";
     Information("Sync Unicorn items from url: " + unicornUrl);
 
-    var authenticationFile = new FilePath($"{configuration.WebsiteRoot}/App_config/Include/Unicorn.SharedSecret.config");
+    var authenticationFile = new FilePath($"{configuration.WebsiteRoot}/App_config/Include/Unicorn/Unicorn.zSharedSecret.config");
     var xPath = "/configuration/sitecore/unicorn/authenticationProvider/SharedSecret";
 
     string sharedSecret = XmlPeek(authenticationFile, xPath);

@@ -23,7 +23,7 @@ namespace ExperienceGenerator.Exm.Services
         {
             _activeJob = new Job();
             settings.Job = _activeJob;           
-            var options = new JobOptions("ExperienceGeneratorExm-" + _activeJob.Id, "ExperienceGenerator", Context.Site.Name, this, "GenerateCampaignData", new object[] { settings });
+            var options = new DefaultJobOptions("ExperienceGeneratorExm-" + _activeJob.Id, "ExperienceGenerator", Context.Site.Name, this, "GenerateCampaignData", new object[] { settings });
             Sitecore.Jobs.JobManager.Start(options);
             return _activeJob;
         }
@@ -32,7 +32,7 @@ namespace ExperienceGenerator.Exm.Services
         {
             _activeJob = new Job();
             settings.Job = _activeJob;
-            var options = new JobOptions("ExperienceGeneratorExmLists-" + _activeJob.Id, "ExperienceGenerator", Context.Site.Name, this, "GenerateList", new object[] { settings });
+            var options = new DefaultJobOptions("ExperienceGeneratorExmLists-" + _activeJob.Id, "ExperienceGenerator", Context.Site.Name, this, "GenerateList", new object[] { settings });
             Sitecore.Jobs.JobManager.Start(options);
             return _activeJob;
         }

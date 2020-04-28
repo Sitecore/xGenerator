@@ -10,7 +10,7 @@ namespace ExperienceGenerator.Client.Infrastructure
     {
         protected override void StartJob(JobInfo info, JobSegment segment)
         {            
-            var options = new JobOptions("ExperienceGenerator-" + info.Id + "/" + segment.Id, "ExperienceGenerator", Context.Site.Name, this, "Run",
+            var options = new DefaultJobOptions("ExperienceGenerator-" + info.Id + "/" + segment.Id, "ExperienceGenerator", Context.Site.Name, this, "Run",
                         new object[] { segment });
 
             JobManager.Start(options);
