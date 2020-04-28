@@ -13,6 +13,7 @@ using ExperienceGenerator.Parsing.Factories;
 using ExperienceGenerator.Repositories;
 using ExperienceGenerator.Services;
 using Newtonsoft.Json.Linq;
+using Sitecore.Configuration;
 
 namespace ExperienceGenerator.Parsing
 {
@@ -271,9 +272,19 @@ namespace ExperienceGenerator.Parsing
                 var segment = new VisitorSegment(kv.Key);
                 var def = (JObject) kv.Value;
 
+                if (!segment.DateGenerator.Start.HasValue)
+                {
+                    var fallbackStartDateConfigSetting = Settings.GetIntSetting("ExperienceGenerator.FallbackStartDate", 365);
+                    segment.DateGenerator.Start = DateTime.Now.AddDays(-1 * fallbackStartDateConfigSetting);
+                }
+
+                if (!segment.DateGenerator.End.HasValue)
+                {
+                    segment.DateGenerator.End = DateTime.Now;
+                }
+
                 segment.DateGenerator.Hour(t => t.AddPeak(0.4, 0.25, 0, pct: true).AddPeak(0.8, 0.1, 2, 0.2, pct: true));
                 //SetUserAgent(segment);
-
 
                 if (type != JobType.Contacts)
                 {
