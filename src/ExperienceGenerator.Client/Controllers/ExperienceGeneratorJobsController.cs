@@ -13,6 +13,17 @@ namespace ExperienceGenerator.Client.Controllers
             if (string.IsNullOrEmpty(spec.RootUrl))
             {
                 spec.RootUrl = Request.RequestUri.GetLeftPart(UriPartial.Authority);
+
+                if (string.Equals(Request.Headers.GetValues("X-Forwarded-Proto").FirstOrDefault(), Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase))
+                {
+                    var uriBuilder = new UriBuilder(spec.RootUrl)
+                    {
+                        Scheme = Uri.UriSchemeHttps,
+                        Port = -1 // default port for scheme
+                    };
+
+                    spec.RootUrl = uriBuilder.ToString();
+                }
             }
             if (spec.Specification == null)
             {
@@ -20,7 +31,7 @@ namespace ExperienceGenerator.Client.Controllers
             }
 
             var status = XGenJobManager.Instance.StartNew(spec);
-            return RedirectToRoute("ExperienceGeneratorJobsApi", new { id = status.Id });
+            return Redirect($"{spec.RootUrl}clientapi/xgen/jobs/{status.Id}");
         }
 
         public IEnumerable<JobInfo> Get()
