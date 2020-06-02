@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Web.Http;
 using Sitecore;
@@ -33,7 +32,7 @@ namespace ExperienceGenerator.Client.Controllers
             }
 
             var status = XGenJobManager.Instance.StartNew(spec);
-            return Redirect(Path.Combine(spec.RootUrl, $"/clientapi/xgen/jobs/{status.Id}").Replace("\\", "/"));
+            return Redirect($"{spec.RootUrl.TrimEnd(('/'))}/clientapi/xgen/jobs/{status.Id}");
         }
 
         public IEnumerable<JobInfo> Get()
