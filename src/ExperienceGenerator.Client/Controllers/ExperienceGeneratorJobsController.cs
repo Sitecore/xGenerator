@@ -14,7 +14,8 @@ namespace ExperienceGenerator.Client.Controllers
             {
                 spec.RootUrl = Request.RequestUri.GetLeftPart(UriPartial.Authority);
 
-                if (string.Equals(Request.Headers.GetValues("X-Forwarded-Proto").FirstOrDefault(), Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase))
+                Request.Headers.TryGetValues("X-Forwarded-Proto", out IEnumerable<string> values);
+                if (string.Equals(values?.FirstOrDefault(), Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase))
                 {
                     var uriBuilder = new UriBuilder(spec.RootUrl)
                     {
