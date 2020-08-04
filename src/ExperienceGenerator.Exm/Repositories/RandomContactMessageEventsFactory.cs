@@ -68,7 +68,6 @@ namespace ExperienceGenerator.Exm.Repositories
             return randomCity;
         }
 
-        [NotNull]
         public MessageContactEvents CreateRandomContactMessageEvents(Contact contactData, Funnel funnel, MessageItem messageItem)
         {
             var messageContactEvents = new MessageContactEvents();
@@ -220,7 +219,7 @@ namespace ExperienceGenerator.Exm.Repositories
 
         private static string GetItemUrl(Item landingPageItem)
         {
-            var options = LinkManager.GetDefaultUrlOptions();
+            var options = LinkManager.GetDefaultUrlBuilderOptions();
             options.AlwaysIncludeServerUrl = true;
 
             var uri = new Uri(LinkManager.GetItemUrl(landingPageItem, options));

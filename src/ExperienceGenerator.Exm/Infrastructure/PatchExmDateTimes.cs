@@ -3,7 +3,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Sitecore.Analytics.Core;
-using Sitecore.Analytics.Model;
+using Sitecore.CES.GeoIp.Core.Model;
 using Sitecore.Analytics.Pipelines.CommitSession;
 using Sitecore.Diagnostics;
 
@@ -56,7 +56,7 @@ namespace ExperienceGenerator.Exm.Infrastructure
                     {
                         var geoData = dataObj["GeoData"].ToObject<WhoIsInformation>();
                         dataObj.Remove("GeoData");
-                        interaction.SetGeoData(geoData);
+                        interaction.SetWhoIsInformation(geoData);
                     }
 
                     pageEvent.Data = JsonConvert.SerializeObject(dataObj);

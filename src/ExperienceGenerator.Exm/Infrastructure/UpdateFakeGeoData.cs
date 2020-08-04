@@ -30,7 +30,7 @@ namespace ExperienceGenerator.Exm.Infrastructure
             var city = _geoDataRepository.CityByID(cityId);
             if (city == null)
                 return;
-            args.Session.Interaction.SetGeoData(city.ToWhoIsInformation());
+            args.Session.Interaction.SetWhoIsInformation(city.ToWhoIsInformation());
             args.Session.Interaction.UpdateLocationReference();
         }
     }
