@@ -55,14 +55,14 @@
     <PackageReference Include="Rainbow.Core" Version="2.1.1" />
     <PackageReference Include="Rainbow.Storage.Sc" Version="2.1.1" />
     <PackageReference Include="Rainbow.Storage.Yaml" Version="2.1.1" />
-    <PackageReference Include="Sitecore.Analytics.Aggregation" Version="9.3.0" />
-    <PackageReference Include="Sitecore.Analytics.DataAccess" Version="9.3.0" />
-    <PackageReference Include="Sitecore.Analytics" Version="9.3.0" />
-    <PackageReference Include="Sitecore.Analytics.Sql" Version="9.3.0" />
-    <PackageReference Include="Sitecore.Cintel" Version="9.3.0" />
-    <PackageReference Include="Sitecore.ContentSearch.Client" Version="9.3.0" />
-    <PackageReference Include="Sitecore.ContentSearch" Version="9.3.0" />
-    <PackageReference Include="Sitecore.Kernel" Version="9.3.0" />
+    <PackageReference Include="Sitecore.Analytics.Aggregation" Version="10.0.0" />
+    <PackageReference Include="Sitecore.Analytics.DataAccess" Version="10.0.0" />
+    <PackageReference Include="Sitecore.Analytics" Version="10.0.0" />
+    <PackageReference Include="Sitecore.Analytics.Sql" Version="10.0.0" />
+    <PackageReference Include="Sitecore.Cintel" Version="10.0.0" />
+    <PackageReference Include="Sitecore.ContentSearch.Client" Version="10.0.0" />
+    <PackageReference Include="Sitecore.ContentSearch" Version="10.0.0" />
+    <PackageReference Include="Sitecore.Kernel" Version="10.0.0" />
     <PackageReference Include="Unicorn" Version="4.1.1" />
     <PackageReference Include="Unicorn.Core" Version="4.1.1" />
     <PackageReference Include="WebBackgrounder" Version="0.2.0" />
