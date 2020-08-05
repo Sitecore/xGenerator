@@ -1,11 +1,12 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Text;
+using System.Web;
 using Colossus;
+using Newtonsoft.Json;
 using ExperienceGenerator.Models;
-using ExperienceGenerator.Repositories;
-using Sitecore.Data;
-using Sitecore.Globalization;
 
 namespace ExperienceGenerator.Data
 {
@@ -14,16 +15,12 @@ namespace ExperienceGenerator.Data
   public class ItemInfoClient
     {
         public string ItemServiceRoot { get; set; }
-        private readonly GeoDataRepository _getDataRepository;
-        private readonly SiteRepository _siteRepository;
 
         public ItemInfoClient(string itemServiceRoot)
         {
             if (!itemServiceRoot.EndsWith("/")) itemServiceRoot += "/";
 
             ItemServiceRoot = itemServiceRoot;
-            _siteRepository = new SiteRepository();
-            _getDataRepository = new GeoDataRepository();
         }
 
         private readonly ConcurrentDictionary<string, ItemInfo> _cache = new ConcurrentDictionary<string, ItemInfo>();
@@ -35,27 +32,35 @@ namespace ExperienceGenerator.Data
             {
                 if (_sites == null)
                 {
-                    _sites = _siteRepository.ValidSites.ToDictionary(s => s.Id);
+                    _sites = Request<SiteInfo[]>("websites")                        
+                        .ToDictionary(s=>s.Id);
                 }
 
                 return _sites;
             }
         }
 
+
+        private TResponse Request<TResponse>(string url)
+        {
+            return JsonConvert.DeserializeObject<TResponse>(new WebClient().DownloadString(ItemServiceRoot + url));
+        }
+
         public IEnumerable<ItemInfo> Query(string query, string language = null, int? maxDepth = 0)
         {
-            var db = Database.GetDatabase("web");
-
-            foreach (var item in db.SelectItems(query))
-            {
-                Language itemLanguage = null;
-                if (!string.IsNullOrEmpty(language))
-                {
-                    Language.TryParse(language, out itemLanguage);
-                }
-
-                yield return ItemInfo.FromItem(item, _siteRepository.ValidSites.Select(w => w.Id), maxDepth, itemLanguage);
+            var url = new StringBuilder()                
+                .Append("items?query=")
+                .Append(HttpUtility.UrlEncode(query));
+            if (maxDepth.HasValue)
+            {            
+              url.Append("&maxDepth=").Append(maxDepth);
             }
+            if (!string.IsNullOrEmpty(language))
+            {
+                url.Append("&language=").Append(language);
+            }
+
+            return Request<ItemInfo[]>(url.ToString());
         }
 
         public ItemInfo GetItemInfo(string itemId, string language = null)
