@@ -10,6 +10,7 @@ namespace ExperienceGenerator.Client.Controllers
     {        
         public IHttpActionResult Post([FromBody] JobSpecification spec)
         {
+            var redirectUrl = spec.RootUrl;
             if (string.IsNullOrEmpty(spec.RootUrl))
             {
                 spec.RootUrl = Request.RequestUri.GetLeftPart(UriPartial.Authority);
@@ -23,7 +24,7 @@ namespace ExperienceGenerator.Client.Controllers
                         Port = -1 // default port for scheme
                     };
 
-                    spec.RootUrl = uriBuilder.ToString();
+                    redirectUrl = uriBuilder.ToString();
                 }
             }
             if (spec.Specification == null)
@@ -32,7 +33,7 @@ namespace ExperienceGenerator.Client.Controllers
             }
 
             var status = XGenJobManager.Instance.StartNew(spec);
-            return Redirect($"{spec.RootUrl.TrimEnd(('/'))}/clientapi/xgen/jobs/{status.Id}");
+            return Redirect($"{redirectUrl.TrimEnd(('/'))}/clientapi/xgen/jobs/{status.Id}");
         }
 
         public IEnumerable<JobInfo> Get()
