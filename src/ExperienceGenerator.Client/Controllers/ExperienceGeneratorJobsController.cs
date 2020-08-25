@@ -24,6 +24,7 @@ namespace ExperienceGenerator.Client.Controllers
                         Port = -1 // default port for scheme
                     };
 
+                    spec.RootUrl = uriBuilder.ToString();
                     redirectUrl = uriBuilder.ToString();
                 }
             }
