@@ -10,13 +10,12 @@ namespace ExperienceGenerator.Client.Controllers
     {        
         public IHttpActionResult Post([FromBody] JobSpecification spec)
         {
-            var redirectUrl = spec.RootUrl;
             if (string.IsNullOrEmpty(spec.RootUrl))
             {
                 spec.RootUrl = Request.RequestUri.GetLeftPart(UriPartial.Authority);
 
                 Request.Headers.TryGetValues("X-Forwarded-Proto", out IEnumerable<string> values);
-                if (string.Equals(values?.FirstOrDefault(), Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(values?.FirstOrDefault(), Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase) && !spec.RootUrl.Contains("localhost"))
                 {
                     var uriBuilder = new UriBuilder(spec.RootUrl)
                     {
@@ -25,7 +24,6 @@ namespace ExperienceGenerator.Client.Controllers
                     };
 
                     spec.RootUrl = uriBuilder.ToString();
-                    redirectUrl = uriBuilder.ToString();
                 }
             }
             if (spec.Specification == null)
@@ -34,7 +32,7 @@ namespace ExperienceGenerator.Client.Controllers
             }
 
             var status = XGenJobManager.Instance.StartNew(spec);
-            return Redirect($"{redirectUrl.TrimEnd(('/'))}/clientapi/xgen/jobs/{status.Id}");
+            return Redirect(new Uri($"/clientapi/xgen/jobs/{status.Id}", UriKind.Relative));
         }
 
         public IEnumerable<JobInfo> Get()
