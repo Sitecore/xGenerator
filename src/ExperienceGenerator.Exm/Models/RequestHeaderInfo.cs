@@ -1,5 +1,5 @@
 ﻿using System;
-using Sitecore.Analytics.Model;
+using Sitecore.CES.GeoIp.Core.Model;
 
 namespace ExperienceGenerator.Exm.Models
 {

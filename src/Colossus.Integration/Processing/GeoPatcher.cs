@@ -1,5 +1,5 @@
 ﻿using Colossus.Web;
-using Sitecore.Analytics.Model;
+using Sitecore.CES.GeoIp.Core.Model;
 using Sitecore.Analytics.Tracking;
 
 namespace Colossus.Integration.Processing

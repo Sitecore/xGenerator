@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using Colossus;
 using Newtonsoft.Json;
-using Sitecore.Analytics.Model;
+using Sitecore.CES.GeoIp.Core.Model;
 
 namespace ExperienceGenerator.Data
 {

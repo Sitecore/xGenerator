@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ExperienceGenerator.Exm</RootNamespace>
     <AssemblyName>ExperienceGenerator.Exm</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -46,34 +46,34 @@
   <ItemGroup>
     <PackageReference Include="Faker.Net" Version="1.0.3" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="Sitecore.Analytics.Aggregation" Version="9.3.0" />
-    <PackageReference Include="Sitecore.Analytics.DataAccess" Version="9.3.0" />
-    <PackageReference Include="Sitecore.Analytics.Model" Version="9.3.0" />
-    <PackageReference Include="Sitecore.Analytics" Version="9.3.0" />
-    <PackageReference Include="Sitecore.Cintel" Version="9.3.0" />
-    <PackageReference Include="Sitecore.Cintel.Client" Version="9.3.0" />
-    <PackageReference Include="Sitecore.Kernel" Version="9.3.0" />
-    <PackageReference Include="Sitecore.Marketing" Version="9.3.0" />
-    <PackageReference Include="Sitecore.ContentSearch" Version="9.3.0" />
-    <PackageReference Include="Sitecore.EDS.Core" Version="9.3.0" />
-    <PackageReference Include="Sitecore.EmailCampaign.Cd" Version="9.3.0" />
-    <PackageReference Include="Sitecore.EmailCampaign.Cm" Version="9.3.0" />
-    <PackageReference Include="Sitecore.EmailCampaign.Cm.UI" Version="9.3.0" />
-    <PackageReference Include="Sitecore.EmailCampaign.ExperienceAnalytics" Version="9.3.0" />
-    <PackageReference Include="Sitecore.EmailCampaign.Model" Version="9.3.0" />
-    <PackageReference Include="Sitecore.EmailCampaign.Model.Web" Version="9.3.0" />
-    <PackageReference Include="Sitecore.EmailCampaign" Version="9.3.0" />
-    <PackageReference Include="Sitecore.EmailCampaign.Server" Version="9.3.0" />
-    <PackageReference Include="Sitecore.ExM.Framework" Version="9.3.0" />
-    <PackageReference Include="Sitecore.Framework.Messaging.Abstractions" Version="4.0.1" />
-    <PackageReference Include="Sitecore.ListManagement" Version="9.3.0" />
-    <PackageReference Include="Sitecore.ListManagement.Services" Version="9.3.0" />
-    <PackageReference Include="Sitecore.ListManagement.XConnect" Version="9.3.0" />
-    <PackageReference Include="Sitecore.Services.Core" Version="9.3.0" />
-    <PackageReference Include="Sitecore.Services.Infrastructure" Version="9.3.0" />
-    <PackageReference Include="Sitecore.XConnect.Client.Configuration.XConnect" Version="9.3.0" />
-    <PackageReference Include="Sitecore.XConnect.Client" Version="9.3.0" />
-    <PackageReference Include="Sitecore.XConnect.Collection.Model" Version="9.3.0" />
+    <PackageReference Include="Sitecore.Analytics.Aggregation" Version="10.0.0" />
+    <PackageReference Include="Sitecore.Analytics.DataAccess" Version="10.0.0" />
+    <PackageReference Include="Sitecore.Analytics.Model" Version="10.0.0" />
+    <PackageReference Include="Sitecore.Analytics" Version="10.0.0" />
+    <PackageReference Include="Sitecore.Cintel" Version="10.0.0" />
+    <PackageReference Include="Sitecore.Cintel.Client" Version="10.0.0" />
+    <PackageReference Include="Sitecore.Kernel" Version="10.0.0" />
+    <PackageReference Include="Sitecore.Marketing" Version="10.0.0" />
+    <PackageReference Include="Sitecore.ContentSearch" Version="10.0.0" />
+    <PackageReference Include="Sitecore.EDS.Core" Version="10.0.0" />
+    <PackageReference Include="Sitecore.EmailCampaign.Cd" Version="10.0.0" />
+    <PackageReference Include="Sitecore.EmailCampaign.Cm" Version="10.0.0" />
+    <PackageReference Include="Sitecore.EmailCampaign.Cm.UI" Version="10.0.0" />
+    <PackageReference Include="Sitecore.EmailCampaign.ExperienceAnalytics" Version="10.0.0" />
+    <PackageReference Include="Sitecore.EmailCampaign.Model" Version="10.0.0" />
+    <PackageReference Include="Sitecore.EmailCampaign.Model.Web" Version="10.0.0" />
+    <PackageReference Include="Sitecore.EmailCampaign" Version="10.0.0" />
+    <PackageReference Include="Sitecore.EmailCampaign.Server" Version="10.0.0" />
+    <PackageReference Include="Sitecore.ExM.Framework" Version="10.0.0" />
+    <PackageReference Include="Sitecore.Framework.Messaging.Abstractions" Version="4.1.0" />
+    <PackageReference Include="Sitecore.ListManagement" Version="10.0.0" />
+    <PackageReference Include="Sitecore.ListManagement.Services" Version="10.0.0" />
+    <PackageReference Include="Sitecore.ListManagement.XConnect" Version="10.0.0" />
+    <PackageReference Include="Sitecore.Services.Core" Version="10.0.0" />
+    <PackageReference Include="Sitecore.Services.Infrastructure" Version="10.0.0" />
+    <PackageReference Include="Sitecore.XConnect.Client.Configuration.XConnect" Version="10.0.0" />
+    <PackageReference Include="Sitecore.XConnect.Client" Version="10.0.0" />
+    <PackageReference Include="Sitecore.XConnect.Collection.Model" Version="10.0.0" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Net.Http" />

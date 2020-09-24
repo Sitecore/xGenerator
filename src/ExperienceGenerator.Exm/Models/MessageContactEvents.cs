@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Sitecore.Analytics.Model;
+using Sitecore.CES.GeoIp.Core.Model;
 using Sitecore.Modules.EmailCampaign.Messages;
 
 namespace ExperienceGenerator.Exm.Models

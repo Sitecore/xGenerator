@@ -59,7 +59,7 @@ namespace Colossus.Integration.Models
                     vd.Screen = new ScreenData(0, 0);
                 }
 
-                vd.GeoData = new WhoIsInformation()
+                vd.WhoIsInformation = new Sitecore.CES.GeoIp.Core.Model.WhoIsInformation()
                 {
                     Country = visit.GetVariable("Country", ""),
                     Region = visit.GetVariable("Region", ""),

@@ -124,7 +124,7 @@ namespace ExperienceGenerator.Exm.Services
             }
         }
 
-        public static void GenerateHandlerEvent(string hostName, Guid contactId, MessageItem messageItem, EventType eventType, DateTime dateTime, string userAgent, WhoIsInformation geoData, string link)
+        public static void GenerateHandlerEvent(string hostName, Guid contactId, MessageItem messageItem, EventType eventType, DateTime dateTime, string userAgent, Sitecore.CES.GeoIp.Core.Model.WhoIsInformation geoData, string link)
         {
             string eventHandlerPath;
             switch (eventType)

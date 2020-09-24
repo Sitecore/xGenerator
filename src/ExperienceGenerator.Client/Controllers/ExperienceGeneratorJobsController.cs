@@ -15,7 +15,7 @@ namespace ExperienceGenerator.Client.Controllers
                 spec.RootUrl = Request.RequestUri.GetLeftPart(UriPartial.Authority);
 
                 Request.Headers.TryGetValues("X-Forwarded-Proto", out IEnumerable<string> values);
-                if (string.Equals(values?.FirstOrDefault(), Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(values?.FirstOrDefault(), Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase) && !spec.RootUrl.Contains("localhost"))
                 {
                     var uriBuilder = new UriBuilder(spec.RootUrl)
                     {
@@ -32,7 +32,7 @@ namespace ExperienceGenerator.Client.Controllers
             }
 
             var status = XGenJobManager.Instance.StartNew(spec);
-            return Redirect($"{spec.RootUrl.TrimEnd(('/'))}/clientapi/xgen/jobs/{status.Id}");
+            return Redirect(new Uri($"/clientapi/xgen/jobs/{status.Id}", UriKind.Relative));
         }
 
         public IEnumerable<JobInfo> Get()

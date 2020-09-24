@@ -29,7 +29,7 @@ namespace ExperienceGenerator.Exm.Infrastructure
             catch (Exception ex)
             {
                 //Log but ignore errors to avoid interrupting standard analytics
-                Log.Error("EXM PatchTracker failed.", ex);
+                Log.Error("EXM PatchTracker failed.", ex, this);
             }
         }
 
@@ -56,7 +56,7 @@ namespace ExperienceGenerator.Exm.Infrastructure
 
 			if (fakeData.GeoData != null)
 			{
-				args.Session.Interaction.SetGeoData(fakeData.GeoData);
+				args.Session.Interaction.SetWhoIsInformation(fakeData.GeoData);
                 args.Session.Interaction.UpdateLocationReference();
 
             }

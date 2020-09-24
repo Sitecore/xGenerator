@@ -18,7 +18,7 @@ namespace ExperienceGenerator.Services
             _geoDataRepository = new GeoDataRepository();
         }
 
-        public City GetRandomCity([NotNull] string subcontinentCode)
+        public City GetRandomCity(string subcontinentCode)
         {
             if (subcontinentCode == null)
                 throw new ArgumentNullException(nameof(subcontinentCode));

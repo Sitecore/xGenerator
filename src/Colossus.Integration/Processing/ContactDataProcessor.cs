@@ -170,7 +170,7 @@ namespace Colossus.Integration.Processing
                     {
                         try
                         {
-                            var contact = client.Get<Contact>(trackerIdentifier, new ContactExpandOptions());
+                            var contact = client.Get<Contact>(trackerIdentifier, new ContactExecutionOptions());
 
                             if (contact != null)
                             {
@@ -233,9 +233,11 @@ namespace Colossus.Integration.Processing
                         {
                             var contact = client.Get<Contact>(
                                 new IdentifiedContactReference(anyIdentifier.Source, anyIdentifier.Identifier),
-                                new ContactExpandOptions(PersonalInformation.DefaultFacetKey,
-                                    EmailAddressList.DefaultFacetKey, PhoneNumberList.DefaultFacetKey,
-                                    AddressList.DefaultFacetKey));
+                                new ContactExecutionOptions(
+                                    new ContactExpandOptions(PersonalInformation.DefaultFacetKey,
+                                        EmailAddressList.DefaultFacetKey,
+                                        PhoneNumberList.DefaultFacetKey,
+                                        AddressList.DefaultFacetKey)));
 
                             if (contact != null)
                             {

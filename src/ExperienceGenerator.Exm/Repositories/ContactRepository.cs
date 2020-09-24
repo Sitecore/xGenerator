@@ -62,7 +62,7 @@ namespace ExperienceGenerator.Exm.Repositories
                 client.Submit();
 
                 xGenContact = client.Get<Contact>(new IdentifiedContactReference(identifier.Source, identifier.Identifier),
-                    new ExpandOptions());
+                    new ContactExecutionOptions());
 
                 return xGenContact;
             }
