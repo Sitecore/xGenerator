@@ -47,7 +47,8 @@ Param(
     [switch]$DryRun,
     [switch]$SkipToolPackageRestore,
     [Parameter(Position=0,Mandatory=$false,ValueFromRemainingArguments=$true)]
-    [string[]]$ScriptArgs
+    [string[]]$ScriptArgs,
+    [switch]$PreRelease
 )
 
 # Attempt to set highest encryption available for SecurityProtocol.
@@ -121,17 +122,6 @@ if ((Test-Path $PSScriptRoot) -and !(Test-Path $TOOLS_DIR)) {
     New-Item -Path $TOOLS_DIR -Type directory | out-null
 }
 
-# Make sure that packages.config exist.
-if (!(Test-Path $PACKAGES_CONFIG)) {
-    Write-Verbose -Message "Downloading packages.config..."
-    try {
-        $wc = GetProxyEnabledWebClient
-        $wc.DownloadFile("https://cakebuild.net/download/bootstrapper/packages", $PACKAGES_CONFIG)
-    } catch {
-        Throw "Could not download packages.config."
-    }
-}
-
 # Try find NuGet.exe in path if not exists
 if (!(Test-Path $NUGET_EXE)) {
     Write-Verbose -Message "Trying to find nuget.exe in PATH..."
@@ -202,6 +192,16 @@ if (Test-Path $ADDINS_PACKAGES_CONFIG) {
 
     Pop-Location
 }
+# Automatically add additional NuGet source to local feed at build time. Requires environment variables.
+
+$accessToken = (& { if ([string]::IsNullOrEmpty("$env:INTERNAL_NUGET_SOURCE_PASSWORD")) { "$env:SYSTEM_ACCESSTOKEN" } else { "$env:INTERNAL_NUGET_SOURCE_PASSWORD" } })
+$internalFeed = $env:INTERNAL_NUGET_SOURCE
+$userName = $env:INTERNAL_NUGET_SOURCE_USERNAME
+if ($accessToken -and $internalFeed -and $userName -and $PreRelease) {
+    & "$NUGET_EXE" sources add -name "sc-internal-package-feed" -source $internalFeed -username $userName -password $accessToken -ConfigFile (Join-Path $PWD nuget.config) -StorePasswordInClearText | Out-Null
+    & "$NUGET_EXE" sources update -name "sc-internal-package-feed" -source $internalFeed -username $userName -password $accessToken -ConfigFile (Join-Path $PWD nuget.config) -StorePasswordInClearText
+}
+
 
 # Restore modules from NuGet
 if (Test-Path $MODULES_PACKAGES_CONFIG) {

@@ -35,14 +35,38 @@
   <ItemGroup>
     <PackageReference Include="Faker.Net" Version="1.0.3" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="Sitecore.Analytics.Aggregation" Version="10.0.0" />
-    <PackageReference Include="Sitecore.Analytics.DataAccess" Version="10.0.0" />
-    <PackageReference Include="Sitecore.Analytics.Model" Version="10.0.0" />
-    <PackageReference Include="Sitecore.Analytics" Version="10.0.0" />
-    <PackageReference Include="Sitecore.ContentSearch" Version="10.0.0" />
-    <PackageReference Include="Sitecore.ExperienceAnalytics.Api" Version="10.0.0" />
-    <PackageReference Include="Sitecore.Kernel" Version="10.0.0" />
-    <PackageReference Include="Sitecore.Marketing" Version="10.0.0" />
+    <PackageReference Include="Sitecore.Analytics.Aggregation" Version="10.1.*-*">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sitecore.Analytics.DataAccess" Version="10.1.*-*">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sitecore.Analytics.Model" Version="10.1.*-*">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sitecore.Analytics" Version="10.1.*-*">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sitecore.ContentSearch" Version="10.1.*-*">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sitecore.ExperienceAnalytics.Api" Version="10.1.*-*">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sitecore.Kernel" Version="10.1.*-*">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sitecore.Marketing" Version="10.1.*-*">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -50,6 +74,7 @@
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>

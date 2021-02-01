@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="15.0" DefaultTargets="Build"
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -46,34 +47,122 @@
   <ItemGroup>
     <PackageReference Include="Faker.Net" Version="1.0.3" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="Sitecore.Analytics.Aggregation" Version="10.0.0" />
-    <PackageReference Include="Sitecore.Analytics.DataAccess" Version="10.0.0" />
-    <PackageReference Include="Sitecore.Analytics.Model" Version="10.0.0" />
-    <PackageReference Include="Sitecore.Analytics" Version="10.0.0" />
-    <PackageReference Include="Sitecore.Cintel" Version="10.0.0" />
-    <PackageReference Include="Sitecore.Cintel.Client" Version="10.0.0" />
-    <PackageReference Include="Sitecore.Kernel" Version="10.0.0" />
-    <PackageReference Include="Sitecore.Marketing" Version="10.0.0" />
-    <PackageReference Include="Sitecore.ContentSearch" Version="10.0.0" />
-    <PackageReference Include="Sitecore.EDS.Core" Version="10.0.0" />
-    <PackageReference Include="Sitecore.EmailCampaign.Cd" Version="10.0.0" />
-    <PackageReference Include="Sitecore.EmailCampaign.Cm" Version="10.0.0" />
-    <PackageReference Include="Sitecore.EmailCampaign.Cm.UI" Version="10.0.0" />
-    <PackageReference Include="Sitecore.EmailCampaign.ExperienceAnalytics" Version="10.0.0" />
-    <PackageReference Include="Sitecore.EmailCampaign.Model" Version="10.0.0" />
-    <PackageReference Include="Sitecore.EmailCampaign.Model.Web" Version="10.0.0" />
-    <PackageReference Include="Sitecore.EmailCampaign" Version="10.0.0" />
-    <PackageReference Include="Sitecore.EmailCampaign.Server" Version="10.0.0" />
-    <PackageReference Include="Sitecore.ExM.Framework" Version="10.0.0" />
-    <PackageReference Include="Sitecore.Framework.Messaging.Abstractions" Version="4.1.0" />
-    <PackageReference Include="Sitecore.ListManagement" Version="10.0.0" />
-    <PackageReference Include="Sitecore.ListManagement.Services" Version="10.0.0" />
-    <PackageReference Include="Sitecore.ListManagement.XConnect" Version="10.0.0" />
-    <PackageReference Include="Sitecore.Services.Core" Version="10.0.0" />
-    <PackageReference Include="Sitecore.Services.Infrastructure" Version="10.0.0" />
-    <PackageReference Include="Sitecore.XConnect.Client.Configuration.XConnect" Version="10.0.0" />
-    <PackageReference Include="Sitecore.XConnect.Client" Version="10.0.0" />
-    <PackageReference Include="Sitecore.XConnect.Collection.Model" Version="10.0.0" />
+    <PackageReference Include="Sitecore.Analytics.Aggregation" Version="10.1.*-*">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sitecore.Analytics.DataAccess" Version="10.1.*-*">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sitecore.Analytics.Model" Version="10.1.*-*">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sitecore.Analytics" Version="10.1.*-*">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sitecore.Cintel" Version="10.1.*-*">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sitecore.Cintel.Client" Version="10.1.*-*">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sitecore.Kernel" Version="10.1.*-*">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sitecore.Marketing" Version="10.1.*-*">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sitecore.ContentSearch" Version="10.1.*-*">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sitecore.EDS.Core" Version="10.1.*-*">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sitecore.EmailCampaign.Cd" Version="10.1.*-*">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sitecore.EmailCampaign.Cm" Version="10.1.*-*">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sitecore.EmailCampaign.Cm.UI" Version="10.1.*-*">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sitecore.EmailCampaign.ExperienceAnalytics" Version="10.1.*-*">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sitecore.EmailCampaign.Model" Version="10.1.*-*">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sitecore.EmailCampaign.Model.Web" Version="10.1.*-*">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sitecore.EmailCampaign" Version="10.1.*-*">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sitecore.EmailCampaign.Server" Version="10.1.*-*">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sitecore.ExM.Framework" Version="10.1.*-*">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sitecore.Framework.Messaging.Abstractions" Version="4.1.0">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sitecore.ListManagement" Version="10.1.*-*">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sitecore.ListManagement.Services" Version="10.1.*-*">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sitecore.ListManagement.XConnect" Version="10.1.*-*">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sitecore.Services.Core" Version="10.1.*-*">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sitecore.Services.Infrastructure" Version="10.1.*-*">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sitecore.XConnect.Client.Configuration.XConnect" Version="10.1.*-*">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sitecore.XConnect.Client" Version="10.1.*-*">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sitecore.XConnect.Collection.Model" Version="10.1.*-*">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sitecore.XConnect.Configuration" Version="10.1.*-*">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Net.Http" />

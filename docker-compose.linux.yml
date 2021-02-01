@@ -1,0 +1,12 @@
+version: "2.4"
+
+services:
+  xGenerator:
+    image: ${REGISTRY}community/modules/custom-xgenerator-assets:${SITECORE_VERSION}-linux
+    isolation: ${ISOLATION}
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.Linux
+      args:
+        BASE_IMAGE:  docker.io/alpine:3
+

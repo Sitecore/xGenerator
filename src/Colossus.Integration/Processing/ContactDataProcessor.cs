@@ -11,6 +11,7 @@ namespace Colossus.Integration.Processing
 {
     using System;
     using Colossus.Web;
+    using Microsoft.Extensions.DependencyInjection;
     using Sitecore;
     using Sitecore.Analytics.Model;
     using Sitecore.Data.Items;
@@ -127,13 +128,14 @@ namespace Colossus.Integration.Processing
             //Use the email to uniquely identify the contact between visits.
             if (xGenIdentifier == null)
             {
+                var contactIdentificationManager = Sitecore.DependencyInjection.ServiceLocator.ServiceProvider.GetRequiredService<Sitecore.Analytics.Tracking.Identification.IContactIdentificationManager>();
                 if (!String.IsNullOrWhiteSpace(emailValue))
                 {
-                    Tracker.Current.Session.IdentifyAs("xGenerator", emailValue);
+                    contactIdentificationManager.IdentifyAs(new Sitecore.Analytics.Tracking.Identification.KnownContactIdentifier("xGenerator", emailValue));
                 }
                 else
                 {
-                    Tracker.Current.Session.IdentifyAs("xGenerator", Tracker.Current.Contact.ContactId.ToString("N"));
+                    contactIdentificationManager.IdentifyAs(new Sitecore.Analytics.Tracking.Identification.KnownContactIdentifier("xGenerator", Tracker.Current.Contact.ContactId.ToString("N")));
                 }
             }
 

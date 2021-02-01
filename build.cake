@@ -18,7 +18,7 @@ var unicornSyncScript = $"./scripts/Unicorn/Sync.ps1";
 
 Setup(context =>
 {
-	cakeConsole.ForegroundColor = ConsoleColor.Yellow;	
+	cakeConsole.ForegroundColor = ConsoleColor.Yellow;
     var configFile = new FilePath(configJsonFile);
     configuration = DeserializeJsonFromFile<Configuration>(configFile);
 });
@@ -65,7 +65,7 @@ Task("Apply-Xml-Transform").Does(() => {
 
 Task("Modify-Unicorn-Source-Folder").Does(() => {
     var zzzDevSettingsFile = File($"{configuration.WebsiteRoot}/App_config/Include/ExperienceGenerator/zExperienceGenerator.DevSettings.config");
-    
+
 	var rootXPath = "configuration/sitecore/sc.variable[@name='{0}']/@value";
     var sourceFolderXPath = string.Format(rootXPath, "experienceGeneratorSource");
     var directoryPath = MakeAbsolute(new DirectoryPath(configuration.ProjectFolder)).FullPath;
@@ -106,7 +106,7 @@ Task("Sync-Unicorn").Does(() => {
 
     string sharedSecret = XmlPeek(authenticationFile, xPath);
 
-    
+
     StartPowershellFile(unicornSyncScript, new PowershellSettings()
                                                         .SetFormatOutput()
                                                         .SetLogOutput()
