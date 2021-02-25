@@ -1,0 +1,10 @@
+{
+    "json.maxItemsComputed": 15000,
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "files.associations": {
+        "build*.yml": "azure-pipelines",
+        "docker*.yml": "yaml"
+    }
+}

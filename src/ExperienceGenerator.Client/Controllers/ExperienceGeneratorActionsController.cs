@@ -263,7 +263,6 @@ namespace ExperienceGenerator.Client.Controllers
         [HttpPost]
         public IHttpActionResult Flush()
         {
-
             var shardMapConnectionString = ConfigurationManager.ConnectionStrings["collection"].ConnectionString;
             if (shardMapConnectionString == null)
             {
@@ -273,42 +272,23 @@ namespace ExperienceGenerator.Client.Controllers
             {
                 return Ok();
             }
-            var shards = new List<string>();
-            using (var conn = new SqlConnection(shardMapConnectionString))
-            {
-                conn.Open();
-                var builder = new SqlConnectionStringBuilder(shardMapConnectionString);
-                using (var dr = new SqlCommand("SELECT ServerName, DatabaseName FROM __ShardManagement.ShardsGlobal", conn).ExecuteReader())
-                {
-                    while (dr.Read())
-                    {
-                        builder.DataSource = dr.GetString(0);
-                        builder.InitialCatalog = dr.GetString(1);
-                        shards.Add(builder.ToString());
-                    }
-                }
-            }
-
-            //var driver = new MongoDbDriver(ConfigurationManager.ConnectionStrings["analytics"].ConnectionString);
-            //driver.ResetDatabase();
-
-            //var item = (Context.ContentDatabase ?? Context.Database).GetItem("/sitecore/media library/Images/xgen");
-            //item?.Delete();
-
-            //var sql = new SqlReportingStorageProvider("reporting");
-            //sql.ExcludedTableFromDataDeletion("dbo", "Segments");
-            //sql.DeleteAllReportingData();
-
-
-            //var index = ContentSearchManager.GetIndex(CustomerIntelligenceConfig.ContactSearch.SearchIndexName);
-            //index.Reset();
-            //index.Refresh();
-            //using (var ctx = index.CreateUpdateContext())
+            //var shards = new List<string>();
+            //using (var conn = new SqlConnection(shardMapConnectionString))
             //{
-            //    ctx.Optimize();
+            //    conn.Open();
+            //    var builder = new SqlConnectionStringBuilder(shardMapConnectionString);
+            //    using (var dr = new SqlCommand("SELECT ServerName, DatabaseName FROM __ShardManagement.ShardsGlobal", conn).ExecuteReader())
+            //    {
+            //        while (dr.Read())
+            //        {
+            //            builder.DataSource = dr.GetString(0);
+            //            builder.InitialCatalog = dr.GetString(1);
+            //            shards.Add(builder.ToString());
+            //        }
+            //    }
             //}
 
-            return Ok();
+            //return Ok();
         }
     }
 }

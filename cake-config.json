@@ -4,6 +4,6 @@
     "SolutionName": "ExperienceGenerator.sln",
     "ProjectFolder": "C:\\projects\\xGenerator",
     "BuildConfiguration": "Debug",
-    "BuildToolVersions": "VS2017",
+    "BuildToolVersions": "VS2019",
     "RunCleanBuilds": false
 }
