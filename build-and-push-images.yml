@@ -127,34 +127,34 @@ stages:
                       docker-compose -f docker-compose.linux.yml build
                       docker-compose -f docker-compose.linux.yml push
                   displayName: "Build Linux Images"
-    # - stage: Trigger_Harbor_Push
-    #   displayName: "Trigger Harbor Push"
-    #   dependsOn:
-    #     - Docker_Windows
-    #     - Docker_Linux
-    #   condition: and(succeeded('Docker_Windows'), succeeded('Docker_Linux'),or( eq(variables['Build.SourceBranch'], 'refs/heads/develop'), eq(variables['Build.SourceBranch'], 'refs/heads/main')))
-    #   jobs:
-    #     - job: Harbor_Push
-    #       displayName: "Harbor Push"
-    #       steps:
-    #         - task: TriggerBuild@3
-    #           displayName: "Trigger Harbor Push"
-    #           inputs:
-    #             definitionIsInCurrentTeamProject: true
-    #             buildDefinition: "103"
-    #             queueBuildForUserThatTriggeredBuild: true
-    #             ignoreSslCertificateErrors: false
-    #             useSameSourceVersion: false
-    #             useCustomSourceVersion: false
-    #             useSameBranch: false
-    #             branchToUse: "main"
-    #             waitForQueuedBuildsToFinish: false
-    #             storeInEnvironmentVariable: false
-    #             buildParameters: "namespace: demo, groupName: demo, tag: $(GitVersion.SemVer)"
-    #             authenticationMethod: "Personal Access Token"
-    #             password: "$(System.AccessToken)"
-    #             enableBuildInQueueCondition: false
-    #             dependentOnSuccessfulBuildCondition: false
-    #             dependentOnFailedBuildCondition: false
-    #             checkbuildsoncurrentbranch: false
-    #             failTaskIfConditionsAreNotFulfilled: false
+    - stage: Trigger_Harbor_Push
+      displayName: "Trigger Harbor Push"
+      dependsOn:
+        - Build_xGenerator
+        - Build_Linux_Images
+      condition: and(succeeded('Build_xGenerator'), succeeded('Build_Linux_Images'),or( eq(variables['Build.SourceBranch'], 'refs/heads/develop'), eq(variables['Build.SourceBranch'], 'refs/heads/master')))
+      jobs:
+        - job: Harbor_Push
+          displayName: "Harbor Push"
+          steps:
+            - task: TriggerBuild@3
+              displayName: "Trigger Harbor Push"
+              inputs:
+                definitionIsInCurrentTeamProject: true
+                buildDefinition: "103"
+                queueBuildForUserThatTriggeredBuild: true
+                ignoreSslCertificateErrors: false
+                useSameSourceVersion: false
+                useCustomSourceVersion: false
+                useSameBranch: false
+                branchToUse: "main"
+                waitForQueuedBuildsToFinish: false
+                storeInEnvironmentVariable: false
+                buildParameters: "namespace: community, groupName: communityModules, tag: ''"
+                authenticationMethod: "Personal Access Token"
+                password: "$(System.AccessToken)"
+                enableBuildInQueueCondition: false
+                dependentOnSuccessfulBuildCondition: false
+                dependentOnFailedBuildCondition: false
+                checkbuildsoncurrentbranch: false
+                failTaskIfConditionsAreNotFulfilled: false
