@@ -55,6 +55,12 @@ stages:
 
                           docker-compose build
                           docker-compose push
+
+                          $env:SITECORE_VERSION = "$(SITECORE_SHORT_VERSION)"
+
+                          docker-compose build
+                          docker-compose push
+
     - stage: Build_Linux_Images
       dependsOn: [Build_xGenerator]
       jobs:
