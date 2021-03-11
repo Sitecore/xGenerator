@@ -151,6 +151,22 @@ namespace Colossus
                 try
                 {
                     response = base.GetWebResponse(request);
+
+                    // #5950 Allow secure cookies when running in Docker
+                    if (response?.Headers["Set-Cookie"] != null && request.RequestUri.Scheme != "https")
+                    {
+                        var container = new CookieContainer();
+                        container.SetCookies(new Uri("https://localhost"), response?.Headers["Set-Cookie"]);
+                        var cookies = container.GetCookies(new Uri("https://localhost"));
+
+                        foreach (Cookie cookie in cookies)
+                        {
+                            if (cookie.Secure)
+                            {
+                                _container.Add(new Cookie(cookie.Name, cookie.Value, "/", request.RequestUri.Host));
+                            }
+                        }
+                    }
                 }
                 catch (WebException wex)
                 {
