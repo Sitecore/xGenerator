@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Web.Hosting;
 using Colossus.Web;
@@ -156,7 +157,10 @@ namespace Colossus
                     if (response?.Headers["Set-Cookie"] != null && request.RequestUri.Scheme != "https")
                     {
                         var container = new CookieContainer();
-                        container.SetCookies(new Uri("https://localhost"), response?.Headers["Set-Cookie"]);
+                        var cookieString = response?.Headers["Set-Cookie"];
+                        cookieString = string.Join(";", cookieString.Split(';').Where(x => !x.Contains("domain=")));
+
+                        container.SetCookies(new Uri("https://localhost"), cookieString);
                         var cookies = container.GetCookies(new Uri("https://localhost"));
 
                         foreach (Cookie cookie in cookies)
