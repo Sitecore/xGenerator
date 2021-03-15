@@ -156,7 +156,7 @@ namespace Colossus
                     // #5950 Allow secure cookies when running in Docker
                     if (!string.IsNullOrEmpty(response?.Headers["Set-Cookie"]) && request.RequestUri.Scheme != "https")
                     {
-                        var cookie = response?.Headers["Set-Cookie"];
+                        var cookie = response.Headers["Set-Cookie"];
                         cookie = string.Join(";", cookie.Split(';').Where(x => !x.Contains("domain=") && !x.Contains("secure")));
                         _container.SetCookies(request.RequestUri, cookie);
                     }
