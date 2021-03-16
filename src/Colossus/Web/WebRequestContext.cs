@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Web.Hosting;
 using Colossus.Web;
@@ -151,6 +152,14 @@ namespace Colossus
                 try
                 {
                     response = base.GetWebResponse(request);
+
+                    // #5950 Allow secure cookies when running in Docker
+                    if (!string.IsNullOrEmpty(response?.Headers["Set-Cookie"]) && request.RequestUri.Scheme != "https")
+                    {
+                        var cookie = response.Headers["Set-Cookie"];
+                        cookie = string.Join(";", cookie.Split(';').Where(x => !x.Contains("domain=") && !x.Contains("secure")));
+                        _container.SetCookies(request.RequestUri, cookie);
+                    }
                 }
                 catch (WebException wex)
                 {
