@@ -51,10 +51,10 @@
     <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.6" />
     <PackageReference Include="Microsoft.AspNet.WebApi.WebHost" Version="5.2.6" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="Rainbow" Version="2.1.1" />
-    <PackageReference Include="Rainbow.Core" Version="2.1.1" />
-    <PackageReference Include="Rainbow.Storage.Sc" Version="2.1.1" />
-    <PackageReference Include="Rainbow.Storage.Yaml" Version="2.1.1" />
+    <PackageReference Include="Rainbow" Version="2.1.3" />
+    <PackageReference Include="Rainbow.Core" Version="2.1.3" />
+    <PackageReference Include="Rainbow.Storage.Sc" Version="2.1.3" />
+    <PackageReference Include="Rainbow.Storage.Yaml" Version="2.1.3" />
     <PackageReference Include="Sitecore.Analytics.Aggregation" Version="10.1.*-*">
       <PrivateAssets>all</PrivateAssets>
       <ExcludeAssets>runtime</ExcludeAssets>
@@ -87,8 +87,8 @@
       <PrivateAssets>all</PrivateAssets>
       <ExcludeAssets>runtime</ExcludeAssets>
     </PackageReference>
-    <PackageReference Include="Unicorn" Version="4.1.1" />
-    <PackageReference Include="Unicorn.Core" Version="4.1.1" />
+    <PackageReference Include="Unicorn" Version="4.1.4" />
+    <PackageReference Include="Unicorn.Core" Version="4.1.4" />
     <PackageReference Include="WebBackgrounder" Version="0.2.0" />
   </ItemGroup>
   <ItemGroup>
