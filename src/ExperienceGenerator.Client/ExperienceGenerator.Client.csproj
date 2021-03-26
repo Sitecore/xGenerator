@@ -116,7 +116,6 @@
     </Content>
     <Content Include="App_Config\Include\Unicorn\Unicorn.UI.config" />
     <Content Include="App_Config\Include\Unicorn\Unicorn.PowerShell.config" />
-    <Content Include="App_Config\Include\Unicorn\Unicorn.DataProvider.config" />
     <Content Include="App_Config\Include\Unicorn\Unicorn.config">
       <SubType>Designer</SubType>
     </Content>
@@ -129,6 +128,8 @@
     <Content Include="App_Config\Include\Unicorn\Unicorn.Users.config" />
     <Content Include="App_Config\Include\Unicorn\Unicorn.Users.DataProvider.config" />
     <Content Include="App_Config\Include\Unicorn\Unicorn.zSharedSecret.config" />
+    <Content Include="App_Config\Include\Unicorn\Unicorn.DataProvider.10.1.config" />
+    <Content Include="App_Config\Include\Unicorn\Unicorn.DataProvider.config.disabled" />
     <None Include="Global.asax" />
     <Content Include="sitecore\shell\client\Applications\ExperienceGenerator\InteractionEditor.js" />
     <Content Include="sitecore\shell\Themes\Standard\ExperienceGenerator.zip" />
