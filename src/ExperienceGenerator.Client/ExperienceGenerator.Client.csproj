@@ -41,6 +41,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <ExcludeFoldersFromDeployment>App_Config\Include\Unicorn</ExcludeFoldersFromDeployment>
+    <ExcludeFilesFromDeployment>App_Config\Include\Rainbow.config</ExcludeFilesFromDeployment>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Configy" Version="1.0.0" />
@@ -119,7 +121,6 @@
     <Content Include="App_Config\Include\Unicorn\Unicorn.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Config\Include\Unicorn\Unicorn.AutoPublish.config" />
     <Content Include="App_Config\Include\ExperienceGenerator\zExperienceGenerator.DevSettings.config" />
     <Content Include="App_Config\Include\ExperienceGenerator\ExperienceGenerator.Processing.Aggregation.Services.config" />
     <Content Include="App_Config\Include\Unicorn\Unicorn.Roles.config" />
@@ -128,8 +129,7 @@
     <Content Include="App_Config\Include\Unicorn\Unicorn.Users.config" />
     <Content Include="App_Config\Include\Unicorn\Unicorn.Users.DataProvider.config" />
     <Content Include="App_Config\Include\Unicorn\Unicorn.zSharedSecret.config" />
-    <Content Include="App_Config\Include\Unicorn\Unicorn.DataProvider.10.1.config" />
-    <Content Include="App_Config\Include\Unicorn\Unicorn.DataProvider.config.disabled" />
+    <Content Include="App_Config\Include\Unicorn\Unicorn.DataProvider.config" />
     <None Include="Global.asax" />
     <Content Include="sitecore\shell\client\Applications\ExperienceGenerator\InteractionEditor.js" />
     <Content Include="sitecore\shell\Themes\Standard\ExperienceGenerator.zip" />

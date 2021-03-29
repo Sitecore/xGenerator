@@ -19,7 +19,7 @@ COPY docker/scripts/Add-InternalNugetFeed.ps1 .
 
 RUN .\Add-InternalNugetFeed.ps1
 
-RUN msbuild /m:1 /p:Configuration="Debug"  /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:DeleteExistingFiles=false /p:publishUrl=C:\out\xGenerator /p:BuildProjectReferences=true /target:Build "ExperienceGenerator.sln" /restore
+RUN msbuild /m:1 /p:Configuration="Release"  /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:DeleteExistingFiles=false /p:publishUrl=C:\out\xGenerator /p:BuildProjectReferences=true /target:Build "ExperienceGenerator.sln" /restore
 
 FROM ${BUILD_IMAGE} as data
 
