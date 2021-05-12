@@ -1,0 +1,39 @@
+name: Docker
+
+on:
+  push:
+    # Publish `development` as Docker `latest` image.
+    branches:
+      - development
+
+    # Publish `v1.2.3` tags as releases.
+    tags:
+      - v*
+
+  # Run tests for any PRs.
+  pull_request:
+
+env:
+  # TODO: Change variable to your image's name.
+  IMAGE_NAME: image
+
+jobs:
+  # Run tests.
+  # See also https://docs.docker.com/docker-hub/builds/automated-testing/
+  test:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Login
+        run: |
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+
+      - name: Build and Push
+        env:
+          REGISTRY: ${{secrets.DOCKER_REGISTRY}}
+          VERSION: latest
+        run: |
+          docker-compose build
+          docker-compose push
