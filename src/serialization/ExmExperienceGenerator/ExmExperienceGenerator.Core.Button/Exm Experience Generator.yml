@@ -13,7 +13,7 @@ SharedFields:
   Value: 200
 - ID: "d25b56d4-23b6-4462-be25-b6a6d7f38e13"
   Hint: Icon
-  Value: Office/32x32/mail_bug.png
+  Value: LaunchPadIcons/32x32/EXM Experience Generator.png
 Languages:
 - Language: en
   Versions:
