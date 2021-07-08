@@ -32,3 +32,23 @@ Languages:
     - ID: "ff5074fa-9220-4dba-89af-61e82babdf02"
       Hint: SelectedValue
       Value: 50
+- Language: "ja-JP"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "0ec9416c-b808-45b4-9319-089cc747b6b8"
+      Hint: Maximum
+      Value: 100
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20181214T082035Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin
+    - ID: "e6d6a619-e0b5-4361-8c0e-ec8fc3d2f402"
+      Hint: Minimum
+      Value: 0
+    - ID: "ff5074fa-9220-4dba-89af-61e82babdf02"
+      Hint: SelectedValue
+      Value: 50
