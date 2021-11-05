@@ -3,7 +3,7 @@ resources:
       clean: true
 
 variables:
-    SITECORE_VERSION: "10.1.0"
+    SITECORE_VERSION: "10.2.0"
     SITECORE_SHORT_VERSION: "10.1"
 
 stages:
@@ -13,18 +13,10 @@ stages:
           - job: Build_xGenerator_Job
             strategy:
                 matrix:
-                    windows2004:
-                        poolName: "docker-2004-agents"
-                        osVersion: "2004"
-                        nanoserverVersion: "2004"
                     ltsc2019:
                         poolName: "docker-ltsc2019-agents"
                         osVersion: "ltsc2019"
                         nanoserverVersion: "1809"
-                    20H2:
-                        poolName: "docker-20H2-agents"
-                        osVersion: "20H2"
-                        nanoserverVersion: "20H2"
             pool:
                 name: $(poolName)
             workspace:

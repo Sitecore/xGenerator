@@ -12,7 +12,7 @@ Param (
   ,
   [Parameter(
     HelpMessage = "Sitecore version")]
-  [string]$SitecoreVersion = "10.1.0"
+  [string]$SitecoreVersion = "10.2.0"
 )
 
 $ErrorActionPreference = "Stop";
